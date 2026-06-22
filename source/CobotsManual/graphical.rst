@@ -1,2435 +1,2438 @@
-图形化编程
-===============
+Programowanie graficzne
+=======================
 
 .. toctree:: 
    :maxdepth: 6
 
-简介
-----------
+Wprowadzenie
+------------
 
-由于示教器一般不会外接键鼠等外设，在示教器端访问机器人WebAPP时，用户可以通过图形化编程功能进行机器人示教程序编辑。功能标准化函数实现使用Blockly库，可以集成在WebAPP系统中，根据需要实现自定义代码块，并且拖拽编程完成后转换为LUA程序通过现有指令协议下发运行。
+Ponieważ panel operatorski zazwyczaj nie jest wyposażony w zewnętrzne urządzenia peryferyjne, takie jak klawiatura czy mysz, podczas uzyskiwania dostępu do WebAPP robota za pośrednictwem panelu operatorskiego użytkownik może edytować programy nauczania robota za pomocą funkcji programowania graficznego. Funkcja ta wykorzystuje bibliotekę Blockly do standaryzowanej implementacji funkcji, która może być zintegrowana z systemem WebAPP. W razie potrzeby można zaimplementować niestandardowe bloki kodu, a po zakończeniu programowania metodą przeciągania i upuszczania, kod jest konwertowany na program LUA i wysyłany do wykonania za pomocą istniejących instrukcji protokołu.
 
-通过使用图形编程，能够做到简单易懂，易操作，语言汉化操作。
+Dzięki zastosowaniu programowania graficznego możliwe jest osiągnięcie prostoty zrozumienia, łatwości obsługi oraz lokalizacji języka chińskiego.
 
-页面分为三个区域：“操作栏”、“toolbox工具栏”和“workspace代码编辑区”，整体的布局设计如图如下：
+Strona jest podzielona na trzy obszary: „Pasek operacji”, „Pasek narzędzi” i „Obszar edycji kodu”. Ogólny układ projektu przedstawiono na rysunku:
 
 .. image:: graphical/001.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.1‑1 图形化编程界面
+.. centered:: Wykres 10.1‑1 Interfejs programowania graficznego
 
-**操作栏**
+**Pasek operacji**
 
-1) **加载**：负责workspace的重新加载；
-2) **导入**：负责导入相关图形化编程程序；
-3) **导出**：负责导出已保存的工作区中的图形化编程程序“保存”按钮功能为代码块编辑完成后保存为对应的示教程序；
-4) **保存**：负责保存已编辑好的图形化代码块；
-5) **清空**：负责快速清空代码编辑区；
-6) **代码**：负责将代码块转译成Lua代码。
+1) **Załaduj**: Odpowiada za ponowne załadowanie obszaru roboczego.
+2) **Importuj**: Odpowiada za import odpowiednich programów programowania graficznego.
+3) **Eksportuj**: Odpowiada za eksport zapisanych programów programowania graficznego z obszaru roboczego. Funkcja przycisku „Zapisz” polega na zapisaniu po edycji bloków kodu jako odpowiedniego programu nauczania.
+4) **Zapisz**: Odpowiada za zapisanie edytowanych graficznych bloków kodu.
+5) **Wyczyść**: Odpowiada za szybkie wyczyszczenie obszaru edycji kodu.
+6) **Kod**: Odpowiada za translację bloków kodu na kod LUA.
 
-**Toolbox**
+**Pasek narzędzi**
 
-1) 包含所有指令和逻辑代码的代码块，可以拖动到workspace创建代码块并编辑；
-2) Toolbox工具栏部分会根据指令类型进一步分类；
-3) 逻辑类指令：if-else，while等；
-4) 基础运动类指令：PTP，LIN，ARC等依据应用场景指令分类：涂胶，焊接，传送带等。在使用的过程中可以方便地找到所需代码块。
+1) Zawiera bloki kodu wszystkich instrukcji i logiki, które można przeciągnąć do obszaru roboczego w celu utworzenia bloków kodu i edycji.
+2) Część paska narzędzi jest dalej klasyfikowana według typów instrukcji.
+3) Instrukcje logiczne: if-else, while itp.
+4) Podstawowe instrukcje ruchu: PTP, LIN, ARC itp. Klasyfikacja według scenariuszy aplikacji: klejenie, spawanie, taśmociąg itp. Podczas użytkowania można łatwo znaleźć potrzebne bloki kodu.
 
-**Workspace**：在代码编辑区中可以编辑和展示图形化的代码块。
+**Obszar roboczy**: W obszarze edycji kodu można edytować i wyświetlać graficzne bloki kodu.
 
-逻辑类图形化编程命令
---------------------------
-逻辑类图形化编程命令包含 循环、数字等逻辑命令。
+Logiczne polecenia programowania graficznego
+--------------------------------------------
+Logiczne polecenia programowania graficznego obejmują polecenia logiczne, takie jak pętle, liczby itp.
 
 .. image:: graphical/003.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.2 逻辑类图形化编程
+.. centered:: Wykres 10.2 Logiczne programowanie graficzne
 
-If/Else判断指令
-~~~~~~~~~~~~~~~~~~~~~
-拖动“If/Else判断指令”代码块,进入图形化编辑界面工作区。（该指令需要一定编程基础，如需帮助，请联系我们）
+Instrukcja warunkowa If/Else
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Przeciągnij blok kodu „Instrukcja warunkowa If/Else” do obszaru roboczego interfejsu edycji graficznej. (Instrukcja ta wymaga podstawowej znajomości programowania. W razie potrzeby skontaktuj się z nami.)
 
 .. image:: graphical/021.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.2-1 If/Else判断指令代码块
+.. centered:: Wykres 10.2-1 Blok kodu instrukcji warunkowej If/Else
 
-While指令
-~~~~~~~~~~~~~~~~~~~~~
-拖动“While指令”代码块,进入图形化编辑界面工作区。（该指令需要一定编程基础，如需帮助，请联系我们）
+Instrukcja While
+~~~~~~~~~~~~~~~~
+Przeciągnij blok kodu „Instrukcja While” do obszaru roboczego interfejsu edycji graficznej. (Instrukcja ta wymaga podstawowej znajomości programowania. W razie potrzeby skontaktuj się z nami.)
 
-在While后方添加输入等待条件，在while内部添加运动指令代码块，点击保存即可。（为方便操作，可任意输入do内容，在程序中编辑其他指令插入代替）
+Dodaj warunek oczekiwania za While, a wewnątrz while dodaj bloki kodu instrukcji ruchu, a następnie kliknij Zapisz. (Dla wygody można wprowadzić dowolną treść do, a następnie edytować i zastąpić innymi instrukcjami w programie.)
 
 .. image:: graphical/022.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.2-2 While指令代码块
+.. centered:: Wykres 10.2-2 Blok kodu instrukcji While
 
-跳转指令
-~~~~~~~~~~~~~~~~~~~~~
-拖动“跳转指令”代码块,进入图形化编辑界面工作区。（该指令需要一定编程基础，如需帮助，请联系我们）
+Instrukcja skoku
+~~~~~~~~~~~~~~~~
+Przeciągnij blok kodu „Instrukcja skoku” do obszaru roboczego interfejsu edycji graficznej. (Instrukcja ta wymaga podstawowej znajomości programowania. W razie potrzeby skontaktuj się z nami.)
 
-- 跳转名称：输入跳转名称，来确定跳转位置
+- Nazwa skoku: Wprowadź nazwę skoku, aby określić miejsce docelowe skoku.
 
 .. image:: graphical/023.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.2-3 跳转指令代码块
+.. centered:: Wykres 10.2-3 Blok kodu instrukcji skoku
 
-.. important:: 跳转名称不能以数字开头。
+.. important:: Nazwa skoku nie może zaczynać się od cyfry.
 
-变量类图形化编程命令
---------------------------
-变量类图形化编程命令包含创建变量命令。
+Polecenia programowania graficznego dotyczące zmiennych
+-------------------------------------------------------
+Polecenia programowania graficznego dotyczące zmiennych obejmują polecenie tworzenia zmiennych.
 
 .. image:: graphical/004.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.3 变量类图形化编程
+.. centered:: Wykres 10.3 Programowanie graficzne dotyczące zmiennych
 
-变量指令
-~~~~~~~~~~~~~~~~~~~~~
-点击“创建”按钮，可输入需要定义得变量名称。
+Instrukcja zmiennej
+~~~~~~~~~~~~~~~~~~~
+Kliknij przycisk „Utwórz”, aby wprowadzić nazwę zmiennej do zdefiniowania.
 
-拖动“变量指令”代码块,进入图形化编辑界面工作区。
+Przeciągnij blok kodu „Instrukcja zmiennej” do obszaru roboczego interfejsu edycji graficznej.
 
-“变量”指令节点,参数：
+Węzeł instrukcji „Zmienna”, parametry:
 
 .. image:: graphical/024.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.3-1 变量指令代码块
+.. centered:: Wykres 10.3-1 Blok kodu instrukcji zmiennej
 
-函数类图形化编程命令
---------------------------
-函数类图形化编程命令包含创建函数命令。
+Polecenia programowania graficznego dotyczące funkcji
+-----------------------------------------------------
+Polecenia programowania graficznego dotyczące funkcji obejmują polecenie tworzenia funkcji.
 
 .. image:: graphical/005.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.4 函数类图形化编程
+.. centered:: Wykres 10.4 Programowanie graficzne dotyczące funkcji
 
-函数方法指令
-~~~~~~~~~~~~~~~~~~~~~
-拖动“函数方法指令”代码块,进入图形化编辑界面工作区。
+Instrukcja metody funkcji
+~~~~~~~~~~~~~~~~~~~~~~~~~
+Przeciągnij blok kodu „Instrukcja metody funkcji” do obszaru roboczego interfejsu edycji graficznej.
 
-“函数方法”指令节点,参数：
+Węzeł instrukcji „Metoda funkcji”, parametry:
 
-- 函数名：运行的函数名称
+- Nazwa funkcji: Nazwa uruchamianej funkcji.
 
 .. image:: graphical/025.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.4-1 函数方法指令代码块
+.. centered:: Wykres 10.4-1 Blok kodu instrukcji metody funkcji
 
-运动类图形化编程命令
---------------------------
-运动类图形化编程命令包含 PTP、Lin 、ARC等运动命令。
+Polecenia programowania graficznego dotyczące ruchu
+---------------------------------------------------
+Polecenia programowania graficznego dotyczące ruchu obejmują polecenia ruchu, takie jak PTP, Lin, ARC itp.
 
 .. image:: graphical/006.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.5 运动类图形化编程
+.. centered:: Wykres 10.5 Programowanie graficzne dotyczące ruchu
 
-点到点指令
-~~~~~~~~~~~~~~~~~~~~~
-拖动“点到点指令”代码块,进入图形化编辑界面工作区。
+Instrukcja punkt-punkt
+~~~~~~~~~~~~~~~~~~~~~~
+Przeciągnij blok kodu „Instrukcja punkt-punkt” do obszaru roboczego interfejsu edycji graficznej.
 
-可以选择需要到达的点，平滑过渡时间设置可以实现该点到下一点的运动是连续的，是否偏移设置，可以选择基于基坐标系偏移和基于工具坐标偏移，并弹出x,y,z,rx,ry,rz偏移量设置，PTP具体路径为运动控制器自动规划的最优路径。
+Można wybrać punkt docelowy. Ustawienie czasu wygładzenia przejścia umożliwia ciągły ruch od tego punktu do następnego. Ustawienie przesunięcia umożliwia wybór przesunięcia względem podstawowego układu współrzędnych lub względem układu współrzędnych narzędzia, a następnie pojawia się okno ustawień wartości przesunięcia x, y, z, rx, ry, rz. Konkretna ścieżka PTP jest optymalną ścieżką automatycznie planowaną przez kontroler ruchu.
 
-“点到点”指令节点,参数：
+Węzeł instrukcji „Punkt-punkt”, parametry:
 
-- 点名称：示教点位
+- Nazwa punktu: Punkt nauczania.
 
-- 调试速度(%)：0 ~ 100
+- Prędkość调试 (%): 0 ~ 100
 
-- 停止：false/true
+- Zatrzymaj: false/true
 
-- 平滑过渡(ms)：平滑过渡时间 0 ~ 500
+- Płynne przejście (ms): Czas wygładzenia przejścia 0 ~ 500
 
-- 是否偏移 否/基坐标偏移/工具坐标偏移 选择否时，dx~drz参数值不生效
+- Czy przesunięcie: Nie / przesunięcie względem podstawy / przesunięcie względem narzędzia. Gdy wybrano Nie, parametry dx~drz nie są aktywne.
 
-- dx~drz：偏移量
+- dx~drz: Wartości przesunięcia.
 
 .. image:: graphical/026.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.5-1 点到点指令代码块
+.. centered:: Wykres 10.5-1 Blok kodu instrukcji punkt-punkt
 
-直线指令
-~~~~~~~~~~~~~~~~~~~~~
-拖动“直线指令”代码块,进入图形化编辑界面工作区。
+Instrukcja linii prostej
+~~~~~~~~~~~~~~~~~~~~~~~~
+Przeciągnij blok kodu „Instrukcja linii prostej” do obszaru roboczego interfejsu edycji graficznej.
 
-该指令功能与“点到点”指令相似，但该指令所到达点的路径为直线。
+Funkcja tej instrukcji jest podobna do instrukcji „Punkt-punkt”, ale ścieżka do punktu docelowego w tej instrukcji jest linią prostą.
 
-“直线”指令节点,参数：
+Węzeł instrukcji „Linia prosta”, parametry:
 
-- 点名称：示教点位
+- Nazwa punktu: Punkt nauczania.
 
-- 调试速度(%)：0 ~ 100
+- Prędkość调试 (%): 0 ~ 100
 
-- 停止：false/true，选择true时，平滑过渡参数值不生效
+- Zatrzymaj: false/true. Gdy wybrano true, parametr wartości płynnego przejścia nie jest aktywny.
 
-- 平滑过渡(mm)：平滑过渡半径 0 ~ 1000
+- Płynne przejście (mm): Promień wygładzenia przejścia 0 ~ 1000
 
-- 是否寻位：false/true
+- Czy pozycjonować: false/true
 
-- 寻位点变量：REF0~99/RES0~99，是否寻位选择false时，参数不生效
+- Zmienna punktu pozycjonowania: REF0~99/RES0~99. Gdy wybrano false w opcji Czy pozycjonować, parametr nie jest aktywny.
 
-- 是否偏移： 否
+- Czy przesunięcie: Nie
 
-- 关节超速保护：否/是
+- Ochrona przed przekroczeniem prędkości stawu: Nie / Tak
 
-- 处理策略：标准/超速时报错停止/自适应降速
+- Strategia postępowania: Standardowa / Zatrzymaj z błędem po przekroczeniu prędkości / Adaptacyjne zmniejszenie prędkości
 
-- 允许降速阈值：0~100
+- Dopuszczalny próg zmniejszenia prędkości: 0~100
 
 .. image:: graphical/027.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.5-2 直线指令代码块
+.. centered:: Wykres 10.5-2 Blok kodu instrukcji linii prostej
 
-直线（过渡点角速度可调）指令
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-拖动“直线（过渡点角速度可调）指令”代码块,进入图形化编辑界面工作区。
+Instrukcja linii prostej (z regulowaną prędkością kątową punktu przejściowego)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Przeciągnij blok kodu „Instrukcja linii prostej (z regulowaną prędkością kątową punktu przejściowego)” do obszaru roboczego interfejsu edycji graficznej.
 
-该指令功能与“点到点”指令相似，但该指令包含过渡点角速度可调。
+Funkcja tej instrukcji jest podobna do instrukcji „Punkt-punkt”, ale zawiera regulowaną prędkość kątową punktu przejściowego.
 
-“直线（过渡点角速度可调）”指令节点,参数：
+Węzeł instrukcji „Linia prosta (z regulowaną prędkością kątową punktu przejściowego)”, parametry:
 
-- 最大角速度：0~300
+- Maksymalna prędkość kątowa: 0~300
 
 .. image:: graphical/028.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.5-3 直线（过渡点角速度可调）指令代码块
+.. centered:: Wykres 10.5-3 Blok kodu instrukcji linii prostej (z regulowaną prędkością kątową punktu przejściowego)
 
-直线(seamPos)指令
-~~~~~~~~~~~~~~~~~~~~~
-拖动“直线(seamPos)指令”代码块,进入图形化编辑界面工作区。
+Instrukcja linii prostej (seamPos)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Przeciągnij blok kodu „Instrukcja linii prostej (seamPos)” do obszaru roboczego interfejsu edycji graficznej.
 
-该指令功能应用于焊接场景中使用激光传感器。
+Ta instrukcja jest używana w scenariuszach spawania z czujnikiem laserowym.
 
-“直线(seamPos)”指令节点,参数：
+Węzeł instrukcji „Linia prosta (seamPos)”, parametry:
 
-- 点名称：示教点位
+- Nazwa punktu: Punkt nauczania.
 
-- 调试速度(%)：0 ~ 100
+- Prędkość调试 (%): 0 ~ 100
 
-- 停止：false/true，选择true时，平滑过渡参数值不生效
+- Zatrzymaj: false/true. Gdy wybrano true, parametr wartości płynnego przejścia nie jest aktywny.
 
-- 平滑过渡(mm)：平滑过渡半径 0 ~ 1000
+- Płynne przejście (mm): Promień wygładzenia przejścia 0 ~ 1000
 
-- 焊缝缓存数据选择：执行规划数据/执行记录数据
+- Wybór danych bufora spoiny: Wykonaj dane planowania / Wykonaj dane rejestracji
 
-- 板材类型：波纹板/瓦楞板/围栏板/油桶/波纹甲壳钢
+- Typ materiału: Blacha falista / Blacha trapezowa / Blacha ogrodzeniowa / Beczka / Stal pancerna falista
 
-- 是否偏移： 否/基坐标偏移/工具坐标偏移/激光原始数据偏移 选择否时，dx~drz参数值不生效
+- Czy przesunięcie: Nie / przesunięcie względem podstawy / przesunięcie względem narzędzia / przesunięcie względem surowych danych lasera. Gdy wybrano Nie, parametry dx~drz nie są aktywne.
 
-- dx~drz：偏移量
+- dx~drz: Wartości przesunięcia.
 
 .. image:: graphical/029.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.5-4 直线(seamPos)指令代码块
+.. centered:: Wykres 10.5-4 Blok kodu instrukcji linii prostej (seamPos)
 
-圆弧指令
-~~~~~~~~~~~~~~~~~~~~~
-拖动“圆弧指令”代码块,进入图形化编辑界面工作区。
+Instrukcja łuku
+~~~~~~~~~~~~~~~
+Przeciągnij blok kodu „Instrukcja łuku” do obszaru roboczego interfejsu edycji graficznej.
 
-圆弧运动包含两个点，第一点为圆弧中间过渡点，第二点为终点，过渡点和终点都可以对是否偏移进行设置，可以选择基于基坐标系偏移和基于工具坐标偏移，设置x,y,z,rx,ry,rz偏移量，终点可以设置平滑过渡半径，实现运动连续效果。
+Ruch łukowy obejmuje dwa punkty: pierwszy punkt to pośredni punkt przejściowy łuku, drugi to punkt końcowy. Dla punktu przejściowego i punktu końcowego można ustawić, czy mają być przesunięte. Można wybrać przesunięcie względem podstawowego układu współrzędnych lub względem układu współrzędnych narzędzia, ustawiając wartości przesunięcia x, y, z, rx, ry, rz. Dla punktu końcowego można ustawić promień wygładzenia przejścia, aby uzyskać efekt ciągłości ruchu.
 
-“圆弧”指令节点,参数：
+Węzeł instrukcji „Łuk”, parametry:
 
-- 圆弧中间点：示教点位
+- Pośredni punkt łuku: Punkt nauczania.
 
-- 是否偏移： 否/基坐标偏移/工具坐标偏移 选择否时，dx~drz参数值不生效
+- Czy przesunięcie: Nie / przesunięcie względem podstawy / przesunięcie względem narzędzia. Gdy wybrano Nie, parametry dx~drz nie są aktywne.
 
-- dx~drz：偏移量
+- dx~drz: Wartości przesunięcia.
 
-- 圆弧终点：示教点位
+- Punkt końcowy łuku: Punkt nauczania.
 
-- 是否偏移： 否/基坐标偏移/工具坐标偏移 选择否时，dx~drz参数值不生效
+- Czy przesunięcie: Nie / przesunięcie względem podstawy / przesunięcie względem narzędzia. Gdy wybrano Nie, parametry dx~drz nie są aktywne.
 
-- dx~drz：偏移量
+- dx~drz: Wartości przesunięcia.
 
-- 调试速度(%)：0 ~ 100
+- Prędkość调试 (%): 0 ~ 100
 
-- 停止：false/true，选择true时，平滑过渡参数值不生效
+- Zatrzymaj: false/true. Gdy wybrano true, parametr wartości płynnego przejścia nie jest aktywny.
 
-- 平滑过渡(mm)：平滑过渡半径 0 ~ 1000
+- Płynne przejście (mm): Promień wygładzenia przejścia 0 ~ 1000
 
 .. image:: graphical/030.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.5-5 圆弧指令代码块
+.. centered:: Wykres 10.5-5 Blok kodu instrukcji łuku
 
-整圆指令
-~~~~~~~~~~~~~~~~~~~~~
-拖动“整圆指令”代码块,进入图形化编辑界面工作区。
+Instrukcja pełnego okręgu
+~~~~~~~~~~~~~~~~~~~~~~~~~
+Przeciągnij blok kodu „Instrukcja pełnego okręgu” do obszaru roboczego interfejsu edycji graficznej.
 
-点击“整圆”指令节点,进入节点图编辑界面。
+Kliknij węzeł instrukcji „Pełny okrąg”, aby przejść do interfejsu edycji grafu węzłów.
 
-整圆运动包含两个点，第一点为整圆中间过渡点1，第二点为整圆中间过渡点2，过渡点2可以设置是否偏移，该偏移量同时生效于过渡点1和过渡点2
+Ruch pełnego okręgu obejmuje dwa punkty: pierwszy punkt to pośredni punkt 1 pełnego okręgu, drugi punkt to pośredni punkt 2 pełnego okręgu. Dla punktu pośredniego 2 można ustawić, czy ma być przesunięty. To przesunięcie obowiązuje jednocześnie dla punktu pośredniego 1 i punktu pośredniego 2.
 
-“整圆”指令节点,参数：
+Węzeł instrukcji „Pełny okrąg”, parametry:
 
-- 整圆中间点1：示教点位
+- Pośredni punkt 1 pełnego okręgu: Punkt nauczania.
 
-- 整圆中间点2：示教点位
+- Pośredni punkt 2 pełnego okręgu: Punkt nauczania.
 
-- 调试速度(%)：0 ~ 100
+- Prędkość调试 (%): 0 ~ 100
 
-- 是否偏移： 否/基坐标偏移/工具坐标偏移 选择否时，dx~drz参数值不生效
+- Czy przesunięcie: Nie / przesunięcie względem podstawy / przesunięcie względem narzędzia. Gdy wybrano Nie, parametry dx~drz nie są aktywne.
 
-- dx~drz：偏移量
+- dx~drz: Wartości przesunięcia.
 
 .. image:: graphical/031.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.5-6 整圆指令代码块
+.. centered:: Wykres 10.5-6 Blok kodu instrukcji pełnego okręgu
 
-螺旋指令
-~~~~~~~~~~~~~~~~~~~~~
-拖动“螺旋指令”代码块,进入图形化编辑界面工作区。
+Instrukcja spirali
+~~~~~~~~~~~~~~~~~~
+Przeciągnij blok kodu „Instrukcja spirali” do obszaru roboczego interfejsu edycji graficznej.
 
-螺旋线运动包含三个点，该三个点组成一个圆，在第三点设置页面，包含螺旋圈数，姿态修正角，半径增量和转轴方向增量这几个参数设置，螺旋圈数即该螺旋线的运动圈数，姿态修正角修正的是螺旋线结束时的姿态与螺旋线第一点的姿态，半径增量即每一圈半径的增量，转轴方向增量即螺旋轴方向的增量。设置 是否偏移，该偏移量生效于整个螺旋线的轨迹。
+Ruch spiralny obejmuje trzy punkty, które tworzą okrąg. Na stronie trzeciego punktu znajdują się parametry: liczba zwojów spirali, kąt korekty orientacji, przyrost promienia i przyrost kierunku osi obrotu. Liczba zwojów spirali to liczba zwojów ruchu spirali. Kąt korekty orientacji koryguje orientację na końcu spirali względem orientacji pierwszego punktu spirali. Przyrost promienia to przyrost promienia każdego zwoju. Przyrost kierunku osi obrotu to przyrost w kierunku osi spirali. Ustaw „Czy przesunięcie”, a to przesunięcie obowiązuje dla całej trajektorii spirali.
 
-“螺旋”指令节点,参数：
+Węzeł instrukcji „Spirala”, parametry:
 
-- 螺旋线中间点1：示教点位
+- Pośredni punkt 1 spirali: Punkt nauczania.
 
-- 螺旋线中间点2：示教点位
+- Pośredni punkt 2 spirali: Punkt nauczania.
 
-- 螺旋线中间点3：示教点位
+- Pośredni punkt 3 spirali: Punkt nauczania.
 
-- 调试速度(%)：0 ~ 100
+- Prędkość调试 (%): 0 ~ 100
 
-- 是否偏移： 否/基坐标偏移/工具坐标偏移 选择否时，dx~drz参数值不生效
+- Czy przesunięcie: Nie / przesunięcie względem podstawy / przesunięcie względem narzędzia. Gdy wybrano Nie, parametry dx~drz nie są aktywne.
 
-- dx~drz：偏移量
+- dx~drz: Wartości przesunięcia.
 
-- 螺旋圈数：0 ~ 100
+- Liczba zwojów spirali: 0 ~ 100
 
-- 姿态角修正rx(°)：-1000 ~ 1000
+- Korekta kąta orientacji rx (°): -1000 ~ 1000
 
-- 姿态角修正ry(°)：-1000 ~ 1000
+- Korekta kąta orientacji ry (°): -1000 ~ 1000
 
-- 姿态角修正rz(°)：-1000 ~ 1000
+- Korekta kąta orientacji rz (°): -1000 ~ 1000
 
-- 半径增量(mm)：-100 ~ 100
+- Przyrost promienia (mm): -100 ~ 100
 
-- 转轴方向增量(mm)：-100 ~ 100
+- Przyrost kierunku osi obrotu (mm): -100 ~ 100
 
 .. image:: graphical/032.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.5-7 螺旋指令代码块
+.. centered:: Wykres 10.5-7 Blok kodu instrukcji spirali
 
-新螺旋指令
-~~~~~~~~~~~~~~~~~~~~~
-拖动“新螺旋指令”代码块,进入图形化编辑界面工作区。
+Nowa instrukcja spirali
+~~~~~~~~~~~~~~~~~~~~~~~
+Przeciągnij blok kodu „Nowa instrukcja spirali” do obszaru roboczego interfejsu edycji graficznej.
 
-点击“新螺旋”指令节点,进入节点图编辑界面。
+Kliknij węzeł instrukcji „Nowa spirala”, aby przejść do interfejsu edycji grafu węzłów.
 
-新螺旋运动为优化版螺旋线运动，该指令只需要一个点加各参数的配置实现螺旋线运动。机器人以当前位置作为起点，用户设置调试速度，是否偏移，螺旋圈数，螺旋倾角，初始半径，半径增量，转轴方向增量和旋转方向这几个参数，螺旋圈数即该螺旋线的运动圈数，螺旋倾角即工具Z轴与水平方向的夹角，姿态修正角修正的是螺旋线结束时的姿态与螺旋线第一点的姿态，初始半径即第一圈半径大小，半径增量即每一圈半径的增量，转轴方向增量即螺旋轴方向的增量，旋转方向即顺时针和逆时针。
+Nowy ruch spiralny to zoptymalizowana wersja ruchu spiralnego. Ta instrukcja wymaga tylko jednego punktu i konfiguracji parametrów, aby zrealizować ruch spiralny. Robot używa bieżącej pozycji jako punktu początkowego. Użytkownik ustawia prędkość调试, czy przesunięcie, liczbę zwojów spirali, kąt nachylenia spirali, promień początkowy, przyrost promienia, przyrost kierunku osi obrotu i kierunek obrotu. Liczba zwojów spirali to liczba zwojów ruchu spirali. Kąt nachylenia spirali to kąt między osią Z narzędzia a kierunkiem poziomym. Kąt korekty orientacji koryguje orientację na końcu spirali względem orientacji pierwszego punktu spirali. Promień początkowy to promień pierwszego zwoju. Przyrost promienia to przyrost promienia każdego zwoju. Przyrost kierunku osi obrotu to przyrost w kierunku osi spirali. Kierunek obrotu to zgodnie z ruchem wskazówek zegara lub przeciwnie do ruchu wskazówek zegara.
 
-“新螺旋”指令节点,参数：
+Węzeł instrukcji „Nowa spirala”, parametry:
 
-- 螺旋线起点：示教点位
+- Punkt początkowy spirali: Punkt nauczania.
 
-- 调试速度(%)：0 ~ 100
+- Prędkość调试 (%): 0 ~ 100
 
-- 是否偏移： 否/基坐标偏移/工具坐标偏移 选择否时，dx~drz参数值不生效
+- Czy przesunięcie: Nie / przesunięcie względem podstawy / przesunięcie względem narzędzia. Gdy wybrano Nie, parametry dx~drz nie są aktywne.
 
-- dx~drz：偏移量
+- dx~drz: Wartości przesunięcia.
 
-- 螺旋圈数：0 ~ 100
+- Liczba zwojów spirali: 0 ~ 100
 
-- 螺旋倾角(°)：-100 ~ 100
+- Kąt nachylenia spirali (°): -100 ~ 100
 
-- 初始半径：0 ~ 100
+- Promień początkowy: 0 ~ 100
 
-- 半径增量(mm)：-100 ~ 100
+- Przyrost promienia (mm): -100 ~ 100
 
-- 转轴方向增量(mm)：-100 ~ 100
+- Przyrost kierunku osi obrotu (mm): -100 ~ 100
 
-- 旋转方向：顺时针/逆时针
+- Kierunek obrotu: Zgodnie z ruchem wskazówek zegara / Przeciwnie do ruchu wskazówek zegara
 
 .. image:: graphical/033.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.5-8 新螺旋指令代码块
+.. centered:: Wykres 10.5-8 Blok kodu nowej instrukcji spirali
 
-水平螺旋指令
-~~~~~~~~~~~~~~~~~~~~~
-拖动“水平螺旋指令”代码块,进入图形化编辑界面工作区。
+Instrukcja spirali poziomej
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Przeciągnij blok kodu „Instrukcja spirali poziomej” do obszaru roboczego interfejsu edycji graficznej.
 
-“H-Spiral”指令为水平空间螺旋线运动，该指令设置于单段运动（直线）指令之后。
+Instrukcja „H-Spiral” to ruch spiralny w przestrzeni poziomej. Instrukcja ta jest umieszczana po instrukcji ruchu pojedynczego odcinka (linii prostej).
 
-“水平螺旋”指令节点,参数：
+Węzeł instrukcji „Spirala pozioma”, parametry:
 
-- 螺旋半径: 0~100mm
+- Promień spirali: 0~100 mm
 
-- 螺旋角速度: 0~2rev/s
+- Prędkość kątowa spirali: 0~2 obr/s
 
-- 旋转方向: 螺旋顺/逆时针
+- Kierunek obrotu: Spirala zgodnie / przeciwnie do ruchu wskazówek zegara
 
-- 螺旋倾角: 0~40°
+- Kąt nachylenia spirali: 0~40°
 
 .. image:: graphical/034.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.5-9 水平螺旋指令代码块
+.. centered:: Wykres 10.5-9 Blok kodu instrukcji spirali poziomej
 
-样条指令
-~~~~~~~~~~~~~~~~~~~~~
-拖动“样条指令”代码块,进入图形化编辑界面工作区。
+Instrukcja krzywej średniej
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Przeciągnij blok kodu „Instrukcja krzywej średniej” do obszaru roboczego interfejsu edycji graficznej.
 
-该指令分为样条组起始，样条段和样条组结束三部分，样条组开始是样条运动的起始标志，样条段目前节点图只包含SPL段，样条组结束是样条运动的结束标志。
+Instrukcja ta składa się z trzech części: początek grupy krzywej średniej, odcinek krzywej średniej i koniec grupy krzywej średniej. Początek grupy krzywej średniej jest znacznikiem początku ruchu krzywej średniej. Odcinek krzywej średniej obecnie w grafie węzłów zawiera tylko odcinek SPL. Koniec grupy krzywej średniej jest znacznikiem końca ruchu krzywej średniej.
 
-“样条-SPTP”指令节点,参数：
+Węzeł instrukcji „Krzywa średnia - SPTP”, parametry:
 
-- 点名称：示教点位
+- Nazwa punktu: Punkt nauczania.
 
-- 调试速度(%)：0 ~ 100
+- Prędkość调试 (%): 0 ~ 100
 
 .. image:: graphical/035.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.5-10 样条指令代码块
+.. centered:: Wykres 10.5-10 Blok kodu instrukcji krzywej średniej
 
-新样条指令
-~~~~~~~~~~~~~~~~~~~~~
-拖动“新样条指令”代码块,进入图形化编辑界面工作区。
+Nowa instrukcja krzywej średniej
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Przeciągnij blok kodu „Nowa instrukcja krzywej średniej” do obszaru roboczego interfejsu edycji graficznej.
 
-该指令为样条指令算法优化指令，后续会替代现有的样条指令，该指令分为多点轨迹起始，多点轨迹段和多点轨迹结束三部分，多点轨迹开始是多点轨迹运动的起始标志，多点轨迹段即设置各个轨迹点，点击图标进入点位添加界面，多点轨迹结束是多点轨迹运动的结束标志，在此可以设置控制模式和调试速度，控制模式分 为给定控制点和给定路径点。
+Ta instrukcja jest zoptymalizowaną instrukcją algorytmu krzywej średniej, która w przyszłości zastąpi istniejącą instrukcję krzywej średniej. Instrukcja ta składa się z trzech części: początek trajektorii wielopunktowej, odcinek trajektorii wielopunktowej i koniec trajektorii wielopunktowej. Początek trajektorii wielopunktowej jest znacznikiem początku ruchu trajektorii wielopunktowej. Odcinek trajektorii wielopunktowej polega na ustawianiu poszczególnych punktów trajektorii. Kliknij ikonę, aby przejść do interfejsu dodawania punktów. Koniec trajektorii wielopunktowej jest znacznikiem końca ruchu trajektorii wielopunktowej. W tym miejscu można ustawić tryb sterowania i prędkość调试. Tryb sterowania dzieli się na podawanie punktów sterujących i podawanie punktów ścieżki.
 
-“新样条”指令节点,参数：
+Węzeł instrukcji „Nowa krzywa średnia”, parametry:
 
-- 控制模式：示教点位
+- Tryb sterowania: Punkt nauczania.
 
-- 全局平均衔接时间：整数型，大于10，默认值为2000ms
+- Globalny średni czas połączenia: Liczba całkowita, większa niż 10, wartość domyślna to 2000 ms.
 
-“新样条-SPL”指令节点,参数：
+Węzeł instrukcji „Nowa krzywa średnia - SPL”, parametry:
 
-- 点名称：示教点位
+- Nazwa punktu: Punkt nauczania.
 
-- 调试速度(%)：0 ~ 100
+- Prędkość调试 (%): 0 ~ 100
 
-- 平滑过渡半径：0 ~ 1000
+- Promień wygładzenia przejścia: 0 ~ 1000
 
-- 是否最后一个点：否/是
+- Czy ostatni punkt: Nie / Tak
 
 .. image:: graphical/036.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.5-11 新样条指令代码块
+.. centered:: Wykres 10.5-11 Blok kodu nowej instrukcji krzywej średniej
 
-摆动指令
-~~~~~~~~~~~~~~~~~~~~~
-拖动“摆动指令”代码块,进入图形化编辑界面工作区。
+Instrukcja oscylacji
+~~~~~~~~~~~~~~~~~~~~
+Przeciągnij blok kodu „Instrukcja oscylacji” do obszaru roboczego interfejsu edycji graficznej.
 
-“摆动”指令节点,参数：
+Węzeł instrukcji „Oscylacja”, parametry:
 
-- 编号：0~7
+- Numer: 0~7
 
 .. image:: graphical/037.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.5-12 摆动指令代码块
+.. centered:: Wykres 10.5-12 Blok kodu instrukcji oscylacji
 
-点偏移指令
-~~~~~~~~~~~~~~~~~~~~~
-拖动“点偏移指令”代码块,进入图形化编辑界面工作区。
+Instrukcja przesunięcia punktu
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Przeciągnij blok kodu „Instrukcja przesunięcia punktu” do obszaru roboczego interfejsu edycji graficznej.
 
-该指令为整体偏移指令，输入各个偏移量，运动指令会基于基坐标（或工件坐标）进行偏移。
+Ta instrukcja jest instrukcją przesunięcia globalnego. Po wprowadzeniu poszczególnych wartości przesunięcia, instrukcje ruchu będą przesunięte względem podstawy (lub współrzędnych przedmiotu).
 
-“点偏移”指令节点,参数：
+Węzeł instrukcji „Przesunięcie punktu”, parametry:
 
-- ∆x：偏移量，-300~300
+- ∆x: Wartość przesunięcia, -300~300
 
-- ∆y：偏移量，-300~300
+- ∆y: Wartość przesunięcia, -300~300
 
-- ∆z：偏移量，-300~300
+- ∆z: Wartość przesunięcia, -300~300
 
-- ∆rx：偏移量，-300~300
+- ∆rx: Wartość przesunięcia, -300~300
 
-- ∆ry：偏移量，-300~300
+- ∆ry: Wartość przesunięcia, -300~300
 
-- ∆rz：偏移量，-300~300
+- ∆rz: Wartość przesunięcia, -300~300
 
 .. image:: graphical/038.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.5-13 点偏移指令代码块
+.. centered:: Wykres 10.5-13 Blok kodu instrukcji przesunięcia punktu
 
-伺服指令
-~~~~~~~~~~~~~~~~~~~~~
-拖动“伺服指令”代码块,进入图形化编辑界面工作区。
+Instrukcja serwo
+~~~~~~~~~~~~~~~~
+Przeciągnij blok kodu „Instrukcja serwo” do obszaru roboczego interfejsu edycji graficznej.
 
-伺服控制（笛卡尔空间运动）指令，该指令可以通过绝对位姿控制或基于当前位姿偏移来控制机器人运动。
+Instrukcja sterowania serwo (ruch w przestrzeni kartezjańskiej). Instrukcja ta może sterować ruchem robota za pomocą sterowania bezwzględną pozycją i orientacją lub przesunięcia względem bieżącej pozycji i orientacji.
 
-“伺服”指令节点,参数：
+Węzeł instrukcji „Serwo”, parametry:
 
-- 运动方式：绝对位置/基坐标偏移/工具坐标偏移
+- Sposób ruchu: Pozycja bezwzględna / przesunięcie względem podstawy / przesunięcie względem narzędzia
 
-- x：偏移量，-300~300
+- x: Wartość przesunięcia, -300~300
 
-- y：偏移量，-300~300
+- y: Wartość przesunięcia, -300~300
 
-- z：偏移量，-300~300
+- z: Wartość przesunięcia, -300~300
 
-- rx：偏移量，-300~300
+- rx: Wartość przesunięcia, -300~300
 
-- ry：偏移量，-300~300
+- ry: Wartość przesunięcia, -300~300
 
-- rz：偏移量，-300~300
+- rz: Wartość przesunięcia, -300~300
 
-- 比例系数x：0~1
+- Współczynnik proporcjonalności x: 0~1
 
-- 比例系数y：0~1
+- Współczynnik proporcjonalności y: 0~1
 
-- 比例系数z：0~1
+- Współczynnik proporcjonalności z: 0~1
 
-- 比例系数rx：0~1
+- Współczynnik proporcjonalności rx: 0~1
 
-- 比例系数ry：0~1
+- Współczynnik proporcjonalności ry: 0~1
 
-- 比例系数rz：0~1
+- Współczynnik proporcjonalności rz: 0~1
 
-- 加速度(%)：0~100
+- Przyspieszenie (%): 0~100
 
-- 速度(%)：0~100
+- Prędkość (%): 0~100
 
-- 指令周期(s)：0.001~0.016
+- Cykl instrukcji (s): 0,001~0,016
 
-- 滤波时间(s)：0~1
+- Czas filtrowania (s): 0~1
 
-- 比例放大：0~100
+- Wzmocnienie proporcjonalne: 0~100
 
 .. image:: graphical/039.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.5-14 伺服指令代码块
+.. centered:: Wykres 10.5-14 Blok kodu instrukcji serwo
 
-轨迹指令
-~~~~~~~~~~~~~~~~~~~~~
-拖动“轨迹指令”代码块,进入图形化编辑界面工作区。
+Instrukcja trajektorii
+~~~~~~~~~~~~~~~~~~~~~~
+Przeciągnij blok kodu „Instrukcja trajektorii” do obszaru roboczego interfejsu edycji graficznej.
 
-在该指令中，用户首先需要有记录好的轨迹。
+W tej instrukcji użytkownik musi najpierw mieć zarejestrowaną trajektorię.
 
-“轨迹”指令节点,参数：
+Węzeł instrukcji „Trajektoria”, parametry:
 
-- 选择轨迹文件：记录好的轨迹
+- Wybierz plik trajektorii: Zarejestrowana trajektoria.
 
-- 调试速度(%)：0 ~ 100，默认值为25
+- Prędkość调试 (%): 0 ~ 100, wartość domyślna to 25.
 
 .. image:: graphical/040.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.5-15 轨迹指令代码块
+.. centered:: Wykres 10.5-15 Blok kodu instrukcji trajektorii
 
-轨迹J指令
-~~~~~~~~~~~~~~~~~~~~~
-拖动“轨迹J指令”代码块,进入图形化编辑界面工作区。
+Instrukcja trajektorii J
+~~~~~~~~~~~~~~~~~~~~~~~~
+Przeciągnij blok kodu „Instrukcja trajektorii J” do obszaru roboczego interfejsu edycji graficznej.
 
-在该指令中，用户首先需要有记录好的轨迹，可以在示教程序界面预先导入轨迹文件。轨迹指令和轨迹J指令适用于相机直接给定轨迹的通用接口，满足在已有固定格式的离散的轨迹点文件时，可导入系统使得机器人按照导入文件的轨迹进行运动。
+W tej instrukcji użytkownik musi najpierw mieć zarejestrowaną trajektorię. Plik trajektorii można wcześniej zaimportować w interfejsie programu nauczania. Instrukcje trajektorii i trajektorii J są przeznaczone do ogólnego interfejsu, w którym kamera bezpośrednio podaje trajektorię. Gdy istnieje plik dyskretnych punktów trajektorii w ustalonym formacie, można go zaimportować do systemu, aby robot poruszał się zgodnie z trajektorią z zaimportowanego pliku.
 
-“轨迹J”指令节点,参数：
+Węzeł instrukcji „Trajektoria J”, parametry:
 
-- 选择轨迹文件：记录好的轨迹
+- Wybierz plik trajektorii: Zarejestrowana trajektoria.
 
-- 调试速度(%)：0 ~ 100，默认值为25
+- Prędkość调试 (%): 0 ~ 100, wartość domyślna to 25.
 
-- 轨迹模式：路径点/控制点
+- Tryb trajektorii: Punkt ścieżki / Punkt sterujący
 
 .. image:: graphical/041.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.5-16 轨迹J指令代码块
+.. centered:: Wykres 10.5-16 Blok kodu instrukcji trajektorii J
 
-轨迹复现指令
-~~~~~~~~~~~~~~~~~~~~~
-拖动“轨迹复现指令”代码块,进入图形化编辑界面工作区。
+Instrukcja odtwarzania trajektorii
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Przeciągnij blok kodu „Instrukcja odtwarzania trajektorii” do obszaru roboczego interfejsu edycji graficznej.
 
-在该指令中，用户首先需要有记录好的轨迹。
+W tej instrukcji użytkownik musi najpierw mieć zarejestrowaną trajektorię.
 
-进行程序编程时，首先用点到点指令到达对应轨迹起始点，然后在轨迹复现指令中选择轨迹，选择平滑轨迹，设置调试速度。轨迹加载指令主要用于预先读取轨迹文件，提取成轨迹指令，更好的应用于传送带跟踪场景。
+Podczas programowania należy najpierw użyć instrukcji punkt-punkt, aby dotrzeć do odpowiedniego punktu początkowego trajektorii, a następnie w instrukcji odtwarzania trajektorii wybrać trajektorię, wybrać wygładzoną trajektorię i ustawić prędkość调试. Instrukcja ładowania trajektorii służy głównie do wcześniejszego odczytania pliku trajektorii i wyodrębnienia go jako instrukcji trajektorii, co lepiej sprawdza się w scenariuszach śledzenia taśmociągu.
 
-“轨迹复现”指令节点,参数：
+Węzeł instrukcji „Odtwarzanie trajektorii”, parametry:
 
-- 轨迹名称：记录好的轨迹
+- Nazwa trajektorii: Zarejestrowana trajektoria.
 
-- 平滑轨迹：否/是
+- Wygładzona trajektoria: Nie / Tak
 
-- 调试速度(%)：0 ~ 100，默认值为25
+- Prędkość调试 (%): 0 ~ 100, wartość domyślna to 25.
 
 .. image:: graphical/042.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.5-17 轨迹复现指令代码块
+.. centered:: Wykres 10.5-17 Blok kodu instrukcji odtwarzania trajektorii
 
-DMP指令
-~~~~~~~~~~~~~~~~~~~~~
-拖动“DMP指令”代码块,进入图形化编辑界面工作区。
+Instrukcja DMP
+~~~~~~~~~~~~~~
+Przeciągnij blok kodu „Instrukcja DMP” do obszaru roboczego interfejsu edycji graficznej.
 
-DMP是一种轨迹模仿学习的方法，需要事先规划参考轨迹。在命令编辑界面 ，选择示教点作为新的起点，点击“添加”、“应用”后可保存该指令。DMP具体路径为以新的起点模仿参考轨迹的新轨迹。
+DMP to metoda uczenia się przez imitację trajektorii, która wymaga wcześniejszego zaplanowania trajektorii odniesienia. W interfejsie edycji poleceń wybierz punkt nauczania jako nowy punkt początkowy. Po kliknięciu „Dodaj”, „Zastosuj” instrukcja może zostać zapisana. Konkretna ścieżka DMP to nowa trajektoria naśladująca trajektorię odniesienia, zaczynająca się od nowego punktu początkowego.
 
-“DMP”指令节点,参数：
+Węzeł instrukcji „DMP”, parametry:
 
-- 点名称：示教点
+- Nazwa punktu: Punkt nauczania.
 
-- 调试速度(%)：0 ~ 100，默认值为100
+- Prędkość调试 (%): 0 ~ 100, wartość domyślna to 100.
 
 .. image:: graphical/043.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.5-18 DMP指令代码块
+.. centered:: Wykres 10.5-18 Blok kodu instrukcji DMP
 
-工具转换指令
-~~~~~~~~~~~~~~~~~~~~~
-拖动“工具转换指令”代码块,进入图形化编辑界面工作区。
+Instrukcja konwersji narzędzia
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Przeciągnij blok kodu „Instrukcja konwersji narzędzia” do obszaru roboczego interfejsu edycji graficznej.
 
-选择所要进行自动转换的工具坐标系，点击“添加”、“应用”后可保存该指令，工具坐标系下点位自动转换。
+Wybierz układ współrzędnych narzędzia, który ma zostać automatycznie przekonwertowany. Po kliknięciu „Dodaj”, „Zastosuj” instrukcja może zostać zapisana, a punkty w układzie współrzędnych narzędzia są automatycznie konwertowane.
 
-“工具转换”指令节点,参数：
+Węzeł instrukcji „Konwersja narzędzia”, parametry:
 
-- 工具坐标系：工具坐标系列表
+- Układ współrzędnych narzędzia: Lista układów współrzędnych narzędzia.
 
 .. image:: graphical/044.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.5-19 工具转换指令代码块
+.. centered:: Wykres 10.5-19 Blok kodu instrukcji konwersji narzędzia
 
-工件转换指令
-~~~~~~~~~~~~~~~~~~~~~
-拖动“工件转换指令”代码块,进入图形化编辑界面工作区。
+Instrukcja konwersji przedmiotu
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Przeciągnij blok kodu „Instrukcja konwersji przedmiotu” do obszaru roboczego interfejsu edycji graficznej.
 
-选择所要进行自动转换的工件坐标系，点击“添加”、“应用”后可保存该指令，工件坐标系下点位自动转换。
+Wybierz układ współrzędnych przedmiotu, który ma zostać automatycznie przekonwertowany. Po kliknięciu „Dodaj”, „Zastosuj” instrukcja może zostać zapisana, a punkty w układzie współrzędnych przedmiotu są automatycznie konwertowane.
 
-“工件转换”指令节点,参数：
+Węzeł instrukcji „Konwersja przedmiotu”, parametry:
 
-- 工件坐标系：工件坐标系列表
+- Układ współrzędnych przedmiotu: Lista układów współrzędnych przedmiotu.
 
 .. image:: graphical/045.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.5-20 工件转换指令代码块
+.. centered:: Wykres 10.5-20 Blok kodu instrukcji konwersji przedmiotu
 
-控制类图形化编程命令
---------------------------
-控制类图形化编程命令包含Wait、IO等控制命令。
+Polecenia programowania graficznego dotyczące sterowania
+--------------------------------------------------------
+Polecenia programowania graficznego dotyczące sterowania obejmują polecenia sterowania, takie jak Wait, IO itp.
 
 .. image:: graphical/007.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.6 控制类图形化编程命令
+.. centered:: Wykres 10.6 Polecenia programowania graficznego dotyczące sterowania
 
-等待指令
-~~~~~~~~~~~~~~~~~~~~~
-拖动“等待指令”代码块,进入图形化编辑界面工作区。
+Instrukcja oczekiwania
+~~~~~~~~~~~~~~~~~~~~~~
+Przeciągnij blok kodu „Instrukcja oczekiwania” do obszaru roboczego interfejsu edycji graficznej.
 
-该指令为延时指令，分为“WaitMs”、“WaitDI”、“WaitMultiDI”和“WaitAI”四部分。
+Ta instrukcja jest instrukcją opóźnienia i dzieli się na cztery części: „WaitMs”, „WaitDI”, „WaitMultiDI” i „WaitAI”.
 
-1. “等待”指令节点,参数：
+1. Węzeł instrukcji „Oczekiwanie”, parametry:
 
-- 等待时间(ms): 延时等待时间单位为毫秒，输入需要等待的毫秒数
+- Czas oczekiwania (ms): Opóźnienie w milisekundach, wprowadź liczbę milisekund oczekiwania.
 
 .. image:: graphical/046.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.6-1 等待指令代码块
+.. centered:: Wykres 10.6-1 Blok kodu instrukcji oczekiwania
 
-2. “等待DI”指令节点,参数：
+2. Węzeł instrukcji „Oczekiwanie na DI”, parametry:
 
-- DI端口号： Ctrl-DI0 ~ Ctrl-CI7(WaitDI,[0~15]), End-DI0 ~ End-DI1(WaitToolDI,[0~1])
+- Numer portu DI: Ctrl-DI0 ~ Ctrl-CI7 (WaitDI, [0~15]), End-DI0 ~ End-DI1 (WaitToolDI, [0~1])
 
-- 状态： false/true
+- Stan: false/true
 
-- 最大时间(ms)： 0 ~ 10000
+- Maksymalny czas (ms): 0 ~ 10000
 
-- 等待超时处理：停止报错/继续执行/一直等待
+- Obsługa przekroczenia limitu czasu oczekiwania: Zatrzymaj z błędem / Kontynuuj wykonanie / Oczekuj w nieskończoność
 
 .. image:: graphical/047.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.6-2 等待DI指令代码块
+.. centered:: Wykres 10.6-2 Blok kodu instrukcji oczekiwania na DI
 
-3. “等待多条DI”指令节点，参数:
+3. Węzeł instrukcji „Oczekiwanie na wiele DI”, parametry:
 
-- 条件： 与/或
+- Warunek: I / LUB
 
-- 条件选择：选择位的状态开启的端口号，以逗号隔开，例DI0,DI1
+- Wybór warunku: Numery portów, dla których stan bitów jest włączony, oddzielone przecinkami, np. DI0, DI1
 
-- 真值对应端口：选择真值的端口号，以逗号隔开，例DI0,DI1
+- Porty odpowiadające wartościom prawdziwym: Numery portów dla wartości prawdziwych, oddzielone przecinkami, np. DI0, DI1
 
-- 最大时间(ms)：0 ~ 10000,最大等待时间
+- Maksymalny czas (ms): 0 ~ 10000, maksymalny czas oczekiwania
 
-- 等待超时处理：停止报错/继续执行/一直等待
+- Obsługa przekroczenia limitu czasu oczekiwania: Zatrzymaj z błędem / Kontynuuj wykonanie / Oczekuj w nieskończoność
 
 .. image:: graphical/048.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.6-3 等待多条DI指令代码块
+.. centered:: Wykres 10.6-3 Blok kodu instrukcji oczekiwania na wiele DI
 
-4. “等待AI”指令节点，参数:
+4. Węzeł instrukcji „Oczekiwanie na AI”, parametry:
 
-- 条件： 与/或
+- Warunek: I / LUB
 
-- AI端口号： Ctrl-AI0 ~ Ctrl-AI1(WaitAI,[0~1]), End-AI0(WaitToolAI,[0])
+- Numer portu AI: Ctrl-AI0 ~ Ctrl-AI1 (WaitAI, [0~1]), End-AI0 (WaitToolAI, [0])
 
-- 条件：大于/小于
+- Warunek: Większy niż / Mniejszy niż
 
-- 数值(%)：1 ~ 100
+- Wartość (%): 1 ~ 100
 
-- 最大时间(ms)：0 ~ 10000
+- Maksymalny czas (ms): 0 ~ 10000
 
-- 等待超时处理：停止报错/继续执行/一直等待,等待超时处理一直等待时，最大时间默认为0
+- Obsługa przekroczenia limitu czasu oczekiwania: Zatrzymaj z błędem / Kontynuuj wykonanie / Oczekuj w nieskończoność. Gdy obsługa przekroczenia limitu czasu oczekiwania jest ustawiona na oczekiwanie w nieskończoność, maksymalny czas domyślnie wynosi 0.
 
 .. image:: graphical/049.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.6-4 等待AI指令代码块
+.. centered:: Wykres 10.6-4 Blok kodu instrukcji oczekiwania na AI
 
-模式切换指令
-~~~~~~~~~~~~~~~~~~~~~
-拖动“模式切换指令”代码块,进入图形化编辑界面工作区。
+Instrukcja przełączania trybu
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Przeciągnij blok kodu „Instrukcja przełączania trybu” do obszaru roboczego interfejsu edycji graficznej.
 
-该指令可切换机器人到手动模式，通常在一个程序结尾处添加，以便用户在程序运行结束后，使机器人自动切换到手动模式，拖动机器人。
+Ta instrukcja może przełączyć robota w tryb ręczny. Zwykle dodaje się ją na końcu programu, aby po zakończeniu programu robot automatycznie przełączył się w tryb ręczny, umożliwiając przeciąganie robota.
 
-“模式切换”指令节点,参数：
+Węzeł instrukcji „Przełączanie trybu”, parametry:
 
-- 模式切换：手动模式
+- Przełączanie trybu: Tryb ręczny
 
 .. image:: graphical/050.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.6-5 模式切换指令代码块
+.. centered:: Wykres 10.6-5 Blok kodu instrukcji przełączania trybu
 
-暂停指令
-~~~~~~~~~~~~~~~~~~~~~
-拖动“暂停指令”代码块,进入图形化编辑界面工作区。
+Instrukcja wstrzymania
+~~~~~~~~~~~~~~~~~~~~~~
+Przeciągnij blok kodu „Instrukcja wstrzymania” do obszaru roboczego interfejsu edycji graficznej.
 
-该指令为暂停指令，在程序中插入该指令，当程序执行到该指令时，机器人会处于暂停状态，若想继续运行，点击控制区“暂停/恢复”按键即可。
+Ta instrukcja jest instrukcją wstrzymania. Po wstawieniu tej instrukcji do programu, gdy program osiągnie ten punkt, robot przejdzie w stan wstrzymania. Aby kontynuować, kliknij przycisk „Wstrzymaj/Wznów” w obszarze sterowania.
 
-“暂停”指令节点,参数：
+Węzeł instrukcji „Wstrzymanie”, parametry:
 
-- 暂停类型：无功能、气缸未到位等
+- Typ wstrzymania: Brak funkcji, Cylinder nie osiągnął pozycji itp.
 
 .. image:: graphical/051.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.6-6 暂停指令代码块
+.. centered:: Wykres 10.6-6 Blok kodu instrukcji wstrzymania
 
-坐标系指令
-~~~~~~~~~~~~~~~~~~~~~
-拖动“设置工具坐标系”/“设置工件坐标系”代码块,进入图形化编辑界面工作区。
+Instrukcje układów współrzędnych
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Przeciągnij bloki kodu „Ustaw układ współrzędnych narzędzia” / „Ustaw układ współrzędnych przedmiotu” do obszaru roboczego interfejsu edycji graficznej.
 
-1. “设置工具坐标系”指令节点,参数：
+1. Węzeł instrukcji „Ustaw układ współrzędnych narzędzia”, parametry:
 
-- 工具坐标系名称：toolcoord1 ~ toolcoord19(SetToolList,[0~19]), etoolcoord0 ~ etoolcoord14(SetExToolList, [0~14])
+- Nazwa układu współrzędnych narzędzia: toolcoord1 ~ toolcoord19 (SetToolList, [0~19]), etoolcoord0 ~ etoolcoord14 (SetExToolList, [0~14])
 
 .. image:: graphical/052.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.6-7 设置工具坐标系指令代码块
+.. centered:: Wykres 10.6-7 Blok kodu instrukcji ustawiania układu współrzędnych narzędzia
 
-2. “设置工件坐标系”指令节点,参数：
+2. Węzeł instrukcji „Ustaw układ współrzędnych przedmiotu”, parametry:
 
-- 工件坐标系名称：wobjcoord1 ~ wobjcoord14
+- Nazwa układu współrzędnych przedmiotu: wobjcoord1 ~ wobjcoord14
 
 .. image:: graphical/053.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.6-8 设置工件坐标系指令代码块
+.. centered:: Wykres 10.6-8 Blok kodu instrukcji ustawiania układu współrzędnych przedmiotu
 
-模拟AI指令
-~~~~~~~~~~~~~~~~~~~~~
-拖动“设置AO”/“获取AI”代码块,进入图形化编辑界面工作区。
+Instrukcje analogowych wejść/wyjść
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Przeciągnij bloki kodu „Ustaw AO” / „Pobierz AI” do obszaru roboczego interfejsu edycji graficznej.
 
-在该指令中，分为设置模拟输出（SetAO/SPLCSetAO）和获取模拟输入（GetAI/SPLCGetAI）两部分功能。
+W instrukcji tej znajdują się dwie części funkcji: ustawianie wyjścia analogowego (SetAO/SPLCSetAO) i pobieranie wejścia analogowego (GetAI/SPLCGetAI).
 
-1. “设置AO”指令节点,参数：
+1. Węzeł instrukcji „Ustaw AO”, parametry:
 
-- 端口：Ctrl-AO0 ~ Ctrl-AO1(阻塞:SetAO,非阻塞:SPLCSetAO,[0~1]), End-AO0(阻塞:SetToolAO,非阻塞:SPLCSetToolAO,[0])
+- Port: Ctrl-AO0 ~ Ctrl-AO1 (blokujące: SetAO, nieblokujące: SPLCSetAO, [0~1]), End-AO0 (blokujące: SetToolAO, nieblokujące: SPLCSetToolAO, [0])
 
-- 数值(%)：0 ~ 100
+- Wartość (%): 0 ~ 100
 
-- 是否阻塞：阻塞/非阻塞
+- Czy blokujące: Blokujące / Nieblokujące
 
-- 是否应用线程：否/是
+- Czy stosować wątek: Nie / Tak
 
 .. image:: graphical/054.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.6-9 设置AO指令代码块
+.. centered:: Wykres 10.6-9 Blok kodu instrukcji ustawiania AO
 
-2. “获取AI”指令节点,参数：
+2. Węzeł instrukcji „Pobierz AI”, parametry:
 
-- 端口：Ctrl-AI0 ~ Ctrl-DI1(阻塞:GetAI,非阻塞:SPLCGetAI,[0~1]), End-AI0(阻塞:GetToolAI,非阻塞:SPLCGetToolAI,[0])
+- Port: Ctrl-AI0 ~ Ctrl-DI1 (blokujące: GetAI, nieblokujące: SPLCGetAI, [0~1]), End-AI0 (blokujące: GetToolAI, nieblokujące: SPLCGetToolAI, [0])
 
-- 条件：大于/小于
+- Warunek: Większy niż / Mniejszy niż
 
-- 数值(%)：0 ~ 100
+- Wartość (%): 0 ~ 100
 
-- 最大时间(ms)：0 ~ 10000
+- Maksymalny czas (ms): 0 ~ 10000
 
-- 是否阻塞：阻塞/非阻塞
+- Czy blokujące: Blokujące / Nieblokujące
 
-- 是否应用线程：否/是
+- Czy stosować wątek: Nie / Tak
 
 .. image:: graphical/055.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.6-10 获取AI指令代码块
+.. centered:: Wykres 10.6-10 Blok kodu instrukcji pobierania AI
 
-数字IO指令
-~~~~~~~~~~~~~~~~~~~~~
-拖动“设置DO”/“获取DI”代码块,进入图形化编辑界面工作区。
+Instrukcje cyfrowych wejść/wyjść
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Przeciągnij bloki kodu „Ustaw DO” / „Pobierz DI” do obszaru roboczego interfejsu edycji graficznej.
 
-指令为IO指令，分为设置IO（SetDO/SPLCSetDO）和获取IO（GetDI/SPLCGetDI）两部分。
+Instrukcja jest instrukcją Wejść/Wyjść i dzieli się na dwie części: ustawianie wyjścia (SetDO/SPLCSetDO) i pobieranie wejścia (GetDI/SPLCGetDI).
 
-1. “设置DO”指令节点,参数：
+1. Węzeł instrukcji „Ustaw DO”, parametry:
 
-- 端口：Ctrl-DO0 ~ Ctrl-CO7(阻塞:SetDO,非阻塞:SPLCSetDO,[0~15]), End-DO0 ~ End-DO1(阻塞:SetToolDO,非阻塞:SPLCSetToolDO,[0~1])
+- Port: Ctrl-DO0 ~ Ctrl-CO7 (blokujące: SetDO, nieblokujące: SPLCSetDO, [0~15]), End-DO0 ~ End-DO1 (blokujące: SetToolDO, nieblokujące: SPLCSetToolDO, [0~1])
 
-- 状态：false/true
+- Stan: false/true
 
-- 是否阻塞：阻塞/非阻塞
+- Czy blokujące: Blokujące / Nieblokujące
 
-- 平滑轨迹：Break/Serious
+- Wygładzona trajektoria: Break / Serious
 
-- 是否应用线程：否/是
+- Czy stosować wątek: Nie / Tak
 
 .. image:: graphical/056.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.6-11 设置DO指令代码块
+.. centered:: Wykres 10.6-11 Blok kodu instrukcji ustawiania DO
 
-2. “获取DI”指令节点,参数：
+2. Węzeł instrukcji „Pobierz DI”, parametry:
 
-- 端口：Ctrl-DI0 ~ Ctrl-CI7(阻塞:GetDI,非阻塞:SPLCGetDI,[0~15]), End-DI0 ~ End-DI1(阻塞:GetToolDI,非阻塞:SPLCGetToolDI,[0~1])
+- Port: Ctrl-DI0 ~ Ctrl-CI7 (blokujące: GetDI, nieblokujące: SPLCGetDI, [0~15]), End-DI0 ~ End-DI1 (blokujące: GetToolDI, nieblokujące: SPLCGetToolDI, [0~1])
 
-- 是否阻塞：阻塞/非阻塞
+- Czy blokujące: Blokujące / Nieblokujące
 
-- 状态：false/true
+- Stan: false/true
 
-- 最大等待时间(ms)：0 ~ 10000
+- Maksymalny czas oczekiwania (ms): 0 ~ 10000
 
-- 是否应用线程：否/是
+- Czy stosować wątek: Nie / Tak
 
 .. image:: graphical/057.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.6-12 获取DI指令代码块
+.. centered:: Wykres 10.6-12 Blok kodu instrukcji pobierania DI
 
-运动DO指令
-~~~~~~~~~~~~~~~~~~~~~
-拖动“运动DO指令”代码块,进入图形化编辑界面工作区。
+Instrukcja ruchomego wyjścia DO
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Przeciągnij blok kodu „Instrukcja ruchomego wyjścia DO” do obszaru roboczego interfejsu edycji graficznej.
 
-该指令实现直线运动过程中，根据设定的间隔，连续输出DO信号功能。
+Ta instrukcja umożliwia ciągłe wyjście sygnału DO podczas ruchu po linii prostej, w oparciu o ustawiony odstęp.
 
-1. “运动DO连续输出”指令节点,参数：
+1. Węzeł instrukcji „Ciągłe wyjście ruchomego DO”, parametry:
 
-- 端口：Ctrl-DO0 ~ Ctrl-DO0(MoveDOStart,[0~15]), End-DO1(MoveDOStart,[0~1])
+- Port: Ctrl-DO0 ~ Ctrl-DO0 (MoveDOStart, [0~15]), End-DO1 (MoveDOStart, [0~1])
 
-- 设定间隔(mm)：0 ~ 500
+- Ustawiony odstęp (mm): 0 ~ 500
 
-- 输出脉冲占空比(%)：0 ~ 99
+- Współczynnik wypełnienia impulsu wyjściowego (%): 0 ~ 99
 
-2. “运动DO单次输出”指令节点,参数：
+2. Węzeł instrukcji „Pojedyncze wyjście ruchomego DO”, parametry:
 
-- 端口：Ctrl-DO0 ~ Ctrl-DO0(MoveDOOnceStart,[0~15]), End-DO1(MoveDOOnceStart,[0~1])
+- Port: Ctrl-DO0 ~ Ctrl-DO0 (MoveDOOnceStart, [0~15]), End-DO1 (MoveDOOnceStart, [0~1])
 
-- 输出模式：匀速段输出/自由配置
+- Tryb wyjścia: Wyjście w odcinku jednostajnym / Dowolna konfiguracja
 
-- 置位时间(ms)：0 ~ 1000 (匀速段输出模式默认为-1)
+- Czas ustawienia (ms): 0 ~ 1000 (w trybie wyjścia w odcinku jednostajnym domyślnie -1)
 
-- 复位时间(ms)：0 ~ 1000 (匀速段输出模式默认为-1)
+- Czas resetowania (ms): 0 ~ 1000 (w trybie wyjścia w odcinku jednostajnym domyślnie -1)
 
 .. image:: graphical/058.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.6-13 “运动DO单次/连续输出”指令代码块
+.. centered:: Wykres 10.6-13 Blok kodu instrukcji „Pojedyncze/ciągłe wyjście ruchomego DO”
 
-运动AO指令
-~~~~~~~~~~~~~~~~~~~~~
-拖动“运动AO指令”代码块,进入图形化编辑界面工作区。
+Instrukcja ruchomego wyjścia AO
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Przeciągnij blok kodu „Instrukcja ruchomego wyjścia AO” do obszaru roboczego interfejsu edycji graficznej.
 
-该指令配合运动指令使用时，可实现在运动过程中，根据实时TCP速度按比例输出AO信号。
+Gdy ta instrukcja jest używana razem z instrukcjami ruchu, umożliwia proporcjonalne wyjście sygnału AO w czasie rzeczywistym podczas ruchu, w oparciu o prędkość TCP w czasie rzeczywistym.
 
-“运动AO”指令节点,参数：
+Węzeł instrukcji „Ruchome wyjście AO”, parametry:
 
-- 控制箱AO编号：Ctrl-AO0 ~ Ctrl-AO1(MoveAOStart,[0~1]), End-AO0(MoveToolAOStart,0)
+- Numer AO skrzynki sterowniczej: Ctrl-AO0 ~ Ctrl-AO1 (MoveAOStart, [0~1]), End-AO0 (MoveToolAOStart, 0)
 
-- 最大TCP速度：0 ~ 100
+- Maksymalna prędkość TCP: 0 ~ 100
 
-- 最大TCP速度AO百分比：0 ~ 100
+- Procent AO przy maksymalnej prędkości TCP: 0 ~ 100
 
-- 死区补偿值AO百分比：0 ~ 100
+- Procent AO kompensacji martwego pola: 0 ~ 100
 
 .. image:: graphical/059.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.6-14 “运动AO”指令代码块
-  
-碰撞等级指令
-~~~~~~~~~~~~~~~~~~~~~
-拖动“碰撞等级指令”代码块,进入图形化编辑界面工作区。
+.. centered:: Wykres 10.6-14 Blok kodu instrukcji „Ruchome wyjście AO”
 
-该指令碰撞等级设置，通过该指令可以在程序运行中实时调节各轴碰撞等级，更灵活的部署应用场景。
+Instrukcja poziomu kolizji
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+Przeciągnij blok kodu „Instrukcja poziomu kolizji” do obszaru roboczego interfejsu edycji graficznej.
 
-“碰撞等级”指令节点,参数：
+Ustawienie poziomu kolizji w tej instrukcji umożliwia regulację poziomu kolizji dla każdej osi w czasie rzeczywistym podczas działania programu, zapewniając bardziej elastyczne wdrażanie w różnych scenariuszach aplikacji.
 
-- 标准等级：标准等级/自定义百分比
+Węzeł instrukcji „Poziom kolizji”, parametry:
 
-- joint1-joint6(N)：0 ~ 100，碰撞阈值，数组型
+- Poziom standardowy: Poziom standardowy / Niestandardowy procent
+
+- joint1-joint6 (N): 0 ~ 100, próg kolizji, typ tablicowy.
 
 .. image:: graphical/060.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.6-15 碰撞等级指令代码块
+.. centered:: Wykres 10.6-15 Blok kodu instrukcji poziomu kolizji
 
-加速度指令
-~~~~~~~~~~~~~~~~~~~~~
-拖动“加速度指令”代码块,进入图形化编辑界面工作区。
+Instrukcja przyspieszenia
+~~~~~~~~~~~~~~~~~~~~~~~~~
+Przeciągnij blok kodu „Instrukcja przyspieszenia” do obszaru roboczego interfejsu edycji graficznej.
 
-“加速度”命令是实现机器人加速度可单独设置功能，通过调节运动指令加速度缩放因子，可以增加或减小加减速时间，实现机器人动作节拍时间可调。
+Polecenie „Przyspieszenie” umożliwia niezależne ustawienie przyspieszenia robota. Regulując współczynnik skalowania przyspieszenia instrukcji ruchu, można zwiększyć lub zmniejszyć czas przyspieszania i zwalniania, co pozwala na regulację czasu cyklu ruchu robota.
 
-“加速度”指令节点,参数：
+Węzeł instrukcji „Przyspieszenie”, parametry:
 
-- 加速度百分比(%)：0 ~ 100
+- Procent przyspieszenia (%): 0 ~ 100
 
 .. image:: graphical/061.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.6-16 加速度指令代码块
+.. centered:: Wykres 10.6-16 Blok kodu instrukcji przyspieszenia
 
-外设类图形化编程命令
---------------------------
-外设类图形化编程命令包含夹爪、喷枪、扩展轴等外设命令。
+Polecenia programowania graficznego dotyczące urządzeń peryferyjnych
+--------------------------------------------------------------------
+Polecenia programowania graficznego dotyczące urządzeń peryferyjnych obejmują polecenia dotyczące chwytaka, pistoletu natryskowego, osi rozszerzonej itp.
 
 .. image:: graphical/008.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.7 外设类图形化编程命令
+.. centered:: Wykres 10.7 Polecenia programowania graficznego dotyczące urządzeń peryferyjnych
 
-夹爪指令
-~~~~~~~~~~~~~~~~~~~~~
-拖动“夹爪运动”、“夹爪激活”和“夹爪复位”代码块,进入图形化编辑界面工作区。
+Instrukcje chwytaka
+~~~~~~~~~~~~~~~~~~~
+Przeciągnij bloki kodu „Ruch chwytaka”, „Aktywacja chwytaka” i „Reset chwytaka” do obszaru roboczego interfejsu edycji graficznej.
 
-指令中，显示完成配置并且已被激活的夹爪编号，对夹爪开闭、开闭速度和开闭力矩的设置，数值为百分比，是否阻塞功能选项，选择阻塞即夹爪运动需等待上一条运动指令执行完才执行，选择非阻塞即夹爪运动与上一条运动指令并行。
+W instrukcji wyświetlane są numery chwytaków, które zostały skonfigurowane i aktywowane. Ustawienia otwierania/zamykania chwytaka, prędkości otwierania/zamykania i momentu otwierania/zamykania są podawane w procentach. Opcja funkcji blokującej: wybór blokowania oznacza, że ruch chwytaka musi czekać na wykonanie poprzedniej instrukcji ruchu; wybór nieblokowania oznacza, że ruch chwytaka odbywa się równolegle z poprzednią instrukcją ruchu.
 
-1. “夹爪运动”节点,参数：
+1. Węzeł „Ruch chwytaka”, parametry:
 
-- 夹爪编号：已被激活的夹爪编号
+- Numer chwytaka: Numer aktywowanego chwytaka.
 
-- 夹爪位置：0~100
+- Pozycja chwytaka: 0~100
 
-- 开闭速度：0~100
+- Prędkość otwierania/zamykania: 0~100
 
-- 开闭力矩：0~100
+- Moment otwierania/zamykania: 0~100
 
-- 最大时间(ms)：0~30000
+- Maksymalny czas (ms): 0~30000
 
-- 是否阻塞：false/true
+- Czy blokujące: false/true
 
 .. image:: graphical/062.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.7-1 夹爪运动指令代码块
+.. centered:: Wykres 10.7-1 Blok kodu instrukcji ruchu chwytaka
 
-夹爪复位指令，显示已经配置的夹爪编号，可以添加夹爪复位指令到程序中。
+Instrukcja resetowania chwytaka wyświetla numery skonfigurowanych chwytaków. Można dodać instrukcję resetowania chwytaka do programu.
 
-2. “夹爪复位”节点,参数：
+2. Węzeł „Reset chwytaka”, parametry:
 
-- 夹爪编号：已被激活的夹爪编号
+- Numer chwytaka: Numer aktywowanego chwytaka.
 
 .. image:: graphical/063.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.7-2 夹爪复位指令代码块
+.. centered:: Wykres 10.7-2 Blok kodu instrukcji resetowania chwytaka
 
-夹爪激活指令，显示已经配置的夹爪编号，可以添加夹爪激活指令到程序中。
+Instrukcja aktywacji chwytaka wyświetla numery skonfigurowanych chwytaków. Można dodać instrukcję aktywacji chwytaka do programu.
 
-3. “夹爪激活”节点,参数：
+3. Węzeł „Aktywacja chwytaka”, parametry:
 
-- 夹爪编号：已被激活的夹爪编号
+- Numer chwytaka: Numer aktywowanego chwytaka.
 
 .. image:: graphical/064.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.7-3 夹爪激活指令代码块
+.. centered:: Wykres 10.7-3 Blok kodu instrukcji aktywacji chwytaka
 
-喷枪指令
-~~~~~~~~~~~~~~~~~~~~~
-拖动“喷枪指令”代码块,进入图形化编辑界面工作区。
+Instrukcje pistoletu natryskowego
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Przeciągnij blok kodu „Instrukcja pistoletu natryskowego” do obszaru roboczego interfejsu edycji graficznej.
 
-该指令为喷涂相关指令，控制喷枪“开始喷涂”、“停止喷涂”、“开始清枪”和“停止清枪”。在编辑该程序相关节点时，需确认已经配置好喷枪外设，否则无法保存。详见机器人外设章节。
+Ta instrukcja jest związana z natryskiwaniem. Steruje pistoletem natryskowym: „Rozpocznij natryskiwanie”, „Zatrzymaj natryskiwanie”, „Rozpocznij czyszczenie pistoletu” i „Zatrzymaj czyszczenie pistoletu”. Podczas edycji odpowiednich węzłów tego programu należy upewnić się, że urządzenie peryferyjne pistoletu natryskowego zostało skonfigurowane, w przeciwnym razie nie będzie można go zapisać. Szczegółowe informacje można znaleźć w rozdziale dotyczącym urządzeń peryferyjnych robota.
 
 .. image:: graphical/065.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.7-4 开始喷涂指令代码块
+.. centered:: Wykres 10.7-4 Blok kodu instrukcji rozpoczęcia natryskiwania
 
 .. image:: graphical/066.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.7-5 停止喷涂指令代码块
+.. centered:: Wykres 10.7-5 Blok kodu instrukcji zatrzymania natryskiwania
 
 .. image:: graphical/067.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.7-6 开始清枪指令代码块
+.. centered:: Wykres 10.7-6 Blok kodu instrukcji rozpoczęcia czyszczenia pistoletu
 
 .. image:: graphical/068.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.7-7 停止清枪指令代码块
+.. centered:: Wykres 10.7-7 Blok kodu instrukcji zatrzymania czyszczenia pistoletu
 
-扩展轴指令（控制器+PLC）
-~~~~~~~~~~~~~~~~~~~~~~~~~~
-拖动“扩展轴指令”代码块,进入图形化编辑界面工作区。
+Instrukcje osi rozszerzonej (kontroler + PLC)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Przeciągnij blok kodu „Instrukcja osi rozszerzonej” do obszaru roboczego interfejsu edycji graficznej.
 
-该指令针对使用外部轴的场景，与PTP指令组合使用，可将空间上一点X轴方向上的移动分解到外部轴运动。选择外部轴编号，运动方式选同步，选择需要到达的点。
+Ta instrukcja jest przeznaczona do scenariuszy wykorzystania zewnętrznych osi. Używana w połączeniu z instrukcjami PTP, może rozłożyć ruch w kierunku X punktu w przestrzeni na ruch zewnętrznej osi. Wybierz numer zewnętrznej osi, wybierz synchroniczny sposób ruchu, a następnie wybierz punkt docelowy.
 
-分为UDP通信加载/配置、异步运动、同步PTP/LIN运动、同步ARC运动、回零指令和使能指令。
+Obejmuje ładowanie/konfigurację komunikacji UDP, ruch asynchroniczny, synchroniczny ruch PTP/LIN, synchroniczny ruch ARC, instrukcję powrotu do zera i instrukcję załączania.
 
-“UDP通信配置”指令节点,输入IP地址、端口号和通信周期；
+Węzeł instrukcji „Konfiguracja komunikacji UDP”, wprowadź adres IP, numer portu i okres komunikacji.
 
 .. image:: graphical/069.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.7-8 UDP通信配置指令代码块
+.. centered:: Wykres 10.7-8 Blok kodu instrukcji konfiguracji komunikacji UDP
 
-“异步运动”指令节点,参数：
+Węzeł instrukcji „Ruch asynchroniczny”, parametry:
 
-- 点名称：示教点位
+- Nazwa punktu: Punkt nauczania.
 
-- 调试速度(%)：0~100
+- Prędkość调试 (%): 0~100
 
 .. image:: graphical/070.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.7-9 异步运动指令代码块
+.. centered:: Wykres 10.7-9 Blok kodu instrukcji ruchu asynchronicznego
 
-“同步PTP/LIN运动”指令节点,参数：
+Węzeł instrukcji „Synchroniczny ruch PTP/LIN”, parametry:
 
-- 运动选择：PTP/LIN
+- Wybór ruchu: PTP/LIN
 
-- 点名称：示教点位
+- Nazwa punktu: Punkt nauczania.
 
-- 调试速度(%)：0~100
+- Prędkość调试 (%): 0~100
 
 .. image:: graphical/071.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.7-10 “同步PTP/LIN运动”指令代码块
+.. centered:: Wykres 10.7-10 Blok kodu instrukcji „Synchronicznego ruchu PTP/LIN”
 
-“同步ARC运动”指令节点,默认运动方式为ARC,参数：
+Węzeł instrukcji „Synchroniczny ruch ARC”, domyślny sposób ruchu to ARC, parametry:
 
-点名称：示教点位
+- Nazwa punktu: Punkt nauczania.
 
-调试速度(%)：0~100
+- Prędkość调试 (%): 0~100
 
 .. image:: graphical/072.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.7-11 “同步ARC运动”指令代码块
+.. centered:: Wykres 10.7-11 Blok kodu instrukcji „Synchronicznego ruchu ARC”
 
-“扩展轴回零”指令节点,,参数：
+Węzeł instrukcji „Powrót do zera osi rozszerzonej”, parametry:
 
-- 扩展轴编号：1~4
+- Numer osi rozszerzonej: 1~4
 
-- 回零方式：当前位置回零/负限位回零/正限位回零
+- Sposób powrotu do zera: Powrót do zera z bieżącej pozycji / Powrót do zera z ogranicznikiem ujemnym / Powrót do zera z ogranicznikiem dodatnim
 
-- 寻零速度：0~2000，默认位5
+- Prędkość poszukiwania zera: 0~2000, wartość domyślna 5
 
-- 零点箍位速度：0~2000，默认为1
+- Prędkość pozycjonowania w zerze: 0~2000, wartość domyślna 1
 
 .. image:: graphical/073.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.7-12 扩展轴回零指令代码块
+.. centered:: Wykres 10.7-12 Blok kodu instrukcji powrotu do zera osi rozszerzonej
 
-“扩展轴使能”指令节点,,参数：
+Węzeł instrukcji „Załączenie osi rozszerzonej”, parametry:
 
-- 扩展轴编号：1~4
+- Numer osi rozszerzonej: 1~4
 
 .. image:: graphical/074.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.7-13 扩展轴使能指令代码块
+.. centered:: Wykres 10.7-13 Blok kodu instrukcji załączenia osi rozszerzonej
 
-扩展轴指令（控制器+伺服驱动器）
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-拖动“扩展轴指令”代码块,进入图形化编辑界面工作区。
+Instrukcje osi rozszerzonej (kontroler + serwonapęd)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Przeciągnij blok kodu „Instrukcja osi rozszerzonej” do obszaru roboczego interfejsu edycji graficznej.
 
-该指令可对扩展轴参数进行配置。根据不同的控制模式设置不同的参数。已配置好的扩展轴，可对其零点设定。
+Ta instrukcja umożliwia konfigurację parametrów osi rozszerzonej. W zależności od wybranego trybu sterowania ustawiane są różne parametry. Dla prawidłowo skonfigurowanej osi rozszerzonej można ustawić jej punkt zerowy.
 
-分为伺服ID、控制模式、伺服使能和伺服回零；控制模式中又分为位置模式和速度模式，这两个节点需要结合控制模式使用，否则单独添加无法生效。
+Obejmuje ID serwonapędu, tryb sterowania, załączanie serwa i powrót do zera serwa. Tryb sterowania dzieli się na tryb pozycyjny i tryb prędkości. Te dwa węzły muszą być używane razem z trybem sterowania, w przeciwnym razie dodanie ich osobno nie będzie skuteczne.
 
-“伺服ID”指令节点,,参数：
+Węzeł instrukcji „ID serwonapędu”, parametry:
 
-- 伺服ID：1~15
+- ID serwonapędu: 1~15
 
 .. image:: graphical/075.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.7-14 伺服ID指令代码块
+.. centered:: Wykres 10.7-14 Blok kodu instrukcji ID serwonapędu
 
-“控制模式”指令节点,参数：
+Węzeł instrukcji „Tryb sterowania”, parametry:
 
-- 伺服ID：1~15
+- ID serwonapędu: 1~15
 
-- 控制模式：位置模式/速度模式
+- Tryb sterowania: Tryb pozycyjny / Tryb prędkości
 
 .. image:: graphical/076.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.7-15 控制模式指令代码块
+.. centered:: Wykres 10.7-15 Blok kodu instrukcji trybu sterowania
 
-“伺服使能”指令节点,,参数：
+Węzeł instrukcji „Załączenie serwonapędu”, parametry:
 
-- 伺服ID：1~15
+- ID serwonapędu: 1~15
 
-- 伺服使能：伺服使能/去除使能
+- Załączenie serwonapędu: Załącz serwonapęd / Odłącz serwonapęd
 
 .. image:: graphical/077.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.7-16 伺服使能指令代码块
+.. centered:: Wykres 10.7-16 Blok kodu instrukcji załączenia serwonapędu
 
-“伺服回零”指令节点,参数：
+Węzeł instrukcji „Powrót do zera serwonapędu”, parametry:
 
-- 伺服ID：1~15
+- ID serwonapędu: 1~15
 
-- 回零方式：当前位置回零/负限位回零/正限位回零
+- Sposób powrotu do zera: Powrót do zera z bieżącej pozycji / Powrót do zera z ogranicznikiem ujemnym / Powrót do zera z ogranicznikiem dodatnim
 
-- 寻零速度：0~2000，默认位5
+- Prędkość poszukiwania zera: 0~2000, wartość domyślna 5
 
-- 零点箍位速度：0~2000，默认为1
+- Prędkość pozycjonowania w zerze: 0~2000, wartość domyślna 1
 
-- 加速度百分比：1~100，默认为100
+- Procent przyspieszenia: 1~100, wartość domyślna 100
 
 .. image:: graphical/078.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.7-17 伺服回零指令代码块
+.. centered:: Wykres 10.7-17 Blok kodu instrukcji powrotu do zera serwonapędu
 
-“位置模式”指令节点,参数：
+Węzeł instrukcji „Tryb pozycyjny”, parametry:
 
-- 伺服ID：1~15
+- ID serwonapędu: 1~15
 
-- 目标位置：无限制
+- Pozycja docelowa: Bez ograniczeń
 
-- 寻零速度：无限制
+- Prędkość poszukiwania zera: Bez ograniczeń
 
-- 加速度百分比：1~100，默认为100
-  
+- Procent przyspieszenia: 1~100, wartość domyślna 100
+
 .. image:: graphical/079.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.7-18 位置模式指令代码块
+.. centered:: Wykres 10.7-18 Blok kodu instrukcji trybu pozycyjnego
 
-“速度模式”指令节点,参数：
+Węzeł instrukcji „Tryb prędkości”, parametry:
 
-- 伺服ID：1~15
+- ID serwonapędu: 1~15
 
-- 目标速度：无限制
+- Prędkość docelowa: Bez ograniczeń
 
-- 加速度百分比：1~100，默认为100
-  
+- Procent przyspieszenia: 1~100, wartość domyślna 100
+
 .. image:: graphical/080.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.7-19 速度模式指令代码块
-   
-传送带指令
+.. centered:: Wykres 10.7-19 Blok kodu instrukcji trybu prędkości
+
+Instrukcje taśmociągu
 ~~~~~~~~~~~~~~~~~~~~~
-该指令包含IO实时检测，位置实时检测，跟踪开启和跟踪关闭四条命令。详见机器人外设章节。
+Ta instrukcja zawiera cztery polecenia: wykrywanie I/O w czasie rzeczywistym, wykrywanie pozycji w czasie rzeczywistym, włączenie śledzenia i wyłączenie śledzenia. Szczegółowe informacje można znaleźć w rozdziale dotyczącym urządzeń peryferyjnych robota.
 
-“IO实时检测”指令节点,参数：
+Węzeł instrukcji „Wykrywanie I/O w czasie rzeczywistym”, parametry:
 
-- 最大等待时间：0~10000
+- Maksymalny czas oczekiwania: 0~10000
 
 .. image:: graphical/081.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.7-20 IO实时检测指令代码块
+.. centered:: Wykres 10.7-20 Blok kodu instrukcji wykrywania I/O w czasie rzeczywistym
 
-“位置实时检测”指令节点,参数：
+Węzeł instrukcji „Wykrywanie pozycji w czasie rzeczywistym”, parametry:
 
-- 工作模式：跟踪抓取/跟踪运动/TPD跟踪
+- Tryb pracy: Śledzenie chwytania / Śledzenie ruchu / Śledzenie TPD
 
 .. image:: graphical/082.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.7-21 位置实时检测指令代码块
+.. centered:: Wykres 10.7-21 Blok kodu instrukcji wykrywania pozycji w czasie rzeczywistym
 
-“跟踪开启”、“跟踪关闭”指令节点,参数：
+Węzły instrukcji „Włączenie śledzenia”, „Wyłączenie śledzenia”, parametry:
 
-工作模式：跟踪抓取/跟踪运动/TPD跟踪
+- Tryb pracy: Śledzenie chwytania / Śledzenie ruchu / Śledzenie TPD
 
 .. image:: graphical/083.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.7-22 跟踪开启/关闭指令代码块
+.. centered:: Wykres 10.7-22 Blok kodu instrukcji włączenia/wyłączenia śledzenia
 
-打磨指令
-~~~~~~~~~~~~~~~~~~~~~
-拖动“打磨指令”代码块,进入图形化编辑界面工作区。
+Instrukcje szlifowania
+~~~~~~~~~~~~~~~~~~~~~~
+Przeciągnij blok kodu „Instrukcja szlifowania” do obszaru roboczego interfejsu edycji graficznej.
 
-该指令用于打磨场景的使用，使用时需要先卸载驱动再加载驱动，然后设置打磨设备使能。
+Ta instrukcja jest używana w scenariuszach szlifowania. Przed użyciem należy najpierw wyładować sterownik, a następnie go załadować, a następnie ustawić załączenie urządzenia szlifującego.
 
-进而设置打磨设备的转速、接触力、伸出距离和控制模式，同时可以对打磨设备错误清除和设备力传感器清零。
+Następnie ustaw prędkość obrotową urządzenia szlifującego, siłę kontaktu, odległość wysunięcia i tryb sterowania. Można również wyczyścić błędy urządzenia i wyzerować czujnik siły urządzenia.
 
 .. image:: graphical/084.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.7-23 通讯驱动加载/卸载指令代码块
+.. centered:: Wykres 10.7-23 Blok kodu instrukcji ładowania/rozładowywania sterownika komunikacji
 
-“设备使能”指令节点,参数：
+Węzeł instrukcji „Załączenie urządzenia”, parametry:
 
-- 设备使能：上使能/下使能
+- Załączenie urządzenia: Załącz / Odłącz
 
 .. image:: graphical/085.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.7-24 设备使能指令代码块
+.. centered:: Wykres 10.7-24 Blok kodu instrukcji załączenia urządzenia
 
 .. image:: graphical/086.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.7-25 设备错误清除指令代码块
+.. centered:: Wykres 10.7-25 Blok kodu instrukcji czyszczenia błędów urządzenia
 
 .. image:: graphical/087.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.7-26 设备力传感器清零指令代码块
+.. centered:: Wykres 10.7-26 Blok kodu instrukcji zerowania czujnika siły urządzenia
 
-“转速”指令节点,参数：
+Węzeł instrukcji „Prędkość obrotowa”, parametry:
 
-- 转速：0~5500
+- Prędkość obrotowa: 0~5500
 
 .. image:: graphical/088.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.7-27 设备转速指令代码块
+.. centered:: Wykres 10.7-27 Blok kodu instrukcji prędkości obrotowej urządzenia
 
-“设定力”指令节点,参数：
+Węzeł instrukcji „Ustawiona siła”, parametry:
 
-- 设定力：0~200
+- Ustawiona siła: 0~200
 
 .. image:: graphical/089.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.7-28 设定力指令代码块
+.. centered:: Wykres 10.7-28 Blok kodu instrukcji ustawionej siły
 
-“伸出距离”指令节点,参数：
+Węzeł instrukcji „Odległość wysunięcia”, parametry:
 
-- 伸出距离：0~12
+- Odległość wysunięcia: 0~12
 
 .. image:: graphical/090.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.7-29 伸出距离指令代码块
+.. centered:: Wykres 10.7-29 Blok kodu instrukcji odległości wysunięcia
 
-“打磨接触力”指令节点,参数：
+Węzeł instrukcji „Siła kontaktu szlifowania”, parametry:
 
-- 接触力：0~10000
+- Siła kontaktu: 0~10000
 
 .. image:: graphical/091.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.7-30 打磨接触力指令代码块
+.. centered:: Wykres 10.7-30 Blok kodu instrukcji siły kontaktu szlifowania
 
-“设定力过渡时间”指令节点,参数：
+Węzeł instrukcji „Czas przejścia ustawionej siły”, parametry:
 
-- 设定力过渡时间：0~10000
+- Czas przejścia ustawionej siły: 0~10000
 
 .. image:: graphical/092.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.7-31 设定力过渡时间指令代码块
+.. centered:: Wykres 10.7-31 Blok kodu instrukcji czasu przejścia ustawionej siły
 
-“工件重量”指令节点,参数：
+Węzeł instrukcji „Masa przedmiotu”, parametry:
 
-- 工件重量：0~10000
+- Masa przedmiotu: 0~10000
 
 .. image:: graphical/093.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.7-32 工件重量指令代码块
+.. centered:: Wykres 10.7-32 Blok kodu instrukcji masy przedmiotu
 
-“控制模式”指令节点,参数：
+Węzeł instrukcji „Tryb sterowania”, parametry:
 
-- 控制模式：回零模式/位置模式/力矩模式
+- Tryb sterowania: Tryb powrotu do zera / Tryb pozycyjny / Tryb momentowy
 
 .. image:: graphical/094.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.7-33 控制模式指令代码块
+.. centered:: Wykres 10.7-33 Blok kodu instrukcji trybu sterowania
 
-焊接类图形化编程命令
---------------------------
-焊接类图形化编程命令包含寻位、段焊、焊接、激光跟踪等焊接命令。
+Polecenia programowania graficznego dotyczące spawania
+------------------------------------------------------
+Polecenia programowania graficznego dotyczące spawania obejmują polecenia spawania, takie jak pozycjonowanie, spawanie odcinkowe, spawanie, śledzenie laserowe itp.
 
 .. image:: graphical/009.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.8 焊接类图形化编程命令
+.. centered:: Wykres 10.8 Polecenia programowania graficznego dotyczące spawania
 
-段焊指令
-~~~~~~~~~~~~~~~~~~~~~
-拖动“段焊指令”代码块,进入图形化编辑界面工作区。
+Instrukcja spawania odcinkowego
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Przeciągnij blok kodu „Instrukcja spawania odcinkowego” do obszaru roboczego interfejsu edycji graficznej.
 
-该指令为焊接专用指令，主要用于一段焊，一段不焊的循环间断焊接场景。在起点与终点之间，使用该指令，选择段焊模式，选择起点和终点，设置调试速度，设置起弧的DO端口，执行长度，非执行长度，根据实际应用场景设置功能模式，摆动选择和取整规则即可实现段焊功能，详细操作可见程序示教页面段焊指令。
+Ta instrukcja jest dedykowaną instrukcją spawania, przeznaczoną głównie do scenariuszy przerywanego spawania, w których jeden odcinek jest spawany, a kolejny nie. Między punktem początkowym a końcowym, używając tej instrukcji, wybierz tryb spawania odcinkowego, wybierz punkt początkowy i końcowy, ustaw prędkość调试, ustaw port DO zajarzenia łuku, długość wykonania, długość niewykonania, ustaw tryb funkcji zgodnie z rzeczywistym scenariuszem aplikacji, wybierz oscylację i zasadę zaokrąglania, aby zrealizować funkcję spawania odcinkowego. Szczegółowa obsługa znajduje się na stronie programowania nauczania w instrukcji spawania odcinkowego.
 
-1. “收弧/起弧”指令节点,参数：
+1. Węzeł instrukcji „Wygaśnięcie łuku / Zajarzenie łuku”, parametry:
 
-- I/O类型：控制器IO/扩展IO
+- Typ I/O: I/O kontrolera / Rozszerzone I/O
 
-- 焊接工艺编号： 0 ~ 7
+- Numer procesu spawania: 0 ~ 7
 
-- 最大等待时间(ms)：0 ~ 10000
+- Maksymalny czas oczekiwania (ms): 0 ~ 10000
 
 .. image:: graphical/095.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.8-1 “收弧/起弧”指令代码块
+.. centered:: Wykres 10.8-1 Blok kodu instrukcji „Wygaśnięcie łuku / Zajarzenie łuku”
 
-2. “段焊”指令节点,参数：
+2. Węzeł instrukcji „Spawanie odcinkowe”, parametry:
 
-- 段焊模式：不变化姿态/变化姿态
+- Tryb spawania odcinkowego: Nie zmieniaj orientacji / Zmieniaj orientację
 
-- 起始点：示教点位
+- Punkt początkowy: Punkt nauczania.
 
-- 终点：示教点位
+- Punkt końcowy: Punkt nauczania.
 
-- 调试速度(%)：0~100，默认为100
+- Prędkość调试 (%): 0~100, wartość domyślna 100
 
-- 执行长度：0~1000
+- Długość wykonania: 0~1000
 
-- 非执行长度：0~1000
+- Długość niewykonania: 0~1000
 
-- 功能模式：0~100，默认为100
+- Tryb funkcji: 0~100, wartość domyślna 100
 
-- 摆动选择：执行段不摆动/执行段摆动
+- Wybór oscylacji: Odcinek wykonawczy bez oscylacji / Odcinek wykonawczy z oscylacją
 
-- 取整规则：不取整/循环取整/单段取整
+- Zasada zaokrąglania: Bez zaokrąglania / Zaokrąglanie cykliczne / Zaokrąglanie pojedynczego odcinka
 
 .. image:: graphical/096.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.8-2 段焊指令代码块
+.. centered:: Wykres 10.8-2 Blok kodu instrukcji spawania odcinkowego
 
-焊接指令
-~~~~~~~~~~~~~~~~~~~~~
-拖动“焊接指令”代码块,进入图形化编辑界面工作区。
+Instrukcje spawania
+~~~~~~~~~~~~~~~~~~~
+Przeciągnij blok kodu „Instrukcja spawania” do obszaru roboczego interfejsu edycji graficznej.
 
-该指令主要用于焊机外设，在添加该指令前请确认在用户外设中焊机配置是否完成，详见机器人外设章节。
+Ta instrukcja jest przeznaczona głównie do urządzeń peryferyjnych spawarki. Przed dodaniem tej instrukcji upewnij się, że konfiguracja spawarki w urządzeniach peryferyjnych użytkownika została zakończona. Szczegółowe informacje można znaleźć w rozdziale dotyczącym urządzeń peryferyjnych robota.
 
-1. “焊接电压”指令节点,参数：
+1. Węzeł instrukcji „Napięcie spawania”, parametry:
 
-- I/O类型：控制器IO/扩展IO
+- Typ I/O: I/O kontrolera / Rozszerzone I/O
 
-- 焊机电压：最小值为0
+- Napięcie spawarki: Minimalna wartość 0
 
-- 焊接电流控制AO：Ctrl-AO0/Ctrl-AO1
+- AO sterowania prądem spawania: Ctrl-AO0/Ctrl-AO1
 
-- 平滑选择：Break/Serious
+- Wybór wygładzenia: Break / Serious
 
 .. image:: graphical/097.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.8-3 焊机电压指令代码块
+.. centered:: Wykres 10.8-3 Blok kodu instrukcji napięcia spawarki
 
-2. “焊机电流”指令节点,参数：
+2. Węzeł instrukcji „Prąd spawarki”, parametry:
 
-- I/O类型：控制器IO/扩展IO
+- Typ I/O: I/O kontrolera / Rozszerzone I/O
 
-- 焊机电流：最小值为0
+- Prąd spawarki: Minimalna wartość 0
 
-- 焊接电流控制AO：Ctrl-AO0/Ctrl-AO1
+- AO sterowania prądem spawania: Ctrl-AO0/Ctrl-AO1
 
-- 平滑选择：Break/Serious
+- Wybór wygładzenia: Break / Serious
 
 .. image:: graphical/098.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.8-4 焊机电流指令代码块
+.. centered:: Wykres 10.8-4 Blok kodu instrukcji prądu spawarki
 
-3. “送气/关气”指令节点,参数：
+3. Węzeł instrukcji „Podawanie gazu / Zamknięcie gazu”, parametry:
 
-- I/O类型：控制器IO/扩展IO
+- Typ I/O: I/O kontrolera / Rozszerzone I/O
 
 .. image:: graphical/099.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.8-5 “送气/关气”指令代码块
+.. centered:: Wykres 10.8-5 Blok kodu instrukcji „Podawanie gazu / Zamknięcie gazu”
 
-4. “正向送丝/停止正向送丝”指令节点,参数：
+4. Węzeł instrukcji „Podawanie drutu do przodu / Zatrzymanie podawania drutu do przodu”, parametry:
 
-- I/O类型：控制器IO/扩展IO
+- Typ I/O: I/O kontrolera / Rozszerzone I/O
 
 .. image:: graphical/100.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.8-6 “正向送丝/停止正向送丝”指令代码块
+.. centered:: Wykres 10.8-6 Blok kodu instrukcji „Podawanie drutu do przodu / Zatrzymanie podawania drutu do przodu”
 
-5. “反向送丝/停止反向送丝”指令节点,参数：
+5. Węzeł instrukcji „Podawanie drutu do tyłu / Zatrzymanie podawania drutu do tyłu”, parametry:
 
-- I/O类型：控制器IO/扩展IO
+- Typ I/O: I/O kontrolera / Rozszerzone I/O
 
 .. image:: graphical/101.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.8-7 “反向送丝/停止反向送丝”指令代码块
+.. centered:: Wykres 10.8-7 Blok kodu instrukcji „Podawanie drutu do tyłu / Zatrzymanie podawania drutu do tyłu”
 
-激光跟踪指令
-~~~~~~~~~~~~~~~~~~~~~
-拖动“激光跟踪指令”代码块,进入图形化编辑界面工作区。
+Instrukcje śledzenia laserowego
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Przeciągnij blok kodu „Instrukcja śledzenia laserowego” do obszaru roboczego interfejsu edycji graficznej.
 
-该指令包含激光命令、跟踪命令和寻位命令三部分，在添加该指令前，请确认用户外设中激光跟踪传感器是否已经配置成功。详见机器人外设章节。
+Ta instrukcja zawiera trzy części: polecenia laserowe, polecenia śledzenia i polecenia pozycjonowania. Przed dodaniem tej instrukcji upewnij się, że czujnik śledzenia laserowego w urządzeniach peryferyjnych użytkownika został pomyślnie skonfigurowany. Szczegółowe informacje można znaleźć w rozdziale dotyczącym urządzeń peryferyjnych robota.
 
-1. “打开/关闭传感器”指令节点，参数：
+1. Węzeł instrukcji „Włącz / Wyłącz czujnik”, parametry:
 
-- 选择焊缝类型：0 ~ 49
+- Wybór typu spoiny: 0 ~ 49
 
 .. image:: graphical/102.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.8-8 “打开/关闭传感器—焊缝类型”指令代码块
+.. centered:: Wykres 10.8-8 Blok kodu instrukcji „Włącz / Wyłącz czujnik — Typ spoiny”
 
-- 选择任务号：0 ~ 255
+- Wybór numeru zadania: 0 ~ 255
 
 .. image:: graphical/103.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.8-9 “打开/关闭传感器—任务号”指令代码块
+.. centered:: Wykres 10.8-9 Blok kodu instrukcji „Włącz / Wyłącz czujnik — Numer zadania”
 
-- 解决方案：0 ~ 5
+- Rozwiązanie: 0 ~ 5
 
 .. image:: graphical/104.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.8-10 “打开/关闭传感器—解决方案”指令代码块
+.. centered:: Wykres 10.8-10 Blok kodu instrukcji „Włącz / Wyłącz czujnik — Rozwiązanie”
 
-2. “加载/卸载传感器”指令节点，参数：
+2. Węzeł instrukcji „Załaduj / Rozładuj czujnik”, parametry:
 
-- 功能选择：睿牛RRT-SV2-BP/创想CXZK-RBTA4L
+- Wybór funkcji: Ruiniu RRT-SV2-BP / Chuangxiang CXZK-RBTA4L
 
 .. image:: graphical/105.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.8-11 “加载/卸载传感器”指令代码块
+.. centered:: Wykres 10.8-11 Blok kodu instrukcji „Załaduj / Rozładuj czujnik”
 
-3. “开始/停止激光跟踪”指令节点，参数
+3. Węzeł instrukcji „Rozpocznij / Zatrzymaj śledzenie laserowe”, parametry:
 
-- 坐标系名称：自定义配置坐标系
+- Nazwa układu współrzędnych: Niestandardowo skonfigurowany układ współrzędnych
 
 .. image:: graphical/106.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.8-12 “开始/停止激光跟踪”指令代码块
+.. centered:: Wykres 10.8-12 Blok kodu instrukcji „Rozpocznij / Zatrzymaj śledzenie laserowe”
 
-4. “激光传感器记录”指令节点，参数：
+4. Węzeł instrukcji „Rejestracja czujnika laserowego”, parametry:
 
-- 功能选择：停止记录/实时跟踪/开始记录/轨迹复现
+- Wybór funkcji: Zatrzymaj rejestrację / Śledzenie w czasie rzeczywistym / Rozpocznij rejestrację / Odtworzenie trajektorii
 
-- 功能选择：延时时间/延时距离
+- Wybór funkcji: Czas opóźnienia / Odległość opóźnienia
 
-- 时间： 0 ~ 10000
+- Czas: 0 ~ 10000
 
-- 扩展轴编号： 1 ~ 4
+- Numer osi rozszerzonej: 1 ~ 4
 
-- 距离： 0 ~ 10000
+- Odległość: 0 ~ 10000
 
-- 补偿灵敏度系数： 0 ~ 1
+- Współczynnik czułości kompensacji: 0 ~ 1
 
-- 速度： 0 ~ 100
+- Prędkość: 0 ~ 100
 
 .. image:: graphical/107.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.8-13 “激光传感器记录”指令代码块
+.. centered:: Wykres 10.8-13 Blok kodu instrukcji „Rejestracja czujnika laserowego”
 
-5. “传感器取点运动”指令节点，参数：
+5. Węzeł instrukcji „Ruch pobierania punktów czujnikiem”, parametry:
 
-- 坐标系名称：自定义配置坐标系
+- Nazwa układu współrzędnych: Niestandardowo skonfigurowany układ współrzędnych
 
-- 运动方式： PTP/Lin
+- Sposób ruchu: PTP/Lin
 
-- 调试速度(%)： 0 ~ 100
+- Prędkość调试 (%): 0 ~ 100
 
-- 姿态参考点： 示教点位
+- Punkt odniesienia orientacji: Punkt nauczania.
 
 .. image:: graphical/108.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.8-14 “传感器取点运动”指令代码块
+.. centered:: Wykres 10.8-14 Blok kodu instrukcji „Ruch pobierania punktów czujnikiem”
 
-6. “激光跟踪复现”指令节点，参数：
+6. Węzeł instrukcji „Odtworzenie śledzenia laserowego”, parametry:
 
 .. image:: graphical/109.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.8-15 “激光跟踪复现”指令代码块
+.. centered:: Wykres 10.8-15 Blok kodu instrukcji „Odtworzenie śledzenia laserowego”
 
-7. “寻位开始/结束”指令节点，参数：
+7. Węzeł instrukcji „Rozpocznij / Zakończ pozycjonowanie”, parametry:
 
-- 坐标系名称：自定义配置坐标系
+- Nazwa układu współrzędnych: Niestandardowo skonfigurowany układ współrzędnych
 
-- 方向： -x/-x/-y/-y/-z/-z/指定方向
+- Kierunek: -x/-x/-y/-y/-z/-z / Określony kierunek
 
-- 方向点：未选择“指定方向”时，参数失效
+- Punkt kierunku: Gdy nie wybrano „Określony kierunek”, parametr jest nieaktywny.
 
-- 速度(%)：0 ~ 100
+- Prędkość (%): 0 ~ 100
 
-- 长度(mm)：0 ~ 1000
+- Długość (mm): 0 ~ 1000
 
-- 最大寻位时间(ms)：0 ~ 10000
+- Maksymalny czas pozycjonowania (ms): 0 ~ 10000
 
 .. image:: graphical/110.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.8-16 “寻位开始/结束”指令代码块
+.. centered:: Wykres 10.8-16 Blok kodu instrukcji „Rozpocznij / Zakończ pozycjonowanie”
 
-激光记录指令
-~~~~~~~~~~~~~~~~~~~~~
-拖动“激光记录指令”代码块,进入图形化编辑界面工作区。
+Instrukcja rejestracji laserowej
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Przeciągnij blok kodu „Instrukcja rejestracji laserowej” do obszaru roboczego interfejsu edycji graficznej.
 
-该指令实现激光跟踪记录起点、终点取出功能，使机器人可以自动运动到起点位置，适用于从工件外部开始运动并进行激光跟踪记录的场合，同时上位机可获取记录数据中起点、终点的信息，用于后续运动。
+Ta instrukcja realizuje funkcję pobierania punktu początkowego i końcowego rejestracji laserowej, umożliwiając robotowi automatyczne przesunięcie się do pozycji początkowej. Nadaje się do scenariuszy, w których ruch rozpoczyna się od zewnątrz przedmiotu i przeprowadzana jest rejestracja laserowa, a komputer nadrzędny może uzyskać informacje o punkcie początkowym i końcowym z danych rejestracji do wykorzystania w późniejszym ruchu.
 
-实现激光跟踪复现速度可调功能，使机器人可以用一个很快的速度进行记录，然后按照正常焊接速度进行复现，可以提高作业效率。
+Realizuje funkcję regulowanej prędkości odtwarzania śledzenia laserowego, umożliwiając robotowi szybkie rejestrowanie, a następnie odtwarzanie z normalną prędkością spawania, co może zwiększyć wydajność pracy.
 
-1. “激光传感器记录”指令节点，参数：
+1. Węzeł instrukcji „Rejestracja czujnika laserowego”, parametry:
 
-- 功能选择：停止记录/实时跟踪/开始记录/轨迹复现
+- Wybór funkcji: Zatrzymaj rejestrację / Śledzenie w czasie rzeczywistym / Rozpocznij rejestrację / Odtworzenie trajektorii
 
-- 功能选择：延时时间/延时距离
+- Wybór funkcji: Czas opóźnienia / Odległość opóźnienia
 
-- 时间： 0 ~ 10000
+- Czas: 0 ~ 10000
 
-- 扩展轴编号： 1 ~ 4
+- Numer osi rozszerzonej: 1 ~ 4
 
-- 距离： 0 ~ 10000
+- Odległość: 0 ~ 10000
 
-- 补偿灵敏度系数： 0 ~ 1
+- Współczynnik czułości kompensacji: 0 ~ 1
 
-- 速度： 0 ~ 100
+- Prędkość: 0 ~ 100
 
 .. image:: graphical/111.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.8-17 焊缝数据记录指令代码块
+.. centered:: Wykres 10.8-17 Blok kodu instrukcji rejestracji danych spoiny
 
-2. “获取焊缝起点/终点”指令节点,参数：
+2. Węzeł instrukcji „Pobierz punkt początkowy/końcowy spoiny”, parametry:
 
-- 运动方式：PTP/LIN
+- Sposób ruchu: PTP/LIN
 
-- 速度(%)：0~100，默认为30
+- Prędkość (%): 0~100, wartość domyślna 30
 
 .. image:: graphical/112.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.8-18 “获取焊缝起点/终点”指令代码块
+.. centered:: Wykres 10.8-18 Blok kodu instrukcji „Pobierz punkt początkowy/końcowy spoiny”
 
-焊丝寻位指令
-~~~~~~~~~~~~~~~~~~~~~
-拖动“焊丝寻位指令”代码块,进入图形化编辑界面工作区。
+Instrukcja pozycjonowania drutem spawalniczym
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Przeciągnij blok kodu „Instrukcja pozycjonowania drutem spawalniczym” do obszaru roboczego interfejsu edycji graficznej.
 
-该指令一般应用于焊接场景中，需要焊机与机器人IO和运动指令相结合使用。分为寻位开始、寻位结束、寻位点设置、计算偏移量和接触点数据写入。
+Ta instrukcja jest zwykle stosowana w scenariuszach spawania i wymaga połączenia spawarki z instrukcjami I/O i ruchu robota. Obejmuje rozpoczęcie pozycjonowania, zakończenie pozycjonowania, ustawienie punktu pozycjonowania, obliczenie przesunięcia i zapis danych punktu kontaktu.
 
-“焊丝寻位开始/结束”指令节点,参数：
+Węzeł instrukcji „Rozpocznij / Zakończ pozycjonowanie drutem spawalniczym”, parametry:
 
-- 基准位置：不更新/更新
+- Pozycja odniesienia: Nie aktualizuj / Aktualizuj
 
-- 寻位速度：0~100
+- Prędkość pozycjonowania: 0~100
 
-- 寻位距离：0~1000
+- Odległość pozycjonowania: 0~1000
 
-- 自动返回标志：不自动返回/自动返回
+- Flaga automatycznego powrotu: Nie wracaj automatycznie / Wracaj automatycznie
 
-- 自动返回速度：0~100
+- Prędkość automatycznego powrotu: 0~100
 
-- 自动返回距离：0~1000
+- Odległość automatycznego powrotu: 0~1000
 
-- 寻位方式：示教点寻位/带偏移量寻位
+- Sposób pozycjonowania: Pozycjonowanie punktem nauczania / Pozycjonowanie z przesunięciem
 
 .. image:: graphical/113.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.8-19 “焊丝寻位开始/结束”指令代码块
+.. centered:: Wykres 10.8-19 Blok kodu instrukcji „Rozpocznij / Zakończ pozycjonowanie drutem spawalniczym”
 
-寻位点设置根据焊缝类型和计算方法添加点位。
+Ustawienie punktów pozycjonowania zależy od typu spoiny i metody obliczeń.
 
-- 当类型为角焊缝，计算方法为1D（xyz中的一个）时，点位添加从a点、b点中选择；
+- Gdy typ to spawanie pachwinowe, a metoda obliczeń to 1D (jeden z xyz), punkty są dodawane z punktów a, b.
 
-- 当类型为角焊缝，计算方法为2D（xyz中的两个）时，点位添加从a点、b点、e点、f点中选择；
+- Gdy typ to spawanie pachwinowe, a metoda obliczeń to 2D (dwa z xyz), punkty są dodawane z punktów a, b, e, f.
 
-- 当类型为角焊缝，计算方法为3D（xyz）时，点位添加从a点、b点、c点、d点、e点、f点中选择；
+- Gdy typ to spawanie pachwinowe, a metoda obliczeń to 3D (xyz), punkty są dodawane z punktów a, b, c, d, e, f.
 
-- 当类型为角焊缝，计算方法为2D-（xyz中的两个，rxryrz中的一个）时，点位添加从a点、b点、c点、d点、e点、f点中选择；
+- Gdy typ to spawanie pachwinowe, a metoda obliczeń to 2D- (dwa z xyz, jeden z rxryrz), punkty są dodawane z punktów a, b, c, d, e, f.
 
-- 当类型为内外径，计算方法为2D2D（xyz中的两个）时，点位添加从a点、b点中选择；
+- Gdy typ to średnica wewnętrzna/zewnętrzna, a metoda obliczeń to 2D2D (dwa z xyz), punkty są dodawane z punktów a, b.
 
-- 当类型为点，计算方法为3D（xyz）时，点位添加从a点、b点、c点、d点、e点、f点中选择；
+- Gdy typ to punkt, a metoda obliczeń to 3D (xyz), punkty są dodawane z punktów a, b, c, d, e, f.
 
-- 当类型为相机，计算方法为3D-（xyzrxryrz）时，点位添加从a点、b点中选择；
+- Gdy typ to kamera, a metoda obliczeń to 3D- (xyzrxryrz), punkty są dodawane z punktów a, b.
 
-- 当类型为面，计算方法为3D-（xyzrxryrz）时，点位添加从a点、b点中选择；
+- Gdy typ to powierzchnia, a metoda obliczeń to 3D- (xyzrxryrz), punkty są dodawane z punktów a, b.
 
 .. image:: graphical/114.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.8-20 “寻位点设置指南”指令代码块
+.. centered:: Wykres 10.8-20 Blok kodu instrukcji „Wskazówki dotyczące ustawiania punktów pozycjonowania”
 
-计算偏移量根据焊缝类型和计算方法设置基准点和接触点。
+Obliczanie przesunięcia: ustaw punkty odniesienia i punkty kontaktu zgodnie z typem spoiny i metodą obliczeń.
 
-- 当类型为角焊缝，计算方法为1D（xyz中的一个）时，设置基准点1、接触点1；
+- Gdy typ to spawanie pachwinowe, a metoda obliczeń to 1D (jeden z xyz), ustaw punkt odniesienia 1, punkt kontaktu 1.
 
-- 当类型为角焊缝，计算方法为2D（xyz中的两个）时，设置基准点1、基准点2、接触点1、接触点2；
+- Gdy typ to spawanie pachwinowe, a metoda obliczeń to 2D (dwa z xyz), ustaw punkt odniesienia 1, punkt odniesienia 2, punkt kontaktu 1, punkt kontaktu 2.
 
-- 当类型为角焊缝，计算方法为3D（xyz）时，设置基准点1、基准点2、基准点3、接触点1、接触点2、接触点3；
+- Gdy typ to spawanie pachwinowe, a metoda obliczeń to 3D (xyz), ustaw punkt odniesienia 1, punkt odniesienia 2, punkt odniesienia 3, punkt kontaktu 1, punkt kontaktu 2, punkt kontaktu 3.
 
-- 当类型为角焊缝，计算方法为2D-（xyz中的两个，rxryrz中的一个）时，设置基准点1、基准点2、基准点3、接触点1、接触点2、接触点3；
+- Gdy typ to spawanie pachwinowe, a metoda obliczeń to 2D- (dwa z xyz, jeden z rxryrz), ustaw punkt odniesienia 1, punkt odniesienia 2, punkt odniesienia 3, punkt kontaktu 1, punkt kontaktu 2, punkt kontaktu 3.
 
-- 当类型为内外径，计算方法为2D2D（xyz中的两个）时，设置基准点1、基准点2、基准点3、接触点1、接触点2、接触点3；
+- Gdy typ to średnica wewnętrzna/zewnętrzna, a metoda obliczeń to 2D2D (dwa z xyz), ustaw punkt odniesienia 1, punkt odniesienia 2, punkt odniesienia 3, punkt kontaktu 1, punkt kontaktu 2, punkt kontaktu 3.
 
-- 当类型为点，计算方法为3D（xyz）时，设置接触点1、接触点2；
+- Gdy typ to punkt, a metoda obliczeń to 3D (xyz), ustaw punkt kontaktu 1, punkt kontaktu 2.
 
-- 当类型为相机，计算方法为3D-（xyzrxryrz）时，设置接触点1、接触点2；
+- Gdy typ to kamera, a metoda obliczeń to 3D- (xyzrxryrz), ustaw punkt kontaktu 1, punkt kontaktu 2.
 
-- 当类型为面，计算方法为3D-（xyzrxryrz）时，设置接触点1、接触点2、接触点3、接触点4、接触点5、接触点6；
+- Gdy typ to powierzchnia, a metoda obliczeń to 3D- (xyzrxryrz), ustaw punkt kontaktu 1, punkt kontaktu 2, punkt kontaktu 3, punkt kontaktu 4, punkt kontaktu 5, punkt kontaktu 6.
 
 .. image:: graphical/115.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.8-21 “计算偏移量”指令代码块
+.. centered:: Wykres 10.8-21 Blok kodu instrukcji „Obliczanie przesunięcia”
 
-“接触点数据写入”指令节点,参数：
+Węzeł instrukcji „Zapis danych punktu kontaktu”, parametry:
 
-- 接触点名称：RES0~99
+- Nazwa punktu kontaktu: RES0~99
 
-- 接触点名称：数据格式为{0,0,0,0,0,0}；
+- Nazwa punktu kontaktu: Format danych to {0,0,0,0,0,0}.
 
 .. image:: graphical/116.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.8-22 “接触点数据写入”指令代码块
+.. centered:: Wykres 10.8-22 Blok kodu instrukcji „Zapis danych punktu kontaktu”
 
-电弧跟踪指令
-~~~~~~~~~~~~~~~~~~~~~
-拖动“电弧跟踪指令”代码块,进入图形化编辑界面工作区。
+Instrukcja śledzenia łuku
+~~~~~~~~~~~~~~~~~~~~~~~~~
+Przeciągnij blok kodu „Instrukcja śledzenia łuku” do obszaru roboczego interfejsu edycji graficznej.
 
-该指令实现机器人焊缝跟踪利用焊缝的偏差检测进行补偿轨迹，可以使用电弧传感器来检测焊缝偏差。
+Ta instrukcja realizuje kompensację trajektorii robota poprzez wykorzystanie detekcji odchylenia spoiny w śledzeniu spoiny. Czujnik łuku może być używany do wykrywania odchylenia spoiny.
 
-“电弧跟踪开启/关闭”指令节点,参数：
+Węzeł instrukcji „Włączenie / Wyłączenie śledzenia łuku”, parametry:
 
-- 电弧跟踪滞后时间(ms)：参考值 50
+- Czas opóźnienia śledzenia łuku (ms): Wartość referencyjna 50
 
-- 偏差补偿：关闭/开启
+- Kompensacja odchylenia: Wyłącz / Włącz
 
-- 调节系数：0 ~ 300
+- Współczynnik regulacji: 0 ~ 300
 
-- 补偿时间(cyc)：0 ~ 300
+- Czas kompensacji (cyc): 0 ~ 300
 
-- 每次最大补偿量(mm)：0 ~ 300
+- Maksymalna kompensacja na raz (mm): 0 ~ 300
 
-- 总计最大补偿量(mm)：0 ~ 300
+- Maksymalna kompensacja całkowita (mm): 0 ~ 300
 
-- 上下坐标系选择：摆动
+- Wybór układu współrzędnych góra-dół: Oscylacja
 
-- 上下基准电流设定方式：反馈/常数
+- Sposób ustawiania prądu odniesienia góra-dół: Sprzężenie zwrotne / Stała
 
-- 上下基准电流(A)：0 ~ 300
+- Prąd odniesienia góra-dół (A): 0 ~ 300
 
 .. image:: graphical/117.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.8-23 电弧跟踪指令代码块
+.. centered:: Wykres 10.8-23 Blok kodu instrukcji śledzenia łuku
 
-姿态调整指令
-~~~~~~~~~~~~~~~~~~~~~
-拖动“姿态调整指令”代码块,进入图形化编辑界面工作区。
+Instrukcja regulacji orientacji
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Przeciągnij blok kodu „Instrukcja regulacji orientacji” do obszaru roboczego interfejsu edycji graficznej.
 
-该指令针对焊接跟踪自适应调整焊枪姿态场景，需要先示教PosA、PosB、PosC三个点位，否则无法添加节点。
+Ta instrukcja jest przeznaczona do scenariuszy adaptacyjnej regulacji orientacji palnika spawalniczego podczas śledzenia spawania. Wymaga wcześniejszego nauczenia trzech punktów PosA, PosB, PosC, w przeciwnym razie nie można dodać węzła.
 
-记录好三个对应的姿态点后，根据机器人实际运动方向，添加姿态自适应调整指令。详见机器人外设章节。
+Po zapisaniu trzech odpowiednich punktów orientacji, zgodnie z rzeczywistym kierunkiem ruchu robota, dodaj instrukcję adaptacyjnej regulacji orientacji. Szczegółowe informacje można znaleźć w rozdziale dotyczącym urządzeń peryferyjnych robota.
 
-“开启姿态调整”指令节点,参数：
+Węzeł instrukcji „Włączenie regulacji orientacji”, parametry:
 
-- 板材类型： 波纹板/瓦楞板/围栏板/波纹甲壳钢
+- Typ materiału: Blacha falista / Blacha trapezowa / Blacha ogrodzeniowa / Stal pancerna falista
 
-- 运动方向：从左至右/从右至左
+- Kierunek ruchu: Od lewej do prawej / Od prawej do lewej
 
-- 姿态调整时间(ms)：0 ~ 1000
+- Czas regulacji orientacji (ms): 0 ~ 1000
 
-- 第一段长度(mm)：
+- Długość pierwszego odcinka (mm):
 
-- 拐点类型：由上往下/由下往上
+- Typ punktu przegięcia: Z góry na dół / Z dołu do góry
 
-- 第二段长度(mm)：
+- Długość drugiego odcinka (mm):
 
-- 第三段长度(mm)：
+- Długość trzeciego odcinka (mm):
 
-- 第四段长度(mm)：
+- Długość czwartego odcinka (mm):
 
-- 第五段长度(mm)：
+- Długość piątego odcinka (mm):
 
 .. image:: graphical/118.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.8-24 姿态调整指令代码块
+.. centered:: Wykres 10.8-24 Blok kodu instrukcji regulacji orientacji
 
-力控类图形化编程命令
---------------------------
-力控类图形化编程命令包含力控集、扭矩记录等力控命令。
+Polecenia programowania graficznego dotyczące sterowania siłą
+-------------------------------------------------------------
+Polecenia programowania graficznego dotyczące sterowania siłą obejmują polecenia sterowania siłą, takie jak zestaw sterowania siłą, rejestracja momentu obrotowego itp.
 
 .. image:: graphical/010.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.9 力控类图形化编程命令
+.. centered:: Wykres 10.9 Polecenia programowania graficznego dotyczące sterowania siłą
 
-力控指令
-~~~~~~~~~~~~~~~~~~~~~
-拖动“力控指令”代码块,进入图形化编辑界面工作区。
+Instrukcje sterowania siłą
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+Przeciągnij blok kodu „Instrukcja sterowania siłą” do obszaru roboczego interfejsu edycji graficznej.
 
-该指令包含FT_Guard(碰撞检测)，FT_Control(恒力控制)，FT_Compliance(柔顺控制)，FT_Spiral(螺旋插入)，FT_Rot(旋转插入)，FT_Lin(直线插入)，FT_FindSurface(表面定位) ，FT_CalCenter(中心定位)八个指令，详见机器人外设章节。
+Ta instrukcja zawiera osiem instrukcji: FT_Guard (wykrywanie kolizji), FT_Control (sterowanie stałą siłą), FT_Compliance (sterowanie podatne), FT_Spiral (wstawianie spiralne), FT_Rot (wstawianie obrotowe), FT_Lin (wstawianie liniowe), FT_FindSurface (lokalizacja powierzchni), FT_CalCenter (lokalizacja środka). Szczegółowe informacje można znaleźć w rozdziale dotyczącym urządzeń peryferyjnych robota.
 
-1. “开启/关闭碰撞检测”指令节点,参数:
+1. Węzeł instrukcji „Włączenie / Wyłączenie wykrywania kolizji”, parametry:
 
-- 坐标系名称：自定义配置的坐标系
+- Nazwa układu współrzędnych: Niestandardowo skonfigurowany układ współrzędnych
 
-- Fx-Tx真值：true/false
+- Wartość logiczna Fx-Tx: true/false
 
-- Fx-Tx当前值：根据实际情况输入
+- Bieżąca wartość Fx-Tx: Wprowadzana zgodnie z rzeczywistą sytuacją
 
-- Fx-Tx最大阈值：根据实际情况输入
+- Maksymalny próg Fx-Tx: Wprowadzany zgodnie z rzeczywistą sytuacją
 
-- Fx-Tx最小阈值：根据实际情况输入
+- Minimalny próg Fx-Tx: Wprowadzany zgodnie z rzeczywistą sytuacją
 
 .. image:: graphical/119.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.9-1 开启/关闭碰撞检测指令代码块
+.. centered:: Wykres 10.9-1 Blok kodu instrukcji włączenia/wyłączenia wykrywania kolizji
 
-2. “开启/关闭控制”指令节点,参数：
+2. Węzeł instrukcji „Włączenie / Wyłączenie sterowania”, parametry:
 
-- 坐标系名称：自定义配置的坐标系
+- Nazwa układu współrzędnych: Niestandardowo skonfigurowany układ współrzędnych
 
-- Fx-Tx真值：true/false
+- Wartość logiczna Fx-Tx: true/false
 
-- Fx-Tx当前值：根据实际情况调整
+- Bieżąca wartość Fx-Tx: Dostosowywana zgodnie z rzeczywistą sytuacją
 
-- F_P_gain - F_D_gain：根据实际情况调整，不能为0
+- F_P_gain - F_D_gain: Dostosowywane zgodnie z rzeczywistą sytuacją, nie mogą wynosić 0
 
-- 自适应启停状态：停止/开启
+- Stan uruchomienia/zatrzymania adaptacyjnego: Zatrzymaj / Włącz
 
-- ILC控制启停状态：停止/训练/实操
+- Stan uruchomienia/zatrzymania sterowania ILC: Zatrzymaj / Trening / Praktyka
 
-- 最大调整距离(mm)：0 ~ 1000
+- Maksymalna odległość regulacji (mm): 0 ~ 1000
 
-- 最大调整角度(°)：0 ~ 1000
+- Maksymalny kąt regulacji (°): 0 ~ 1000
 
 .. image:: graphical/120.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.9-2 开启/关闭控制指令代码块
+.. centered:: Wykres 10.9-2 Blok kodu instrukcji włączenia/wyłączenia sterowania
 
-3. “开启/关闭柔顺控制”指令节点,参数：
+3. Węzeł instrukcji „Włączenie / Wyłączenie sterowania podatnego”, parametry:
 
-- 下发位置调节系数：0 ~ 1
+- Współczynnik regulacji pozycji zadanej: 0 ~ 1
 
-- 柔顺开启力阈值(N)：0 ~ 100
+- Próg siły włączenia podatności (N): 0 ~ 100
 
 .. image:: graphical/121.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.9-3 开启/关闭柔顺控制指令代码块
+.. centered:: Wykres 10.9-3 Blok kodu instrukcji włączenia/wyłączenia sterowania podatnego
 
-4. “螺旋插入”指令节点,参数：
+4. Węzeł instrukcji „Wstawianie spiralne”, parametry:
 
-- 坐标系名称：工具坐标系/基坐标
+- Nazwa układu współrzędnych: Układ współrzędnych narzędzia / Współrzędne podstawowe
 
-- 每圈半径进给量(mm)：0 ~ 100,参考值：0.7
+- Posuw promienia na okrążenie (mm): 0 ~ 100, wartość referencyjna: 0,7
 
-- 力或力矩阈值(N/Nm)：0 ~ 100,参考值：50
+- Próg siły lub momentu obrotowego (N/Nm): 0 ~ 100, wartość referencyjna: 50
 
-- 最大探索时间(ms)：0 ~ 60000, 参考值：60000
+- Maksymalny czas poszukiwania (ms): 0 ~ 60000, wartość referencyjna: 60000
 
-- 线速度最大值(mm/s)：0 ~ 100，参考值：5
+- Maksymalna prędkość liniowa (mm/s): 0 ~ 100, wartość referencyjna: 5
 
 .. image:: graphical/122.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.9-4 螺旋插入指令代码块
+.. centered:: Wykres 10.9-4 Blok kodu instrukcji wstawiania spiralnego
 
-5. “旋转插入”指令节点,参数:
+5. Węzeł instrukcji „Wstawianie obrotowe”, parametry:
 
-- 坐标系名称：工具坐标系/基坐标
+- Nazwa układu współrzędnych: Układ współrzędnych narzędzia / Współrzędne podstawowe
 
-- 旋转角速度(°/s)：0 ~ 100,参考值：0.7
+- Prędkość kątowa obrotu (°/s): 0 ~ 100, wartość referencyjna: 0,7
 
-- 触发力或终止力矩(N/Nm)：0 ~ 100,参考值：50
+- Siła wyzwalająca lub kończący moment obrotowy (N/Nm): 0 ~ 100, wartość referencyjna: 50
 
-- 最大旋转角度(°)：0 ~ 100,参考值：5
+- Maksymalny kąt obrotu (°): 0 ~ 100, wartość referencyjna: 5
 
-- 力的方向：方向z/方向mz
+- Kierunek siły: Kierunek z / Kierunek mz
 
-- 最大旋转角加速度(°/s^2)：0 ~ 100
+- Maksymalne przyspieszenie kątowe obrotu (°/s²): 0 ~ 100
 
-- 插入方向：正/负
+- Kierunek wstawiania: Dodatni / Ujemny
 
 .. image:: graphical/123.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.9-5 旋转插入指令代码块
+.. centered:: Wykres 10.9-5 Blok kodu instrukcji wstawiania obrotowego
 
-6. “直线插入”指令节点,参数：
+6. Węzeł instrukcji „Wstawianie liniowe”, parametry:
 
-- 坐标系名称：工具坐标系/基坐标
+- Nazwa układu współrzędnych: Układ współrzędnych narzędzia / Współrzędne podstawowe
 
-- 动作终止力阈值(N)：0 ~ 100
+- Próg siły zakończenia ruchu (N): 0 ~ 100
 
-- 直线速度(mm/s)：0 ~ 100,参考值：1
+- Prędkość liniowa (mm/s): 0 ~ 100, wartość referencyjna: 1
 
-- 直线加速度(°/s^2)：0 ~ 100
+- Przyspieszenie liniowe (°/s²): 0 ~ 100
 
-- 最大插入距离(mm)：0 ~ 100
+- Maksymalna odległość wstawiania (mm): 0 ~ 100
 
-- 插入方向：正/负
+- Kierunek wstawiania: Dodatni / Ujemny
 
 .. image:: graphical/124.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.9-6 直线插入指令代码块
+.. centered:: Wykres 10.9-6 Blok kodu instrukcji wstawiania liniowego
 
-7. “表面定位”指令节点,参数：
+7. Węzeł instrukcji „Lokalizacja powierzchni”, parametry:
 
-- 坐标系名称：工具坐标系/基坐标
+- Nazwa układu współrzędnych: Układ współrzędnych narzędzia / Współrzędne podstawowe
 
-- 移动方向：正/负
+- Kierunek ruchu: Dodatni / Ujemny
 
-- 移动轴：X/Y/Z
+- Oś ruchu: X/Y/Z
 
-- 探索直线速度(mm/s)：0 ~ 100
+- Prędkość liniowa poszukiwania (mm/s): 0 ~ 100
 
-- 探索加速度(mm/s^2)：0 ~ 100
+- Przyspieszenie poszukiwania (mm/s²): 0 ~ 100
 
-- 最大探索距离(mm)：0 ~ 100
+- Maksymalna odległość poszukiwania (mm): 0 ~ 100
 
-- 动作终止力阈值(N)：0 ~ 100
+- Próg siły zakończenia ruchu (N): 0 ~ 100
 
 .. image:: graphical/125.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.9-7 表面定位指令代码块
+.. centered:: Wykres 10.9-7 Blok kodu instrukcji lokalizacji powierzchni
 
-8. “中间平面开始/结束计算”指令节点。
+8. Węzeł instrukcji „Rozpocznij / Zakończ obliczanie płaszczyzny pośredniej”.
 
 .. image:: graphical/126.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.9-8 中间平面开始/结束计算指令代码块
+.. centered:: Wykres 10.9-8 Blok kodu instrukcji rozpoczęcia/zakończenia obliczania płaszczyzny pośredniej
 
-扭矩记录指令
-~~~~~~~~~~~~~~~~~~~~~
-拖动“扭矩记录指令”代码块,进入图形化编辑界面工作区。
+Instrukcja rejestracji momentu obrotowego
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Przeciągnij blok kodu „Instrukcja rejestracji momentu obrotowego” do obszaru roboczego interfejsu edycji graficznej.
 
-该指令为扭矩记录指令，包含“扭矩记录开始/“扭矩记录停止”和“扭矩记录复位”三种指令。
+Ta instrukcja jest instrukcją rejestracji momentu obrotowego i zawiera trzy instrukcje: „Rozpocznij rejestrację momentu obrotowego”, „Zatrzymaj rejestrację momentu obrotowego” i „Resetuj rejestrację momentu obrotowego”.
 
-实现扭矩实时记录碰撞检测功能。
+Realizuje funkcję wykrywania kolizji w czasie rzeczywistym na podstawie rejestracji momentu obrotowego.
 
-点击“扭矩记录启动”按钮，持续记录运动指令运行过程中的碰撞情况，记录的实时扭矩作为碰撞检测判断的理论值，以减少误报错概率。
+Kliknij przycisk „Rozpocznij rejestrację momentu obrotowego”, aby kontynuować rejestrowanie kolizji podczas działania instrukcji ruchu. Zarejestrowany moment obrotowy w czasie rzeczywistym jest używany jako teoretyczna wartość do oceny wykrywania kolizji, aby zmniejszyć prawdopodobieństwo fałszywych alarmów.
 
-当超出设定阈值范围时，记录碰撞检测持续时间。
+Gdy wartość przekroczy ustawiony zakres progowy, rejestrowany jest czas trwania wykrywania kolizji.
 
-点击“扭矩记录停止”按钮，停止记录。点击“扭矩记录复位”，状态恢复默认状态。
+Kliknij przycisk „Zatrzymaj rejestrację momentu obrotowego”, aby zatrzymać rejestrację. Kliknij „Resetuj rejestrację momentu obrotowego”, aby przywrócić stan domyślny.
 
-1. “扭矩记录开始”指令节点,参数：
+1. Węzeł instrukcji „Rozpocznij rejestrację momentu obrotowego”, parametry:
 
-- 平滑选择：不平滑(原始数据)/平滑(平滑后数据)
+- Wybór wygładzenia: Bez wygładzenia (dane surowe) / Wygładzone (dane po wygładzeniu)
 
-- 关节负阈值(Nm)：-100 ~ 0
+- Próg ujemny stawu (Nm): -100 ~ 0
 
-- 关节正阈值(Nm)：0 ~ 100
+- Próg dodatni stawu (Nm): 0 ~ 100
 
-- 关节持续检测碰撞时间(ms)：0 ~ 1000
+- Czas ciągłego wykrywania kolizji stawu (ms): 0 ~ 1000
 
 .. image:: graphical/128.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.9-9 扭矩记录开始指令代码块
+.. centered:: Wykres 10.9-9 Blok kodu instrukcji rozpoczęcia rejestracji momentu obrotowego
 
-2. “扭矩记录结束”指令节点
+2. Węzeł instrukcji „Zakończenie rejestracji momentu obrotowego”
 
 .. image:: graphical/129.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.9-10 扭矩记录结束指令代码块
+.. centered:: Wykres 10.9-10 Blok kodu instrukcji zakończenia rejestracji momentu obrotowego
 
-3. “扭矩记录复位”指令节点
+3. Węzeł instrukcji „Resetowanie rejestracji momentu obrotowego”
 
 .. image:: graphical/130.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.9-11 扭矩记录复位指令代码块
+.. centered:: Wykres 10.9-11 Blok kodu instrukcji resetowania rejestracji momentu obrotowego
 
-通讯类图形化编程命令
---------------------------
-通讯类图形化编程命令包含modbus主站设置（客户端）、modbus从站设置、读寄存器等通讯命令。
+Polecenia programowania graficznego dotyczące komunikacji
+---------------------------------------------------------
+Polecenia programowania graficznego dotyczące komunikacji obejmują polecenia komunikacyjne, takie jak ustawienia mastera Modbus (klient), ustawienia slave'a Modbus, odczyt rejestrów itp.
 
 .. image:: graphical/011.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.10 通讯类图形化编程命令
+.. centered:: Wykres 10.10 Polecenia programowania graficznego dotyczące komunikacji
 
-Modbus指令
-~~~~~~~~~~~~~~~~~~~~~
-拖动“Modbus指令”代码块,进入图形化编辑界面工作区。
+Instrukcje Modbus
+~~~~~~~~~~~~~~~~~
+Przeciągnij blok kodu „Instrukcja Modbus” do obszaru roboczego interfejsu edycji graficznej.
 
-该指令功能为基于ModbusTCP协议的总线功能，用户可以通过相关指令控制机器人与ModbusTCP client或server通讯（主站与从站通讯），对线圈，离散量，寄存器进行读写操作。关于ModbusTCP更多操作功能，前请联系我们咨询。
+Funkcją tej instrukcji jest funkcja magistrali oparta na protokole Modbus TCP. Użytkownik może za pomocą powiązanych instrukcji sterować komunikacją robota z klientem lub serwerem Modbus TCP (komunikacja master-slave), wykonując operacje odczytu i zapisu na cewkach, wartościach dyskretnych i rejestrach. W przypadku większej liczby funkcji operacyjnych Modbus TCP skontaktuj się z nami.
 
-使用modbus节点功能前，需要先在示教程序ModbusTCP配置中配置主站、从站以及DI、DO、AI、AO名称。
+Przed użyciem funkcji węzłów Modbus należy najpierw skonfigurować mastera, slave'a oraz nazwy DI, DO, AI, AO w konfiguracji Modbus TCP w programie nauczania.
 
-1. 主站数字输出设置,参数：
+1. Ustawienia wyjścia cyfrowego mastera, parametry:
 
-- Modbus主站名称：根据实际情况配置
+- Nazwa mastera Modbus: Konfigurowana zgodnie z rzeczywistą sytuacją.
 
-- DO名称：根据实际情况配置
+- Nazwa DO: Konfigurowana zgodnie z rzeczywistą sytuacją.
 
-- 寄存器数量：整数型 0 ~ 128
+- Liczba rejestrów: Liczba całkowita 0 ~ 128
 
-- 寄存器值：根据寄存器数量来定，可输入多个数值。例如数量为3，值为1,0,1
+- Wartość rejestru: Zależna od liczby rejestrów, można wprowadzić wiele wartości. Na przykład dla liczby 3, wartości 1,0,1.
 
 .. image:: graphical/131.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.10-1 主站“读/写数字输出”指令代码块
+.. centered:: Wykres 10.10-1 Blok kodu instrukcji mastera „Odczyt / Zapis wyjścia cyfrowego”
 
-2. 主站数字输入设置,参数：
+2. Ustawienia wejścia cyfrowego mastera, parametry:
 
-- Modbus主站名称：根据实际情况配置
+- Nazwa mastera Modbus: Konfigurowana zgodnie z rzeczywistą sytuacją.
 
-- DI名称：根据实际情况配置
+- Nazwa DI: Konfigurowana zgodnie z rzeczywistą sytuacją.
 
-- 寄存器数量：整数型 0 ~ 128
+- Liczba rejestrów: Liczba całkowita 0 ~ 128
 
 .. image:: graphical/132.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.10-2 主站“读数字输入”指令代码块
+.. centered:: Wykres 10.10-2 Blok kodu instrukcji mastera „Odczyt wejścia cyfrowego”
 
-3. 主站模拟输出设置,参数：
+3. Ustawienia wyjścia analogowego mastera, parametry:
 
-- Modbus主站名称：根据实际情况配置
+- Nazwa mastera Modbus: Konfigurowana zgodnie z rzeczywistą sytuacją.
 
-- AO名称：根据实际情况配置
+- Nazwa AO: Konfigurowana zgodnie z rzeczywistą sytuacją.
 
-- 寄存器数量：整数型 0 ~ 128
+- Liczba rejestrów: Liczba całkowita 0 ~ 128
 
-- 寄存器值：根据寄存器数量来定，可输入多个数值。例如数量为3，值为1,0,1
+- Wartość rejestru: Zależna od liczby rejestrów, można wprowadzić wiele wartości. Na przykład dla liczby 3, wartości 1,0,1.
 
 .. image:: graphical/133.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.10-3 主站“读/写模拟输出”指令代码块
+.. centered:: Wykres 10.10-3 Blok kodu instrukcji mastera „Odczyt / Zapis wyjścia analogowego”
 
-4. 主站模拟输入设置,参数：
+4. Ustawienia wejścia analogowego mastera, parametry:
 
-- Modbus主站名称：根据实际情况配置
+- Nazwa mastera Modbus: Konfigurowana zgodnie z rzeczywistą sytuacją.
 
-- AI名称：根据实际情况配置
+- Nazwa AI: Konfigurowana zgodnie z rzeczywistą sytuacją.
 
-- 寄存器数量：整数型 0 ~ 128
+- Liczba rejestrów: Liczba całkowita 0 ~ 128
 
 .. image:: graphical/134.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.10-4 主站“读模拟输入”指令代码块
+.. centered:: Wykres 10.10-4 Blok kodu instrukcji mastera „Odczyt wejścia analogowego”
 
-5. 主站等待数字输入设置,参数： 
+5. Ustawienia oczekiwania mastera na wejście cyfrowe, parametry:
 
-- Modbus主站名称：根据实际情况配置
+- Nazwa mastera Modbus: Konfigurowana zgodnie z rzeczywistą sytuacją.
 
-- DI名称：根据实际情况配置
+- Nazwa DI: Konfigurowana zgodnie z rzeczywistą sytuacją.
 
-- 等待状态：true/false
+- Stan oczekiwania: true/false
 
-- 超时时间(ms)：整数型 0 ~ 128
+- Czas przekroczenia limitu (ms): Liczba całkowita 0 ~ 128
 
 .. image:: graphical/135.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.10-5 主站“等待数字输入”指令代码块
+.. centered:: Wykres 10.10-5 Blok kodu instrukcji mastera „Oczekiwanie na wejście cyfrowe”
 
-6. 主站等待模拟字输入设置,参数：
+6. Ustawienia oczekiwania mastera na wejście analogowe, parametry:
 
-- Modbus主站名称：根据实际情况配置
+- Nazwa mastera Modbus: Konfigurowana zgodnie z rzeczywistą sytuacją.
 
-- AI名称：根据实际情况配置
+- Nazwa AI: Konfigurowana zgodnie z rzeczywistą sytuacją.
 
-- 等待状态：大于/小于
+- Stan oczekiwania: Większy niż / Mniejszy niż
 
-- 寄存器数量：整数型 0 ~ 128
+- Liczba rejestrów: Liczba całkowita 0 ~ 128
 
-- 寄存器值：根据寄存器数量来定，可输入多个数值。
+- Wartość rejestru: Zależna od liczby rejestrów, można wprowadzić wiele wartości.
 
 .. image:: graphical/136.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.10-6 主站“等待模拟输入指令代码块
+.. centered:: Wykres 10.10-6 Blok kodu instrukcji mastera „Oczekiwanie na wejście analogowe”
 
-7. 从站数字输出设置,参数：
+7. Ustawienia wyjścia cyfrowego slave'a, parametry:
 
-- DO名称：根据实际情况配置
+- Nazwa DO: Konfigurowana zgodnie z rzeczywistą sytuacją.
 
-- 寄存器数量：整数型 0 ~ 128
+- Liczba rejestrów: Liczba całkowita 0 ~ 128
 
-- 寄存器值：根据寄存器数量来定，可输入多个数值。例如数量为3，值为1,0,1
+- Wartość rejestru: Zależna od liczby rejestrów, można wprowadzić wiele wartości. Na przykład dla liczby 3, wartości 1,0,1.
 
 .. image:: graphical/137.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.10-7 从站“读/写数字输出”指令代码块
+.. centered:: Wykres 10.10-7 Blok kodu instrukcji slave'a „Odczyt / Zapis wyjścia cyfrowego”
 
-8. 从站数字输入设置,参数：
+8. Ustawienia wejścia cyfrowego slave'a, parametry:
 
-- DI名称：根据实际情况配置
+- Nazwa DI: Konfigurowana zgodnie z rzeczywistą sytuacją.
 
-- 寄存器数量：整数型 0 ~ 128
+- Liczba rejestrów: Liczba całkowita 0 ~ 128
 
 .. image:: graphical/138.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.10-8 从站“读数字输入”指令代码块
+.. centered:: Wykres 10.10-8 Blok kodu instrukcji slave'a „Odczyt wejścia cyfrowego”
 
-9. 从站模拟输出设置,参数：
+9. Ustawienia wyjścia analogowego slave'a, parametry:
 
-- AO名称：根据实际情况配置
+- Nazwa AO: Konfigurowana zgodnie z rzeczywistą sytuacją.
 
-- 寄存器数量：整数型 0 ~ 128
+- Liczba rejestrów: Liczba całkowita 0 ~ 128
 
-- 寄存器值：根据寄存器数量来定，可输入多个数值。例如数量为3，值为1,0,1
+- Wartość rejestru: Zależna od liczby rejestrów, można wprowadzić wiele wartości. Na przykład dla liczby 3, wartości 1,0,1.
 
 .. image:: graphical/139.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.10-9 从站“读/写模拟输出”指令代码块
+.. centered:: Wykres 10.10-9 Blok kodu instrukcji slave'a „Odczyt / Zapis wyjścia analogowego”
 
-10. 从站模拟输入设置,参数：
+10. Ustawienia wejścia analogowego slave'a, parametry:
 
-- AI名称：根据实际情况配置
+- Nazwa AI: Konfigurowana zgodnie z rzeczywistą sytuacją.
 
-- 寄存器数量：整数型 0 ~ 128
+- Liczba rejestrów: Liczba całkowita 0 ~ 128
 
 .. image:: graphical/140.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.10-10 从站“读模拟输入”指令代码块
+.. centered:: Wykres 10.10-10 Blok kodu instrukcji slave'a „Odczyt wejścia analogowego”
 
-11. 从站等待数字输入设置,参数：
+11. Ustawienia oczekiwania slave'a na wejście cyfrowe, parametry:
 
-- DI名称：根据实际情况配置
+- Nazwa DI: Konfigurowana zgodnie z rzeczywistą sytuacją.
 
-- 等待状态：true/false
+- Stan oczekiwania: true/false
 
-- 超时时间(ms)：整数型
+- Czas przekroczenia limitu (ms): Liczba całkowita
 
 .. image:: graphical/141.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.10-11 从站“等待数字输入”指令代码块
+.. centered:: Wykres 10.10-11 Blok kodu instrukcji slave'a „Oczekiwanie na wejście cyfrowe”
 
-12. 从站等待模拟输入设置,参数：
+12. Ustawienia oczekiwania slave'a na wejście analogowe, parametry:
 
-- AI名称：根据实际情况配置
+- Nazwa AI: Konfigurowana zgodnie z rzeczywistą sytuacją.
 
-- 等待状态：大于/小于
+- Stan oczekiwania: Większy niż / Mniejszy niż
 
-- 寄存器数量：整数型 0 ~ 128
+- Liczba rejestrów: Liczba całkowita 0 ~ 128
 
-- 寄存器值：根据寄存器数量来定，可输入多个数值。
+- Wartość rejestru: Zależna od liczby rejestrów, można wprowadzić wiele wartości.
 
 .. image:: graphical/142.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.10-12 从站“等待模拟输入”指令代码块   
+.. centered:: Wykres 10.10-12 Blok kodu instrukcji slave'a „Oczekiwanie na wejście analogowe”
 
-13. 读寄存器指令,参数：
+13. Instrukcja odczytu rejestru, parametry:
 
-- 功能码：0x01-线圈/0x02-离散量/0x03-保持寄存器/0x04-输入寄存器
+- Kod funkcji: 0x01 - cewka / 0x02 - wartość dyskretna / 0x03 - rejestr przechowujący / 0x04 - rejestr wejściowy
 
-- 寄存器、线圈、离散量地址：根据实际情况输入
+- Adres rejestru, cewki, wartości dyskretnej: Wprowadzany zgodnie z rzeczywistą sytuacją.
 
-- 寄存器、线圈、离散量数量：0 ~ 255
+- Liczba rejestrów, cewek, wartości dyskretnych: 0 ~ 255
 
-- 地址：根据实际情况输入
+- Adres: Wprowadzany zgodnie z rzeczywistą sytuacją.
 
-- 是否应用线程：否/是
+- Czy stosować wątek: Nie / Tak
 
 .. image:: graphical/143.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.10-13 “读寄存器”指令代码块
+.. centered:: Wykres 10.10-13 Blok kodu instrukcji „Odczyt rejestru”
 
-14. 读寄存器数据指令,参数：
+14. Instrukcja odczytu danych rejestru, parametry:
 
-- 寄存器、线圈、离散量数量：0 ~ 255
+- Liczba rejestrów, cewek, wartości dyskretnych: 0 ~ 255
 
-- 是否应用线程：否/是
+- Czy stosować wątek: Nie / Tak
 
 .. image:: graphical/144.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.10-14 “读寄存器数据”指令代码块
+.. centered:: Wykres 10.10-14 Blok kodu instrukcji „Odczyt danych rejestru”
 
-15. 写寄存器指令,参数：
+15. Instrukcja zapisu rejestru, parametry:
 
-- 功能码：0x01-线圈/0x02-离散量/0x03-保持寄存器/0x04-输入寄存器
+- Kod funkcji: 0x01 - cewka / 0x02 - wartość dyskretna / 0x03 - rejestr przechowujący / 0x04 - rejestr wejściowy
 
-- 寄存器、线圈地址：根据实际情况输入
+- Adres rejestru, cewki: Wprowadzany zgodnie z rzeczywistą sytuacją.
 
-- 寄存器、线圈数量：0 ~ 255
+- Liczba rejestrów, cewek: 0 ~ 255
 
-- 字节数组：根据实际情况输入
+- Tablica bajtów: Wprowadzana zgodnie z rzeczywistą sytuacją.
 
-- 地址：根据实际情况输入
+- Adres: Wprowadzany zgodnie z rzeczywistą sytuacją.
 
-- 是否应用线程：否/是
+- Czy stosować wątek: Nie / Tak
 
 .. image:: graphical/145.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.10-15 “写寄存器指令”指令代码块
+.. centered:: Wykres 10.10-15 Blok kodu instrukcji „Zapis rejestru”
 
-高级类图形化编程命令
---------------------------
-高级类图形化编程命令包含dofile调用子程序、辅助线程、折叠指令等高级命令。
+Polecenia programowania graficznego dotyczące zaawansowanych funkcji
+--------------------------------------------------------------------
+Polecenia programowania graficznego dotyczące zaawansowanych funkcji obejmują polecenia zaawansowane, takie jak wywoływanie podprogramów przez dofile, wątki pomocnicze, instrukcje zwijania itp.
 
 .. image:: graphical/012.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.11 高级类图形化编程命令
+.. centered:: Wykres 10.11 Polecenia programowania graficznego dotyczące zaawansowanych funkcji
 
-折叠指令
-~~~~~~~~~~~~~~~~~~~~~
-拖动“折叠指令”代码块,进入图形化编辑界面工作区。
+Instrukcja zwijania
+~~~~~~~~~~~~~~~~~~~
+Przeciągnij blok kodu „Instrukcja zwijania” do obszaru roboczego interfejsu edycji graficznej.
 
-该指令提供多行代码块折叠显示，方便用户阅读代码块。
+Ta instrukcja zapewnia zwijanie wyświetlania bloków kodu wielowierszowego, ułatwiając użytkownikowi czytanie bloków kodu.
 
-“折叠”指令节点,参数：
+Węzeł instrukcji „Zwijanie”, parametry:
 
-- 代码块名称：命名折叠代码块名称
+- Nazwa bloku kodu: Nazwij zwijany blok kodu.
 
 .. image:: graphical/146.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.11-1 折叠指令代码块
+.. centered:: Wykres 10.11-1 Blok kodu instrukcji zwijania
 
-调用子程序指令
-~~~~~~~~~~~~~~~~~~~~~
-拖动“调用子程序指令”代码块,进入图形化编辑界面工作区。
+Instrukcja wywoływania podprogramu
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Przeciągnij blok kodu „Instrukcja wywoływania podprogramu” do obszaru roboczego interfejsu edycji graficznej.
 
-该指令为调用子程序指令，在程序中插入该指令，当程序执行到该指令时，机器人会处于暂停状态，若想继续运行，点击控制区“暂停/恢复”按键即可。
+Ta instrukcja jest instrukcją wywoływania podprogramu. Po wstawieniu tej instrukcji do programu, gdy program osiągnie ten punkt, robot przejdzie w stan wstrzymania. Aby kontynuować, kliknij przycisk „Wstrzymaj/Wznów” w obszarze sterowania.
 
-“调用子程序”指令节点,参数：
+Węzeł instrukcji „Wywołanie podprogramu”, parametry:
 
-- dofile文件：创建生成的文件名
+- Plik dofile: Nazwa utworzonego pliku.
 
-- 第几层调用：第一层/第二层
+- Poziom wywołania: Pierwszy poziom / Drugi poziom
 
-- id编号：所属层级对应位置id
+- ID: Identyfikator pozycji odpowiadający poziomowi.
 
 .. image:: graphical/147.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.11-2 调用子程序指令代码块
+.. centered:: Wykres 10.11-2 Blok kodu instrukcji wywoływania podprogramu
 
-辅助线程指令
-~~~~~~~~~~~~~~~~~~~~~
-拖动“辅助线程”代码块,进入图形化编辑界面工作区。
+Instrukcja wątku pomocniczego
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Przeciągnij blok kodu „Wątek pomocniczy” do obszaru roboczego interfejsu edycji graficznej.
 
-Thread命令为辅助线程功能，用户可以定义一个辅助线程与主线程同时运行，辅助线程主要与外部设备进行数据交互，支持socket通信，机器人DI状态获取，机器人DO状态设置，机器人状态信息获取，与主线程数据交互，主线程通过辅助线程获取的数据用于控制机器人运动逻辑的判断。
+Polecenie Thread to funkcja wątku pomocniczego. Użytkownik może zdefiniować wątek pomocniczy działający równolegle z wątkiem głównym. Wątek pomocniczy służy głównie do wymiany danych z urządzeniami zewnętrznymi, obsługuje komunikację socket, pobieranie stanu DI robota, ustawianie stanu DO robota, pobieranie informacji o stanie robota oraz wymianę danych z wątkiem głównym. Dane uzyskane przez wątek główny z wątku pomocniczego są używane do podejmowania decyzji dotyczących logiki sterowania ruchem robota.
 
-“辅助线程”指令节点,参数：
+Węzeł instrukcji „Wątek pomocniczy”, parametry:
 
-- 方法名称：辅助线程名称
-  
-- 调用函数：辅助线程调用函数值
+- Nazwa metody: Nazwa wątku pomocniczego.
+
+- Wywoływana funkcja: Wartość funkcji wywoływanej przez wątek pomocniczy.
 
 .. image:: graphical/148.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.11-3 辅助线程代码块
+.. centered:: Wykres 10.11-3 Blok kodu wątku pomocniczego
 
-点位表指令
-~~~~~~~~~~~~~~~~~~~~~
-拖动“点位表”代码块,进入图形化编辑界面工作区。
+Instrukcja tabeli punktów
+~~~~~~~~~~~~~~~~~~~~~~~~~
+Przeciągnij blok kodu „Tabela punktów” do obszaru roboczego interfejsu edycji graficznej.
 
-该指令主要用于系统模式和点位表模式之间的模式切换，通过切换点位表来应用不同点位表内的示教点位。详情见章节12——示教点。
+Ta instrukcja służy głównie do przełączania między trybem systemowym a trybem tabeli punktów. Poprzez przełączanie tabel punktów stosowane są punkty nauczania z różnych tabel punktów. Szczegółowe informacje znajdują się w rozdziale 12 – Punkty nauczania.
 
-“点位表”指令节点,参数：
+Węzeł instrukcji „Tabela punktów”, parametry:
 
-- 点位表模式：切换不同得点位表名称
+- Tryb tabeli punktów: Przełączanie różnych nazw tabel punktów.
 
 .. image:: graphical/149.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.11-4 点位表代码块
+.. centered:: Wykres 10.11-4 Blok kodu tabeli punktów
 
-焦点跟随指令
-~~~~~~~~~~~~~~~~~~~~~
-拖动“焦点跟随”代码块,进入图形化编辑界面工作区。
+Instrukcja śledzenia ogniska
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Przeciągnij blok kodu „Śledzenie ogniska” do obszaru roboczego interfejsu edycji graficznej.
 
-该指令主要用于机器人运动过程中，始终聚焦在一个点上跟随移动。
+Ta instrukcja służy głównie do utrzymywania stałego skupienia na jednym punkcie podczas ruchu robota.
 
-“焦点跟随”指令节点,参数：
+Węzeł instrukcji „Śledzenie ogniska”, parametry:
 
-- 参数比例：0~100，默认值50
-- 前馈参数：0~1000，默认值19
-- 最大角速度加速度限制：0~10000，默认值1440
-- 最大角速度限制：0~1000，默认值180
-- 锁定X轴指向：参考输入矢量/水平/垂直
+- Proporcja parametru: 0~100, wartość domyślna 50.
+
+- Parametr sprzężenia przedniego: 0~1000, wartość domyślna 19.
+
+- Ograniczenie maksymalnego przyspieszenia kątowego: 0~10000, wartość domyślna 1440.
+
+- Ograniczenie maksymalnej prędkości kątowej: 0~1000, wartość domyślna 180.
+
+- Zablokuj kierunek osi X: Odniesienie do wektora wejściowego / Poziomo / Pionowo
 
 .. image:: graphical/150.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.11-5 焦点跟随代码块
+.. centered:: Wykres 10.11-5 Blok kodu śledzenia ogniska
 
-图形化编程命令使用示例
--------------------------
-选择图形化编程类型后，点击需要使用的图形代码块，即可在工作区进行拖拽和拼接操作。
+Przykłady użycia poleceń programowania graficznego
+--------------------------------------------------
+Po wybraniu typu programowania graficznego kliknij potrzebny graficzny blok kodu, aby móc go przeciągnąć i połączyć w obszarze roboczym.
 
-例如选择PTP和Lin运动指令以及控制指令Waitms进行拼接，外层可嵌套一个折叠高级指令并输入注释名称，则可实现代码块折叠操作。
+Na przykład wybierz instrukcje ruchu PTP i Lin oraz instrukcję sterowania Waitms do połączenia. Na zewnątrz można umieścić zaawansowaną instrukcję zwijania i wprowadzić nazwę komentarza, aby zrealizować zwijanie bloku kodu.
 
-其中点击下拉框可选择指令参数类型，输入框可填入指令参数数据。图形化编程命令示例如下：
+Po kliknięciu listy rozwijanej można wybrać typ parametru instrukcji, a w polu wejściowym można wprowadzić dane parametru instrukcji. Przykład polecenia programowania graficznego jest następujący:
 
 .. image:: graphical/013.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.12-1 图形化编程命令示例
+.. centered:: Wykres 10.12-1 Przykład polecenia programowania graficznego
 
-图形化编程指令拼接和参数填入完成后，填写工作区名称，点击“保存”图标即可保存本次程序。选择编写完成的“工作区”，点击开始运行，即可执行本段程序。
+Po zakończeniu łączenia instrukcji programowania graficznego i wypełniania parametrów, wypełnij nazwę obszaru roboczego i kliknij ikonę „Zapisz”, aby zapisać bieżący program. Wybierz „Obszar roboczy”, który został napisany, kliknij „Rozpocznij działanie”, aby wykonać ten fragment programu.
 
-图形化编程代码块模块化
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-为了提高图形化编程代码可阅读性，增加了图形化编程代码块模块化功能，即高级指令：折叠指令代码块。
+Modularyzacja bloków kodu programowania graficznego
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Aby poprawić czytelność kodu programowania graficznego, dodano funkcję modularyzacji bloków kodu programowania graficznego, czyli zaawansowaną instrukcję: blok kodu instrukcji zwijania.
 
 .. image:: graphical/014.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.12-2 折叠指令代码块
+.. centered:: Wykres 10.12-2 Blok kodu instrukcji zwijania
 
-1. 编写一段代码块指令，在外层添加折叠指令代码块，在输入框内编写该段指令的备注。
+1. Napisz fragment instrukcji bloku kodu, dodaj na zewnątrz blok kodu instrukcji zwijania i wpisz w polu wejściowym notatkę dla tego fragmentu instrukcji.
 
 .. image:: graphical/015.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.12-3 折叠指令效果图
+.. centered:: Wykres 10.12-3 Efekt działania instrukcji zwijania
 
-2. 右键操作栏右击"折叠块"，该段指令代码块折叠，该代码块折叠成一行显示，且折叠下可正确执行程序。
+2. Kliknij prawym przyciskiem myszy na „Zwijany blok” na pasku operacji. Ten fragment instrukcji bloku kodu zostanie zwinięty, blok kodu zostanie zwinięty do jednej linii, a program pod zwinięciem może być prawidłowo wykonany.
 
 .. image:: graphical/016.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.12-4 折叠后效果图
+.. centered:: Wykres 10.12-4 Efekt po zwinięciu
 
-3. 滚动鼠标，可实现页面缩放功能，具体效果如下：
+3. Przewijanie myszką umożliwia funkcję skalowania strony. Konkretny efekt jest następujący:
 
 .. image:: graphical/017.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.12-5 页面缩放功能效果图
+.. centered:: Wykres 10.12-5 Efekt działania funkcji skalowania strony
 
-图形化编程同名覆盖
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-在图形化编程页面，新建/加载文件后，更改工作区名称后点击保存。若更改的工作区名称文件已存在，则触发“示教点已存在”弹出框，如下图。
+Nadpisywanie o tej samej nazwie w programowaniu graficznym
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Na stronie programowania graficznego, po utworzeniu/zaladowaniu pliku, zmień nazwę obszaru roboczego i kliknij Zapisz. Jeśli plik o zmienionej nazwie obszaru roboczego już istnieje, zostanie wyświetlone okno dialogowe „Punkt nauczania już istnieje”, jak poniżej.
 
 .. image:: graphical/018.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.12-6 图形化编程程序覆盖
+.. centered:: Wykres 10.12-6 Nadpisywanie programu programowania graficznego
 
-**Step1**：点击“取消”按钮，继续执行之前的操作。
+**Krok 1**: Kliknij przycisk „Anuluj”, aby kontynuować poprzednią operację.
 
-**Step2**：点击“同步更新示教程序”复选框，再点击“覆盖”按钮，则当前图形化编程页面的lua程序覆盖更改后工作区文件名的lua程序。
+**Krok 2**: Zaznacz pole wyboru „Synchronizuj aktualizację programu nauczania”, a następnie kliknij przycisk „Nadpisz”. Spowoduje to, że program lua na bieżącej stronie programowania graficznego nadpisze program lua o nazwie pliku zmienionego obszaru roboczego.
 
-图形化编程程序未保存验证
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Weryfikacja niezapisania programu w programowaniu graficznym
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Na stronie programowania graficznego, po otwarciu/utworzeniu programu, jeśli program programowania graficznego został zmodyfikowany i nie został zapisany.
 
-在图形化编程页面，打开/新建程序后，若图形化编程程序发生改动未保存程序。
-
-若点击“打开”文件操作，则触发“是否保存此程序”弹出框，提示“当前程序已发生改变，是否保存此程序的更改？”，如下图。
+Jeśli klikniesz operację „Otwórz” plik, zostanie wyświetlone okno dialogowe „Czy zapisać ten program” z komunikatem „Bieżący program został zmieniony. Czy zapisać zmiany w tym programie?”, jak poniżej.
 
 .. image:: graphical/019.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.12-7 当前页面程序未保存验证
+.. centered:: Wykres 10.12-7 Bieżąca strona programu - weryfikacja niezapisania
 
-**Step1**：点击“不保存”按钮，继续执行之前的“打开”文件操作。
+**Krok 1**: Kliknij przycisk „Nie zapisuj”, aby kontynuować poprzednią operację „Otwórz” plik.
 
-**Step2**：点击“保存”按钮，未保存的lua程序保存成功，并继续执行之前的“打开”文件操作。
+**Krok 2**: Kliknij przycisk „Zapisz”, niezapisany program lua zostanie pomyślnie zapisany, a następnie kontynuuj poprzednią operację „Otwórz” plik.
 
-若离开图形化编程页面，切换到其他页面时，同样触发“是否保存此程序”提示，且仍然停留在当前图形化编程页面，如下图。
+Jeśli opuścisz stronę programowania graficznego i przejdziesz do innej strony, również zostanie wyświetlony komunikat „Czy zapisać ten program”, a użytkownik nadal pozostanie na bieżącej stronie programowania graficznego, jak poniżej.
 
 .. image:: graphical/020.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10.12-8 切换页面程序未保存验证
+.. centered:: Wykres 10.12-8 Weryfikacja niezapisania programu przy przełączaniu strony
 
-**Step1**：点击“不保存”按钮，跳转到之前选择的页面。
+**Krok 1**: Kliknij przycisk „Nie zapisuj”, aby przejść do poprzednio wybranej strony.
 
-**Step2**：点击“保存”按钮，未保存的lua程序保存成功，并跳转到之前选择的页面。若保存的程序名称已存在，提示示教点位已存在，是否覆盖。进行取消/覆盖操作后，跳转到之前选择的页面。
+**Krok 2**: Kliknij przycisk „Zapisz”, niezapisany program lua zostanie pomyślnie zapisany, a następnie przejdź do poprzednio wybranej strony. Jeśli nazwa zapisanego programu już istnieje, pojawi się komunikat, że punkt nauczania już istnieje i czy go nadpisać. Po wykonaniu operacji anulowania/nadpisania przejdź do poprzednio wybranej strony.

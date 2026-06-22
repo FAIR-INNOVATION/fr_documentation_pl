@@ -1,119 +1,119 @@
-机器人常用设置
-=================
+Ustawienia ogólne robota
+========================
 
-.. toctree:: 
+.. toctree::
     :maxdepth: 5
 
-设置工具参考点-六点法
-++++++++++++++++++++++++++++++++++
-.. code-block:: Java
-    :linenos:
-
-    /** 
-    * @brief 设置工具参考点-六点法
-    * @param [in] point_num 点编号,范围[1~6]
-    * @return 错误码 
-    */ 
-    int SetToolPoint(int point_num);
-
-计算工具坐标系--六点法
-++++++++++++++++++++++++++++++++++
-.. code-block:: Java
-    :linenos:
-
-    /** 
-    * @brief 计算工具坐标系
-    * @param [out] tcp_pose 工具坐标系
-    * @return 错误码 
-    */ 
-    int ComputeTool(DescPose tcp_pose);
-
-设置工具参考点-四点法
-++++++++++++++++++++++++++++++++++
-.. code-block:: Java
-    :linenos:
-
-    /** 
-    * @brief 设置工具参考点-四点法
-    * @param [in] point_num 点编号,范围[1~4]
-    * @return 错误码 
-    */ 
-    int SetTcp4RefPoint(int point_num);
-
-计算工具坐标系-四点法
-++++++++++++++++++++++++++++++++++
-.. code-block:: Java
-    :linenos:
-
-    /** 
-    * @brief 计算工具坐标系
-    * @param [out] tcp_pose 工具坐标系
-    * @return 错误码 
-    */ 
-    int ComputeTcp4(DescPose tcp_pose);
-
-根据点位信息计算工具坐标系
-++++++++++++++++++++++++++++++++++
-.. code-block:: Java
-    :linenos:
-
-    /** 
-    * @brief 根据点位信息计算工具坐标系
-    * @param [in] method 计算方法；0-四点法；1-六点法
-    * @param [in] pos 关节位置组，四点法时数组长度为4个，六点法时数组长度为6个
-    * @param [out] tool_pose 输出的工具坐标系
-    * @return 错误码 
-    */ 
-    int ComputeToolCoordWithPoints(int method, JointPos[] pos,DescPose tool_pose);
-
-设置工具坐标系
-++++++++++++++++++++++++++++++++++
-.. code-block:: Java
-    :linenos:
-
-    /** 
-    * @brief 设置工具坐标系 
-    * @param [in] id 坐标系编号，范围[0~14]
-    * @param [in] coord  工具中心点相对于末端法兰中心位姿
-    * @param [in] type  0-工具坐标系，1-传感器坐标系
-    * @param [in] install 安装位置，0-机器人末端，1-机器人外部
-    * @param [in] toolID  工具ID
-    * @param [in] loadNum  负载编号
-    * @return 错误码 
-    */ 
-    int SetToolCoord(int id, DescPose coord, int type, int install, int toolID, int loadNum);  
-
-设置工具坐标系列表
-++++++++++++++++++++++++++++++++++
+Ustawianie punktu odniesienia narzędzia - metoda sześciu punktów
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief  设置工具坐标系列表
-    * @param  [in] id 坐标系编号，范围[0~14]
-    * @param  [in] coord  工具中心点相对于末端法兰中心位姿
-    * @param  [in] type  0-工具坐标系，1-传感器坐标系
-    * @param  [in] install 安装位置，0-机器人末端，1-机器人外部
-    * @param  [in] loadNum 负载编号
-    * @return  错误码
+    * @brief Ustawia punkt odniesienia narzędzia - metoda sześciu punktów
+    * @param [in] point_num Numer punktu, zakres [1~6]
+    * @return Kod błędu
     */
-    int SetToolList(int id, DescPose coord, int type, int install, int loadNum);  
+    int SetToolPoint(int point_num);
 
-获取当前工具坐标系
+Obliczanie układu współrzędnych narzędzia -- metoda sześciu punktów
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Oblicza układ współrzędnych narzędzia
+    * @param [out] tcp_pose Układ współrzędnych narzędzia
+    * @return Kod błędu
+    */
+    int ComputeTool(DescPose tcp_pose);
+
+Ustawianie punktu odniesienia narzędzia - metoda czterech punktów
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Ustawia punkt odniesienia narzędzia - metoda czterech punktów
+    * @param [in] point_num Numer punktu, zakres [1~4]
+    * @return Kod błędu
+    */
+    int SetTcp4RefPoint(int point_num);
+
+Obliczanie układu współrzędnych narzędzia - metoda czterech punktów
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Oblicza układ współrzędnych narzędzia
+    * @param [out] tcp_pose Układ współrzędnych narzędzia
+    * @return Kod błędu
+    */
+    int ComputeTcp4(DescPose tcp_pose);
+
+Obliczanie układu współrzędnych narzędzia na podstawie informacji o punktach
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Oblicza układ współrzędnych narzędzia na podstawie informacji o punktach
+    * @param [in] method Metoda obliczeniowa; 0-metoda czterech punktów; 1-metoda sześciu punktów
+    * @param [in] pos Grupa pozycji stawów, długość tablicy 4 dla metody czterech punktów, 6 dla metody sześciu punktów
+    * @param [out] tool_pose Wyjściowy układ współrzędnych narzędzia
+    * @return Kod błędu
+    */
+    int ComputeToolCoordWithPoints(int method, JointPos[] pos,DescPose tool_pose);
+
+Ustawianie układu współrzędnych narzędzia
 +++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief  获取当前工具坐标系
-    * @param  [in] flag 0-阻塞，1-非阻塞
-    * @param  [out] desc_pos 工具坐标系位姿
-    * @return  错误码
+    * @brief Ustawia układ współrzędnych narzędzia
+    * @param [in] id Numer układu współrzędnych, zakres [0~14]
+    * @param [in] coord Pozycja i orientacja środka narzędzia względem środka kołnierza końcowego
+    * @param [in] type 0-układ współrzędnych narzędzia, 1-układ współrzędnych czujnika
+    * @param [in] install Pozycja montażu, 0-koniec robota, 1-na zewnątrz robota
+    * @param [in] toolID ID narzędzia
+    * @param [in] loadNum Numer obciążenia
+    * @return Kod błędu
     */
-    int GetTCPOffset(int flag, DescPose desc_pos); 
+    int SetToolCoord(int id, DescPose coord, int type, int install, int toolID, int loadNum);
 
-机器人工具坐标系操作代码示例
-++++++++++++++++++++++++++++++++++
+Ustawianie listy układów współrzędnych narzędzia
+++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Ustawia listę układów współrzędnych narzędzia
+    * @param [in] id Numer układu współrzędnych, zakres [0~14]
+    * @param [in] coord Pozycja i orientacja środka narzędzia względem środka kołnierza końcowego
+    * @param [in] type 0-układ współrzędnych narzędzia, 1-układ współrzędnych czujnika
+    * @param [in] install Pozycja montażu, 0-koniec robota, 1-na zewnątrz robota
+    * @param [in] loadNum Numer obciążenia
+    * @return Kod błędu
+    */
+    int SetToolList(int id, DescPose coord, int type, int install, int loadNum);
+
+Pobieranie bieżącego układu współrzędnych narzędzia
++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Pobiera bieżący układ współrzędnych narzędzia
+    * @param [in] flag 0-blokujący, 1-nieblokujący
+    * @param [out] desc_pos Pozycja i orientacja układu współrzędnych narzędzia
+    * @return Kod błędu
+    */
+    int GetTCPOffset(int flag, DescPose desc_pos);
+
+Przykład kodu operacji na układzie współrzędnych narzędzia robota
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
@@ -176,60 +176,60 @@
         return 0;
     }
 
-设置外部工具坐标参考点-六点法
-++++++++++++++++++++++++++++++++++
-.. code-block:: Java
-    :linenos:
-
-    /** 
-    * @brief 设置外部工具参考点-三点法 
-    * @param [in] point_num 点编号,范围[1~3]
-    * @return 错误码 
-    */ 
-    int SetExTCPPoint(int point_num); 
-
-计算外部工具坐标系-六点法
-++++++++++++++++++++++++++++++++++
-.. code-block:: Java
-    :linenos:
-    
-    /** 
-    * @brief 计算外部工具坐标系-三点法
-    * @param [out] tcp_pose 外部工具坐标系
-    * @return 错误码 
-    */ 
-    int ComputeExTCF(DescPose tcp_pose); 
-
-设置外部工具坐标系
-++++++++++++++++++++++++++++++++++
+Ustawianie punktu odniesienia zewnętrznego narzędzia - metoda trzech punktów
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief 设置外部工具坐标系 
-    * @param [in] id 坐标系编号，范围[0~14]
-    * @param [in] etcp  工具中心点相对末端法兰中心位姿
-    * @param [in] etool  待定
-    * @return 错误码 
+    * @brief Ustawia punkt odniesienia zewnętrznego narzędzia - metoda trzech punktów
+    * @param [in] point_num Numer punktu, zakres [1~3]
+    * @return Kod błędu
     */
-    int SetExToolCoord(int id, DescPose etcp, DescPose etool); 
+    int SetExTCPPoint(int point_num);
 
-设置外部工具坐标系列表
-++++++++++++++++++++++++++++++++++
+Obliczanie zewnętrznego układu współrzędnych narzędzia - metoda trzech punktów
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief  设置外部工具坐标系列表
-    * @param  [in] id 坐标系编号，范围[0~14]
-    * @param  [in] etcp  工具中心点相对末端法兰中心位姿
-    * @param  [in] etool  待定
-    * @return  错误码
+    * @brief Oblicza zewnętrzny układ współrzędnych narzędzia - metoda trzech punktów
+    * @param [out] tcp_pose Zewnętrzny układ współrzędnych narzędzia
+    * @return Kod błędu
     */
-    int SetExToolList(int id, DescPose etcp, DescPose etool); 
+    int ComputeExTCF(DescPose tcp_pose);
 
-机器人外部工具坐标系操作代码示例
-+++++++++++++++++++++++++++++++++++++++++++++++
+Ustawianie zewnętrznego układu współrzędnych narzędzia
+++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Ustawia zewnętrzny układ współrzędnych narzędzia
+    * @param [in] id Numer układu współrzędnych, zakres [0~14]
+    * @param [in] etcp Pozycja i orientacja środka narzędzia względem środka kołnierza końcowego
+    * @param [in] etool Do ustalenia
+    * @return Kod błędu
+    */
+    int SetExToolCoord(int id, DescPose etcp, DescPose etool);
+
+Ustawianie listy zewnętrznych układów współrzędnych narzędzia
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Ustawia listę zewnętrznych układów współrzędnych narzędzia
+    * @param [in] id Numer układu współrzędnych, zakres [0~14]
+    * @param [in] etcp Pozycja i orientacja środka narzędzia względem środka kołnierza końcowego
+    * @param [in] etool Do ustalenia
+    * @return Kod błędu
+    */
+    int SetExToolList(int id, DescPose etcp, DescPose etool);
+
+Przykład kodu operacji na zewnętrznym układzie współrzędnych narzędzia robota
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
@@ -267,91 +267,90 @@
         return 0;
     }
 
-设置工件坐标系参考点-三点法
-++++++++++++++++++++++++++++++++++
+Ustawianie punktu odniesienia układu współrzędnych obiektu - metoda trzech punktów
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
-    /** 
-    * @brief 设置工件参考点-三点法 
-    * @param [in] point_num 点编号,范围[1~3]
-    * @return 错误码 
-    */ 
+    /**
+    * @brief Ustawia punkt odniesienia obiektu - metoda trzech punktów
+    * @param [in] point_num Numer punktu, zakres [1~3]
+    * @return Kod błędu
+    */
     int SetWObjCoordPoint(int point_num);
 
-
-计算工件坐标系
-++++++++++++++++++++++++++++++++++
-.. code-block:: Java
-    :linenos:
-
-    /** 
-    * @brief 计算工件坐标系
-    * @param [in]  method 计算方式 0：原点-x轴-z轴  1：原点-x轴-xy平面
-    * @param [in]  refFrame 参考坐标系
-    * @param [out]  wobj_pose 工件坐标系
-    * @return 错误码 
-    */ 
-    int ComputeWObjCoord(int method, int refFrame, DescPose wobj_pose); 
-
-设置工件坐标系
-++++++++++++++++++++++++++++++++++
+Obliczanie układu współrzędnych obiektu
++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief  设置工件坐标系
-    * @param  [in] id 坐标系编号，范围[1~15]
-    * @param  [in] coord  工件坐标系相对于末端法兰中心位姿
-    * @param  [in] refFrame 参考坐标系
-    * @return  错误码
-    */    
+    * @brief Oblicza układ współrzędnych obiektu
+    * @param [in] method Sposób obliczania 0: punkt początkowy - oś X - oś Z  1: punkt początkowy - oś X - płaszczyzna XY
+    * @param [in] refFrame Układ odniesienia
+    * @param [out] wobj_pose Układ współrzędnych obiektu
+    * @return Kod błędu
+    */
+    int ComputeWObjCoord(int method, int refFrame, DescPose wobj_pose);
+
+Ustawianie układu współrzędnych obiektu
++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Ustawia układ współrzędnych obiektu
+    * @param [in] id Numer układu współrzędnych, zakres [1~15]
+    * @param [in] coord Pozycja i orientacja układu współrzędnych obiektu względem środka kołnierza końcowego
+    * @param [in] refFrame Układ odniesienia
+    * @return Kod błędu
+    */
     int SetWObjCoord(int id, DescPose coord, int refFrame);
 
-设置工件坐标系列表
-++++++++++++++++++++++++++++++++++
+Ustawianie listy układów współrzędnych obiektu
+++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief  设置工件坐标系列表
-    * @param  [in] id 坐标系编号，范围[1~15]
-    * @param  [in] coord  工件坐标系相对于末端法兰中心位姿
-    * @param  [in] refFrame 参考坐标系
-    * @return  错误码
-    */    
+    * @brief Ustawia listę układów współrzędnych obiektu
+    * @param [in] id Numer układu współrzędnych, zakres [1~15]
+    * @param [in] coord Pozycja i orientacja układu współrzędnych obiektu względem środka kołnierza końcowego
+    * @param [in] refFrame Układ odniesienia
+    * @return Kod błędu
+    */
     int SetWObjList(int id, DescPose coord, int refFrame);
 
-根据点位信息计算工件坐标系
-++++++++++++++++++++++++++++++++++
-.. code-block:: Java
-    :linenos:
-
-    /** 
-    * @brief 根据点位信息计算工件坐标系
-    * @param [in] method 计算方法；0：原点-x轴-z轴  1：原点-x轴-xy平面
-    * @param [in] pos 三个TCP位置组
-    * @param [in] refFrame 参考坐标系
-    * @param [in] tcp_pose 输出工件坐标系
-    * @return 错误码 
-    */ 
-    int ComputeWObjCoordWithPoints(int method, DescPose[] pos, int refFrame,DescPose tcp_pose);
-
-获取当前工件坐标系
-++++++++++++++++++++++++++++++++++++
+Obliczanie układu współrzędnych obiektu na podstawie informacji o punktach
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief  获取当前工件坐标系
-    * @param  [in] flag 0-阻塞，1-非阻塞
-    * @param  [out] desc_pos 工件坐标系位姿
-    * @return  错误码
-    */   
+    * @brief Oblicza układ współrzędnych obiektu na podstawie informacji o punktach
+    * @param [in] method Metoda obliczeniowa; 0: punkt początkowy - oś X - oś Z  1: punkt początkowy - oś X - płaszczyzna XY
+    * @param [in] pos Trzy grupy pozycji TCP
+    * @param [in] refFrame Układ odniesienia
+    * @param [in] tcp_pose Wyjściowy układ współrzędnych obiektu
+    * @return Kod błędu
+    */
+    int ComputeWObjCoordWithPoints(int method, DescPose[] pos, int refFrame,DescPose tcp_pose);
+
+Pobieranie bieżącego układu współrzędnych obiektu
++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Pobiera bieżący układ współrzędnych obiektu
+    * @param [in] flag 0-blokujący, 1-nieblokujący
+    * @param [out] desc_pos Pozycja i orientacja układu współrzędnych obiektu
+    * @return Kod błędu
+    */
     int GetWObjOffset(int flag, DescPose desc_pos);
 
-机器人工件坐标系操作代码示例
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Przykład kodu operacji na układzie współrzędnych obiektu robota
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
@@ -392,168 +391,168 @@
         rtn = robot.GetWObjOffset(0, getWobjDesc);
         return 0;
     }
-    
-设置全局速度
-++++++++++++++++++++++++++++++++++
+
+Ustawianie prędkości globalnej
+++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief  设置全局速度
-    * @param  [in]  vel  速度百分比，范围[0~100]
-    * @return  错误码
+    * @brief Ustawia prędkość globalną
+    * @param [in] vel Procent prędkości, zakres [0~100]
+    * @return Kod błędu
     */
-    int SetSpeed(int vel); 
+    int SetSpeed(int vel);
 
-设置机器人加速度
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Ustawianie przyspieszenia robota
+++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief 设置机器人加速度
-    * @param [in] acc 机器人加速度百分比
-    * @return 错误码
+    * @brief Ustawia przyspieszenie robota
+    * @param [in] acc Procent przyspieszenia robota
+    * @return Kod błędu
     */
     int SetOaccScale(double acc);
 
-获取机器人默认速度
+Pobieranie domyślnej prędkości robota
 +++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief  获取机器人默认速度
-    * @return  List[0]:int 错误码; List[1]: double vel 速度，单位mm/s
-    */   
-    List<Number> GetDefaultTransVel(); 
+    * @brief Pobiera domyślną prędkość robota
+    * @return List[0]:int kod błędu; List[1]: double vel prędkość, jednostka mm/s
+    */
+    List<Number> GetDefaultTransVel();
 
-设置末端负载重量
-++++++++++++++++++++++++++++++++++
+Ustawianie masy obciążenia końcówki
++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief  设置末端负载重量
-    * @param  [in] loadNum 负载编号
-    * @param  [in] weight  负载重量，单位kg
-    * @return  错误码
+    * @brief Ustawia masę obciążenia końcówki
+    * @param [in] loadNum Numer obciążenia
+    * @param [in] weight Masa obciążenia, jednostka kg
+    * @return Kod błędu
     */
     int SetLoadWeight(int loadNum,double weight);
 
-设置末端负载质心坐标
-++++++++++++++++++++++++++++++++++
+Ustawianie współrzędnych środka ciężkości obciążenia końcówki
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief  设置末端负载质心坐标
-    * @param  [in] coord 质心坐标，单位mm
-    * @return  错误码
+    * @brief Ustawia współrzędne środka ciężkości obciążenia końcówki
+    * @param [in] coord Współrzędne środka ciężkości, jednostka mm
+    * @return Kod błędu
     */
-    int SetLoadCoord(DescTran coord); 
+    int SetLoadCoord(DescTran coord);
 
-设置末端负载质心坐标
-++++++++++++++++++++++++++++++++++
+Ustawianie współrzędnych środka ciężkości obciążenia końcówki
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
     /**
-     * @brief  设置末端负载质心坐标
-     * @param  [in] loadNum 负载编号
-     * @param  [in] coord 质心坐标，单位mm
-     * @return  错误码
+     * @brief Ustawia współrzędne środka ciężkości obciążenia końcówki
+     * @param [in] loadNum Numer obciążenia
+     * @param [in] coord Współrzędne środka ciężkości, jednostka mm
+     * @return Kod błędu
      */
     public int SetLoadCoord(int loadNum, DescTran coord)
 
-获取当前负载的重量
-+++++++++++++++++++++++++++++++++++++++++
+Pobieranie masy bieżącego obciążenia
+++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief  获取当前负载的重量
-    * @param  [in] flag 0-阻塞，1-非阻塞
-    * @return  List[0]:int 错误码; List[1]: double weight  负载重量，单位kg
+    * @brief Pobiera masę bieżącego obciążenia
+    * @param [in] flag 0-blokujący, 1-nieblokujący
+    * @return List[0]:int kod błędu; List[1]: double weight masa obciążenia, jednostka kg
     */
-    List<Number> GetTargetPayload(int flag); 
+    List<Number> GetTargetPayload(int flag);
 
-获取当前负载的质心
-+++++++++++++++++++++++++++++++++++++++++
+Pobieranie środka ciężkości bieżącego obciążenia
+++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief  获取当前负载的质心
-    * @param  [in] flag 0-阻塞，1-非阻塞
-    * @param  [out] cog 负载质心，单位mm
-    * @return  错误码
-    */   
+    * @brief Pobiera środek ciężkości bieżącego obciążenia
+    * @param [in] flag 0-blokujący, 1-nieblokujący
+    * @param [out] cog Środek ciężkości obciążenia, jednostka mm
+    * @return Kod błędu
+    */
     int GetTargetPayloadCog(int flag, DescTran cog);
 
-设置机器人安装方式
-++++++++++++++++++++++++++++++++++
+Ustawianie sposobu montażu robota
++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief  设置机器人安装方式
-    * @param  [in]  install  安装方式，0-正装，1-侧装，2-倒装
-    * @return  错误码
+    * @brief Ustawia sposób montażu robota
+    * @param [in] install Sposób montażu, 0-normalny, 1-boczny, 2-odwrócony
+    * @return Kod błędu
     */
-    int SetRobotInstallPos(int install); 
+    int SetRobotInstallPos(int install);
 
-设置机器人安装角度
-++++++++++++++++++++++++++++++++++
+Ustawianie kąta montażu robota
+++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief  设置机器人安装角度，自由安装
-    * @param  [in] yangle  倾斜角
-    * @param  [in] zangle  旋转角
-    * @return  错误码
+    * @brief Ustawia kąt montażu robota, montaż swobodny
+    * @param [in] yangle Kąt nachylenia
+    * @param [in] zangle Kąt obrotu
+    * @return Kod błędu
     */
-    int SetRobotInstallAngle(double yangle, double zangle); 
+    int SetRobotInstallAngle(double yangle, double zangle);
 
-获取机器人安装角度
-++++++++++++++++++++++++++++++++++
+Pobieranie kąta montażu robota
+++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief  获取机器人安装角度
-    * @return  List[0]:错误码; List[1]:double yangle 倾斜角; List[2]:double zangle 旋转角
+    * @brief Pobiera kąt montażu robota
+    * @return List[0]:kod błędu; List[1]:double yangle kąt nachylenia; List[2]:double zangle kąt obrotu
     */
     public List<Number> GetRobotInstallAngle()
 
-设置系统变量值
-++++++++++++++++++++++++++++++++++
+Ustawianie wartości zmiennej systemowej
++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief  设置系统变量值
-    * @param  [in]  id  变量编号，范围[1~20]
-    * @param  [in]  value 变量值
-    * @return  错误码
+    * @brief Ustawia wartość zmiennej systemowej
+    * @param [in] id Numer zmiennej, zakres [1~20]
+    * @param [in] value Wartość zmiennej
+    * @return Kod błędu
     */
-    int SetSysVarValue(int id, double value); 
+    int SetSysVarValue(int id, double value);
 
-获取系统变量值
-+++++++++++++++++++++++++++++++++++++++++
+Pobieranie wartości zmiennej systemowej
++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief  获取系统变量值
-    * @param  [in] id 系统变量编号，范围[1~20]
-    * @return  List[0]:错误码; List[1]:double value 系统变量值
+    * @brief Pobiera wartość zmiennej systemowej
+    * @param [in] id Numer zmiennej systemowej, zakres [1~20]
+    * @return List[0]:kod błędu; List[1]:double value wartość zmiennej systemowej
     */
-    List<Number> GetSysVarValue(int id); 
+    List<Number> GetSysVarValue(int id);
 
-机器人常用设置代码示例
-++++++++++++++++++++++++++++++++++
+Przykład kodu ustawień ogólnych robota
+++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
@@ -614,68 +613,68 @@
         return 0;
     }
 
-关节摩擦力补偿开关
-++++++++++++++++++++++++++++++++
-.. code-block:: Java
-    :linenos:
-
-    /** 
-    * @brief 关节摩擦力补偿开关 
-    * @param [in] state  0-关，1-开
-    * @return 错误码 
-    */ 
-    int FrictionCompensationOnOff(int state); 
-
-设置关节摩擦力补偿系数-正装
-++++++++++++++++++++++++++++++++
+Przełącznik kompensacji tarcia stawów
++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief  设置关节摩擦力补偿系数-正装
-    * @param  [in]  coeff 六个关节补偿系数，范围[0~1]
-    * @return  错误码
+    * @brief Przełącznik kompensacji tarcia stawów
+    * @param [in] state 0-wył., 1-wł.
+    * @return Kod błędu
+    */
+    int FrictionCompensationOnOff(int state);
+
+Ustawianie współczynników kompensacji tarcia stawów - montaż normalny
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Ustawia współczynniki kompensacji tarcia stawów - montaż normalny
+    * @param [in] coeff Współczynniki kompensacji dla sześciu stawów, zakres [0~1]
+    * @return Kod błędu
     */
     int SetFrictionValue_level(Object[] coeff);
 
-设置关节摩擦力补偿系数-侧装
-++++++++++++++++++++++++++++++++
+Ustawianie współczynników kompensacji tarcia stawów - montaż boczny
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief  设置关节摩擦力补偿系数-侧装
-    * @param  [in]  coeff 六个关节补偿系数，范围[0~1]
-    * @return  错误码
+    * @brief Ustawia współczynniki kompensacji tarcia stawów - montaż boczny
+    * @param [in] coeff Współczynniki kompensacji dla sześciu stawów, zakres [0~1]
+    * @return Kod błędu
     */
-    int SetFrictionValue_wall(Object[] coeff); 
+    int SetFrictionValue_wall(Object[] coeff);
 
-设置关节摩擦力补偿系数-倒装
-++++++++++++++++++++++++++++++++
+Ustawianie współczynników kompensacji tarcia stawów - montaż odwrócony
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief  设置关节摩擦力补偿系数-倒装
-    * @param  [in]  coeff 六个关节补偿系数，范围[0~1]
-    * @return  错误码
+    * @brief Ustawia współczynniki kompensacji tarcia stawów - montaż odwrócony
+    * @param [in] coeff Współczynniki kompensacji dla sześciu stawów, zakres [0~1]
+    * @return Kod błędu
     */
     int SetFrictionValue_ceiling(Object[] coeff);
 
-设置关节摩擦力补偿系数-自由安装
-++++++++++++++++++++++++++++++++
+Ustawianie współczynników kompensacji tarcia stawów - montaż swobodny
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief  设置关节摩擦力补偿系数-自由安装
-    * @param  [in]  coeff 六个关节补偿系数，范围[0~1]
-    * @return  错误码
+    * @brief Ustawia współczynniki kompensacji tarcia stawów - montaż swobodny
+    * @param [in] coeff Współczynniki kompensacji dla sześciu stawów, zakres [0~1]
+    * @return Kod błędu
     */
     int SetFrictionValue_freedom(Object[] coeff);
 
-机器人设置关节摩擦力补偿代码示例
-++++++++++++++++++++++++++++++++++
+Przykład kodu ustawiania kompensacji tarcia stawów robota
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
@@ -706,32 +705,32 @@
         return 0;
     }
 
-查询机器人错误码
-++++++++++++++++++++++++++++++++++++
+Sprawdzanie kodu błędu robota
++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
     /**
-     * @brief  查询机器人错误码
-     * @param  [out]  maincode  主错误码
-     * @param  [out]  subcode   子错误码
-     * @return  错误码
-     */ 
+     * @brief Sprawdza kod błędu robota
+     * @param [out] maincode Główny kod błędu
+     * @param [out] subcode Podrzędny kod błędu
+     * @return Kod błędu
+     */
     int GetRobotErrorCode(int[] maincode, int[] subcode);
 
-错误状态清除
-++++++++++++++++++++++++++++++++
+Czyszczenie stanu błędu
++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief  错误状态清除
-    * @return  错误码
+    * @brief Czyszczenie stanu błędu
+    * @return Kod błędu
     */
-    int ResetAllError(); 
+    int ResetAllError();
 
-机器人故障状态获取及清除错误代码示例
-+++++++++++++++++++++++++++++++++++++++++++++++
+Przykład kodu pobierania stanu usterki robota i czyszczenia błędu
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
@@ -748,36 +747,36 @@
         return 0;
     }
 
-设置宽电压控制箱温度及风扇转速监控参数
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Ustawianie parametrów monitorowania temperatury i prędkości wentylatora szerokonapięciowej szafy sterowniczej
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: Java SDK-v1.0.6-3.8.3
 
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief 设置宽电压控制箱温度及风扇转速监控参数
-    * @param [in] enable 0-不使能监测；1-使能监测
-    * @param [in] period 监测周期(s),范围1-100
-    * @return 错误码
+    * @brief Ustawia parametry monitorowania temperatury i prędkości wentylatora szerokonapięciowej szafy sterowniczej
+    * @param [in] enable 0-nie włączaj monitorowania; 1-włącz monitorowanie
+    * @param [in] period Okres monitorowania (s), zakres 1-100
+    * @return Kod błędu
     */
     int SetWideBoxTempFanMonitorParam(int enable, int period);
 
-获取宽电压控制箱温度及风扇转速监控参数
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Pobieranie parametrów monitorowania temperatury i prędkości wentylatora szerokonapięciowej szafy sterowniczej
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: Java SDK-v1.0.6-3.8.3
 
 .. code-block:: Java
     :linenos:
 
-    /** 
-    * @brief 获取宽电压控制箱温度及风扇转速监控参数
-    * @return List[0]-错误码,List[1]-enable 0-不使能监测；1-使能监测,List[2]-period 监测周期(s),范围1-100
+    /**
+    * @brief Pobiera parametry monitorowania temperatury i prędkości wentylatora szerokonapięciowej szafy sterowniczej
+    * @return List[0]-kod błędu, List[1]-enable 0-nie włączaj monitorowania; 1-włącz monitorowanie, List[2]-period Okres monitorowania (s), zakres 1-100
     */
     List<Number> GetWideBoxTempFanMonitorParam()
 
-宽电压控制箱温度和风扇电流状态获取代码示例
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Przykład kodu pobierania temperatury szerokonapięciowej szafy sterowniczej i stanu prądu wentylatora
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
@@ -809,84 +808,84 @@
         return 0;
     }
 
-设置焦点标定点
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Ustawianie punktu kalibracji ogniskowej
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: Java SDK-v1.0.7-3.8.4
 
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief 设置焦点标定点
-    * @param [in] pointNum 焦点标定点编号 1-8
-    * @param [in] point    标定点坐标
-    * @return 错误码
+    * @brief Ustawia punkt kalibracji ogniskowej
+    * @param [in] pointNum Numer punktu kalibracji ogniskowej 1-8
+    * @param [in] point Współrzędne punktu kalibracji
+    * @return Kod błędu
     */
     int SetFocusCalibPoint(int pointNum, DescPose point)
 
-计算焦点标定结果
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Obliczanie wyniku kalibracji ogniskowej
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: Java SDK-v1.0.7-3.8.4
 
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief 计算焦点标定结果
-    * @param [in] pointNum  标定点个数
-    * @param [in] resultPos 标定结果XYZ
-    * @param [out] accuracy  标定精度误差
-    * @return 错误码
+    * @brief Oblicza wynik kalibracji ogniskowej
+    * @param [in] pointNum Liczba punktów kalibracji
+    * @param [in] resultPos Wynik kalibracji XYZ
+    * @param [out] accuracy Błąd dokładności kalibracji
+    * @return Kod błędu
     */
     int ComputeFocusCalib(int pointNum, DescTran resultPos, double[] accuracy)
 
-开启焦点跟随
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Rozpoczęcie śledzenia ogniskowej
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: Java SDK-v1.0.7-3.8.4
 
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief 开启焦点跟随
-    * @param [in] kp       比例参数，默认50.0
-    * @param [in] kpredict 前馈参数，默认19.0
-    * @param [in] aMax     最大角加速度限制，默认1440°/s^2
-    * @param [in] vMax     最大角速度限制，默认180°/s
-    * @param [in] type     锁定X轴指向(0-参考输入矢量；1-水平；2-垂直)
-    * @return 错误码
+    * @brief Rozpoczęcie śledzenia ogniskowej
+    * @param [in] kp Parametr proporcjonalny, domyślnie 50.0
+    * @param [in] kpredict Parametr sprzężenia przedniego, domyślnie 19.0
+    * @param [in] aMax Maksymalne ograniczenie przyspieszenia kątowego, domyślnie 1440°/s^2
+    * @param [in] vMax Maksymalne ograniczenie prędkości kątowej, domyślnie 180°/s
+    * @param [in] type Zablokowanie kierunku osi X (0-wektor odniesienia wejściowego; 1-poziomy; 2-pionowy)
+    * @return Kod błędu
     */
     int FocusStart(double kp, double kpredict, double aMax, double vMax, int type)
 
-停止焦点跟随
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Zatrzymanie śledzenia ogniskowej
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: Java SDK-v1.0.7-3.8.4
 
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief 停止焦点跟随
-    * @return 错误码
+    * @brief Zatrzymanie śledzenia ogniskowej
+    * @return Kod błędu
     */
     int FocusEnd()
 
-设置焦点坐标
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Ustawianie współrzędnych ogniskowej
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: Java SDK-v1.0.7-3.8.4
 
 .. code-block:: Java
     :linenos:
-    
+
     /**
-    * @brief 设置焦点坐标
-    * @param pos 焦点坐标XYZ
-    * @return 错误码
+    * @brief Ustawia współrzędne ogniskowej
+    * @param pos Współrzędne ogniskowej XYZ
+    * @return Kod błędu
     */
     public int SetFocusPosition(DescTran pos)
 
-焦点跟随代码示例
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Przykład kodu śledzenia ogniskowej
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
@@ -958,88 +957,85 @@
         robot.FocusEnd();
     }
 
-关节扭矩传感器灵敏度标定功能开启
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Włączenie funkcji kalibracji czułości czujnika momentu stawów
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief 关节扭矩传感器灵敏度标定功能开启
-    * @param status 0-关闭；1-开启
-    * @return 错误码
+    * @brief Włączenie funkcji kalibracji czułości czujnika momentu stawów
+    * @param status 0-wyłączone; 1-włączone
+    * @return Kod błędu
     */
     public int JointSensitivityEnable(int status)
 
-关节扭矩传感器灵敏度数据采集
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Zbieranie danych czułości czujnika momentu stawów
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief 关节扭矩传感器灵敏度数据采集
-    * @return 错误码
+    * @brief Zbieranie danych czułości czujnika momentu stawów
+    * @return Kod błędu
     */
     public int JointSensitivityCollect()
 
-获取关节扭矩传感器灵敏度标定结果
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Pobieranie wyniku kalibracji czułości czujnika momentu stawów
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief 获取关节扭矩传感器灵敏度标定结果
-    * @param calibResult j1~j6关节灵敏度[0-1]
-    * @param linearityn j1~j6关节线性度[0-1]
-    * @return 错误码
+    * @brief Pobiera wynik kalibracji czułości czujnika momentu stawów
+    * @param calibResult Czułość stawów j1~j6 [0-1]
+    * @param linearity Liniowość stawów j1~j6 [0-1]
+    * @return Kod błędu
     */
     public int JointSensitivityCalibration(double calibResult[6], double linearity[6])
 
-获取关节扭矩传感器迟滞误差
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
+Pobieranie błędu histerezy czujnika momentu stawów
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief 获取关节扭矩传感器迟滞误差
-    * @param hysteresisError j1~j6关节迟滞误差
-    * @return 错误码
+    * @brief Pobiera błąd histerezy czujnika momentu stawów
+    * @param hysteresisError Błąd histerezy stawów j1~j6
+    * @return Kod błędu
     */
     public int JointHysteresisError(double[] hysteresisError);
-    
-获取关节扭矩传感器重复精度
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
+Pobieranie powtarzalności czujnika momentu stawów
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
-    
+
     /**
-    * @brief 获取关节扭矩传感器重复精度
-    * @param repeatability j1~j6关节扭矩传感器重复精度
-    * @return 错误码
+    * @brief Pobiera powtarzalność czujnika momentu stawów
+    * @param repeatability Powtarzalność czujnika momentu stawów j1~j6
+    * @return Kod błędu
     */
     public int JointRepeatability(double[] repeatability);
-    
-设置关节力传感器参数
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
+Ustawianie parametrów czujnika siły stawów
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief 设置关节力传感器参数
-    * @param 必选参数 M J1-J6质量系数[]
-    * @param 必选参数 B J1-J6阻尼系数[]
-    * @param 必选参数 K J1-J6刚度系数[]
-    * @param 默认参数 threshold 力控制阈值，Nm
-    * @param 默认参数 sensitivity 灵敏度,Nm/V,[]
-    * @param 默认参数 setZeroFlag 功能开启标志位；0-关闭；1-开启；2-位置1记录零点；3-位置2记录零点
-    * @return 错误码
+    * @brief Ustawia parametry czujnika siły stawów
+    * @param Parametry obowiązkowe M Współczynniki masy J1-J6 []
+    * @param Parametry obowiązkowe B Współczynniki tłumienia J1-J6 []
+    * @param Parametry obowiązkowe K Współczynniki sztywności J1-J6 []
+    * @param Parametry domyślne threshold Próg sterowania siłą, Nm
+    * @param Parametry domyślne sensitivity Czułość, Nm/V, []
+    * @param Parametry domyślne setZeroFlag Flaga włączenia funkcji; 0-wyłączone; 1-włączone; 2-rejestracja punktu zerowego w pozycji 1; 3-rejestracja punktu zerowego w pozycji 2
+    * @return Kod błędu
     */
     public int SetAdmittanceParams(double[] M, double[] B, double[] K, double[] threshold, double[] sensitivity, int setZeroFlag);
 
-关节扭矩传感器灵敏度自动标定代码示例
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Przykład kodu automatycznej kalibracji czułości czujnika momentu stawów
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
@@ -1108,7 +1104,7 @@
         rtn = robot.JointSensitivityCollect();
         System.out.printf("JointSensitivityCollect 7 rtn is %d\n", rtn);
         robot.Sleep(100);
-        //反向行程
+        //skok wsteczny
         robot.MoveJ(jointPos6, descPos6, 0, 0, 100, 100, 100, epos, -1, 0, offset_pos);
         robot.Sleep(100);
         rtn = robot.JointSensitivityCollect();
@@ -1169,39 +1165,39 @@
         System.out.printf("SetAdmittanceParams rtn is %d\n", rtn);
     }
 
-获取机器人8个从站端口错误帧数
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Pobieranie liczby błędnych ramek 8 portów stacji podrzędnej robota
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief 获取机器人8个从站端口错误帧数
-    * @param  inRecvErr 输入接收错误帧数
-    * @param  inCRCErr 输入CRC错误帧数
-    * @param  inTransmitErr 输入转发错误帧数
-    * @param  inLinkErr 输入链接错误帧数
-    * @param  outRecvErr 输出接收错误帧数
-    * @param  outCRCErr 输出CRC错误帧数
-    * @param  outTransmitErr 输出转发错误帧数
-    * @param  outLinkErr 输出链接错误帧数
-    * @return 错误码
+    * @brief Pobiera liczbę błędnych ramek 8 portów stacji podrzędnej robota
+    * @param inRecvErr Liczba błędnych ramek odbioru wejściowego
+    * @param inCRCErr Liczba błędnych ramek CRC wejściowego
+    * @param inTransmitErr Liczba błędnych ramek transmisji wejściowej
+    * @param inLinkErr Liczba błędnych ramek łącza wejściowego
+    * @param outRecvErr Liczba błędnych ramek odbioru wyjściowego
+    * @param outCRCErr Liczba błędnych ramek CRC wyjściowego
+    * @param outTransmitErr Liczba błędnych ramek transmisji wyjściowej
+    * @param outLinkErr Liczba błędnych ramek łącza wyjściowego
+    * @return Kod błędu
     */
     public int GetSlavePortErrCounter(int[] inRecvErr, int[] inCRCErr, int[] inTransmitErr, int[] inLinkErr, int[] outRecvErr, int[] outCRCErr, int[] outTransmitErr, int[] outLinkErr)
 
-从站端口错误帧清零
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Zerowanie licznika błędnych ramek portu stacji podrzędnej
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief 从站端口错误帧清零
-    * @param slaveID 从站编号0~7
-    * @return 错误码
+    * @brief Zerowanie licznika błędnych ramek portu stacji podrzędnej
+    * @param slaveID Numer stacji podrzędnej 0~7
+    * @return Kod błędu
     */
     public int SlavePortErrCounterClear(int slaveID)
 
-获取从站端口错误帧代码示例
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Przykład kodu pobierania błędnych ramek portu stacji podrzędnej
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
@@ -1261,32 +1257,32 @@
         robot.CloseRPC();
     }
 
-设置各轴速度前馈系数
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Ustawianie współczynników sprzężenia przedniego prędkości dla poszczególnych osi
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief 设置各轴速度前馈系数
-    * @param  radio 各轴速度前馈系数
-    * @return 错误码
+    * @brief Ustawia współczynniki sprzężenia przedniego prędkości dla poszczególnych osi
+    * @param radio Współczynniki sprzężenia przedniego prędkości dla poszczególnych osi
+    * @return Kod błędu
     */
     public int SetVelFeedForwardRatio(double[] radio)
 
-获取各轴速度前馈系数
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Pobieranie współczynników sprzężenia przedniego prędkości dla poszczególnych osi
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief 获取各轴速度前馈系数
-    * @param  radio 各轴速度前馈系数
-    * @return 错误码
+    * @brief Pobiera współczynniki sprzężenia przedniego prędkości dla poszczególnych osi
+    * @param radio Współczynniki sprzężenia przedniego prędkości dla poszczególnych osi
+    * @return Kod błędu
     */
     public int GetVelFeedForwardRatio(double[] radio)
 
-机器人速度前馈系数代码示例
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Przykład kodu współczynników sprzężenia przedniego prędkości robota
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
@@ -1300,91 +1296,91 @@
         robot.CloseRPC();
     }
 
-光电传感器TCP标定-计算工具RPY
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Kalibracja TCP czujnika fotoelektrycznego - obliczanie RPY narzędzia
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief 光电传感器TCP标定-计算工具RPY
-    * @param  Btool 机器人笛卡尔位置
-    * @param  Etool 当前工具坐标系数值
-    * @param  sensor 当前传感器坐标系数值(暂未开放)
-    * @param  radius 圆周运动半径mm(暂未开放)
-    * @param  dz 沿基座标系z轴负方向运动距离；当dz = 10000时，函数直接返回工具RPY
-    * @param  TCPRPY 工具RPY数值
-    * @return 错误码
+    * @brief Kalibracja TCP czujnika fotoelektrycznego - obliczanie RPY narzędzia
+    * @param Btool Pozycja kartezjańska robota
+    * @param Etool Wartości bieżącego układu współrzędnych narzędzia
+    * @param sensor Wartości bieżącego układu współrzędnych czujnika (tymczasowo niedostępne)
+    * @param radius Promień ruchu okrężnego mm (tymczasowo niedostępne)
+    * @param dz Odległość ruchu w kierunku ujemnym osi Z układu bazowego; gdy dz = 10000, funkcja bezpośrednio zwraca RPY narzędzia
+    * @param TCPRPY Wartości RPY narzędzia
+    * @return Kod błędu
     */
     public int TCPComputeRPY(DescPose Btool, DescPose Etool, DescPose sensor, double radius, double dz, Rpy TCPRPY)
 
-光电传感器TCP标定-计算工具XYZ
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Kalibracja TCP czujnika fotoelektrycznego - obliczanie XYZ narzędzia
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief 光电传感器TCP标定-计算工具XYZ
-    * @param  select 0-计算工具TCP；1-计算传感器原点；2-计算传感器姿态；3-直接返回工具TCP；4-记录当前工件坐标系和工具坐标系
-    * @param  originDirection 0-X方向；1-Y方向；2-Z方向
-    * @param  pos1 机器人笛卡尔位置1
-    * @param  pos2 机器人笛卡尔位置2
-    * @param  pos3 机器人笛卡尔位置3
-    * @param  pos4 机器人笛卡尔位置4
-    * @param  TCP 工具XYZ数值
-    * @return 错误码
+    * @brief Kalibracja TCP czujnika fotoelektrycznego - obliczanie XYZ narzędzia
+    * @param select 0-obliczanie TCP narzędzia; 1-obliczanie punktu początkowego czujnika; 2-obliczanie orientacji czujnika; 3-bezpośrednie zwrócenie TCP narzędzia; 4-rejestracja bieżącego układu współrzędnych obiektu i narzędzia
+    * @param originDirection 0-kierunek X; 1-kierunek Y; 2-kierunek Z
+    * @param pos1 Pozycja kartezjańska robota 1
+    * @param pos2 Pozycja kartezjańska robota 2
+    * @param pos3 Pozycja kartezjańska robota 3
+    * @param pos4 Pozycja kartezjańska robota 4
+    * @param TCP Wartości XYZ narzędzia
+    * @return Kod błędu
     */
     public int TCPComputeXYZ(int select, double originDirection, DescTran pos1, DescTran pos2, DescTran pos3, DescTran pos4, DescTran TCP)
 
-光电传感器TCP标定-开始记录末端法兰中心位置
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Kalibracja TCP czujnika fotoelektrycznego - rozpoczęcie rejestracji pozycji środka kołnierza końcowego
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief 光电传感器TCP标定-开始记录末端法兰中心位置
-    * @return 错误码
+    * @brief Kalibracja TCP czujnika fotoelektrycznego - rozpoczęcie rejestracji pozycji środka kołnierza końcowego
+    * @return Kod błędu
     */
     public int TCPRecordFlangePosStart()
 
-光电传感器TCP标定-停止记录末端法兰中心位置
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Kalibracja TCP czujnika fotoelektrycznego - zatrzymanie rejestracji pozycji środka kołnierza końcowego
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief 光电传感器TCP标定-停止记录末端法兰中心位置
-    * @return 错误码
+    * @brief Kalibracja TCP czujnika fotoelektrycznego - zatrzymanie rejestracji pozycji środka kołnierza końcowego
+    * @return Kod błędu
     */
     public int TCPRecordFlangePosEnd()
 
-光电传感器TCP标定-获取末端工具中心点位置
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Kalibracja TCP czujnika fotoelektrycznego - pobieranie pozycji środka końcowego narzędzia
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief 光电传感器TCP标定-获取末端工具中心点位置
-    * @param  TCP 工具中心点位置(x,y,z)
-    * @return 错误码
+    * @brief Kalibracja TCP czujnika fotoelektrycznego - pobieranie pozycji środka końcowego narzędzia
+    * @param TCP Pozycja środka narzędzia (x, y, z)
+    * @return Kod błędu
     */
     public int TCPGetRecordFlangePos(DescTran TCP)
 
-光电传感器TCP标定
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Kalibracja TCP czujnika fotoelektrycznego
++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief 光电传感器TCP标定
-    * @param luaPath 自动标定lua程序路径：QX版本机器人-"/fruser/FR_CalibrateTheToolTcp.lua";LA版本机器人-"/usr/local/etc/controller/lua/FR_CalibrateTheToolTcp.lua"
-    * @param offset 示教点偏移(x,y,z)mm
-    * @param TCP 标定后的工具坐标系(x,y,z,rx,ry,rz)
-    * @return 错误码
+    * @brief Kalibracja TCP czujnika fotoelektrycznego
+    * @param luaPath Ścieżka programu lua automatycznej kalibracji: dla robota wersji QX - "/fruser/FR_CalibrateTheToolTcp.lua"; dla robota wersji LA - "/usr/local/etc/controller/lua/FR_CalibrateTheToolTcp.lua"
+    * @param offset Przesunięcie punktu nauczania (x, y, z) mm
+    * @param TCP Układ współrzędnych narzędzia po kalibracji (x, y, z, rx, ry, rz)
+    * @return Kod błędu
     */
     public int PhotoelectricSensorTCPCalibration(String luaPath, DescTran offset, DescPose TCP)
 
-光电传感器TCP标定代码示例
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Przykład kodu kalibracji TCP czujnika fotoelektrycznego
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 

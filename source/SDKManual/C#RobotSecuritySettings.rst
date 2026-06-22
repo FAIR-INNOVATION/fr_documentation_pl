@@ -1,67 +1,67 @@
-机器人安全设置
-=================
+Ustawienia bezpieczeństwa robota
+================================
 
 .. toctree:: 
     :maxdepth: 5
 
-设置碰撞等级
-++++++++++++++++++++++++++++++++
+Ustawienie poziomu kolizji
++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief 设置碰撞等级
-    * @param  [in]  mode  0-等级，1-百分比
-    * @param  [in]  level 碰撞阈值，等级对应范围[],百分比对应范围[0~1]
-    * @param  [in]  config 0-不更新配置文件，1-更新配置文件
-    * @return  错误码
+    * @brief Ustawia poziom kolizji
+    * @param  [in]  mode  0-poziom, 1-procent
+    * @param  [in]  level Próg kolizji, zakres dla poziomu [], zakres dla procentu [0~1]
+    * @param  [in]  config 0-nie aktualizuj pliku konfiguracyjnego, 1-aktualizuj plik konfiguracyjny
+    * @return  Kod błędu
     */
     int SetAnticollision(int mode, double[] level, int config); 
 
-设置碰撞后策略
+Ustawienie strategii po kolizji
 ++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief  设置碰撞后策略
-    * @param  [in] strategy  0-报错暂停；1-继续运行；2-报错停止；3-重力矩模式；4-震荡相应模式；5-碰撞回弹模式
-    * @param  [in] safeTime  安全停止时间[1000 - 2000]ms
-    * @param  [in] safeDistance  安全停止距离[1-150]mm
-    * @param  [in] safeVel  tcp安全停止速度 [50-250]mm/s
-    * @param  [in] safetyMargin  j1-j6安全系数[1-10]
-    * @return  错误码
+    * @brief  Ustawia strategię po kolizji
+    * @param  [in] strategy  0-zatrzymaj z błędem i wstrzymaj; 1-kontynuuj działanie; 2-zatrzymaj z błędem; 3-tryb momentu grawitacyjnego; 4-tryb odpowiedzi oscylacyjnej; 5-tryb odbicia kolizyjnego
+    * @param  [in] safeTime  Czas bezpiecznego zatrzymania [1000 - 2000] ms
+    * @param  [in] safeDistance  Odległość bezpiecznego zatrzymania [1-150] mm
+    * @param  [in] safeVel  Prędkość bezpiecznego zatrzymania TCP [50-250] mm/s
+    * @param  [in] safetyMargin  Współczynniki bezpieczeństwa j1-j6 [1-10]
+    * @return  Kod błędu
     */
     int SetCollisionStrategy(int strategy, int safeTime, int safeDistance, int safeVel,int[] safetyMargin);
 
-自定义碰撞检测阈值功能开始
-++++++++++++++++++++++++++++++++
+Rozpoczęcie funkcji niestandardowego progu wykrywania kolizji
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief  自定义碰撞检测阈值功能开始，设置关节端和TCP端的碰撞检测阈值
-    * @param  [in] flag 1-仅关节检测开启；2-仅TCP检测开启；3-关节和TCP检测同时开启
-    * @param  [in] jointDetectionThreshould 关节碰撞检测阈值 j1-j6
-    * @param  [in] tcpDetectionThreshould TCP碰撞检测阈值，xyzabc
-    * @param  [in] block 0-非阻塞；1-阻塞
-    * @return  错误码
+    * @brief  Rozpoczęcie funkcji niestandardowego progu wykrywania kolizji, ustawienie progów wykrywania kolizji dla strony stawów i strony TCP
+    * @param  [in] flag 1-tylko wykrywanie stawów włączone; 2-tylko wykrywanie TCP włączone; 3-wykrywanie stawów i TCP włączone jednocześnie
+    * @param  [in] jointDetectionThreshould Próg wykrywania kolizji stawów j1-j6
+    * @param  [in] tcpDetectionThreshould Próg wykrywania kolizji TCP, xyzabc
+    * @param  [in] block 0-nieblokujące; 1-blokujące
+    * @return  Kod błędu
     */
     int CustomCollisionDetectionStart(int flag, double[] jointDetectionThreshould, double[] tcpDetectionThreshould, int block);
 
-自定义碰撞检测阈值功能关闭
-++++++++++++++++++++++++++++++++
+Zakończenie funkcji niestandardowego progu wykrywania kolizji
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief  自定义碰撞检测阈值功能关闭
-    * @return  错误码
+    * @brief  Zakończenie funkcji niestandardowego progu wykrywania kolizji
+    * @return  Kod błędu
     */
     int CustomCollisionDetectionEnd()
 
-机器人碰撞等级设置代码示例
-++++++++++++++++++++++++++++++++
+Przykład kodu ustawiania poziomu kolizji robota
++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
@@ -103,46 +103,46 @@
         Console.WriteLine($"CustomCollisionDetectionEnd rtn is {rtn}");
     }
 
-设置正限位
-++++++++++++++++++++++++++++++++
+Ustawienie dodatniego limitu
+++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief  设置正限位
-    * @param  [in] limit 六个关节位置，单位deg
-    * @return  错误码
+    * @brief  Ustawia dodatni limit
+    * @param  [in] limit Pozycje sześciu stawów, jednostka deg
+    * @return  Kod błędu
     */
     int SetLimitPositive(double[] limit); 
 
-设置负限位
-++++++++++++++++++++++++++++++++
+Ustawienie ujemnego limitu
+++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief  设置负限位
-    * @param  [in] limit 六个关节位置，单位deg
-    * @return  错误码
+    * @brief  Ustawia ujemny limit
+    * @param  [in] limit Pozycje sześciu stawów, jednostka deg
+    * @return  Kod błędu
     */
     int SetLimitNegative(double[] limit); 
 
-获取关节软限位角度
-++++++++++++++++++++++++++++++++
+Pobranie kąta miękkiego limitu stawu
+++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief  获取关节软限位角度
-    * @param  [in] flag 0-阻塞，1-非阻塞	 
-    * @param  [out] negative  负限位角度，单位deg
-    * @param  [out] positive  正限位角度，单位deg
-    * @return  错误码
+    * @brief  Pobiera kąt miękkiego limitu stawu
+    * @param  [in] flag 0-blokujący, 1-nieblokujący	 
+    * @param  [out] negative  Kąt ujemnego limitu, jednostka deg
+    * @param  [out] positive  Kąt dodatniego limitu, jednostka deg
+    * @return  Kod błędu
     */
     int GetJointSoftLimitDeg(byte flag, ref double[] negative, ref double[] positive);
 
-机器人限位设置代码示例
-++++++++++++++++++++++++++++
+Przykład kodu ustawiania limitów robota
++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
@@ -160,34 +160,34 @@
         Console.WriteLine($"pos limit deg:{pos_deg[0]},{pos_deg[1]},{pos_deg[2]},{pos_deg[3]},{pos_deg[4]},{pos_deg[5]}");
     }
 
-设置机器人碰撞检测方法
-++++++++++++++++++++++++++++
+Ustawienie metody wykrywania kolizji robota
++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief 设置机器人碰撞检测方法
-    * @param  [in] method 碰撞检测方法：0-电流模式；1-双编码器；2-电流和双编码器同时开启
-    * @param [in] thresholdMode 碰撞等级阈值方式；0-碰撞等级固定阈值方式；1-自定义碰撞检测阈值
-    * @return  错误码
+    * @brief Ustawia metodę wykrywania kolizji robota
+    * @param  [in] method Metoda wykrywania kolizji: 0-tryb prądowy; 1-podwójny enkoder; 2-tryb prądowy i podwójny enkoder włączone jednocześnie
+    * @param [in] thresholdMode Sposób progu poziomu kolizji; 0-stały próg poziomu kolizji; 1-niestandardowy próg wykrywania kolizji
+    * @return  Kod błędu
     */
     int SetCollisionDetectionMethod(int method,int thresholdMode=0);
 
 
-设置静态下碰撞检测开始关闭
-++++++++++++++++++++++++++++
+Ustawienie włączania/wyłączania wykrywania kolizji w stanie spoczynku
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief 设置静态下碰撞检测开始关闭
-    * @param  [in] status 0-关闭；1-开启
-    * @return  错误码
+    * @brief Ustawia włączanie/wyłączanie wykrywania kolizji w stanie spoczynku
+    * @param  [in] status 0-wyłączone; 1-włączone
+    * @return  Kod błędu
     */
     int SetStaticCollisionOnOff(int status);
 
-设置机器人碰撞检测方法代码示例
-++++++++++++++++++++++++++++++++++++++++
+Przykład kodu ustawiania metody wykrywania kolizji robota
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
@@ -202,21 +202,21 @@
         Console.WriteLine($"SetStaticCollisionOnOff Off rtn is {rtn}");
     }
 
-关节扭矩功率检测
-++++++++++++++++++++++++++++
+Wykrywanie momentu obrotowego i mocy stawu
+++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief 关节扭矩功率检测
-    * @param  [in] status 0-关闭；1-开启
-    * @param  [in] power 设定最大功率(W)
-    * @return  错误码
+    * @brief Wykrywanie momentu obrotowego i mocy stawu
+    * @param  [in] status 0-wyłączone; 1-włączone
+    * @param  [in] power Ustawiona maksymalna moc (W)
+    * @return  Kod błędu
     */
     int SetPowerLimit(int status, double power);
 
-关节扭矩功率检测代码示例
-++++++++++++++++++++++++++++
+Przykład kodu wykrywania momentu obrotowego i mocy stawu
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
@@ -240,22 +240,22 @@
         robot.DragTeachSwitch(0);
     }
 
-设置安全速度参数
-++++++++++++++++++++++++++++
+Ustawienie parametrów bezpiecznej prędkości
++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief 设置安全速度参数
-    * @param [in] enable 0-关；1-手动模式启用；2-所有模式启用(不支持自动限速)
-    * @param [in] maxTCPVel 限制最大TCP速度;[0-1000]mm/s
-    * @param [in] strategy 超速后策略；0-停止报警；1-自动限速；2-停止报警并去使能
-    * @return 错误码
+    * @brief Ustawia parametry bezpiecznej prędkości
+    * @param [in] enable 0-wył.; 1-włącz w trybie ręcznym; 2-włącz we wszystkich trybach (nie obsługuje automatycznego ograniczenia prędkości)
+    * @param [in] maxTCPVel Maksymalna prędkość TCP do ograniczenia; [0-1000] mm/s
+    * @param [in] strategy Strategia po przekroczeniu prędkości; 0-zatrzymaj z alarmem; 1-automatyczne ograniczenie prędkości; 2-zatrzymaj z alarmem i odłącz
+    * @return Kod błędu
     */
     public int SetVelReducePara(int enable, double maxTCPVel, int strategy)
     
-设置安全速度参数的SDK代码示例
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Przykład kodu SDK ustawiania parametrów bezpiecznej prędkości
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
@@ -269,23 +269,23 @@
 
         robot.SetSpeed(80);
 
-        // 测试参数错误
+        // Testowanie błędu parametru
         rtn = robot.SetVelReducePara(2, 30, 1);
         Console.WriteLine($"SetVelReducePara param error rtn is {rtn}");
 
-        // 禁用减速
+        // Wyłączenie redukcji prędkości
         rtn = robot.SetVelReducePara(0, 30, 1);
         Console.WriteLine($"SetVelReducePara disable reduce vel rtn is {rtn}");
         robot.MoveJ(j1, 0, 0, 100, 100, 100, epos, -1, 0, offset_pos);
         robot.MoveJ(j2, 0, 0, 100, 100, 100, epos, -1, 0, offset_pos);
 
-        // 启用减速（手动模式）
+        // Włączenie redukcji prędkości (tryb ręczny)
         rtn = robot.SetVelReducePara(1, 30, 1);
         Console.WriteLine($"SetVelReducePara reduce vel rtn is {rtn}");
         robot.MoveJ(j1, 0, 0, 100, 100, 100, epos, -1, 0, offset_pos);
         robot.MoveJ(j2, 0, 0, 100, 100, 100, epos, -1, 0, offset_pos);
 
-        // 所有模式启用，策略为停止报警并去使能
+        // Włączenie we wszystkich trybach, strategia zatrzymaj z alarmem i odłącz
         rtn = robot.SetVelReducePara(2, 30, 2);
         Console.WriteLine($"SetVelReducePara disable robot rtn is {rtn}");
         robot.MoveJ(j1, 0, 0, 100, 100, 100, epos, -1, 0, offset_pos);
@@ -296,7 +296,7 @@
         robot.RobotEnable(1);
         Thread.Sleep(1000);
 
-        // 所有模式启用，策略为停止报警（正常参数）
+        // Włączenie we wszystkich trybach, strategia zatrzymaj z alarmem (normalne parametry)
         rtn = robot.SetVelReducePara(2, 30, 0);
         Console.WriteLine($"SetVelReducePara report error rtn is {rtn}");
         robot.MoveJ(j1, 0, 0, 100, 100, 100, epos, -1, 0, offset_pos);

@@ -1,77 +1,82 @@
-机器人安全设置
-=================
+Ustawienia bezpieczeństwa robota
+================================
 
 .. toctree:: 
     :maxdepth: 5
 
-设置碰撞等级
-+++++++++++++++
+Ustawianie poziomu kolizji
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "原型", "``SetAnticollision (mode,level,config)``"
-    "描述", "设置碰撞等级"
-    "必选参数", "- ``mode``:0-等级，1-百分比；
-    - ``level=[j1,j2,j3,j4,j5,j6]``:碰撞阈值；
-    - ``config``:0-不更新配置文件，1-更新配置文件"
-    "默认参数", "无"
-    "返回值", "错误码 成功-0  失败- errcode"
+    "Prototyp", "``SetAnticollision (mode,level,config)``"
+    "Opis", "Ustawianie poziomu kolizji"
+    "Parametry wymagane", "- ``mode``: 0-poziom, 1-procent;
+    - ``level=[j1,j2,j3,j4,j5,j6]``: Próg kolizji;
+    - ``config``: 0-nie aktualizuj pliku konfiguracyjnego, 1-aktualizuj plik konfiguracyjny"
+    "Parametry domyślne", "Brak"
+    "Wartość zwracana", "Kod błędu sukces-0 błąd- errcode"
 
-设置碰撞后策略
-++++++++++++++++++
+Ustawianie strategii po kolizji
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "原型", "``SetCollisionStrategy(strategy,safeTime,safeDistance,safeVel,safetyMargin)``"
-    "描述", "设置碰撞后策略"
-    "必选参数", "- ``strategy``：0-报错暂停，1-继续运行，2-报错停止，3-重力矩模式，4-震荡相应模式，5-碰撞回弹模式"
-    "默认参数", "- ``safeTime``：安全停止时间[1000-2000]ms，默认为：1000
-    - ``safeDistance``：安全停止距离[1-150]mm，默认为：100
-    - ``safeVel``：安全停止速度[50-250]mm/s，默认为：250
-    - ``safetyMargin[6]``：安全系数[1-10]，默认为：[10,10,10,10,10,10]"
-    "返回值", "错误码 成功-0  失败- errcode"
+    "Prototyp", "``SetCollisionStrategy(strategy,safeTime,safeDistance,safeVel,safetyMargin)``"
+    "Opis", "Ustawianie strategii po kolizji"
+    "Parametry wymagane", "- ``strategy``: 0-zatrzymaj z błędem, 1-kontynuuj działanie, 2-zatrzymaj z błędem, 3-tryb momentu grawitacyjnego, 4-tryb odpowiedzi oscylacyjnej, 5-tryb odbicia po kolizji"
+    "Parametry domyślne", "- ``safeTime``: Czas bezpiecznego zatrzymania [1000-2000] ms, domyślnie: 1000
+    - ``safeDistance``: Bezpieczna odległość zatrzymania [1-150] mm, domyślnie: 100
+    - ``safeVel``: Bezpieczna prędkość zatrzymania [50-250] mm/s, domyślnie: 250
+    - ``safetyMargin[6]``: Współczynniki bezpieczeństwa [1-10], domyślnie: [10,10,10,10,10,10]"
+    "Wartość zwracana", "Kod błędu sukces-0 błąd- errcode"
 
-自定义碰撞检测阈值功能开始，设置关节端和TCP端的碰撞检测阈值
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Rozpoczęcie funkcji niestandardowego progu detekcji kolizji, ustawienie progów detekcji kolizji dla strony przegubów i strony TCP
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. versionadded:: python SDK-v2.1.0
 
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "原型", "``CustomCollisionDetectionStart(flag, jointDetectionThreshould, tcpDetectionThreshould, block)``"
-    "描述", "自定义碰撞检测阈值功能开始，设置关节端和TCP端的碰撞检测阈值"
-    "必选参数", "- ``flag``： 1-仅关节检测开启；2-仅TCP检测开启；3-关节和TCP检测同时开启
-    - ``jointDetectionThreshould``： 关节碰撞检测阈值 j1-j6
-    - ``tcpDetectionThreshould``： TCP碰撞检测阈值，xyzabc
-    - ``block``： 0-非阻塞；1-阻塞"
-    "默认参数", "无"
-    "返回值", "- 错误码 成功-0  失败- errcode"
+    "Prototyp", "``CustomCollisionDetectionStart(flag, jointDetectionThreshould, tcpDetectionThreshould, block)``"
+    "Opis", "Rozpoczęcie funkcji niestandardowego progu detekcji kolizji, ustawienie progów detekcji kolizji dla strony przegubów i strony TCP"
+    "Parametry wymagane", "- ``flag``: 1-tylko detekcja przegubów włączona; 2-tylko detekcja TCP włączona; 3-detekcja przegubów i TCP włączone jednocześnie
+    - ``jointDetectionThreshould``: Próg detekcji kolizji przegubów j1-j6
+    - ``tcpDetectionThreshould``: Próg detekcji kolizji TCP, xyzabc
+    - ``block``: 0-nieblokujący; 1-blokujący"
+    "Parametry domyślne", "Brak"
+    "Wartość zwracana", "- Kod błędu sukces-0 błąd- errcode"
 
-自定义碰撞检测阈值功能关闭
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Zakończenie funkcji niestandardowego progu detekcji kolizji
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. versionadded:: python SDK-v2.1.0
 
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "原型", "``CustomCollisionDetectionEnd()``"
-    "描述", "自定义碰撞检测阈值功能关闭"
-    "必选参数", "无"
-    "默认参数", "无"
-    "返回值", "- 错误码 成功-0  失败- errcode"
+    "Prototyp", "``CustomCollisionDetectionEnd()``"
+    "Opis", "Zakończenie funkcji niestandardowego progu detekcji kolizji"
+    "Parametry wymagane", "Brak"
+    "Parametry domyślne", "Brak"
+    "Wartość zwracana", "- Kod błędu sukces-0 błąd- errcode"
 
-机器人碰撞等级设置代码示例
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Przykład kodu ustawiania poziomu kolizji robota
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: python
     :linenos: 
 
     from fairino import Robot
     import time
-    # 与机器人控制器建立连接，连接成功返回一个机器人对象
+    # Połączenie z kontrolerem robota, po pomyślnym połączeniu zwraca obiekt robota
     robot = Robot.RPC('192.168.58.2')
     mode = 0
     config = 1
@@ -103,51 +108,55 @@
     print(f"CustomCollisionDetectionEnd rtn is {rtn}")
     robot.CloseRPC()
 
-设置正限位
-+++++++++++++
+Ustawianie dodatniego ograniczenia
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "原型", "``SetLimitPositive(p_limit)``"
-    "描述", "设置正限位"
-    "必选参数", "- ``p_limit=[j1,j2,j3,j4,j5,j6]``：六个关节位置"
-    "默认参数", "无"
-    "返回值", "错误码 成功-0  失败- errcode"
+    "Prototyp", "``SetLimitPositive(p_limit)``"
+    "Opis", "Ustawianie dodatniego ograniczenia"
+    "Parametry wymagane", "- ``p_limit=[j1,j2,j3,j4,j5,j6]``: Pozycje sześciu przegubów"
+    "Parametry domyślne", "Brak"
+    "Wartość zwracana", "Kod błędu sukces-0 błąd- errcode"
 
-设置负限位
-+++++++++++++
+Ustawianie ujemnego ograniczenia
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "原型", "``SetLimitNegative(n_limit)``"
-    "描述", "设置负限位"
-    "必选参数", "- ``n_limit=[j1,j2,j3,j4,j5,j6]``：六个关节位置"
-    "默认参数", "无"
-    "返回值", "错误码 成功-0  失败- errcode"
+    "Prototyp", "``SetLimitNegative(n_limit)``"
+    "Opis", "Ustawianie ujemnego ograniczenia"
+    "Parametry wymagane", "- ``n_limit=[j1,j2,j3,j4,j5,j6]``: Pozycje sześciu przegubów"
+    "Parametry domyślne", "Brak"
+    "Wartość zwracana", "Kod błędu sukces-0 błąd- errcode"
 
-获取关节软限位角度
-+++++++++++++++++++
+Pobieranie kątów miękkiego ograniczenia przegubów
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "原型", "``GetJointSoftLimitDeg(flag=1)``"
-    "描述", "获取关节软限位角度"
-    "必选参数", "无"
-    "默认参数", "``flag``：0-阻塞，1-非阻塞  默认1"
-    "返回值", "- 错误码 成功-0  失败- errcode
-    - ``[j1min,j1max,j2min,j2max,j3min,j3max, j4min,j4max,j5min, j5max, j6min,j6max]``：轴1~轴6，关节负限位与正限位，单位[mm]"
+    "Prototyp", "``GetJointSoftLimitDeg(flag=1)``"
+    "Opis", "Pobieranie kątów miękkiego ograniczenia przegubów"
+    "Parametry wymagane", "Brak"
+    "Parametry domyślne", "``flag``: 0-blokujący, 1-nieblokujący domyślnie 1"
+    "Wartość zwracana", "- Kod błędu sukces-0 błąd- errcode
+    - ``[j1min,j1max,j2min,j2max,j3min,j3max, j4min,j4max,j5min, j5max, j6min,j6max]``: Oś 1 ~ oś 6, ujemne i dodatnie ograniczenie przegubów, jednostka [mm]"
 
-机器人限位设置代码示例
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Przykład kodu ustawiania ograniczeń robota
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: python
     :linenos: 
 
     from fairino import Robot
     import time
-    # 与机器人控制器建立连接，连接成功返回一个机器人对象
+    # Połączenie z kontrolerem robota, po pomyślnym połączeniu zwraca obiekt robota
     robot = Robot.RPC('192.168.58.2')
     plimit = [170.0, 80.0, 150.0, 80.0, 170.0, 160.0]
     robot.SetLimitPositive(plimit)
@@ -158,47 +167,50 @@
     print(f"neg limit deg: {neg_deg[0]}, {neg_deg[2]}, {neg_deg[4]}, {neg_deg[6]}, {neg_deg[8]}, {neg_deg[10]}")
     robot.CloseRPC()
 
-设置机器人碰撞检测方法
-+++++++++++++++++++++++++++++++++
+Ustawianie metody detekcji kolizji robota
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. versionadded:: python SDK-v2.1.2
 
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "原型", "``SetCollisionDetectionMethod(method, thresholdMode)``"
-    "描述", "设置机器人碰撞检测方法"
-    "必选参数", "
-    - ``method``：碰撞检测方法：0-电流模式；1-双编码器；2-电流和双编码器同时开启
-    - ``thresholdMode``：碰撞等级阈值方式；0-碰撞等级固定阈值方式；1-自定义碰撞检测阈值  
+    "Prototyp", "``SetCollisionDetectionMethod(method, thresholdMode)``"
+    "Opis", "Ustawianie metody detekcji kolizji robota"
+    "Parametry wymagane", "
+    - ``method``: Metoda detekcji kolizji: 0-tryb prądowy; 1-podwójny enkoder; 2-tryb prądowy i podwójny enkoder włączone jednocześnie
+    - ``thresholdMode``: Sposób progu poziomu kolizji; 0-stały próg poziomu kolizji; 1-niestandardowy próg detekcji kolizji  
     "
-    "默认参数", "无"
-    "返回值", "- 错误码 成功-0  失败- errcode"
+    "Parametry domyślne", "Brak"
+    "Wartość zwracana", "- Kod błędu sukces-0 błąd- errcode"
 
-设置静态下碰撞检测开始关闭
-+++++++++++++++++++++++++++++++++
+Włączanie/wyłączanie detekcji kolizji w stanie statycznym
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. versionadded:: python SDK-v2.0.5
 
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "原型", "``SetStaticCollisionOnOff(status)``"
-    "描述", "设置静态下碰撞检测开始关闭"
-    "必选参数", "
-    - ``status``： 0-关闭；1-开启
+    "Prototyp", "``SetStaticCollisionOnOff(status)``"
+    "Opis", "Włączanie/wyłączanie detekcji kolizji w stanie statycznym"
+    "Parametry wymagane", "
+    - ``status``: 0-wyłączone; 1-włączone
     "
-    "默认参数", "无"
-    "返回值", "- 错误码 成功-0  失败- errcode"
+    "Parametry domyślne", "Brak"
+    "Wartość zwracana", "- Kod błędu sukces-0 błąd- errcode"
 
-设置机器人碰撞检测方法代码示例
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Przykład kodu ustawiania metody detekcji kolizji robota
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: python
     :linenos: 
 
     from fairino import Robot
     import time
-    # 与机器人控制器建立连接，连接成功返回一个机器人对象
+    # Połączenie z kontrolerem robota, po pomyślnym połączeniu zwraca obiekt robota
     robot = Robot.RPC('192.168.58.2')
     rtn = robot.SetCollisionDetectionMethod(0,0)
     rtn = robot.SetStaticCollisionOnOff(1)
@@ -208,31 +220,33 @@
     print(f"SetStaticCollisionOnOff Off rtn is {rtn}")
     robot.CloseRPC()
 
-关节扭矩功率检测
-+++++++++++++++++++++++++++++++++
+Detekcja momentu obrotowego i mocy przegubów
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. versionadded:: python SDK-v2.0.5
 
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "原型", "``SetPowerLimit(status, power)``"
-    "描述", "关节扭矩功率检测"
-    "必选参数", "
-    - ``status``：0-关闭；1-开启
-    - ``power``：设定最大功率(W)
+    "Prototyp", "``SetPowerLimit(status, power)``"
+    "Opis", "Detekcja momentu obrotowego i mocy przegubów"
+    "Parametry wymagane", "
+    - ``status``: 0-wyłączone; 1-włączone
+    - ``power``: Ustawiona maksymalna moc (W)
     "
-    "默认参数", "无"
-    "返回值", "- 错误码 成功-0  失败- errcode"
+    "Parametry domyślne", "Brak"
+    "Wartość zwracana", "- Kod błędu sukces-0 błąd- errcode"
     
-关节扭矩功率检测代码示例
-+++++++++++++++++++++++++++++++++
+Przykład kodu detekcji momentu obrotowego i mocy przegubów
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: python
     :linenos: 
 
     from fairino import Robot
     import time
-    # 与机器人控制器建立连接，连接成功返回一个机器人对象
+    # Połączenie z kontrolerem robota, po pomyślnym połączeniu zwraca obiekt robota
     robot = Robot.RPC('192.168.58.2')
     robot.DragTeachSwitch(1)
     robot.SetPowerLimit(1, 200)
@@ -242,30 +256,31 @@
     while count > 0:
         error = robot.ServoJT(torques, 0.001)
         count -= 1
-        time.sleep(0.001)  # 1ms delay
+        time.sleep(0.001)  # opóźnienie 1 ms
     error = robot.ServoJTEnd()
     robot.DragTeachSwitch(0)
     robot.CloseRPC()
 
-设置安全速度参数
-+++++++++++++++++++++++++++++++++
+Ustawianie parametrów bezpiecznej prędkości
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "原型", "``SetVelReducePara(enable, maxTCPVel, strategy)``"
-    "描述", "设置安全速度参数"
-    "必选参数", "
-    - ``enable``：0-关；1-手动模式启用；2-所有模式启用(不支持自动限速)
-    - ``maxTCPVel``：限制最大TCP速度;[0-1000]mm/s
-    - ``strategy``：超速后策略；0-停止报警；1-自动限速；2-停止报警并去使能
+    "Prototyp", "``SetVelReducePara(enable, maxTCPVel, strategy)``"
+    "Opis", "Ustawianie parametrów bezpiecznej prędkości"
+    "Parametry wymagane", "
+    - ``enable``: 0-wył.; 1-włączone w trybie ręcznym; 2-włączone we wszystkich trybach (automatyczne ograniczanie prędkości nie jest obsługiwane)
+    - ``maxTCPVel``: Ograniczenie maksymalnej prędkości TCP; [0-1000] mm/s
+    - ``strategy``: Strategia po przekroczeniu prędkości; 0-zatrzymaj i alarmuj; 1-automatyczne ograniczanie prędkości; 2-zatrzymaj, alarmuj i dezaktywuj
     "
-    "默认参数", "无"
-    "返回值", "- 错误码 成功-0  失败- errcode"
+    "Parametry domyślne", "Brak"
+    "Wartość zwracana", "- Kod błędu sukces-0 błąd- errcode"
 
-设置安全速度参数的SDK代码示例
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Przykład kodu SDK ustawiania parametrów bezpiecznej prędkości
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: python
     :linenos: 
 
@@ -273,24 +288,24 @@
     import time
     from fairino import Robot
 
-    # 与机器人控制器建立连接
+    # Połączenie z kontrolerem robota
     robot = Robot.RPC('192.168.58.2')
 
     def TestSetVelReducePara(self):
-        # 初始化关节位置、外部轴和偏移
+        # Inicjalizacja pozycji przegubów, osi zewnętrznej i przesunięcia
         j1 = [0, -90, 90, 0, 0, 0]
         j2 = [90, -90, 90, 0, 0, 0]
         epos = [0, 0, 0, 0]
         offset_pos = [0, 0, 0, 0, 0, 0]
 
-        # 设置基础速度
+        # Ustawienie prędkości podstawowej
         robot.SetSpeed(80)
 
-        # 测试参数错误的情况（mode=2 无效？）
+        # Test przypadku błędu parametru (mode=2 jest nieprawidłowy?)
         rtn = robot.SetVelReducePara(2, 30, 1)
         print(f"SetVelReducePara param error rtn is {rtn}")
 
-        # 关闭减速功能（mode=0, action=1 表示禁用减速）
+        # Wyłączenie funkcji redukcji prędkości (mode=0, action=1 oznacza wyłączenie redukcji)
         rtn = robot.SetVelReducePara(0, 30, 1)
         print(f"SetVelReducePara disable reduce vel rtn is {rtn}")
         robot.MoveJ(joint_pos=j1, tool=0, user=0, vel=100, acc=100, ovl=100,
@@ -298,7 +313,7 @@
         robot.MoveJ(joint_pos=j2, tool=0, user=0, vel=100, acc=100, ovl=100,
                     exaxis_pos=epos, blendT=-1, offset_flag=0, offset_pos=offset_pos)
 
-        # 启用减速功能（mode=1, action=1）
+        # Włączenie funkcji redukcji prędkości (mode=1, action=1)
         rtn = robot.SetVelReducePara(1, 30, 1)
         print(f"SetVelReducePara reduce vel rtn is {rtn}")
         robot.MoveJ(joint_pos=j1, tool=0, user=0, vel=100, acc=100, ovl=100,
@@ -306,7 +321,7 @@
         robot.MoveJ(joint_pos=j2, tool=0, user=0, vel=100, acc=100, ovl=100,
                     exaxis_pos=epos, blendT=-1, offset_flag=0, offset_pos=offset_pos)
 
-        # 测试 action=2（可能表示急停或禁用机器人）
+        # Test action=2 (może oznaczać awaryjne zatrzymanie lub wyłączenie robota)
         rtn = robot.SetVelReducePara(2, 30, 2)
         print(f"SetVelReducePara disable robot rtn is {rtn}")
         robot.MoveJ(joint_pos=j1, tool=0, user=0, vel=100, acc=100, ovl=100,
@@ -314,13 +329,13 @@
         robot.MoveJ(joint_pos=j2, tool=0, user=0, vel=100, acc=100, ovl=100,
                     exaxis_pos=epos, blendT=-1, offset_flag=0, offset_pos=offset_pos)
 
-        # 等待、复位错误并重新使能机器人
+        # Oczekiwanie, resetowanie błędów i ponowne włączenie robota
         time.sleep(2)
         robot.ResetAllError()
         robot.RobotEnable(1)
         time.sleep(1)
 
-        # 测试 action=0（可能表示仅上报错误，不执行动作）
+        # Test action=0 (może oznaczać tylko zgłoszenie błędu, bez wykonywania akcji)
         rtn = robot.SetVelReducePara(2, 30, 0)
         print(f"SetVelReducePara report error rtn is {rtn}")
         robot.MoveJ(joint_pos=j1, tool=0, user=0, vel=100, acc=100, ovl=100,
@@ -328,7 +343,7 @@
         robot.MoveJ(joint_pos=j2, tool=0, user=0, vel=100, acc=100, ovl=100,
                     exaxis_pos=epos, blendT=-1, offset_flag=0, offset_pos=offset_pos)
 
-        # 关闭连接
+        # Zamknięcie połączenia
         robot.CloseRPC()
 
     TestSetVelReducePara(robot)

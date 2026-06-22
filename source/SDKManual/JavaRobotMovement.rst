@@ -1,52 +1,56 @@
-机器人运动
+Ruch robota
 ============
 
 .. toctree:: 
     :maxdepth: 5
 
 
-jog点动
-+++++++++++++++++++++++++++++
+Jog (punktowy ruch)
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /** 
-    * @brief jog 点动 
-    * @param [in] refType 0-关节点动，2-基坐标系下点动，4-工具坐标系下点动，8-工件坐标系下点动
-    * @param [in] nb 1-关节1(或x轴)，2-关节2(或y轴)，3-关节3(或z轴)，4-关节4(或绕x轴旋转)，5-关节5(或绕y轴旋转)，6-关节6(或绕z轴旋转)
-    * @param [in] dir 0-负方向，1-正方向
-    * @param [in] vel 速度百分比，[0~100]
-    * @param [in] acc 加速度百分比， [0~100]
-    * @param [in] max_dis 单次点动最大角度，单位[°]或距离，单位[mm]
-    * @return 错误码 
+    * @brief Jog (punktowy ruch) 
+    * @param [in] refType 0-jog przegubów, 2-jog w układzie bazowym, 4-jog w układzie narzędzia, 8-jog w układzie przedmiotu
+    * @param [in] nb 1-przegub 1(lub oś X), 2-przegub 2(lub oś Y), 3-przegub 3(lub oś Z), 4-przegub 4(lub obrót wokół osi X), 5-przegub 5(lub obrót wokół osi Y), 6-przegub 6(lub obrót wokół osi Z)
+    * @param [in] dir 0-kierunek ujemny, 1-kierunek dodatni
+    * @param [in] vel Procent prędkości, [0~100]
+    * @param [in] acc Procent przyspieszenia, [0~100]
+    * @param [in] max_dis Maksymalny kąt pojedynczego ruchu punktowego, jednostka [°] lub odległość, jednostka [mm]
+    * @return Kod błędu 
     */ 
     int StartJOG(int refType, int nb, int dir, double vel, double acc, double max_dis);
 
-jog点动减速停止
-+++++++++++++++++++++++++++++
+Zatrzymanie jog z redukcją prędkości
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief  jog点动减速停止
-    * @param  [in]  stopType  1-关节点动停止，3-基坐标系下点动停止，5-工具坐标系下点动停止，9-工件坐标系下点动停止
-    * @return  错误码
+    * @brief  Zatrzymanie jog z redukcją prędkości
+    * @param  [in]  stopType  1-zatrzymanie jog przegubów, 3-zatrzymanie jog w układzie bazowym, 5-zatrzymanie jog w układzie narzędzia, 9-zatrzymanie jog w układzie przedmiotu
+    * @return  Kod błędu
     */
     int StopJOG(int stopType);
 
-jog点动立即停止
-+++++++++++++++++++++++++++++
+Natychmiastowe zatrzymanie jog
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief jog点动立即停止
-    * @return  错误码
+    * @brief Natychmiastowe zatrzymanie jog
+    * @return  Kod błędu
     */
     int ImmStopJOG(); 
 
-机器人点动控制代码示例
-+++++++++++++++++++++++++++++
+Przykład kodu sterowania punktowego robotem
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
@@ -86,477 +90,493 @@ jog点动立即停止
         return 0;
     }
 
-关节空间运动
-+++++++++++++++++++++++++++++
+Ruch w przestrzeni przegubów
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief  关节空间运动
-    * @param  [in] joint_pos  目标关节位置,单位deg
-    * @param  [in] desc_pos  目标笛卡尔位姿
-    * @param  [in] tool  工具坐标号，范围[0~14]
-    * @param  [in] user  工件坐标号，范围[0~14]
-    * @param  [in] vel  速度百分比，范围[0~100]
-    * @param  [in] acc  加速度百分比，范围[0~100],暂不开放
-    * @param  [in] ovl  速度缩放因子，范围[0~100]
-    * @param  [in] epos  扩展轴位置，单位mm
-    * @param  [in] blendT [-1.0]-运动到位(阻塞)，[0~500.0]-平滑时间(非阻塞)，单位ms
-    * @param  [in] offset_flag  0-不偏移，1-基坐标系/工件坐标系下偏移，2-工具坐标系下偏移
-    * @param  [in] offset_pos  位姿偏移量
-    * @return  错误码
+    * @brief  Ruch w przestrzeni przegubów
+    * @param  [in] joint_pos  Docelowa pozycja przegubów, jednostka deg
+    * @param  [in] desc_pos  Docelowa poza kartezjańska
+    * @param  [in] tool  Numer narzędzia, zakres [0~14]
+    * @param  [in] user  Numer przedmiotu, zakres [0~14]
+    * @param  [in] vel  Procent prędkości, zakres [0~100]
+    * @param  [in] acc  Procent przyspieszenia, zakres [0~100], tymczasowo niedostępne
+    * @param  [in] ovl  Współczynnik skalowania prędkości, zakres [0~100]
+    * @param  [in] epos  Pozycja osi rozszerzenia, jednostka mm
+    * @param  [in] blendT [-1.0]-ruch do pozycji (blokujący), [0~500.0]-czas wygładzania (nieblokujący), jednostka ms
+    * @param  [in] offset_flag  0-brak przesunięcia, 1-przesunięcie w układzie bazowym/układzie przedmiotu, 2-przesunięcie w układzie narzędzia
+    * @param  [in] offset_pos  Wartość przesunięcia pozy
+    * @return  Kod błędu
     */
     int MoveJ(JointPos joint_pos, DescPose desc_pos, int tool, int user, double vel, double acc, double ovl, ExaxisPos epos, double blendT, int offset_flag, DescPose offset_pos);
 
-关节空间运动(自动正运动学计算)
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Ruch w przestrzeni przegubów (automatyczne obliczenia kinematyki prostej)
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. versionadded:: Java SDK-v1.0.8-3.8.5
 
 .. code-block:: Java
     :linenos:
 
     /** 
-    * @brief  关节空间运动(自动正运动学计算)
-    * @param  [in] joint_pos  目标关节位置,单位deg
-    * @param  [in] tool  工具坐标号，范围[0~14]
-    * @param  [in] user  工件坐标号，范围[0~14]
-    * @param  [in] vel  速度百分比，范围[0~100]
-    * @param  [in] acc  加速度百分比，范围[0~100],暂不开放
-    * @param  [in] ovl  速度缩放因子，范围[0~100]
-    * @param  [in] epos  扩展轴位置，单位mm
-    * @param  [in] blendT [-1.0]-运动到位(阻塞)，[0~500.0]-平滑时间(非阻塞)，单位ms
-    * @param  [in] offset_flag  0-不偏移，1-基坐标系/工件坐标系下偏移，2-工具坐标系下偏移
-    * @param  [in] offset_pos  位姿偏移量
-    * @return 错误码 
+    * @brief  Ruch w przestrzeni przegubów (automatyczne obliczenia kinematyki prostej)
+    * @param  [in] joint_pos  Docelowa pozycja przegubów, jednostka deg
+    * @param  [in] tool  Numer narzędzia, zakres [0~14]
+    * @param  [in] user  Numer przedmiotu, zakres [0~14]
+    * @param  [in] vel  Procent prędkości, zakres [0~100]
+    * @param  [in] acc  Procent przyspieszenia, zakres [0~100], tymczasowo niedostępne
+    * @param  [in] ovl  Współczynnik skalowania prędkości, zakres [0~100]
+    * @param  [in] epos  Pozycja osi rozszerzenia, jednostka mm
+    * @param  [in] blendT [-1.0]-ruch do pozycji (blokujący), [0~500.0]-czas wygładzania (nieblokujący), jednostka ms
+    * @param  [in] offset_flag  0-brak przesunięcia, 1-przesunięcie w układzie bazowym/układzie przedmiotu, 2-przesunięcie w układzie narzędzia
+    * @param  [in] offset_pos  Wartość przesunięcia pozy
+    * @return  Kod błędu 
     */ 
     int MoveJ(JointPos joint_pos, int tool, int user, double vel, double acc, double ovl, ExaxisPos epos, double blendT, int offset_flag, DescPose offset_pos)
 
-笛卡尔空间直线运动
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Ruch liniowy w przestrzeni kartezjańskiej
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. versionchanged:: Java SDK-v1.0.5-3.8.2
 
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief  笛卡尔空间直线运动(重载函数1 增加blendMode)
-    * @param  joint_pos  目标关节位置,单位deg
-    * @param  desc_pos   目标笛卡尔位姿
-    * @param  tool  工具坐标号，范围[1~15]
-    * @param  user  工件坐标号，范围[1~15]
-    * @param  vel  速度百分比，范围[0~100]
-    * @param  acc  加速度百分比，范围[0~100],暂不开放
-    * @param  ovl  速度缩放因子[0~100]/物理速度(mm/s)
-    * @param  blendR [-1.0]-运动到位(阻塞)，[0~1000.0]-平滑半径(非阻塞)，单位mm
-    * @param  blendMode 过渡方式；0-内切过渡；1-角点过渡
-    * @param  epos  扩展轴位置，单位mm
-    * @param  search  0-不焊丝寻位，1-焊丝寻位
-    * @param  offset_flag  0-不偏移，1-基坐标系/工件坐标系下偏移，2-工具坐标系下偏移
-    * @param  offset_pos  位姿偏移量
-    * @param  oacc 加速度缩放因子[0-100]/物理加速度(mm/s2)
-    * @param  velAccParamMode 速度加速度参数模式；0-百分比；1-物理速度(mm/s)加速度(mm/s2)
-    * @param  overSpeedStrategy  超速处理策略，1-标准；2-超速时报错停止；3-自适应降速，默认为0
-    * @param  speedPercent  允许降速阈值百分比[0-100]，默认10%
-    * @return  错误码
+    * @brief  Ruch liniowy w przestrzeni kartezjańskiej (przeciążona funkcja 1 z dodanym blendMode)
+    * @param  joint_pos  Docelowa pozycja przegubów, jednostka deg
+    * @param  desc_pos   Docelowa poza kartezjańska
+    * @param  tool  Numer narzędzia, zakres [1~15]
+    * @param  user  Numer przedmiotu, zakres [1~15]
+    * @param  vel  Procent prędkości, zakres [0~100]
+    * @param  acc  Procent przyspieszenia, zakres [0~100], tymczasowo niedostępne
+    * @param  ovl  Współczynnik skalowania prędkości [0~100]/prędkość fizyczna (mm/s)
+    * @param  blendR [-1.0]-ruch do pozycji (blokujący), [0~1000.0]-promień wygładzania (nieblokujący), jednostka mm
+    * @param  blendMode Sposób przejścia; 0-przejście styczne wewnętrznie; 1-przejście narożne
+    * @param  epos  Pozycja osi rozszerzenia, jednostka mm
+    * @param  search  0-brak poszukiwania pozycji drutu, 1-poszukiwanie pozycji drutu
+    * @param  offset_flag  0-brak przesunięcia, 1-przesunięcie w układzie bazowym/układzie przedmiotu, 2-przesunięcie w układzie narzędzia
+    * @param  offset_pos  Wartość przesunięcia pozy
+    * @param  oacc Współczynnik skalowania przyspieszenia [0-100]/przyspieszenie fizyczne (mm/s2)
+    * @param  velAccParamMode Tryb parametrów prędkości i przyspieszenia; 0-procentowy; 1-prędkość fizyczna (mm/s) przyspieszenie (mm/s2)
+    * @param  overSpeedStrategy  Strategia przekroczenia prędkości, 1-standardowa; 2-zatrzymanie z błędem przy przekroczeniu prędkości; 3-adaptacyjne zmniejszenie prędkości, domyślnie 0
+    * @param  speedPercent  Procentowy próg dopuszczalnego zmniejszenia prędkości [0-100], domyślnie 10%
+    * @return  Kod błędu
     */
     public int MoveL(JointPos joint_pos, DescPose desc_pos, int tool, int user, double vel, double acc, double ovl, double blendR, int blendMode, ExaxisPos epos, int search, int offset_flag, DescPose offset_pos, double oacc,int velAccParamMode, int overSpeedStrategy, int speedPercent)
 
-笛卡尔空间直线运动(自动逆运动学计算)
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Ruch liniowy w przestrzeni kartezjańskiej (automatyczne obliczenia kinematyki odwrotnej)
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. versionadded:: Java SDK-v1.0.8-3.8.5
 
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief  笛卡尔空间直线运动(自动逆运动学计算)
-    * @param [in] desc_pos   目标笛卡尔位姿
-    * @param [in] tool  工具坐标号，范围[1~15]
-    * @param [in] user  工件坐标号，范围[1~15]
-    * @param [in] vel  速度百分比，范围[0~100]
-    * @param [in] acc  加速度百分比，范围[0~100],暂不开放
-    * @param [in] ovl  速度缩放因子，范围[0~100]
-    * @param [in] blendR [-1.0]-运动到位(阻塞)，[0~1000.0]-平滑半径(非阻塞)，单位mm
-    * @param [in] blendMode 过渡方式；0-内切过渡；1-角点过渡
-    * @param [in] epos  扩展轴位置，单位mm
-    * @param [in] search  0-不焊丝寻位，1-焊丝寻位
-    * @param [in] offset_flag  0-不偏移，1-基坐标系/工件坐标系下偏移，2-工具坐标系下偏移
-    * @param [in] offset_pos  位姿偏移量
-    * @param [in] config 逆解关节空间配置，[-1]-参考当前关节位置解算，[0~7]-依据特定关节空间配置求解
-    * @param [in] overSpeedStrategy  超速处理策略，1-标准；2-超速时报错停止；3-自适应降速，默认为0
-    * @param [in] speedPercent  允许降速阈值百分比[0-100]，默认10%
-    * @return  错误码
+    * @brief  Ruch liniowy w przestrzeni kartezjańskiej (automatyczne obliczenia kinematyki odwrotnej)
+    * @param [in] desc_pos   Docelowa poza kartezjańska
+    * @param [in] tool  Numer narzędzia, zakres [1~15]
+    * @param [in] user  Numer przedmiotu, zakres [1~15]
+    * @param [in] vel  Procent prędkości, zakres [0~100]
+    * @param [in] acc  Procent przyspieszenia, zakres [0~100], tymczasowo niedostępne
+    * @param [in] ovl  Współczynnik skalowania prędkości, zakres [0~100]
+    * @param [in] blendR [-1.0]-ruch do pozycji (blokujący), [0~1000.0]-promień wygładzania (nieblokujący), jednostka mm
+    * @param [in] blendMode Sposób przejścia; 0-przejście styczne wewnętrznie; 1-przejście narożne
+    * @param [in] epos  Pozycja osi rozszerzenia, jednostka mm
+    * @param [in] search  0-brak poszukiwania pozycji drutu, 1-poszukiwanie pozycji drutu
+    * @param [in] offset_flag  0-brak przesunięcia, 1-przesunięcie w układzie bazowym/układzie przedmiotu, 2-przesunięcie w układzie narzędzia
+    * @param [in] offset_pos  Wartość przesunięcia pozy
+    * @param [in] config Konfiguracja przestrzeni przegubów dla kinematyki odwrotnej, [-1]-obliczenia względem bieżącej pozycji przegubów, [0~7]-obliczenia według określonej konfiguracji przestrzeni przegubów
+    * @param [in] overSpeedStrategy  Strategia przekroczenia prędkości, 1-standardowa; 2-zatrzymanie z błędem przy przekroczeniu prędkości; 3-adaptacyjne zmniejszenie prędkości, domyślnie 0
+    * @param [in] speedPercent  Procentowy próg dopuszczalnego zmniejszenia prędkości [0-100], domyślnie 10%
+    * @return  Kod błędu
     */
     int MoveL(DescPose desc_pos, int tool, int user, double vel, double acc, double ovl, double blendR, int blendMode, ExaxisPos epos, int search, int offset_flag, DescPose offset_pos, int config, int overSpeedStrategy, int speedPercent)
 
-笛卡尔空间直线运动（增加速度加速度参数模式velAccParamMode参数）
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Ruch liniowy w przestrzeni kartezjańskiej (z dodanym parametrem trybu parametrów prędkości i przyspieszenia velAccParamMode)
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. versionadded:: Java SDK-v1.0.8-3.8.5
 
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief  笛卡尔空间直线运动（增加速度加速度参数模式velAccParamMode参数）
-    * @param  [in] joint_pos  目标关节位置,单位deg
-    * @param  [in] desc_pos   目标笛卡尔位姿
-    * @param  [in] tool  工具坐标号，范围[1~15]
-    * @param  [in] user  工件坐标号，范围[1~15]
-    * @param  [in] vel  速度百分比，范围[0~100]
-    * @param  [in] acc  加速度百分比，范围[0~100],暂不开放
-    * @param  [in] ovl  速度缩放因子，范围[0~100]
-    * @param  [in] blendR [-1.0]-运动到位(阻塞)，[0~1000.0]-平滑半径(非阻塞)，单位mm
-    * @param  [in] epos  扩展轴位置，单位mm
-    * @param  [in] search  0-不焊丝寻位，1-焊丝寻位
-    * @param  [in] offset_flag  0-不偏移，1-基坐标系/工件坐标系下偏移，2-工具坐标系下偏移
-    * @param  [in] offset_pos  位姿偏移量
-    * @param  [in] velAccParamMode 速度加速度参数模式；0-百分比；1-物理速度(mm/s)加速度(mm/s2)
-    * @param  [in] overSpeedStrategy  超速处理策略，1-标准；2-超速时报错停止；3-自适应降速，默认为0
-    * @param  [in] speedPercent  允许降速阈值百分比[0-100]，默认10%
-    * @return  错误码
+    * @brief  Ruch liniowy w przestrzeni kartezjańskiej (z dodanym parametrem trybu parametrów prędkości i przyspieszenia velAccParamMode)
+    * @param  [in] joint_pos  Docelowa pozycja przegubów, jednostka deg
+    * @param  [in] desc_pos   Docelowa poza kartezjańska
+    * @param  [in] tool  Numer narzędzia, zakres [1~15]
+    * @param  [in] user  Numer przedmiotu, zakres [1~15]
+    * @param  [in] vel  Procent prędkości, zakres [0~100]
+    * @param  [in] acc  Procent przyspieszenia, zakres [0~100], tymczasowo niedostępne
+    * @param  [in] ovl  Współczynnik skalowania prędkości, zakres [0~100]
+    * @param  [in] blendR [-1.0]-ruch do pozycji (blokujący), [0~1000.0]-promień wygładzania (nieblokujący), jednostka mm
+    * @param  [in] epos  Pozycja osi rozszerzenia, jednostka mm
+    * @param  [in] search  0-brak poszukiwania pozycji drutu, 1-poszukiwanie pozycji drutu
+    * @param  [in] offset_flag  0-brak przesunięcia, 1-przesunięcie w układzie bazowym/układzie przedmiotu, 2-przesunięcie w układzie narzędzia
+    * @param  [in] offset_pos  Wartość przesunięcia pozy
+    * @param  [in] velAccParamMode Tryb parametrów prędkości i przyspieszenia; 0-procentowy; 1-prędkość fizyczna (mm/s) przyspieszenie (mm/s2)
+    * @param  [in] overSpeedStrategy  Strategia przekroczenia prędkości, 1-standardowa; 2-zatrzymanie z błędem przy przekroczeniu prędkości; 3-adaptacyjne zmniejszenie prędkości, domyślnie 0
+    * @param  [in] speedPercent  Procentowy próg dopuszczalnego zmniejszenia prędkości [0-100], domyślnie 10%
+    * @return  Kod błędu
     */
     public int MoveL(JointPos joint_pos, DescPose desc_pos, int tool, int user, double vel, double acc, double ovl, double blendR, ExaxisPos epos, int search, int offset_flag, DescPose offset_pos, int velAccParamMode, int overSpeedStrategy, int speedPercent)
 
-笛卡尔空间直线运动(重载函数1 增加blendMode)
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Ruch liniowy w przestrzeni kartezjańskiej (przeciążona funkcja 1 z dodanym blendMode)
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. versionadded:: Java SDK-v1.0.8-3.8.5
 
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief  笛卡尔空间直线运动(重载函数1 增加blendMode)
-    * @param  [in] joint_pos  目标关节位置,单位deg
-    * @param  [in] desc_pos   目标笛卡尔位姿
-    * @param  [in] tool  工具坐标号，范围[1~15]
-    * @param  [in] user  工件坐标号，范围[1~15]
-    * @param  [in] vel  速度百分比，范围[0~100]
-    * @param  [in] acc  加速度百分比，范围[0~100],暂不开放
-    * @param  [in] ovl  速度缩放因子，范围[0~100]
-    * @param  [in] blendR [-1.0]-运动到位(阻塞)，[0~1000.0]-平滑半径(非阻塞)，单位mm
-    * @param  [in] blendMode 过渡方式；0-内切过渡；1-角点过渡
-    * @param  [in] epos  扩展轴位置，单位mm
-    * @param  [in] search  0-不焊丝寻位，1-焊丝寻位
-    * @param  [in] offset_flag  0-不偏移，1-基坐标系/工件坐标系下偏移，2-工具坐标系下偏移
-    * @param  [in] offset_pos  位姿偏移量
-    * @param  [in] velAccParamMode 速度加速度参数模式；0-百分比；1-物理速度(mm/s)加速度(mm/s2)
-    * @param  [in] overSpeedStrategy  超速处理策略，1-标准；2-超速时报错停止；3-自适应降速，默认为0
-    * @param  [in] speedPercent  允许降速阈值百分比[0-100]，默认10%
-    * @return  错误码
+    * @brief  Ruch liniowy w przestrzeni kartezjańskiej (przeciążona funkcja 1 z dodanym blendMode)
+    * @param  [in] joint_pos  Docelowa pozycja przegubów, jednostka deg
+    * @param  [in] desc_pos   Docelowa poza kartezjańska
+    * @param  [in] tool  Numer narzędzia, zakres [1~15]
+    * @param  [in] user  Numer przedmiotu, zakres [1~15]
+    * @param  [in] vel  Procent prędkości, zakres [0~100]
+    * @param  [in] acc  Procent przyspieszenia, zakres [0~100], tymczasowo niedostępne
+    * @param  [in] ovl  Współczynnik skalowania prędkości, zakres [0~100]
+    * @param  [in] blendR [-1.0]-ruch do pozycji (blokujący), [0~1000.0]-promień wygładzania (nieblokujący), jednostka mm
+    * @param  [in] blendMode Sposób przejścia; 0-przejście styczne wewnętrznie; 1-przejście narożne
+    * @param  [in] epos  Pozycja osi rozszerzenia, jednostka mm
+    * @param  [in] search  0-brak poszukiwania pozycji drutu, 1-poszukiwanie pozycji drutu
+    * @param  [in] offset_flag  0-brak przesunięcia, 1-przesunięcie w układzie bazowym/układzie przedmiotu, 2-przesunięcie w układzie narzędzia
+    * @param  [in] offset_pos  Wartość przesunięcia pozy
+    * @param  [in] velAccParamMode Tryb parametrów prędkości i przyspieszenia; 0-procentowy; 1-prędkość fizyczna (mm/s) przyspieszenie (mm/s2)
+    * @param  [in] overSpeedStrategy  Strategia przekroczenia prędkości, 1-standardowa; 2-zatrzymanie z błędem przy przekroczeniu prędkości; 3-adaptacyjne zmniejszenie prędkości, domyślnie 0
+    * @param  [in] speedPercent  Procentowy próg dopuszczalnego zmniejszenia prędkości [0-100], domyślnie 10%
+    * @return  Kod błędu
     */
     public int MoveL(JointPos joint_pos, DescPose desc_pos, int tool, int user, double vel, double acc, double ovl, double blendR, int blendMode, ExaxisPos epos, int search, int offset_flag, DescPose offset_pos, int velAccParamMode, int overSpeedStrategy, int speedPercent)
 
-笛卡尔空间直线运动(重载函数2 不需要输入关节位置)
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Ruch liniowy w przestrzeni kartezjańskiej (przeciążona funkcja 2 bez konieczności podawania pozycji przegubów)
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. versionadded:: Java SDK-v1.0.8-3.8.5
 
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief  笛卡尔空间直线运动(重载函数2 不需要输入关节位置)
-    * @param  [in] desc_pos   目标笛卡尔位姿
-    * @param  [in] tool  工具坐标号，范围[1~15]
-    * @param  [in] user  工件坐标号，范围[1~15]
-    * @param  [in] vel  速度百分比，范围[0~100]
-    * @param  [in] acc  加速度百分比，范围[0~100],暂不开放
-    * @param  [in] ovl  速度缩放因子，范围[0~100]
-    * @param  [in] blendR [-1.0]-运动到位(阻塞)，[0~1000.0]-平滑半径(非阻塞)，单位mm
-    * @param  [in] blendMode 过渡方式；0-内切过渡；1-角点过渡
-    * @param  [in] epos  扩展轴位置，单位mm
-    * @param  [in] search  0-不焊丝寻位，1-焊丝寻位
-    * @param  [in] offset_flag  0-不偏移，1-基坐标系/工件坐标系下偏移，2-工具坐标系下偏移
-    * @param  [in] offset_pos  位姿偏移量
-    * @param  [in] config 逆解关节空间配置，[-1]-参考当前关节位置解算，[0~7]-依据特定关节空间配置求解
-    * @param  [in] velAccParamMode 速度加速度参数模式；0-百分比；1-物理速度(mm/s)加速度(mm/s2)
-    * @param  [in] overSpeedStrategy  超速处理策略，1-标准；2-超速时报错停止；3-自适应降速，默认为0
-    * @param  [in] speedPercent  允许降速阈值百分比[0-100]，默认10%
-    * @return  错误码
+    * @brief  Ruch liniowy w przestrzeni kartezjańskiej (przeciążona funkcja 2 bez konieczności podawania pozycji przegubów)
+    * @param  [in] desc_pos   Docelowa poza kartezjańska
+    * @param  [in] tool  Numer narzędzia, zakres [1~15]
+    * @param  [in] user  Numer przedmiotu, zakres [1~15]
+    * @param  [in] vel  Procent prędkości, zakres [0~100]
+    * @param  [in] acc  Procent przyspieszenia, zakres [0~100], tymczasowo niedostępne
+    * @param  [in] ovl  Współczynnik skalowania prędkości, zakres [0~100]
+    * @param  [in] blendR [-1.0]-ruch do pozycji (blokujący), [0~1000.0]-promień wygładzania (nieblokujący), jednostka mm
+    * @param  [in] blendMode Sposób przejścia; 0-przejście styczne wewnętrznie; 1-przejście narożne
+    * @param  [in] epos  Pozycja osi rozszerzenia, jednostka mm
+    * @param  [in] search  0-brak poszukiwania pozycji drutu, 1-poszukiwanie pozycji drutu
+    * @param  [in] offset_flag  0-brak przesunięcia, 1-przesunięcie w układzie bazowym/układzie przedmiotu, 2-przesunięcie w układzie narzędzia
+    * @param  [in] offset_pos  Wartość przesunięcia pozy
+    * @param  [in] config Konfiguracja przestrzeni przegubów dla kinematyki odwrotnej, [-1]-obliczenia względem bieżącej pozycji przegubów, [0~7]-obliczenia według określonej konfiguracji przestrzeni przegubów
+    * @param  [in] velAccParamMode Tryb parametrów prędkości i przyspieszenia; 0-procentowy; 1-prędkość fizyczna (mm/s) przyspieszenie (mm/s2)
+    * @param  [in] overSpeedStrategy  Strategia przekroczenia prędkości, 1-standardowa; 2-zatrzymanie z błędem przy przekroczeniu prędkości; 3-adaptacyjne zmniejszenie prędkości, domyślnie 0
+    * @param  [in] speedPercent  Procentowy próg dopuszczalnego zmniejszenia prędkości [0-100], domyślnie 10%
+    * @return  Kod błędu
     */
     public int MoveL(DescPose desc_pos, int tool, int user, double vel, double acc, double ovl, double blendR, int blendMode, ExaxisPos epos, int search, int offset_flag, DescPose offset_pos, int config, int velAccParamMode, int overSpeedStrategy, int speedPercent)
 
-笛卡尔空间圆弧运动
-+++++++++++++++++++++++++++++++++++++++++++
+Ruch po łuku w przestrzeni kartezjańskiej
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief  笛卡尔空间圆弧运动
-    * @param  joint_pos_p  路径点关节位置,单位deg
-    * @param  desc_pos_p   路径点笛卡尔位姿
-    * @param  ptool  工具坐标号，范围[1~15]
-    * @param  puser  工件坐标号，范围[1~15]
-    * @param  pvel  速度百分比，范围[0~100]
-    * @param  pacc  加速度百分比，范围[0~100],暂不开放
-    * @param  epos_p  扩展轴位置，单位mm
-    * @param  poffset_flag  0-不偏移，1-基坐标系/工件坐标系下偏移，2-工具坐标系下偏移
-    * @param  offset_pos_p  位姿偏移量
-    * @param  joint_pos_t  目标点关节位置,单位deg
-    * @param  desc_pos_t   目标点笛卡尔位姿
-    * @param  ttool  工具坐标号，范围[1~15]
-    * @param  tuser  工件坐标号，范围[1~15]
-    * @param  tvel  速度百分比，范围[0~100]
-    * @param  tacc  加速度百分比，范围[0~100],暂不开放
-    * @param  epos_t  扩展轴位置，单位mm
-    * @param  toffset_flag  0-不偏移，1-基坐标系/工件坐标系下偏移，2-工具坐标系下偏移
-    * @param  offset_pos_t  位姿偏移量
-    * @param  ovl  速度缩放因子[0~100]/物理速度(mm/s)
-    * @param  blendR [-1.0]-运动到位(阻塞)，[0~1000.0]-平滑半径(非阻塞)，单位mm
-    * @param  oacc 加速度缩放因子[0-100]/物理加速度(mm/s2)
-    * @param  velAccParamMode 速度加速度参数模式；0-百分比；1-物理速度(mm/s)加速度(mm/s2)
-    * @return  错误码
+    * @brief  Ruch po łuku w przestrzeni kartezjańskiej
+    * @param  joint_pos_p  Pozycja przegubów punktu pośredniego, jednostka deg
+    * @param  desc_pos_p   Pozycja kartezjańska punktu pośredniego
+    * @param  ptool  Numer narzędzia, zakres [1~15]
+    * @param  puser  Numer przedmiotu, zakres [1~15]
+    * @param  pvel  Procent prędkości, zakres [0~100]
+    * @param  pacc  Procent przyspieszenia, zakres [0~100], tymczasowo niedostępne
+    * @param  epos_p  Pozycja osi rozszerzenia, jednostka mm
+    * @param  poffset_flag  0-brak przesunięcia, 1-przesunięcie w układzie bazowym/układzie przedmiotu, 2-przesunięcie w układzie narzędzia
+    * @param  offset_pos_p  Wartość przesunięcia pozy
+    * @param  joint_pos_t  Pozycja przegubów punktu docelowego, jednostka deg
+    * @param  desc_pos_t   Pozycja kartezjańska punktu docelowego
+    * @param  ttool  Numer narzędzia, zakres [1~15]
+    * @param  tuser  Numer przedmiotu, zakres [1~15]
+    * @param  tvel  Procent prędkości, zakres [0~100]
+    * @param  tacc  Procent przyspieszenia, zakres [0~100], tymczasowo niedostępne
+    * @param  epos_t  Pozycja osi rozszerzenia, jednostka mm
+    * @param  toffset_flag  0-brak przesunięcia, 1-przesunięcie w układzie bazowym/układzie przedmiotu, 2-przesunięcie w układzie narzędzia
+    * @param  offset_pos_t  Wartość przesunięcia pozy
+    * @param  ovl  Współczynnik skalowania prędkości [0~100]/prędkość fizyczna (mm/s)
+    * @param  blendR [-1.0]-ruch do pozycji (blokujący), [0~1000.0]-promień wygładzania (nieblokujący), jednostka mm
+    * @param  oacc Współczynnik skalowania przyspieszenia [0-100]/przyspieszenie fizyczne (mm/s2)
+    * @param  velAccParamMode Tryb parametrów prędkości i przyspieszenia; 0-procentowy; 1-prędkość fizyczna (mm/s) przyspieszenie (mm/s2)
+    * @return  Kod błędu
     */
     public int MoveC(JointPos joint_pos_p, DescPose desc_pos_p, int ptool, int puser, double pvel, double pacc, ExaxisPos epos_p, int poffset_flag, DescPose offset_pos_p, JointPos joint_pos_t, DescPose desc_pos_t, int ttool, int tuser, double tvel, double tacc, ExaxisPos epos_t, int toffset_flag, DescPose offset_pos_t, double ovl, double blendR, double oacc,int velAccParamMode)
 
-笛卡尔空间圆弧运动(自动逆运动学计算)
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Ruch po łuku w przestrzeni kartezjańskiej (automatyczne obliczenia kinematyki odwrotnej)
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. versionadded:: Java SDK-v1.0.8-3.8.5
 
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief  笛卡尔空间圆弧运动(自动逆运动学计算)
-    * @param [in] desc_pos_p   路径点笛卡尔位姿
-    * @param [in] ptool  工具坐标号，范围[1~15]
-    * @param [in] puser  工件坐标号，范围[1~15]
-    * @param [in] pvel  速度百分比，范围[0~100]
-    * @param [in] pacc  加速度百分比，范围[0~100],暂不开放
-    * @param [in] epos_p  扩展轴位置，单位mm
-    * @param [in] poffset_flag  0-不偏移，1-基坐标系/工件坐标系下偏移，2-工具坐标系下偏移
-    * @param [in] offset_pos_p  位姿偏移量
-    * @param [in] desc_pos_t   目标点笛卡尔位姿
-    * @param [in] ttool  工具坐标号，范围[1~15]
-    * @param [in] tuser  工件坐标号，范围[1~15]
-    * @param [in] tvel  速度百分比，范围[0~100]
-    * @param [in] tacc  加速度百分比，范围[0~100],暂不开放
-    * @param [in] epos_t  扩展轴位置，单位mm
-    * @param [in] toffset_flag  0-不偏移，1-基坐标系/工件坐标系下偏移，2-工具坐标系下偏移
-    * @param [in] offset_pos_t  位姿偏移量
-    * @param [in] ovl  速度缩放因子，范围[0~100]
-    * @param [in] blendR [-1.0]-运动到位(阻塞)，[0~1000.0]-平滑半径(非阻塞)，单位mm
-    * @param [in] config 逆解关节空间配置，[-1]-参考当前关节位置解算，[0~7]-依据特定关节空间配置求解
-    * @return  错误码
+    * @brief  Ruch po łuku w przestrzeni kartezjańskiej (automatyczne obliczenia kinematyki odwrotnej)
+    * @param [in] desc_pos_p   Pozycja kartezjańska punktu pośredniego
+    * @param [in] ptool  Numer narzędzia, zakres [1~15]
+    * @param [in] puser  Numer przedmiotu, zakres [1~15]
+    * @param [in] pvel  Procent prędkości, zakres [0~100]
+    * @param [in] pacc  Procent przyspieszenia, zakres [0~100], tymczasowo niedostępne
+    * @param [in] epos_p  Pozycja osi rozszerzenia, jednostka mm
+    * @param [in] poffset_flag  0-brak przesunięcia, 1-przesunięcie w układzie bazowym/układzie przedmiotu, 2-przesunięcie w układzie narzędzia
+    * @param [in] offset_pos_p  Wartość przesunięcia pozy
+    * @param [in] desc_pos_t   Pozycja kartezjańska punktu docelowego
+    * @param [in] ttool  Numer narzędzia, zakres [1~15]
+    * @param [in] tuser  Numer przedmiotu, zakres [1~15]
+    * @param [in] tvel  Procent prędkości, zakres [0~100]
+    * @param [in] tacc  Procent przyspieszenia, zakres [0~100], tymczasowo niedostępne
+    * @param [in] epos_t  Pozycja osi rozszerzenia, jednostka mm
+    * @param [in] toffset_flag  0-brak przesunięcia, 1-przesunięcie w układzie bazowym/układzie przedmiotu, 2-przesunięcie w układzie narzędzia
+    * @param [in] offset_pos_t  Wartość przesunięcia pozy
+    * @param [in] ovl  Współczynnik skalowania prędkości, zakres [0~100]
+    * @param [in] blendR [-1.0]-ruch do pozycji (blokujący), [0~1000.0]-promień wygładzania (nieblokujący), jednostka mm
+    * @param [in] config Konfiguracja przestrzeni przegubów dla kinematyki odwrotnej, [-1]-obliczenia względem bieżącej pozycji przegubów, [0~7]-obliczenia według określonej konfiguracji przestrzeni przegubów
+    * @return  Kod błędu
     */
     int MoveC(DescPose desc_pos_p, int ptool, int puser, double pvel, double pacc, ExaxisPos epos_p, int poffset_flag, DescPose offset_pos_p, DescPose desc_pos_t, int ttool, int tuser, double tvel, double tacc, ExaxisPos epos_t, int toffset_flag, DescPose offset_pos_t, double ovl, double blendR, int config)
 
-笛卡尔空间圆弧运动(增加速度加速度参数模式velAccParamMode参数)
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Ruch po łuku w przestrzeni kartezjańskiej (z dodanym parametrem trybu parametrów prędkości i przyspieszenia velAccParamMode)
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. versionadded:: Java SDK-v1.0.8-3.8.5
 
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief  笛卡尔空间圆弧运动(增加速度加速度参数模式velAccParamMode参数)
-    * @param  [in] joint_pos_p  路径点关节位置,单位deg
-    * @param  [in] desc_pos_p   路径点笛卡尔位姿
-    * @param  [in] ptool  工具坐标号，范围[1~15]
-    * @param  [in] puser  工件坐标号，范围[1~15]
-    * @param  [in] pvel  速度百分比，范围[0~100]
-    * @param  [in] pacc  加速度百分比，范围[0~100],暂不开放
-    * @param  [in] epos_p  扩展轴位置，单位mm
-    * @param  [in] poffset_flag  0-不偏移，1-基坐标系/工件坐标系下偏移，2-工具坐标系下偏移
-    * @param  [in] offset_pos_p  位姿偏移量
-    * @param  [in] joint_pos_t  目标点关节位置,单位deg
-    * @param  [in] desc_pos_t   目标点笛卡尔位姿
-    * @param  [in] ttool  工具坐标号，范围[1~15]
-    * @param  [in] tuser  工件坐标号，范围[1~15]
-    * @param  [in] tvel  速度百分比，范围[0~100]
-    * @param  [in] tacc  加速度百分比，范围[0~100],暂不开放
-    * @param  [in] epos_t  扩展轴位置，单位mm
-    * @param  [in] toffset_flag  0-不偏移，1-基坐标系/工件坐标系下偏移，2-工具坐标系下偏移
-    * @param  [in] offset_pos_t  位姿偏移量
-    * @param  [in] ovl  速度缩放因子，范围[0~100]
-    * @param  [in] blendR [-1.0]-运动到位(阻塞)，[0~1000.0]-平滑半径(非阻塞)，单位mm
-    * @param  [in] velAccParamMode 速度加速度参数模式；0-百分比；1-物理速度(mm/s)加速度(mm/s2)
-    * @return  错误码
+    * @brief  Ruch po łuku w przestrzeni kartezjańskiej (z dodanym parametrem trybu parametrów prędkości i przyspieszenia velAccParamMode)
+    * @param  [in] joint_pos_p  Pozycja przegubów punktu pośredniego, jednostka deg
+    * @param  [in] desc_pos_p   Pozycja kartezjańska punktu pośredniego
+    * @param  [in] ptool  Numer narzędzia, zakres [1~15]
+    * @param  [in] puser  Numer przedmiotu, zakres [1~15]
+    * @param  [in] pvel  Procent prędkości, zakres [0~100]
+    * @param  [in] pacc  Procent przyspieszenia, zakres [0~100], tymczasowo niedostępne
+    * @param  [in] epos_p  Pozycja osi rozszerzenia, jednostka mm
+    * @param  [in] poffset_flag  0-brak przesunięcia, 1-przesunięcie w układzie bazowym/układzie przedmiotu, 2-przesunięcie w układzie narzędzia
+    * @param  [in] offset_pos_p  Wartość przesunięcia pozy
+    * @param  [in] joint_pos_t  Pozycja przegubów punktu docelowego, jednostka deg
+    * @param  [in] desc_pos_t   Pozycja kartezjańska punktu docelowego
+    * @param  [in] ttool  Numer narzędzia, zakres [1~15]
+    * @param  [in] tuser  Numer przedmiotu, zakres [1~15]
+    * @param  [in] tvel  Procent prędkości, zakres [0~100]
+    * @param  [in] tacc  Procent przyspieszenia, zakres [0~100], tymczasowo niedostępne
+    * @param  [in] epos_t  Pozycja osi rozszerzenia, jednostka mm
+    * @param  [in] toffset_flag  0-brak przesunięcia, 1-przesunięcie w układzie bazowym/układzie przedmiotu, 2-przesunięcie w układzie narzędzia
+    * @param  [in] offset_pos_t  Wartość przesunięcia pozy
+    * @param  [in] ovl  Współczynnik skalowania prędkości, zakres [0~100]
+    * @param  [in] blendR [-1.0]-ruch do pozycji (blokujący), [0~1000.0]-promień wygładzania (nieblokujący), jednostka mm
+    * @param  [in] velAccParamMode Tryb parametrów prędkości i przyspieszenia; 0-procentowy; 1-prędkość fizyczna (mm/s) przyspieszenie (mm/s2)
+    * @return  Kod błędu
     */
     public int MoveC(JointPos joint_pos_p, DescPose desc_pos_p, int ptool, int puser, double pvel, double pacc, ExaxisPos epos_p, int poffset_flag, DescPose offset_pos_p, JointPos joint_pos_t, DescPose desc_pos_t, int ttool, int tuser, double tvel, double tacc, ExaxisPos epos_t, int toffset_flag, DescPose offset_pos_t, double ovl, double blendR, int velAccParamMode)
 
-笛卡尔空间圆弧运动(重载函数1 不需要输入关节位置)
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Ruch po łuku w przestrzeni kartezjańskiej (przeciążona funkcja 1 bez konieczności podawania pozycji przegubów)
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. versionadded:: Java SDK-v1.0.8-3.8.5
 
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief  笛卡尔空间圆弧运动 (重载函数1 不需要输入关节位置)
-    * @param  [in] desc_pos_p   路径点笛卡尔位姿
-    * @param  [in] ptool  工具坐标号，范围[1~15]
-    * @param  [in] puser  工件坐标号，范围[1~15]
-    * @param  [in] pvel  速度百分比，范围[0~100]
-    * @param  [in] pacc  加速度百分比，范围[0~100],暂不开放
-    * @param  [in] epos_p  扩展轴位置，单位mm
-    * @param  [in] poffset_flag  0-不偏移，1-基坐标系/工件坐标系下偏移，2-工具坐标系下偏移
-    * @param  [in] offset_pos_p  位姿偏移量
-    * @param  [in] desc_pos_t   目标点笛卡尔位姿
-    * @param  [in] ttool  工具坐标号，范围[1~15]
-    * @param  [in] tuser  工件坐标号，范围[1~15]
-    * @param  [in] tvel  速度百分比，范围[0~100]
-    * @param  [in] tacc  加速度百分比，范围[0~100],暂不开放
-    * @param  [in] epos_t  扩展轴位置，单位mm
-    * @param  [in] toffset_flag  0-不偏移，1-基坐标系/工件坐标系下偏移，2-工具坐标系下偏移
-    * @param  [in] offset_pos_t  位姿偏移量
-    * @param  [in] ovl  速度缩放因子，范围[0~100]
-    * @param  [in] blendR [-1.0]-运动到位(阻塞)，[0~1000.0]-平滑半径(非阻塞)，单位mm
-    * @param  [in] config 逆解关节空间配置，[-1]-参考当前关节位置解算，[0~7]-依据特定关节空间配置求解
-    * @param  [in] velAccParamMode 速度加速度参数模式；0-百分比；1-物理速度(mm/s)加速度(mm/s2)
-    * @return  错误码
+    * @brief  Ruch po łuku w przestrzeni kartezjańskiej (przeciążona funkcja 1 bez konieczności podawania pozycji przegubów)
+    * @param  [in] desc_pos_p   Pozycja kartezjańska punktu pośredniego    * @param  [in] ptool  Numer narzędzia, zakres [1~15]
+    * @param  [in] puser  Numer przedmiotu, zakres [1~15]
+    * @param  [in] pvel  Procent prędkości, zakres [0~100]
+    * @param  [in] pacc  Procent przyspieszenia, zakres [0~100], tymczasowo niedostępne
+    * @param  [in] epos_p  Pozycja osi rozszerzenia, jednostka mm
+    * @param  [in] poffset_flag  0-brak przesunięcia, 1-przesunięcie w układzie bazowym/układzie przedmiotu, 2-przesunięcie w układzie narzędzia
+    * @param  [in] offset_pos_p  Wartość przesunięcia pozy
+    * @param  [in] desc_pos_t   Pozycja kartezjańska punktu docelowego
+    * @param  [in] ttool  Numer narzędzia, zakres [1~15]
+    * @param  [in] tuser  Numer przedmiotu, zakres [1~15]
+    * @param  [in] tvel  Procent prędkości, zakres [0~100]
+    * @param  [in] tacc  Procent przyspieszenia, zakres [0~100], tymczasowo niedostępne
+    * @param  [in] epos_t  Pozycja osi rozszerzenia, jednostka mm
+    * @param  [in] toffset_flag  0-brak przesunięcia, 1-przesunięcie w układzie bazowym/układzie przedmiotu, 2-przesunięcie w układzie narzędzia
+    * @param  [in] offset_pos_t  Wartość przesunięcia pozy
+    * @param  [in] ovl  Współczynnik skalowania prędkości, zakres [0~100]
+    * @param  [in] blendR [-1.0]-ruch do pozycji (blokujący), [0~1000.0]-promień wygładzania (nieblokujący), jednostka mm
+    * @param  [in] config Konfiguracja przestrzeni przegubów dla kinematyki odwrotnej, [-1]-obliczenia względem bieżącej pozycji przegubów, [0~7]-obliczenia według określonej konfiguracji przestrzeni przegubów
+    * @param  [in] velAccParamMode Tryb parametrów prędkości i przyspieszenia; 0-procentowy; 1-prędkość fizyczna (mm/s) przyspieszenie (mm/s2)
+    * @return  Kod błędu
     */
     public int MoveC(DescPose desc_pos_p, int ptool, int puser, double pvel, double pacc, ExaxisPos epos_p, int poffset_flag, DescPose offset_pos_p, DescPose desc_pos_t, int ttool, int tuser, double tvel, double tacc, ExaxisPos epos_t, int toffset_flag, DescPose offset_pos_t, double ovl, double blendR, int config, int velAccParamMode)
 
-笛卡尔空间整圆运动
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Ruch po pełnym okręgu w przestrzeni kartezjańskiej
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. versionchanged:: Java SDK-v1.0.6-3.8.3
 
 .. code-block:: Java
     :linenos:
 
     /**
-    *@brief  笛卡尔空间整圆运动
-    *@param  joint_pos_p  路径点1关节位置,单位deg
-    *@param  desc_pos_p   路径点1笛卡尔位姿
-    *@param  ptool  工具坐标号，范围[1~15]
-    *@param  puser  工件坐标号，范围[1~15]
-    *@param  pvel  速度百分比，范围[0~100]
-    *@param  pacc  加速度百分比，范围[0~100],暂不开放
-    *@param  epos_p  扩展轴位置，单位mm
-    *@param  joint_pos_t  路径点2关节位置,单位deg
-    *@param  desc_pos_t   路径点2笛卡尔位姿
-    *@param  ttool  工具坐标号，范围[1~15]
-    *@param  tuser  工件坐标号，范围[1~15]
-    *@param  tvel  速度百分比，范围[0~100]
-    *@param  tacc  加速度百分比，范围[0~100],暂不开放
-    *@param  epos_t  扩展轴位置，单位mm
-    *@param  ovl  速度缩放因子[0~100]/物理速度(mm/s)
-    *@param  offset_flag  0-不偏移，1-基坐标系/工件坐标系下偏移，2-工具坐标系下偏移
-    *@param  offset_pos  位姿偏移量
-    *@param  oacc 加速度缩放因子[0-100]/物理加速度(mm/s2)
-    *@param  blendR -1：阻塞；0~1000：平滑半径
-    *@param  velAccParamMode 速度加速度参数模式；0-百分比；1-物理速度(mm/s)加速度(mm/s2)
-    *@return  错误码
+    *@brief  Ruch po pełnym okręgu w przestrzeni kartezjańskiej
+    *@param  joint_pos_p  Pozycja przegubów punktu pośredniego 1, jednostka deg
+    *@param  desc_pos_p   Pozycja kartezjańska punktu pośredniego 1
+    *@param  ptool  Numer narzędzia, zakres [1~15]
+    *@param  puser  Numer przedmiotu, zakres [1~15]
+    *@param  pvel  Procent prędkości, zakres [0~100]
+    *@param  pacc  Procent przyspieszenia, zakres [0~100], tymczasowo niedostępne
+    *@param  epos_p  Pozycja osi rozszerzenia, jednostka mm
+    *@param  joint_pos_t  Pozycja przegubów punktu pośredniego 2, jednostka deg
+    *@param  desc_pos_t   Pozycja kartezjańska punktu pośredniego 2
+    *@param  ttool  Numer narzędzia, zakres [1~15]
+    *@param  tuser  Numer przedmiotu, zakres [1~15]
+    *@param  tvel  Procent prędkości, zakres [0~100]
+    *@param  tacc  Procent przyspieszenia, zakres [0~100], tymczasowo niedostępne
+    *@param  epos_t  Pozycja osi rozszerzenia, jednostka mm
+    *@param  ovl  Współczynnik skalowania prędkości [0~100]/prędkość fizyczna (mm/s)
+    *@param  offset_flag  0-brak przesunięcia, 1-przesunięcie w układzie bazowym/układzie przedmiotu, 2-przesunięcie w układzie narzędzia
+    *@param  offset_pos  Wartość przesunięcia pozy
+    *@param  oacc Współczynnik skalowania przyspieszenia [0-100]/przyspieszenie fizyczne (mm/s2)
+    *@param  blendR -1: blokujący; 0~1000: promień wygładzania
+    *@param  velAccParamMode Tryb parametrów prędkości i przyspieszenia; 0-procentowy; 1-prędkość fizyczna (mm/s) przyspieszenie (mm/s2)
+    *@return  Kod błędu
     */
     public int Circle(JointPos joint_pos_p, DescPose desc_pos_p, int ptool, int puser, double pvel, double pacc, ExaxisPos epos_p, JointPos joint_pos_t, DescPose desc_pos_t, int ttool, int tuser, double tvel, double tacc, ExaxisPos epos_t, double ovl, int offset_flag, DescPose offset_pos, double oacc, double blendR, int velAccParamMode)
 
-笛卡尔空间整圆运动(自动逆运动学计算)
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Ruch po pełnym okręgu w przestrzeni kartezjańskiej (automatyczne obliczenia kinematyki odwrotnej)
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. versionadded:: Java SDK-v1.0.8-3.8.5
 
 .. code-block:: Java
     :linenos:
 
     /**
-     * @brief  笛卡尔空间整圆运动(自动逆运动学计算)
-     * @param  [in] desc_pos_p   路径点1笛卡尔位姿
-     * @param  [in] ptool  工具坐标号，范围[0~14]
-     * @param  [in] puser  工件坐标号，范围[0~14]
-     * @param  [in] pvel  速度百分比，范围[0~100]
-     * @param  [in] pacc  加速度百分比，范围[0~100],暂不开放
-     * @param  [in] epos_p  扩展轴位置，单位mm
-     * @param  [in] desc_pos_t   路径点2笛卡尔位姿
-     * @param  [in] ttool  工具坐标号，范围[0~14]
-     * @param  [in] tuser  工件坐标号，范围[0~14]
-     * @param  [in] tvel  速度百分比，范围[0~100]
-     * @param  [in] tacc  加速度百分比，范围[0~100],暂不开放
-     * @param  [in] epos_t  扩展轴位置，单位mm
-     * @param  [in] ovl  速度缩放因子，范围[0~100]
-     * @param  [in] offset_flag  0-不偏移，1-基坐标系/工件坐标系下偏移，2-工具坐标系下偏移
-     * @param  [in] offset_pos  位姿偏移量
-     * @param  [in] oacc 加速度百分比
-     * @param  [in] blendR -1：阻塞；0~1000：平滑半径
-     * @param  [in] config 逆解关节空间配置，[-1]-参考当前关节位置解算，[0~7]-依据特定关节空间配置求解
-     * @return  错误码
+     * @brief  Ruch po pełnym okręgu w przestrzeni kartezjańskiej (automatyczne obliczenia kinematyki odwrotnej)
+     * @param  [in] desc_pos_p   Pozycja kartezjańska punktu pośredniego 1
+     * @param  [in] ptool  Numer narzędzia, zakres [0~14]
+     * @param  [in] puser  Numer przedmiotu, zakres [0~14]
+     * @param  [in] pvel  Procent prędkości, zakres [0~100]
+     * @param  [in] pacc  Procent przyspieszenia, zakres [0~100], tymczasowo niedostępne
+     * @param  [in] epos_p  Pozycja osi rozszerzenia, jednostka mm
+     * @param  [in] desc_pos_t   Pozycja kartezjańska punktu pośredniego 2
+     * @param  [in] ttool  Numer narzędzia, zakres [0~14]
+     * @param  [in] tuser  Numer przedmiotu, zakres [0~14]
+     * @param  [in] tvel  Procent prędkości, zakres [0~100]
+     * @param  [in] tacc  Procent przyspieszenia, zakres [0~100], tymczasowo niedostępne
+     * @param  [in] epos_t  Pozycja osi rozszerzenia, jednostka mm
+     * @param  [in] ovl  Współczynnik skalowania prędkości, zakres [0~100]
+     * @param  [in] offset_flag  0-brak przesunięcia, 1-przesunięcie w układzie bazowym/układzie przedmiotu, 2-przesunięcie w układzie narzędzia
+     * @param  [in] offset_pos  Wartość przesunięcia pozy
+     * @param  [in] oacc Procent przyspieszenia
+     * @param  [in] blendR -1: blokujący; 0~1000: promień wygładzania
+     * @param  [in] config Konfiguracja przestrzeni przegubów dla kinematyki odwrotnej, [-1]-obliczenia względem bieżącej pozycji przegubów, [0~7]-obliczenia według określonej konfiguracji przestrzeni przegubów
+     * @return  Kod błędu
      */
     int Circle(DescPose desc_pos_p, int ptool, int puser, double pvel, double pacc, ExaxisPos epos_p, DescPose desc_pos_t, int ttool, int tuser, double tvel, double tacc, ExaxisPos epos_t, double ovl, int offset_flag, DescPose offset_pos, double oacc, double blendR,int config)
 
-笛卡尔空间整圆运动（增加速度加速度参数模式velAccParamMode参数）
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Ruch po pełnym okręgu w przestrzeni kartezjańskiej (z dodanym parametrem trybu parametrów prędkości i przyspieszenia velAccParamMode)
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. versionadded:: Java SDK-v1.0.8-3.8.5
 
 .. code-block:: Java
     :linenos:
 
     /**
-    *@brief  笛卡尔空间整圆运动（增加速度加速度参数模式velAccParamMode参数）
-    *@param  [in] joint_pos_p  路径点1关节位置,单位deg
-    *@param  [in] desc_pos_p   路径点1笛卡尔位姿
-    *@param  [in] ptool  工具坐标号，范围[1~15]
-    *@param  [in] puser  工件坐标号，范围[1~15]
-    *@param  [in] pvel  速度百分比，范围[0~100]
-    *@param  [in] pacc  加速度百分比，范围[0~100],暂不开放
-    *@param  [in] epos_p  扩展轴位置，单位mm
-    *@param  [in] joint_pos_t  路径点2关节位置,单位deg
-    *@param  [in] desc_pos_t   路径点2笛卡尔位姿
-    *@param  [in] ttool  工具坐标号，范围[1~15]
-    *@param  [in] tuser  工件坐标号，范围[1~15]
-    *@param  [in] tvel  速度百分比，范围[0~100]
-    *@param  [in] tacc  加速度百分比，范围[0~100],暂不开放
-    *@param  [in] epos_t  扩展轴位置，单位mm
-    *@param  [in] ovl  速度缩放因子，范围[0~100]
-    *@param  [in] offset_flag  0-不偏移，1-基坐标系/工件坐标系下偏移，2-工具坐标系下偏移
-    *@param  [in] offset_pos  位姿偏移量
-    *@param  [in] oacc 加速度百分比
-    *@param  [in] blendR -1：阻塞；0~1000：平滑半径
-    *@param  [in] velAccParamMode 速度加速度参数模式；0-百分比；1-物理速度(mm/s)加速度(mm/s2)
-    *@return  错误码
+    *@brief  Ruch po pełnym okręgu w przestrzeni kartezjańskiej (z dodanym parametrem trybu parametrów prędkości i przyspieszenia velAccParamMode)
+    *@param  [in] joint_pos_p  Pozycja przegubów punktu pośredniego 1, jednostka deg
+    *@param  [in] desc_pos_p   Pozycja kartezjańska punktu pośredniego 1
+    *@param  [in] ptool  Numer narzędzia, zakres [1~15]
+    *@param  [in] puser  Numer przedmiotu, zakres [1~15]
+    *@param  [in] pvel  Procent prędkości, zakres [0~100]
+    *@param  [in] pacc  Procent przyspieszenia, zakres [0~100], tymczasowo niedostępne
+    *@param  [in] epos_p  Pozycja osi rozszerzenia, jednostka mm
+    *@param  [in] joint_pos_t  Pozycja przegubów punktu pośredniego 2, jednostka deg
+    *@param  [in] desc_pos_t   Pozycja kartezjańska punktu pośredniego 2
+    *@param  [in] ttool  Numer narzędzia, zakres [1~15]
+    *@param  [in] tuser  Numer przedmiotu, zakres [1~15]
+    *@param  [in] tvel  Procent prędkości, zakres [0~100]
+    *@param  [in] tacc  Procent przyspieszenia, zakres [0~100], tymczasowo niedostępne
+    *@param  [in] epos_t  Pozycja osi rozszerzenia, jednostka mm
+    *@param  [in] ovl  Współczynnik skalowania prędkości, zakres [0~100]
+    *@param  [in] offset_flag  0-brak przesunięcia, 1-przesunięcie w układzie bazowym/układzie przedmiotu, 2-przesunięcie w układzie narzędzia
+    *@param  [in] offset_pos  Wartość przesunięcia pozy
+    *@param  [in] oacc Procent przyspieszenia
+    *@param  [in] blendR -1: blokujący; 0~1000: promień wygładzania
+    *@param  [in] velAccParamMode Tryb parametrów prędkości i przyspieszenia; 0-procentowy; 1-prędkość fizyczna (mm/s) przyspieszenie (mm/s2)
+    *@return  Kod błędu
     */
     public int Circle(JointPos joint_pos_p, DescPose desc_pos_p, int ptool, int puser, double pvel, double pacc, ExaxisPos epos_p, JointPos joint_pos_t, DescPose desc_pos_t, int ttool, int tuser, double tvel, double tacc, ExaxisPos epos_t, double ovl, int offset_flag, DescPose offset_pos, double oacc, double blendR, int velAccParamMode)
 
-笛卡尔空间整圆运动 (重载函数1 不需要输入关节位置)
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Ruch po pełnym okręgu w przestrzeni kartezjańskiej (przeciążona funkcja 1 bez konieczności podawania pozycji przegubów)
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. versionadded:: Java SDK-v1.0.8-3.8.5
 
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief  笛卡尔空间整圆运动 (重载函数1 不需要输入关节位置)
-    * @param  [in] desc_pos_p   路径点1笛卡尔位姿
-    * @param  [in] ptool  工具坐标号，范围[0~14]
-    * @param  [in] puser  工件坐标号，范围[0~14]
-    * @param  [in] pvel  速度百分比，范围[0~100]
-    * @param  [in] pacc  加速度百分比，范围[0~100],暂不开放
-    * @param  [in] epos_p  扩展轴位置，单位mm
-    * @param  [in] desc_pos_t   路径点2笛卡尔位姿
-    * @param  [in] ttool  工具坐标号，范围[0~14]
-    * @param  [in] tuser  工件坐标号，范围[0~14]
-    * @param  [in] tvel  速度百分比，范围[0~100]
-    * @param  [in] tacc  加速度百分比，范围[0~100],暂不开放
-    * @param  [in] epos_t  扩展轴位置，单位mm
-    * @param  [in] ovl  速度缩放因子，范围[0~100]
-    * @param  [in] offset_flag  0-不偏移，1-基坐标系/工件坐标系下偏移，2-工具坐标系下偏移
-    * @param  [in] offset_pos  位姿偏移量
-    * @param  [in] oacc 加速度百分比
-    * @param  [in] blendR -1：阻塞；0~1000：平滑半径
-    * @param  [in] config 逆解关节空间配置，[-1]-参考当前关节位置解算，[0~7]-依据特定关节空间配置求解
-    * @param  [in] velAccParamMode 速度加速度参数模式；0-百分比；1-物理速度(mm/s)加速度(mm/s2)
-    * @return  错误码
+    * @brief  Ruch po pełnym okręgu w przestrzeni kartezjańskiej (przeciążona funkcja 1 bez konieczności podawania pozycji przegubów)
+    * @param  [in] desc_pos_p   Pozycja kartezjańska punktu pośredniego 1
+    * @param  [in] ptool  Numer narzędzia, zakres [0~14]
+    * @param  [in] puser  Numer przedmiotu, zakres [0~14]
+    * @param  [in] pvel  Procent prędkości, zakres [0~100]
+    * @param  [in] pacc  Procent przyspieszenia, zakres [0~100], tymczasowo niedostępne
+    * @param  [in] epos_p  Pozycja osi rozszerzenia, jednostka mm
+    * @param  [in] desc_pos_t   Pozycja kartezjańska punktu pośredniego 2
+    * @param  [in] ttool  Numer narzędzia, zakres [0~14]
+    * @param  [in] tuser  Numer przedmiotu, zakres [0~14]
+    * @param  [in] tvel  Procent prędkości, zakres [0~100]
+    * @param  [in] tacc  Procent przyspieszenia, zakres [0~100], tymczasowo niedostępne
+    * @param  [in] epos_t  Pozycja osi rozszerzenia, jednostka mm
+    * @param  [in] ovl  Współczynnik skalowania prędkości, zakres [0~100]
+    * @param  [in] offset_flag  0-brak przesunięcia, 1-przesunięcie w układzie bazowym/układzie przedmiotu, 2-przesunięcie w układzie narzędzia
+    * @param  [in] offset_pos  Wartość przesunięcia pozy
+    * @param  [in] oacc Procent przyspieszenia
+    * @param  [in] blendR -1: blokujący; 0~1000: promień wygładzania
+    * @param  [in] config Konfiguracja przestrzeni przegubów dla kinematyki odwrotnej, [-1]-obliczenia względem bieżącej pozycji przegubów, [0~7]-obliczenia według określonej konfiguracji przestrzeni przegubów
+    * @param  [in] velAccParamMode Tryb parametrów prędkości i przyspieszenia; 0-procentowy; 1-prędkość fizyczna (mm/s) przyspieszenie (mm/s2)
+    * @return  Kod błędu
     */
     public int Circle(DescPose desc_pos_p, int ptool, int puser, double pvel, double pacc, ExaxisPos epos_p, DescPose desc_pos_t, int ttool, int tuser, double tvel, double tacc, ExaxisPos epos_t, double ovl, int offset_flag, DescPose offset_pos, double oacc, double blendR, int config, int velAccParamMode)
 
-笛卡尔空间点到点运动
-+++++++++++++++++++++++++++++
+Ruch punkt-punkt w przestrzeni kartezjańskiej
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /** 
-    * @brief 笛卡尔空间点到点运动 
-    * @param [in] desc_pos  目标笛卡尔位姿或位姿增量
-    * @param [in] tool  工具坐标号，范围[0~14]
-    * @param [in] user  工件坐标号，范围[0~14]
-    * @param [in] vel  速度百分比，范围[0~100]
-    * @param [in] acc  加速度百分比，范围[0~100],暂不开放
-    * @param [in] ovl  速度缩放因子，范围[0~100]
-    * @param [in] blendT [-1.0]-运动到位(阻塞)，[0~500.0]-平滑时间(非阻塞)，单位ms
-    * @param [in] config  关节空间配置，[-1]-参考当前关节位置解算，[0~7]-参考特定关节空间配置解算，默认为-1
-    * @return 错误码 
+    * @brief Ruch punkt-punkt w przestrzeni kartezjańskiej 
+    * @param [in] desc_pos  Docelowa poza kartezjańska lub przyrost pozy
+    * @param [in] tool  Numer narzędzia, zakres [0~14]
+    * @param [in] user  Numer przedmiotu, zakres [0~14]
+    * @param [in] vel  Procent prędkości, zakres [0~100]
+    * @param [in] acc  Procent przyspieszenia, zakres [0~100], tymczasowo niedostępne
+    * @param [in] ovl  Współczynnik skalowania prędkości, zakres [0~100]
+    * @param [in] blendT [-1.0]-ruch do pozycji (blokujący), [0~500.0]-czas wygładzania (nieblokujący), jednostka ms
+    * @param [in] config  Konfiguracja przestrzeni przegubów, [-1]-obliczenia względem bieżącej pozycji przegubów, [0~7]-obliczenia według określonej konfiguracji przestrzeni przegubów, domyślnie -1
+    * @return Kod błędu 
     */ 
     int MoveCart(DescPose desc_pos, int tool, int user, double vel, double acc, double ovl, double blendT, int config);
 
-机器人基本运动指令代码示例
-++++++++++++++++++++++++++++++++++++++
+Przykład kodu podstawowych instrukcji ruchu robota
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
@@ -611,53 +631,56 @@ jog点动立即停止
         return 0;
     }
 
-笛卡尔空间螺旋线运动
-+++++++++++++++++++++++++++++
+Ruch po spirali w przestrzeni kartezjańskiej
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief 笛卡尔空间螺旋线运动 
-    * @param [in] joint_pos  目标关节位置,单位deg
-    * @param [in] desc_pos   目标笛卡尔位姿
-    * @param [in] tool  工具坐标号，范围[0~14]
-    * @param [in] user  工件坐标号，范围[0~14]
-    * @param [in] vel  速度百分比，范围[0~100]
-    * @param [in] acc  加速度百分比，范围[0~100],暂不开放
-    * @param [in] epos  扩展轴位置，单位mm
-    * @param [in] ovl  速度缩放因子，范围[0~100]
-    * @param [in] offset_flag  0-不偏移，1-基坐标系/工件坐标系下偏移，2-工具坐标系下偏移
-    * @param [in] offset_pos  位姿偏移量
-    * @return 错误码 
+    * @brief Ruch po spirali w przestrzeni kartezjańskiej 
+    * @param [in] joint_pos  Docelowa pozycja przegubów, jednostka deg
+    * @param [in] desc_pos   Docelowa poza kartezjańska
+    * @param [in] tool  Numer narzędzia, zakres [0~14]
+    * @param [in] user  Numer przedmiotu, zakres [0~14]
+    * @param [in] vel  Procent prędkości, zakres [0~100]
+    * @param [in] acc  Procent przyspieszenia, zakres [0~100], tymczasowo niedostępne
+    * @param [in] epos  Pozycja osi rozszerzenia, jednostka mm
+    * @param [in] ovl  Współczynnik skalowania prędkości, zakres [0~100]
+    * @param [in] offset_flag  0-brak przesunięcia, 1-przesunięcie w układzie bazowym/układzie przedmiotu, 2-przesunięcie w układzie narzędzia
+    * @param [in] offset_pos  Wartość przesunięcia pozy
+    * @return Kod błędu 
     */
     int NewSpiral(JointPos joint_pos, DescPose desc_pos, int tool, int user, double vel, double acc, ExaxisPos epos, double ovl, int offset_flag, DescPose offset_pos, SpiralParam spiral_param);
 
-笛卡尔空间螺旋线运动(自动逆运动学计算)
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Ruch po spirali w przestrzeni kartezjańskiej (automatyczne obliczenia kinematyki odwrotnej)
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. versionadded:: Java SDK-v1.0.8-3.8.5
 
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief 笛卡尔空间螺旋线运动 (自动逆运动学计算)
-    * @param [in] desc_pos   目标笛卡尔位姿
-    * @param [in] tool  工具坐标号，范围[0~14]
-    * @param [in] user  工件坐标号，范围[0~14]
-    * @param [in] vel  速度百分比，范围[0~100]
-    * @param [in] acc  加速度百分比，范围[0~100],暂不开放
-    * @param [in] epos  扩展轴位置，单位mm
-    * @param [in] ovl  速度缩放因子，范围[0~100]
-    * @param [in] offset_flag  0-不偏移，1-基坐标系/工件坐标系下偏移，2-工具坐标系下偏移
-    * @param [in] offset_pos  位姿偏移量
-    * @param [in] spiral_param  螺旋参数
-    * @param [in] config  逆解关节空间配置，[-1]-参考当前关节位置解算，[0~7]-依据特定关节空间配置求解
-    * @return 错误码 
+    * @brief Ruch po spirali w przestrzeni kartezjańskiej (automatyczne obliczenia kinematyki odwrotnej)
+    * @param [in] desc_pos   Docelowa poza kartezjańska
+    * @param [in] tool  Numer narzędzia, zakres [0~14]
+    * @param [in] user  Numer przedmiotu, zakres [0~14]
+    * @param [in] vel  Procent prędkości, zakres [0~100]
+    * @param [in] acc  Procent przyspieszenia, zakres [0~100], tymczasowo niedostępne
+    * @param [in] epos  Pozycja osi rozszerzenia, jednostka mm
+    * @param [in] ovl  Współczynnik skalowania prędkości, zakres [0~100]
+    * @param [in] offset_flag  0-brak przesunięcia, 1-przesunięcie w układzie bazowym/układzie przedmiotu, 2-przesunięcie w układzie narzędzia
+    * @param [in] offset_pos  Wartość przesunięcia pozy
+    * @param [in] spiral_param  Parametry spirali
+    * @param [in] config  Konfiguracja przestrzeni przegubów dla kinematyki odwrotnej, [-1]-obliczenia względem bieżącej pozycji przegubów, [0~7]-obliczenia według określonej konfiguracji przestrzeni przegubów
+    * @return Kod błędu 
     */
     int NewSpiral(DescPose desc_pos, int tool, int user, double vel, double acc, ExaxisPos epos, double ovl, int offset_flag, DescPose offset_pos, SpiralParam spiral_param,int config)
 
-螺旋线运动代码示例
-+++++++++++++++++++++++++++++
+Przykład kodu ruchu po spirali
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
@@ -688,54 +711,58 @@ jog点动立即停止
         return 0;
     }
 
-伺服运动开始
-+++++++++++++++++++++++++++++
+Rozpoczęcie ruchu serwo
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief 伺服运动开始，配合ServoJ、ServoCart指令使用
-    * @param comType 指令下发类型；0-xmlrpc；1-UDP(对应机器人20007端口)
-    * @return 错误码
+    * @brief Rozpoczęcie ruchu serwo, używane razem z instrukcjami ServoJ, ServoCart
+    * @param comType Typ wysyłania instrukcji; 0-xmlrpc; 1-UDP (odpowiadający portowi 20007 robota)
+    * @return Kod błędu
     */
     public int ServoMoveStart (int comType)
 
-伺服运动结束
-+++++++++++++++++++++++++++++
+Zakończenie ruchu serwo
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief 伺服运动开始，配合ServoJ、ServoCart指令使用
-    * @param comType 指令下发类型；0-xmlrpc；1-UDP(对应机器人20007端口)
-    * @return 错误码
+    * @brief Zakończenie ruchu serwo, używane razem z instrukcjami ServoJ, ServoCart
+    * @param comType Typ wysyłania instrukcji; 0-xmlrpc; 1-UDP (odpowiadający portowi 20007 robota)
+    * @return Kod błędu
     */
     public int ServoMoveEnd (int comType)
 
-关节空间伺服模式运动
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Ruch w trybie serwo w przestrzeni przegubów
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. versionchanged:: Java SDK-v1.0.6-3.8.3
 
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief  关节空间伺服模式运动
-    * @param  joint_pos  目标关节位置,单位deg
-    * @param  axisPos  外部轴位置,单位mm
-    * @param  acc  加速度百分比，范围[0~100],暂不开放，默认为0
-    * @param  vel  速度百分比，范围[0~100]，暂不开放，默认为0
-    * @param  cmdT  指令下发周期，单位s，建议范围[0.001~0.0016]
-    * @param  filterT 滤波时间，单位s，暂不开放，默认为0
-    * @param  gain  目标位置的比例放大器，暂不开放，默认为0
-    * @param  id servoJ指令ID,默认为0
-    * @param comType 指令下发类型；0-xmlrpc；1-UDP(对应机器人20007端口)
-    * @return 错误码
+    * @brief  Ruch w trybie serwo w przestrzeni przegubów
+    * @param  joint_pos  Docelowa pozycja przegubów, jednostka deg
+    * @param  axisPos  Pozycja zewnętrznej osi, jednostka mm
+    * @param  acc  Procent przyspieszenia, zakres [0~100], tymczasowo niedostępne, domyślnie 0
+    * @param  vel  Procent prędkości, zakres [0~100], tymczasowo niedostępne, domyślnie 0
+    * @param  cmdT  Okres wysyłania instrukcji, jednostka s, zalecany zakres [0.001~0.0016]
+    * @param  filterT Czas filtrowania, jednostka s, tymczasowo niedostępne, domyślnie 0
+    * @param  gain  Wzmocnienie proporcjonalne pozycji docelowej, tymczasowo niedostępne, domyślnie 0
+    * @param  id ID instrukcji servoJ, domyślnie 0
+    * @param comType Typ wysyłania instrukcji; 0-xmlrpc; 1-UDP (odpowiadający portowi 20007 robota)
+    * @return Kod błędu
     */
     public int ServoJ(JointPos joint_pos, ExaxisPos axisPos, float acc, float vel, float cmdT, float filterT, float gain, int id, int comType)
 
-基于UDP通信的ServoJ、ServoMoveStart、ServoMoveEnd SDK代码示例
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Przykład kodu SDK dla ServoJ, ServoMoveStart, ServoMoveEnd opartych na komunikacji UDP
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
@@ -747,7 +774,7 @@ jog点动立即停止
             System.out.println("count: " + count);
             System.out.println("cmdID: " + cmdID);
             System.out.println("dataLen: " + dataLen);
-            System.out.println("内容 (content): " + content);
+            System.out.println("content: " + content);
             return 0;
         });
         int rtn=-1;
@@ -807,8 +834,9 @@ jog点动立即停止
         }
     }
 
-关节空间伺服模式运动示例程序
-+++++++++++++++++++++++++++++++++++++++++++++
+Przykładowy program ruchu w trybie serwo w przestrzeni przegubów
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
@@ -843,49 +871,53 @@ jog点动立即停止
         }
     }
 
-关节扭矩控制开始
-+++++++++++++++++++++++++++++
+Rozpoczęcie sterowania momentem obrotowym przegubów
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief  关节扭矩控制开始
-    * @param  comType 指令下发类型；0-xmlrpc；1-UDP(对应机器人20007端口)
-    * @return  错误码
+    * @brief  Rozpoczęcie sterowania momentem obrotowym przegubów
+    * @param  comType Typ wysyłania instrukcji; 0-xmlrpc; 1-UDP (odpowiadający portowi 20007 robota)
+    * @return  Kod błędu
     */
     public int ServoJTStart (int comType)
 
-关节扭矩控制
-+++++++++++++++++++++++++++++
+Sterowanie momentem obrotowym przegubów
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief 关节扭矩控制
-    * @param torque j1~j6关节扭矩，单位Nm
-    * @param interval 指令周期，单位s，范围[0.001~0.008]
-    * @param checkFlag 检测策略 0-不限制；1-限制功率；2-限制速度；3-功率和速度同时限制
-    * @param jPowerLimit 关节最大功率限制(W)
-    * @param jVelLimit 关节最大速度(°/s)
-    * @param  comType 指令下发类型；0-xmlrpc；1-UDP(对应机器人20007端口)
-    * @return 错误码
+    * @brief Sterowanie momentem obrotowym przegubów
+    * @param torque moment obrotowy przegubów j1~j6, jednostka Nm
+    * @param interval Okres instrukcji, jednostka s, zakres [0.001~0.008]
+    * @param checkFlag Strategia wykrywania 0-brak ograniczeń; 1-ograniczenie mocy; 2-ograniczenie prędkości; 3-ograniczenie mocy i prędkości jednocześnie
+    * @param jPowerLimit Maksymalne ograniczenie mocy przegubu (W)
+    * @param jVelLimit Maksymalna prędkość przegubu (°/s)
+    * @param  comType Typ wysyłania instrukcji; 0-xmlrpc; 1-UDP (odpowiadający portowi 20007 robota)
+    * @return Kod błędu
     */
     public int ServoJT(double[] torque, double interval, int checkFlag, double[] jPowerLimit, double[] jVelLimit, int comType)
 
-关节扭矩控制结束
-+++++++++++++++++++++++++++++
+Zakończenie sterowania momentem obrotowym przegubów
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief  关节扭矩控制结束
-    * @param comType 指令下发类型；0-xmlrpc；1-UDP(对应机器人20007端口)
-    * @return  错误码
+    * @brief  Zakończenie sterowania momentem obrotowym przegubów
+    * @param comType Typ wysyłania instrukcji; 0-xmlrpc; 1-UDP (odpowiadający portowi 20007 robota)
+    * @return  Kod błędu
     */
     public int ServoJTEnd (int comType)
 
-关节空间伺服模式运动示例程序
-+++++++++++++++++++++++++++++++++++++++++++++
+Przykładowy program ruchu w trybie serwo w przestrzeni przegubów
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
@@ -912,8 +944,9 @@ jog点动立即停止
         return 0;
     }
 
-基于UDP通信的ServoJT、ServoJTStart、ServoJTEnd SDK代码示例
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Przykład kodu SDK dla ServoJT, ServoJTStart, ServoJTEnd opartych na komunikacji UDP
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
@@ -976,8 +1009,9 @@ jog点动立即停止
         }
     }
 
-具有超速保护的关节扭矩控制代码示例
-+++++++++++++++++++++++++++++++++++++++++
+Przykład kodu sterowania momentem obrotowym przegubów z ochroną przed przekroczeniem prędkości
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
@@ -1011,28 +1045,30 @@ jog点动立即停止
         error = robot.ServoJTEnd();  //#伺服运动结束
     }
 
-笛卡尔空间伺服模式运动
-+++++++++++++++++++++++++++++++++++++++++
+Ruch w trybie serwo w przestrzeni kartezjańskiej
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /**
-    *@brief 笛卡尔空间伺服模式运动
-    *@param mode 0-绝对运动(基坐标系)，1-增量运动(基坐标系)，2-增量运动(工具坐标系)
-    *@param desc_pose 目标笛卡尔位姿或位姿增量
-    *@param exaxis 扩展轴位置
-    *@param pos_gain 位姿增量比例系数，仅在增量运动下生效，范围[0~1]
-    *@param acc 加速度百分比，范围[0~100],暂不开放，默认为0
-    *@param vel 速度百分比，范围[0~100]，暂不开放，默认为0
-    *@param cmdT 指令下发周期，单位s，建议范围[0.001~0.016]
-    *@param filterT 滤波时间，单位s，暂不开放，默认为0
-    *@param gain 目标位置的比例放大器，暂不开放，默认为0
-    *@return 错误码
+    *@brief Ruch w trybie serwo w przestrzeni kartezjańskiej
+    *@param mode 0-ruch absolutny (układ bazowy), 1-ruch przyrostowy (układ bazowy), 2-ruch przyrostowy (układ narzędzia)
+    *@param desc_pose Docelowa poza kartezjańska lub przyrost pozy
+    *@param exaxis Pozycja osi rozszerzenia
+    *@param pos_gain Współczynnik proporcjonalny przyrostu pozy, działa tylko w ruchu przyrostowym, zakres [0~1]
+    *@param acc Procent przyspieszenia, zakres [0~100], tymczasowo niedostępne, domyślnie 0
+    *@param vel Procent prędkości, zakres [0~100], tymczasowo niedostępne, domyślnie 0
+    *@param cmdT Okres wysyłania instrukcji, jednostka s, zalecany zakres [0.001~0.016]
+    *@param filterT Czas filtrowania, jednostka s, tymczasowo niedostępne, domyślnie 0
+    *@param gain Wzmocnienie proporcjonalne pozycji docelowej, tymczasowo niedostępne, domyślnie 0
+    *@return Kod błędu
     */
     public int ServoCart(int mode, DescPose desc_pose, ExaxisPos exaxis, double[] pos_gain, double acc, double vel, double cmdT, double filterT, double gain)
 
-笛卡尔空间伺服模式运动代码示例
-+++++++++++++++++++++++++++++++++++++++++
+Przykład kodu ruchu w trybie serwo w przestrzeni kartezjańskiej
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
@@ -1061,67 +1097,72 @@ jog点动立即停止
         robot.CloseRPC();
     }
 
-样条运动开始
-+++++++++++++++++++++++++++++
+Rozpoczęcie ruchu po krzywej składanej (spline)
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief  样条运动开始
-    * @return  错误码
+    * @brief  Rozpoczęcie ruchu po krzywej składanej (spline)
+    * @return  Kod błędu
     */
     int SplineStart();
 
-关节运动PTP
-+++++++++++++++++++++++++++++
+Ruch PTP (punkt-punkt) po krzywej składanej
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief  关节空间样条运动
-    * @param  [in] joint_pos  目标关节位置,单位deg
-    * @param  [in] desc_pos   目标笛卡尔位姿
-    * @param  [in] tool  工具坐标号，范围[0~14]
-    * @param  [in] user  工件坐标号，范围[0~14]
-    * @param  [in] vel  速度百分比，范围[0~100]
-    * @param  [in] acc  加速度百分比，范围[0~100],暂不开放
-    * @param  [in] ovl  速度缩放因子，范围[0~100]
-    * @return  错误码
+    * @brief  Ruch po krzywej składanej w przestrzeni przegubów
+    * @param  [in] joint_pos  Docelowa pozycja przegubów, jednostka deg
+    * @param  [in] desc_pos   Docelowa poza kartezjańska
+    * @param  [in] tool  Numer narzędzia, zakres [0~14]
+    * @param  [in] user  Numer przedmiotu, zakres [0~14]
+    * @param  [in] vel  Procent prędkości, zakres [0~100]
+    * @param  [in] acc  Procent przyspieszenia, zakres [0~100], tymczasowo niedostępne
+    * @param  [in] ovl  Współczynnik skalowania prędkości, zakres [0~100]
+    * @return  Kod błędu
     */
     int SplinePTP(JointPos joint_pos, DescPose desc_pos, int tool, int user, double vel, double acc, double ovl);
 
-关节空间样条运动 (自动正运动学计算)
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Ruch po krzywej składanej w przestrzeni przegubów (automatyczne obliczenia kinematyki prostej)
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. versionadded:: Java SDK-v1.0.8-3.8.5
 
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief  关节空间样条运动 (自动正运动学计算)
-    * @param  [in] joint_pos  目标关节位置,单位deg
-    * @param  [in] tool  工具坐标号，范围[0~14]
-    * @param  [in] user  工件坐标号，范围[0~14]
-    * @param  [in] vel  速度百分比，范围[0~100]
-    * @param  [in] acc  加速度百分比，范围[0~100],暂不开放
-    * @param  [in] ovl  速度缩放因子，范围[0~100]
-    * @return  错误码
+    * @brief  Ruch po krzywej składanej w przestrzeni przegubów (automatyczne obliczenia kinematyki prostej)
+    * @param  [in] joint_pos  Docelowa pozycja przegubów, jednostka deg
+    * @param  [in] tool  Numer narzędzia, zakres [0~14]
+    * @param  [in] user  Numer przedmiotu, zakres [0~14]
+    * @param  [in] vel  Procent prędkości, zakres [0~100]
+    * @param  [in] acc  Procent przyspieszenia, zakres [0~100], tymczasowo niedostępne
+    * @param  [in] ovl  Współczynnik skalowania prędkości, zakres [0~100]
+    * @return  Kod błędu
     */
     int SplinePTP(JointPos joint_pos, int tool, int user, double vel, double acc, double ovl)
 
-样条运动结束
-+++++++++++++++++++++++++++++
+Zakończenie ruchu po krzywej składanej (spline)
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief  样条运动结束
-    * @return  错误码
+    * @brief  Zakończenie ruchu po krzywej składanej (spline)
+    * @return  Kod błędu
     */
     int SplineEnd(); 
 
-样条运动代码示例
-+++++++++++++++++++++++++++++
+Przykład kodu ruchu po krzywej składanej
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
@@ -1153,74 +1194,79 @@ jog点动立即停止
         return 0;
     }
 
-新样条运动开始
-+++++++++++++++++++++++++++++
+Rozpoczęcie nowego ruchu po krzywej składanej (new spline)
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /** 
-    * @brief 新样条运动开始 
-    * @param [in] type   0-圆弧过渡，1-给定点位为路径点
-    * @param [in] averageTime  全局平均衔接时间(ms)(10 ~  )，默认2000
-    * @return 错误码 
+    * @brief Rozpoczęcie nowego ruchu po krzywej składanej (new spline) 
+    * @param [in] type   0-przejście łukowe, 1-punkty podane jako punkty ścieżki
+    * @param [in] averageTime  Globalny średni czas łączenia (ms)(10 ~  ), domyślnie 2000
+    * @return Kod błędu 
     */ 
     int NewSplineStart(int type, int averageTime);
     
-新样条指令点
-+++++++++++++++++++++++++++++
+Punkt instrukcji nowej krzywej składanej
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /** 
-    * @brief 增加样条运动指令点 
-    * @param [in] joint_pos  目标关节位置,单位deg
-    * @param [in] desc_pos   目标笛卡尔位姿
-    * @param [in] tool  工具坐标号，范围[0~14]
-    * @param [in] user  工件坐标号，范围[0~14]
-    * @param [in] vel  速度百分比，范围[0~100]
-    * @param [in] acc  加速度百分比，范围[0~100],暂不开放
-    * @param [in] ovl  速度缩放因子，范围[0~100]
-    * @param [in] blendR [-1.0]-运动到位(阻塞)，[0~1000.0]-平滑半径(非阻塞)，单位mm
-    * @param [in] lastFlag 是否为最后一个点，0-否，1-是
-    * @return 错误码 
+    * @brief Dodanie punktu instrukcji ruchu po krzywej składanej 
+    * @param [in] joint_pos  Docelowa pozycja przegubów, jednostka deg
+    * @param [in] desc_pos   Docelowa poza kartezjańska
+    * @param [in] tool  Numer narzędzia, zakres [0~14]
+    * @param [in] user  Numer przedmiotu, zakres [0~14]
+    * @param [in] vel  Procent prędkości, zakres [0~100]
+    * @param [in] acc  Procent przyspieszenia, zakres [0~100], tymczasowo niedostępne
+    * @param [in] ovl  Współczynnik skalowania prędkości, zakres [0~100]
+    * @param [in] blendR [-1.0]-ruch do pozycji (blokujący), [0~1000.0]-promień wygładzania (nieblokujący), jednostka mm
+    * @param [in] lastFlag Czy to ostatni punkt, 0-nie, 1-tak
+    * @return Kod błędu 
     */ 
     int NewSplinePoint(JointPos joint_pos, DescPose desc_pos, int tool, int user, double vel, double acc, double ovl, double blendR, int lastFlag);
 
-新样条指令点(自动逆运动学计算)
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Punkt instrukcji nowej krzywej składanej (automatyczne obliczenia kinematyki odwrotnej)
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. versionadded:: Java SDK-v1.0.8-3.8.5
 
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief 新样条指令点(自动逆运动学计算)
-    * @param  [in] desc_pos   目标笛卡尔位姿
-    * @param  [in] tool  工具坐标号，范围[0~14]
-    * @param  [in] user  工件坐标号，范围[0~14]
-    * @param  [in] vel  速度百分比，范围[0~100]
-    * @param  [in] acc  加速度百分比，范围[0~100],暂不开放
-    * @param  [in] ovl  速度缩放因子，范围[0~100]
-    * @param  [in] blendR [-1.0]-运动到位(阻塞)，[0~1000.0]-平滑半径(非阻塞)，单位mm
-    * @param  [in] lastFlag 是否为最后一个点，0-否，1-是
-    * @param  [in] config 逆解关节空间配置，[-1]-参考当前关节位置解算，[0~7]-依据特定关节空间配置求解
-    * @return  错误码
+    * @brief Punkt instrukcji nowej krzywej składanej (automatyczne obliczenia kinematyki odwrotnej)
+    * @param  [in] desc_pos   Docelowa poza kartezjańska
+    * @param  [in] tool  Numer narzędzia, zakres [0~14]
+    * @param  [in] user  Numer przedmiotu, zakres [0~14]
+    * @param  [in] vel  Procent prędkości, zakres [0~100]
+    * @param  [in] acc  Procent przyspieszenia, zakres [0~100], tymczasowo niedostępne
+    * @param  [in] ovl  Współczynnik skalowania prędkości, zakres [0~100]
+    * @param  [in] blendR [-1.0]-ruch do pozycji (blokujący), [0~1000.0]-promień wygładzania (nieblokujący), jednostka mm
+    * @param  [in] lastFlag Czy to ostatni punkt, 0-nie, 1-tak
+    * @param  [in] config Konfiguracja przestrzeni przegubów dla kinematyki odwrotnej, [-1]-obliczenia względem bieżącej pozycji przegubów, [0~7]-obliczenia według określonej konfiguracji przestrzeni przegubów
+    * @return  Kod błędu
     */
     int NewSplinePoint(DescPose desc_pos, int tool, int user, double vel, double acc, double ovl, double blendR, int lastFlag,int config)
 
-新样条运动结束
-+++++++++++++++++++++++++++++
+Zakończenie nowego ruchu po krzywej składanej
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /** 
-    * @brief 新样条运动开始 
-    * @return 错误码 
+    * @brief Zakończenie nowego ruchu po krzywej składanej 
+    * @return Kod błędu 
     */ 
     int NewSplineEnd();
     
-新样条运动代码示例
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Przykład kodu nowego ruchu po krzywej składanej
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
@@ -1257,41 +1303,45 @@ jog点动立即停止
         return 0;
     }
 
-终止运动
-+++++++++++++++++++++++++++++
+Zatrzymanie ruchu
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief 终止运动
-    * @return  错误码
+    * @brief Zatrzymanie ruchu
+    * @return  Kod błędu
     */
     int StopMotion();
 
-暂停运动
-+++++++++++++++++++++++++++++
+Wstrzymanie ruchu
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
     
     /** 
-      * @brief 暂停运动 
-      * @return 错误码 
+      * @brief Wstrzymanie ruchu 
+      * @return Kod błędu 
     */  
     int PauseMotion();
 
-恢复运动
-+++++++++++++++++++++++++++++
+Wznowienie ruchu
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /** 
-    * @brief 恢复运动 
-    * @return 错误码 
+    * @brief Wznowienie ruchu 
+    * @return Kod błędu 
     */ 
     int ResumeMotion();
 
-运动暂停、恢复、停止代码示例
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Przykład kodu wstrzymywania, wznawiania i zatrzymywania ruchu
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
@@ -1330,33 +1380,36 @@ jog点动立即停止
         return 0;
     }
 
-点位整体偏移开始
-+++++++++++++++++++++++++++++
+Rozpoczęcie globalnego przesunięcia punktów
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief  点位整体偏移开始
-    * @param  [in]  flag  0-基坐标系下/工件坐标系下偏移，2-工具坐标系下偏移
-    * @param  [in]  offset_pos  位姿偏移量
-    * @return  错误码
+    * @brief  Rozpoczęcie globalnego przesunięcia punktów
+    * @param  [in]  flag  0-przesunięcie w układzie bazowym/układzie przedmiotu, 2-przesunięcie w układzie narzędzia
+    * @param  [in]  offset_pos  Wartość przesunięcia pozy
+    * @return  Kod błędu
     */
     int PointsOffsetEnable(int flag, DescPose offset_pos); 
 
 
-点位整体偏移结束
-+++++++++++++++++++++++++++++
+Zakończenie globalnego przesunięcia punktów
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief  点位整体偏移结束
-    * @return  错误码
+    * @brief  Zakończenie globalnego przesunięcia punktów
+    * @return  Kod błędu
     */
     int PointsOffsetDisable(); 
 
-点位偏移代码示例
-+++++++++++++++++++++++++++++
+Przykład kodu przesunięcia punktów
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
@@ -1393,60 +1446,65 @@ jog点动立即停止
         return 0;
     }
 
-控制箱AO飞拍开始
-+++++++++++++++++++++++++++++
+Rozpoczęcie zdjęcia seryjnego AO skrzynki kontrolnej (fly拍摄)
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief 控制箱AO飞拍开始
-    * @param [in] AONum 控制箱AO编号
-    * @param [in] maxTCPSpeed 最大TCP速度值[1-5000mm/s]，默认1000
-    * @param [in] maxAOPercent 最大TCP速度值对应的AO百分比，默认100%
-    * @param [in] zeroZoneCmp 死区补偿值AO百分比，整形，默认为20%，范围[0-100]
-    * @return 错误码
+    * @brief Rozpoczęcie zdjęcia seryjnego AO skrzynki kontrolnej (fly拍摄)
+    * @param [in] AONum Numer AO skrzynki kontrolnej
+    * @param [in] maxTCPSpeed Maksymalna wartość prędkości TCP [1-5000mm/s], domyślnie 1000
+    * @param [in] maxAOPercent Procent AO odpowiadający maksymalnej prędkości TCP, domyślnie 100%
+    * @param [in] zeroZoneCmp Wartość kompensacji strefy nieczułości, procent AO, liczba całkowita, domyślnie 20%, zakres [0-100]
+    * @return Kod błędu
     */
     int MoveAOStart(int AONum, int maxTCPSpeed, int maxAOPercent, int zeroZoneCmp);
 
-控制箱AO飞拍停止
-+++++++++++++++++++++++++++++   
+Zatrzymanie zdjęcia seryjnego AO skrzynki kontrolnej
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief 控制箱AO飞拍停止
-    * @return 错误码
+    * @brief Zatrzymanie zdjęcia seryjnego AO skrzynki kontrolnej
+    * @return Kod błędu
     */
     int MoveAOStop();
     
-末端AO飞拍开始
-+++++++++++++++++++++++++++++   
+Rozpoczęcie zdjęcia seryjnego AO końcówki
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief 末端AO飞拍开始
-    * @param [in] AONum 末端AO编号
-    * @param [in] maxTCPSpeed 最大TCP速度值[1-5000mm/s]，默认1000
-    * @param [in] maxAOPercent 最大TCP速度值对应的AO百分比，默认100%
-    * @param [in] zeroZoneCmp 死区补偿值AO百分比，整形，默认为20%，范围[0-100]
-    * @return 错误码
+    * @brief Rozpoczęcie zdjęcia seryjnego AO końcówki
+    * @param [in] AONum Numer AO końcówki
+    * @param [in] maxTCPSpeed Maksymalna wartość prędkości TCP [1-5000mm/s], domyślnie 1000
+    * @param [in] maxAOPercent Procent AO odpowiadający maksymalnej prędkości TCP, domyślnie 100%
+    * @param [in] zeroZoneCmp Wartość kompensacji strefy nieczułości, procent AO, liczba całkowita, domyślnie 20%, zakres [0-100]
+    * @return Kod błędu
     */
     int MoveToolAOStart(int AONum, int maxTCPSpeed, int maxAOPercent, int zeroZoneCmp);
     
-末端AO飞拍停止
-+++++++++++++++++++++++++++++   
+Zatrzymanie zdjęcia seryjnego AO końcówki
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief 末端AO飞拍停止
-    * @return 错误码
+    * @brief Zatrzymanie zdjęcia seryjnego AO końcówki
+    * @return Kod błędu
     */
     int MoveToolAOStop();
 
-AO飞拍代码示例
-+++++++++++++++++++++++++++++
+Przykład kodu zdjęcia seryjnego AO
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
@@ -1487,60 +1545,65 @@ AO飞拍代码示例
         return 0;
     }
 
-开始Ptp运动FIR滤波
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Rozpoczęcie filtracji FIR ruchu PTP
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. versionchanged:: Java SDK-v1.0.5-3.8.2
 
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief 开始Ptp运动FIR滤波
-    * @param [in] maxAcc 最大加速度极值(deg/s2)
-    * @param [in] maxJek 统一关节急动度极值(deg/s3)
-    * @return 错误码
+    * @brief Rozpoczęcie filtracji FIR ruchu PTP
+    * @param [in] maxAcc Maksymalna wartość ekstremalna przyspieszenia (deg/s2)
+    * @param [in] maxJek Ekstremalna wartość zrywu dla ujednoliconych przegubów (deg/s3)
+    * @return Kod błędu
     */
     int PtpFIRPlanningStart(double maxAcc,double maxJek);
 
-关闭Ptp运动FIR滤波
-+++++++++++++++++++++++++++++
+Zakończenie filtracji FIR ruchu PTP
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief 关闭Ptp运动FIR滤波
-    * @return 错误码
+    * @brief Zakończenie filtracji FIR ruchu PTP
+    * @return Kod błędu
     */
     int PtpFIRPlanningEnd();
 
-开始LIN、ARC运动FIR滤波
-+++++++++++++++++++++++++++++
+Rozpoczęcie filtracji FIR ruchu LIN i ARC
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief 开始LIN、ARC运动FIR滤波
-    * @param [in] maxAccLin 线加速度极值(mm/s2)
-    * @param [in] maxAccDeg 角加速度极值(deg/s2)
-    * @param [in] maxJerkLin 线加加速度极值(mm/s3)
-    * @param [in] maxJerkDeg 角加加速度极值(deg/s3)
-    * @return 错误码
+    * @brief Rozpoczęcie filtracji FIR ruchu LIN i ARC
+    * @param [in] maxAccLin Ekstremalna wartość przyspieszenia liniowego (mm/s2)
+    * @param [in] maxAccDeg Ekstremalna wartość przyspieszenia kątowego (deg/s2)
+    * @param [in] maxJerkLin Ekstremalna wartość zrywu liniowego (mm/s3)
+    * @param [in] maxJerkDeg Ekstremalna wartość zrywu kątowego (deg/s3)
+    * @return Kod błędu
     */
     int LinArcFIRPlanningStart(double maxAccLin, double maxAccDeg, double maxJerkLin, double maxJerkDeg);
 
-关闭LIN、ARC运动FIR滤波
-+++++++++++++++++++++++++++++
+Zakończenie filtracji FIR ruchu LIN i ARC
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief 关闭LIN、ARC运动FIR滤波
-    * @return 错误码
+    * @brief Zakończenie filtracji FIR ruchu LIN i ARC
+    * @return Kod błędu
     */
     int LinArcFIRPlanningEnd();
 
-FIR滤波代码示例
-+++++++++++++++++++++++++++++
+Przykład kodu filtracji FIR
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
@@ -1569,34 +1632,37 @@ FIR滤波代码示例
         return 0;
     }
 
-加速度平滑开启
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Włączenie wygładzania przyspieszenia
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. versionadded:: Java SDK-v1.0.4-3.8.1
 .. code-block:: Java
     :linenos:
 
     /**
-     * @brief 加速度平滑开启
-     * @param [in] saveFlag 是否断电保存
-     * @return  错误码
+     * @brief Włączenie wygładzania przyspieszenia
+     * @param [in] saveFlag Czy zapisać po odłączeniu zasilania
+     * @return  Kod błędu
      */
     public int AccSmoothStart(boolean saveFlag)
 
-加速度平滑关闭
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Wyłączenie wygładzania przyspieszenia
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. versionadded:: Java SDK-v1.0.4-3.8.1
 .. code-block:: Java
     :linenos:
 
     /**
-     * @brief 加速度平滑关闭
-     * @param [in] saveFlag 是否断电保存
-     * @return  错误码
+     * @brief Wyłączenie wygładzania przyspieszenia
+     * @param [in] saveFlag Czy zapisać po odłączeniu zasilania
+     * @return  Kod błędu
      */
     public int AccSmoothEnd(boolean saveFlag)
 
-加速度平滑代码示例
-+++++++++++++++++++++++++++++
+Przykład kodu wygładzania przyspieszenia
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
@@ -1619,31 +1685,34 @@ FIR滤波代码示例
         return 0;
     }
 
-指定姿态速度开启
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Włączenie określonej prędkości pozy
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /**
-     * @brief 指定姿态速度开启
-     * @param [in] ratio 姿态速度百分比[0-300]
-     * @return  错误码
+     * @brief Włączenie określonej prędkości pozy
+     * @param [in] ratio Procent prędkości pozy [0-300]
+     * @return  Kod błędu
      */
     int AngularSpeedStart(int ratio)
 
-指定姿态速度关闭
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Wyłączenie określonej prędkości pozy
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /**
-     * @brief 指定姿态速度关闭
-     * @return  错误码
+     * @brief Wyłączenie określonej prędkości pozy
+     * @return  Kod błędu
      */
     int AngularSpeedEnd();
 
-机器人指定姿态速度代码示例
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Przykład kodu określonej prędkości pozy robota
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
@@ -1665,34 +1734,37 @@ FIR滤波代码示例
         return 0;
     }
 
-开始奇异位姿保护
-++++++++++++++++++++++++++++++++
+Rozpoczęcie ochrony przed osobliwą pozycją
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief  开始奇异位姿保护
-    * @param  [in]  protectMode 奇异保护模式，0：关节模式；1-笛卡尔模式
-    * @param  [in]  minShoulderPos 肩奇异调整范围(mm), 默认100
-    * @param  [in]  minElbowPos 肘奇异调整范围(mm), 默认50
-    * @param  [in]  minWristPos 腕奇异调整范围(°), 默认10
-    * @return  错误码
+    * @brief  Rozpoczęcie ochrony przed osobliwą pozycją
+    * @param  [in]  protectMode Tryb ochrony przed osobliwością, 0: tryb przegubowy; 1-tryb kartezjański
+    * @param  [in]  minShoulderPos Zakres regulacji osobliwości barku (mm), domyślnie 100
+    * @param  [in]  minElbowPos Zakres regulacji osobliwości łokcia (mm), domyślnie 50
+    * @param  [in]  minWristPos Zakres regulacji osobliwości nadgarstka (°), domyślnie 10
+    * @return  Kod błędu
     */
     int SingularAvoidStart(int protectMode, double minShoulderPos, double minElbowPos, double minWristPos);
 
-停止奇异位姿保护
-++++++++++++++++++++++++++++++++
+Zatrzymanie ochrony przed osobliwą pozycją
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief  停止奇异位姿保护
-    * @return  错误码
+    * @brief  Zatrzymanie ochrony przed osobliwą pozycją
+    * @return  Kod błędu
     */
     int SingularAvoidEnd();
 
-机器人奇异位姿保护代码示例
-++++++++++++++++++++++++++++++++
+Przykład kodu ochrony przed osobliwą pozycją robota
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
@@ -1714,70 +1786,74 @@ FIR滤波代码示例
         return 0;
     }
 
-清空运动指令队列
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Wyczyszczenie kolejki instrukcji ruchu
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief 清空运动指令队列
-    * @return 错误码
+    * @brief Wyczyszczenie kolejki instrukcji ruchu
+    * @return Kod błędu
     */
     public int MotionQueueClear()
 
-移动到相贯线起始点
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Przejście do punktu początkowego linii przecięcia rur
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief 移动到相贯线起始点
-    * @param [in] mainPoint 主管6个示教点的笛卡尔位姿
-    * @param [in] mainExaxisPos 主管6个示教点扩展轴位置
-    * @param [in] piecePoint 辅管6个示教点的笛卡尔位姿
-    * @param [in] pieceExaxisPos 拼接管6个示教点扩展轴位置
-    * @param [in] extAxisFlag 是否启用扩展轴；0-不启用；1-启用
-    * @param [in] exaxisPos 起点扩展轴位置
-    * @param [in] tool 工具坐标系编号
-    * @param [in] wobj 工件坐标系编号
-    * @param [in] vel 速度百分比
-    * @param [in] acc 加速度百分比
-    * @param [in] ovl 速度缩放因子
-    * @param [in] oacc 加速度缩放因子
-    * @param [in] moveType 运动类型; 0-PTP；1-LIN
-    * @param [in] moveDirection 运动方向；0-顺时针；1-逆时针
-    * @param [in] offset 偏移量
-    * @return 错误码
+    * @brief Przejście do punktu początkowego linii przecięcia rur
+    * @param [in] mainPoint Pozycje kartezjańskie 6 punktów nauczania rury głównej
+    * @param [in] mainExaxisPos Pozycje osi rozszerzenia 6 punktów nauczania rury głównej
+    * @param [in] piecePoint Pozycje kartezjańskie 6 punktów nauczania rury pomocniczej
+    * @param [in] pieceExaxisPos Pozycje osi rozszerzenia 6 punktów nauczania rury łączącej
+    * @param [in] extAxisFlag Czy włączyć oś rozszerzenia; 0-niewłączony; 1-włączony
+    * @param [in] exaxisPos Pozycja osi rozszerzenia punktu początkowego
+    * @param [in] tool Numer układu narzędzia
+    * @param [in] wobj Numer układu przedmiotu
+    * @param [in] vel Procent prędkości
+    * @param [in] acc Procent przyspieszenia
+    * @param [in] ovl Współczynnik skalowania prędkości
+    * @param [in] oacc Współczynnik skalowania przyspieszenia
+    * @param [in] moveType Typ ruchu; 0-PTP；1-LIN
+    * @param [in] moveDirection Kierunek ruchu; 0-zgodnie z ruchem wskazówek zegara；1-przeciwnie do ruchu wskazówek zegara
+    * @param [in] offset Wartość przesunięcia
+    * @return Kod błędu
     */
     public int MoveToIntersectLineStart(DescPose[] mainPoint, ExaxisPos[] mainExaxisPos, DescPose[] piecePoint, ExaxisPos[] pieceExaxisPos, int extAxisFlag, ExaxisPos exaxisPos, int tool, int wobj, double vel, double acc, double ovl, double oacc, int moveType, int moveDirection, DescPose offset);
             
-相贯线运动
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Ruch po linii przecięcia rur
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief 相贯线运动
-    * @param [in] mainPoint 主管6个示教点的笛卡尔位姿
-    * @param [in] mainExaxisPos 主管6个示教点扩展轴位置
-    * @param [in] piecePoint 辅管6个示教点的笛卡尔位姿
-    * @param [in] pieceExaxisPos 拼接管6个示教点扩展轴位置
-    * @param [in] extAxisFlag 是否启用扩展轴；0-不启用；1-启用
-    * @param [in] exaxisPos 起点扩展轴位置
-    * @param [in] tool 工具坐标系编号
-    * @param [in] wobj 工件坐标系编号
-    * @param [in] vel 速度百分比
-    * @param [in] acc 加速度百分比
-    * @param [in] ovl 速度缩放因子
-    * @param [in] oacc 加速度缩放因子
-    * @param [in] moveDirection 运动方向; 0-顺时针；1-逆时针
-    * @param [in] offset 偏移量
-    * @return 错误码
+    * @brief Ruch po linii przecięcia rur
+    * @param [in] mainPoint Pozycje kartezjańskie 6 punktów nauczania rury głównej
+    * @param [in] mainExaxisPos Pozycje osi rozszerzenia 6 punktów nauczania rury głównej
+    * @param [in] piecePoint Pozycje kartezjańskie 6 punktów nauczania rury pomocniczej
+    * @param [in] pieceExaxisPos Pozycje osi rozszerzenia 6 punktów nauczania rury łączącej
+    * @param [in] extAxisFlag Czy włączyć oś rozszerzenia; 0-niewłączony; 1-włączony
+    * @param [in] exaxisPos Pozycje osi rozszerzenia punktu początkowego
+    * @param [in] tool Numer układu narzędzia
+    * @param [in] wobj Numer układu przedmiotu
+    * @param [in] vel Procent prędkości
+    * @param [in] acc Procent przyspieszenia
+    * @param [in] ovl Współczynnik skalowania prędkości
+    * @param [in] oacc Współczynnik skalowania przyspieszenia
+    * @param [in] moveDirection Kierunek ruchu; 0-zgodnie z ruchem wskazówek zegara；1-przeciwnie do ruchu wskazówek zegara
+    * @param [in] offset Wartość przesunięcia
+    * @return Kod błędu
     */
     public int MoveIntersectLine(DescPose[] mainPoint, ExaxisPos[] mainExaxisPos, DescPose[] piecePoint, ExaxisPos[] pieceExaxisPos, int extAxisFlag, ExaxisPos[] exaxisPos, int tool, int wobj, double vel, double acc, double ovl, double oacc, int moveDirection, DescPose offset);
                 
-机器人相贯线运动代码示例
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Przykład kodu ruchu robota po linii przecięcia rur
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
@@ -1834,19 +1910,21 @@ FIR滤波代码示例
         return ;
     }
                 
-原地空运动
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Ruch w miejscu (pusty ruch)
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief 原地空运动
-    * @return 错误码
+    * @brief Ruch w miejscu (pusty ruch)
+    * @return Kod błędu
     */
     public int MoveStationary()
 
-原地空运动代码示例
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Przykład kodu ruchu w miejscu
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
@@ -1862,34 +1940,37 @@ FIR滤波代码示例
         robot.Sleep(9999999);
     }
 
-定点摆动开始
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Rozpoczęcie wahadła w punkcie stałym
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief 定点摆动开始
-    * @param [in] weaveNum 摆动编号[0-7]
-    * @param [in] mode 0-工具坐标系；1-参考点
-    * @param [in] refPoint 参考点笛卡尔坐标[x,y,z,a,b,c]
-    * @param [in] weaveTime 摆动时间[s]
-    * @return 错误码
+    * @brief Rozpoczęcie wahadła w punkcie stałym
+    * @param [in] weaveNum Numer wahadła [0-7]
+    * @param [in] mode 0-układ narzędzia; 1-punkt odniesienia
+    * @param [in] refPoint Współrzędne kartezjańskie punktu odniesienia [x,y,z,a,b,c]
+    * @param [in] weaveTime Czas wahadła [s]
+    * @return Kod błędu
     */
     public int OriginPointWeaveStart(int weaveNum, int mode, DescPose refPoint, double weaveTime)
     
-定点摆动结束
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Zakończenie wahadła w punkcie stałym
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief 定点摆动结束
-    * @return 错误码
+    * @brief Zakończenie wahadła w punkcie stałym
+    * @return Kod błędu
     */
     public int OriginPointWeaveEnd();
         
-定点摆动的SDK代码示例
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Przykład kodu SDK dla wahadła w punkcie stałym
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
@@ -1916,8 +1997,9 @@ FIR滤波代码示例
         return 0;
     }
 
-定点摆动（包含激光及扩展轴）的SDK代码示例
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Przykład kodu SDK dla wahadła w punkcie stałym (z laserem i osią rozszerzenia)
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
@@ -1975,28 +2057,30 @@ FIR滤波代码示例
         return 0;
     }
     
-关节空间速度伺服模式运动
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Ruch w trybie serwo prędkościowym w przestrzeni przegubów
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief  关节空间速度伺服模式运动
-    * @param   joint_vel  6个目标关节速度,单位deg/s
-    * @param   exis_vel  4个外部轴速度,单位deg/s
-    * @param   acc  加速度百分比，范围[0~100],暂不开放，默认为0
-    * @param   vel  速度百分比，范围[0~100]，暂不开放，默认为0
-    * @param   cmdT  指令下发周期，单位s，建议范围[0.001~0.0016]
-    * @param   filterT 滤波时间，单位s，暂不开放，默认为0
-    * @param   gain  目标位置的比例放大器，暂不开放，默认为0
-    * @param   id  servoJ指令ID,默认为0
-    * @param   comType 指令下发类型；0-xmlrpc；1-UDP(对应机器人20007端口)
-    * @return  错误码
+    * @brief  Ruch w trybie serwo prędkościowym w przestrzeni przegubów
+    * @param   joint_vel  6 docelowych prędkości przegubów, jednostka deg/s
+    * @param   exis_vel  4 prędkości zewnętrznych osi, jednostka deg/s
+    * @param   acc  Procent przyspieszenia, zakres [0~100], tymczasowo niedostępne, domyślnie 0
+    * @param   vel  Procent prędkości, zakres [0~100], tymczasowo niedostępne, domyślnie 0
+    * @param   cmdT  Okres wysyłania instrukcji, jednostka s, zalecany zakres [0.001~0.0016]
+    * @param   filterT Czas filtrowania, jednostka s, tymczasowo niedostępne, domyślnie 0
+    * @param   gain  Wzmocnienie proporcjonalne pozycji docelowej, tymczasowo niedostępne, domyślnie 0
+    * @param   id  ID instrukcji servoJ, domyślnie 0
+    * @param   comType Typ wysyłania instrukcji; 0-xmlrpc; 1-UDP (odpowiadający portowi 20007 robota)
+    * @return  Kod błędu
     */
     public int ServoJV(double[] joint_vel, double[] exis_vel, double acc, double vel, double cmdT, double filterT, double gain, int id, int comType)
 
-关节空间速度伺服模式运动代码示例
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Przykład kodu ruchu w trybie serwo prędkościowym w przestrzeni przegubów
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
@@ -2021,50 +2105,54 @@ FIR滤波代码示例
         return 0;
     }
 
-关节MIT控制开始
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Rozpoczęcie sterowania MIT przegubów
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief 关节MIT控制开始
-    * @param  comType 指令下发类型；0-xmlrpc；1-UDP(对应机器人20007端口)
-    * @return 错误码
+    * @brief Rozpoczęcie sterowania MIT przegubów
+    * @param  comType Typ wysyłania instrukcji; 0-xmlrpc; 1-UDP (odpowiadający portowi 20007 robota)
+    * @return Kod błędu
     */
     errno_t ServoMITStart(int comType = 0);
 
-关节MIT控制结束
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Zakończenie sterowania MIT przegubów
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief 关节MIT控制结束
-    * @param  comType 指令下发类型；0-xmlrpc；1-UDP(对应机器人20007端口)
-    * @return 错误码
+    * @brief Zakończenie sterowania MIT przegubów
+    * @param  comType Typ wysyłania instrukcji; 0-xmlrpc; 1-UDP (odpowiadający portowi 20007 robota)
+    * @return Kod błędu
     */
     public int ServoMITEnd(int comType);
 
-关节MIT控制
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Sterowanie MIT przegubów
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief 关节MIT控制
-    * @param  posGain j1~j6关节位置增益
-    * @param  desPos j1~j6关节期望位置 单位:deg
-    * @param  velGain j1~j6关节速度增益
-    * @param  desVel j1~j6关节期望速度 单位:deg/s
-    * @param  torque_ff j1~j6前馈力矩 单位:Nm
-    * @param  interval 指令周期，单位s，范围[0.001~0.008]
-    * @param  comType 指令下发类型；0-xmlrpc；1-UDP(对应机器人20007端口)
-    * @return 错误码
+    * @brief Sterowanie MIT przegubów
+    * @param  posGain Wzmocnienie pozycji przegubów j1~j6
+    * @param  desPos Oczekiwana pozycja przegubów j1~j6 jednostka:deg
+    * @param  velGain Wzmocnienie prędkości przegubów j1~j6
+    * @param  desVel Oczekiwana prędkość przegubów j1~j6 jednostka:deg/s
+    * @param  torque_ff Moment wyprzedzający j1~j6 jednostka:Nm
+    * @param  interval Okres instrukcji, jednostka s, zakres [0.001~0.008]
+    * @param  comType Typ wysyłania instrukcji; 0-xmlrpc; 1-UDP (odpowiadający portowi 20007 robota)
+    * @return Kod błędu
     */
     public int ServoMIT(double[] posGain, double[] desPos, double[] velGain, double[] desVel, double[] torque_ff, double interval, int comType)
 
-机器人关节MIT控制代码示例
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Przykład kodu sterowania MIT przegubów robota
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 

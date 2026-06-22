@@ -1,54 +1,54 @@
-其他接口
+Inne interfejsy
 ================
 
 .. toctree:: 
     :maxdepth: 5
 
-获取SSH公钥
-+++++++++++++++++++++++++++++++++++
+Pobieranie klucza publicznego SSH
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief 获取SSH公钥
-    * @param [out] keygen 公钥
-    * @return 错误码
+    * @brief Pobiera klucz publiczny SSH
+    * @param [out] keygen Klucz publiczny
+    * @return Kod błędu
     */
     int GetSSHKeygen(String[] keygen)
 
-下发SCP指令
-+++++++++++++++++++++++++++++++++++++++++++++++++++++
+Wysyłanie polecenia SCP
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: Java SDK-v1.0.6-3.8.3
 
 .. code-block:: Java
     :linenos:
 
     /** 
-    * @brief 下发SCP指令
-    * @param [in] mode 0-上传（上位机->控制器），1-下载（控制器->上位机）
-    * @param [in] sshname 上位机用户名
-    * @param [in] sship 上位机ip地址
-    * @param [in] usr_file_url 上位机文件路径
-    * @param [in] robot_file_url 机器人控制器文件路径
-    * @return 错误码
+    * @brief Wysyła polecenie SCP
+    * @param [in] mode 0-upload (komputer nadrzędny -> kontroler), 1-pobranie (kontroler -> komputer nadrzędny)
+    * @param [in] sshname Nazwa użytkownika komputera nadrzędnego
+    * @param [in] sship Adres IP komputera nadrzędnego
+    * @param [in] usr_file_url Ścieżka do pliku na komputerze nadrzędnym
+    * @param [in] robot_file_url Ścieżka do pliku w kontrolerze robota
+    * @return Kod błędu
     */
     int SetSSHScpCmd(int mode, String sshname, String sship, String usr_file_url, String robot_file_url)
 
-计算指定路径下文件的MD5值
-+++++++++++++++++++++++++++++++++++++++++++++++++++++
+Obliczanie wartości MD5 pliku w określonej ścieżce
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief 计算指定路径下文件的MD5值
-    * @param [in] file_path 文件路径包含文件名，默认Traj文件夹路径为:"/fruser/traj/",如"/fruser/traj/trajHelix_aima_1.txt"
-    * @param [out] md5 文件MD5值
-    * @return 错误码
+    * @brief Oblicza wartość MD5 pliku w określonej ścieżce
+    * @param [in] file_path Ścieżka do pliku wraz z nazwą. Domyślna ścieżka folderu Traj to:"/fruser/traj/", np. "/fruser/traj/trajHelix_aima_1.txt"
+    * @param [out] md5 Wartość MD5 pliku
+    * @return Kod błędu
     */
     int ComputeFileMD5(String file_path, String[] md5)
 
-机器人SSH、MD5指令代码示例
-+++++++++++++++++++++++++++++++++++++++++++++++++++++
+Przykład kodu dla poleceń SSH i MD5 robota
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
@@ -74,30 +74,30 @@
         return 0;
     }
 
-设置机器人 20004 端口反馈周期
-++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Ustawianie okresu zwrotnego portu 20004 robota
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief 设置机器人 20004 端口反馈周期
-    * @param [in] period 机器人 20004 端口反馈周期(ms)
-    * @return  错误码
+    * @brief Ustawia okres zwrotny portu 20004 robota
+    * @param [in] period Okres zwrotny portu 20004 robota (ms)
+    * @return  Kod błędu
     */
     public int SetRobotRealtimeStateSamplePeriod(int period)
 
-获取机器人 20004 端口反馈周期
-++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Pobieranie okresu zwrotnego portu 20004 robota
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief  获取机器人 20004 端口反馈周期
-    * @return  List[0]:错误码; List[1]:机器人 20004 端口反馈周期(ms)
+    * @brief  Pobiera okres zwrotny portu 20004 robota
+    * @return  List[0]:Kod błędu; List[1]:Okres zwrotny portu 20004 robota (ms)
     */
     public List<Integer> GetRobotRealtimeStateSamplePeriod()
 
-机器人20004端口状态反馈周期配置代码示例
+Przykład konfiguracji okresu zwrotnego stanu portu 20004 robota
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
@@ -112,32 +112,32 @@
         return 0;
     }
 
-机器人软件升级
+Aktualizacja oprogramowania robota
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
     /**
-     * @brief 机器人软件升级
-     * @param [in] filePath 软件升级包全路径
-     * @param [in] block 是否阻塞至升级完成 true:阻塞；false:非阻塞
-     * @return  错误码
+     * @brief Aktualizacja oprogramowania robota
+     * @param [in] filePath Pełna ścieżka pakietu aktualizacyjnego oprogramowania
+     * @param [in] block Czy blokować do czasu zakończenia aktualizacji: true - blokuj; false - nieblokujący
+     * @return  Kod błędu
      */
     public int SoftwareUpgrade(String filePath, boolean block)
 
-获取机器人软件升级状态
+Pobieranie statusu aktualizacji oprogramowania robota
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief  获取机器人软件升级状态
-    * @return  List[0]:错误码; List[1]:机器人软件升级状态 0-空闲中或上传升级包中；1~100：升级完成百分比；-1:升级软件失败；-2：校验失败；-3：版本校验失败；-4：解压失败；-5：用户配置升级失败；-6：外设配置升级失败；-7：扩展轴配置升级失败；-8：机器人配置升级失败；-9：DH参数配置升级失败
+    * @brief  Pobiera status aktualizacji oprogramowania robota
+    * @return  List[0]:Kod błędu; List[1]:Status aktualizacji oprogramowania robota: 0-bezczynność lub przesyłanie pakietu aktualizacyjnego; 1~100:procent ukończenia aktualizacji; -1:niepowodzenie aktualizacji oprogramowania; -2:niepowodzenie weryfikacji; -3:niepowodzenie weryfikacji wersji; -4:niepowodzenie dekompresji; -5:niepowodzenie aktualizacji konfiguracji użytkownika; -6:niepowodzenie aktualizacji konfiguracji urządzeń peryferyjnych; -7:niepowodzenie aktualizacji konfiguracji osi rozszerzenia; -8:niepowodzenie aktualizacji konfiguracji robota; -9:niepowodzenie aktualizacji konfiguracji parametrów DH
     */
     public List<Integer> GetSoftwareUpgradeState()
 
-机器人软件升级代码示例
-+++++++++++++++++++++++++++++++++++++++
+Przykład kodu aktualizacji oprogramowania robota
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
@@ -153,47 +153,47 @@
         }
     }
 
-下载点位表数据库
-+++++++++++++++++++++++++++++++++++
+Pobieranie bazy danych tabeli punktów
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
     /** 
-    * @brief 下载点位表数据库 
-    * @param [in] pointTableName 要下载的点位表名称    pointTable1.db
-    * @param [in] saveFilePath 下载点位表的存储路径   C://test/
-    * @return 错误码 
+    * @brief Pobiera bazę danych tabeli punktów 
+    * @param [in] pointTableName Nazwa tabeli punktów do pobrania    pointTable1.db
+    * @param [in] saveFilePath Ścieżka zapisu pobranej tabeli punktów   C://test/
+    * @return Kod błędu 
     */
     int PointTableDownLoad(String pointTableName, String saveFilePath);
 
-上传点位表数据库
-+++++++++++++++++++++++++++++++++++
+Przesyłanie bazy danych tabeli punktów
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
     /** 
-    * @brief 上传点位表数据库 
-    * @param [in] pointTableFilePath 上传点位表的全路径名   C://test/pointTable1.db
-    * @return 错误码 
+    * @brief Przesyła bazę danych tabeli punktów 
+    * @param [in] pointTableFilePath Pełna ścieżka przesyłanej tabeli punktów   C://test/pointTable1.db
+    * @return Kod błędu 
     */
     int PointTableUpLoad(String pointTableFilePath);
 
-点位表更新lua文件
-+++++++++++++++++++++++++++++++++++
+Aktualizacja pliku Lua tabeli punktów
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
     /** 
-    * @brief 点位表更新lua文件
-    * @param [in] pointTableName 要切换的点位表名称   "pointTable1.db",当点位表为空，即""时，表示将lua程序更新为未应用点位表的初始程序
-    * @param [in] luaFileName 要更新的lua文件名称   "testPointTable.lua"
-    * @param [out] errorStr 切换点位表错误信息
-    * @return 错误码 
+    * @brief Aktualizuje plik Lua tabeli punktów
+    * @param [in] pointTableName Nazwa tabeli punktów do przełączenia   "pointTable1.db". Gdy tabela punktów jest pusta, tzn. "", oznacza to aktualizację programu Lua do programu początkowego bez zastosowanej tabeli punktów
+    * @param [in] luaFileName Nazwa pliku Lua do aktualizacji   "testPointTable.lua"
+    * @param [out] errorStr Informacja o błędzie przełączania tabeli punktów
+    * @return Kod błędu 
     */
     int PointTableUpdateLua(String pointTableName, String luaFileName, String errorStr);
 
-机器人点位表操作代码示例
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Przykład operacji na tabeli punktów robota
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
@@ -215,50 +215,50 @@
         return 0;
     }
 
-控制器日志下载
-+++++++++++++++++++++++++++++++++++++++++++++++++++++
+Pobieranie logów kontrolera
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: Java SDK-v1.0.4-3.8.1
 
 .. code-block:: Java
     :linenos:
 
     /** 
-    * @brief 控制器日志下载
-    * @param [in] savePath 保存文件路径"D://zDown/"
-    * @return 错误码
+    * @brief Pobiera logi kontrolera
+    * @param [in] savePath Ścieżka zapisu pliku "D://zDown/"
+    * @return Kod błędu
     */
     int RbLogDownload(String savePath);
 
-所有数据源下载
-+++++++++++++++++++++++++++++++++++++++++++++++++++++
+Pobieranie wszystkich źródeł danych
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: Java SDK-v1.0.4-3.8.1
 
 .. code-block:: Java
     :linenos:
 
     /** 
-    * @brief 所有数据源下载
-    * @param [in] savePath 保存文件路径"D://zDown/"
-    * @return 错误码
+    * @brief Pobiera wszystkie źródła danych
+    * @param [in] savePath Ścieżka zapisu pliku "D://zDown/"
+    * @return Kod błędu
     */
     int AllDataSourceDownload(String savePath);
 
-数据备份包下载
-+++++++++++++++++++++++++++++++++++++++++++++++++++++
+Pobieranie pakietu kopii zapasowej danych
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: Java SDK-v1.0.4-3.8.1
 
 .. code-block:: Java
     :linenos:
 
     /** 
-    * @brief 数据备份包下载
-    * @param [in] savePath 保存文件路径"D://zDown/"
-    * @return 错误码
+    * @brief Pobiera pakiet kopii zapasowej danych
+    * @param [in] savePath Ścieżka zapisu pliku "D://zDown/"
+    * @return Kod błędu
     */
     int DataPackageDownload(String savePath);
 
-下载控制器数据代码示例
-+++++++++++++++++++++++++++++++++++
+Przykład kodu pobierania danych z kontrolera
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
@@ -272,81 +272,81 @@
         return 0;
     }
 
-设置编码器升级
-+++++++++++++++++++++++++++++++++++++++++++++++++++++
+Ustawianie aktualizacji enkodera
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: Java SDK-v1.0.7-3.8.4
 
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief 设置编码器升级
-    * @param [in] path 本地升级包全路径(D://zUP/XXXXX.bin)
-    * @return 错误码
+    * @brief Ustawia aktualizację enkodera
+    * @param [in] path Pełna ścieżka lokalnego pakietu aktualizacyjnego (D://zUP/XXXXX.bin)
+    * @return Kod błędu
     */
     int SetEncoderUpgrade(String path)
 
-设置关节固件升级
-+++++++++++++++++++++++++++++++++++++++++++++++++++++
+Ustawianie aktualizacji firmware przegubów
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: Java SDK-v1.0.7-3.8.4
 
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief 设置关节固件升级
-    * @param [in] type 升级文件类型；1-升级固件；2-升级从站配置文件
-    * @param [in] path 本地升级包全路径(D://zUP/XXXXX.bin)
-    * @return 错误码
+    * @brief Ustawia aktualizację firmware przegubów
+    * @param [in] type Typ pliku aktualizacyjnego; 1-aktualizacja firmware; 2-aktualizacja pliku konfiguracyjnego stacji podrzędnej
+    * @param [in] path Pełna ścieżka lokalnego pakietu aktualizacyjnego (D://zUP/XXXXX.bin)
+    * @return Kod błędu
     */
     public int SetJointFirmwareUpgrade(int type, String path)
 
-设置控制箱固件升级
-+++++++++++++++++++++++++++++++++++++++++++++++++++++
+Ustawianie aktualizacji firmware skrzynki kontrolnej
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: Java SDK-v1.0.7-3.8.4
 
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief 设置控制箱固件升级
-    * @param [in] type 升级文件类型；1-升级固件；2-升级从站配置文件
-    * @param [in] path 本地升级包全路径(D://zUP/XXXXX.bin)
-    * @return 错误码
+    * @brief Ustawia aktualizację firmware skrzynki kontrolnej
+    * @param [in] type Typ pliku aktualizacyjnego; 1-aktualizacja firmware; 2-aktualizacja pliku konfiguracyjnego stacji podrzędnej
+    * @param [in] path Pełna ścieżka lokalnego pakietu aktualizacyjnego (D://zUP/XXXXX.bin)
+    * @return Kod błędu
     */
     public int SetCtrlFirmwareUpgrade(int type, String path)
 
-设置末端固件升级
-+++++++++++++++++++++++++++++++++++++++++++++++++++++
+Ustawianie aktualizacji firmware końcówki
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: Java SDK-v1.0.7-3.8.4
 
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief 设置末端固件升级
-    * @param [in] type 升级文件类型；1-升级固件；2-升级从站配置文件
-    * @param [in] path 本地升级包全路径(D://zUP/XXXXX.bin)
-    * @return 错误码
+    * @brief Ustawia aktualizację firmware końcówki
+    * @param [in] type Typ pliku aktualizacyjnego; 1-aktualizacja firmware; 2-aktualizacja pliku konfiguracyjnego stacji podrzędnej
+    * @param [in] path Pełna ścieżka lokalnego pakietu aktualizacyjnego (D://zUP/XXXXX.bin)
+    * @return Kod błędu
     */
     public int SetEndFirmwareUpgrade(int type, String path)
 
-关节全参数配置文件升级
-+++++++++++++++++++++++++++++++++++++++++++++++++++++
+Aktualizacja pliku konfiguracji pełnych parametrów przegubu
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: Java SDK-v1.0.7-3.8.4
 
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief 关节全参数配置文件升级
-    * @param [in] path 本地升级包全路径(D://zUP/XXXXX.bin)
-    * @return 错误码
+    * @brief Aktualizacja pliku konfiguracji pełnych parametrów przegubu
+    * @param [in] path Pełna ścieżka lokalnego pakietu aktualizacyjnego (D://zUP/XXXXX.bin)
+    * @return Kod błędu
     */
     public int JointAllParamUpgrade(String path)
 
-机器人从站固件升级代码示例
-+++++++++++++++++++++++++++++++++++++++++++++++++++++
+Przykład kodu aktualizacji firmware stacji podrzędnej robota
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
@@ -376,75 +376,75 @@
         robot.CloseRPC();
     }
 
-机器人操作系统升级(LA控制箱)
-+++++++++++++++++++++++++++++++++++++++++++++++++++++
+Aktualizacja systemu operacyjnego robota (skrzynka kontrolna LA)
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: Java SDK-v1.0.9-3.8.6
 
 .. code-block:: Java
     :linenos:
 
     /**
-     * @brief 机器人操作系统升级(LA控制箱)
-     * @param [in] filePath 操作系统升级包全路径
-     * @return  错误码
+     * @brief Aktualizacja systemu operacyjnego robota (skrzynka kontrolna LA)
+     * @param [in] filePath Pełna ścieżka pakietu aktualizacyjnego systemu operacyjnego
+     * @return  Kod błędu
      */
     public int KernelUpgrade(String filePath)
 
-获取机器人操作系统升级结果(LA控制箱)
-+++++++++++++++++++++++++++++++++++++++++++++++++++++
+Pobieranie wyniku aktualizacji systemu operacyjnego robota (skrzynka kontrolna LA)
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: Java SDK-v1.0.9-3.8.6
 
 .. code-block:: Java
     :linenos:
 
     /**
-     * @brief 获取机器人操作系统升级结果(LA控制箱)
-     * @param [out] result 升级结果：0:成功；-1:失败
-     * @return  错误码
+     * @brief Pobiera wynik aktualizacji systemu operacyjnego robota (skrzynka kontrolna LA)
+     * @param [out] result Wynik aktualizacji: 0:sukces; -1:niepowodzenie
+     * @return  Kod błędu
      */
     public int GetKernelUpgradeResult(int[] result)
 
-机器人MCU日志生成
-+++++++++++++++++++++++++++++++++++++++++++++++++++++
+Generowanie logów MCU robota
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief 机器人MCU日志生成
-    * @return 错误码
+    * @brief Generuje logi MCU robota
+    * @return Kod błędu
     */
     public int RobotMCULogCollect()
 
-设置端口通讯断开时停止机器人运行
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Ustawianie zatrzymania robota po rozłączeniu komunikacji portu
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief 设置端口通讯断开时停止机器人运行
-    * @param pordID 端口编号 0-8080；1-8083；2-20002；3-20004
-    * @param enable 0-关闭；1-开启
-    * @param confirmTime 通讯中断确认时长(ms)[0-5000]
-    * @return 错误码
+    * @brief Ustawia zatrzymanie robota po rozłączeniu komunikacji portu
+    * @param portID Numer portu 0-8080; 1-8083; 2-20002; 3-20004
+    * @param enable 0-wyłącz; 1-włącz
+    * @param confirmTime Czas potwierdzenia przerwania komunikacji (ms)[0-5000]
+    * @return Kod błędu
     */
     public int SetRobotStopOnComDisc(int portID, bool enable, int confirmTime)
     
-获取端口通讯断开时停止机器人运行参数
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Pobieranie parametrów zatrzymania robota po rozłączeniu komunikacji portu
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief 获取端口通讯断开时停止机器人运行参数
-    * @param pordID 端口编号 0-8080；1-8083；2-20002；3-20004
-    * @param enable 结果数组，index 0: 0-关闭；1-开启
-    * @param confirmTime 结果数组，index 0: 通讯中断确认时长(ms)[0-5000] 
-    * @return 错误码
+    * @brief Pobiera parametry zatrzymania robota po rozłączeniu komunikacji portu
+    * @param portID Numer portu 0-8080; 1-8083; 2-20002; 3-20004
+    * @param enable Tablica wyników, index 0: 0-wyłącz; 1-włącz
+    * @param confirmTime Tablica wyników, index 0: Czas potwierdzenia przerwania komunikacji (ms)[0-5000] 
+    * @return Kod błędu
     */
-    public int GetRobotStopOnComDisc(int pordID, int[] enable, int[] confirmTime)
+    public int GetRobotStopOnComDisc(int portID, int[] enable, int[] confirmTime)
 
-端口通讯断开时停止机器人运行参数代码示例
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Przykład kodu parametrów zatrzymania robota po rozłączeniu komunikacji portu
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
@@ -471,20 +471,20 @@
         return;
     }
 
-UDP发送指令帧
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Wysyłanie ramki polecenia UDP
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief UDP发送指令帧
-    * @param 指令帧
-    * @return 错误码
+    * @brief Wysyła ramkę polecenia UDP
+    * @param ramka polecenia
+    * @return Kod błędu
     */
     public int SendUDPFrame(String frame)
     
-关于UDP通信的SDK代码示例
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Przykład kodu SDK dla komunikacji UDP
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
@@ -516,22 +516,22 @@ UDP发送指令帧
         robot.Sleep(2000);
     }
         
-设置用户自定义机器人末端灯色
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Ustawianie niestandardowego koloru lampki końcówki robota przez użytkownika
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief 设置用户自定义机器人末端灯色
-    * @param r 末端红灯控制；0-灭；1-亮
-    * @param g 末端绿灯控制；0-灭；1-亮
-    * @param b 末端蓝灯控制；0-灭；1-亮
-    * @return 错误码
+    * @brief Ustawia niestandardowy kolor lampki końcówki robota przez użytkownika
+    * @param r Sterowanie czerwoną lampką końcówki; 0-wyłącz; 1-włącz
+    * @param g Sterowanie zieloną lampką końcówki; 0-wyłącz; 1-włącz
+    * @param b Sterowanie niebieską lampką końcówki; 0-wyłącz; 1-włącz
+    * @return Kod błędu
     */
     public int SetUserLEDColor(bool r, bool g, bool b)
             
-设置用户自定义机器人末端灯色的SDK代码示例
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Przykład kodu SDK ustawiania niestandardowego koloru lampki końcówki robota przez użytkownika
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 

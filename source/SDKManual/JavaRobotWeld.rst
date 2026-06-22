@@ -1,143 +1,153 @@
-机器人焊接
-=============
+Spawanie robotem
+================
 
 .. toctree:: 
     :maxdepth: 5
 
 
-设置焊接工艺曲线参数
-++++++++++++++++++++++++++++++++++
+Ustawianie parametrów krzywej procesu spawania
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /** 
-    * @brief 设置焊接工艺曲线参数
-    * @param [in] id 焊接工艺编号(1-99)
-    * @param [in] param 焊接工艺参数
-    * @return 错误码 
+    * @brief Ustawianie parametrów krzywej procesu spawania
+    * @param [in] id Numer procesu spawania (1-99)
+    * @param [in] param Parametry procesu spawania
+    * @return Kod błędu 
     */
     int WeldingSetProcessParam(int id, WeldingProcessParam param);
 
-获取焊接工艺曲线参数
-++++++++++++++++++++++++++++++++++
+Pobieranie parametrów krzywej procesu spawania
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /** 
-    * @brief 获取焊接工艺曲线参数
-    * @param [in] id 焊接工艺编号(1-99)
-    * @param [out] param 焊接工艺参数
-    * @return 错误码 
+    * @brief Pobieranie parametrów krzywej procesu spawania
+    * @param [in] id Numer procesu spawania (1-99)
+    * @param [out] param Parametry procesu spawania
+    * @return Kod błędu 
     */
     int WeldingGetProcessParam(int id, WeldingProcessParam param);
 
-设置焊接电流与输出模拟量对应关系
-++++++++++++++++++++++++++++++++++
+Ustawianie zależności między prądem spawania a wyjściowym sygnałem analogowym
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief 设置焊接电流与输出模拟量对应关系
-    * @param [in] relation 关系值
-    * @return 错误码
+    * @brief Ustawianie zależności między prądem spawania a wyjściowym sygnałem analogowym
+    * @param [in] relation Wartość zależności
+    * @return Kod błędu
     */
     int WeldingSetCurrentRelation(WeldCurrentAORelation relation);
 
-设置焊接电压与输出模拟量对应关系
-++++++++++++++++++++++++++++++++++
+Ustawianie zależności między napięciem spawania a wyjściowym sygnałem analogowym
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief 设置焊接电压与输出模拟量对应关系
-    * @param [in] relation 焊接电压-模拟量输出关系值
-    * @return 错误码
+    * @brief Ustawianie zależności między napięciem spawania a wyjściowym sygnałem analogowym
+    * @param [in] relation Wartość zależności napięcie spawania - wyjście analogowe
+    * @return Kod błędu
     */
     int WeldingSetVoltageRelation(WeldVoltageAORelation relation);
 
-获取焊接电流与输出模拟量对应关系
-++++++++++++++++++++++++++++++++++
+Pobieranie zależności między prądem spawania a wyjściowym sygnałem analogowym
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief 获取焊接电流与输出模拟量对应关系
-    * @param [out] relation 关系值
-    * @return 错误码
+    * @brief Pobieranie zależności między prądem spawania a wyjściowym sygnałem analogowym
+    * @param [out] relation Wartość zależności
+    * @return Kod błędu
     */
     int WeldingGetCurrentRelation(WeldCurrentAORelation relation);
 
-获取焊接电压与输出模拟量对应关系
-++++++++++++++++++++++++++++++++++
+Pobieranie zależności między napięciem spawania a wyjściowym sygnałem analogowym
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief 获取焊接电压与输出模拟量对应关系
-    * @param [out] relation 焊接电压-模拟量输出关系值
-    * @return 错误码
+    * @brief Pobieranie zależności między napięciem spawania a wyjściowym sygnałem analogowym
+    * @param [out] relation Wartość zależności napięcie spawania - wyjście analogowe
+    * @return Kod błędu
     */
     int WeldingGetVoltageRelation(WeldVoltageAORelation relation);
 
-设置焊接电流
-++++++++++++++++++++++++++++++++++
+Ustawianie prądu spawania
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief 设置焊接电流
-    * @param [in] ioType 控制IO类型 0-控制箱IO；1-扩展IO
-    * @param [in] current 焊接电流值(A)
-    * @param [in] AOIndex 焊接电流控制箱模拟量输出端口(0-1)
-    * @param [in] blend 是否平滑 0-不平滑；1-平滑
-    * @return 错误码
+    * @brief Ustawianie prądu spawania
+    * @param [in] ioType Typ IO sterowania 0-IO skrzynki kontrolnej; 1-rozszerzone IO
+    * @param [in] current Wartość prądu spawania (A)
+    * @param [in] AOIndex Port wyjścia analogowego prądu spawania skrzynki kontrolnej (0-1)
+    * @param [in] blend Czy wygładzać 0-nie; 1-tak
+    * @return Kod błędu
     */
     int WeldingSetCurrent(int ioType, double current, int AOIndex, int blend);
 
-设置焊接电压
-++++++++++++++++++++++++++++++++++
+Ustawianie napięcia spawania
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief 设置焊接电压
-    * @param [in] ioType 控制IO类型 0-控制箱IO；1-扩展IO
-    * @param [in] voltage 焊接电压值(A)
-    * @param [in] AOIndex 焊接电压控制箱模拟量输出端口(0-1)
-    * @param [in] blend 是否平滑 0-不平滑；1-平滑
-    * @return 错误码
+    * @brief Ustawianie napięcia spawania
+    * @param [in] ioType Typ IO sterowania 0-IO skrzynki kontrolnej; 1-rozszerzone IO
+    * @param [in] voltage Wartość napięcia spawania (V)
+    * @param [in] AOIndex Port wyjścia analogowego napięcia spawania skrzynki kontrolnej (0-1)
+    * @param [in] blend Czy wygładzać 0-nie; 1-tak
+    * @return Kod błędu
     */
     int WeldingSetVoltage(int ioType, double voltage, int AOIndex, int blend);
 
-设置摆动参数
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Ustawianie parametrów ruchu wahadłowego
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. versionchanged:: Java SDK-v1.0.5-3.8.2
 
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief 设置摆动参数
-    * @param [in] weaveNum 摆焊参数配置编号
-    * @param [in] weaveType 摆动类型 0-平面三角波摆动；1-垂直L型三角波摆动；2-顺时针圆形摆动；3-逆时针圆形摆动；4-平面正弦波摆动；5-垂直L型正弦波摆动；6-垂直三角波摆动；7-垂直正弦波摆动
-    * @param [in] weaveFrequency 摆动频率(Hz)
-    * @param [in] weaveIncStayTime 等待模式 0-周期不包含等待时间；1-周期包含等待时间
-    * @param [in] weaveRange 摆动幅度(mm)
-    * @param [in] weaveLeftRange 垂直三角摆动左弦长度(mm)
-    * @param [in] weaveRightRange 垂直三角摆动右弦长度(mm)
-    * @param [in] additionalStayTime 垂直三角摆动垂三角点停留时间(mm)
-    * @param [in] weaveLeftStayTime 摆动左停留时间(ms)
-    * @param [in] weaveRightStayTime 摆动右停留时间(ms)
-    * @param [in] weaveCircleRadio 圆形摆动-回调比率(0-100%)
-    * @param [in] weaveStationary 摆动位置等待，0-等待时间内位置继续移动；1-等待时间内位置静止
-    * @param [in] weaveYawAngle 摆动方向方位角(绕摆动Z轴旋转)，单位°
-    * @param [in] weaveRotAngle 摆动方向方位角(绕摆动X轴旋转)，单位°
-    * @return 错误码
+    * @brief Ustawianie parametrów ruchu wahadłowego
+    * @param [in] weaveNum Numer konfiguracji parametrów spawania wahadłowego
+    * @param [in] weaveType Typ wahadła 0-płaskie wahadło trójkątne; 1-pionowe wahadło trójkątne typu L; 2-kołowe wahadło zgodne z ruchem wskazówek zegara; 3-kołowe wahadło przeciwnie do ruchu wskazówek zegara; 4-płaskie wahadło sinusoidalne; 5-pionowe wahadło sinusoidalne typu L; 6-pionowe wahadło trójkątne; 7-pionowe wahadło sinusoidalne
+    * @param [in] weaveFrequency Częstotliwość wahadła (Hz)
+    * @param [in] weaveIncStayTime Tryb oczekiwania 0-cykl nie zawiera czasu oczekiwania; 1-cykl zawiera czas oczekiwania
+    * @param [in] weaveRange Amplituda wahadła (mm)
+    * @param [in] weaveLeftRange Długość lewej cięciwy w pionowym wahadle trójkątnym (mm)
+    * @param [in] weaveRightRange Długość prawej cięciwy w pionowym wahadle trójkątnym (mm)
+    * @param [in] additionalStayTime Czas postoju w punkcie wierzchołkowym pionowego wahadła trójkątnego (ms)
+    * @param [in] weaveLeftStayTime Czas postoju po lewej stronie wahadła (ms)
+    * @param [in] weaveRightStayTime Czas postoju po prawej stronie wahadła (ms)
+    * @param [in] weaveCircleRadio Wahadło kołowe - współczynnik powrotu (0-100%)
+    * @param [in] weaveStationary Oczekiwanie w pozycji wahadła, 0-ruch kontynuowany w czasie oczekiwania; 1-pozycja nieruchoma w czasie oczekiwania
+    * @param [in] weaveYawAngle Azymut kierunku wahadła (obrót wokół osi Z wahadła), jednostka °
+    * @param [in] weaveRotAngle Azymut kierunku wahadła (obrót wokół osi X wahadła), jednostka °
+    * @return Kod błędu
     */
     int WeaveSetPara(int weaveNum, int weaveType, double weaveFrequency, int weaveIncStayTime, double weaveRange, double weaveLeftRange, double weaveRightRange, int additionalStayTime, int weaveLeftStayTime, int weaveRightStayTime, int weaveCircleRadio, int weaveStationary, double weaveYawAngle,double weaveRotAngle)
 
-设置焊接参数代码示例
-++++++++++++++++++++++++++++++++++++++++++++++++
+Przykład kodu ustawiania parametrów spawania
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
@@ -217,217 +227,234 @@
         return 0;
     }
 
-即时设置摆动参数
-++++++++++++++++++++++++++++++++++
+Natychmiastowe ustawianie parametrów ruchu wahadłowego
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief 即时设置摆动参数
-    * @param [in] weaveNum 摆焊参数配置编号
-    * @param [in]weaveType 摆动类型 0-平面三角波摆动；1-垂直L型三角波摆动；2-顺时针圆形摆动；3-逆时针圆形摆动；4-平面正弦波摆动；5-垂直L型正弦波摆动；6-垂直三角波摆动；7-垂直正弦波摆动
-    * @param [in]weaveFrequency 摆动频率(Hz)
-    * @param [in]weaveIncStayTime 等待模式 0-周期不包含等待时间；1-周期包含等待时间
-    * @param [in]weaveRange 摆动幅度(mm)
-    * @param [in]weaveLeftStayTime 摆动左停留时间(ms)
-    * @param [in]weaveRightStayTime 摆动右停留时间(ms)
-    * @param [in]weaveCircleRadio 圆形摆动-回调比率(0-100%)
-    * @param [in]weaveStationary 摆动位置等待，0-等待时间内位置继续移动；1-等待时间内位置静止
-    * @return 错误码
+    * @brief Natychmiastowe ustawianie parametrów ruchu wahadłowego
+    * @param [in] weaveNum Numer konfiguracji parametrów spawania wahadłowego
+    * @param [in]weaveType Typ wahadła 0-płaskie wahadło trójkątne; 1-pionowe wahadło trójkątne typu L; 2-kołowe wahadło zgodne z ruchem wskazówek zegara; 3-kołowe wahadło przeciwnie do ruchu wskazówek zegara; 4-płaskie wahadło sinusoidalne; 5-pionowe wahadło sinusoidalne typu L; 6-pionowe wahadło trójkątne; 7-pionowe wahadło sinusoidalne
+    * @param [in]weaveFrequency Częstotliwość wahadła (Hz)
+    * @param [in]weaveIncStayTime Tryb oczekiwania 0-cykl nie zawiera czasu oczekiwania; 1-cykl zawiera czas oczekiwania
+    * @param [in]weaveRange Amplituda wahadła (mm)
+    * @param [in]weaveLeftStayTime Czas postoju po lewej stronie wahadła (ms)
+    * @param [in]weaveRightStayTime Czas postoju po prawej stronie wahadła (ms)
+    * @param [in]weaveCircleRadio Wahadło kołowe - współczynnik powrotu (0-100%)
+    * @param [in]weaveStationary Oczekiwanie w pozycji wahadła, 0-ruch kontynuowany w czasie oczekiwania; 1-pozycja nieruchoma w czasie oczekiwania
+    * @return Kod błędu
     */
     int WeaveOnlineSetPara(int weaveNum, int weaveType, double weaveFrequency, int weaveIncStayTime, double weaveRange, int weaveLeftStayTime, int weaveRightStayTime, int weaveCircleRadio, int weaveStationary);
 
-设置机器人焊接电弧意外中断检测参数
-++++++++++++++++++++++++++++++++++
+Ustawianie parametrów wykrywania nieoczekiwanego przerwania łuku spawalniczego robota
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /** 
-    * @brief 设置机器人焊接电弧意外中断检测参数
-    * @param [in] checkEnable 是否使能检测；0-不使能；1-使能
-    * @param [in] arcInterruptTimeLength 电弧中断确认时长(ms)
-    * @return 错误码 
+    * @brief Ustawianie parametrów wykrywania nieoczekiwanego przerwania łuku spawalniczego robota
+    * @param [in] checkEnable Czy włączyć wykrywanie; 0-nie; 1-tak
+    * @param [in] arcInterruptTimeLength Czas potwierdzenia przerwania łuku (ms)
+    * @return Kod błędu 
     */
     int WeldingSetCheckArcInterruptionParam(int checkEnable, int arcInterruptTimeLength);
 
-获取机器人焊接电弧意外中断检测参数
-++++++++++++++++++++++++++++++++++
+Pobieranie parametrów wykrywania nieoczekiwanego przerwania łuku spawalniczego robota
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /** 
-    * @brief 获取机器人焊接电弧意外中断检测参数
-    * @return List[0]:错误码; List[1]:double 是否使能检测；0-不使能；1-使能; List[2]:电弧中断确认时长(ms) 
+    * @brief Pobieranie parametrów wykrywania nieoczekiwanego przerwania łuku spawalniczego robota
+    * @return List[0]:Kod błędu; List[1]:double Czy włączyć wykrywanie; 0-nie; 1-tak; List[2]:Czas potwierdzenia przerwania łuku (ms) 
     */
     List<Integer> WeldingGetCheckArcInterruptionParam();
 
-设置机器人焊接中断恢复参数
-++++++++++++++++++++++++++++++++++
+Ustawianie parametrów wznawiania spawania po przerwaniu robota
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /** 
-    * @brief 设置机器人焊接中断恢复参数
-    * @param [in] enable 是否使能焊接中断恢复
-    * @param [in] length 焊缝重叠距离(mm)
-    * @param [in] velocity 机器人回到再起弧点速度百分比(0-100)
-    * @param [in] moveType 机器人运动到再起弧点方式；0-LIN；1-PTP
-    * @return 错误码 
+    * @brief Ustawianie parametrów wznawiania spawania po przerwaniu robota
+    * @param [in] enable Czy włączyć wznawianie spawania po przerwaniu
+    * @param [in] length Długość zakładki spoiny (mm)
+    * @param [in] velocity Procent prędkości powrotu robota do punktu ponownego zapłonu łuku (0-100)
+    * @param [in] moveType Sposób ruchu robota do punktu ponownego zapłonu łuku; 0-LIN; 1-PTP
+    * @return Kod błędu 
     */
     int WeldingSetReWeldAfterBreakOffParam(int enable, double length, double velocity, int moveType);
 
-获取机器人焊接中断恢复参数
-++++++++++++++++++++++++++++++++++
+Pobieranie parametrów wznawiania spawania po przerwaniu robota
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /** 
-    * @brief 获取机器人焊接中断恢复参数
-    * @return List[0]:错误码; List[1]:int 是否使能焊接中断恢复; List[2]:double 焊缝重叠距离(mm);
-    * @return List[3]:double 机器人回到再起弧点速度百分比(0-100);List[4]:int 机器人运动到再起弧点方式；0-LIN；1-PTP 
+    * @brief Pobieranie parametrów wznawiania spawania po przerwaniu robota
+    * @return List[0]:Kod błędu; List[1]:int Czy włączyć wznawianie spawania po przerwaniu; List[2]:double Długość zakładki spoiny (mm);
+    * @return List[3]:double Procent prędkości powrotu robota do punktu ponownego zapłonu łuku (0-100);List[4]:int Sposób ruchu robota do punktu ponownego zapłonu łuku; 0-LIN; 1-PTP 
     */
     List<Number> WeldingGetReWeldAfterBreakOffParam();
 
-设置焊机控制模式扩展DO端口
-++++++++++++++++++++++++++++++++++
+Ustawianie rozszerzonego portu DO trybu sterowania spawarką
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /** 
-    * @brief 设置焊机控制模式扩展DO端口
-    * @param [in] DONum 焊机控制模式DO端口(0-127)
-    * @return 错误码 
+    * @brief Ustawianie rozszerzonego portu DO trybu sterowania spawarką
+    * @param [in] DONum Port DO trybu sterowania spawarką (0-127)
+    * @return Kod błędu 
     */
     int SetWeldMachineCtrlModeExtDoNum(int DONum);
 
-设置焊机控制模式
-++++++++++++++++++++++++++++++++++
+Ustawianie trybu sterowania spawarką
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief 设置焊机控制模式
-    * @param mode 焊机控制模式; 0-直流一元模式；1-脉冲一元模式；2-JOB模式；3-近控模式；4-分别模式；5-CC/CV模式；6-TIG；7-CMT
-    * @param ioType 控制类型；0-控制箱IO;1-数字通信协议(UDP);2-数字通信协议(ModbusTCP)
-    * @return 错误码* @return 错误码
+    * @brief Ustawianie trybu sterowania spawarką
+    * @param mode Tryb sterowania spawarką; 0-tryb jednowartościowy DC; 1-tryb jednowartościowy impulsowy; 2-tryb JOB; 3-tryb sterowania lokalnego; 4-tryb oddzielny; 5-tryb CC/CV; 6-TIG; 7-CMT
+    * @param ioType Typ sterowania; 0-IO skrzynki kontrolnej; 1-protokół komunikacji cyfrowej (UDP); 2-protokół komunikacji cyfrowej (ModbusTCP)
+    * @return Kod błędu* @return Kod błędu
     */
     public int SetWeldMachineCtrlMode(int mode, int ioType)
 
-焊接开始
-++++++++++++++++++++++++++++++++++
+Rozpoczęcie spawania
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief 焊接开始
-    * @param [in] ioType io类型 0-控制器IO； 1-扩展IO
-    * @param [in] arcNum 焊机配置文件编号
-    * @param [in] timeout 起弧超时时间
-    * @return 错误码
+    * @brief Rozpoczęcie spawania
+    * @param [in] ioType Typ IO 0-IO kontrolera; 1-rozszerzone IO
+    * @param [in] arcNum Numer pliku konfiguracyjnego spawarki
+    * @param [in] timeout Czas timeout zapłonu łuku
+    * @return Kod błędu
     */
     int ARCStart(int ioType, int arcNum, int timeout);
 
-焊接结束
-++++++++++++++++++++++++++++++++++
+Zakończenie spawania
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief 焊接结束
-    * @param [in] ioType io类型 0-控制器IO； 1-扩展IO
-    * @param [in] arcNum 焊机配置文件编号
-    * @param [in] timeout 熄弧超时时间
-    * @return 错误码
+    * @brief Zakończenie spawania
+    * @param [in] ioType Typ IO 0-IO kontrolera; 1-rozszerzone IO
+    * @param [in] arcNum Numer pliku konfiguracyjnego spawarki
+    * @param [in] timeout Czas timeout wygaszenia łuku
+    * @return Kod błędu
     */
     int ARCEnd(int ioType, int arcNum, int timeout);
 
-摆动开始
-++++++++++++++++++++++++++++++++++
+Rozpoczęcie ruchu wahadłowego
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief 摆动开始
-    * @param [in] weaveNum 摆焊参数配置编号
-    * @return 错误码
+    * @brief Rozpoczęcie ruchu wahadłowego
+    * @param [in] weaveNum Numer konfiguracji parametrów spawania wahadłowego
+    * @return Kod błędu
     */
     int WeaveStart(int weaveNum);
 
-摆动结束
-++++++++++++++++++++++++++++++++++
+Zakończenie ruchu wahadłowego
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief 摆动结束
-    * @param [in] weaveNum 摆焊参数配置编号
-    * @return 错误码
+    * @brief Zakończenie ruchu wahadłowego
+    * @param [in] weaveNum Numer konfiguracji parametrów spawania wahadłowego
+    * @return Kod błędu
     */
     int WeaveEnd(int weaveNum);
 
-正向送丝
-++++++++++++++++++++++++++++++++++
+Podawanie drutu do przodu
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief 正向送丝
-    * @param [in] ioType io类型  0-控制器IO；1-扩展IO
-    * @param [in] wireFeed 送丝控制  0-停止送丝；1-送丝
-    * @return 错误码
+    * @brief Podawanie drutu do przodu
+    * @param [in] ioType Typ IO 0-IO kontrolera; 1-rozszerzone IO
+    * @param [in] wireFeed Sterowanie podawaniem drutu 0-zatrzymaj podawanie; 1-podawaj
+    * @return Kod błędu
     */
     int SetForwardWireFeed(int ioType, int wireFeed); 	
 
-反向送丝
-++++++++++++++++++++++++++++++++++
+Podawanie drutu do tyłu
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief 反向送丝
-    * @param [in] ioType io类型  0-控制器IO；1-扩展IO
-    * @param [in] wireFeed 送丝控制  0-停止送丝；1-送丝
-    * @return 错误码
+    * @brief Podawanie drutu do tyłu
+    * @param [in] ioType Typ IO 0-IO kontrolera; 1-rozszerzone IO
+    * @param [in] wireFeed Sterowanie podawaniem drutu 0-zatrzymaj podawanie; 1-podawaj
+    * @return Kod błędu
     */
     int SetReverseWireFeed(int ioType, int wireFeed);
 
-送气
-++++++++++++++++++++++++++++++++++
+Podawanie gazu osłonowego
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief 送气
-    * @param [in] ioType io类型  0-控制器IO；1-扩展IO
-    * @param [in] airControl 送气控制  0-停止送气；1-送气
-    * @return 错误码
+    * @brief Podawanie gazu osłonowego
+    * @param [in] ioType Typ IO 0-IO kontrolera; 1-rozszerzone IO
+    * @param [in] airControl Sterowanie podawaniem gazu 0-zatrzymaj podawanie; 1-podawaj
+    * @return Kod błędu
     */
     int SetAspirated(int ioType, int airControl);
 
-设置机器人焊接中断后恢复焊接
-++++++++++++++++++++++++++++++++++
+Ustawianie wznowienia spawania po przerwaniu robota
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /** 
-    * @brief 设置机器人焊接中断后恢复焊接
-    * @return 错误码 
+    * @brief Ustawianie wznowienia spawania po przerwaniu robota
+    * @return Kod błędu 
     */
     int WeldingStartReWeldAfterBreakOff();
 
-设置机器人焊接中断后退出焊接
-++++++++++++++++++++++++++++++++++
+Ustawianie wyjścia ze spawania po przerwaniu robota
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /** 
-    * @brief 设置机器人焊接中断后退出焊接
-    * @return 错误码 
+    * @brief Ustawianie wyjścia ze spawania po przerwaniu robota
+    * @return Kod błędu 
     */
     int WeldingAbortWeldAfterBreakOff();
 
-机器人焊接控制代码示例
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Przykład kodu sterowania spawaniem robota
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
@@ -454,40 +481,42 @@
         return 0;
     }
 
-段焊开始
-++++++++++++++++++++++++++++++++++
+Rozpoczęcie spawania segmentowego
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /** 
-    * @brief 段焊开始
-    * @param [in] startDesePos 起始点笛卡尔位置
-    * @param [in] endDesePos 结束点笛卡尔位姿
-    * @param [in] startJPos 起始点关节位姿
-    * @param [in] endJPos 结束点关节位姿
-    * @param [in] weldLength 焊接段长度(mm)
-    * @param [in] noWeldLength 非焊接段长度(mm)
-    * @param [in] weldIOType 焊接IO类型(0-控制箱IO；1-扩展IO)
-    * @param [in] arcNum 焊机配置文件编号
-    * @param [in] weldTimeout 起/收弧超时时间
-    * @param [in] isWeave 是否摆动
-    * @param [in] weaveNum 摆焊参数配置编号
-    * @param [in] tool 工具号
-    * @param [in] user 工件号
-    * @param [in] vel  速度百分比，范围[0~100]
-    * @param [in] acc  加速度百分比，范围[0~100],暂不开放
-    * @param [in] ovl  速度缩放因子，范围[0~100]
-    * @param [in] blendR [-1.0]-运动到位(阻塞)，[0~1000.0]-平滑半径(非阻塞)，单位mm
-    * @param [in] epos  扩展轴位置，单位mm
-    * @param [in] search  0-不焊丝寻位，1-焊丝寻位
-    * @param [in] offset_flag  0-不偏移，1-基坐标系/工件坐标系下偏移，2-工具坐标系下偏移
-    * @param [in] offset_pos  位姿偏移量
-    * @return 错误码 
+    * @brief Rozpoczęcie spawania segmentowego
+    * @param [in] startDesePos Pozycja kartezjańska punktu początkowego
+    * @param [in] endDesePos Pozycja kartezjańska punktu końcowego
+    * @param [in] startJPos Pozycja przegubów punktu początkowego
+    * @param [in] endJPos Pozycja przegubów punktu końcowego
+    * @param [in] weldLength Długość segmentu spawanego (mm)
+    * @param [in] noWeldLength Długość segmentu niespawanego (mm)
+    * @param [in] weldIOType Typ IO spawania (0-IO skrzynki kontrolnej; 1-rozszerzone IO)
+    * @param [in] arcNum Numer pliku konfiguracyjnego spawarki
+    * @param [in] weldTimeout Czas timeout zapłonu/wygaszenia łuku
+    * @param [in] isWeave Czy ruch wahadłowy
+    * @param [in] weaveNum Numer konfiguracji parametrów spawania wahadłowego
+    * @param [in] tool Numer narzędzia
+    * @param [in] user Numer przedmiotu
+    * @param [in] vel  Procent prędkości, zakres [0~100]
+    * @param [in] acc  Procent przyspieszenia, zakres [0~100], tymczasowo niedostępne
+    * @param [in] ovl  Współczynnik skalowania prędkości, zakres [0~100]
+    * @param [in] blendR [-1.0]-ruch do pozycji (blokujący), [0~1000.0]-promień wygładzania (nieblokujący), jednostka mm
+    * @param [in] epos  Pozycja osi rozszerzenia, jednostka mm
+    * @param [in] search  0-brak poszukiwania pozycji drutu, 1-poszukiwanie pozycji drutu
+    * @param [in] offset_flag  0-brak przesunięcia, 1-przesunięcie w układzie bazowym/układzie przedmiotu, 2-przesunięcie w układzie narzędzia
+    * @param [in] offset_pos  Wartość przesunięcia pozy
+    * @return Kod błędu 
     */
     int SegmentWeldStart(DescPose startDesePos, DescPose endDesePos, JointPos startJPos, JointPos endJPos, double weldLength, double noWeldLength, int weldIOType,int arcNum, int weldTimeout, boolean isWeave, int weaveNum, int tool, int user, double vel, double acc, double ovl, double blendR, ExaxisPos epos, int search, int offset_flag, DescPose offset_pos);
 
-机器人段焊代码示例
-++++++++++++++++++++++++++++++++++++++++++
+Przykład kodu spawania segmentowego robota
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
@@ -512,73 +541,79 @@
         return 0;
     }
 
-仿真摆动开始
-++++++++++++++++++++++++++++++++++
+Rozpoczęcie symulacji ruchu wahadłowego
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /** 
-    * @brief 仿真摆动开始
-    * @param [in] weaveNum  摆动参数编号
-    * @return 错误码 
+    * @brief Rozpoczęcie symulacji ruchu wahadłowego
+    * @param [in] weaveNum  Numer parametrów wahadła
+    * @return Kod błędu 
     */
     int WeaveStartSim(int weaveNum);
 
-仿真摆动结束
-++++++++++++++++++++++++++++++++++
+Zakończenie symulacji ruchu wahadłowego
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /** 
-    * @brief 仿真摆动结束
-    * @param [in] weaveNum  摆动参数编号
-    * @return 错误码 
+    * @brief Zakończenie symulacji ruchu wahadłowego
+    * @param [in] weaveNum  Numer parametrów wahadła
+    * @return Kod błędu 
     */
     int WeaveEndSim(int weaveNum);
 
-开始轨迹检测预警(不运动)
-++++++++++++++++++++++++++++++++++
+Rozpoczęcie ostrzegania o wykrywaniu trajektorii (bez ruchu)
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /** 
-    * @brief 开始轨迹检测预警(不运动)
-    * @param [in] weaveNum   摆动参数编号
-    * @return 错误码 
+    * @brief Rozpoczęcie ostrzegania o wykrywaniu trajektorii (bez ruchu)
+    * @param [in] weaveNum   Numer parametrów wahadła
+    * @return Kod błędu 
     */
     int WeaveInspectStart(int weaveNum);
 
-结束轨迹检测预警(不运动)
-++++++++++++++++++++++++++++++++++
+Zakończenie ostrzegania o wykrywaniu trajektorii (bez ruchu)
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /** 
-    * @brief 结束轨迹检测预警(不运动)
-    * @param [in] weaveNum   摆动参数编号
-    * @return 错误码 
+    * @brief Zakończenie ostrzegania o wykrywaniu trajektorii (bez ruchu)
+    * @param [in] weaveNum   Numer parametrów wahadła
+    * @return Kod błędu 
     */
     int WeaveInspectEnd(int weaveNum);
 
-摆动渐变开始
-++++++++++++++++++++++++++++++++++++++++++++++++++
+Rozpoczęcie zmiany parametrów wahadła
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. versionchanged:: Java SDK-v1.0.5-3.8.2
 
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief  摆动渐变开始
-    * @param  [in] weaveChangeFlag 1-变摆动参数；2-变摆动参数+焊接速度
-    * @param  [in] weaveNum 摆动编号
-    * @param  [in] velStart 焊接开始速度，(cm/min)
-    * @param  [in] velEnd 焊接结束速度，(cm/min)
-    * @return 错误码
+    * @brief  Rozpoczęcie zmiany parametrów wahadła
+    * @param  [in] weaveChangeFlag 1-zmiana parametrów wahadła; 2-zmiana parametrów wahadła + prędkości spawania
+    * @param  [in] weaveNum Numer wahadła
+    * @param  [in] velStart Prędkość początkowa spawania, (cm/min)
+    * @param  [in] velEnd Prędkość końcowa spawania, (cm/min)
+    * @return Kod błędu
     */
     int WeaveChangeStart(int weaveChangeFlag, int weaveNum, double velStart, double velEnd)
 
-机器人摆动渐变焊接代码示例
-+++++++++++++++++++++++++++++++++++++++++++++
+Przykład kodu spawania ze zmianą parametrów wahadła robota
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
@@ -617,106 +652,115 @@
         return 0;
     }
 
-摆动渐变结束
-++++++++++++++++++++++++++++++++++++++++++++++++++
+Zakończenie zmiany parametrów wahadła
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. versionadded:: Java SDK-v1.0.2-3.7.9
 
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief 摆动渐变结束
-    * @return 错误码
+    * @brief Zakończenie zmiany parametrów wahadła
+    * @return Kod błędu
     */
     int WeaveChangeEnd(); 
 
-扩展IO-配置焊机气体检测信号
-++++++++++++++++++++++++++++++++++
+Rozszerzone IO - konfiguracja sygnału detekcji gazu spawarki
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /** 
-    * @brief 扩展IO-配置焊机气体检测信号
-    * @param [in] DONum  气体检测信号扩展DO编号
-    * @return 错误码 
+    * @brief Rozszerzone IO - konfiguracja sygnału detekcji gazu spawarki
+    * @param [in] DONum  Rozszerzony numer DO sygnału detekcji gazu
+    * @return Kod błędu 
     */
     int SetAirControlExtDoNum(int DONum);
 
-扩展IO-配置焊机起弧信号
-++++++++++++++++++++++++++++++++++
+Rozszerzone IO - konfiguracja sygnału zapłonu łuku spawarki
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /** 
-    * @brief 扩展IO-配置焊机起弧信号
-    * @param [in] DONum  焊机起弧信号扩展DO编号
-    * @return 错误码 
+    * @brief Rozszerzone IO - konfiguracja sygnału zapłonu łuku spawarki
+    * @param [in] DONum  Rozszerzony numer DO sygnału zapłonu łuku spawarki
+    * @return Kod błędu 
     */
     int SetArcStartExtDoNum(int DONum);
 
-扩展IO-配置焊机反向送丝信号
-++++++++++++++++++++++++++++++++++
+Rozszerzone IO - konfiguracja sygnału podawania drutu do tyłu spawarki
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /** 
-    * @brief 扩展IO-配置焊机反向送丝信号
-    * @param [in] DONum  反向送丝信号扩展DO编号
-    * @return 错误码 
+    * @brief Rozszerzone IO - konfiguracja sygnału podawania drutu do tyłu spawarki
+    * @param [in] DONum  Rozszerzony numer DO sygnału podawania drutu do tyłu
+    * @return Kod błędu 
     */
     int SetWireReverseFeedExtDoNum(int DONum);
 
-扩展IO-配置焊机正向送丝信号
-++++++++++++++++++++++++++++++++++
+Rozszerzone IO - konfiguracja sygnału podawania drutu do przodu spawarki
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /** 
-    * @brief 扩展IO-配置焊机正向送丝信号
-    * @param [in] DONum  正向送丝信号扩展DO编号
-    * @return 错误码 
+    * @brief Rozszerzone IO - konfiguracja sygnału podawania drutu do przodu spawarki
+    * @param [in] DONum  Rozszerzony numer DO sygnału podawania drutu do przodu
+    * @return Kod błędu 
     */
     int SetWireForwardFeedExtDoNum(int DONum);
 
-扩展IO-配置焊机起弧成功信号
-++++++++++++++++++++++++++++++++++
+Rozszerzone IO - konfiguracja sygnału pomyślnego zapłonu łuku spawarki
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /** 
-    * @brief 扩展IO-配置焊机起弧成功信号
-    * @param [in] DINum  起弧成功信号扩展DI编号
-    * @return 错误码 
+    * @brief Rozszerzone IO - konfiguracja sygnału pomyślnego zapłonu łuku spawarki
+    * @param [in] DINum  Rozszerzony numer DI sygnału pomyślnego zapłonu łuku
+    * @return Kod błędu 
     */
     int SetArcDoneExtDiNum(int DINum);
 
-扩展IO-配置焊机准备信号
-++++++++++++++++++++++++++++++++++
+Rozszerzone IO - konfiguracja sygnału gotowości spawarki
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /** 
-    * @brief 扩展IO-配置焊机准备信号
-    * @param [in] DINum  焊机准备信号扩展DI编号
-    * @return 错误码 
+    * @brief Rozszerzone IO - konfiguracja sygnału gotowości spawarki
+    * @param [in] DINum  Rozszerzony numer DI sygnału gotowości spawarki
+    * @return Kod błędu 
     */
     int SetWeldReadyExtDiNum(int DINum);
 
-扩展IO-配置焊接中断恢复信号
-++++++++++++++++++++++++++++++++++
+Rozszerzone IO - konfiguracja sygnału wznowienia po przerwaniu spawania
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /** 
-    * @brief 扩展IO-配置焊接中断恢复信号
-    * @param [in] reWeldDINum  焊接中断后恢复焊接信号扩展DI编号
-    * @param [in] abortWeldDINum  焊接中断后退出焊接信号扩展DI编号
-    * @return 错误码 
+    * @brief Rozszerzone IO - konfiguracja sygnału wznowienia po przerwaniu spawania
+    * @param [in] reWeldDINum  Rozszerzony numer DI sygnału wznowienia spawania po przerwaniu
+    * @param [in] abortWeldDINum  Rozszerzony numer DI sygnału wyjścia ze spawania po przerwaniu
+    * @return Kod błędu 
     */
     int SetExtDIWeldBreakOffRecover(int reWeldDINum, int abortWeldDINum);
 
-设置扩展IO焊接信号代码示例
-+++++++++++++++++++++++++++++++++++++++++++
+Przykład kodu konfiguracji rozszerzonych sygnałów IO spawania
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
@@ -735,92 +779,98 @@
         return 0;
     }
 
-电弧跟踪控制
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Sterowanie śledzeniem łuku
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. versionchanged:: Java SDK-v1.0.2-3.7.9
 
 .. code-block:: Java
     :linenos:
 
     /** 
-    * @brief 电弧跟踪控制
-    * @param [in] flag 开关，0-关；1-开
-    * @param [in] delaytime 滞后时间，单位ms
-    * @param [in] isLeftRight 左右偏差补偿
-    * @param [in] klr 左右调节系数(灵敏度)
-    * @param [in] tStartLr 左右开始补偿时间cyc
-    * @param [in] stepMaxLr 左右每次最大补偿量 mm
-    * @param [in] sumMaxLr 左右总计最大补偿量 mm
-    * @param [in] isUpLow 上下偏差补偿
-    * @param [in] kud 上下调节系数(灵敏度)
-    * @param [in] tStartUd 上下开始补偿时间cyc
-    * @param [in] stepMaxUd 上下每次最大补偿量 mm
-    * @param [in] sumMaxUd 上下总计最大补偿量
-    * @param [in] axisSelect 上下坐标系选择，0-摆动；1-工具；2-基座
-    * @param [in] referenceType 上下基准电流设定方式，0-反馈；1-常数
-    * @param [in] referSampleStartUd 上下基准电流采样开始计数(反馈)，cyc
-    * @param [in] referSampleCountUd 上下基准电流采样循环计数(反馈)，cyc
-    * @param [in] referenceCurrent 上下基准电流mA
-    * @param [in] offsetType 偏置跟踪类型，0-不偏置；1-采样；2-百分比
-    * @param [in] offsetParameter 偏置参数；采样(偏置采样开始时间，默认采一周期)；百分比(偏置百分比(-100 ~ 100))
-    * @return 错误码 
+    * @brief Sterowanie śledzeniem łuku
+    * @param [in] flag Przełącznik, 0-wył.; 1-wł.
+    * @param [in] delaytime Czas opóźnienia, jednostka ms
+    * @param [in] isLeftRight Kompensacja odchylenia lewo-prawo
+    * @param [in] klr Współczynnik regulacji lewo-prawo (czułość)
+    * @param [in] tStartLr Czas rozpoczęcia kompensacji lewo-prawo cyc
+    * @param [in] stepMaxLr Maksymalna wielkość kompensacji na raz lewo-prawo mm
+    * @param [in] sumMaxLr Maksymalna całkowita wielkość kompensacji lewo-prawo mm
+    * @param [in] isUpLow Kompensacja odchylenia góra-dół
+    * @param [in] kud Współczynnik regulacji góra-dół (czułość)
+    * @param [in] tStartUd Czas rozpoczęcia kompensacji góra-dół cyc
+    * @param [in] stepMaxUd Maksymalna wielkość kompensacji na raz góra-dół mm
+    * @param [in] sumMaxUd Maksymalna całkowita wielkość kompensacji góra-dół
+    * @param [in] axisSelect Wybór układu współrzędnych góra-dół, 0-wahadłowy; 1-narzędzia; 2-podstawy
+    * @param [in] referenceType Sposób ustawienia prądu odniesienia góra-dół, 0-sprzężenie zwrotne; 1-stała
+    * @param [in] referSampleStartUd Początek próbkowania prądu odniesienia góra-dół (sprzężenie zwrotne), cyc
+    * @param [in] referSampleCountUd Liczba cykli próbkowania prądu odniesienia góra-dół (sprzężenie zwrotne), cyc
+    * @param [in] referenceCurrent Prąd odniesienia góra-dół mA
+    * @param [in] offsetType Typ śledzenia z przesunięciem, 0-bez przesunięcia; 1-próbkowanie; 2-procent
+    * @param [in] offsetParameter Parametr przesunięcia; próbkowanie (czas rozpoczęcia próbkowania przesunięcia, domyślnie jeden cykl); procent (procent przesunięcia (-100 ~ 100))
+    * @return Kod błędu 
     */
     int ArcWeldTraceControl(int flag, double delaytime, int isLeftRight, double klr, double tStartLr, double stepMaxLr, double sumMaxLr, int isUpLow, double kud, double tStartUd, double stepMaxUd, double sumMaxUd, int axisSelect, int referenceType, double referSampleStartUd, double referSampleCountUd, double referenceCurrent,int offsetType, int offsetParameter);
 
-电弧跟踪AI通带选择
-++++++++++++++++++++++++++++++++++
+Wybór pasma przenoszenia AI śledzenia łuku
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief  电弧跟踪AI通带选择
-    * @param  channel 电弧跟踪AI通带选择,[0-3]
-    * @return  错误码
+    * @brief  Wybór pasma przenoszenia AI śledzenia łuku
+    * @param  channel Wybór pasma przenoszenia AI śledzenia łuku, [0-3]
+    * @return  Kod błędu
     */
     public int ArcWeldTraceExtAIChannelConfig(int channel)
 
-电弧追踪 + 多层多道补偿开启
-++++++++++++++++++++++++++++++++++
+Włączenie kompensacji śledzenia łuku + wielowarstwowej, wielościeżkowej
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief 电弧追踪 + 多层多道补偿开启
-    * @return 错误码
+    * @brief Włączenie kompensacji śledzenia łuku + wielowarstwowej, wielościeżkowej
+    * @return Kod błędu
     */
     public int ArcWeldTraceReplayStart()
 
-电弧追踪 + 多层多道补偿关闭
-++++++++++++++++++++++++++++++++++
+Wyłączenie kompensacji śledzenia łuku + wielowarstwowej, wielościeżkowej
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief 电弧追踪 + 多层多道补偿关闭
-    * @return 错误码
+    * @brief Wyłączenie kompensacji śledzenia łuku + wielowarstwowej, wielościeżkowej
+    * @return Kod błędu
     */
     public int ArcWeldTraceReplayEnd()
 
-偏移量坐标变化-多层多道焊
-++++++++++++++++++++++++++++++++++
+Zmiana współrzędnych przesunięcia - spawanie wielowarstwowe, wielościeżkowe
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief 偏移量坐标变化-多层多道焊
-    * @param pointO 基准点笛卡尔位姿
-    * @param pointX 基准点X向偏移方向点笛卡尔位姿
-    * @param pointZ 基准点Z向偏移方向点笛卡尔位姿
-    * @param dx x方向偏移量(mm)
-    * @param dz z方向偏移量(mm)
-    * @param dry 绕y轴偏移量(°)
-    * @param offset 计算结果偏移量
-    * @return 错误码
+    * @brief Zmiana współrzędnych przesunięcia - spawanie wielowarstwowe, wielościeżkowe
+    * @param pointO Pozycja kartezjańska punktu odniesienia
+    * @param pointX Pozycja kartezjańska punktu wskazującego kierunek przesunięcia X punktu odniesienia
+    * @param pointZ Pozycja kartezjańska punktu wskazującego kierunek przesunięcia Z punktu odniesienia
+    * @param dx Wielkość przesunięcia w kierunku X (mm)
+    * @param dz Wielkość przesunięcia w kierunku Z (mm)
+    * @param dry Wielkość przesunięcia wokół osi Y (°)
+    * @param offset Wynikowe przesunięcie
+    * @return Kod błędu
     */
     public int MultilayerOffsetTrsfToBase(DescTran pointO, DescTran pointX, DescTran pointZ, double dx, double dz, double dry, DescPose offset)
 
-多层多道焊电弧跟踪代码示例
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Przykład kodu śledzenia łuku dla spawania wielowarstwowego, wielościeżkowego
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
@@ -926,70 +976,75 @@
         return 0;
     }
 
-电弧跟踪焊机电流反馈AI通道选择
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Wybór kanału AI sprzężenia zwrotnego prądu spawarki dla śledzenia łuku
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. versionadded:: Java SDK-v1.0.5-3.8.2
 
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief 电弧跟踪焊机电流反馈AI通道选择
-    * @param  [in] channel 通道；0-扩展AI0；1-扩展AI1；2-扩展AI2；3-扩展AI3；4-控制箱AI0；5-控制箱AI1
-    * @return 错误码
+    * @brief Wybór kanału AI sprzężenia zwrotnego prądu spawarki dla śledzenia łuku
+    * @param  [in] channel Kanał; 0-rozszerzony AI0; 1-rozszerzony AI1; 2-rozszerzony AI2; 3-rozszerzony AI3; 4-AI0 skrzynki kontrolnej; 5-AI1 skrzynki kontrolnej
+    * @return Kod błędu
     */
     int ArcWeldTraceAIChannelCurrent(int channel)
 
-电弧跟踪焊机电压反馈AI通道选择
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Wybór kanału AI sprzężenia zwrotnego napięcia spawarki dla śledzenia łuku
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. versionadded:: Java SDK-v1.0.5-3.8.2
 
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief 电弧跟踪焊机电压反馈AI通道选择
-    * @param  [in] channel 通道；0-扩展AI0；1-扩展AI1；2-扩展AI2；3-扩展AI3；4-控制箱AI0；5-控制箱AI1
-    * @return 错误码
+    * @brief Wybór kanału AI sprzężenia zwrotnego napięcia spawarki dla śledzenia łuku
+    * @param  [in] channel Kanał; 0-rozszerzony AI0; 1-rozszerzony AI1; 2-rozszerzony AI2; 3-rozszerzony AI3; 4-AI0 skrzynki kontrolnej; 5-AI1 skrzynki kontrolnej
+    * @return Kod błędu
     */
     int ArcWeldTraceAIChannelVoltage(int channel)
 
-电弧跟踪焊机电流反馈转换参数
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Parametry konwersji sprzężenia zwrotnego prądu spawarki dla śledzenia łuku
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. versionadded:: Java SDK-v1.0.5-3.8.2
 
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief 电弧跟踪焊机电流反馈转换参数
-    * @param [in] AILow AI通道下限，默认值0V，范围[0-10V]
-    * @param [in] AIHigh AI通道上限，默认值10V，范围[0-10V]
-    * @param [in] currentLow AI通道下限对应焊机电流值，默认值0V，范围[0-200V]
-    * @param [in] currentHigh AI通道上限对应焊机电流值，默认值100V，范围[0-200V]
-    * @return 错误码
+    * @brief Parametry konwersji sprzężenia zwrotnego prądu spawarki dla śledzenia łuku
+    * @param [in] AILow Dolna granica kanału AI, domyślnie 0V, zakres [0-10V]
+    * @param [in] AIHigh Górna granica kanału AI, domyślnie 10V, zakres [0-10V]
+    * @param [in] currentLow Wartość prądu spawarki odpowiadająca dolnej granicy kanału AI, domyślnie 0V, zakres [0-200V]
+    * @param [in] currentHigh Wartość prądu spawarki odpowiadająca górnej granicy kanału AI, domyślnie 100V, zakres [0-200V]
+    * @return Kod błędu
     */
     int ArcWeldTraceCurrentPara(double AILow, double AIHigh, double currentLow, double currentHigh)
 
-电弧跟踪焊机电压反馈转换参数
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Parametry konwersji sprzężenia zwrotnego napięcia spawarki dla śledzenia łuku
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. versionadded:: Java SDK-v1.0.5-3.8.2
 
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief 电弧跟踪焊机电压反馈转换参数
-    * @param [in] AILow AI通道下限，默认值0V，范围[0-10V]
-    * @param [in] AIHigh AI通道上限，默认值10V，范围[0-10V]
-    * @param [in] voltageLow AI通道下限对应焊机电压值，默认值0V，范围[0-200V]
-    * @param [in] voltageHigh AI通道上限对应焊机电压值，默认值100V，范围[0-200V]
-    * @return 错误码
+    * @brief Parametry konwersji sprzężenia zwrotnego napięcia spawarki dla śledzenia łuku
+    * @param [in] AILow Dolna granica kanału AI, domyślnie 0V, zakres [0-10V]
+    * @param [in] AIHigh Górna granica kanału AI, domyślnie 10V, zakres [0-10V]
+    * @param [in] voltageLow Wartość napięcia spawarki odpowiadająca dolnej granicy kanału AI, domyślnie 0V, zakres [0-200V]
+    * @param [in] voltageHigh Wartość napięcia spawarki odpowiadająca górnej granicy kanału AI, domyślnie 100V, zakres [0-200V]
+    * @return Kod błędu
     */
     int ArcWeldTraceVoltagePara(double AILow, double AIHigh, double voltageLow, double voltageHigh)
 
-电弧跟踪代码示例
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Przykład kodu śledzenia łuku
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
@@ -1040,21 +1095,23 @@
         robot.MoveJ(safejointPos, safedescPose, 1, 0, 20, 20, 100, exaxisPos, -1, 0, offdese);
     }
 
-设置焊丝寻位扩展IO端口
-++++++++++++++++++++++++++++++++++
+Ustawianie rozszerzonego portu IO dla poszukiwania pozycji drutu
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /** 
-    * @brief 设置焊丝寻位扩展IO端口
-    * @param [in] searchDoneDINum 焊丝寻位成功DO端口(0-127)
-    * @param [in] searchStartDONum 焊丝寻位启停控制DO端口(0-127)
-    * @return 错误码
+    * @brief Ustawianie rozszerzonego portu IO dla poszukiwania pozycji drutu
+    * @param [in] searchDoneDINum Port DO pomyślnego poszukiwania pozycji drutu (0-127)
+    * @param [in] searchStartDONum Port DO sterowania uruchamianiem/zatrzymywaniem poszukiwania pozycji drutu (0-127)
+    * @return Kod błędu
     */
     int SetWireSearchExtDIONum(int searchDoneDINum, int searchStartDONum);
 
-示例程序
-++++++++++++++++++++++++++++++++++
+Przykładowy program
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
@@ -1126,84 +1183,90 @@
         robot.PointsOffsetDisable();
     }
 
-焊丝寻位开始
-++++++++++++++++++++++++++++++++++
+Rozpoczęcie poszukiwania pozycji drutu
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /** 
-    * @brief 焊丝寻位开始
-    * @param [in] refPos  1-基准点 0-接触点
-    * @param [in] searchVel   寻位速度 %
-    * @param [in] searchDis  寻位距离 mm
-    * @param [in] autoBackFlag 自动返回标志，0-不自动；-自动
-    * @param [in] autoBackVel  自动返回速度 %
-    * @param [in] autoBackDis  自动返回距离 mm
-    * @param [in] offectFlag  1-带偏移量寻位；0-示教点寻位
-    * @return 错误码 
+    * @brief Rozpoczęcie poszukiwania pozycji drutu
+    * @param [in] refPos  1-punkt odniesienia 0-punkt kontaktu
+    * @param [in] searchVel   Prędkość poszukiwania %
+    * @param [in] searchDis  Odległość poszukiwania mm
+    * @param [in] autoBackFlag Flaga automatycznego powrotu, 0-nie automatyczny; 1-automatyczny
+    * @param [in] autoBackVel  Prędkość automatycznego powrotu %
+    * @param [in] autoBackDis  Odległość automatycznego powrotu mm
+    * @param [in] offectFlag  1-poszukiwanie z przesunięciem; 0-poszukiwanie punktu nauczania
+    * @return Kod błędu 
     */
     int WireSearchStart(int refPos, double searchVel, int searchDis, int autoBackFlag, double autoBackVel, int autoBackDis, int offectFlag);
 
-焊丝寻位结束
-++++++++++++++++++++++++++++++++++
+Zakończenie poszukiwania pozycji drutu
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /** 
-    * @brief 焊丝寻位结束
-    * @param [in] refPos  1-基准点 2-接触点
-    * @param [in] searchVel   寻位速度 %
-    * @param [in] searchDis  寻位距离 mm
-    * @param [in] autoBackFlag 自动返回标志，0-不自动；-自动
-    * @param [in] autoBackVel  自动返回速度 %
-    * @param [in] autoBackDis  自动返回距离 mm
-    * @param [in] offectFlag  1-带偏移量寻位；2-示教点寻位
-    * @return 错误码 
+    * @brief Zakończenie poszukiwania pozycji drutu
+    * @param [in] refPos  1-punkt odniesienia 2-punkt kontaktu
+    * @param [in] searchVel   Prędkość poszukiwania %
+    * @param [in] searchDis  Odległość poszukiwania mm
+    * @param [in] autoBackFlag Flaga automatycznego powrotu, 0-nie automatyczny; 1-automatyczny
+    * @param [in] autoBackVel  Prędkość automatycznego powrotu %
+    * @param [in] autoBackDis  Odległość automatycznego powrotu mm
+    * @param [in] offectFlag  1-poszukiwanie z przesunięciem; 2-poszukiwanie punktu nauczania
+    * @return Kod błędu 
     */
     int WireSearchEnd(int refPos, double searchVel, int searchDis, int autoBackFlag, double autoBackVel, int autoBackDis, int offectFlag);
 
-计算焊丝寻位偏移量
-++++++++++++++++++++++++++++++++++
+Obliczanie przesunięcia poszukiwania pozycji drutu
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /** 
-    * @brief 计算焊丝寻位偏移量
-    * @param [in] seamType  焊缝类型
-    * @param [in] method   计算方法
-    * @param [in] varNameRef 基准点1-6，“#”表示无点变量
-    * @param [in] varNameRes 接触点1-6，“#”表示无点变量
-    * @param [out] offset 偏移位姿[x, y, z, a, b, c]及偏移方式
-    * @return 错误码 
+    * @brief Obliczanie przesunięcia poszukiwania pozycji drutu
+    * @param [in] seamType  Typ spoiny
+    * @param [in] method   Metoda obliczeniowa
+    * @param [in] varNameRef Punkty odniesienia 1-6, „#” oznacza brak zmiennej punktowej
+    * @param [in] varNameRes Punkty kontaktu 1-6, „#” oznacza brak zmiennej punktowej
+    * @param [out] offset Przesunięcie pozy [x, y, z, a, b, c] i sposób przesunięcia
+    * @return Kod błędu 
     */
     int GetWireSearchOffset(int seamType, int method, String[] varNameRef, String[] varNameRes, DescOffset offset);
 
-等待焊丝寻位完成
-++++++++++++++++++++++++++++++++++
+Oczekiwanie na zakończenie poszukiwania pozycji drutu
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /** 
-    * @brief 等待焊丝寻位完成
-    * @return 错误码 
+    * @brief Oczekiwanie na zakończenie poszukiwania pozycji drutu
+    * @return Kod błędu 
     */
     int WireSearchWait(String name);
 
-焊丝寻位接触点写入数据库
-++++++++++++++++++++++++++++++++++
+Zapis punktu kontaktu poszukiwania pozycji drutu do bazy danych
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /** 
-    * @brief 焊丝寻位接触点写入数据库
-    * @param [in] varName  接触点名称 “RES0” ~ “RES99”
-    * @param [in] pos  接触点数据[x, y, x, a, b, c]
-    * @return 错误码 
+    * @brief Zapis punktu kontaktu poszukiwania pozycji drutu do bazy danych
+    * @param [in] varName  Nazwa punktu kontaktu „RES0” ~ „RES99”
+    * @param [in] pos  Dane punktu kontaktu [x, y, x, a, b, c]
+    * @return Kod błędu 
     */
     int SetPointToDatabase(String varName, DescPose pos);
 
-机器人焊丝寻位代码示例
-+++++++++++++++++++++++++++++++++++++++++++++
+Przykład kodu poszukiwania pozycji drutu robota
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
@@ -1283,70 +1346,75 @@
         return 0;
     }
 
-设置焊接电压渐变开始
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Ustawianie rozpoczęcia zmiany napięcia spawania
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. versionadded:: Java SDK-v1.0.5-3.8.2
 
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief 设置焊接电压渐变开始
-    * @param [in] IOType 控制类型；0-控制箱IO；1-数字通信协议(UDP);2-数字通信协议(ModbusTCP)
-    * @param [in] voltageStart 起始焊接电压(V)
-    * @param [in] voltageEnd 终止焊接电压(V)
-    * @param [in] AOIndex 控制箱AO端口号(0-1)
-    * @param [in] blend 是否平滑 0-不平滑；1-平滑
-    * @return 错误码
+    * @brief Ustawianie rozpoczęcia zmiany napięcia spawania
+    * @param [in] IOType Typ sterowania; 0-IO skrzynki kontrolnej; 1-protokół komunikacji cyfrowej (UDP); 2-protokół komunikacji cyfrowej (ModbusTCP)
+    * @param [in] voltageStart Początkowe napięcie spawania (V)
+    * @param [in] voltageEnd Końcowe napięcie spawania (V)
+    * @param [in] AOIndex Numer portu AO skrzynki kontrolnej (0-1)
+    * @param [in] blend Czy wygładzać 0-nie; 1-tak
+    * @return Kod błędu
     */
     int WeldingSetVoltageGradualChangeStart(int IOType, double voltageStart, double voltageEnd, int AOIndex, int blend)
 
-设置焊接电压渐变结束
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Ustawianie zakończenia zmiany napięcia spawania
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. versionadded:: Java SDK-v1.0.5-3.8.2
 
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief 设置焊接电压渐变结束
-    * @return 错误码
+    * @brief Ustawianie zakończenia zmiany napięcia spawania
+    * @return Kod błędu
     */
     int WeldingSetVoltageGradualChangeEnd()
 
-设置焊接电流渐变开始
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Ustawianie rozpoczęcia zmiany prądu spawania
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. versionadded:: Java SDK-v1.0.5-3.8.2
 
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief 设置焊接电流渐变开始
-    * @param [in] IOType 控制类型；0-控制箱IO；1-数字通信协议(UDP);2-数字通信协议(ModbusTCP)
-    * @param [in] currentStart 起始焊接电流(A)
-    * @param [in] currentEnd 终止焊接电流(A)
-    * @param [in] AOIndex 控制箱AO端口号(0-1)
-    * @param [in] blend 是否平滑 0-不平滑；1-平滑
-    * @return 错误码
+    * @brief Ustawianie rozpoczęcia zmiany prądu spawania
+    * @param [in] IOType Typ sterowania; 0-IO skrzynki kontrolnej; 1-protokół komunikacji cyfrowej (UDP); 2-protokół komunikacji cyfrowej (ModbusTCP)
+    * @param [in] currentStart Początkowy prąd spawania (A)
+    * @param [in] currentEnd Końcowy prąd spawania (A)
+    * @param [in] AOIndex Numer portu AO skrzynki kontrolnej (0-1)
+    * @param [in] blend Czy wygładzać 0-nie; 1-tak
+    * @return Kod błędu
     */
     int WeldingSetCurrentGradualChangeStart(int IOType, double currentStart, double currentEnd, int AOIndex, int blend)
 
-设置焊接电流渐变结束
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Ustawianie zakończenia zmiany prądu spawania
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. versionadded:: Java SDK-v1.0.5-3.8.2
 
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief 设置焊接电流渐变结束
-    * @return 错误码
+    * @brief Ustawianie zakończenia zmiany prądu spawania
+    * @return Kod błędu
     */
     int WeldingSetCurrentGradualChangeEnd()
 
-机器人焊接电流电压渐变代码示例
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Przykład kodu zmiany prądu i napięcia spawania robota
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
@@ -1393,48 +1461,51 @@
         robot.WeldingSetVoltageGradualChangeEnd();
     }
 
-设置自定义摆动参数
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Ustawianie niestandardowych parametrów ruchu wahadłowego
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. versionadded:: Java SDK-v1.0.9-3.8.6
 
 .. code-block:: Java
     :linenos:
 
     /**
-     * @brief 设置自定义摆动参数
-     * @param [in] id 自定义摆动编号：0-2
-     * @param [in] pointNum 摆动点位个数 0-10
-     * @param [in] point 移动端点数据x,y,z
-     * @param [in] stayTime 摆动停留时间ms
-     * @param [in] frequency 摆动频率 Hz
-     * @param [in] incStayType 等待模式：0-周期不包含等待时间；1-周期包含等待时间
-     * @param [in] stationary 摆动位置等待：0-等待时间内继续运动；1-等待时间内位置静止
-     * @return  错误码
+     * @brief Ustawianie niestandardowych parametrów ruchu wahadłowego
+     * @param [in] id Niestandardowy numer wahadła: 0-2
+     * @param [in] pointNum Liczba punktów wahadła 0-10
+     * @param [in] point Dane punktów końcowych ruchu x,y,z
+     * @param [in] stayTime Czas postoju wahadła ms
+     * @param [in] frequency Częstotliwość wahadła Hz
+     * @param [in] incStayType Tryb oczekiwania: 0-cykl nie zawiera czasu oczekiwania; 1-cykl zawiera czas oczekiwania
+     * @param [in] stationary Oczekiwanie w pozycji wahadła: 0-kontynuacja ruchu w czasie oczekiwania; 1-pozycja nieruchoma w czasie oczekiwania
+     * @return  Kod błędu
      */
     public int CustomWeaveSetPara(int id, int pointNum, DescTran[] point, double[] stayTime, double frequency, int incStayType, int stationary)
 
-获取自定义摆动参数
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Pobieranie niestandardowych parametrów ruchu wahadłowego
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. versionadded:: Java SDK-v1.0.9-3.8.6
 
 .. code-block:: Java
     :linenos:
 
     /**
-     * @brief 获取自定义摆动参数
-     * @param [in] id 自定义摆动编号：0-2
-     * @param [out] pointNum 摆动点位个数 0-10
-     * @param [out] point 移动端点数据x,y,z
-     * @param [out] stayTime 摆动停留时间ms
-     * @param [out] frequency 摆动频率 Hz
-     * @param [out] incStayType 等待模式：0-周期不包含等待时间；1-周期包含等待时间
-     * @param [out] stationary 摆动位置等待：0-等待时间内继续运动；1-等待时间内位置静止
-     * @return  错误码
+     * @brief Pobieranie niestandardowych parametrów ruchu wahadłowego
+     * @param [in] id Niestandardowy numer wahadła: 0-2
+     * @param [out] pointNum Liczba punktów wahadła 0-10
+     * @param [out] point Dane punktów końcowych ruchu x,y,z
+     * @param [out] stayTime Czas postoju wahadła ms
+     * @param [out] frequency Częstotliwość wahadła Hz
+     * @param [out] incStayType Tryb oczekiwania: 0-cykl nie zawiera czasu oczekiwania; 1-cykl zawiera czas oczekiwania
+     * @param [out] stationary Oczekiwanie w pozycji wahadła: 0-kontynuacja ruchu w czasie oczekiwania; 1-pozycja nieruchoma w czasie oczekiwania
+     * @return  Kod błędu
      */
     public int CustomWeaveGetPara(int id, int[] pointNum, DescTran[] point, double[] stayTime, double[] frequency, int[] incStayType, int[] stationary)
 
-自定义摆动参数代码示例
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Przykład kodu niestandardowych parametrów ruchu wahadłowego
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
@@ -1514,178 +1585,192 @@
         robot.CloseRPC();
     }
 
-激光焊机参数配置
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Konfiguracja parametrów spawarki laserowej
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief 激光焊机参数配置
-    * @param  io_type 通信类型 0-IO 1-UDP
-    * @param  num 需要设置的组号（1~10）
-    * @param  scanSpeed 扫描速度
-    * @param  scanWidth 扫描宽度
-    * @param  peakPower 峰值功率
-    * @param  dutyCycle 占空比
-    * @param  freq 频率
-    * @return 错误码
+    * @brief Konfiguracja parametrów spawarki laserowej
+    * @param  io_type Typ komunikacji 0-IO 1-UDP
+    * @param  num Numer grupy do ustawienia (1~10)
+    * @param  scanSpeed Prędkość skanowania
+    * @param  scanWidth Szerokość skanowania
+    * @param  peakPower Moc szczytowa
+    * @param  dutyCycle Współczynnik wypełnienia
+    * @param  freq Częstotliwość
+    * @return Kod błędu
     */
     public int SetLaserWeldingParam(int io_type, int num, int scanSpeed, int scanWidth, int peakPower, int dutyCycle, int freq);
 
-设置激光焊接开始停止
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Ustawianie rozpoczęcia/zatrzymania spawania laserowego
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief 设置激光焊接开始停止
-    * @param io_type 通信类型 0-IO 1-UDP
-    * @param status 控制字 0-收光 1-出光
-    * @param max_waittime 最大等待时间，单位毫秒，默认10000
-    * @return 错误码
+    * @brief Ustawianie rozpoczęcia/zatrzymania spawania laserowego
+    * @param io_type Typ komunikacji 0-IO 1-UDP
+    * @param status Słowo sterujące 0-wyłącz wiązkę 1-włącz wiązkę
+    * @param max_waittime Maksymalny czas oczekiwania, jednostka milisekundy, domyślnie 10000
+    * @return Kod błędu
     */
     public int SetLaserWeldingStartEnd(int io_type, int status, int max_waittime)
 
-激光焊机使能去使能
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Włączanie/wyłączanie spawarki laserowej
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief 激光焊机使能去使能
-    * @param io_type 通信类型 0-IO 1-UDP
-    * @param status 0-去使能 1-使能
-    * @return 错误码
+    * @brief Włączanie/wyłączanie spawarki laserowej
+    * @param io_type Typ komunikacji 0-IO 1-UDP
+    * @param status 0-wyłącz 1-włącz
+    * @return Kod błędu
     */
     public int SetLaserWeldingEnable(int io_type, int status)
 
-激光焊机故障复位
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Resetowanie błędów spawarki laserowej
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief 激光焊机故障复位
-    * @param io_type 通信类型 0-IO 1-UDP
-    * @param status 控制字 0-无效 1-故障复位
-    * @return 错误码
+    * @brief Resetowanie błędów spawarki laserowej
+    * @param io_type Typ komunikacji 0-IO 1-UDP
+    * @param status Słowo sterujące 0-nieważne 1-resetowanie błędu
+    * @return Kod błędu
     */
     public int ResetLaserWeldingErr(int io_type, int status)
 
-获取激光焊机运行状态
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Pobieranie stanu pracy spawarki laserowej
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief 获取激光焊机运行状态
-    * @param io_type 通信类型 0-IO 1-UDP
-    * @param  status 控制字 0-停机 1-运行
-    * @return 错误码
+    * @brief Pobieranie stanu pracy spawarki laserowej
+    * @param io_type Typ komunikacji 0-IO 1-UDP
+    * @param  status Słowo sterujące 0-zatrzymana 1-pracuje
+    * @return Kod błędu
     */
     public int GetLaserWeldingRunningState(int io_type, int[] status)
 
-获取激光焊机故障状态
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Pobieranie stanu awarii spawarki laserowej
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief 获取激光焊机故障状态
-    * @param io_type 通信类型 0-IO 1-UDP
-    * @param  status 0-无故障 1-存在故障
-    * @return 错误码
+    * @brief Pobieranie stanu awarii spawarki laserowej
+    * @param io_type Typ komunikacji 0-IO 1-UDP
+    * @param  status 0-brak awarii 1-występuje awaria
+    * @return Kod błędu
     */
     public int GetLaserWeldingErrState(int io_type, int[] status)
 
-获取激光焊机配置参数
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Pobieranie parametrów konfiguracyjnych spawarki laserowej
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief 获取激光焊机10个工艺组中某一个的配置参数
-    * @param num 需要设置的组号（1~10）
-    * @param params 输出参数数组：[scanSpeed, scanWidth, peakPower, dutyCycle, freq]
-    * @return 错误码
+    * @brief Pobieranie parametrów konfiguracyjnych jednej z 10 grup procesowych spawarki laserowej
+    * @param num Numer grupy do ustawienia (1~10)
+    * @param params Tablica parametrów wyjściowych: [scanSpeed, scanWidth, peakPower, dutyCycle, freq]
+    * @return Kod błędu
     */
     public int GetLaserWeldingParamTarget(int num, int[] params)
 
-获取当前激光焊机生效的配置参数
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Pobieranie aktualnie obowiązujących parametrów konfiguracyjnych spawarki laserowej
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief 获取当前激光焊机生效的配置参数
-    * @param io_type 通信类型 0-IO 1-UDP
-    * @param params 输出参数数组：[scanSpeed, scanWidth, peakPower, dutyCycle, freq]
-    * @return 错误码
+    * @brief Pobieranie aktualnie obowiązujących parametrów konfiguracyjnych spawarki laserowej
+    * @param io_type Typ komunikacji 0-IO 1-UDP
+    * @param params Tablica parametrów wyjściowych: [scanSpeed, scanWidth, peakPower, dutyCycle, freq]
+    * @return Kod błędu
     */
     public int GetLaserWeldingParamActual(int io_type, int[] params)
 
-配置激光焊机扩展IO使能DO端口
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Konfiguracja rozszerzonego portu DO włączania spawarki laserowej
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief 激光焊机设置扩展IO，使能的DO端口
-    * @param ctrlModeDONum 激光焊机使能的扩展DO端口号
-    * @return 错误码
+    * @brief Ustawianie rozszerzonego IO dla spawarki laserowej, portu DO włączania
+    * @param ctrlModeDONum Rozszerzony numer portu DO włączania spawarki laserowej
+    * @return Kod błędu
     */
     public int SetLaserWeldingEnableExtDoNum(int ctrlModeDONum)
 
-配置激光焊机扩展IO启动DO端口
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Konfiguracja rozszerzonego portu DO uruchamiania spawarki laserowej
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief 激光焊机设置扩展IO，启动的DO端口
-    * @param ctrlModeDONum 激光焊机启动（出光收光）的扩展DO端口号
-    * @return 错误码
+    * @brief Ustawianie rozszerzonego IO dla spawarki laserowej, portu DO uruchamiania
+    * @param ctrlModeDONum Rozszerzony numer portu DO uruchamiania (włączania/wyłączania wiązki) spawarki laserowej
+    * @return Kod błędu
     */
     public int SetLaserWeldingStartExtDoNum(int ctrlModeDONum)
 
-配置激光焊机扩展IO故障复位DO端口
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Konfiguracja rozszerzonego portu DO resetowania błędów spawarki laserowej
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief 激光焊机设置扩展IO，故障复位的DO端口
-    * @param ctrlModeDONum 激光焊机故障复位的扩展DO端口号
-    * @return 错误码
+    * @brief Ustawianie rozszerzonego IO dla spawarki laserowej, portu DO resetowania błędów
+    * @param ctrlModeDONum Rozszerzony numer portu DO resetowania błędów spawarki laserowej
+    * @return Kod błędu
     */
     public int SetLaserWeldingErrResetExtDoNum(int ctrlModeDONum)
 
-配置激光焊机扩展IO运行状态（出光状态）DI端口
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Konfiguracja rozszerzonego portu DI stanu pracy (stanu wiązki) spawarki laserowej
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief 配置激光焊机扩展IO运行状态（出光状态）DI端口
-    * @param diNum 配置激光焊机运行状态（出光状态）扩展DI端口
-    * @return 错误码，0表示成功，非0表示失败
+    * @brief Konfiguracja rozszerzonego portu DI stanu pracy (stanu wiązki) spawarki laserowej
+    * @param diNum Rozszerzony port DI stanu pracy (stanu wiązki) spawarki laserowej
+    * @return Kod błędu, 0 oznacza sukces, wartość niezerowa oznacza błąd
     */
     public int SetLaserWeldingRunningStateExtDiNum(int diNum);
 
-配置激光焊机扩展IO故障状态DI端口
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Konfiguracja rozszerzonego portu DI stanu awarii spawarki laserowej
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief 配置激光焊机扩展IO故障状态DI端口
-    * @param diNum 配置激光焊机故障状态扩展DI端口
-    * @return 错误码，0表示成功，非0表示失败
+    * @brief Konfiguracja rozszerzonego portu DI stanu awarii spawarki laserowej
+    * @param diNum Rozszerzony port DI stanu awarii spawarki laserowej
+    * @return Kod błędu, 0 oznacza sukces, wartość niezerowa oznacza błąd
     */
     public int SetLaserWeldingErrStateExtDiNum(int diNum);
 
-激光焊接代码示例
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Przykład kodu spawania laserowego
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 

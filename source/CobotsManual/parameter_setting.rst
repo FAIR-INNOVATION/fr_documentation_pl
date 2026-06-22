@@ -1,26 +1,26 @@
-机器人参数设置
-===================
+Ustawianie parametrów robota
+============================
 
-设置安装方式
---------------------
+Ustawienie sposobu instalacji
+-----------------------------
 
-机器人默认安装方式为水平安装，当机器人安装方式更改时，需及时在“初始设置”->“基础”->“安装”菜单下设置机器人的实际安装方式，以保证机器人正常工作。
+Domyślnym sposobem instalacji robota jest instalacja pozioma. Gdy sposób instalacji robota zostanie zmieniony, należy niezwłocznie ustawić rzeczywisty sposób instalacji robota w menu "Ustawienia początkowe" -> "Podstawowe" -> "Instalacja", aby zapewnić prawidłowe działanie robota.
 
-考虑到更加灵活丰富的机器人部署场景，我们提供了自由安装功能，用户点击“初始设置”->“基础”->“安装”，进入机器人安装方式设置页面。手动调整“基座倾斜”和“基座旋转”角度，三维模型会对应展示安装效果。修改后点击“应用”按钮即可完成机器人安装方式设置。
+Biorąc pod uwagę bardziej elastyczne i bogate scenariusze wdrażania robota, udostępniliśmy funkcję swobodnej instalacji. Użytkownik klika "Ustawienia początkowe" -> "Podstawowe" -> "Instalacja", aby przejść do strony ustawiania sposobu instalacji robota. Ręczna regulacja kąta "Nachylenie podstawy" i "Obrót podstawy" spowoduje odpowiednie wyświetlenie efektu instalacji w modelu trójwymiarowym. Po modyfikacji kliknij przycisk "Zastosuj", aby zakończyć ustawianie sposobu instalacji robota.
 
 .. image:: teaching_pendant_software/026.png
    :width: 6in
    :align: center
    
-.. centered:: 图表 3.1-1 机器人安装
+.. centered:: Wykres 3.1-1 Instalacja robota
 
 .. important::
-    机器人安装完成后，必须正确设置机器人的安装方式，否则会影响机器人的拖动功能以及碰撞检测功能使用。
+    Po zakończeniu instalacji robota należy prawidłowo ustawić sposób instalacji robota. W przeciwnym razie wpłynie to na funkcję przeciągania robota oraz funkcję wykrywania kolizji.
 
-设置末端负载
---------------------
+Ustawienie obciążenia końcówki
+------------------------------
 
-在“初始设置”->“基础”->“负载”中“轨迹辨识”的辨识类型，进入末端负载设置界面。
+W "Ustawienia początkowe" -> "Podstawowe" -> "Obciążenie", w typie identyfikacji "Identyfikacja trajektorii", przejdź do interfejsu ustawiania obciążenia końcówki.
 
 .. note:: 
    .. image:: base/071.png
@@ -28,9 +28,9 @@
       :height: 0.75in
       :align: left
 
-   名称：**应用按钮**
+   Nazwa: **Przycisk Zastosuj**
    
-   作用：点击应用负载编号对应的负载重量和质心坐标
+   Funkcja: Kliknięcie powoduje zastosowanie masy obciążenia i współrzędnych środka ciężkości odpowiadających numerowi obciążenia
 
 .. note:: 
    .. image:: base/072.png
@@ -38,9 +38,9 @@
       :height: 0.75in
       :align: left
 
-   名称：**修改按钮**
+   Nazwa: **Przycisk Modyfikuj**
    
-   作用：点击打开/关闭辨识运动界面
+   Funkcja: Kliknięcie otwiera/zamyka interfejs ruchu identyfikacyjnego
 
 .. note:: 
    .. image:: base/073.png
@@ -48,9 +48,9 @@
       :height: 0.75in
       :align: left
 
-   名称：**重命名按钮**
+   Nazwa: **Przycisk Zmień nazwę**
    
-   作用：重命名负载名称
+   Funkcja: Zmienia nazwę obciążenia
 
 .. note:: 
    .. image:: base/074.png
@@ -58,44 +58,44 @@
       :height: 0.75in
       :align: left
 
-   名称：**清空按钮**
+   Nazwa: **Przycisk Wyczyść**
    
-   作用：清空当前负载信息（负载重量和质心坐标置0）
+   Funkcja: Czyści bieżące informacje o obciążeniu (masa obciążenia i współrzędne środka ciężkości są zerowane)
 
-在配置末端负载时，可直接输入末端工具的质量以及对应的质心坐标X、Y和Z”后点击“应用”按钮即可设置。
+Podczas konfigurowania obciążenia końcówki można bezpośrednio wprowadzić masę narzędzia końcowego oraz odpowiadające mu współrzędne środka ciężkości X, Y i Z, a następnie kliknąć przycisk "Zastosuj", aby je ustawić.
 
-同时可以点击“编辑”按钮，打开“辨识运动”界面进行负载自动辨识，辨识运行完成后进行应用。
+Jednocześnie można kliknąć przycisk "Edytuj", aby otworzyć interfejs "Ruch identyfikacyjny" i przeprowadzić automatyczną identyfikację obciążenia. Po zakończeniu identyfikacji należy zastosować wyniki.
 
 .. important:: 
-   负载质量不可超过机器人的最大负载范围。对应型号负载如下：
+    Masa obciążenia nie może przekraczać maksymalnego zakresu obciążenia robota. Obciążenia dla poszczególnych modeli są następujące:
 
-   - FR3：3kg
+   - FR3: 3 kg
 
-   - FR5：5kg
+   - FR5: 5 kg
 
-   - FR10：10kg
+   - FR10: 10 kg
 
-   - FR16：16kg
+   - FR16: 16 kg
    
-   - FR20：20kg
+   - FR20: 20 kg
    
-   - FR30：30kg
+   - FR30: 30 kg
 
-   质心坐标设置范围为0-1000，单位mm。
+   Zakres ustawiania współrzędnych środka ciężkości wynosi 0-1000, jednostka mm.
 
 .. image:: base/016.png
    :width: 4in
    :align: center
 
-.. centered:: 图表 3.2-1 负载设定示意图
+.. centered:: Wykres 3.2-1 Schemat ustawiania obciążenia
     
 .. important:: 
-    机器人末端安装负载后，必须正确设置末端负载重量以及质心坐标，否则会影响机器人的拖动功能以及碰撞检测功能使用。
+    Po zamontowaniu obciążenia na końcówce robota należy prawidłowo ustawić masę obciążenia końcówki oraz współrzędne środka ciężkości. W przeciwnym razie wpłynie to na funkcję przeciągania robota oraz funkcję wykrywania kolizji.
 
-设置工具坐标
---------------------
+Ustawienie współrzędnych narzędzia
+----------------------------------
 
-在“初始设置”->“基础”->“工具坐标”进入工具坐标页面。
+W menu "Ustawienia początkowe" -> "Podstawowe" -> "Współrzędne narzędzia" przejdź do strony współrzędnych narzędzia.
 
 .. note:: 
    .. image:: base/071.png
@@ -103,9 +103,9 @@
       :height: 0.75in
       :align: left
 
-   名称：**应用按钮**
+   Nazwa: **Przycisk Zastosuj**
    
-   作用：点击应用工具坐标系
+   Funkcja: Kliknięcie powoduje zastosowanie układu współrzędnych narzędzia
 
 .. note:: 
    .. image:: base/072.png
@@ -113,9 +113,9 @@
       :height: 0.75in
       :align: left
 
-   名称：**修改按钮**
+   Nazwa: **Przycisk Modyfikuj**
    
-   作用：点击打开/关闭坐标系标定界面
+   Funkcja: Kliknięcie otwiera/zamyka interfejs kalibracji układu współrzędnych
 
 .. note:: 
    .. image:: base/073.png
@@ -123,9 +123,9 @@
       :height: 0.75in
       :align: left
 
-   名称：**重命名按钮**
+   Nazwa: **Przycisk Zmień nazwę**
    
-   作用：重命名工具坐标系名称
+   Funkcja: Zmienia nazwę układu współrzędnych narzędzia
 
 .. note:: 
    .. image:: base/074.png
@@ -133,27 +133,27 @@
       :height: 0.75in
       :align: left
 
-   名称：**清空按钮**
+   Nazwa: **Przycisk Wyczyść**
    
-   作用：清空当前工具坐标信息
+   Funkcja: Czyści bieżące informacje o współrzędnych narzędzia
 
-工具坐标可实现工具坐标的修改、清空与应用。在工具坐标系的下拉列表中，选择对应的坐标系后会在下方显示对应坐标值（坐标系名称可自定义），工具类型以及安装位置（仅在传感器类型工具下显示），选择某一坐标系后点击“应用”按钮，当前使用的工具坐标系变为所选择的坐标，如下所示。
+Współrzędne narzędzia umożliwiają modyfikację, czyszczenie i zastosowanie współrzędnych narzędzia. Na liście rozwijanej układów współrzędnych narzędzia, po wybraniu odpowiedniego układu współrzędnych, poniżej wyświetlone zostaną odpowiadające mu wartości współrzędnych (nazwa układu współrzędnych może być dostosowana przez użytkownika), typ narzędzia oraz pozycja instalacji (wyświetlana tylko dla narzędzi typu czujnikowego). Po wybraniu układu współrzędnych kliknij przycisk "Zastosuj", a aktualnie używany układ współrzędnych narzędzia zmieni się na wybrany układ współrzędnych, jak pokazano poniżej.
 
 .. image:: base/001.png
    :width: 4in
    :align: center
    
-.. centered:: 图表 3.3-1 设置工具坐标
+.. centered:: Wykres 3.3-1 Ustawianie współrzędnych narzędzia
 
-点击“修改”可根据提示对该编号的工具坐标系进行重新设置。工具标定方法分为四点法和六点法，四点法只标定工具TCP，即工具中心点的位置，其姿态默认与末端姿态一致，六点法则在四点法的基础上增加了两点，用于标定工具的姿态。
+Kliknij "Modyfikuj", aby ponownie ustawić układ współrzędnych narzędzia o danym numerze zgodnie z instrukcjami. Metody kalibracji narzędzia dzielą się na metodę czteropunktową i metodę sześciopunktową. Metoda czteropunktowa kalibruje tylko TCP narzędzia, czyli pozycję środka punktu narzędzia, a jego orientacja jest domyślnie zgodna z orientacją końcówki. Metoda sześciopunktowa dodaje dwa punkty do metody czteropunktowej w celu kalibracji orientacji narzędzia.
 
 .. image:: base/002.png
    :width: 4in
    :align: center
 
-.. centered:: 图表 3.3-2 工具坐标系标定
+.. centered:: Wykres 3.3-2 Kalibracja układu współrzędnych narzędzia
 
 .. important:: 
-    1. 末端安装工具后，必须要进行工具坐标系的标定及应用，否则会导致机器人执行运动指令时工具中心点的位置和姿态不符合预期值。
+    1. Po zamontowaniu narzędzia na końcówce konieczna jest kalibracja i zastosowanie układu współrzędnych narzędzia. W przeciwnym razie pozycja i orientacja środka punktu narzędzia podczas wykonywania przez robota instrukcji ruchu nie będą zgodne z oczekiwanymi wartościami.
 
-    2. 工具坐标系一般使用toolcoord1~toolcoord19,应用toolcoord0代表工具TCP的位置中心在末端法兰中心，在进行工具坐标系标定时，首先需将工具坐标系应用至toolcoord0，然后选择其他工具坐标系进行标定及应用。
+    2. Układ współrzędnych narzędzia jest zwykle używany jako toolcoord1~toolcoord19. Zastosowanie toolcoord0 oznacza, że środek TCP narzędzia znajduje się w środku kołnierza końcówki. Podczas kalibracji układu współrzędnych narzędzia należy najpierw zastosować układ współrzędnych narzędzia do toolcoord0, a następnie wybrać inny układ współrzędnych narzędzia do kalibracji i zastosowania.

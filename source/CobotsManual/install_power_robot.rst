@@ -1,396 +1,396 @@
-机器人安装上电
-===================
+Instalacja i zasilanie robota
+=============================
 
 .. toctree:: 
    :maxdepth: 6
 
-安装机器人手臂
-----------------
+Instalacja ramienia robota
+--------------------------
 
-协作机器人安装在安装座上时，使用合规数量螺栓（强度不低于8.8级）将机器人拧紧固定在安装座上；建议安装座上使用两个合规销孔配合销钉进行机器人定位，以提高机器人安装精度，防止因为碰撞等使机器人发生移动。当机器人有较高运行精度要求时，请务必增加销钉对机器人进行定位。
+Podczas montażu robota współpracującego na podstawie montażowej należy użyć odpowiedniej liczby śrub (o klasie wytrzymałości nie niższej niż 8.8), aby dokręcić i zamocować robota na podstawie montażowej. Zaleca się użycie dwóch zgodnych otworów kołkowych na podstawie montażowej w połączeniu z kołkami do pozycjonowania robota, aby zwiększyć dokładność montażu robota i zapobiec przemieszczaniu się robota spowodowanemu kolizjami. Gdy robot ma wysokie wymagania co do dokładności działania, należy obowiązkowo dodać kołki do pozycjonowania robota.
 
-.. centered:: 表格 1.1-1 机器人安装零件标准
+.. centered:: Tabela 1.1-1 Normy części montażowych robota
 
 .. list-table::
    :widths: 80 50 50 50
    :header-rows: 0
    :align: center
 
-   * - **协作机器人型号**
-     - **螺栓**
-     - **螺栓扭矩**
-     - **销孔规格**
+   * - **Model robota współpracującego**
+     - **Śruby**
+     - **Moment dokręcania śrub**
+     - **Specyfikacja otworu kołkowego**
 
    * - FR3
-     - 4颗M6
-     - ≥10Nm
-     - φ5mm
+     - 4 sztuki M6
+     - ≥10 Nm
+     - φ5 mm
 
    * - FR3-WMS
-     - 4颗M6
-     - ≥10Nm
-     - φ5mm
+     - 4 sztuki M6
+     - ≥10 Nm
+     - φ5 mm
 
    * - FR3-WML
-     - 4颗M6
-     - ≥10Nm
-     - φ5mm
+     - 4 sztuki M6
+     - ≥10 Nm
+     - φ5 mm
 
    * - FR3-C
-     - 4颗M6
-     - ≥10Nm
-     - φ5mm
+     - 4 sztuki M6
+     - ≥10 Nm
+     - φ5 mm
 
    * - FR5-C
-     - 4颗M6
-     - ≥10Nm
-     - φ5mm
+     - 4 sztuki M6
+     - ≥10 Nm
+     - φ5 mm
    
    * - FR5
-     - 4颗M8
-     - ≥20Nm
-     - φ8mm
+     - 4 sztuki M8
+     - ≥20 Nm
+     - φ8 mm
 
    * - FR10
-     - 4颗M8
-     - ≥25Nm
-     - φ8mm
+     - 4 sztuki M8
+     - ≥25 Nm
+     - φ8 mm
 
    * - FR16
-     - 4颗M8
-     - ≥25Nm
-     - φ8mm
+     - 4 sztuki M8
+     - ≥25 Nm
+     - φ8 mm
 
    * - FR20
-     - 6颗M10
-     - ≥45Nm
-     - φ8mm
+     - 6 sztuk M10
+     - ≥45 Nm
+     - φ8 mm
 
    * - FR30
-     - 6颗M10
-     - ≥45Nm
-     - φ8mm
+     - 6 sztuk M10
+     - ≥45 Nm
+     - φ8 mm
 
    * - FR30L
-     - 6颗M10
-     - ≥45Nm
-     - φ8mm
+     - 6 sztuk M10
+     - ≥45 Nm
+     - φ8 mm
 
 .. important:: 
-   推荐机器人安装座满足以下几个要求，以保证机器人安装牢固、稳定：
+   Zaleca się, aby podstawa montażowa robota spełniała następujące wymagania, zapewniając solidne i stabilne zamocowanie robota:
    
-   （1）机器人安装座需要足够牢固且有足够的承载能力，应该至少能承载5倍的机器人重量，至少能承受10倍的1轴扭矩。
+   (1) Podstawa montażowa robota musi być wystarczająco wytrzymała i mieć odpowiednią nośność. Powinna wytrzymać co najmniej 5-krotność ciężaru robota i co najmniej 10-krotność momentu obrotowego osi 1.
 
-   （2）机器人安装座应表面平整，以保证与机器人接触面紧密接触；
+   (2) Powierzchnia podstawy montażowej robota powinna być płaska, aby zapewnić ścisły kontakt z powierzchnią robota.
 
-   （3）机器人安装座应刚度足够强壮，固定牢固，不会和机器人发生共振；
+   (3) Podstawa montażowa robota powinna być wystarczająco sztywna, solidnie zamocowana i nie może rezonować z robotem.
 
-   （4）机器人和其他部件同时运动时，安装座与其他运动部件应隔离开，不要固定在一起避免运动过程中的振动干扰；
+   (4) Gdy robot i inne elementy poruszają się jednocześnie, podstawa montażowa powinna być odizolowana od innych ruchomych części, nie należy ich mocować razem, aby uniknąć zakłóceń wibracyjnych podczas ruchu.
 
-   （5）如果机器人安装在移动平台或者外部轴上，移动平台或者外部轴的加速度应尽量低；
+   (5) Jeśli robot jest zainstalowany na ruchomej platformie lub zewnętrznej osi, przyspieszenie ruchomej platformy lub zewnętrznej osi powinno być tak niskie, jak to możliwe.
 
-连接控制箱
-----------------
+Podłączenie skrzynki sterowniczej
+------------------------------------
 
-本系列机器人可以配置三种不同电源输入的控制箱，控制箱电源输入信息详见控制箱铭牌信息。机器人需要电气接地。机械手控制系统的外部连线均使用可插拔可快速安装的插头进行连接。
+Roboty tej serii mogą być wyposażone w trzy różne skrzynki sterownicze z różnymi wejściami zasilania. Szczegółowe informacje na temat wejścia zasilania skrzynki sterowniczej znajdują się na tabliczce znamionowej skrzynki sterowniczej. Robot wymaga uziemienia elektrycznego. Zewnętrzne połączenia systemu sterowania ramieniem są wykonywane za pomocą wtyczek, które można podłączyć i szybko zainstalować.
 
-A. 30-60VDC
-B. 176-264VAC~50-60Hz
-C. 100-240VAC~50-60HZ
+A. 30-60 V DC
+B. 176-264 V AC ~ 50-60 Hz
+C. 100-240 V AC ~ 50-60 Hz
 
-.. note:: 交流输入的控制箱区分窄电压和宽电压两个版本，控制箱接线端子和外形一致，单独通过外形不能区分，请通过控制箱铭牌进行确认，确认无误后再上电运行。
+.. note:: Skrzynki sterownicze z wejściem prądu przemiennego są dostępne w dwóch wersjach: wąskiego i szerokiego zakresu napięcia. Zaciski przyłączeniowe i wygląd zewnętrzny skrzynek sterowniczych są identyczne, nie można ich odróżnić samym wyglądem. Należy to potwierdzić na podstawie tabliczki znamionowej skrzynki sterowniczej, a po potwierdzeniu, że nie ma błędów, włączyć zasilanie i uruchomić.
 
-协作机器人接线面板如下图表：
+Panel podłączenia robota współpracującego przedstawiono na poniższym wykresie:
 
 .. image:: installation/037.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 1.2-1 控制箱接线面板
+.. centered:: Wykres 1.2-1 Panel podłączenia skrzynki sterowniczej
 
-按钮盒接口默认为示教器控制端口，IP地址为192.168.58.2，使用网线连接按钮盒接口与电脑，电脑IP地址设为192.168.58.10或与之同一网段，打开谷歌浏览器输入192.168.58.2即可访问示教器页面。
+Złącze panelu przyciskowego jest domyślnie portem sterowania panelem operatorskim. Adres IP to 192.168.58.2. Użyj kabla sieciowego, aby połączyć złącze panelu przyciskowego z komputerem. Ustaw adres IP komputera na 192.168.58.10 lub w tej samej podsieci. Otwórz przeglądarkę Google Chrome i wprowadź 192.168.58.2, aby uzyskać dostęp do strony panelu operatorskiego.
 
-认识按钮盒及末端LED
----------------------
+Poznanie panelu przyciskowego i końcowego LED
+---------------------------------------------
 
-按钮盒
-~~~~~~~~~
+Panel przyciskowy
+~~~~~~~~~~~~~~~~~
 
-60按钮盒(POE)(BX01)
-++++++++++++++++++++++++++++++
+60 panel przyciskowy (POE)(BX01)
+++++++++++++++++++++++++++++++++
 
 .. figure:: installation/058.png
 	:align: center
 	:width: 6in
 
-.. centered:: 图表 1.3-1 60按钮盒（POE）
+.. centered:: Wykres 1.3-1 60 panel przyciskowy (POE)
 
-60按钮盒(POE)(BX02)-V1.0
-++++++++++++++++++++++++++++++
+60 panel przyciskowy (POE)(BX02)-V1.0
++++++++++++++++++++++++++++++++++++++
 
 .. image:: installation/059.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 1.3-2 控制箱接线面板
+.. centered:: Wykres 1.3-2 Panel podłączenia skrzynki sterowniczej
 
-.. centered:: 表格 1.3-1 控制箱接线面板按键说明
+.. centered:: Tabela 1.3-1 Opis przycisków panelu podłączenia skrzynki sterowniczej
 
 .. list-table::
    :widths: 50 200
    :header-rows: 0
    :align: center
 
-   * - **按键名**
-     - **功能**
+   * - **Nazwa przycisku**
+     - **Funkcja**
 
-   * - 急停开关
-     - 当按下急停开关，机器人进入紧急停止状态
+   * - Wyłącznik awaryjny
+     - Po naciśnięciu wyłącznika awaryjnego robot przechodzi w stan awaryjnego zatrzymania
 
-   * - 开始停止
-     - 开始/停止运行程序
+   * - Start/Stop
+     - Uruchamianie/zatrzymywanie działania programu
 
-   * - 网口
-     - 连接web示教器
+   * - Port sieciowy
+     - Podłączenie do panelu operatorskiego sieciowego
 
-   * - 关机
-     - 暂未启用
+   * - Wyłączenie
+     - Tymczasowo nieaktywne
 
-   * - 记录点
-     - 记录示教点
+   * - Zapis punktu
+     - Zapis punktu uczenia
 
-   * - 示教模式
-     - 进入/退出搭配示教器状态
+   * - Tryb uczenia
+     - Wejście/wyjście ze stanu z podłączonym panelem operatorskim
 
-   * - 运行模式
-     - 自动/手动模式切换
+   * - Tryb pracy
+     - Przełączanie trybu automatyczny/ręczny
 
-   * - 拖动模式
-     - 进入/退出拖动模式
+   * - Tryb przeciągania
+     - Wejście/wyjście z trybu przeciągania
 
-60按钮盒(POE)(BX02)-V2.0
-+++++++++++++++++++++++++++++++++++
+60 panel przyciskowy (POE)(BX02)-V2.0
++++++++++++++++++++++++++++++++++++++
 
 .. image:: installation/079.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 1.3-3 控制箱接线面板
+.. centered:: Wykres 1.3-3 Panel podłączenia skrzynki sterowniczej
 
-.. centered:: 表格 1.3-2 控制箱接线面板按键说明
+.. centered:: Tabela 1.3-2 Opis przycisków panelu podłączenia skrzynki sterowniczej
 
 .. list-table::
    :widths: 50 200
    :header-rows: 0
    :align: center
 
-   * - **按键名**
-     - **功能**
+   * - **Nazwa przycisku**
+     - **Funkcja**
 
-   * - 急停开关
-     - 当按下急停开关，机器人进入紧急停止状态
+   * - Wyłącznik awaryjny
+     - Po naciśnięciu wyłącznika awaryjnego robot przechodzi w stan awaryjnego zatrzymania
 
-   * - 开始停止
-     - 开始/停止运行程序
+   * - Start/Stop
+     - Uruchamianie/zatrzymywanie działania programu
 
-   * - 网口
-     - 连接web示教器
+   * - Port sieciowy
+     - Podłączenie do panelu operatorskiego sieciowego
 
-   * - IP复位
-     - 重置网口IP
+   * - Reset IP
+     - Resetowanie adresu IP portu sieciowego
 
-   * - 记录点
-     - 记录示教点
+   * - Zapis punktu
+     - Zapis punktu uczenia
 
-   * - 一键清除
-     - 清除所有可恢复的报错
+   * - Jedno kliknięcie wyczyszczenia
+     - Czyszczenie wszystkich możliwych do usunięcia błędów
 
-   * - 运行模式
-     - 自动/手动模式切换
+   * - Tryb pracy
+     - Przełączanie trybu automatyczny/ręczny
 
-   * - 拖动模式
-     - 进入/退出拖动模式
+   * - Tryb przeciągania
+     - Wejście/wyjście z trybu przeciągania
 
-末端LED
-~~~~~~~~~
+Końcowy LED
+~~~~~~~~~~~
 
-.. centered:: 表格 1.3-3 末端LED定义
+.. centered:: Tabela 1.3-3 Definicja końcowego LED
 
 .. list-table::
    :widths: 120 100
    :header-rows: 0
    :align: center
 
-   * - **功能**
-     - **LED颜色**
+   * - **Funkcja**
+     - **Kolor LED**
 
-   * - 通信未建立时
-     - “灭”“红”“绿”“蓝”交替
+   * - Gdy komunikacja nie jest nawiązana
+     - Naprzemiennie: "wyłączony", "czerwony", "zielony", "niebieski"
 
-   * - 自动模式
-     - 蓝色长亮
+   * - Tryb automatyczny
+     - Świeci na niebiesko
 
-   * - 手动模式
-     - 绿色长亮
+   * - Tryb ręczny
+     - Świeci na zielono
 
-   * - 拖动模式
-     - 白青色长亮
+   * - Tryb przeciągania
+     - Świeci na biało-błękitnie
 
-   * - 按钮盒记录点（仅在使用按钮盒时）
-     - 紫色闪烁两下
+   * - Zapis punktu na panelu przyciskowym (tylko podczas korzystania z panelu przyciskowego)
+     - Miga na fioletowo dwa razy
 
-   * - 进入未搭配按钮盒状态（仅在使用按钮盒时）
-     - 青蓝色闪烁两下
+   * - Wejście w stan bez podłączonego panelu przyciskowego (tylko podczas korzystania z panelu przyciskowego)
+     - Miga na błękitno dwa razy
 
-   * - 开始运行（仅在使用按钮盒时）
-     - 蓝色闪烁两下
+   * - Rozpoczęcie działania (tylko podczas korzystania z panelu przyciskowego)
+     - Miga na niebiesko dwa razy
 
-   * - 停止运行（仅在使用按钮盒时）
-     - 红色闪烁两下
+   * - Zatrzymanie działania (tylko podczas korzystania z panelu przyciskowego)
+     - Miga na czerwono dwa razy
 
-   * - 报错（仅在使用按钮盒时）
-     - 红色长亮
+   * - Błąd (tylko podczas korzystania z panelu przyciskowego)
+     - Świeci na czerwono
 
-   * - 校零完成
-     - 白青色闪烁三下
+   * - Zakończenie kalibracji zera
+     - Miga na biało-błękitnie trzy razy
 
-   * - 去使能
-     - 黄色闪烁两下
+   * - Odłączenie
+     - Miga na żółto dwa razy
 
-上电使能
-----------------
+Włączenie zasilania i załączenie
+--------------------------------
 
-上电前，请确认按钮盒急停按钮处理松开状态，按下控制箱红色开关按钮上电，使能成功后末端LED灯处于绿色常亮状态。
+Przed włączeniem zasilania upewnij się, że przycisk awaryjnego zatrzymania na panelu przyciskowym jest zwolniony. Naciśnij czerwony przycisk zasilania na skrzynce sterowniczej, aby włączyć zasilanie. Po pomyślnym załączeniu, końcowy dioda LED świeci na zielono.
 
-电源关闭
-----------------
+Wyłączenie zasilania
+--------------------
 
 .. important:: 
-  在使用本设备时，请务必确保在关闭电源之前，停止所有运行中的程序，停用状态查询功能，确认运行状态处于“Stopped”。这一操作旨在保护设备及存储数据的安全，避免因突然断电而导致的数据丢失或系统损坏。
+   Podczas korzystania z tego urządzenia należy bezwzględnie upewnić się, że przed wyłączeniem zasilania wszystkie działające programy zostały zatrzymane, funkcja zapytania o stan została wyłączona, a stan pracy jest ustawiony na "Stopped" (Zatrzymany). Ta czynność ma na celu ochronę urządzenia i bezpieczeństwa przechowywanych danych, zapobiegając utracie danych lub uszkodzeniu systemu spowodowanemu nagłym odcięciem zasilania.
 
 .. image:: installation/078.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 1.5-1 关闭电源按钮
+.. centered:: Wykres 1.5-1 Przycisk wyłączania zasilania
 
-控制箱纽扣电池
-----------------------------------------------------------------
+Bateria pastylkowa skrzynki sterowniczej
+----------------------------------------
 
-时间丢失的常见原因
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Częste przyczyny utraty czasu
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-本设备使用外部纽扣电池作为实时时钟（RTC）的后备电源，用于在主电源断电时维持时间计数。
+Urządzenie to wykorzystuje zewnętrzną baterię pastylkową jako zasilanie rezerwowe dla zegara czasu rzeczywistego (RTC), służącą do podtrzymywania zliczania czasu w przypadku zaniku głównego zasilania.
 
-若出现时间丢失（即重新上电后显示错误日期），通常由以下一种或多种原因引起：
+Jeśli wystąpi utrata czasu (tzn. po ponownym włączeniu zasilania wyświetlana jest nieprawidłowa data), jest to zwykle spowodowane jedną lub kilkoma z następujących przyczyn:
 
 .. list-table::
    :widths: 40 40 60
    :header-rows: 0
    :align: center
 
-   * - **原因分类**
-     - **具体描述**
-     - **排查建议**
+   * - **Kategoria przyczyny**
+     - **Szczegółowy opis**
+     - **Zalecenia dotyczące diagnozowania**
 
-   * - 纽扣电池电量耗尽
-     - 设备3个月以上未上电使用，导致电池能量自然消耗完毕。
-     - 使用万用表测量电池电压（需拆下测量），若电压低于2.5V则需充电。
+   * - Wyczerpanie baterii pastylkowej
+     - Urządzenie nie było używane przez ponad 3 miesiące, co spowodowało naturalne zużycie energii baterii.
+     - Zmierz napięcie baterii za pomocą multimetru (po wyjęciu), jeśli napięcie jest niższe niż 2,5 V, baterię należy naładować.
 
-   * - 电池损坏
-     - 电池使用寿命已到。
-     - 查看电池是否出现漏液鼓包情况，需要更换电池。电池型号：MS621FE-FL11E，3V/5.5mAH，可充电使用。
+   * - Uszkodzenie baterii
+     - Bateria osiągnęła koniec swojego okresu użytkowania.
+     - Sprawdź, czy bateria nie przecieka ani nie jest wybrzuszona. Wymień baterię. Model baterii: MS621FE-FL11E, 3 V / 5,5 mAh, nadaje się do ładowania.
 
-   * - 电池端子接触不良
-     - 电池端子氧化、变形，或设备受到震动导致电池瞬间脱离触点。
-     - 检查电池与端子插接是否牢固，清洁触点，重新安装电池并确保卡紧。
+   * - Słaby kontakt styków baterii
+     - Utlenienie lub odkształcenie styków baterii, lub wstrząsy urządzenia spowodowały chwilowe odłączenie baterii od styków.
+     - Sprawdź, czy bateria jest dobrze osadzona w styku, wyczyść styki, zainstaluj baterię ponownie i upewnij się, że jest dobrze zamocowana.
 
-   * - 未安装电池或电池装反
-     - 用户未安装备用电池，或安装时正负极方向错误。
-     - | 确认电池已安装且极性正确（正极朝上）。
-      
+   * - Brak baterii lub bateria włożona odwrotnie
+     - Użytkownik nie zainstalował baterii zapasowej lub zainstalował ją z nieprawidłową polaryzacją.
+     - | Upewnij się, że bateria jest zainstalowana, a bieguny są prawidłowe (biegun dodatni skierowany do góry).
+
        .. image:: installation/131.png
           :width: 2in
           :align: center
 
-   * - 电池充电电路故障
-     - 可充电纽扣电池无法正常蓄电。
-     - 需由专业维修人员检测充电回路。
+   * - Awaria obwodu ładowania baterii
+     - Ładowalna bateria pastylkowa nie może normalnie przechowywać ładunku.
+     - Wymagana jest kontrola obwodu ładowania przez wykwalifikowany personel serwisowy.
 
-.. warning:: 本设备使用的纽扣电池型号为[MS621FE-FL11E，3V/5.5mAH，可充电使用]，请务必根据型号选择正确的处理方式，严禁安装不可充电电池。
+.. warning:: Bateria pastylkowa używana w tym urządzeniu to model [MS621FE-FL11E, 3 V / 5,5 mAh, nadaje się do ładowania]. Należy koniecznie postępować zgodnie z odpowiednią procedurą dla tego modelu. Zabrania się instalowania baterii, które nie nadają się do ładowania.
 
-时间异常识别和手动校准
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Identyfikacja nieprawidłowości czasu i ręczna kalibracja
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-1)异常识别方法
+1) Metoda identyfikacji nieprawidłowości
    
-机器人重新上电后，首先查看设备页面当前显示的时间。将其与电脑的系统时间进行比对：
+Po ponownym włączeniu zasilania robota należy najpierw sprawdzić aktualny czas wyświetlany na stronie urządzenia. Porównaj go z czasem systemowym komputera:
 
-- 若两者一致，表示时间正常，无需后续操作。
+- Jeśli są zgodne, oznacza to, że czas jest prawidłowy i nie są wymagane dalsze działania.
 
 .. image:: installation/132.png
    :width: 4in
    :align: center
 
-.. centered:: 图表 1.6-1 系统时间异常情况
+.. centered:: Wykres 1.6-1 Nieprawidłowa sytuacja czasu systemowego
 
-- 若两者不一致（例如日期错误、时分秒偏差较大），则判定为时间异常，请继续执行下面的校准步骤。
+- Jeśli nie są zgodne (np. błędna data, duże odchylenie godziny, minut, sekund), oznacza to nieprawidłowość czasu. Należy kontynuować procedurę kalibracji opisaną poniżej.
   
-2)校准步骤
+2) Procedura kalibracji
 
-如已确认时间异常，请按以下操作同步系统时间：
+Jeśli potwierdzono nieprawidłowość czasu, wykonaj następujące czynności, aby zsynchronizować czas systemowy:
 
-- 打开浏览器进入 WebApp，依次导航至：“系统设置 -> 通用设置 -> 时间”界面。
+- Otwórz przeglądarkę i przejdź do WebApp, następnie nawiguj kolejno do: "Ustawienia systemowe -> Ustawienia ogólne -> Czas".
 
 .. image:: installation/133.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 1.6-2 系统时间更新界面
+.. centered:: Wykres 1.6-2 Interfejs aktualizacji czasu systemowego
 
-- 点击界面中的“更新”按钮，系统将自动完成时间同步。同步后返回机器人页面，时间即可恢复正常。
+- Kliknij przycisk "Aktualizuj" w interfejsie, a system automatycznie zsynchronizuje czas. Po synchronizacji wróć do strony robota, a czas powinien wrócić do normy.
 
-纽扣电池充电与维护注意事项
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Ładowanie baterii pastylkowej i uwagi dotyczące konserwacji
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-1)充电条件
+1) Warunki ładowania
 
-- 设备主电源接通（220V AC）后，充电电路自动激活。
-- 环境温度应在 0℃ ~ 45℃ 范围内，高温会降低充电效率并缩短电池寿命。
+- Po podłączeniu głównego zasilania urządzenia (220 V AC) obwód ładowania aktywuje się automatycznie.
+- Temperatura otoczenia powinna mieścić się w zakresie 0°C ~ 45°C. Wysoka temperatura zmniejsza wydajność ładowania i skraca żywotność baterii.
 
-2)充电时间
+2) Czas ładowania
 
-- 完全放电的电池大约需要 [5小时] 才能充满。期间时间保持功能正常。
+- Całkowicie rozładowana bateria potrzebuje około [5 godzin] do pełnego naładowania. W tym czasie funkcja podtrzymania czasu działa prawidłowo.
 
-3)禁止事项
+3) Zakazy
 
-- 请勿使用外部充电器直接对设备内的纽扣电池充电。
-- 请勿将不可充电电池装入带设备中，否则可能引起危险。
+- Nie używaj zewnętrznej ładowarki do ładowania baterii pastylkowej w urządzeniu.
+- Nie instaluj baterii, które nie nadają się do ładowania w urządzeniu, ponieważ może to spowodować zagrożenie.
 
-电池更换与废弃
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-1)更换周期
+Wymiana i utylizacja baterii
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1) Okres wymiany
 
-- 通常可使用 [5 年] 以上，若出现时间频繁丢失请更换。
+- Zazwyczaj żywotność baterii wynosi ponad [5 lat]. Wymień baterię, jeśli czas jest często tracony.
 
-2)更换步骤
+2) Procedura wymiany
 
-- 断开设备主电源。
-- 打开上盖。
-- 取出旧电池，注意极性方向。
-- 焊接同型号合格新电池（正极朝上）。
-- 合上盖，重新上电并校对当前时间。
+- Odłącz główne zasilanie urządzenia.
+- Otwórz górną pokrywę.
+- Wyjmij starą baterię, zwracając uwagę na polaryzację.
+- Przylutuj nową baterię tego samego modelu (biegun dodatni skierowany do góry).
+- Zamknij pokrywę, włącz ponownie zasilanie i skoryguj bieżący czas.
 
-3)废弃处置
+3) Utylizacja
 
-- 请勿将电池投入火中或与水接触。
-- 按照当地法规分类回收废旧电池（纽扣电池通常含有锂或重金属）。
+- Nie wrzucaj baterii do ognia ani nie dopuszczaj do kontaktu z wodą.
+- Utylizuj zużyte baterie zgodnie z lokalnymi przepisami dotyczącymi segregacji odpadów (baterie pastylkowe często zawierają lit lub metale ciężkie).
 
-技术支持
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Wsparcie techniczne
+~~~~~~~~~~~~~~~~~~~
 
-若按照以上步骤操作后问题仍未解决，请联系我们的技术支持团队，并提供以下信息：
+Jeśli problem nie zostanie rozwiązany po wykonaniu powyższych kroków, skontaktuj się z naszym zespołem wsparcia technicznego i podaj następujące informacje:
 
-- 设备型号与序列号。
-- 使用的电池型号（请查看电池表面刻字）。
-- 故障现象（例如：断电后立即丢失 / 放置一晚后丢失）。
+- Model i numer seryjny urządzenia.
+- Używany model baterii (sprawdź napisy na powierzchni baterii).
+- Opis usterki (np. natychmiastowa utrata po odcięciu zasilania / utrata po pozostawieniu na noc).

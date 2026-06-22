@@ -1,43 +1,43 @@
-码垛FRCap
-===========
+Paletyzator FRCap
+=================
 
-插件包管理
--------------
+Zarządzanie pakietami wtyczek
+-----------------------------
 
-在协作机器人WebApp中“系统设置”->“插件配置”页面，点击“导入”按钮，选择码垛FRCap插件包（名称格式：插件包名称+版本号.plugin，示例：码垛机Palletizer-v0.0.0.plugin）上传。上传成功后列表展示导入成功的码垛FRCap插件包，包括插件启停状态、名称、版本号、描述和作者等。操作栏中可以对码垛FRCap插件包进行“停用”、“启用”和“删除”。
+Na stronie „Ustawienia systemowe” -> „Konfiguracja wtyczek” w WebApp robota współpracującego kliknij przycisk „Importuj”, wybierz pakiet wtyczki FRCap paletyzatora (format nazwy: nazwa pakietu wtyczki + numer wersji .plugin, przykład: Paletyzator Palletizer-v0.0.0.plugin) i prześlij go. Po pomyślnym przesłaniu lista wyświetli pomyślnie zaimportowane pakiety wtyczek FRCap paletyzatora, w tym stan uruchomienia/wyłączenia wtyczki, nazwę, numer wersji, opis i autora. W kolumnie operacji można „Wyłączyć”, „Włączyć” i „Usunąć” pakiet wtyczki FRCap paletyzatora.
 
 .. image:: frcap_pictures/013.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10-1-1 WebApp插件配置界面
+.. centered:: Wykres 10-1-1 Interfejs konfiguracji wtyczek WebApp
 
-第一次成功导入码垛FRCap插件包后，插件包状态为“已停用”，点击“启用”按钮，启用成功后，协作机器人WebApp的“辅助应用”模块增加码垛FRCap插件包开始页面（例如：码垛机Palletizer-v0.0.0.plugin对应的页面模块名称为“码垛机Palletizer”）。点击“开始”按钮进入首页，查看当前已配置的码垛配方，根据需求进行使用。
+Po pierwszym pomyślnym zaimportowaniu pakietu wtyczki FRCap paletyzatora, stan wtyczki to „Wyłączona”. Kliknij przycisk „Włącz”. Po pomyślnym włączeniu, moduł „Aplikacje pomocnicze” WebApp robota współpracującego zostanie rozszerzony o stronę początkową pakietu wtyczki FRCap paletyzatora (np. nazwa modułu strony odpowiadająca Paletyzator Palletizer-v0.0.0.plugin to „Paletyzator Palletizer”). Kliknij przycisk „Rozpocznij”, aby przejść do strony głównej, wyświetlić aktualnie skonfigurowane receptury paletyzacji i używać ich zgodnie z potrzebami.
 
 .. note:: 
-   如果配方为空，请先新增/导入配方。
+   Jeśli lista receptur jest pusta, należy najpierw dodać/zaimportować recepturę.
 
 .. image:: frcap_pictures/014.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10-1-2 WebApp + 码垛FRCap展示图
+.. centered:: Wykres 10-1-2 Widok WebApp + FRCap paletyzatora
 
 .. image:: frcap_pictures/015.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10-1-3 码垛FRCap首页
+.. centered:: Wykres 10-1-3 Strona główna FRCap paletyzatora
 
-配方管理
-------------
-每个配方分为配方名称、配方操作和配方编辑三大区域。操作区按钮依次为：重命名、导出、复制和删除。
+Zarządzanie recepturami
+-----------------------
+Każda receptura jest podzielona na trzy główne obszary: nazwa receptury, operacje na recepturze i edycja receptury. Przyciski w obszarze operacji to kolejno: zmień nazwę, eksportuj, kopiuj i usuń.
 
 .. image:: frcap_pictures/016.png
    :width: 3in
    :align: center
 
-.. centered:: 图表 10-2-1 配方区域划分
+.. centered:: Wykres 10-2-1 Podział obszaru receptury
 
 .. note:: 
    .. image:: frcap_pictures/045.png
@@ -45,8 +45,8 @@
       :height: 0.5in
       :align: left
 
-   | 名称：**导出配方**
-   | 作用：导出当前配方的数据
+   | Nazwa: **Eksportuj recepturę**
+   | Funkcja: Eksportuje dane bieżącej receptury
 
 .. note:: 
    .. image:: frcap_pictures/046.png
@@ -54,8 +54,8 @@
       :height: 0.5in
       :align: left
 
-   | 名称：**复制配方**
-   | 作用：复制当前配方的数据
+   | Nazwa: **Kopiuj recepturę**
+   | Funkcja: Kopiuje dane bieżącej receptury
 
 .. note:: 
    .. image:: frcap_pictures/047.png
@@ -63,28 +63,28 @@
       :height: 0.5in
       :align: left
 
-   | 名称：**删除配方**
-   | 作用：删除当前配方
+   | Nazwa: **Usuń recepturę**
+   | Funkcja: Usuwa bieżącą recepturę
 
-获取
-~~~~~~~
-进入码垛插件包首页后，获取当前所有配方。当配方数大于四时，展示配方区域出现滚动条，用户可上下滚动查看配方。
+Pobieranie
+~~~~~~~~~~
+Po wejściu na stronę główną pakietu wtyczki paletyzatora, pobierane są wszystkie bieżące receptury. Gdy liczba receptur jest większa niż cztery, w obszarze wyświetlania receptur pojawia się pasek przewijania, umożliwiający użytkownikowi przewijanie w górę i w dół w celu przeglądania receptur.
 
 .. note:: 
-   所有配方名称以“palletizing”开头，例如“palletizing_test1”。
+   Wszystkie nazwy receptur zaczynają się od „palletizing”, np. „palletizing_test1”.
 
 .. image:: frcap_pictures/017.png
    :width: 3in
    :align: center
 
-.. centered:: 图表 10-2-2 配方获取
+.. centered:: Wykres 10-2-2 Pobieranie receptury
 
-新增
-~~~~~~
-在任意配方的操作区，点击“新增”按钮，进入“新增配方”弹窗，输入码垛配方名称，点击“确认”按钮。新增成功后，配方展示区域增加新增的码垛配方。
+Dodawanie
+~~~~~~~~~
+W obszarze operacji dowolnej receptury kliknij przycisk „Dodaj”, aby przejść do okna „Dodaj recepturę”. Wprowadź nazwę receptury paletyzacji i kliknij przycisk „Potwierdź”. Po pomyślnym dodaniu, nowa receptura paletyzacji pojawi się w obszarze wyświetlania receptur.
 
 .. note:: 
-   所有配方名称以“palletizing”开头，无需输入“palletizing”，只需要输入“_”以后的名称。例如“palletizing_add”，输入“add”即可。
+   Wszystkie nazwy receptur zaczynają się od „palletizing”. Nie trzeba wpisywać „palletizing”, wystarczy wpisać nazwę po znaku „_”. Na przykład dla „palletizing_add” wystarczy wpisać „add”.
 
 .. image:: frcap_pictures/018.png
    :width: 6in
@@ -94,47 +94,47 @@
    :width: 6in
    :align: center
 
-.. centered:: 图表 10-2-3 配方新增
+.. centered:: Wykres 10-2-3 Dodawanie receptury
 
-重命名
-~~~~~~~~~~
-在任意配方的操作区，击配方名称展示输入框，进入“码垛配方重命名”弹窗，输入码垛配方名称，点击“确认”按钮。重命名成功后，配方展示区域原码垛配方名称被重命名。
+Zmiana nazwy
+~~~~~~~~~~~~
+W obszarze operacji dowolnej receptury kliknij pole wyświetlania nazwy receptury, aby przejść do okna „Zmień nazwę receptury paletyzacji”. Wprowadź nową nazwę receptury paletyzacji i kliknij przycisk „Potwierdź”. Po pomyślnej zmianie nazwy, stara nazwa receptury w obszarze wyświetlania zostanie zastąpiona nową.
 
 .. note::
-   所有配方名称以“palletizing”开头，无需输入“palletizing”，模态窗自动带出“_”以后的名称。例如“palletizing_rename”，自动带出“rename”。
+   Wszystkie nazwy receptur zaczynają się od „palletizing”. Nie trzeba wpisywać „palletizing”, okno modalne automatycznie wyświetli nazwę po znaku „_”. Na przykład dla „palletizing_rename” automatycznie wyświetli „rename”.
 
 .. image:: frcap_pictures/020.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10-2-4 配方重命名
+.. centered:: Wykres 10-2-4 Zmiana nazwy receptury
 
-导出
+Eksport
 ~~~~~~~
-在任意配方的操作区，点击“导出”图标，即可下载当前配方的所有数据。
+W obszarze operacji dowolnej receptury kliknij ikonę „Eksportuj”, aby pobrać wszystkie dane bieżącej receptury.
 
 .. image:: frcap_pictures/021.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10-2-5 配方导出
+.. centered:: Wykres 10-2-5 Eksport receptury
 
-复制
-~~~~~~~~~
-在任意配方的操作区，点击“复制”图标，进入“码垛配方复制”弹窗，输入码垛配方名称，点击“确认”按钮。复制成功后，配方展示区域增加复制的码垛配方。
+Kopiowanie
+~~~~~~~~~~
+W obszarze operacji dowolnej receptury kliknij ikonę „Kopiuj”, aby przejść do okna „Kopiuj recepturę paletyzacji”. Wprowadź nazwę receptury paletyzacji i kliknij przycisk „Potwierdź”. Po pomyślnym skopiowaniu, skopiowana receptura pojawi się w obszarze wyświetlania receptur.
 
 .. note:: 
-   所有配方名称以“palletizing”开头，无需输入“palletizing”，模态窗自动带出“_”以后的名称。例如“palletizing_copy”，自动带出“copy”。
+   Wszystkie nazwy receptur zaczynają się od „palletizing”. Nie trzeba wpisywać „palletizing”, okno modalne automatycznie wyświetli nazwę po znaku „_”. Na przykład dla „palletizing_copy” automatycznie wyświetli „copy”.
 
 .. image:: frcap_pictures/022.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10-2-6 配方复制
+.. centered:: Wykres 10-2-6 Kopiowanie receptury
 
-删除
-~~~~~~~~~
-在任意配方的操作区，点击“删除”图标，即可删除当前配方。
+Usuwanie
+~~~~~~~~
+W obszarze operacji dowolnej receptury kliknij ikonę „Usuń”, aby usunąć bieżącą recepturę.
 
 .. image:: frcap_pictures/023.png
    :width: 6in
@@ -144,108 +144,108 @@
    :width: 6in
    :align: center
 
-.. centered:: 图表 10-2-7 配方删除
+.. centered:: Wykres 10-2-7 Usuwanie receptury
 
-编辑
-~~~~~~~~
-任意配方，点击“编辑”按钮，进入当前配方的配置界面。
+Edycja
+~~~~~~
+Dla dowolnej receptury kliknij przycisk „Edytuj”, aby przejść do interfejsu konfiguracji bieżącej receptury.
 
 .. image:: frcap_pictures/025.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10-2-8 码垛配方编辑
+.. centered:: Wykres 10-2-8 Edycja receptury paletyzacji
 
-导入
-~~~~~~~~
-点击“导入”按钮，选择码垛配方压缩包并上传，导入成功后码垛配方增加导入的配方。
+Import
+~~~~~~
+Kliknij przycisk „Importuj”, wybierz spakowany plik receptury paletyzacji i prześlij go. Po pomyślnym zaimportowaniu, zaimportowana receptura pojawi się na liście receptur paletyzacji.
 
 .. note:: 
-   所有配方压缩包名称以“palletizing”开头，以“.tar.gz”结尾，例如“palletizing_import.tar.gz”。
+   Wszystkie nazwy spakowanych plików receptur zaczynają się od „palletizing” i kończą na „.tar.gz”, np. „palletizing_import.tar.gz”.
 
 .. image:: frcap_pictures/026.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10-2-9 配方导入
+.. centered:: Wykres 10-2-9 Import receptury
 
 .. important:: 
-   码垛配方的“新增”、“重命名”和“复制”，输入已经存在的配方名称提示“已有同名配方”。
+   Podczas operacji „Dodawania”, „Zmiany nazwy” i „Kopiowania” receptury paletyzacji, jeśli wprowadzona nazwa już istnieje, pojawi się komunikat „Receptura o tej nazwie już istnieje”.
 
 .. image:: frcap_pictures/027.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10-2-10 配方同名提示
+.. centered:: Wykres 10-2-10 Komunikat o istniejącej recepturze
 
-配方配置
-------------
-任意配方的配置界面，显示箱子、托盘、模式和高级配置的基础信息，在对应配置栏中进行具体参数配置。
+Konfiguracja receptury
+----------------------
+Interfejs konfiguracji dowolnej receptury wyświetla podstawowe informacje o skrzynkach, paletach, trybach i konfiguracji zaawansowanej. Szczegółowa konfiguracja parametrów odbywa się w odpowiednich sekcjach konfiguracyjnych.
 
 .. image:: frcap_pictures/028.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10-3-1 码垛配方编辑界面
+.. centered:: Wykres 10-3-1 Interfejs edycji receptury paletyzacji
 
-工作站设置
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Ustawienia stanowiska
+~~~~~~~~~~~~~~~~~~~~~
 
-在配方编辑中，可选择是否使用码垛工作站。使用码垛工作站则对应码垛功能使用工作站PLC中I/O信号完成；若选择无码垛工作站，则默认使用控制箱上I/O信号完成码垛功能。
+Podczas edycji receptury można wybrać, czy używać stanowiska paletyzacyjnego. Użycie stanowiska paletyzacyjnego oznacza, że odpowiednia funkcja paletyzacji będzie korzystać z sygnałów I/O w PLC stanowiska. Jeśli wybrano „Brak stanowiska paletyzacyjnego”, domyślnie funkcja paletyzacji będzie korzystać z sygnałów I/O na skrzynce sterowniczej.
 
 .. image:: frcap_pictures/076.png
    :width: 4in
    :align: center
 
-.. centered:: 图表 10-3-1-1 配方编辑页面
+.. centered:: Wykres 10-3-1-1 Strona edycji receptury
 
-码垛功能I/O接线配置
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Konfiguracja podłączeń I/O funkcji paletyzacji
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-（1）在选择使用码垛工作站后，点击扩展I/O配置，可根据对应功能及与PLC的I/O接口实际接线，自定义选择码垛功能的I/O信号配置，如下图为码垛工作站默认接线配置。
+(1) Po wybraniu użycia stanowiska paletyzacyjnego, kliknij „Konfiguracja rozszerzonych I/O”. W zależności od odpowiednich funkcji i rzeczywistego podłączenia do interfejsów I/O PLC, można niestandardowo wybrać konfigurację sygnałów I/O dla funkcji paletyzacji. Poniższy rysunek przedstawia domyślną konfigurację podłączeń dla stanowiska paletyzacyjnego.
 
 .. image:: frcap_pictures/077.png
    :width: 4in
    :align: center
 
-.. centered:: 图表 10-3-1-2 码垛工作站默认接线配置
+.. centered:: Wykres 10-3-1-2 Domyślna konfiguracja podłączeń dla stanowiska paletyzacyjnego
 
-（2）若选择不使用码垛工作站，则默认使用控制箱I/O信号，根据对应功能及与控制箱I/O接口的实际接线，自定义选择码垛功能的I/O信号配置，如下图为无码垛工作站（使用控制箱I/O）默认接线配置。
+(2) Jeśli wybrano „Brak stanowiska paletyzacyjnego”, domyślnie używane są sygnały I/O skrzynki sterowniczej. W zależności od odpowiednich funkcji i rzeczywistego podłączenia do interfejsów I/O skrzynki sterowniczej, można niestandardowo wybrać konfigurację sygnałów I/O dla funkcji paletyzacji. Poniższy rysunek przedstawia domyślną konfigurację podłączeń dla braku stanowiska paletyzacyjnego (użycie I/O skrzynki sterowniczej).
 
 .. image:: frcap_pictures/078.png
    :width: 4in
    :align: center
 
-.. centered:: 图表 10-3-1-3 无码垛工作站（控制箱I/O）默认接线配置
+.. centered:: Wykres 10-3-1-3 Domyślna konfiguracja podłączeń dla braku stanowiska paletyzacyjnego (I/O skrzynki sterowniczej)
 
-码垛功能I/O通讯测试
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Test komunikacji I/O funkcji paletyzacji
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-（1）选择使用码垛工作站时，配置完成工作站码垛工作站扩展I/O信号后，可点击“测试”，对所接线的I/O功能进行测试验证；
- 
+(1) Po wybraniu użycia stanowiska paletyzacyjnego i skonfigurowaniu rozszerzonych sygnałów I/O stanowiska paletyzacyjnego, można kliknąć „Test”, aby przetestować i zweryfikować podłączone funkcje I/O.
+
 .. image:: frcap_pictures/079.png
    :width: 4in
    :align: center
 
-.. centered:: 图表 10-3-1-4 码垛工作站I/O接线测试
+.. centered:: Wykres 10-3-1-4 Test podłączeń I/O stanowiska paletyzacyjnego
 
-（2）选择无码垛工作站时，配置完成码垛功能对应的控制箱I/O信号后，可点击“测试”，对所接线的I/O功能进行测试验证；
- 
+(2) Po wybraniu braku stanowiska paletyzacyjnego i skonfigurowaniu sygnałów I/O skrzynki sterowniczej odpowiadających funkcji paletyzacji, można kliknąć „Test”, aby przetestować i zweryfikować podłączone funkcje I/O.
+
 .. image:: frcap_pictures/080.png
    :width: 4in
    :align: center
 
-.. centered:: 图表 10-3-1-5 无码垛工作站（控制箱I/O）接线测试
+.. centered:: Wykres 10-3-1-5 Test podłączeń I/O dla braku stanowiska paletyzacyjnego (I/O skrzynki sterowniczej)
 
-箱子配置
-~~~~~~~~~~~
+Konfiguracja skrzynek
+~~~~~~~~~~~~~~~~~~~~~
 
-箱子操作
-++++++++++
+Operacje na skrzynkach
+++++++++++++++++++++++
 
-箱子可以配置多个不同类型的箱子。
+Można skonfigurować wiele skrzynek różnych typów.
 
-点击“新增”按钮，新增成功后，按当前顺序新增一个箱子。
+Kliknij przycisk „Dodaj”. Po pomyślnym dodaniu, nowa skrzynka zostanie dodana w bieżącej kolejności.
 
 .. image:: frcap_pictures/048.png
    :width: 6in
@@ -255,17 +255,17 @@
    :width: 6in
    :align: center
 
-.. centered:: 图表 10-3-2 新增箱子
+.. centered:: Wykres 10-3-2 Dodawanie skrzynki
 
-点击箱子名称展示的输入框区域，弹出“箱子重命名”模态窗，输入名称后，点击“确认”按钮确认重命名。
+Kliknij w pole wyświetlania nazwy skrzynki, aby przejść do okna „Zmień nazwę skrzynki”. Wprowadź nazwę i kliknij przycisk „Potwierdź”, aby potwierdzić zmianę nazwy.
 
 .. image:: frcap_pictures/050.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10-3-3 重命名箱子
+.. centered:: Wykres 10-3-3 Zmiana nazwy skrzynki
 
-点击“复制”图标，复制成功后，根据当前箱子名称复制一个箱子。
+Kliknij ikonę „Kopiuj”. Po pomyślnym skopiowaniu, nowa skrzynka zostanie utworzona na podstawie nazwy bieżącej skrzynki.
 
 .. image:: frcap_pictures/051.png
    :width: 6in
@@ -275,12 +275,12 @@
    :width: 6in
    :align: center
 
-.. centered:: 图表 10-3-4 复制箱子
+.. centered:: Wykres 10-3-4 Kopiowanie skrzynki
 
-点击“删除”图标，即可删除箱子数据。
+Kliknij ikonę „Usuń”, aby usunąć dane skrzynki.
 
 .. note:: 
-   请勿删除已经在模式配置中配置的箱子。
+   Nie należy usuwać skrzynki, która została już skonfigurowana w konfiguracji trybu.
 
 .. image:: frcap_pictures/053.png
    :width: 6in
@@ -290,24 +290,24 @@
    :width: 6in
    :align: center
 
-.. centered:: 图表 10-3-5 删除箱子
+.. centered:: Wykres 10-3-5 Usuwanie skrzynki
 
-任意箱子，点击“编辑”按钮，进入配置箱子参数界面。配置成功后，箱子配置状态图表为绿色；配置未完成时，箱子配置状态图标为黄色。
+Dla dowolnej skrzynki kliknij przycisk „Edytuj”, aby przejść do interfejsu konfiguracji parametrów skrzynki. Po pomyślnej konfiguracji, ikona stanu konfiguracji skrzynki zmieni kolor na zielony. Gdy konfiguracja nie jest ukończona, ikona stanu konfiguracji skrzynki jest żółta.
 
 .. image:: frcap_pictures/055.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10-3-6 箱子参数配置完成
+.. centered:: Wykres 10-3-6 Zakończenie konfiguracji parametrów skrzynki
 
 .. image:: frcap_pictures/056.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10-3-7 箱子参数配置未完成
+.. centered:: Wykres 10-3-7 Nieukończona konfiguracja parametrów skrzynki
 
-箱子参数
-++++++++++
+Parametry skrzynki
+++++++++++++++++++
 
 .. note:: 
    .. image:: frcap_pictures/057.png
@@ -315,8 +315,8 @@
       :height: 0.5in
       :align: left
 
-   | 名称：**上一个箱子**
-   | 作用：切换选择上一个箱子，当选择为第一个箱子时，再次切换选择为最后一个箱子。
+   | Nazwa: **Poprzednia skrzynka**
+   | Funkcja: Przełącza na poprzednią skrzynkę. Gdy wybrana jest pierwsza skrzynka, ponowne przełączenie wybierze ostatnią skrzynkę.
 
 .. note:: 
    .. image:: frcap_pictures/058.png
@@ -324,64 +324,64 @@
       :height: 0.5in
       :align: left
 
-   | 名称：**下一个箱子**
-   | 作用：切换选择下一个箱子，当选择为最后一个箱子时，再次切换选择为第一个箱子。
+   | Nazwa: **Następna skrzynka**
+   | Funkcja: Przełącza na następną skrzynkę. Gdy wybrana jest ostatnia skrzynka, ponowne przełączenie wybierze pierwszą skrzynkę.
 
-在箱子配置栏中点击“编辑”进入“箱子配置”弹窗，设置箱子的“长”、“宽”、“高”、“负载”和“工件标签朝向，点击“确认”按钮完成箱子信息配置；设置箱子的抓取点（保持抓取点在箱子的中心，吸盘底部与箱子接触时呈现挤压状态），点击“记录”按钮完成设置。
+W sekcji konfiguracji skrzynek kliknij „Edytuj”, aby przejść do okna „Konfiguracja skrzynki”. Ustaw „Długość”, „Szerokość”, „Wysokość”, „Ładowność” i „Orientację etykiety przedmiotu” dla skrzynki, a następnie kliknij przycisk „Potwierdź”, aby zakończyć konfigurację informacji o skrzynce. Ustaw punkt chwytania skrzynki (utrzymuj punkt chwytania w środku skrzynki, z tym że spód przyssawki jest ściśnięty podczas kontaktu ze skrzynką) i kliknij przycisk „Zapisz”, aby zakończyć ustawianie.
 
 .. image:: frcap_pictures/029.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10-3-8 箱子配置
+.. centered:: Wykres 10-3-8 Konfiguracja skrzynki
 
 .. image:: frcap_pictures/030.png
    :width: 3in
    :align: center
 
-.. centered:: 图表 10-3-9 箱子抓取点
+.. centered:: Wykres 10-3-9 Punkt chwytania skrzynki
 
-.. important:: 必须记录箱子抓取点，否则无法配置箱子的长、宽和高。
+.. important:: Konieczne jest zapisanie punktu chwytania skrzynki, w przeciwnym razie nie będzie można skonfigurować długości, szerokości i wysokości skrzynki.
 
-托盘配置
-+++++++++++
-在托盘配置栏中点击“配置”进入“托盘配置”弹窗，设置托盘“前边”、“侧边”和“高度”，接着设置工位过渡点，点击“确认配置”完成托盘信息设置。
+Konfiguracja palety
++++++++++++++++++++
+W sekcji konfiguracji palety kliknij „Konfiguruj”, aby przejść do okna „Konfiguracja palety”. Ustaw „Przód”, „Bok” i „Wysokość” palety, a następnie ustaw punkty przejściowe stanowisk. Kliknij „Potwierdź konfigurację”, aby zakończyć ustawianie informacji o palecie.
 
 .. image:: frcap_pictures/031.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10-3-10 托盘配置
+.. centered:: Wykres 10-3-10 Konfiguracja palety
 
 .. image:: frcap_pictures/032.png
    :width: 3in
    :align: center
 
-.. centered:: 图表 10-3-11 左工位过渡点
+.. centered:: Wykres 10-3-11 Punkt przejściowy lewego stanowiska
 
 .. image:: frcap_pictures/033.png
    :width: 3in
    :align: center
 
-.. centered:: 图表 10-3-12 右工位过渡点
+.. centered:: Wykres 10-3-12 Punkt przejściowy prawego stanowiska
 
-.. important:: 必须记录工位过渡点，否则无法生成的程序无法保存。
+.. important:: Konieczne jest zapisanie punktów przejściowych stanowisk, w przeciwnym razie wygenerowany program nie będzie mógł zostać zapisany.
 
-模式配置
-~~~~~~~~~~
+Konfiguracja trybu
+~~~~~~~~~~~~~~~~~~
 
-模式操作
-++++++++++
+Operacje na trybie
+++++++++++++++++++
 
-在模式配置中选择箱子时，可以选择相同高度不同长宽的箱子。在模式展示区域分为：模式添加（配置码垛垛型）和码垛层数配置。
+Podczas wybierania skrzynki w konfiguracji trybu można wybierać skrzynki o tej samej wysokości, ale różnych długościach i szerokościach. Obszar wyświetlania trybu jest podzielony na: dodawanie trybu (konfiguracja wzoru układania) i konfiguracja liczby warstw paletyzacji.
 
 .. image:: frcap_pictures/059.png
    :width: 3in
    :align: center
 
-.. centered:: 图表 10-3-13 模式展示区域
+.. centered:: Wykres 10-3-13 Obszar wyświetlania trybu
 
-点击“新增”按钮，新增成功后，按当前顺序新增一种模式。
+Kliknij przycisk „Dodaj”. Po pomyślnym dodaniu, nowy tryb zostanie dodany w bieżącej kolejności.
 
 .. image:: frcap_pictures/060.png
    :width: 6in
@@ -391,17 +391,17 @@
    :width: 6in
    :align: center
 
-.. centered:: 图表 10-3-14 新增模式
+.. centered:: Wykres 10-3-14 Dodawanie trybu
 
-在模式添加区域的任意模式，点击模式名称展示的输入框区域，弹出“模式重命名”模态窗，输入名称后，点击“确认”按钮确认重命名。
+Dla dowolnego trybu w obszarze dodawania trybu, kliknij w pole wyświetlania nazwy trybu, aby przejść do okna „Zmień nazwę trybu”. Wprowadź nową nazwę i kliknij przycisk „Potwierdź”, aby potwierdzić zmianę nazwy.
 
 .. image:: frcap_pictures/062.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10-3-15 重命名模式
+.. centered:: Wykres 10-3-15 Zmiana nazwy trybu
 
-在模式添加区域的任意模式，点击“复制”图标，复制成功后，根据当前模式名称复制一种模式。
+Dla dowolnego trybu w obszarze dodawania trybu, kliknij ikonę „Kopiuj”. Po pomyślnym skopiowaniu, nowy tryb zostanie utworzony na podstawie nazwy bieżącego trybu.
 
 .. image:: frcap_pictures/063.png
    :width: 6in
@@ -411,9 +411,9 @@
    :width: 6in
    :align: center
 
-.. centered:: 图表 10-3-16 复制模式
+.. centered:: Wykres 10-3-16 Kopiowanie trybu
 
-在模式添加区域的任意模式，点击“删除”图标，即可删除当前模式数据。
+Dla dowolnego trybu w obszarze dodawania trybu, kliknij ikonę „Usuń”, aby usunąć dane bieżącego trybu.
 
 .. image:: frcap_pictures/065.png
    :width: 6in
@@ -423,32 +423,32 @@
    :width: 6in
    :align: center
 
-.. centered:: 图表 10-3-17 删除模式
+.. centered:: Wykres 10-3-17 Usuwanie trybu
 
-在模式添加区域的任意模式，点击“编辑”按钮，进入“模式配置”模态窗，配置当前模式的码垛垛型。配置成功后，箱子配置状态图表为绿色；配置未完成时，箱子配置状态图标为黄色。
+Dla dowolnego trybu w obszarze dodawania trybu, kliknij przycisk „Edytuj”, aby przejść do okna „Konfiguracja trybu” i skonfigurować wzór układania dla bieżącego trybu. Po pomyślnej konfiguracji, ikona stanu konfiguracji skrzynki zmieni kolor na zielony. Gdy konfiguracja nie jest ukończona, ikona stanu konfiguracji skrzynki jest żółta.
 
 .. image:: frcap_pictures/067.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10-3-18 模式参数配置完成
+.. centered:: Wykres 10-3-18 Zakończenie konfiguracji parametrów trybu
 
 .. image:: frcap_pictures/068.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10-3-19 模式参数配置未完成
+.. centered:: Wykres 10-3-19 Nieukończona konfiguracja parametrów trybu
 
-在码垛层数配置区域，展示码垛层数和排序。点击“编辑”按钮，进入“垛型序列配置”模态窗，输入“码垛层数”，选择每一层的模式，点击“确认”按钮完成配置。
+W obszarze konfiguracji liczby warstw paletyzacji wyświetlana jest liczba warstw i ich kolejność. Kliknij przycisk „Edytuj”, aby przejść do okna „Konfiguracja sekwencji wzorów układania”. Wprowadź „Liczbę warstw paletyzacji”, wybierz tryb dla każdej warstwy i kliknij przycisk „Potwierdź”, aby zakończyć konfigurację.
 
 .. image:: frcap_pictures/069.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10-3-20 码垛层数配置
+.. centered:: Wykres 10-3-20 Konfiguracja liczby warstw paletyzacji
 
-模式参数
-++++++++++
+Parametry trybu
++++++++++++++++
 
 .. note:: 
    .. image:: frcap_pictures/057.png
@@ -456,8 +456,8 @@
       :height: 0.5in
       :align: left
 
-   | 名称：**上一种模式**
-   | 作用：切换选择上一种模式，当选择为第一种模式时，再次切换选择为最后一种模式。
+   | Nazwa: **Poprzedni tryb**
+   | Funkcja: Przełącza na poprzedni tryb. Gdy wybrany jest pierwszy tryb, ponowne przełączenie wybierze ostatni tryb.
 
 .. note:: 
    .. image:: frcap_pictures/058.png
@@ -465,44 +465,44 @@
       :height: 0.5in
       :align: left
 
-   | 名称：**下一种模式**
-   | 作用：切换选择下一种模式，当选择为最后一种模式时，再次切换选择为第一种模式。
+   | Nazwa: **Następny tryb**
+   | Funkcja: Przełącza na następny tryb. Gdy wybrany jest ostatni tryb, ponowne przełączenie wybierze pierwszy tryb.
 
-在模式配置栏中点击“配置”进入“模式配置”弹窗。主要分为模式选择、箱子操作和垛型模拟四个区域。
+W sekcji konfiguracji trybu kliknij „Konfiguruj”, aby przejść do okna „Konfiguracja trybu”. Jest ono podzielone głównie na cztery obszary: wybór trybu, operacje na skrzynkach i symulacja wzoru układania.
 
 .. image:: frcap_pictures/040.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10-3-21 模式配置
+.. centered:: Wykres 10-3-21 Konfiguracja trybu
 
 .. important:: 
-   添加箱子时，箱子之间有碰撞时工件背景颜色变红，此时以上操作无法进行。如需操作，请调整箱子为无碰撞。
+   Podczas dodawania skrzynek, jeśli dojdzie do kolizji między skrzynkami, kolor tła przedmiotu zmieni się na czerwony. W takim przypadku powyższe operacje nie są możliwe. Aby przeprowadzić operację, należy dostosować skrzynki tak, aby nie kolidowały.
 
-弹窗头部选择模式，在箱子操作区域选择箱子添加该模式下的箱子，可选择一键添加，默认无箱子间隔铺满居中托盘。自定义设置箱子间隔，可以单个添加也可以批量添加，点击“确认”完成模式信息设置。当选择的箱子高度不一致时，无法完成配置，并提示“箱子类型高度不一致，不可被添加在同一模式”。
+W nagłówku okna wybierz tryb. W obszarze operacji na skrzynkach wybierz skrzynkę do dodania w tym trybie. Można dodać wszystkie za jednym razem – domyślnie skrzynki są rozmieszczane bez odstępów, wyśrodkowane na palecie. Niestandardowo ustaw odstępy między skrzynkami. Można dodawać pojedynczo lub wsadowo. Kliknij „Potwierdź”, aby zakończyć ustawianie informacji o trybie. Gdy wybrane skrzynki mają różne wysokości, konfiguracja nie może zostać ukończona i pojawi się komunikat „Wysokość wybranych typów skrzynek jest niezgodna, nie można ich dodać w tym samym trybie”.
 
 .. image:: frcap_pictures/070.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10-3-22 选择的箱子高度不一致的提示
+.. centered:: Wykres 10-3-22 Komunikat o niezgodności wysokości wybranych skrzynek
 
-选择参考模式（无法选中已选择的模式），对比查看当前模式配置情况是否能在该参考模式的基础上码垛，方便客户直观的查看不同模式下的箱子垛型。
+Wybierz tryb odniesienia (nie można wybrać już wybranego trybu), aby porównać i sprawdzić, czy konfiguracja bieżącego trybu umożliwia układanie na podstawie tego trybu odniesienia, ułatwiając klientowi wizualną ocenę wzorów układania skrzynek w różnych trybach.
 
 .. important:: 
-   码垛方向：以右托盘为例，右下角为最远处，从右下角竖向或者横向摆放一排工件，再向上一排横向或竖向摆放工件，以此类推（Web页面已标注码垛方向，请注意查看）。左托盘依据右托盘模式镜像放置工件。
+   Kierunek paletyzacji: na przykładzie prawej palety, prawy dolny róg jest najdalszym punktem. Układa się jeden rząd przedmiotów pionowo lub poziomo od prawego dolnego rogu, następnie kolejny rząd poziomo lub pionowo powyżej, i tak dalej (kierunek paletyzacji jest oznaczony na stronie internetowej, należy go sprawdzić). Lewa paleta odzwierciedla umieszczanie przedmiotów zgodnie z trybem prawej palety.
 
-高级配置
-~~~~~~~~~~~
-在高级配置栏中点击“配置”进入“高级配置”弹窗。配置项如下：
+Konfiguracja zaawansowana
+~~~~~~~~~~~~~~~~~~~~~~~~~
+W sekcji konfiguracji zaawansowanej kliknij „Konfiguruj”, aby przejść do okna „Konfiguracja zaawansowana”. Elementy konfiguracji są następujące:
 
 .. image:: frcap_pictures/041.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10-3-23 高级配置
+.. centered:: Wykres 10-3-23 Konfiguracja zaawansowana
 
-1) 码垛设备尺寸：码垛工作台的尺寸。
+1) Wymiary urządzenia paletyzacyjnego: Wymiary stołu paletyzacyjnego.
 
 .. image:: frcap_pictures/074.png
    :width: 6in
@@ -512,141 +512,141 @@
    :width: 6in
    :align: center
 
-.. centered:: 图表 10-3-24 码垛工作台
+.. centered:: Wykres 10-3-24 Stół paletyzacyjny
 
 .. important::
-   X、Y、Z为左托盘右上角或者右托盘左上角点相对于机器人基坐标系坐标值的绝对值，Angle为机器人安装时的旋转角度，推荐安装时为0。
+   X, Y, Z to wartości bezwzględne współrzędnych punktu w prawym górnym rogu lewej palety lub w lewym górnym rogu prawej palety względem podstawowego układu współrzędnych robota. Angle to kąt obrotu robota podczas instalacji. Zaleca się, aby wynosił 0.
 
-2) 取料抬升高度：用户自定义取料成功后，从抓取点取料成功后抬升的高度。
+2) Wysokość podnoszenia pobranego materiału: Wysokość, na jaką robot podnosi się po pomyślnym pobraniu materiału z punktu chwytania, zdefiniowana przez użytkownika.
 
-3) 取料等待时间：用户自定义监控吸料后负压到位信号的等待时间，未到位时重复吸取动作。
+3) Czas oczekiwania na pobranie materiału: Czas oczekiwania zdefiniowany przez użytkownika na monitorowanie sygnału obecności podciśnienia po przyssaniu. Jeśli sygnał nie zostanie odebrany, czynność przyssania jest powtarzana.
 
-4) 第一/二次偏移距离：用户自定义配置机器人倾斜堆放至目标点的偏移距离。
-
-.. note::
-   第一次偏移参数Z必须大于箱子高度，否则在堆放过程中会与已经放置的箱子发生碰撞。
-
-5) 隔板配置：设置隔板尺寸“长”、“宽”和“高”以及选择隔板的启停。
+4) Pierwsza/druga odległość przesunięcia: Odległość przesunięcia zdefiniowana przez użytkownika dla pochylonego układania robota do punktu docelowego.
 
 .. note::
-   当开启隔板功能后，配方管理展示高级配置的内容显示隔板配置的基本参数。
+   Parametr Z pierwszego przesunięcia musi być większy niż wysokość skrzynki, w przeciwnym razie podczas układania dojdzie do kolizji z już ustawionymi skrzynkami.
+
+5) Konfiguracja przekładek: Ustaw wymiary przekładki: „Długość”, „Szerokość” i „Wysokość” oraz wybierz uruchomienie/zatrzymanie przekładek.
+
+.. note::
+   Po włączeniu funkcji przekładek, zarządzanie recepturami wyświetli podstawowe parametry przekładek w treści konfiguracji zaawansowanej.
 
 .. image:: frcap_pictures/034.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10-3-25 隔板配置
+.. centered:: Wykres 10-3-25 Konfiguracja przekładek
 
 .. image:: frcap_pictures/071.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10-3-26 配方管理——高级配置显示隔板配置
+.. centered:: Wykres 10-3-26 Zarządzanie recepturami – wyświetlanie konfiguracji przekładek w konfiguracji zaawansowanej
 
-接着设置隔板过渡点，隔板过渡点为三个，设置目的是抓取隔板后大致规划一个运动路径，避免发生碰撞而无法完成放置隔板的动作。
+Następnie ustaw punkty przejściowe dla przekładki. Istnieją trzy punkty przejściowe dla przekładki. Ich ustawienie ma na celu zgrubne zaplanowanie ścieżki ruchu po chwyceniu przekładki, aby uniknąć kolizji i umożliwić wykonanie czynności umieszczenia przekładki.
 
-.. note:: 过渡点1从箱子抓取点开始运动一段距离后示教；过渡点2从过渡点1开始运动一段距离开始示教，也可以成为过渡中间点；过渡点3从过渡点2开始运动一段距离，为隔板放置前的最后一个点位。
+.. note:: Punkt przejściowy 1 jest nauczany po przebyciu pewnej odległości od punktu chwytania skrzynki. Punkt przejściowy 2 jest nauczany po przebyciu pewnej odległości od punktu przejściowego 1; może być również punktem pośrednim przejścia. Punkt przejściowy 3 jest nauczany po przebyciu pewnej odległości od punktu przejściowego 2 i jest ostatnim punktem przed umieszczeniem przekładki.
 
 .. image:: frcap_pictures/035.png
    :width: 3in
    :align: center
 
-.. centered:: 图表 10-3-27 隔板过渡点1（以右工位为例）
+.. centered:: Wykres 10-3-27 Punkt przejściowy 1 przekładki (na przykładzie prawego stanowiska)
 
 .. image:: frcap_pictures/036.png
    :width: 3in
    :align: center
 
-.. centered:: 图表 10-3-28 隔板过渡点2（以右工位为例）
+.. centered:: Wykres 10-3-28 Punkt przejściowy 2 przekładki (na przykładzie prawego stanowiska)
 
 .. image:: frcap_pictures/037.png
    :width: 3in
    :align: center
 
-.. centered:: 图表 10-3-29 隔板过渡点3（以右工位为例）
+.. centered:: Wykres 10-3-29 Punkt przejściowy 3 przekładki (na przykładzie prawego stanowiska)
 
-接着设置抓取点（保持抓取点在隔板的中心，吸盘底部与隔板接触时呈现挤压状态）和放置点，点击“确认”完成隔板信息设置。
+Następnie ustaw punkt chwytania (utrzymuj punkt chwytania w środku przekładki, z tym że spód przyssawki jest ściśnięty podczas kontaktu z przekładką) i punkt umieszczenia. Kliknij „Potwierdź”, aby zakończyć ustawianie informacji o przekładce.
 
 .. image:: frcap_pictures/038.png
    :width: 3in
    :align: center
 
-.. centered:: 图表 10-3-30 隔板抓取点（以右工位为例）
+.. centered:: Wykres 10-3-30 Punkt chwytania przekładki (na przykładzie prawego stanowiska)
 
 .. image:: frcap_pictures/039.png
    :width: 3in
    :align: center
 
-.. centered:: 图表 10-3-31 隔板放置点（以右工位为例）
+.. centered:: Wykres 10-3-31 Punkt umieszczenia przekładki (na przykładzie prawego stanowiska)
 
-6) 升降轴：用户自定义配置升降轴启停、通讯参数（IP地址、端口号和通讯周期）、开始升降的层号以及选择升降轴的启停。
+6) Oś podnoszenia: Użytkownik definiuje niestandardowo uruchomienie/zatrzymanie osi podnoszenia, parametry komunikacji (adres IP, numer portu i cykl komunikacyjny), numer warstwy, od której rozpoczyna się podnoszenie, oraz wybiera uruchomienie/zatrzymanie osi podnoszenia.
 
 .. note::
-   - 升降轴工作时每次抬升的高度为箱子的高度。
-   - 当开启升降轴功能后，首页展示高级配置的内容显示升降轴测试的按钮，点击“测试”按钮可以进入“升降轴测试”弹窗，对升降轴进行加载通讯、上升和下降的准确性测试，避免直接使用出现无法工作和误差较大的问题。
+   - Wysokość podnoszenia podczas pracy osi podnoszenia to wysokość skrzynki.
+   - Po włączeniu funkcji osi podnoszenia, strona główna wyświetli przycisk testu osi podnoszenia w treści konfiguracji zaawansowanej. Kliknięcie przycisku „Test” powoduje przejście do okna „Test osi podnoszenia”, umożliwiając testowanie dokładności ładowania komunikacji, podnoszenia i opuszczania osi podnoszenia, aby uniknąć problemów z brakiem działania lub dużymi błędami podczas bezpośredniego użytkowania.
 
 .. image:: frcap_pictures/042.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10-3-32 升降轴配置
+.. centered:: Wykres 10-3-32 Konfiguracja osi podnoszenia
 
 .. image:: frcap_pictures/072.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 10-3-33 配方管理——高级配置显示升降轴
+.. centered:: Wykres 10-3-33 Zarządzanie recepturami – wyświetlanie konfiguracji osi podnoszenia w konfiguracji zaawansowanej
 
 .. image:: frcap_pictures/073.png
    :width: 4in
    :align: center
 
-.. centered:: 图表 10-3-34 升降轴测试
+.. centered:: Wykres 10-3-34 Test osi podnoszenia
 
-程序生成
-------------
-在配方展示下方查看“程序生成”，根据配方及需求选择配方。当左右工位都选择配方时，需要选择启动优先级；当只选择左工位或右工位配方时，无需选择启动优先级。输入程序名称后，点击“生成”按钮。
+Generowanie programu
+--------------------
+Poniżej wyświetlania receptur znajduje się sekcja „Generowanie programu”. Wybierz recepturę zgodnie z recepturą i potrzebami. Gdy receptury zostaną wybrane zarówno dla lewego, jak i prawego stanowiska, należy wybrać priorytet uruchomienia. Gdy receptura zostanie wybrana tylko dla lewego lub tylko dla prawego stanowiska, nie ma potrzeby wybierania priorytetu uruchomienia. Po wprowadzeniu nazwy programu kliknij przycisk „Generuj”.
 
-.. note:: 所有程序名称以“palletizing”开头，无需输入“palletizing”，只需要输入“_”以后的名称。例如“palletizing_program”，输入“program”即可。
+.. note:: Wszystkie nazwy programów zaczynają się od „palletizing”. Nie trzeba wpisywać „palletizing”, wystarczy wpisać nazwę po znaku „_”. Na przykład dla „palletizing_program” wystarczy wpisać „program”.
 
 .. image:: frcap_pictures/043.png
    :width: 4in
    :align: center
 
-.. centered:: 图表 10-4-1 程序生成——左右工位同时选择配方
+.. centered:: Wykres 10-4-1 Generowanie programu – wybór receptur dla obu stanowisk jednocześnie
 
 .. image:: frcap_pictures/081.png
    :width: 4in
    :align: center
 
-.. centered:: 图表 10-4-2 程序生成——左工位选择配方，右工位不选择配方
+.. centered:: Wykres 10-4-2 Generowanie programu – wybór receptury dla lewego stanowiska, brak wyboru dla prawego
 
 .. important:: 
-    1. 如果左工位或右工位未选择码垛配方，则代表该工位不启用。
-    2. 生成程序成功后，务必在程序示教中将所有子程序和主程序手动保存。
-    3. 拆垛程序以“de”开头，例如码垛程序为“palletizing_program”，拆垛程序则为“depalletizing_program”。
-    4. 当运行左右工位都配置配方的程序时，同时接收到左右工件到位信号后，根据设置的优先级进行工作。
+    1. Jeśli receptura paletyzacji nie została wybrana dla lewego lub prawego stanowiska, oznacza to, że dane stanowisko nie jest aktywowane.
+    2. Po pomyślnym wygenerowaniu programu, należy ręcznie zapisać wszystkie podprogramy i program główny w programie nauczania.
+    3. Program rozpaletyzowania zaczyna się od „de”. Na przykład, jeśli program paletyzacji to „palletizing_program”, program rozpaletyzowania to „depalletizing_program”.
+    4. Podczas uruchamiania programu, w którym receptury są skonfigurowane dla obu stanowisk, po jednoczesnym odebraniu sygnałów gotowości przedmiotu z lewego i prawego stanowiska, praca odbywa się zgodnie z ustawionym priorytetem.
 
-单取料点程序
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Program z jednym punktem pobierania
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-单取料点程序有两种以下情况：
+Program z jednym punktem pobierania występuje w dwóch następujących sytuacjach:
 
-(1) 左右工位选择相同的配方；
-(2) 左工位和右工位选择不同配方，但是配方中配置的箱子抓取点位姿相同。
+(1) Lewe i prawe stanowisko wybierają tę samą recepturę.
+(2) Lewe i prawe stanowisko wybierają różne receptury, ale pozycja i orientacja punktu chwytania skrzynki skonfigurowana w recepturach jest taka sama.
 
 .. image:: frcap_pictures/082.png
    :width: 4in
    :align: center
 
-.. centered:: 图表 10-4-3 单取料点箱子抓取点
+.. centered:: Wykres 10-4-3 Punkt chwytania skrzynki dla jednego punktu pobierania
 
-双取料点程序
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-双取料点程序配置，需要左工位和右工位选择不同配方，且配方中配置的箱子抓取点位姿不同。
+Program z dwoma punktami pobierania
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Konfiguracja programu z dwoma punktami pobierania wymaga, aby lewe i prawe stanowisko wybrały różne receptury, a pozycja i orientacja punktu chwytania skrzynki skonfigurowana w tych recepturach była różna.
 
 .. image:: frcap_pictures/083.png
    :width: 4in
    :align: center
 
-.. centered:: 图表 10-4-4 双取料点箱子抓取点
+.. centered:: Wykres 10-4-4 Punkt chwytania skrzynki dla dwóch punktów pobierania

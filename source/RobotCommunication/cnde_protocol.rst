@@ -1,9 +1,9 @@
-CNDE数据帧协议格式
-=========================
+Format protokołu ramki danych CNDE
+==================================
 
-协作机器人CNDE通讯协议如下，客户端向机器人发送数据及机器人向客户端反馈数据均需要遵循该协议；协议通过帧类型区分不同功能的数据帧，帧类型定义见表2-2；不同类型帧对应不用的数据内容，具体数据内容定义见表3-1 ~ 表3-7。
+Protokół komunikacyjny CNDE robota współpracującego jest następujący. Zarówno dane wysyłane przez klienta do robota, jak i dane zwracane przez robota do klienta muszą być zgodne z tym protokołem. Protokół rozróżnia różne funkcje ramek danych za pomocą typu ramki. Definicje typów ramek podano w Tabeli 2-2. Różne typy ramek odpowiadają różnym treściom danych. Szczegółowe definicje treści danych podano w Tabelach 3-1 do 3-7.
 
-.. centered:: 表2-1 机器人CNDE数据帧格式
+.. centered:: Tabela 2-1 Format ramki danych CNDE robota
 
 .. list-table::
    :widths: 20 20 20 20 20 20 20
@@ -11,15 +11,15 @@ CNDE数据帧协议格式
    :align: center
    :class: sheet-center
 
-   * - **名称**
-     - **帧头**
-     - **帧计数**
-     - **帧类型**
-     - **数据长度**
-     - **内容**
-     - **帧尾**
+   * - **Nazwa**
+     - **Nagłówek ramki**
+     - **Licznik ramki**
+     - **Typ ramki**
+     - **Długość danych**
+     - **Treść**
+     - **Stopka ramki**
    
-   * - **长度(byte)**
+   * - **Długość (bajt)**
      - 2
      - 1
      - 1
@@ -27,15 +27,15 @@ CNDE数据帧协议格式
      - --
      - 2
    
-   * - **内容**
+   * - **Treść**
      - 0x5A5A
      - 0 ~ 255
      - 0 ~ 8
-     - “数据内容”的字节个数
-     - 数据帧内容
+     - Liczba bajtów „Treści danych”
+     - Treść ramki danych
      - 0xA5A5
 
-.. centered:: 表2-2 机器人CNDE数据帧类型
+.. centered:: Tabela 2-2 Typy ramek danych CNDE robota
 
 .. list-table::
    :widths: 40 20 40
@@ -43,42 +43,42 @@ CNDE数据帧协议格式
    :align: center
    :class: sheet-center
 
-   * - **类型**
-     - **数值**
-     - **数据帧方向**
+   * - **Typ**
+     - **Wartość**
+     - **Kierunek ramki danych**
 
-   * - 输入配置帧（控制配置）
+   * - Ramka konfiguracji wejść (konfiguracja sterowania)
      - 0x00
-     - Client->Robot
+     - Klient -> Robot
 
-   * - 输出配置帧（状态配置）
+   * - Ramka konfiguracji wyjść (konfiguracja stanu)
      - 0x01
-     - Client->Robot
+     - Klient -> Robot
 
-   * - CNDE输出启动
+   * - Uruchomienie wyjścia CNDE
      - 0x02
-     - Client->Robot
+     - Klient -> Robot
 
-   * - CNDE输出停止
+   * - Zatrzymanie wyjścia CNDE
      - 0x03
-     - Client->Robot
+     - Klient -> Robot
 
-   * - 输出数据帧（状态数据）
+   * - Ramka danych wyjściowych (dane stanu)
      - 0x04
-     - Robot->Client
+     - Robot -> Klient
 
-   * - 输入数据帧（控制数据）
+   * - Ramka danych wejściowych (dane sterowania)
      - 0x05
-     - Client->Robot
+     - Klient -> Robot
 
-   * - 字符提示消息
+   * - Komunikat ostrzegawczy typu string
      - 0x06
-     - Client->Robot, Robot->Client
+     - Klient -> Robot, Robot -> Klient
 
-   * - 设置机器人CNDE协议版本号
+   * - Ustawienie numeru wersji protokołu CNDE robota
      - 0x07
-     - Client->Robot
+     - Klient -> Robot
 
-   * - 获取机器人软固件版本
+   * - Pobranie wersji oprogramowania i oprogramowania sprzętowego robota
      - 0x08
-     - Client->Robot, Robot->Client
+     - Klient -> Robot, Robot -> Klient

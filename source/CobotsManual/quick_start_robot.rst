@@ -1,162 +1,161 @@
-快速启动机器人
-===================
+Szybkie uruchamianie robota
+============================
 
 .. toctree:: 
    :maxdepth: 5
 
-安装机器人手臂和控制箱
-----------------------------
+Instalacja ramienia robota i skrzynki sterowniczej
+---------------------------------------------------
 
-根据 3.硬件安装 中的 3.5 和 3.6 安装连接机器人手臂和控制箱。
+Zgodnie z rozdziałem 3.5 i 3.6 w 3. Instalacja sprzętowa, zainstaluj i podłącz ramię robota oraz skrzynkę sterowniczą.
 
--  开箱取出机器人手臂，使用4颗强度不低于8.8级强度的M8螺栓安装机器人手臂。将机器人手臂安装在一个坚固且防震的表面，若用铝板固定，铝板厚度不小于16mm，若用铁板固定，铁板厚度不小于8mm；
+-   Wyjmij ramię robota z opakowania, zamontuj ramię robota za pomocą 4 śrub M8 o klasie wytrzymałości nie niższej niż 8.8. Zamontuj ramię robota na solidnej i odpornej na wibracje powierzchni. Jeśli mocujesz do płyty aluminiowej, jej grubość nie może być mniejsza niż 16 mm; jeśli do płyty stalowej, jej grubość nie może być mniejsza niż 8 mm.
 
--  将控制箱放置在其支脚上；
+-   Umieść skrzynkę sterowniczą na jej stopkach.
 
--  将机器人手臂本体重载线缆连接到控制箱重载接口；
+-   Podłącz kabel zasilający głównego ramienia robota do złącza zasilania głównego skrzynki sterowniczej.
 
--  将按钮盒航空插头插到控制箱示教器接口；
+-   Podłącz wtyczkę lotniczą panelu przyciskowego do złącza panelu operatorskiego skrzynki sterowniczej.
 
--  确保控制箱电源按钮关闭情况下（按钮打到0）将电源线接到电源插口；
+-   Upewnij się, że przycisk zasilania skrzynki sterowniczej jest wyłączony (przycisk ustawiony na 0), a następnie podłącz przewód zasilający do gniazda zasilania.
 
--  插上电源控制箱插头。
+-   Włóż wtyczkę zasilania do skrzynki sterowniczej.
 
 .. warning:: 
-   （1）如果机器人没有安全地放置在坚固的表面上，机器人有可能会倾倒并造成伤害。
+   (1) Jeśli robot nie jest bezpiecznie umieszczony na solidnej powierzchni, może się przewrócić i spowodować obrażenia.
    
-   （2）不要快速对控制箱电源进行开关操作，建议控制箱电源开关OFF 到再次ON之间的时间大于1分钟。
+   (2) Nie włączaj i nie wyłączaj szybko zasilania skrzynki sterowniczej. Zaleca się, aby czas między wyłączeniem (OFF) a ponownym włączeniem (ON) zasilania skrzynki sterowniczej był dłuższy niż 1 minutę.
 
-示教器启动控制机器人
----------------------------
+Uruchamianie robota za pomocą panelu operatorskiego
+----------------------------------------------------
 
-控制箱连接机器人手臂、示教盒和任何周边设备的物理电气输入/输出端。必须打开控制箱才能给机器人手臂通电。
+Skrzynka sterownicza łączy ramię robota, panel operatorski oraz fizyczne elektryczne wejścia/wyjścia wszelkich urządzeń peryferyjnych. Skrzynka sterownicza musi być włączona, aby zasilić ramię robota.
 
--  按下控制箱的电源按钮开启控制箱；
+-   Naciśnij przycisk zasilania na skrzynce sterowniczej, aby ją włączyć.
 
--  启动机器人后，此时机器人为手动模式且未使能，若需要在手动模式下操作机器人，需要按压示教器上三位使能开关OFF（放开）⇒ ON ⇒ OFF（按压），当开关处于 ON 状态时，拖动或控制机器人运动。
+-   Po uruchomieniu robota jest on w trybie ręcznym i nie jest załączony. Aby obsługiwać robota w trybie ręcznym, należy nacisnąć trójpozycyjny przełącznik załączający na panelu operatorskim w sekwencji OFF (zwolnienie) ⇒ ON (naciśnięcie) ⇒ OFF (zwolnienie). Gdy przełącznik jest w stanie ON, można przeciągać lub sterować ruchem robota.
 
--  若无需在手动模式操作机器人，可用示教器上钥匙开关旋转按钮切换机器人工作模式：自动、手动、自定义；
+-   Jeśli nie ma potrzeby obsługi robota w trybie ręcznym, można użyć przełącznika kluczykowego na panelu operatorskim, aby przełączyć tryb pracy robota: automatyczny, ręczny, niestandardowy.
 
--  当切换机器人手动状态时，应检查安全空间内外是否存在异常并谨慎操作机器运行；
+-   Podczas przełączania robota w tryb ręczny należy sprawdzić, czy w przestrzeni bezpieczeństwa i poza nią nie ma nieprawidłowości, i ostrożnie obsługiwać ruch robota.
 
--  当切换机器人自动状态时，应检查安全措施并恢复到正常状态下并谨慎操作机器运行；
+-   Podczas przełączania robota w tryb automatyczny należy sprawdzić środki bezpieczeństwa, przywrócić je do stanu normalnego i ostrożnie obsługiwać ruch robota.
 
--  当无法正常打开示教器时，请查看设备连接是否正常。
+-   Jeśli nie można normalnie otworzyć panelu operatorskiego, sprawdź, czy połączenia urządzenia są prawidłowe.
 
-按钮盒控制机器人运动
-----------------------
+Sterowanie ruchem robota za pomocą panelu przyciskowego
+--------------------------------------------------------
 
-参照 3.硬件安装 的 3.6.3.末端LED定义 来控制机器人。现有按钮盒分为60按钮盒(POE)(BX01)、60按钮盒(POE)(BX02)-V1.0、60按钮盒(POE)(BX02)-V2.0，以60按钮盒(POE)(BX01)为例，操作步骤如下。
+Zgodnie z rozdziałem 3.6.3. Definicja końcowego LED w 3. Instalacja sprzętowa, steruj robotem. Istniejące panele przyciskowe dzielą się na 60 przyciskowy panel (POE)(BX01), 60 przyciskowy panel (POE)(BX02)-V1.0, 60 przyciskowy panel (POE)(BX02)-V2.0. Na przykładzie 60 przyciskowego panelu (POE)(BX01), kroki operacyjne są następujące.
 
-未搭配示教器
-~~~~~~~~~~~~~~~
+Bez podłączonego panelu operatorskiego
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
--  **Step1**：打开机器人控制箱电源开关，启动机器人，等待末端LED长显绿色后，方可操作机器人如下图：
+-  **Krok 1**: Włącz przełącznik zasilania skrzynki sterowniczej robota, uruchom robota. Poczekaj, aż końcowa dioda LED będzie świecić na zielono, zanim zaczniesz obsługiwać robota, jak na rysunku:
 
 .. figure:: quick_start_robot/001.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 4.3-1 末端LED绿色示意图
+.. centered:: Wykres 4.3-1 Schemat zielonej końcowej diody LED
 
--  **Step2**：长按按钮盒“按键2”，进入未搭配示教器模式，末端LED青蓝色闪烁三下，如下图：
+-  **Krok 2**: Naciśnij i przytrzymaj „Przycisk 2” na panelu przyciskowym, aby przejść do trybu bez podłączonego panelu operatorskiego. Końcowa dioda LED mignie trzy razy na błękitno, jak na rysunku:
 
 .. figure:: quick_start_robot/002.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 4.3-2 末端LED青蓝色示意图
+.. centered:: Wykres 4.3-2 Schemat błękitnej końcowej diody LED
 
--  **Step3**：长按按钮盒“按键1”切换机器人到拖动模式，此时末端LED为白青色，如图表4.3-3。移动机器人至任意位置，长按“按键1”退出拖动模式，短按按钮盒“按键2”记录P1点，末端LED紫色闪烁三下，如图表4.3-4。
+-  **Krok 3**: Naciśnij i przytrzymaj „Przycisk 1” na panelu przyciskowym, aby przełączyć robota w tryb przeciągania. W tym momencie końcowa dioda LED świeci na biało-błękitnie, jak na Wykresie 4.3-3. Przesuń robota w dowolne miejsce, naciśnij i przytrzymaj „Przycisk 1”, aby wyjść z trybu przeciągania. Krótko naciśnij „Przycisk 2” na panelu przyciskowym, aby zapisać punkt P1. Końcowa dioda LED mignie trzy razy na fioletowo, jak na Wykresie 4.3-4.
 
--  **Step4**：移动机器人，短按按钮盒“按键2”记录P2点，末端LED紫色闪烁三下，如图表4.3-4。
+-  **Krok 4**: Przesuń robota, krótko naciśnij „Przycisk 2” na panelu przyciskowym, aby zapisać punkt P2. Końcowa dioda LED mignie trzy razy na fioletowo, jak na Wykresie 4.3-4.
 
 .. figure:: quick_start_robot/003.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 4.3-3 末端LED白青色示意图
+.. centered:: Wykres 4.3-3 Schemat biało-błękitnej końcowej diody LED
 
 .. figure:: quick_start_robot/004.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 4.3-4 末端LED紫色示意图
+.. centered:: Wykres 4.3-4 Schemat fioletowej końcowej diody LED
 
--  **Step5**：长按按钮盒“按键1”退出拖动模式，此时为手动模式，末端LED为绿色，如图表4.3-5。短按“按键1”切换机器人到自动模式，此时末端LED为蓝色，如图表4.3-6。
+-  **Krok 5**: Naciśnij i przytrzymaj „Przycisk 1” na panelu przyciskowym, aby wyjść z trybu przeciągania. Robot jest teraz w trybie ręcznym, a końcowa dioda LED świeci na zielono, jak na Wykresie 4.3-5. Krótko naciśnij „Przycisk 1”, aby przełączyć robota w tryb automatyczny. W tym momencie końcowa dioda LED świeci na niebiesko, jak na Wykresie 4.3-6.
 
--  **Step6**：短按按钮盒“按键3”运行该程序，末端LED蓝色闪烁两下，如图表4.3-6。
+-  **Krok 6**: Krótko naciśnij „Przycisk 3” na panelu przyciskowym, aby uruchomić program. Końcowa dioda LED mignie dwa razy na niebiesko, jak na Wykresie 4.3-6.
 
 .. figure:: quick_start_robot/005.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 4.3-5 末端LED绿色示意图
+.. centered:: Wykres 4.3-5 Schemat zielonej końcowej diody LED
 
 .. figure:: quick_start_robot/006.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 4.3-6 末端LED蓝色示意图
+.. centered:: Wykres 4.3-6 Schemat niebieskiej końcowej diody LED
 
--  **Step7**：短按按钮盒“按键3”停止运行该程序，末端LED红色闪烁三下，如下图：
+-  **Krok 7**: Krótko naciśnij „Przycisk 3” na panelu przyciskowym, aby zatrzymać działanie programu. Końcowa dioda LED mignie trzy razy na czerwono, jak na rysunku:
 
 .. figure:: quick_start_robot/007.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 4.3-7 末端LED红色示意图
+.. centered:: Wykres 4.3-7 Schemat czerwonej końcowej diody LED
 
-搭配示教器
-~~~~~~~~~~~~~~
+Z podłączonym panelem operatorskim
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
--  **Step1**：启动机器人，等待末端LED绿色停止闪烁，方可操作机器人。
+-  **Krok 1**: Uruchom robota. Poczekaj, aż zielona końcowa dioda LED przestanie migać, zanim zaczniesz obsługiwać robota.
 
--  **Step2**：打开示教器进入到程序编辑界面。
+-  **Krok 2**: Otwórz panel operatorski i przejdź do interfejsu edycji programu.
 
--  **Step3**：选择空白模板新建一个程序文件。
+-  **Krok 3**: Wybierz pusty szablon, aby utworzyć nowy plik programu.
 
--  **Step4**：短按按钮盒按键1切换机器人到手动模式，此时末端LED为绿色。
+-  **Krok 4**: Krótko naciśnij przycisk 1 na panelu przyciskowym, aby przełączyć robota w tryb ręczny. W tym momencie końcowa dioda LED świeci na zielono.
 
--  **Step5**：长按按钮盒按键1切换机器人到拖动模式，此时末端LED为白青色，移动机器人至任意位置，短按按钮盒按键2记录P1点，末端LED紫色闪烁三下，手动添加“PTP(p1,100,-1,0)”指令到程序文件中。
+-  **Krok 5**: Naciśnij i przytrzymaj przycisk 1 na panelu przyciskowym, aby przełączyć robota w tryb przeciągania. W tym momencie końcowa dioda LED świeci na biało-błękitnie. Przesuń robota w dowolne miejsce, krótko naciśnij przycisk 2 na panelu przyciskowym, aby zapisać punkt P1. Końcowa dioda LED mignie trzy razy na fioletowo. Ręcznie dodaj instrukcję „PTP(p1,100,-1,0)” do pliku programu.
 
 .. figure:: quick_start_robot/008.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 4.3-8 记录并添加点P1
+.. centered:: Wykres 4.3-8 Zapisywanie i dodawanie punktu P1
 
--  **Step6**：移动机器人，短按按钮盒按键2记录P2点，末端LED紫色闪烁三下，手动添加“PTP(p2,100,-1,0)”指令到程序中。
+-  **Krok 6**: Przesuń robota, krótko naciśnij przycisk 2 na panelu przyciskowym, aby zapisać punkt P2. Końcowa dioda LED mignie trzy razy na fioletowo. Ręcznie dodaj instrukcję „PTP(p2,100,-1,0)” do programu.
 
 .. figure:: quick_start_robot/009.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 4.3-9 记录并添加点P2  
+.. centered:: Wykres 4.3-9 Zapisywanie i dodawanie punktu P2  
 
--  **Step7**：保存程序文件内容。
+-  **Krok 7**: Zapisz zawartość pliku programu.
 
--  **Step8**：长按按钮盒按键1退出拖动模式，此时为手动模式，末端LED为绿色，短按按钮盒按键1切换机器人到自动模式，此时末端LED为蓝色。
+-  **Krok 8**: Naciśnij i przytrzymaj przycisk 1 na panelu przyciskowym, aby wyjść z trybu przeciągania. Robot jest teraz w trybie ręcznym, a końcowa dioda LED świeci na zielono. Krótko naciśnij przycisk 1 na panelu przyciskowym, aby przełączyć robota w tryb automatyczny. W tym momencie końcowa dioda LED świeci na niebiesko.
 
--  **Step9**：短按按钮盒按键3运行该程序，末端LED蓝色闪烁两下。
+-  **Krok 9**: Krótko naciśnij przycisk 3 na panelu przyciskowym, aby uruchomić program. Końcowa dioda LED mignie dwa razy na niebiesko.
 
+Sterowanie ruchem robota za pomocą panelu operatorskiego
+---------------------------------------------------------
 
-示教器控制机器人运动
-------------------------
+Kliknij przycisk „Program nauczania” w lewym menu głównym panelu operatorskiego, a następnie kliknij jego podmenu „Programowanie”, aby przejść do interfejsu nauczania programu. W tym interfejsie realizowane jest głównie pisanie i modyfikowanie programów nauczania robota.
 
-点击示教器左侧一级菜单中的“示教程序”按钮，点击其子菜单“程序编程”进入程序示教界面，该界面中主要实现机器人示教程序的编写以及修改。
-
-点击“新建”图标按钮后，用户命名该文件，并选择一个模板作为该新建文件的内容，点击新建即可创建成功并打开该程序文件。
+Po kliknięciu ikony przycisku „Nowy” użytkownik nadaje nazwę plikowi i wybiera szablon jako zawartość nowego pliku. Kliknięcie „Nowy” spowoduje utworzenie pliku i otwarcie go.
 
 .. figure:: quick_start_robot/010.png
    :align: center
    :width: 6in
    
-.. centered:: 图表 4.4-1 示教程序运行示意图
+.. centered:: Wykres 4.4-1 Schemat działania programu nauczania
 
 .. warning:: 
-   您的头和躯干不能位于机器人可接触到的范围（工作区）。请不要将您的手指放在机器人可抓住的地方。
+   Głowa i tułów nie mogą znajdować się w zasięgu robota (strefie roboczej). Nie wkładaj palców w miejsca, które robot może chwycić.
 
 .. important:: 
-   - 不要让机器人移到自身或其他物体中，因为这会对机器人造成损害。
-   - 这只是一个快速启动指南，教您如何轻松地使用FR协作机器人。该指南的前提是环境安全无害，用户谨慎小心。请不要将速度或者加速度上调至默认值之上。在使机器人进入操作之前，始终进行风险评估。
+   - Nie dopuść, aby robot uderzył w siebie lub inne obiekty, ponieważ może to spowodować uszkodzenie robota.
+   - Jest to tylko przewodnik szybkiego startu, który pokazuje, jak łatwo używać robota współpracującego FR. Przewodnik ten zakłada, że środowisko jest bezpieczne i niegroźne, a użytkownik działa ostrożnie. Nie zwiększaj prędkości ani przyspieszenia powyżej wartości domyślnych. Zawsze przeprowadzaj ocenę ryzyka przed uruchomieniem robota.

@@ -1,105 +1,105 @@
-机器人轨迹复现
-=================
+Odtwarzanie trajektorii robota
+==============================
 
 .. toctree:: 
     :maxdepth: 5
 
-设置TPD轨迹记录参数
-++++++++++++++++++++++++++++
+Ustawienie parametrów rejestracji trajektorii TPD
++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief  设置TPD轨迹记录参数
-    * @param  [in] type  记录数据类型，1-关节位置
-    * @param  [in] name  轨迹文件名
-    * @param  [in] period_ms  数据采样周期，固定值2ms或4ms或8ms
-    * @param  [in] di_choose  DI选择,bit0~bit7对应控制箱DI0~DI7，bit8~bit9对应末端DI0~DI1，0-不选择，1-选择
-    * @param  [in] do_choose  DO选择,bit0~bit7对应控制箱DO0~DO7，bit8~bit9对应末端DO0~DO1，0-不选择，1-选择
-    * @return  错误码
+    * @brief  Ustawia parametry rejestracji trajektorii TPD
+    * @param  [in] type  Typ rejestrowanych danych, 1-pozycja stawów
+    * @param  [in] name  Nazwa pliku trajektorii
+    * @param  [in] period_ms  Okres próbkowania danych, stała wartość 2 ms lub 4 ms lub 8 ms
+    * @param  [in] di_choose  Wybór DI, bit0~bit7 odpowiadają DI0~DI7 skrzynki sterowniczej, bit8~bit9 odpowiadają końcowym DI0~DI1, 0-nie wybieraj, 1-wybierz
+    * @param  [in] do_choose  Wybór DO, bit0~bit7 odpowiadają DO0~DO7 skrzynki sterowniczej, bit8~bit9 odpowiadają końcowym DO0~DO1, 0-nie wybieraj, 1-wybierz
+    * @return  Kod błędu
     */
     int SetTPDParam(int type, string name, int period_ms, UInt16 di_choose, UInt16 do_choose);
 
-开始TPD轨迹记录
-++++++++++++++++++++++++++++
+Rozpoczęcie rejestracji trajektorii TPD
++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief  开始TPD轨迹记录
-    * @param  [in] type  记录数据类型，1-关节位置
-    * @param  [in] name  轨迹文件名
-    * @param  [in] period_ms  数据采样周期，固定值2ms或4ms或8ms
-    * @param  [in] di_choose  DI选择,bit0~bit7对应控制箱DI0~DI7，bit8~bit9对应末端DI0~DI1，0-不选择，1-选择
-    * @param  [in] do_choose  DO选择,bit0~bit7对应控制箱DO0~DO7，bit8~bit9对应末端DO0~DO1，0-不选择，1-选择
-    * @return  错误码
+    * @brief  Rozpoczyna rejestrację trajektorii TPD
+    * @param  [in] type  Typ rejestrowanych danych, 1-pozycja stawów
+    * @param  [in] name  Nazwa pliku trajektorii
+    * @param  [in] period_ms  Okres próbkowania danych, stała wartość 2 ms lub 4 ms lub 8 ms
+    * @param  [in] di_choose  Wybór DI, bit0~bit7 odpowiadają DI0~DI7 skrzynki sterowniczej, bit8~bit9 odpowiadają końcowym DI0~DI1, 0-nie wybieraj, 1-wybierz
+    * @param  [in] do_choose  Wybór DO, bit0~bit7 odpowiadają DO0~DO7 skrzynki sterowniczej, bit8~bit9 odpowiadają końcowym DO0~DO1, 0-nie wybieraj, 1-wybierz
+    * @return  Kod błędu
     */
     int SetTPDStart(int type, string name, int period_ms, UInt16 di_choose, UInt16 do_choose); 
 
-停止TPD轨迹记录
-++++++++++++++++++++++++++++
+Zatrzymanie rejestracji trajektorii TPD
++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief  停止TPD轨迹记录
-    * @return  错误码
+    * @brief  Zatrzymuje rejestrację trajektorii TPD
+    * @return  Kod błędu
     */
     int SetWebTPDStop(); 
 
-删除TPD轨迹记录
-++++++++++++++++++++++++++++
+Usunięcie rejestracji trajektorii TPD
++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief  删除TPD轨迹记录
-    * @param  [in] name  轨迹文件名
-    * @return  错误码
+    * @brief  Usuwa rejestrację trajektorii TPD
+    * @param  [in] name  Nazwa pliku trajektorii
+    * @return  Kod błędu
     */   
     int SetTPDDelete(string name); 
 
-TPD轨迹预加载
-++++++++++++++++++++++++++++
+Wstępne ładowanie trajektorii TPD
+++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief  轨迹预加载
-    * @param  [in] name  轨迹文件名
-    * @return  错误码
+    * @brief  Wstępne ładowanie trajektorii
+    * @param  [in] name  Nazwa pliku trajektorii
+    * @return  Kod błędu
     */      
     int LoadTPD(string name);
 
-获取TPD轨迹起始位姿
-++++++++++++++++++++++++++++
+Pobranie początkowej pozycji i orientacji trajektorii TPD
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /** 
-    * @brief 获取轨迹起始位姿 
-    * @param [in] name  轨迹文件名
-    * @param [out] desc_pose 轨迹起始位姿 
-    * @return 错误码 
+    * @brief Pobiera początkową pozycję i orientację trajektorii 
+    * @param [in] name  Nazwa pliku trajektorii
+    * @param [out] desc_pose Początkowa pozycja i orientacja trajektorii 
+    * @return Kod błędu 
     */ 
     int GetTPDStartPose(string name, ref DescPose desc_pose); 
 
-TPD轨迹复现
+Odtworzenie trajektorii TPD
 ++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief  轨迹复现
-    * @param  [in] name  轨迹文件名
-    * @param  [in] blend 0-不平滑，1-平滑
-    * @param  [in] ovl  速度缩放百分比，范围[0~100]
-    * @return  错误码
+    * @brief  Odtwarza trajektorię
+    * @param  [in] name  Nazwa pliku trajektorii
+    * @param  [in] blend 0-niewygładzone, 1-wygładzone
+    * @param  [in] ovl  Procent skalowania prędkości, zakres [0~100]
+    * @return  Kod błędu
     */
     int MoveTPD(string name, byte blend, float ovl); 
 
-机器人TPD轨迹记录代码示例
-++++++++++++++++++++++++++++++
+Przykład kodu rejestracji trajektorii TPD robota
+++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
@@ -143,71 +143,71 @@ TPD轨迹复现
         robot.SetTPDDelete(name);
     }
 
-外部轨迹文件预处理
-++++++++++++++++++++++++++++
+Wstępne przetwarzanie zewnętrznego pliku trajektorii
+++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /** 
-    * @brief 外部轨迹文件预处理 
-    * @param [in] name 轨迹文件名  
-    * @param [in] ovl 速度缩放百分比，范围[0~100] 
-    * @param [in] opt 1-控制点，默认为1 
-    * @return 错误码 
+    * @brief Wstępne przetwarzanie zewnętrznego pliku trajektorii 
+    * @param [in] name Nazwa pliku trajektorii  
+    * @param [in] ovl Procent skalowania prędkości, zakres [0~100] 
+    * @param [in] opt 1-punkt sterujący, domyślnie 1 
+    * @return Kod błędu 
     */ 
     int LoadTrajectoryJ(string name, float ovl, int opt); 
 
-外部轨迹文件轨迹复现
-++++++++++++++++++++++++++++
+Odtworzenie trajektorii z zewnętrznego pliku trajektorii
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /** 
-    * @brief 外部轨迹文件轨迹复现  
-    * @return 错误码 
+    * @brief Odtwarza trajektorię z zewnętrznego pliku trajektorii  
+    * @return Kod błędu 
     */
     int MoveTrajectoryJ();
 
-获取轨迹文件轨迹起始位置
-++++++++++++++++++++++++++++
+Pobranie początkowej pozycji trajektorii z pliku trajektorii
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /** 
-    * @brief 获取轨迹文件轨迹起始位置 
-    * @param [in] name 轨迹文件名  
-    * @param [out] desc_pose 轨迹起始位姿  
-    * @return 错误码 
+    * @brief Pobiera początkową pozycję trajektorii z pliku trajektorii 
+    * @param [in] name Nazwa pliku trajektorii  
+    * @param [out] desc_pose Początkowa pozycja i orientacja trajektorii  
+    * @return Kod błędu 
     */ 
     int GetTrajectoryStartPose(string name, ref DescPose desc_pose); 
 
-获取轨迹文件轨迹点编号
-++++++++++++++++++++++++++++
+Pobranie numeru punktu trajektorii z pliku trajektorii
++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /** 
-    * @brief 获取轨迹点编号   
-    * @param [out] pnum 轨迹点编号  
-    * @return 错误码 
+    * @brief Pobiera numer punktu trajektorii   
+    * @param [out] pnum Numer punktu trajektorii  
+    * @return Kod błędu 
     */  
     int GetTrajectoryPointNum(ref int pnum);
 
-设置轨迹文件轨迹运行速度
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Ustawienie prędkości podczas odtwarzania trajektorii
+++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief  设置轨迹运行中的速度
-    * @param  [in] ovl 速度百分比
-    * @param  [in] mode 0-降速模式 1-直接切换
-    * @return  错误码
+    * @brief  Ustawia prędkość podczas odtwarzania trajektorii
+    * @param  [in] ovl Procent prędkości
+    * @param  [in] mode 0-tryb zmniejszania prędkości 1-bezpośrednie przełączanie
+    * @return  Kod błędu
     */
     public int SetTrajectoryJSpeed(double ovl, int mode = 0)
 
-设置轨迹运行中的速度代码示例
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Przykład kodu ustawiania prędkości podczas odtwarzania trajektorii
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
@@ -216,7 +216,7 @@ TPD轨迹复现
     {
         int rtn;
 
-        // 1. 上传轨迹 J 文件
+        // 1. Przesłanie pliku trajektorii J
         rtn = robot.TrajectoryJUpLoad(localFilePath);
         if (rtn != 0)
         {
@@ -225,7 +225,7 @@ TPD轨迹复现
         }
         Console.WriteLine($"Upload TrajectoryJ success: {localFilePath}");
 
-        // 2. 加载轨迹文件
+        // 2. Załadowanie pliku trajektorii
         rtn = robot.LoadTrajectoryJ(remoteFilePath, 100, 1);
         if (rtn != 0)
         {
@@ -234,7 +234,7 @@ TPD轨迹复现
         }
         Console.WriteLine($"LoadTrajectoryJ success: {remoteFilePath}");
 
-        // 3. 获取轨迹起始位姿
+        // 3. Pobranie początkowej pozycji trajektorii
         DescPose trajStartPose = new DescPose(0, 0, 0, 0, 0, 0);
         rtn = robot.GetTrajectoryStartPose(remoteFilePath, ref trajStartPose);
         if (rtn != 0)
@@ -245,7 +245,7 @@ TPD轨迹复现
         Console.WriteLine($"Trajectory start pose: ({trajStartPose.tran.x}, {trajStartPose.tran.y}, {trajStartPose.tran.z}, " +
                             $"{trajStartPose.rpy.rx}, {trajStartPose.rpy.ry}, {trajStartPose.rpy.rz})");
 
-        // 4. 移动到轨迹起始点（使用笛卡尔空间 PTP）
+        // 4. Przejście do punktu początkowego trajektorii (używając PTP w przestrzeni kartezjańskiej)
         robot.SetSpeed(initialSpeedPercent);
         rtn = robot.MoveCart(trajStartPose, 0, 0, 100, 100, 100, -1, -1);
         if (rtn != 0)
@@ -254,20 +254,20 @@ TPD轨迹复现
             return rtn;
         }
 
-        // 5. 获取轨迹点数（可选，仅用于显示）
+        // 5. Pobranie liczby punktów trajektorii (opcjonalne, tylko do wyświetlenia)
         int trajPointNum = 0;
         rtn = robot.GetTrajectoryPointNum(ref trajPointNum);
         if (rtn != 0)
         {
             Console.WriteLine($"GetTrajectoryPointNum failed: {rtn}");
-            // 不返回，继续执行
+            // Nie zwracaj, kontynuuj wykonywanie
         }
         else
         {
             Console.WriteLine($"Trajectory points count: {trajPointNum}");
         }
 
-        // 6. 开始执行轨迹运动（非阻塞）
+        // 6. Rozpoczęcie wykonywania ruchu trajektorii (nieblokujące)
         rtn = robot.MoveTrajectoryJ();
         if (rtn != 0)
         {
@@ -276,28 +276,28 @@ TPD轨迹复现
         }
         Console.WriteLine("MoveTrajectoryJ started.");
 
-        // 7. 在运动过程中动态修改速度（交替 10% 和 80%）
-        // 使用 GetRobotMotionDone 检查运动是否完成
+        // 7. Dynamiczna zmiana prędkości podczas ruchu (naprzemiennie 10% i 80%)
+        // Użyj GetRobotMotionDone do sprawdzenia, czy ruch został zakończony
         byte motionDone = 0;
         robot.GetRobotMotionDone(ref motionDone);
 
         while (motionDone == 0)
         {
-            // 设置为 10% 速度
+            // Ustaw prędkość na 10%
             rtn = robot.SetTrajectoryJSpeed(10.0, trajSpeedMode);
             Console.WriteLine($"SetTrajectoryJSpeed to 10% returned: {rtn}");
             robot.Sleep(1000);
 
-            // 重新检查运动状态
+            // Ponownie sprawdź stan ruchu
             robot.GetRobotMotionDone(ref motionDone);
             if (motionDone != 0) break;
 
-            // 设置为 80% 速度
+            // Ustaw prędkość na 80%
             rtn = robot.SetTrajectoryJSpeed(80.0, trajSpeedMode);
             Console.WriteLine($"SetTrajectoryJSpeed to 80% returned: {rtn}");
             robot.Sleep(1000);
 
-            // 再次检查运动状态
+            // Ponownie sprawdź stan ruchu
             robot.GetRobotMotionDone(ref motionDone);
         }
 
@@ -305,116 +305,116 @@ TPD轨迹复现
         return 0;
     }
 
-设置轨迹文件轨迹运行中的力和力矩
+Ustawienie siły i momentu podczas odtwarzania trajektorii
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    /** 
+    * @brief Ustawia siłę i moment podczas odtwarzania trajektorii  
+    * @param [in] ft Siły w trzech kierunkach i momenty obrotowe, jednostka N i Nm
+    * @return Kod błędu 
+    */
+    int SetTrajectoryJForceTorque(ForceTorque ft); 
+
+Ustawienie siły wzdłuż osi X podczas odtwarzania trajektorii
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    /** 
+    * @brief Ustawia siłę wzdłuż osi X podczas odtwarzania trajektorii  
+    * @param [in] fx  Siła wzdłuż osi X, jednostka N
+    * @return Kod błędu 
+    */
+    int SetTrajectoryJForceFx(double fx);
+
+Ustawienie siły wzdłuż osi Y podczas odtwarzania trajektorii
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    /** 
+    * @brief Ustawia siłę wzdłuż osi Y podczas odtwarzania trajektorii  
+    * @param [in] fy  Siła wzdłuż osi Y, jednostka N
+    * @return Kod błędu 
+    */
+    int SetTrajectoryJForceFy(double fy);
+
+Ustawienie siły wzdłuż osi Z podczas odtwarzania trajektorii
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    /** 
+    * @brief Ustawia siłę wzdłuż osi Z podczas odtwarzania trajektorii  
+    * @param [in] fz  Siła wzdłuż osi Z, jednostka N
+    * @return Kod błędu 
+    */
+    int SetTrajectoryJForceFz(double fz);
+
+Ustawienie momentu obrotowego wokół osi X podczas odtwarzania trajektorii
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    /** 
+    * @brief Ustawia moment obrotowy wokół osi X podczas odtwarzania trajektorii  
+    * @param [in] tx  Moment obrotowy wokół osi X, jednostka Nm
+    * @return Kod błędu 
+    */
+    int SetTrajectoryJTorqueTx(double tx);
+
+Ustawienie momentu obrotowego wokół osi Y podczas odtwarzania trajektorii
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    /** 
+    * @brief Ustawia moment obrotowy wokół osi Y podczas odtwarzania trajektorii  
+    * @param [in] ty  Moment obrotowy wokół osi Y, jednostka Nm
+    * @return Kod błędu 
+    */
+    int SetTrajectoryJTorqueTy(double ty);
+
+Ustawienie momentu obrotowego wokół osi Z podczas odtwarzania trajektorii
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    /** 
+    * @brief Ustawia moment obrotowy wokół osi Z podczas odtwarzania trajektorii  
+    * @param [in] tz  Moment obrotowy wokół osi Z, jednostka Nm
+    * @return Kod błędu 
+    */
+    int SetTrajectoryJTorqueTz(double tz);
+
+Przesłanie pliku trajektorii J
 ++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
-    /** 
-    * @brief 设置轨迹文件轨迹运行中的力和力矩  
-    * @param [in] ft 三个方向的力和扭矩，单位N和Nm
-    * @return 错误码 
-    */
-    int SetTrajectoryJForceTorque(ForceTorque ft); 
-
-设置轨迹运行中的沿x方向的力
-++++++++++++++++++++++++++++
-.. code-block:: c#
-    :linenos:
-
-    /** 
-    * @brief 设置轨迹运行中的沿x方向的力  
-    * @param [in] fx  沿x方向的力，单位N
-    * @return 错误码 
-    */
-    int SetTrajectoryJForceFx(double fx);
-
-设置轨迹运行中的沿y方向的力
-++++++++++++++++++++++++++++
-.. code-block:: c#
-    :linenos:
-
-    /** 
-    * @brief 设置轨迹运行中的沿y方向的力  
-    * @param [in] fy  沿y方向的力，单位N
-    * @return 错误码 
-    */
-    int SetTrajectoryJForceFy(double fy);
-
-设置轨迹运行中的沿z方向的力
-++++++++++++++++++++++++++++
-.. code-block:: c#
-    :linenos:
-
-    /** 
-    * @brief 设置轨迹运行中的沿z方向的力  
-    * @param [in] fz  沿z方向的力，单位N
-    * @return 错误码 
-    */
-    int SetTrajectoryJForceFz(double fz);
-
-设置轨迹运行中的绕x轴的扭矩
-++++++++++++++++++++++++++++
-.. code-block:: c#
-    :linenos:
-
-    /** 
-    * @brief 设置轨迹运行中的绕x轴的扭矩  
-    * @param [in] tx  绕x轴的扭矩，单位Nm
-    * @return 错误码 
-    */
-    int SetTrajectoryJTorqueTx(double tx);
-
-设置轨迹运行中的绕y轴的扭矩
-++++++++++++++++++++++++++++
-.. code-block:: c#
-    :linenos:
-
-    /** 
-    * @brief 设置轨迹运行中的绕y轴的扭矩  
-    * @param [in] ty  绕y轴的扭矩，单位Nm
-    * @return 错误码 
-    */
-    int SetTrajectoryJTorqueTy(double ty);
-
-设置轨迹运行中的绕z轴的扭矩
-++++++++++++++++++++++++++++
-.. code-block:: c#
-    :linenos:
-
-    /** 
-    * @brief 设置轨迹运行中的绕z轴的扭矩  
-    * @param [in] tz  绕z轴的扭矩，单位Nm
-    * @return 错误码 
-    */
-    int SetTrajectoryJTorqueTz(double tz);
-
-上传轨迹J文件
-++++++++++++++++++++++++++++++
-.. code-block:: c#
-    :linenos:
-
     /**
-    * @brief 上传轨迹J文件
-    * @param [in] filePath 上传轨迹文件的全路径名   C://test/testJ.txt
-    * @return 错误码
+    * @brief Przesyła plik trajektorii J
+    * @param [in] filePath Pełna ścieżka przesyłanego pliku trajektorii   C://test/testJ.txt
+    * @return Kod błędu
     */
     int TrajectoryJUpLoad(string filePath);
 
-删除轨迹J文件
+Usunięcie pliku trajektorii J
 ++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief 删除轨迹J文件
-    * @param [in] fileName 文件名称 testJ.txt
-    * @return 错误码
+    * @brief Usuwa plik trajektorii J
+    * @param [in] fileName Nazwa pliku testJ.txt
+    * @return Kod błędu
     */
     int TrajectoryJDelete(string fileName);
 
-机器人轨迹J文件复现代码示例
-++++++++++++++++++++++++++++
+Przykład kodu odtwarzania pliku trajektorii J robota
+++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
@@ -473,38 +473,38 @@ TPD轨迹复现
         Console.WriteLine("MoveTrajectoryJ rtn is: {0}\n", rtn);
     }
 
-轨迹预处理(轨迹前瞻)
-++++++++++++++++++++++++++++++
+Wstępne przetwarzanie trajektorii (wyprzedzenie trajektorii)
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief  轨迹预处理(轨迹前瞻)
-    * @param  [in] name  轨迹文件名
-    * @param  [in] mode 采样模式，0-不进行采样；1-等数据间隔采样；2-等误差限制采样
-    * @param  [in] errorLim 误差限制，使用直线拟合生效
-    * @param  [in] type 平滑方式，0-贝塞尔平滑
-    * @param  [in] precision 平滑精度，使用贝塞尔平滑时生效
-    * @param  [in] vamx 设定的最大速度，mm/s
-    * @param  [in] amax 设定的最大加速度，mm/s2
-    * @param  [in] jmax 设定的最大加加速度，mm/s3
-    * @return  错误码   
+    * @brief  Wstępne przetwarzanie trajektorii (wyprzedzenie trajektorii)
+    * @param  [in] name  Nazwa pliku trajektorii
+    * @param  [in] mode Tryb próbkowania, 0-brak próbkowania; 1-próbkowanie w równych odstępach danych; 2-próbkowanie z ograniczeniem błędu
+    * @param  [in] errorLim Ograniczenie błędu, stosowane przy aproksymacji liniowej
+    * @param  [in] type Sposób wygładzania, 0-wygładzanie Beziera
+    * @param  [in] precision Dokładność wygładzania, stosowana przy wygładzaniu Beziera
+    * @param  [in] vamx Ustawiona maksymalna prędkość, mm/s
+    * @param  [in] amax Ustawione maksymalne przyspieszenie, mm/s²
+    * @param  [in] jmax Ustawione maksymalne gwałtowność, mm/s³
+    * @return  Kod błędu   
     */
     int LoadTrajectoryLA(string name, int mode, double errorLim, int type, double precision, double vamx, double amax, double jmax);
 
-轨迹复现(轨迹前瞻)
-++++++++++++++++++++++++++++++
+Odtworzenie trajektorii (wyprzedzenie trajektorii)
++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief  轨迹复现(轨迹前瞻)
-    * @return  错误码   
+    * @brief  Odtwarza trajektorię (wyprzedzenie trajektorii)
+    * @return  Kod błędu   
     */
     int MoveTrajectoryLA();
 
-轨迹复现(轨迹前瞻)代码示例
-++++++++++++++++++++++++++++
+Przykład kodu odtwarzania trajektorii (wyprzedzenie trajektorii)
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
@@ -515,7 +515,7 @@ TPD轨迹复现
         string nameA = "/fruser/traj/A.txt";
         string nameB = "/fruser/traj/B.txt";
 
-        rtn = robot.LoadTrajectoryLA(nameB, 0, 0, 0, 1, 100.0, 100.0, 1000.0);    // 直线拟合
+        rtn = robot.LoadTrajectoryLA(nameB, 0, 0, 0, 1, 100.0, 100.0, 1000.0);    // Aproksymacja liniowa
         Console.WriteLine($"LoadTrajectoryLA rtn is {rtn}");
 
         DescPose startPos = new DescPose(0, 0, 0, 0, 0, 0);
@@ -528,22 +528,22 @@ TPD轨迹复现
         Console.WriteLine($"MoveTrajectoryLA rtn is {rtn}");
     }
 
-运动到TPD轨迹记录起点
-++++++++++++++++++++++++++++++++++++++++++++++
+Przejście do punktu początkowego rejestracji trajektorii TPD
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief 运动到TPD轨迹记录起点
-    * @param [in] name 轨迹文件名
-    * @param [in] moveType 运动类型；0-PTP; 1-LIN
-    * @param [in] ovl 速度缩放百分比，范围[0~100]
-    * @return 错误码
+    * @brief Przejście do punktu początkowego rejestracji trajektorii TPD
+    * @param [in] name Nazwa pliku trajektorii
+    * @param [in] moveType Typ ruchu; 0-PTP; 1-LIN
+    * @param [in] ovl Procent skalowania prędkości, zakres [0~100]
+    * @return Kod błędu
     */
     public int MoveToTPDStart(string name, int moveType, double ovl)
 
-运动到TPD轨迹记录起点的SDK代码示例
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Przykład kodu SDK przejścia do punktu początkowego rejestracji trajektorii TPD
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 

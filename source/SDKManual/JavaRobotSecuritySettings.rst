@@ -1,70 +1,75 @@
-机器人安全设置
-=================
+Ustawienia bezpieczeństwa robota
+=================================
 
 .. toctree:: 
     :maxdepth: 5
 
-设置碰撞等级
-++++++++++++++++++++++++++++++++
+Ustawianie poziomu kolizji
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief 设置碰撞等级
-    * @param  [in]  mode  0-等级，1-百分比
-    * @param  [in]  level 碰撞阈值，等级对应范围[1 - 10对应等级1-10， 100-关闭],百分比对应范围[0~10 对应 0% - 100%]
-    * @param  [in]  config 0-不更新配置文件，1-更新配置文件
-    * @return  错误码
+    * @brief Ustawianie poziomu kolizji
+    * @param  [in]  mode  0-poziom, 1-procent
+    * @param  [in]  level Próg kolizji, poziom odpowiada zakresowi [1 - 10 dla poziomów 1-10, 100-wyłączone], procent odpowiada zakresowi [0~10 dla 0% - 100%]
+    * @param  [in]  config 0-nie aktualizuj pliku konfiguracyjnego, 1-aktualizuj plik konfiguracyjny
+    * @return  Kod błędu
     */
     int SetAnticollision(int mode, Object[] level, int config); 
 
-设置碰撞后策略
-++++++++++++++++++++++++++++++++
+Ustawianie strategii po kolizji
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief  设置碰撞后策略
-    * @param  [in] strategy  0-报错停止，1-继续运行
-    * @param  [in] safeTime  安全停止时间[1000 - 2000]ms
-    * @param  [in] safeDistance  安全停止距离[1-150]mm
-    * @param  [in] safetyMargin  j1-j6安全系数[1-10]
-    * @return  错误码  
+    * @brief  Ustawianie strategii po kolizji
+    * @param  [in] strategy  0-zatrzymaj z błędem, 1-kontynuuj działanie
+    * @param  [in] safeTime  Czas bezpiecznego zatrzymania [1000 - 2000] ms
+    * @param  [in] safeDistance  Bezpieczna odległość zatrzymania [1-150] mm
+    * @param  [in] safetyMargin  Współczynniki bezpieczeństwa dla j1-j6 [1-10]
+    * @return  Kod błędu  
     */
     int SetCollisionStrategy(int strategy, int safeTime, int safeDistance, int safetyMargin[]); 
 
-自定义碰撞检测阈值功能开始
-+++++++++++++++++++++++++++++++++++++++++++++
+Rozpoczęcie funkcji niestandardowego progu detekcji kolizji
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. versionadded:: Java SDK-v1.0.3-3.8.0
 
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief  自定义碰撞检测阈值功能开始，设置关节端和TCP端的碰撞检测阈值
-    * @param  [in] flag 1-仅关节检测开启；2-仅TCP检测开启；3-关节和TCP检测同时开启
-    * @param  [in] jointDetectionThreshould 关节碰撞检测阈值 j1-j6
-    * @param  [in] tcpDetectionThreshould  TCP碰撞检测阈值，xyzabc
-    * @param  [in] block 0-非阻塞；1-阻塞
-    * @return  错误码
+    * @brief  Rozpoczęcie funkcji niestandardowego progu detekcji kolizji, ustawienie progów detekcji kolizji dla strony przegubów i strony TCP
+    * @param  [in] flag 1-tylko detekcja przegubów włączona; 2-tylko detekcja TCP włączona; 3-detekcja przegubów i TCP włączone jednocześnie
+    * @param  [in] jointDetectionThreshould Próg detekcji kolizji przegubów j1-j6
+    * @param  [in] tcpDetectionThreshould  Próg detekcji kolizji TCP, xyzabc
+    * @param  [in] block 0-nieblokujący; 1-blokujący
+    * @return  Kod błędu
     */   
     public int CustomCollisionDetectionStart(int flag, double[] jointDetectionThreshould, double[] tcpDetectionThreshould, int block);
 
-自定义碰撞检测阈值功能关闭
-+++++++++++++++++++++++++++++++++++++++++++++
+Zakończenie funkcji niestandardowego progu detekcji kolizji
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. versionadded:: Java SDK-v1.0.3-3.8.0
 
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief  自定义碰撞检测阈值功能关闭
-    * @return  错误码
+    * @brief  Zakończenie funkcji niestandardowego progu detekcji kolizji
+    * @return  Kod błędu
     */   
     public int CustomCollisionDetectionEnd();
 
-机器人碰撞等级设置代码示例
-++++++++++++++++++++++++++++++++++++++++++++++++++
+Przykład kodu ustawiania poziomu kolizji robota
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
@@ -107,46 +112,50 @@
         return 0;
     }
 
-设置正限位
-++++++++++++++++++++++++++++++++
+Ustawianie dodatniego ograniczenia
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief  设置正限位
-    * @param  [in] limit 六个关节位置，单位deg
-    * @return  错误码
+    * @brief  Ustawianie dodatniego ograniczenia
+    * @param  [in] limit Pozycje sześciu przegubów, jednostka deg
+    * @return  Kod błędu
     */
     int SetLimitPositive(Object[] limit); 
 
-设置负限位
-++++++++++++++++++++++++++++++++
+Ustawianie ujemnego ograniczenia
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief  设置负限位
-    * @param  [in] limit 六个关节位置，单位deg
-    * @return  错误码
+    * @brief  Ustawianie ujemnego ograniczenia
+    * @param  [in] limit Pozycje sześciu przegubów, jednostka deg
+    * @return  Kod błędu
     */
     int SetLimitNegative(Object[] limit); 
 
-获取关节软限位角度
-+++++++++++++++++++++++++++++++++++++++++
+Pobieranie kątów miękkiego ograniczenia przegubów
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief  获取关节软限位角度
-    * @param  [in] flag 0-阻塞，1-非阻塞
-    * @param  [out] negative  负限位角度，单位deg
-    * @param  [out] positive  正限位角度，单位deg
-    * @return  错误码
+    * @brief  Pobieranie kątów miękkiego ograniczenia przegubów
+    * @param  [in] flag 0-blokujący, 1-nieblokujący
+    * @param  [out] negative  Kąt ujemnego ograniczenia, jednostka deg
+    * @param  [out] positive  Kąt dodatniego ograniczenia, jednostka deg
+    * @return  Kod błędu
     */
     int GetJointSoftLimitDeg(int flag, Object[] negative, Object[] positive); 
 
-机器人限位设置代码示例
-++++++++++++++++++++++++++++++++++++++++++++++
+Przykład kodu ustawiania ograniczeń robota
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
@@ -164,35 +173,38 @@
         return 0;
     }
 
-设置机器人碰撞检测方法
-++++++++++++++++++++++++++++++++++++++++++++++++++
+Ustawianie metody detekcji kolizji robota
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. versionchanged:: Java SDK-v1.0.5-3.8.2
 
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief 设置机器人碰撞检测方法
-    * @param [in] method 碰撞检测方法：0-电流模式；1-双编码器；2-电流和双编码器同时开启
-    * @param [in] thresholdMode 碰撞等级阈值方式；0-碰撞等级固定阈值方式；1-自定义碰撞检测阈值
-    * @return 错误码
+    * @brief Ustawianie metody detekcji kolizji robota
+    * @param [in] method Metoda detekcji kolizji: 0-tryb prądowy; 1-podwójny enkoder; 2-tryb prądowy i podwójny enkoder włączone jednocześnie
+    * @param [in] thresholdMode Sposób progu poziomu kolizji; 0-stały próg poziomu kolizji; 1-niestandardowy próg detekcji kolizji
+    * @return Kod błędu
     */
     int SetCollisionDetectionMethod(int method,int thresholdMode)
 
-设置静态下碰撞检测开始关闭
-++++++++++++++++++++++++++++++++++++++++++++++++++
+Włączanie/wyłączanie detekcji kolizji w stanie statycznym
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief 设置静态下碰撞检测开始关闭
-    * @param  [in] status 0-关闭；1-开启
-    * @return  错误码
+    * @brief Włączanie/wyłączanie detekcji kolizji w stanie statycznym
+    * @param  [in] status 0-wyłączone; 1-włączone
+    * @return  Kod błędu
     */
     public int SetStaticCollisionOnOff(int status)
 
-设置机器人碰撞检测方法代码示例
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Przykład kodu ustawiania metody detekcji kolizji robota
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
@@ -210,21 +222,23 @@
         return 0;
     }
 
-关节扭矩功率检测
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Detekcja momentu obrotowego i mocy przegubów
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief 关节扭矩功率检测
-    * @param  [in] status 0-关闭；1-开启
-    * @param  [in] power 设定最大功率(W)
-    * @return  错误码
+    * @brief Detekcja momentu obrotowego i mocy przegubów
+    * @param  [in] status 0-wyłączone; 1-włączone
+    * @param  [in] power Ustawiona maksymalna moc (W)
+    * @return  Kod błędu
     */
     public int SetPowerLimit(int status, double power)
 
-关节扭矩功率检测代码示例
-++++++++++++++++++++++++++++++++++++++++++++++++
+Przykład kodu detekcji momentu obrotowego i mocy przegubów
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
@@ -250,22 +264,24 @@
         return 0;
     }
     
-设置安全速度参数
-++++++++++++++++++++++++++++++++++++++++++++++++
+Ustawianie parametrów bezpiecznej prędkości
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief 设置安全速度参数
-    * @param enable 0-关；1-手动模式启用；2-所有模式启用(不支持自动限速)
-    * @param maxTCPVel 限制最大TCP速度;[0-1000]mm/s
-    * @param strategy 超速后策略；0-停止报警；1-自动限速；2-停止报警并去使能
-    * @return 错误码
+    * @brief Ustawianie parametrów bezpiecznej prędkości
+    * @param enable 0-wył.; 1-włączone w trybie ręcznym; 2-włączone we wszystkich trybach (automatyczne ograniczanie prędkości nie jest obsługiwane)
+    * @param maxTCPVel Ograniczenie maksymalnej prędkości TCP; [0-1000] mm/s
+    * @param strategy Strategia po przekroczeniu prędkości; 0-zatrzymaj i alarmuj; 1-automatyczne ograniczanie prędkości; 2-zatrzymaj, alarmuj i dezaktywuj
+    * @return Kod błędu
     */
     public int SetVelReducePara(int enable, double maxTCPVel, int strategy)
         
-设置安全速度参数的SDK代码示例
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Przykład kodu SDK ustawiania parametrów bezpiecznej prędkości
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 

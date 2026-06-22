@@ -1,5 +1,5 @@
-版本更新说明
-====================
+Informacje o aktualizacji wersji
+================================
 
 .. toctree:: 
     :maxdepth: 5
@@ -9,251 +9,251 @@
    :header-rows: 0
    :align: center
 
-   * - **版本号**
-     - **日期**
-     - **更新描述**
+   * - **Numer wersji**
+     - **Data**
+     - **Opis aktualizacji**
 
    * - V3.9.6
      - 2026-05-26
-     - | 1.更新机器人状态反馈结构体，增加扩展轴坐标系编号状态；
-       | 2.更新机器人状态反馈配置枚举类型，增加扩展轴坐标系编号配置枚举；
-       | 3.新增ExtAxisGetParamConfig()获取UDP扩展轴参数配置接口。
-       | 4.新增ServoJV()机器人关节空间速度伺服模式运动接口。
-       | 5.新增ServoMITStart()机器人关节MIT控制开始接口。
-       | 6.新增ServoMITEnd()机器人关节MIT控制结束接口。
-       | 7.新增ServoMIT()机器人关节MIT控制接口。
-       | 8.新增SetLaserWeldingParam()机器人激光焊接参数配置接口。
-       | 9.新增SetLaserWeldingStartEnd()设置机器人激光焊接开启停止接口。
-       | 10.新增SetLaserWeldingEnable()设置激光焊机使能去使能接口。
-       | 11.新增ResetLaserWeldingErr()设置激光焊机故障复位接口。
-       | 12.新增GetLaserWeldingRunningState()获取激光焊机运行状态接口。
-       | 13.新增GetLaserWeldingErrState()获取激光焊机故障状态接口。
-       | 14.新增GetLaserWeldingParamTarget()获取激光焊接配置参数接口。
-       | 15.新增GetLaserWeldingParamActual()获取当前激光焊机生效的配置参数接口。
-       | 16.新增SetLaserWeldingEnableExtDoNum()配置激光焊机扩展IO使能DO端口接口。
-       | 17.新增SetLaserWeldingStartExtDoNum()配置激光焊机扩展IO启动DO端口接口。
-       | 18.新增SetLaserWeldingErrResetExtDoNum()配置激光焊机扩展IO故障复位DO端口接口。
-       | 19.新增SetLaserWeldingRunningStateExtDiNum()配置激光焊机扩展IO运行状态（出光状态）DI端口接口。
-       | 20.新增SetLaserWeldingErrStateExtDiNum()配置激光焊机扩展IO故障状态DI端口接口。
+     - | 1. Aktualizacja struktury sprzężenia zwrotnego stanu robota, dodano stan numeru układu współrzędnych osi rozszerzenia;
+       | 2. Aktualizacja typu wyliczeniowego konfiguracji sprzężenia zwrotnego stanu robota, dodano wyliczenie konfiguracji numeru układu współrzędnych osi rozszerzenia;
+       | 3. Dodano interfejs ExtAxisGetParamConfig() do pobierania konfiguracji parametrów UDP osi rozszerzenia.
+       | 4. Dodano interfejs ServoJV() do ruchu w trybie serwo prędkościowym w przestrzeni przegubów robota.
+       | 5. Dodano interfejs ServoMITStart() do rozpoczęcia sterowania MIT przegubów robota.
+       | 6. Dodano interfejs ServoMITEnd() do zakończenia sterowania MIT przegubów robota.
+       | 7. Dodano interfejs ServoMIT() do sterowania MIT przegubów robota.
+       | 8. Dodano interfejs SetLaserWeldingParam() do konfiguracji parametrów spawania laserowego robota.
+       | 9. Dodano interfejs SetLaserWeldingStartEnd() do ustawiania rozpoczęcia/zatrzymania spawania laserowego robota.
+       | 10. Dodano interfejs SetLaserWeldingEnable() do włączania/wyłączania spawarki laserowej.
+       | 11. Dodano interfejs ResetLaserWeldingErr() do resetowania błędów spawarki laserowej.
+       | 12. Dodano interfejs GetLaserWeldingRunningState() do pobierania stanu pracy spawarki laserowej.
+       | 13. Dodano interfejs GetLaserWeldingErrState() do pobierania stanu awarii spawarki laserowej.
+       | 14. Dodano interfejs GetLaserWeldingParamTarget() do pobierania parametrów konfiguracyjnych spawania laserowego.
+       | 15. Dodano interfejs GetLaserWeldingParamActual() do pobierania aktualnie obowiązujących parametrów konfiguracyjnych spawarki laserowej.
+       | 16. Dodano interfejs SetLaserWeldingEnableExtDoNum() do konfiguracji rozszerzonego portu DO włączania spawarki laserowej.
+       | 17. Dodano interfejs SetLaserWeldingStartExtDoNum() do konfiguracji rozszerzonego portu DO uruchamiania spawarki laserowej.
+       | 18. Dodano interfejs SetLaserWeldingErrResetExtDoNum() do konfiguracji rozszerzonego portu DO resetowania błędów spawarki laserowej.
+       | 19. Dodano interfejs SetLaserWeldingRunningStateExtDiNum() do konfiguracji rozszerzonego portu DI stanu pracy (stanu wiązki) spawarki laserowej.
+       | 20. Dodano interfejs SetLaserWeldingErrStateExtDiNum() do konfiguracji rozszerzonego portu DI stanu awarii spawarki laserowej.
 
    * - V3.9.5
      - 2026-04-24
-     - | 1.SetTrajectoryJSpeed()接口新增模式降速模式、直接切换；
-       | 2.更新机器人状态反馈结构体类型；
-       | 3.新增机器人状态反馈配置枚举类型；
-       | 4.新增机器人状态反馈配置结果类；
-       | 5.新增SetRobotRealtimeStateConfig()配置机器人CNDE状态反馈接口；
-       | 6.新增AddRobotRealtimeState()CNDE状态配置添加一个机器人状态接口；
-       | 7.新增DeleteRobotRealtimeState()CNDE状态配置删除一个机器人状态接口；
-       | 8.新增SetRobotRealtimeStatePeriod()设置CNDE状态反馈周期接口；
-       | 9.新增GetRobotRealtimeStateConfig()获取当前CNDE状态反馈所有状态集合和周期接口。
+     - | 1. W interfejsie SetTrajectoryJSpeed() dodano tryby: tryb zmniejszania prędkości i bezpośrednie przełączanie;
+       | 2. Aktualizacja typu struktury sprzężenia zwrotnego stanu robota;
+       | 3. Dodano typ wyliczeniowy konfiguracji sprzężenia zwrotnego stanu robota;
+       | 4. Dodano klasę wyniku konfiguracji sprzężenia zwrotnego stanu robota;
+       | 5. Dodano interfejs SetRobotRealtimeStateConfig() do konfiguracji sprzężenia zwrotnego stanu CNDE robota;
+       | 6. Dodano interfejs AddRobotRealtimeState() do dodawania stanu robota w konfiguracji stanu CNDE;
+       | 7. Dodano interfejs DeleteRobotRealtimeState() do usuwania stanu robota w konfiguracji stanu CNDE;
+       | 8. Dodano interfejs SetRobotRealtimeStatePeriod() do ustawiania okresu sprzężenia zwrotnego stanu CNDE;
+       | 9. Dodano interfejs GetRobotRealtimeStateConfig() do pobierania wszystkich bieżących stanów i okresu sprzężenia zwrotnego stanu CNDE.
 
    * - V3.9.4
      - 2026-03-25
-     - | 1.ServoJTStart()接口新增通信类型选择参数，支持XMLPRC/UDP通信；
-       | 2.ServoJTEnd()接口新增通信类型选择参数，支持XMLPRC/UDP通信；
-       | 3.ServoJT()接口新增通信类型选择参数，支持XMLPRC/UDP通信；
-       | 4.ServoMoveStart()接口新增通信类型选择参数，支持XMLPRC/UDP通信；
-       | 5.ServoMoveEnd()接口新增通信类型选择参数，支持XMLPRC/UDP通信；
-       | 6.ServoJ()接口新增通信类型选择参数，支持XMLPRC/UDP通信；
-       | 7.SetWeldMachineCtrlMode()接口新增控制模式选择参数；
-       | 8.ExtDevGetUDPComParam()接口新增获取UDP通信参数：重启控制箱后是否自动重连；
-       | 9.新增SetAxleGenComEnable()开启末端通用透传功能接口；
-       | 10.新增SndRcvAxleGenComCmdData()末端发送非周期数据并等待应答接口；
-       | 11.新增SetRobotStopOnComDisc()设置端口通讯断开时停止机器人运行接口；
-       | 12.新增GetRobotStopOnComDisc()获取端口通讯断开时停止机器人运行参数接口；
-       | 13.新增SetDIConfig()设置控制箱可配置 CI 端口功能接口；
-       | 14.新增GetDIConfig()获取控制箱可配置 CI 端口功能接口；
-       | 15.新增SetDOConfig()设置控制箱可配置 CO 端口功能接口；
-       | 16.新增GetDOConfig()获取控制箱可配置 CO 端口功能接口；
-       | 17.新增SetToolDIConfig()设置末端可配置 End-CI 端口功能接口；
-       | 18.新增GetToolDIConfig()获取末端可配置 End-CI 端口功能接口；
-       | 19.新增SetDIConfigLevel()设置控制箱可配置 CI 有效状态接口；
-       | 20.新增GetDIConfigLevel()获取控制箱可配置 CI 有效状态接口；
-       | 21.新增SetDOConfigLevel()设置控制箱可配置 CO 有效状态接口；
-       | 22.新增GetDOConfigLevel()获取控制箱可配置 CO 有效状态接口；
-       | 23.新增SetToolDIConfigLevel()设置末端可配置 CI 有效状态接口；
-       | 24.新增GetToolDIConfigLevel()获取末端可配置 CI 有效状态接口；
-       | 25.新增SetStandardDILevel()设置控制箱标准 DI 有效状态接口；
-       | 26.新增GetStandardDILevel()获取控制箱标准 DI 有效状态接口；
-       | 27.新增SetStandardDOLevel()设置控制箱标准 DO 有效状态接口；
-       | 28.新增GetStandardDOLevel()获取控制箱标准 DO 有效状态接口；
-       | 29.新增SetExAxisCmdDoneTimeUDP() 扩展轴定位完成时间设置接口；
-       | 30.新增OpenLuaDownload()下载开放协议 Lua 文件接口；
-       | 31.新增OpenLuaDelete()删除开放协议 Lua 文件接口；
-       | 32.新增AllOpenLuaDelete()删除开放协议 Lua 文件接口；
-       | 33.新增SendUDPFrameUDP ()发送指令帧接口；
-       | 34.新增SetCmdRpyCallback()设置 SDK 通过 UDP 发送指令的执行结果回调函数接口；
-       | 35.新增SetVelReducePara()设置安全速度参数接口；
-       | 36.新增OriginPointWeaveStart()定点摆动开始接口；
-       | 37.新增OriginPointWeaveEnd()定点摆动结束接口；
-       | 38.新增SetUserLEDColor()设置用户自定义机器人末端灯色接口；
-       | 39.新增MoveToTPDStart()运动到 TPD 轨迹记录起点接口；
+     - | 1. W interfejsie ServoJTStart() dodano parametr wyboru typu komunikacji, obsługa XMLPRC/UDP;
+       | 2. W interfejsie ServoJTEnd() dodano parametr wyboru typu komunikacji, obsługa XMLPRC/UDP;
+       | 3. W interfejsie ServoJT() dodano parametr wyboru typu komunikacji, obsługa XMLPRC/UDP;
+       | 4. W interfejsie ServoMoveStart() dodano parametr wyboru typu komunikacji, obsługa XMLPRC/UDP;
+       | 5. W interfejsie ServoMoveEnd() dodano parametr wyboru typu komunikacji, obsługa XMLPRC/UDP;
+       | 6. W interfejsie ServoJ() dodano parametr wyboru typu komunikacji, obsługa XMLPRC/UDP;
+       | 7. W interfejsie SetWeldMachineCtrlMode() dodano parametr wyboru trybu sterowania;
+       | 8. W interfejsie ExtDevGetUDPComParam() dodano pobieranie parametru komunikacji UDP: czy automatycznie ponownie połączyć po ponownym uruchomieniu skrzynki kontrolnej;
+       | 9. Dodano interfejs SetAxleGenComEnable() do włączania ogólnej funkcji przezroczystej transmisji końcowej;
+       | 10. Dodano interfejs SndRcvAxleGenComCmdData() do wysyłania danych aperiodycznych przez końcówkę i oczekiwania na odpowiedź;
+       | 11. Dodano interfejs SetRobotStopOnComDisc() do ustawiania zatrzymania robota po rozłączeniu komunikacji portu;
+       | 12. Dodano interfejs GetRobotStopOnComDisc() do pobierania parametrów zatrzymania robota po rozłączeniu komunikacji portu;
+       | 13. Dodano interfejs SetDIConfig() do ustawiania funkcji konfigurowalnego portu CI skrzynki kontrolnej;
+       | 14. Dodano interfejs GetDIConfig() do pobierania funkcji konfigurowalnego portu CI skrzynki kontrolnej;
+       | 15. Dodano interfejs SetDOConfig() do ustawiania funkcji konfigurowalnego portu CO skrzynki kontrolnej;
+       | 16. Dodano interfejs GetDOConfig() do pobierania funkcji konfigurowalnego portu CO skrzynki kontrolnej;
+       | 17. Dodano interfejs SetToolDIConfig() do ustawiania funkcji konfigurowalnego portu End-CI końcówki;
+       | 18. Dodano interfejs GetToolDIConfig() do pobierania funkcji konfigurowalnego portu End-CI końcówki;
+       | 19. Dodano interfejs SetDIConfigLevel() do ustawiania stanu aktywnego konfigurowalnego CI skrzynki kontrolnej;
+       | 20. Dodano interfejs GetDIConfigLevel() do pobierania stanu aktywnego konfigurowalnego CI skrzynki kontrolnej;
+       | 21. Dodano interfejs SetDOConfigLevel() do ustawiania stanu aktywnego konfigurowalnego CO skrzynki kontrolnej;
+       | 22. Dodano interfejs GetDOConfigLevel() do pobierania stanu aktywnego konfigurowalnego CO skrzynki kontrolnej;
+       | 23. Dodano interfejs SetToolDIConfigLevel() do ustawiania stanu aktywnego konfigurowalnego CI końcówki;
+       | 24. Dodano interfejs GetToolDIConfigLevel() do pobierania stanu aktywnego konfigurowalnego CI końcówki;
+       | 25. Dodano interfejs SetStandardDILevel() do ustawiania stanu aktywnego standardowego DI skrzynki kontrolnej;
+       | 26. Dodano interfejs GetStandardDILevel() do pobierania stanu aktywnego standardowego DI skrzynki kontrolnej;
+       | 27. Dodano interfejs SetStandardDOLevel() do ustawiania stanu aktywnego standardowego DO skrzynki kontrolnej;
+       | 28. Dodano interfejs GetStandardDOLevel() do pobierania stanu aktywnego standardowego DO skrzynki kontrolnej;
+       | 29. Dodano interfejs SetExAxisCmdDoneTimeUDP() do ustawiania czasu zakończenia pozycjonowania osi rozszerzenia;
+       | 30. Dodano interfejs OpenLuaDownload() do pobierania pliku Lua protokołu otwartego;
+       | 31. Dodano interfejs OpenLuaDelete() do usuwania pliku Lua protokołu otwartego;
+       | 32. Dodano interfejs AllOpenLuaDelete() do usuwania pliku Lua protokołu otwartego;
+       | 33. Dodano interfejs SendUDPFrameUDP() do wysyłania ramki instrukcji;
+       | 34. Dodano interfejs SetCmdRpyCallback() do ustawiania funkcji zwrotnej wyniku wykonania instrukcji wysłanej przez SDK przez UDP;
+       | 35. Dodano interfejs SetVelReducePara() do ustawiania parametrów bezpiecznej prędkości;
+       | 36. Dodano interfejs OriginPointWeaveStart() do rozpoczęcia wahadła w punkcie stałym;
+       | 37. Dodano interfejs OriginPointWeaveEnd() do zakończenia wahadła w punkcie stałym;
+       | 38. Dodano interfejs SetUserLEDColor() do ustawiania niestandardowego koloru lampki końcówki robota przez użytkownika;
+       | 39. Dodano interfejs MoveToTPDStart() do ruchu do punktu początkowego rejestracji trajektorii TPD;
    
    * - V3.9.3
      - 2026-02-11
-     - | 1.ServoCart()接口增加扩展轴参数
-       | 2.SetOutputResetCtlBoxDO()接口增加暂停恢复后是否重加载复位前DO状态参数
-       | 3.SetOutputResetCtlBoxAO()接口增加暂停恢复后是否重加载复位前DO状态参数
-       | 4.SetOutputResetAxleDO()接口增加暂停恢复后是否重加载复位前DO状态参数
-       | 5.SetOutputResetAxleAO()接口增加暂停恢复后是否重加载复位前DO状态参数
-       | 6.SetOutputResetExtDO()接口增加暂停恢复后是否重加载复位前DO状态参数
-       | 7.SetOutputResetExtAO()接口增加暂停恢复后是否重加载复位前DO状态参数
-       | 8.SetOutputResetSmartToolDO()接口增加暂停恢复后是否重加载复位前DO状态参数
-       | 9.增加GetInverseKinExaxis()包含扩展轴位置的逆运动学求解接口
+     - | 1. W interfejsie ServoCart() dodano parametr osi rozszerzenia;
+       | 2. W interfejsie SetOutputResetCtlBoxDO() dodano parametr stanu DO sprzed resetu do ponownego załadowania po wznowieniu po wstrzymaniu;
+       | 3. W interfejsie SetOutputResetCtlBoxAO() dodano parametr stanu DO sprzed resetu do ponownego załadowania po wznowieniu po wstrzymaniu;
+       | 4. W interfejsie SetOutputResetAxleDO() dodano parametr stanu DO sprzed resetu do ponownego załadowania po wznowieniu po wstrzymaniu;
+       | 5. W interfejsie SetOutputResetAxleAO() dodano parametr stanu DO sprzed resetu do ponownego załadowania po wznowieniu po wstrzymaniu;
+       | 6. W interfejsie SetOutputResetExtDO() dodano parametr stanu DO sprzed resetu do ponownego załadowania po wznowieniu po wstrzymaniu;
+       | 7. W interfejsie SetOutputResetExtAO() dodano parametr stanu DO sprzed resetu do ponownego załadowania po wznowieniu po wstrzymaniu;
+       | 8. W interfejsie SetOutputResetSmartToolDO() dodano parametr stanu DO sprzed resetu do ponownego załadowania po wznowieniu po wstrzymaniu;
+       | 9. Dodano interfejs GetInverseKinExaxis() do rozwiązywania kinematyki odwrotnej z uwzględnieniem pozycji osi rozszerzenia.
        
    * - V3.9.2
      - 2026-01-26
-     - | 1.FT_RotInsertion()接口增加未检测到力/力矩的处理策略参数
-       | 2.LaserSensorRecordandReplay()接口增加机器人定点跟踪相关参数
-       | 3.增加MoveStationary()接口
-       | 4.增加TCPComputeRPY()接口
-       | 5.增加TCPComputeXYZ()接口
-       | 6.增加TCPRecordFlangePosStart()接口
-       | 7.增加TCPRecordFlangePosEnd()接口
-       | 8.增加TCPGetRecordFlangePos()接口
-       | 9.增加PhotoelectricSensorTCPCalibration()接口
+     - | 1. W interfejsie FT_RotInsertion() dodano parametr strategii postępowania przy niewykryciu siły/momentu;
+       | 2. W interfejsie LaserSensorRecordandReplay() dodano parametry związane ze śledzeniem punktowym robota;
+       | 3. Dodano interfejs MoveStationary();
+       | 4. Dodano interfejs TCPComputeRPY();
+       | 5. Dodano interfejs TCPComputeXYZ();
+       | 6. Dodano interfejs TCPRecordFlangePosStart();
+       | 7. Dodano interfejs TCPRecordFlangePosEnd();
+       | 8. Dodano interfejs TCPGetRecordFlangePos();
+       | 9. Dodano interfejs PhotoelectricSensorTCPCalibration().
 
    * - V3.9.1
      - 2025-12-25
-     - | 1.MoveL()接口增加oacc速度缩放因子参数/物理加速度参数；
-       | 2.MoveC()接口增加oacc速度缩放因子参数/物理加速度参数；
-       | 3.Circle()接口优化关于物理速度和物理加速度的参数描述；
-       | 4.增加FT_Control()重载函数，具有rx、ry启动阈值、力矩调节系数参数；
-       | 5.增加SerCoderCompenParams()接口；
+     - | 1. W interfejsie MoveL() dodano parametr współczynnika skalowania prędkości oacc / parametr przyspieszenia fizycznego;
+       | 2. W interfejsie MoveC() dodano parametr współczynnika skalowania prędkości oacc / parametr przyspieszenia fizycznego;
+       | 3. W interfejsie Circle() zoptymalizowano opis parametrów dotyczących prędkości fizycznej i przyspieszenia fizycznego;
+       | 4. Dodano przeciążoną funkcję FT_Control() z parametrami progu uruchomienia rx, ry i współczynnika regulacji momentu;
+       | 5. Dodano interfejs SerCoderCompenParams();
        
    * - V3.9.0
      - 2025-11-26
-     - | 1.JointSensitivityCalibration()接口增加j1~j6关节线性度返回
-       | 2.增加JointHysteresisError()接口
-       | 3.增加JointRepeatability()接口
-       | 4.增加SetAdmittanceParams()接口
-       | 5.增加MoveToIntersectLineStart()接口
-       | 6.增加MoveIntersectLine()接口
+     - | 1. W interfejsie JointSensitivityCalibration() dodano zwracanie liniowości przegubów j1~j6;
+       | 2. Dodano interfejs JointHysteresisError();
+       | 3. Dodano interfejs JointRepeatability();
+       | 4. Dodano interfejs SetAdmittanceParams();
+       | 5. Dodano interfejs MoveToIntersectLineStart();
+       | 6. Dodano interfejs MoveIntersectLine();
        
    * - V3.8.7
      - 2025-10-21
-     - | 1.FT_Control()增加质量参数和阻尼参数接口
-       | 2.增加JointSensitivityCalibration()接口
-       | 3.增加JointSensitivityCollect()接口
-       | 4.增加MotionQueueClear()接口
-       | 5.增加GetSlavePortErrCounter()接口
-       | 6.增加SlavePortErrCounterClear()接口
-       | 7.增加SetVelFeedForwardRatio()接口
-       | 8.增加GetVelFeedForwardRatio()接口
-       | 9.增加RobotMCULogCollect()接口
-       | 10.状态结构体增加ServoJ指令计数及最后一个指令目标位置数据
-       | 11.新螺旋线参数结构体SpiralParam增加速度加速度参数模式；
+     - | 1. W interfejsie FT_Control() dodano parametry masy i tłumienia;
+       | 2. Dodano interfejs JointSensitivityCalibration();
+       | 3. Dodano interfejs JointSensitivityCollect();
+       | 4. Dodano interfejs MotionQueueClear();
+       | 5. Dodano interfejs GetSlavePortErrCounter();
+       | 6. Dodano interfejs SlavePortErrCounterClear();
+       | 7. Dodano interfejs SetVelFeedForwardRatio();
+       | 8. Dodano interfejs GetVelFeedForwardRatio();
+       | 9. Dodano interfejs RobotMCULogCollect();
+       | 10. W strukturze stanu dodano licznik instrukcji ServoJ oraz dane pozycji docelowej ostatniej instrukcji;
+       | 11. W strukturze parametrów nowej spirali SpiralParam dodano tryb parametrów prędkości i przyspieszenia;
 
    * - V3.8.6
      - 2025-09-19
-     - | 1.SetLoadCoord()接口增加负载编号参数
-       | 2.增加LaserTrackingLaserOnOff()接口
-       | 3.增加LaserTrackingTrackOnOff()接口
-       | 4.增加LaserTrackingSearchStart_xyz()接口
-       | 5.增加LaserTrackingSearchStart_point()接口
-       | 6.增加LaserTrackingSearchStop()接口
-       | 7.增加LaserTrackingSensorConfig()接口
-       | 8.增加LaserTrackingSensorSamplePeriod()接口
-       | 9.增加LoadPosSensorDriver()接口
-       | 10.增加UnLoadPosSensorDriver()接口
-       | 11.增加LaserSensorRecord1()接口
-       | 12.增加LaserSensorReplay()接口
-       | 13.增加MoveLTR()接口
-       | 14.增加LaserSensorRecordandReplay()接口
-       | 15.增加MoveToLaserRecordStart()接口
-       | 16.增加MoveToLaserRecordEnd()接口
-       | 17.增加MoveToLaserSeamPos()接口
-       | 18.增加GetLaserSeamPos()接口
-       | 19.增加ImpedanceControlStartStop()接口
-       | 20.增加GetToolCoordWithID()接口
-       | 21.增加GetWObjCoordWithID()接口
-       | 22.增加GetExToolCoordWithID()接口
-       | 23.增加GetExAxisCoordWithID()接口
-       | 24.增加GetTargetPayloadWithID()接口
-       | 25.增加GetExAxisCoordWithID()接口
-       | 26.增加GetCurWObjCoord()接口
-       | 27.增加GetCurExToolCoord()接口
-       | 28.增加GetCurExToolCoord()接口
-       | 29.增加KernelUpgrade()接口
-       | 30.增加GetKernelUpgradeResult()接口
-       | 31.增加CustomWeaveSetPara()接口
-       | 32.增加CustomWeaveGetPara()接口
-       | 33.状态结构体增加工具、工件、外部工具、扩展轴坐标系和负载质量、质心数据
+     - | 1. W interfejsie SetLoadCoord() dodano parametr numeru obciążenia;
+       | 2. Dodano interfejs LaserTrackingLaserOnOff();
+       | 3. Dodano interfejs LaserTrackingTrackOnOff();
+       | 4. Dodano interfejs LaserTrackingSearchStart_xyz();
+       | 5. Dodano interfejs LaserTrackingSearchStart_point();
+       | 6. Dodano interfejs LaserTrackingSearchStop();
+       | 7. Dodano interfejs LaserTrackingSensorConfig();
+       | 8. Dodano interfejs LaserTrackingSensorSamplePeriod();
+       | 9. Dodano interfejs LoadPosSensorDriver();
+       | 10. Dodano interfejs UnLoadPosSensorDriver();
+       | 11. Dodano interfejs LaserSensorRecord1();
+       | 12. Dodano interfejs LaserSensorReplay();
+       | 13. Dodano interfejs MoveLTR();
+       | 14. Dodano interfejs LaserSensorRecordandReplay();
+       | 15. Dodano interfejs MoveToLaserRecordStart();
+       | 16. Dodano interfejs MoveToLaserRecordEnd();
+       | 17. Dodano interfejs MoveToLaserSeamPos();
+       | 18. Dodano interfejs GetLaserSeamPos();
+       | 19. Dodano interfejs ImpedanceControlStartStop();
+       | 20. Dodano interfejs GetToolCoordWithID();
+       | 21. Dodano interfejs GetWObjCoordWithID();
+       | 22. Dodano interfejs GetExToolCoordWithID();
+       | 23. Dodano interfejs GetExAxisCoordWithID();
+       | 24. Dodano interfejs GetTargetPayloadWithID();
+       | 25. Dodano interfejs GetExAxisCoordWithID();
+       | 26. Dodano interfejs GetCurWObjCoord();
+       | 27. Dodano interfejs GetCurExToolCoord();
+       | 28. Dodano interfejs GetCurExToolCoord();
+       | 29. Dodano interfejs KernelUpgrade();
+       | 30. Dodano interfejs GetKernelUpgradeResult();
+       | 31. Dodano interfejs CustomWeaveSetPara();
+       | 32. Dodano interfejs CustomWeaveGetPara();
+       | 33. W strukturze stanu dodano układy współrzędnych narzędzia, przedmiotu, zewnętrznego narzędzia, osi rozszerzenia oraz dane masy i środka ciężkości obciążenia.
 
    * - V3.8.5
      - 2025-08-20
-     - | 1.增加OpenLuaUpload()接口
-       | 2.增加GetFieldBusConfig()接口
-       | 3.增加FieldBusSlaveWriteDO()接口
-       | 4.增加FieldBusSlaveWriteAO()接口
-       | 5.增加FieldBusSlaveReadDI()接口
-       | 6.增加FieldBusSlaveReadAI()接口
-       | 7.增加FieldBusSlaveWaitDI()接口
-       | 8.增加FieldBusSlaveWaitAI()接口
-       | 9.增加SetSuckerCtrl()接口
-       | 10.增加GetSuckerState()接口
-       | 11.增加WaitSuckerState()接口
-       | 12.增加MoveL()速度加速度参数模式velAccParamMode接口
-       | 13.增加MoveL()重载函数1接口
-       | 14.增加MoveL()重载函数2接口
-       | 15.增加MoveC()速度加速度参数模式velAccParamMode接口
-       | 16.增加MoveC()重载函数1接口
-       | 17.增加Circle()速度加速度参数模式velAccParamMode接口
-       | 18.增加Circle()重载函数1接口
-       | 19.增加SetExAxisRobotPlan()接口
+     - | 1. Dodano interfejs OpenLuaUpload();
+       | 2. Dodano interfejs GetFieldBusConfig();
+       | 3. Dodano interfejs FieldBusSlaveWriteDO();
+       | 4. Dodano interfejs FieldBusSlaveWriteAO();
+       | 5. Dodano interfejs FieldBusSlaveReadDI();
+       | 6. Dodano interfejs FieldBusSlaveReadAI();
+       | 7. Dodano interfejs FieldBusSlaveWaitDI();
+       | 8. Dodano interfejs FieldBusSlaveWaitAI();
+       | 9. Dodano interfejs SetSuckerCtrl();
+       | 10. Dodano interfejs GetSuckerState();
+       | 11. Dodano interfejs WaitSuckerState();
+       | 12. Dodano interfejs MoveL() z trybem parametrów prędkości i przyspieszenia velAccParamMode;
+       | 13. Dodano przeciążoną funkcję 1 MoveL();
+       | 14. Dodano przeciążoną funkcję 2 MoveL();
+       | 15. Dodano interfejs MoveC() z trybem parametrów prędkości i przyspieszenia velAccParamMode;
+       | 16. Dodano przeciążoną funkcję 1 MoveC();
+       | 17. Dodano interfejs Circle() z trybem parametrów prędkości i przyspieszenia velAccParamMode;
+       | 18. Dodano przeciążoną funkcję 1 Circle();
+       | 19. Dodano interfejs SetExAxisRobotPlan();
 
    * - V3.8.4
      - 2025-07-17
-     - | 1.ExtAxisMove()接口增加blend平滑参数；
-       | 2.增加SetFocusCalibPoint()接口
-       | 3.增加ComputeFocusCalib()接口；
-       | 4.增加FocusStart()接口；
-       | 5.增加FocusEnd()接口
-       | 6.增加SetFocusPosition()接口；
-       | 7.增加SetEncoderUpgrade()接口；
-       | 8.增加SetJointFirmwareUpgrade()接口
-       | 9.增加SetCtrlFirmwareUpgrade()接口；
-       | 10.增加SetEndFirmwareUpgrade()接口；
-       | 11.增加JointAllParamUpgrade()接口；
+     - | 1. W interfejsie ExtAxisMove() dodano parametr wygładzania blend;
+       | 2. Dodano interfejs SetFocusCalibPoint();
+       | 3. Dodano interfejs ComputeFocusCalib();
+       | 4. Dodano interfejs FocusStart();
+       | 5. Dodano interfejs FocusEnd();
+       | 6. Dodano interfejs SetFocusPosition();
+       | 7. Dodano interfejs SetEncoderUpgrade();
+       | 8. Dodano interfejs SetJointFirmwareUpgrade();
+       | 9. Dodano interfejs SetCtrlFirmwareUpgrade();
+       | 10. Dodano interfejs SetEndFirmwareUpgrade();
+       | 11. Dodano interfejs JointAllParamUpgrade();
        
    * - V3.8.3
      - 2025-06-24
-     - | 1.Circle()接口增加加速度百分比及平滑半径参数；
-       | 2.EndForceDragControl()接口增加辅助拖动时机器人碰撞检测标志参数；
-       | 3.ServoJ()接口增加指令ID参数；
-       | 4.增加SetSSHScpCmd()接口
-       | 5.增加SetWideBoxTempFanMonitorParam()接口；
-       | 6.增加GetWideBoxTempFanMonitorParam()接口；
-       | 7.状态结构体增加控制箱温度和风扇电流状态数据；
+     - | 1. W interfejsie Circle() dodano parametr procentu przyspieszenia i promienia wygładzania;
+       | 2. W interfejsie EndForceDragControl() dodano parametr flagi wykrywania kolizji robota podczas przeciągania wspomaganego;
+       | 3. W interfejsie ServoJ() dodano parametr ID instrukcji;
+       | 4. Dodano interfejs SetSSHScpCmd();
+       | 5. Dodano interfejs SetWideBoxTempFanMonitorParam();
+       | 6. Dodano interfejs GetWideBoxTempFanMonitorParam();
+       | 7. W strukturze stanu dodano dane temperatury skrzynki kontrolnej i prądu wentylatora;
               
    * - V3.8.2
      - 2025-06-13
-     - | 1.WeaveSetPara()接口增加摆动方向侧倾角(绕摆动X轴偏转)参数
-       | 2.WeaveChangeStart()接口增加摆动编号、焊接开始速度、焊接结束速度参数
-       | 3.ExtDevSetUDPComParam()接口增加断电重启后是否自动建立连接参数
-       | 4.SetCollisionDetectionMethod()接口增加碰撞等级阈值方式选择
-       | 5.PtpFIRPlanningStart()接口增加统一关节急动度极值
-       | 6.增加WeldingSetVoltageGradualChangeStart()接口
-       | 7.增加WeldingSetVoltageGradualChangeEnd()接口
-       | 8.增加WeldingSetCurrentGradualChangeStart()接口
-       | 9.增加WeldingSetCurrentGradualChangeEnd()接口
-       | 10.增加ArcWeldTraceAIChannelCurrent()接口
-       | 11.增加ArcWeldTraceAIChannelVoltage()接口
-       | 12.增加ArcWeldTraceCurrentPara()接口
-       | 13.增加ArcWeldTraceVoltagePara()接口
-       | 14.增加GetSmarttoolBtnState()接口
-       | 15.增加ExtAxisGetCoord()接口
+     - | 1. W interfejsie WeaveSetPara() dodano parametr kąta pochylenia bocznego kierunku wahadła (odchylenie wokół osi X wahadła);
+       | 2. W interfejsie WeaveChangeStart() dodano parametry numeru wahadła, prędkości początkowej spawania i prędkości końcowej spawania;
+       | 3. W interfejsie ExtDevSetUDPComParam() dodano parametr automatycznego ustanawiania połączenia po ponownym uruchomieniu zasilania;
+       | 4. W interfejsie SetCollisionDetectionMethod() dodano wybór sposobu progu poziomu kolizji;
+       | 5. W interfejsie PtpFIRPlanningStart() dodano ekstremalną wartość zrywu dla ujednoliconych przegubów;
+       | 6. Dodano interfejs WeldingSetVoltageGradualChangeStart();
+       | 7. Dodano interfejs WeldingSetVoltageGradualChangeEnd();
+       | 8. Dodano interfejs WeldingSetCurrentGradualChangeStart();
+       | 9. Dodano interfejs WeldingSetCurrentGradualChangeEnd();
+       | 10. Dodano interfejs ArcWeldTraceAIChannelCurrent();
+       | 11. Dodano interfejs ArcWeldTraceAIChannelVoltage();
+       | 12. Dodano interfejs ArcWeldTraceCurrentPara();
+       | 13. Dodano interfejs ArcWeldTraceVoltagePara();
+       | 14. Dodano interfejs GetSmarttoolBtnState();
+       | 15. Dodano interfejs ExtAxisGetCoord();
                      
    * - V3.8.1
      - 2025-04-24
-     - | 1.ConveyorSetParam()接口增加跟踪运动类型、跟踪起始距离、跟踪终止距离参数
-       | 2.增加AccSmoothStart()接口
-       | 3.增加AccSmoothEnd()接口
-       | 4.增加RbLogDownload()接口
-       | 5.增加AllDataSourceDownload()接口
-       | 6.增加DataPackageDownload()接口
-       | 7.增加GetRobotSN()接口
-       | 8.增加ShutDownRobotOS()接口
-       | 9.增加ConveyorComDetect()接口
-       | 10.增加ConveyorComDetectTrigger()接口
+     - | 1. W interfejsie ConveyorSetParam() dodano parametry typu śledzenia ruchu, odległości początkowej śledzenia i odległości końcowej śledzenia;
+       | 2. Dodano interfejs AccSmoothStart();
+       | 3. Dodano interfejs AccSmoothEnd();
+       | 4. Dodano interfejs RbLogDownload();
+       | 5. Dodano interfejs AllDataSourceDownload();
+       | 6. Dodano interfejs DataPackageDownload();
+       | 7. Dodano interfejs GetRobotSN();
+       | 8. Dodano interfejs ShutDownRobotOS();
+       | 9. Dodano interfejs ConveyorComDetect();
+       | 10. Dodano interfejs ConveyorComDetectTrigger();

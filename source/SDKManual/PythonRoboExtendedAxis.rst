@@ -1,258 +1,274 @@
-扩展轴
-=============
+Oś rozszerzenia
+===============
 
 .. toctree:: 
     :maxdepth: 5
 
-设置485扩展轴参数
-+++++++++++++++++++++
+Ustawianie parametrów osi rozszerzenia 485
++++++++++++++++++++++++++++++++++++++++++++
+
 .. versionadded:: python SDK-v2.0.3
 
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "原型", "``AuxServoSetParam(servoId,servoCompany,servoModel,servoSoftVersion, servoResolution,axisMechTransRatio)``"
-    "描述", "设置485扩展轴参数"
-    "必选参数", "- ``servoId``：伺服驱动器ID，范围[1-15],对应从站ID；
-    - ``servoCompany``：伺服驱动器厂商，1-戴纳泰克；
-    - ``servoModel``：伺服驱动器型号，1-FD100-750C；
-    - ``servoSoftVersion``：伺服驱动器软件版本，1-V1.0；
-    - ``servoResolution``：编码器分辨率；
-    - ``axisMechTransRatio``：机械传动比；"
-    "默认参数", "无"
-    "返回值", "错误码 成功-0  失败- errcode"
+    "Prototyp", "``AuxServoSetParam(servoId,servoCompany,servoModel,servoSoftVersion, servoResolution,axisMechTransRatio)``"
+    "Opis", "Ustawianie parametrów osi rozszerzenia 485"
+    "Parametry wymagane", "- ``servoId``: ID serwonapędu, zakres [1-15], odpowiada ID węzła podrzędnego;
+    - ``servoCompany``: Producent serwonapędu, 1-DynaTek;
+    - ``servoModel``: Model serwonapędu, 1-FD100-750C;
+    - ``servoSoftVersion``: Wersja oprogramowania serwonapędu, 1-V1.0;
+    - ``servoResolution``: Rozdzielczość enkodera;
+    - ``axisMechTransRatio``: Przełożenie mechaniczne;"
+    "Parametry domyślne", "Brak"
+    "Wartość zwracana", "Kod błędu sukces-0 błąd- errcode"
 
-获取485扩展轴配置参数
-+++++++++++++++++++++
+Pobieranie parametrów konfiguracyjnych osi rozszerzenia 485
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. versionadded:: python SDK-v2.0.3
 
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "原型", "``AuxServoGetParam(servoId)``"
-    "描述", "获取485扩展轴配置参数"
-    "必选参数", "- ``servoId``：伺服驱动器ID，范围[1-15],对应从站ID；"
-    "默认参数", "无"
-    "返回值", "- 错误码 成功-0  失败- errcode;
-    - ``servoCompany``：伺服驱动器厂商，1-戴纳泰克；
-    - ``servoModel``：伺服驱动器型号，1-FD100-750C；
-    - ``servoSoftVersion``：伺服驱动器软件版本，1-V1.0；
-    - ``servoResolution``：编码器分辨率；
-    - ``axisMechTransRatio``：机械传动比；"
+    "Prototyp", "``AuxServoGetParam(servoId)``"
+    "Opis", "Pobieranie parametrów konfiguracyjnych osi rozszerzenia 485"
+    "Parametry wymagane", "- ``servoId``: ID serwonapędu, zakres [1-15], odpowiada ID węzła podrzędnego;"
+    "Parametry domyślne", "Brak"
+    "Wartość zwracana", "- Kod błędu sukces-0 błąd- errcode;
+    - ``servoCompany``: Producent serwonapędu, 1-DynaTek;
+    - ``servoModel``: Model serwonapędu, 1-FD100-750C;
+    - ``servoSoftVersion``: Wersja oprogramowania serwonapędu, 1-V1.0;
+    - ``servoResolution``: Rozdzielczość enkodera;
+    - ``axisMechTransRatio``: Przełożenie mechaniczne;"
 
-设置485扩展轴使能/去使能
-++++++++++++++++++++++++++
+Ustawianie włączenia/wyłączenia osi rozszerzenia 485
+++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. versionadded:: python SDK-v2.0.3
 
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "原型", "``AuxServoEnable(servoId,status)``"
-    "描述", "设置485扩展轴使能/去使能"
-    "必选参数", "- ``servoId``：伺服驱动器ID，范围[1-15],对应从站ID；
-    - ``status``：使能状态，0-去使能， 1-使能;"
-    "默认参数", "无"
-    "返回值", "错误码 成功-0  失败- errcode"
+    "Prototyp", "``AuxServoEnable(servoId,status)``"
+    "Opis", "Ustawianie włączenia/wyłączenia osi rozszerzenia 485"
+    "Parametry wymagane", "- ``servoId``: ID serwonapędu, zakres [1-15], odpowiada ID węzła podrzędnego;
+    - ``status``: Stan włączenia, 0-wyłącz, 1-włącz;"
+    "Parametry domyślne", "Brak"
+    "Wartość zwracana", "Kod błędu sukces-0 błąd- errcode"
 
-设置485扩展轴控制模式
-+++++++++++++++++++++++
+Ustawianie trybu sterowania osi rozszerzenia 485
+++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. versionadded:: python SDK-v2.0.3
 
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "原型", "``AuxServoSetControlMode(servoId,mode)``"
-    "描述", "设置485扩展轴控制模式"
-    "必选参数", "- ``servoId``：伺服驱动器ID，范围[1-15],对应从站ID；
-    - ``mode``：控制模式，0-位置模式，1-速度模式;"
-    "默认参数", "无"
-    "返回值", "错误码 成功-0  失败- errcode"
+    "Prototyp", "``AuxServoSetControlMode(servoId,mode)``"
+    "Opis", "Ustawianie trybu sterowania osi rozszerzenia 485"
+    "Parametry wymagane", "- ``servoId``: ID serwonapędu, zakres [1-15], odpowiada ID węzła podrzędnego;
+    - ``mode``: Tryb sterowania, 0-tryb pozycyjny, 1-tryb prędkościowy;"
+    "Parametry domyślne", "Brak"
+    "Wartość zwracana", "Kod błędu sukces-0 błąd- errcode"
 
-设置485扩展轴目标位置(位置模式)
-++++++++++++++++++++++++++++++++
+Ustawianie pozycji docelowej osi rozszerzenia 485 (tryb pozycyjny)
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. versionadded:: python SDK-v2.0.3
 
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "原型", "``AuxServoSetTargetPos(servoId,pos,speed)``"
-    "描述", "设置485扩展轴目标位置(位置模式)"
-    "必选参数", "- ``servoId``：伺服驱动器ID，范围[1-15],对应从站ID；
-    - ``pos``：目标位置，mm或°；
-    - ``speed``：目标速度，mm/s或°/s;"
-    "默认参数", "无"
-    "返回值", "错误码 成功-0  失败- errcode"
+    "Prototyp", "``AuxServoSetTargetPos(servoId,pos,speed)``"
+    "Opis", "Ustawianie pozycji docelowej osi rozszerzenia 485 (tryb pozycyjny)"
+    "Parametry wymagane", "- ``servoId``: ID serwonapędu, zakres [1-15], odpowiada ID węzła podrzędnego;
+    - ``pos``: Pozycja docelowa, mm lub °;
+    - ``speed``: Prędkość docelowa, mm/s lub °/s;"
+    "Parametry domyślne", "Brak"
+    "Wartość zwracana", "Kod błędu sukces-0 błąd- errcode"
 
-设置485扩展轴目标转矩(力矩模式)-暂未开放
-++++++++++++++++++++++++++++++++++++++++
+Ustawianie momentu obrotowego docelowego osi rozszerzenia 485 (tryb momentowy) - tymczasowo niedostępne
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. versionadded:: python SDK-v2.0.3
 
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "原型", "``AuxServoSetTargetTorque(servoId,torque)``"
-    "描述", "设置485扩展轴目标转矩(力矩模式)"
-    "必选参数", "- ``servoId``：伺服驱动器ID，范围[1-15],对应从站ID；
-    - ``torque``：目标力矩，Nm;"
-    "默认参数", "无"
-    "返回值", "错误码 成功-0  失败- errcode"
+    "Prototyp", "``AuxServoSetTargetTorque(servoId,torque)``"
+    "Opis", "Ustawianie momentu obrotowego docelowego osi rozszerzenia 485 (tryb momentowy)"
+    "Parametry wymagane", "- ``servoId``: ID serwonapędu, zakres [1-15], odpowiada ID węzła podrzędnego;
+    - ``torque``: Moment obrotowy docelowy, Nm;"
+    "Parametry domyślne", "Brak"
+    "Wartość zwracana", "Kod błędu sukces-0 błąd- errcode"
 
-设置485扩展轴回零
-++++++++++++++++++++++++++++++++++++++++
+Ustawianie powrotu do zera osi rozszerzenia 485
+++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. versionadded:: python SDK-v2.0.3
 
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "原型", "``AuxServoHoming(servoId,mode,searchVel,latchVel)``"
-    "描述", "设置485扩展轴回零"
-    "必选参数", "- ``servoId``：伺服驱动器ID，范围[1-15],对应从站ID；
-    - ``mode``：回零模式，1-当前位置回零；2-负限位回零；3-正限位回零;
-    - ``searchVel``： 回零速度，mm/s或°/s;
-    - ``latchVel``：箍位速度，mm/s或°/s;"
-    "默认参数", "无"
-    "返回值", "错误码 成功-0  失败- errcode"
+    "Prototyp", "``AuxServoHoming(servoId,mode,searchVel,latchVel)``"
+    "Opis", "Ustawianie powrotu do zera osi rozszerzenia 485"
+    "Parametry wymagane", "- ``servoId``: ID serwonapędu, zakres [1-15], odpowiada ID węzła podrzędnego;
+    - ``mode``: Tryb powrotu do zera, 1-powrót do zera w bieżącej pozycji; 2-powrót do zera z ograniczeniem ujemnym; 3-powrót do zera z ograniczeniem dodatnim;
+    - ``searchVel``: Prędkość poszukiwania zera, mm/s lub °/s;
+    - ``latchVel``: Prędkość zatrzasku, mm/s lub °/s;"
+    "Parametry domyślne", "Brak"
+    "Wartość zwracana", "Kod błędu sukces-0 błąd- errcode"
 
-清除485扩展轴错误信息
-++++++++++++++++++++++++++++++++++++++++
+Czyszczenie informacji o błędzie osi rozszerzenia 485
++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. versionadded:: python SDK-v2.0.3
 
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "原型", "``AuxServoClearError(servoId)``"
-    "描述", "清除485扩展轴错误信息"
-    "必选参数", "- ``servoId``：伺服驱动器ID，范围[1-15],对应从站ID；"
-    "默认参数", "无"
-    "返回值", "错误码 成功-0  失败- errcode"
+    "Prototyp", "``AuxServoClearError(servoId)``"
+    "Opis", "Czyszczenie informacji o błędzie osi rozszerzenia 485"
+    "Parametry wymagane", "- ``servoId``: ID serwonapędu, zakres [1-15], odpowiada ID węzła podrzędnego;"
+    "Parametry domyślne", "Brak"
+    "Wartość zwracana", "Kod błędu sukces-0 błąd- errcode"
 
-获取485扩展轴伺服状态
-++++++++++++++++++++++++++++++++++++++++
+Pobieranie stanu serwonapędu osi rozszerzenia 485
+++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. versionadded:: python SDK-v2.0.3
 
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "原型", "``AuxServoGetStatus(servoId)``"
-    "描述", "获取485扩展轴伺服状态"
-    "必选参数", "- ``servoId``：伺服驱动器ID，范围[1-15],对应从站ID；"
-    "默认参数", "无"
-    "返回值", "- 错误码 成功-0  失败- errcode;
-    - ``servoErrCode``：伺服驱动器故障码
-    - ``servoState``：伺服驱动器状态 bit0:0-未使能；1-使能;  bit1:0-未运动；1-正在运动;  bit2 0-正限位未触发；1-正限位触发；bit3 0-负限位未触发；1-负限位触发；bit4 0-未定位完成；1-定位完成；  bit5：0-未回零；1-回零完成；
-    - ``servoPos``：伺服当前位置 mm或°；
-    - ``servoSpeed``：伺服当前速度 mm/s或°/s；
-    - ``servoTorque``：伺服当前转矩Nm；"
+    "Prototyp", "``AuxServoGetStatus(servoId)``"
+    "Opis", "Pobieranie stanu serwonapędu osi rozszerzenia 485"
+    "Parametry wymagane", "- ``servoId``: ID serwonapędu, zakres [1-15], odpowiada ID węzła podrzędnego;"
+    "Parametry domyślne", "Brak"
+    "Wartość zwracana", "- Kod błędu sukces-0 błąd- errcode;
+    - ``servoErrCode``: Kod błędu serwonapędu
+    - ``servoState``: Stan serwonapędu bit0:0-wyłączony; 1-włączony; bit1:0-brak ruchu; 1-w ruchu; bit2 0-ograniczenie dodatnie nieaktywne; 1-ograniczenie dodatnie aktywne; bit3 0-ograniczenie ujemne nieaktywne; 1-ograniczenie ujemne aktywne; bit4 0-brak pozycjonowania; 1-pozycjonowanie zakończone; bit5:0-brak powrotu do zera; 1-powrót do zera zakończony;
+    - ``servoPos``: Bieżąca pozycja serwonapędu mm lub °;
+    - ``servoSpeed``: Bieżąca prędkość serwonapędu mm/s lub °/s;
+    - ``servoTorque``: Bieżący moment obrotowy serwonapędu Nm;"
 
-设置485扩展轴目标速度(速度模式)
-+++++++++++++++++++++++++++++++
+Ustawianie prędkości docelowej osi rozszerzenia 485 (tryb prędkościowy)
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. versionadded:: python SDK-v2.0.3
 
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "原型", "``AuxServoSetTargetSpeed(servoId,speed)``"
-    "描述", "设置485扩展轴目标速度(速度模式)"
-    "必选参数", "- ``servoId``：伺服驱动器ID，范围[1-15],对应从站ID；
-    - ``speed``：目标速度，mm/s或°/s;"
-    "默认参数", "无"
-    "返回值", "错误码 成功-0  失败- errcode"
+    "Prototyp", "``AuxServoSetTargetSpeed(servoId,speed)``"
+    "Opis", "Ustawianie prędkości docelowej osi rozszerzenia 485 (tryb prędkościowy)"
+    "Parametry wymagane", "- ``servoId``: ID serwonapędu, zakres [1-15], odpowiada ID węzła podrzędnego;
+    - ``speed``: Prędkość docelowa, mm/s lub °/s;"
+    "Parametry domyślne", "Brak"
+    "Wartość zwracana", "Kod błędu sukces-0 błąd- errcode"
 
-设置状态反馈中485扩展轴数据轴号
-++++++++++++++++++++++++++++++++++++++++
+Ustawianie numeru osi danych osi rozszerzenia 485 w sprzężeniu zwrotnym stanu
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. versionadded:: python SDK-v2.0.3
 
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "原型", "``AuxServosetStatusID(servoId)``"
-    "描述", "设置状态反馈中485扩展轴数据轴号"
-    "必选参数", "- ``servoId``：伺服驱动器ID，范围[1-15],对应从站ID；"
-    "默认参数", "无"
-    "返回值", "错误码 成功-0  失败- errcode"
+    "Prototyp", "``AuxServosetStatusID(servoId)``"
+    "Opis", "Ustawianie numeru osi danych osi rozszerzenia 485 w sprzężeniu zwrotnym stanu"
+    "Parametry wymagane", "- ``servoId``: ID serwonapędu, zakres [1-15], odpowiada ID węzła podrzędnego;"
+    "Parametry domyślne", "Brak"
+    "Wartość zwracana", "Kod błędu sukces-0 błąd- errcode"
 
-设置485扩展轴运动加减速度
-++++++++++++++++++++++++++++++++++++++++
+Ustawianie przyspieszenia i opóźnienia ruchu osi rozszerzenia 485
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. versionadded:: python SDK-v2.0.5
 
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "原型", "``AuxServoSetAcc(acc, dec)``"
-    "描述", "设置485扩展轴运动加减速度"
-    "必选参数", "- ``acc``：485扩展轴运动加速度
-    - ``dec``：485扩展轴运动减速度"
-    "默认参数", "无"
-    "返回值", "错误码 成功-0  失败- errcode"
+    "Prototyp", "``AuxServoSetAcc(acc, dec)``"
+    "Opis", "Ustawianie przyspieszenia i opóźnienia ruchu osi rozszerzenia 485"
+    "Parametry wymagane", "- ``acc``: Przyspieszenie ruchu osi rozszerzenia 485
+    - ``dec``: Opóźnienie ruchu osi rozszerzenia 485"
+    "Parametry domyślne", "Brak"
+    "Wartość zwracana", "Kod błędu sukces-0 błąd- errcode"
 
-设置485扩展轴急停加减速度
-++++++++++++++++++++++++++++++++++++++++
+Ustawianie przyspieszenia i opóźnienia awaryjnego zatrzymania osi rozszerzenia 485
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. versionadded:: python SDK-v2.0.5
 
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "原型", "``AuxServoSetEmergencyStopAcc(acc, dec)``"
-    "描述", "设置485扩展轴急停加减速度"
-    "必选参数", "- ``acc``：485扩展轴急停加速度
-    - ``dec``：485扩展轴急停减速度"
-    "默认参数", "无"
-    "返回值", "错误码 成功-0  失败- errcode"
+    "Prototyp", "``AuxServoSetEmergencyStopAcc(acc, dec)``"
+    "Opis", "Ustawianie przyspieszenia i opóźnienia awaryjnego zatrzymania osi rozszerzenia 485"
+    "Parametry wymagane", "- ``acc``: Przyspieszenie awaryjnego zatrzymania osi rozszerzenia 485
+    - ``dec``: Opóźnienie awaryjnego zatrzymania osi rozszerzenia 485"
+    "Parametry domyślne", "Brak"
+    "Wartość zwracana", "Kod błędu sukces-0 błąd- errcode"
 
-获取485扩展轴运动加减速度
-++++++++++++++++++++++++++++++++++++++++
+Pobieranie przyspieszenia i opóźnienia ruchu osi rozszerzenia 485
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. versionadded:: python SDK-v2.0.5
 
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "原型", "``AuxServoGetAcc()``"
-    "描述", "获取485扩展轴运动加减速度"
-    "必选参数", "无"
-    "默认参数", "无"
-    "返回值", "- 错误码 成功-0  失败- errcode
-    - ``acc``：485扩展轴运动加速度
-    - ``dec``：485扩展轴运动减速度"
+    "Prototyp", "``AuxServoGetAcc()``"
+    "Opis", "Pobieranie przyspieszenia i opóźnienia ruchu osi rozszerzenia 485"
+    "Parametry wymagane", "Brak"
+    "Parametry domyślne", "Brak"
+    "Wartość zwracana", "- Kod błędu sukces-0 błąd- errcode
+    - ``acc``: Przyspieszenie ruchu osi rozszerzenia 485
+    - ``dec``: Opóźnienie ruchu osi rozszerzenia 485"
 
-获取485扩展轴急停加减速度
-++++++++++++++++++++++++++++++++++++++++
+Pobieranie przyspieszenia i opóźnienia awaryjnego zatrzymania osi rozszerzenia 485
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. versionadded:: python SDK-v2.0.5
 
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "原型", "``AuxServoGetEmergencyStopAcc()``"
-    "描述", "获取485扩展轴急停加减速度"
-    "必选参数", "无"
-    "默认参数", "无"
-    "返回值", "- 错误码 成功-0  失败- errcode
-    - ``acc``：485扩展轴急停加速度
-    - ``dec``：485扩展轴急停减速度"
+    "Prototyp", "``AuxServoGetEmergencyStopAcc()``"
+    "Opis", "Pobieranie przyspieszenia i opóźnienia awaryjnego zatrzymania osi rozszerzenia 485"
+    "Parametry wymagane", "Brak"
+    "Parametry domyślne", "Brak"
+    "Wartość zwracana", "- Kod błędu sukces-0 błąd- errcode
+    - ``acc``: Przyspieszenie awaryjnego zatrzymania osi rozszerzenia 485
+    - ``dec``: Opóźnienie awaryjnego zatrzymania osi rozszerzenia 485"
 
-扩展轴控制代码示例
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Przykład kodu sterowania osią rozszerzenia
+++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: python
     :linenos:
 
     from fairino import Robot
     import time
     import threading
-    # 与机器人控制器建立连接，连接成功返回一个机器人对象
+    # Połączenie z kontrolerem robota, po pomyślnym połączeniu zwraca obiekt robota
     robot = Robot.RPC('192.168.58.2')
     retval = robot.AuxServoSetParam(1, 1, 1, 1, 131072, 15.45)
     print(f"AuxServoSetParam is: {retval}")
@@ -328,270 +344,284 @@
     robot.AuxServoSetTargetSpeed(1, 0, 80)
     robot.CloseRPC()
 
-UDP扩展轴通讯参数配置
-++++++++++++++++++++++++++++++++++++++++
+Konfiguracja parametrów komunikacji UDP dla osi rozszerzenia
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. versionadded:: python SDK-v2.1.2
 
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "原型", "``ExtDevSetUDPComParam(ip, port, period, lossPkgTime, lossPkgNum, disconnectTime, reconnectEnable, reconnectPeriod, reconnectNum, selfConnect)``"
-    "描述", "UDP扩展轴通讯参数配置"
-    "必选参数", "
-    - ``ip``：PLC IP地址；
-    - ``port``：端口号；
-    - ``period``：通讯周期(ms，暂不开放)；
-    - ``lossPkgTime``：丢包检测时间(ms)；
-    - ``lossPkgNum``：丢包次数；
-    - ``disconnectTime``：通讯断开确认时长；
-    - ``reconnectEnable``：通讯断开自动重连使能 0-不使能 1-使能；
-    - ``reconnectPeriod``：重连周期间隔(ms)；
-    - ``reconnectNum``：重连次数
-    - ``selfConnect``：断电重启是否自动建立连接；0-不建立连接；1-建立连接"
-    "默认参数", "无"
-    "返回值", "错误码 成功-0  失败- errcode"
+    "Prototyp", "``ExtDevSetUDPComParam(ip, port, period, lossPkgTime, lossPkgNum, disconnectTime, reconnectEnable, reconnectPeriod, reconnectNum, selfConnect)``"
+    "Opis", "Konfiguracja parametrów komunikacji UDP dla osi rozszerzenia"
+    "Parametry wymagane", "
+    - ``ip``: Adres IP PLC;
+    - ``port``: Numer portu;
+    - ``period``: Okres komunikacji (ms, tymczasowo niedostępne);
+    - ``lossPkgTime``: Czas wykrywania utraty pakietów (ms);
+    - ``lossPkgNum``: Liczba utraconych pakietów;
+    - ``disconnectTime``: Czas potwierdzenia przerwania komunikacji;
+    - ``reconnectEnable``: Włączenie automatycznego ponownego łączenia po przerwaniu komunikacji 0-niewłączone 1-włączone;
+    - ``reconnectPeriod``: Odstęp czasu ponownego łączenia (ms);
+    - ``reconnectNum``: Liczba ponownych łączeń
+    - ``selfConnect``: Czy automatycznie ustanowić połączenie po ponownym uruchomieniu zasilania; 0-nie ustanawiaj połączenia; 1-ustanów połączenie"
+    "Parametry domyślne", "Brak"
+    "Wartość zwracana", "Kod błędu sukces-0 błąd- errcode"
 
-获取UDP扩展轴通讯参数
-++++++++++++++++++++++++++++++++++++++++
+Pobieranie parametrów komunikacji UDP dla osi rozszerzenia
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. versionadded:: python SDK-v2.0.4
 
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "原型", "``ExtDevGetUDPComParam()``"
-    "描述", "获取UDP扩展轴通讯参数"
-    "必选参数", "无"
-    "默认参数", "无"
-    "返回值", "
-    - 错误码 成功-0  失败- errcode；
-    - ``ip``：PLC IP地址；
-    - ``port``：端口号；
-    - ``period``：通讯周期(ms，暂不开放)；
-    - ``lossPkgTime``：丢包检测时间(ms)；
-    - ``lossPkgNum``：丢包次数；
-    - ``disconnectTime``：通讯断开确认时长；
-    - ``reconnectEnable``：通讯断开自动重连使能 0-不使能 1-使能；
-    - ``reconnectPeriod``：重连周期间隔(ms)；
-    - ``reconnectNum``：重连次数
-    - ``selfConnect``：重启控制箱后是否自动重连；0-不重连；1-重连"
- 
-加载UDP通信
-++++++++++++++++++++++++++++++++++++++++
+    "Prototyp", "``ExtDevGetUDPComParam()``"
+    "Opis", "Pobieranie parametrów komunikacji UDP dla osi rozszerzenia"
+    "Parametry wymagane", "Brak"
+    "Parametry domyślne", "Brak"
+    "Wartość zwracana", "
+    - Kod błędu sukces-0 błąd- errcode;
+    - ``ip``: Adres IP PLC;
+    - ``port``: Numer portu;
+    - ``period``: Okres komunikacji (ms, tymczasowo niedostępne);
+    - ``lossPkgTime``: Czas wykrywania utraty pakietów (ms);
+    - ``lossPkgNum``: Liczba utraconych pakietów;
+    - ``disconnectTime``: Czas potwierdzenia przerwania komunikacji;
+    - ``reconnectEnable``: Włączenie automatycznego ponownego łączenia po przerwaniu komunikacji 0-niewłączone 1-włączone;
+    - ``reconnectPeriod``: Odstęp czasu ponownego łączenia (ms);
+    - ``reconnectNum``: Liczba ponownych łączeń
+    - ``selfConnect``: Czy automatycznie ponownie połączyć po ponownym uruchomieniu skrzynki kontrolnej; 0-nie łącz ponownie; 1-łącz ponownie"
+
+Ładowanie komunikacji UDP
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. versionadded:: python SDK-v2.0.4
 
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "原型", "``ExtDevLoadUDPDriver()``"
-    "描述", "加载UDP通信"
-    "必选参数", "无"
-    "默认参数", "无"
-    "返回值", "错误码 成功-0  失败- errcode"
+    "Prototyp", "``ExtDevLoadUDPDriver()``"
+    "Opis", "Ładowanie komunikacji UDP"
+    "Parametry wymagane", "Brak"
+    "Parametry domyślne", "Brak"
+    "Wartość zwracana", "Kod błędu sukces-0 błąd- errcode"
     
-卸载UDP通信
-++++++++++++++++++++++++++++++++++++++++
+Rozładowanie komunikacji UDP
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. versionadded:: python SDK-v2.0.4
 
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "原型", "``ExtDevUnloadUDPDriver()``"
-    "描述", "卸载UDP通信"
-    "必选参数", "无"
-    "默认参数", "无"
-    "返回值", "错误码 成功-0  失败- errcode"
+    "Prototyp", "``ExtDevUnloadUDPDriver()``"
+    "Opis", "Rozładowanie komunikacji UDP"
+    "Parametry wymagane", "Brak"
+    "Parametry domyślne", "Brak"
+    "Wartość zwracana", "Kod błędu sukces-0 błąd- errcode"
 
-UDP扩展轴通信异常断开后恢复连接
-++++++++++++++++++++++++++++++++++++++++
+Przywracanie połączenia po nieprawidłowym przerwaniu komunikacji UDP osi rozszerzenia
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. versionadded:: python SDK-v2.0.4
 
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "原型", "``ExtDevUDPClientComReset()``"
-    "描述", "UDP扩展轴通信异常断开后恢复连接"
-    "必选参数", "无"
-    "默认参数", "无"
-    "返回值", "错误码 成功-0  失败- errcode"
+    "Prototyp", "``ExtDevUDPClientComReset()``"
+    "Opis", "Przywracanie połączenia po nieprawidłowym przerwaniu komunikacji UDP osi rozszerzenia"
+    "Parametry wymagane", "Brak"
+    "Parametry domyślne", "Brak"
+    "Wartość zwracana", "Kod błędu sukces-0 błąd- errcode"
 
-UDP扩展轴通信异常断开后关闭通讯
-++++++++++++++++++++++++++++++++++++++++
+Zamykanie komunikacji po nieprawidłowym przerwaniu komunikacji UDP osi rozszerzenia
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. versionadded:: python SDK-v2.0.4
 
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "原型", "``ExtDevUDPClientComClose()``"
-    "描述", "UDP扩展轴通信异常断开后关闭通讯"
-    "必选参数", "无"
-    "默认参数", "无"
-    "返回值", "错误码 成功-0  失败- errcode"
+    "Prototyp", "``ExtDevUDPClientComClose()``"
+    "Opis", "Zamykanie komunikacji po nieprawidłowym przerwaniu komunikacji UDP osi rozszerzenia"
+    "Parametry wymagane", "Brak"
+    "Parametry domyślne", "Brak"
+    "Wartość zwracana", "Kod błędu sukces-0 błąd- errcode"
 
-UDP扩展轴参数配置
-++++++++++++++++++++++++++++++++++++++++
+Konfiguracja parametrów UDP osi rozszerzenia
+++++++++++++++++++++++++++++++++++++++++++++
+
 .. versionadded:: python SDK-v2.0.4
 
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "原型", "``ExtAxisParamConfig(axisId, axisType, axisDirection, axisMax, axisMin, axisVel, axisAcc,axisLead, encResolution, axisOffect, axisCompany, axisModel, axisEncType)``"
-    "描述", "UDP扩展轴参数配置"
-    "必选参数", "
-    - ``axisId``：轴号[1-4]；
-    - ``axisType``：扩展轴类型 0-平移；1-旋转；
-    - ``axisDirection``：扩展轴方向 0-正向；1-反向；
-    - ``axisMax``：扩展轴最大位置 mm；
-    - ``axisMin``：扩展轴最小位置 mm；
-    - ``axisVel``：速度mm/s；
-    - ``axisAcc``：加速度mm/s2；
-    - ``axisLead``：导程mm；
-    - ``encResolution``：编码器分辨率；
-    - ``axisOffect``：焊缝起始点扩展轴偏移量；
-    - ``axisCompany``：驱动器厂家 1-禾川；2-汇川；3-松下；
-    - ``axisModel``：驱动器型号 1-禾川-SV-XD3EA040L-E，2-禾川-SV-X2EA150A-A，1-汇川-SV620PT5R4I，1-松下-MADLN15SG，2-松下-MSDLN25SG，3-松下-MCDLN35SG；
-    - ``axisEncType``：编码器类型  0-增量；1-绝对值；"
-    "默认参数", "无"
-    "返回值", "错误码 成功-0  失败- errcode"
+    "Prototyp", "``ExtAxisParamConfig(axisId, axisType, axisDirection, axisMax, axisMin, axisVel, axisAcc,axisLead, encResolution, axisOffect, axisCompany, axisModel, axisEncType)``"
+    "Opis", "Konfiguracja parametrów UDP osi rozszerzenia"
+    "Parametry wymagane", "
+    - ``axisId``: Numer osi [1-4];
+    - ``axisType``: Typ osi rozszerzenia 0-przesuwna; 1-obrotowa;
+    - ``axisDirection``: Kierunek osi rozszerzenia 0-dodatni; 1-ujemny;
+    - ``axisMax``: Maksymalna pozycja osi rozszerzenia mm;
+    - ``axisMin``: Minimalna pozycja osi rozszerzenia mm;
+    - ``axisVel``: Prędkość mm/s;
+    - ``axisAcc``: Przyspieszenie mm/s2;
+    - ``axisLead``: Skok śruby mm;
+    - ``encResolution``: Rozdzielczość enkodera;
+    - ``axisOffect``: Przesunięcie osi rozszerzenia punktu początkowego spoiny;
+    - ``axisCompany``: Producent serwonapędu 1-Hechuan; 2-Inovance; 3-Panasonic;
+    - ``axisModel``: Model serwonapędu 1-Hechuan-SV-XD3EA040L-E, 2-Hechuan-SV-X2EA150A-A, 1-Inovance-SV620PT5R4I, 1-Panasonic-MADLN15SG, 2-Panasonic-MSDLN25SG, 3-Panasonic-MCDLN35SG;
+    - ``axisEncType``: Typ enkodera 0-inkrementacyjny; 1-absolutny;"
+    "Parametry domyślne", "Brak"
+    "Wartość zwracana", "Kod błędu sukces-0 błąd- errcode"
 
-UDP扩展轴参数获取
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Pobieranie parametrów UDP osi rozszerzenia
+++++++++++++++++++++++++++++++++++++++++++
 
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "原型", "``ExtAxisGetParamConfig(self, axisID)``"
-    "描述", "UDP扩展轴参数获取"
-    "必选参数", "
-    - ``axisID``：扩展轴号[1-4]
-    - ``axisType``：扩展轴类型 0-平移；1-旋转
-    - ``axisDirection``：扩展轴方向 0-正向；1-反向
-    - ``axisMax``：扩展轴最大位置 mm
-    - ``axisMin``：扩展轴最小位置 mm
-    - ``axisVel``：速度mm/s
-    - ``axisAcc``：加速度mm/s2
-    - ``axisLead``：导程mm
-    - ``encResolution``：编码器分辨率
-    - ``axisOffect``：焊缝起始点扩展轴偏移量
-    - ``axisCompany``：驱动器厂家 1-禾川；2-汇川；3-松下
-    - ``axisModel``：驱动器型号 1-禾川-SV-XD3EA040L-E，2-禾川-SV-X2EA150A-A，1-汇川-SV620PT5R4I，1-松下-MADLN15SG，2-松下-MSDLN25SG，3-松下-MCDLN35SG
-    - ``axisEncType``：编码器类型 0-增量；1-绝对值
+    "Prototyp", "``ExtAxisGetParamConfig(self, axisID)``"
+    "Opis", "Pobieranie parametrów UDP osi rozszerzenia"
+    "Parametry wymagane", "
+    - ``axisID``: Numer osi rozszerzenia [1-4]
+    - ``axisType``: Typ osi rozszerzenia 0-przesuwna; 1-obrotowa
+    - ``axisDirection``: Kierunek osi rozszerzenia 0-dodatni; 1-ujemny
+    - ``axisMax``: Maksymalna pozycja osi rozszerzenia mm
+    - ``axisMin``: Minimalna pozycja osi rozszerzenia mm
+    - ``axisVel``: Prędkość mm/s
+    - ``axisAcc``: Przyspieszenie mm/s2
+    - ``axisLead``: Skok śruby mm
+    - ``encResolution``: Rozdzielczość enkodera
+    - ``axisOffect``: Przesunięcie osi rozszerzenia punktu początkowego spoiny
+    - ``axisCompany``: Producent serwonapędu 1-Hechuan; 2-Inovance; 3-Panasonic
+    - ``axisModel``: Model serwonapędu 1-Hechuan-SV-XD3EA040L-E, 2-Hechuan-SV-X2EA150A-A, 1-Inovance-SV620PT5R4I, 1-Panasonic-MADLN15SG, 2-Panasonic-MSDLN25SG, 3-Panasonic-MCDLN35SG
+    - ``axisEncType``: Typ enkodera 0-inkrementacyjny; 1-absolutny
     "
-    "默认参数", "无"
-    "返回值", "错误码 成功-0  失败- errcode"
+    "Parametry domyślne", "Brak"
+    "Wartość zwracana", "Kod błędu sukces-0 błąd- errcode"
 
-设置扩展机器人相对扩展轴位置
-++++++++++++++++++++++++++++++++++++++++
+Ustawianie pozycji rozszerzonego robota względem osi rozszerzenia
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. versionadded:: python SDK-v2.0.4
 
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "原型", "``SetRobotPosToAxis(installType)``"
-    "描述", "设置扩展机器人相对扩展轴位置"
-    "必选参数", "- ``installType``：0-机器人安装在外部轴上，1-机器人安装在外部轴外；"
-    "默认参数", "无"
-    "返回值", "错误码 成功-0  失败- errcode"
+    "Prototyp", "``SetRobotPosToAxis(installType)``"
+    "Opis", "Ustawianie pozycji rozszerzonego robota względem osi rozszerzenia"
+    "Parametry wymagane", "- ``installType``: 0-robot zamontowany na osi zewnętrznej, 1-robot zamontowany poza osią zewnętrzną;"
+    "Parametry domyślne", "Brak"
+    "Wartość zwracana", "Kod błędu sukces-0 błąd- errcode"
 
-设置扩展轴系统DH参数配置
-++++++++++++++++++++++++++++++++++++++++
+Ustawianie konfiguracji parametrów DH układu osi rozszerzenia
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. versionadded:: python SDK-v2.0.4
 
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "原型", "``SetAxisDHParaConfig(axisConfig,axisDHd1,axisDHd2,axisDHd3,axisDHd4,axisDHa1, axisDHa2,axisDHa3,axisDHa4)``"
-    "描述", "设置扩展轴系统DH参数配置"
-    "必选参数", "
-    - ``axisConfig``：外部轴构型，0-单自由度直线滑轨，1-两自由度L型变位机，2-三自由度，3-四自由度，4-单自由度变位机；
-    - ``axisDHd1``：外部轴DH参数d1 mm；
-    - ``axisDHd2``：外部轴DH参数d2 mm；
-    - ``axisDHd3``：外部轴DH参数d3 mm；
-    - ``axisDHd4``：外部轴DH参数d4 mm；
-    - ``axisDHa1``：外部轴DH参数a1 mm；
-    - ``axisDHa2``：外部轴DH参数a2 mm；
-    - ``axisDHa3``：外部轴DH参数a3 mm；
-    - ``axisDHa4``：外部轴DH参数a4 mm；"
-    "默认参数", "无"
-    "返回值", "错误码 成功-0  失败- errcode"
+    "Prototyp", "``SetAxisDHParaConfig(axisConfig,axisDHd1,axisDHd2,axisDHd3,axisDHd4,axisDHa1, axisDHa2,axisDHa3,axisDHa4)``"
+    "Opis", "Ustawianie konfiguracji parametrów DH układu osi rozszerzenia"
+    "Parametry wymagane", "
+    - ``axisConfig``: Konfiguracja osi zewnętrznej, 0-prosta prowadnica liniowa z jednym stopniem swobody, 1-pozycjoner L z dwoma stopniami swobody, 2-trzech stopni swobody, 3-czterech stopni swobody, 4-pozycjoner z jednym stopniem swobody;
+    - ``axisDHd1``: Parametr DH osi zewnętrznej d1 mm;
+    - ``axisDHd2``: Parametr DH osi zewnętrznej d2 mm;
+    - ``axisDHd3``: Parametr DH osi zewnętrznej d3 mm;
+    - ``axisDHd4``: Parametr DH osi zewnętrznej d4 mm;
+    - ``axisDHa1``: Parametr DH osi zewnętrznej a1 mm;
+    - ``axisDHa2``: Parametr DH osi zewnętrznej a2 mm;
+    - ``axisDHa3``: Parametr DH osi zewnętrznej a3 mm;
+    - ``axisDHa4``: Parametr DH osi zewnętrznej a4 mm;"
+    "Parametry domyślne", "Brak"
+    "Wartość zwracana", "Kod błędu sukces-0 błąd- errcode"
                           
-UDP扩展轴使能
-++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: python SDK-v2.0.4
-
-.. csv-table:: 
-    :stub-columns: 1
-    :widths: 10 30
-
-    "原型", "``ExtAxisServoOn(axisID, status)``"
-    "描述", "UDP扩展轴使能"
-    "必选参数", "- ``axisID``：轴号[1-4]；
-    - ``status``：0-去使能；1-使能；"
-    "默认参数", "无"
-    "返回值", "错误码 成功-0  失败- errcode"
-
-UDP扩展轴回零
-++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: python SDK-v2.0.4
-
-.. csv-table:: 
-    :stub-columns: 1
-    :widths: 10 30
-
-    "原型", "``ExtAxisSetHoming(axisID, mode, searchVel, latchVel)``"
-    "描述", "UDP扩展轴回零"
-    "必选参数", "
-    - ``axisID``：轴号[1-4]；
-    - ``mode``：回零方式 0当前位置回零，1负限位回零，2-正限位回零；
-    - ``searchVel``：寻零速度(mm/s)；
-    - ``latchVel``：寻零箍位速度(mm/s)；"
-    "默认参数", "无"
-    "返回值", "错误码 成功-0  失败- errcode"
-
-UDP扩展轴点动开始
-++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: python SDK-v2.0.4
-
-.. csv-table:: 
-    :stub-columns: 1
-    :widths: 10 30
-
-    "原型", "``ExtAxisStartJog( axisID, direction, vel, acc, maxDistance)``"
-    "描述", "UDP扩展轴点动开始"
-    "必选参数", "
-    - ``axisID``：轴号[1-4]；
-    - ``direction``：转动方向 0-反向；1-正向；
-    - ``vel``：速度(mm/s)；
-    - ``acc``：加速度(mm/s)；
-    - ``maxDistance``：最大点动距离；"
-    "默认参数", "无"
-    "返回值", "错误码 成功-0  失败- errcode"
-
-UDP扩展轴点动停止
-++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: python SDK-v2.0.4
-
-.. csv-table:: 
-    :stub-columns: 1
-    :widths: 10 30
-
-    "原型", "``ExtAxisStopJog(axisID)``"
-    "描述", "UDP扩展轴点动停止"
-    "必选参数", "- ``axisID``：轴号[1-4]；"
-    "默认参数", "无"
-    "返回值", "错误码 成功-0  失败- errcode"
-
-UDP扩展轴配置与点动代码示例
+Włączanie UDP osi rozszerzenia
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. versionadded:: python SDK-v2.0.4
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototyp", "``ExtAxisServoOn(axisID, status)``"
+    "Opis", "Włączanie UDP osi rozszerzenia"
+    "Parametry wymagane", "- ``axisID``: Numer osi [1-4];
+    - ``status``: 0-wyłącz; 1-włącz;"
+    "Parametry domyślne", "Brak"
+    "Wartość zwracana", "Kod błędu sukces-0 błąd- errcode"
+
+Powrót do zera UDP osi rozszerzenia
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. versionadded:: python SDK-v2.0.4
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototyp", "``ExtAxisSetHoming(axisID, mode, searchVel, latchVel)``"
+    "Opis", "Powrót do zera UDP osi rozszerzenia"
+    "Parametry wymagane", "
+    - ``axisID``: Numer osi [1-4];
+    - ``mode``: Sposób powrotu do zera 0-powrót do zera w bieżącej pozycji, 1-powrót do zera z ograniczeniem ujemnym, 2-powrót do zera z ograniczeniem dodatnim;
+    - ``searchVel``: Prędkość poszukiwania zera (mm/s);
+    - ``latchVel``: Prędkość zatrzasku poszukiwania zera (mm/s);"
+    "Parametry domyślne", "Brak"
+    "Wartość zwracana", "Kod błędu sukces-0 błąd- errcode"
+
+Rozpoczęcie punktowego ruchu UDP osi rozszerzenia
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. versionadded:: python SDK-v2.0.4
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototyp", "``ExtAxisStartJog( axisID, direction, vel, acc, maxDistance)``"
+    "Opis", "Rozpoczęcie punktowego ruchu UDP osi rozszerzenia"
+    "Parametry wymagane", "
+    - ``axisID``: Numer osi [1-4];
+    - ``direction``: Kierunek obrotu 0-ujemny; 1-dodatni;
+    - ``vel``: Prędkość (mm/s);
+    - ``acc``: Przyspieszenie (mm/s);
+    - ``maxDistance``: Maksymalna odległość punktowego ruchu;"
+    "Parametry domyślne", "Brak"
+    "Wartość zwracana", "Kod błędu sukces-0 błąd- errcode"
+
+Zatrzymanie punktowego ruchu UDP osi rozszerzenia
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. versionadded:: python SDK-v2.0.4
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototyp", "``ExtAxisStopJog(axisID)``"
+    "Opis", "Zatrzymanie punktowego ruchu UDP osi rozszerzenia"
+    "Parametry wymagane", "- ``axisID``: Numer osi [1-4];"
+    "Parametry domyślne", "Brak"
+    "Wartość zwracana", "Kod błędu sukces-0 błąd- errcode"
+
+Przykład kodu konfiguracji i punktowego ruchu UDP osi rozszerzenia
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: python
     :linenos:
 
@@ -600,41 +630,41 @@ UDP扩展轴配置与点动代码示例
     import time
 
     def main():
-        # 添加需要获取的实时状态数据（如果需要的话）
+        # Dodanie potrzebnych danych stanu w czasie rzeczywistym (jeśli potrzebne)
         # rtn = AddRobotRealtimeState([RobotState.ExaxisCoordID])
         # if rtn != 0:
-        #     print(f"✗ 添加字段失败，错误码: {rtn}")
+        #     print(f"✗ Dodanie pola nie powiodło się, kod błędu: {rtn}")
         #     return None
-        # print("✓ 字段添加成功")
+        # print("✓ Pole dodane pomyślnie")
 
-        # 与机器人控制器建立连接
+        # Połączenie z kontrolerem robota
         robot = Robot.RPC('192.168.58.2')
-        time.sleep(0.5)  # 等待连接和数据接收
+        time.sleep(0.5)  # Oczekiwanie na połączenie i odbiór danych
 
-        # 配置UDP通讯参数
+        # Konfiguracja parametrów komunikacji UDP
         rtn = robot.ExtDevSetUDPComParam("192.168.58.88", 2021, 2, 100, 3, 200, 1, 100, 5, 1)
         print(f"ExtDevSetUDPComParam rtn is {rtn}")
 
-        # 获取UDP通讯参数
+        # Pobranie parametrów komunikacji UDP
         error, param = robot.ExtDevGetUDPComParam()
         print("ExtDevGetUDPComParam return ", error)
-        print("UDP扩展轴通讯参数: ", param)
+        print("Parametry komunikacji UDP osi rozszerzenia: ", param)
 
-        # 加载UDP驱动
+        # Ładowanie sterownika UDP
         robot.ExtDevLoadUDPDriver()
 
-        # 设置扩展轴命令完成时间
+        # Ustawienie czasu zakończenia polecenia osi rozszerzenia
         rtn = robot.SetExAxisCmdDoneTime(5000.0)
         print(f"SetExAxisCmdDoneTime rtn is {rtn}")
 
-        # 扩展轴伺服使能
+        # Włączenie serwonapędu osi rozszerzenia
         rtn = robot.ExtAxisServoOn(1, 1)
         print(f"ExtAxisServoOn axis id 1 rtn is {rtn}")
         rtn = robot.ExtAxisServoOn(2, 1)
         print(f"ExtAxisServoOn axis id 2 rtn is {rtn}")
         time.sleep(2)
 
-        # 扩展轴回零
+        # Powrót do zera osi rozszerzenia
         robot.ExtAxisSetHoming(1, 0, 10, 2)
         time.sleep(2)
         rtn = robot.ExtAxisSetHoming(2, 0, 10, 2)
@@ -642,33 +672,33 @@ UDP扩展轴配置与点动代码示例
 
         time.sleep(4)
 
-        # 设置机器人相对扩展轴位置
+        # Ustawienie pozycji robota względem osi rozszerzenia
         rtn = robot.SetRobotPosToAxis(1)
         print(f"SetRobotPosToAxis rtn is {rtn}")
 
-        # 设置扩展轴DH参数配置
+        # Ustawienie konfiguracji parametrów DH osi rozszerzenia
         rtn = robot.SetAxisDHParaConfig(10, 20, 0, 0, 0, 0, 0, 0, 0)
         print(f"SetAxisDHParaConfig rtn is {rtn}")
 
-        # 配置扩展轴1参数
+        # Konfiguracja parametrów osi rozszerzenia 1
         rtn = robot.ExtAxisParamConfig(1, 1, 1, 1000, -1000, 1000, 1000, 1.905, 262144, 200, 1, 0, 0)
         print(f"ExtAxisParamConfig axis 1 rtn is {rtn}")
 
-        # 获取扩展轴1参数配置
+        # Pobranie konfiguracji parametrów osi rozszerzenia 1
         rtn, axisType, axisDirection, axisMax, axisMin, axisVel, axisAcc, axisLead, encResolution, axisOffect, axisCompany, axisModel, axisEncType = robot.ExtAxisGetParamConfig(1)
         print(f"axis id 1 ExtAxisGetParamConfig : axisType {axisType}, axisDirection {axisDirection}, axisMax {axisMax}, axisMin {axisMin}, axisVel {axisVel}, axisAcc {axisAcc}, axisLead {axisLead}, encResolution {encResolution}, axisOffect {axisOffect}, axisCompany {axisCompany}, axisModel {axisModel}, axisEncType {axisEncType}")
 
-        # 配置扩展轴2参数
+        # Konfiguracja parametrów osi rozszerzenia 2
         rtn = robot.ExtAxisParamConfig(2, 1, 1, 1000, -1000, 1000, 1000, 4.444, 262144, 200, 1, 0, 0)
         print(f"ExtAxisParamConfig axis 2 rtn is {rtn}")
 
-        # 获取扩展轴2参数配置
+        # Pobranie konfiguracji parametrów osi rozszerzenia 2
         rtn, axisType, axisDirection, axisMax, axisMin, axisVel, axisAcc, axisLead, encResolution, axisOffect, axisCompany, axisModel, axisEncType = robot.ExtAxisGetParamConfig(2)
         print(f"axis id 2 ExtAxisGetParamConfig : axisType {axisType}, axisDirection {axisDirection}, axisMax {axisMax}, axisMin {axisMin}, axisVel {axisVel}, axisAcc {axisAcc}, axisLead {axisLead}, encResolution {encResolution}, axisOffect {axisOffect}, axisCompany {axisCompany}, axisModel {axisModel}, axisEncType {axisEncType}")
 
         time.sleep(3)
 
-        # 扩展轴1点动测试
+        # Test punktowego ruchu osi rozszerzenia 1
         robot.ExtAxisStartJog(1, 0, 10, 10, 30)
         time.sleep(1)
         robot.ExtAxisStopJog(1)
@@ -677,137 +707,145 @@ UDP扩展轴配置与点动代码示例
 
         time.sleep(3)
 
-        # 扩展轴2点动测试
+        # Test punktowego ruchu osi rozszerzenia 2
         robot.ExtAxisStartJog(2, 0, 10, 10, 30)
         time.sleep(1)
         robot.ExtAxisStopJog(2)
         time.sleep(3)
         robot.ExtAxisServoOn(2, 0)
 
-        # 卸载UDP驱动
+        # Rozładowanie sterownika UDP
         robot.ExtDevUnloadUDPDriver()
 
-        # 关闭连接
+        # Zamknięcie połączenia
         robot.CloseRPC()
 
 
-    # 调用测试函数
+    # Wywołanie funkcji testowej
     main()
 
-设置扩展轴坐标系参考点-四点法
-++++++++++++++++++++++++++++++++++++++++
+Ustawianie punktu odniesienia układu współrzędnych osi rozszerzenia - metoda czterech punktów
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. versionadded:: python SDK-v2.0.4
 
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "原型", "``ExtAxisSetRefPoint(pointNum)``"
-    "描述", "设置扩展轴坐标系参考点-四点法"
-    "必选参数", "- ``pointNum``：点编号[1-4]；"
-    "默认参数", "无"
-    "返回值", "错误码 成功-0  失败- errcode"
+    "Prototyp", "``ExtAxisSetRefPoint(pointNum)``"
+    "Opis", "Ustawianie punktu odniesienia układu współrzędnych osi rozszerzenia - metoda czterech punktów"
+    "Parametry wymagane", "- ``pointNum``: Numer punktu [1-4];"
+    "Parametry domyślne", "Brak"
+    "Wartość zwracana", "Kod błędu sukces-0 błąd- errcode"
         
-计算扩展轴坐标系-四点法
-++++++++++++++++++++++++++++++++++++++++
+Obliczanie układu współrzędnych osi rozszerzenia - metoda czterech punktów
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. versionadded:: python SDK-v2.0.4
 
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "原型", "``ExtAxisComputeECoordSys()``"
-    "描述", "计算扩展轴坐标系-四点法"
-    "必选参数", "无"
-    "默认参数", "无"
-    "返回值", "- 错误码 成功-0  失败- errcode;
-    - ``coord``：扩展轴坐标系值[x,y,z,rx,ry,rz]；"
+    "Prototyp", "``ExtAxisComputeECoordSys()``"
+    "Opis", "Obliczanie układu współrzędnych osi rozszerzenia - metoda czterech punktów"
+    "Parametry wymagane", "Brak"
+    "Parametry domyślne", "Brak"
+    "Wartość zwracana", "- Kod błędu sukces-0 błąd- errcode;
+    - ``coord``: Wartość układu współrzędnych osi rozszerzenia [x,y,z,rx,ry,rz];"
                  
-变位机坐标系参考点设置-四点法
-++++++++++++++++++++++++++++++++++++++++
+Ustawianie punktu odniesienia układu współrzędnych pozycjonera - metoda czterech punktów
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. versionadded:: python SDK-v2.0.4
 
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "原型", "``PositionorSetRefPoint(pointNum)``"
-    "描述", "变位机坐标系参考点设置-四点法"
-    "必选参数", "- ``pointNum``：点编号[1-4]；"
-    "默认参数", "无"
-    "返回值", "错误码 成功-0  失败- errcode"
+    "Prototyp", "``PositionorSetRefPoint(pointNum)``"
+    "Opis", "Ustawianie punktu odniesienia układu współrzędnych pozycjonera - metoda czterech punktów"
+    "Parametry wymagane", "- ``pointNum``: Numer punktu [1-4];"
+    "Parametry domyślne", "Brak"
+    "Wartość zwracana", "Kod błędu sukces-0 błąd- errcode"
 
-变位机坐标系计算-四点法
-++++++++++++++++++++++++++++++++++++++++
+Obliczanie układu współrzędnych pozycjonera - metoda czterech punktów
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. versionadded:: python SDK-v2.0.4
 
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "原型", "``PositionorComputeECoordSys()``"
-    "描述", "变位机坐标系计算-四点法"
-    "必选参数", "无"
-    "默认参数", "无"
-    "返回值", "- 错误码 成功-0  失败- errcode;
-    - ``coord``：变位机坐标系值[x,y,z,rx,ry,rz]；"
+    "Prototyp", "``PositionorComputeECoordSys()``"
+    "Opis", "Obliczanie układu współrzędnych pozycjonera - metoda czterech punktów"
+    "Parametry wymagane", "Brak"
+    "Parametry domyślne", "Brak"
+    "Wartość zwracana", "- Kod błędu sukces-0 błąd- errcode;
+    - ``coord``: Wartość układu współrzędnych pozycjonera [x,y,z,rx,ry,rz];"
              
-设置标定参考点在变位机末端坐标系下位姿
-++++++++++++++++++++++++++++++++++++++++
+Ustawianie pozy punktu kalibracji w układzie współrzędnych końcówki pozycjonera
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. versionadded:: python SDK-v2.0.4
 
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "原型", "``SetRefPointInExAxisEnd(pos)``"
-    "描述", "设置标定参考点在变位机末端坐标系下位姿"
-    "必选参数", "- ``pos``：位姿值[x,y,z,rx,ry,rz]；"
-    "默认参数", "无"
-    "返回值", "错误码 成功-0  失败- errcode"
+    "Prototyp", "``SetRefPointInExAxisEnd(pos)``"
+    "Opis", "Ustawianie pozy punktu kalibracji w układzie współrzędnych końcówki pozycjonera"
+    "Parametry wymagane", "- ``pos``: Wartość pozy [x,y,z,rx,ry,rz];"
+    "Parametry domyślne", "Brak"
+    "Wartość zwracana", "Kod błędu sukces-0 błąd- errcode"
 
-应用扩展轴坐标系
-++++++++++++++++++++++++++++++++++++++++
+Stosowanie układu współrzędnych osi rozszerzenia
++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. versionadded:: python SDK-v2.0.4
 
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "原型", "``ExtAxisActiveECoordSys(applyAxisId,axisCoordNum,coord,calibFlag)``"
-    "描述", "应用扩展轴坐标系"
-    "必选参数", "
-    - ``applyAxisId``:扩展轴编号 bit0-bit3对应扩展轴编号1-4，如应用扩展轴1和3，则是 0b 0000 0101,也就是5；
-    - ``axisCoordNum``：扩展轴坐标系编号；
-    - ``coord``：坐标系值[x,y,z,rx,ry,rz]；
-    - ``calibFlag``：标定标志 0-否，1-是；"
-    "默认参数", "无"
-    "返回值", "错误码 成功-0  失败- errcode"
+    "Prototyp", "``ExtAxisActiveECoordSys(applyAxisId,axisCoordNum,coord,calibFlag)``"
+    "Opis", "Stosowanie układu współrzędnych osi rozszerzenia"
+    "Parametry wymagane", "
+    - ``applyAxisId``: Numer osi rozszerzenia bit0-bit3 odpowiada numerom osi rozszerzenia 1-4, np. zastosowanie osi rozszerzenia 1 i 3, to 0b 0000 0101, czyli 5;
+    - ``axisCoordNum``: Numer układu współrzędnych osi rozszerzenia;
+    - ``coord``: Wartość układu współrzędnych [x,y,z,rx,ry,rz];
+    - ``calibFlag``: Flaga kalibracji 0-nie, 1-tak;"
+    "Parametry domyślne", "Brak"
+    "Wartość zwracana", "Kod błędu sukces-0 błąd- errcode"
 
-获取扩展轴坐标系
-+++++++++++++++++++++++++++++++++++++++++++++++++++
+Pobieranie układu współrzędnych osi rozszerzenia
++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. versionadded:: python SDK-v2.1.2
 
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "原型", "``ExtAxisGetCoord()``"
-    "描述", "获取扩展轴坐标系"
-    "必选参数", "无"
-    "默认参数", "无"
-    "返回值", "- 错误码 成功-0  失败- errcode
-    - ``coord``：扩展轴坐标系"
+    "Prototyp", "``ExtAxisGetCoord()``"
+    "Opis", "Pobieranie układu współrzędnych osi rozszerzenia"
+    "Parametry wymagane", "Brak"
+    "Parametry domyślne", "Brak"
+    "Wartość zwracana", "- Kod błędu sukces-0 błąd- errcode
+    - ``coord``: Układ współrzędnych osi rozszerzenia"
 
-扩展轴坐标系标定代码示例
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Przykład kodu kalibracji układu współrzędnych osi rozszerzenia
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: python
     :linenos:
 
     from fairino import Robot
     import time
     import threading
-    # 与机器人控制器建立连接，连接成功返回一个机器人对象
+    # Połączenie z kontrolerem robota, po pomyślnym połączeniu zwraca obiekt robota
     robot = Robot.RPC('192.168.58.2')
     rtn = robot.ExtDevSetUDPComParam("192.168.58.88", 2021, 2, 100, 3, 200, 1, 100, 5, 1)
     print(f"ExtDevSetUDPComParam rtn is {rtn}")
@@ -902,22 +940,23 @@ UDP扩展轴配置与点动代码示例
     print(f"ExtAxisActiveECoordSys rtn is {rtn}")
     robot.CloseRPC()
           
-UDP扩展轴运动
+Ruch UDP osi rozszerzenia
 ++++++++++++++++++++++++++++++++++++++++
+
 .. versionadded:: python SDK-v2.1.4
 
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "原型", "``ExtAxisMove(pos,ovl,blend=-1)``"
-    "描述", "UDP扩展轴运动"
-    "必选参数", "- ``pos=[exaxis[0],exaxis[1],exaxis[2],exaxis[3]]``：目标位置 轴1位置~轴4位置;
-    - ``ovl``：速度百分比"
-    "默认参数", "- ``blend``：平滑参数(mm或ms)，-1,等待运动完成，默认-1"
-    "返回值", "错误码 成功-0  失败- errcode"
+    "Prototyp", "``ExtAxisMove(pos,ovl,blend=-1)``"
+    "Opis", "Ruch UDP osi rozszerzenia"
+    "Parametry wymagane", "- ``pos=[exaxis[0],exaxis[1],exaxis[2],exaxis[3]]``: Pozycja docelowa pozycja osi 1 ~ pozycja osi 4;
+    - ``ovl``: Procent prędkości"
+    "Parametry domyślne", "- ``blend``: Parametr wygładzania (mm lub ms), -1, oczekiwanie na zakończenie ruchu, domyślnie -1"
+    "Wartość zwracana", "Kod błędu sukces-0 błąd- errcode"
                                         
-UDP扩展轴运动代码示例
+Przykład kodu ruchu UDP osi rozszerzenia
 ++++++++++++++++++++++++++++++++++++++++
 
 .. code-block:: python
@@ -925,221 +964,224 @@ UDP扩展轴运动代码示例
 
     from fairino import Robot
     import time
-    # 与机器人控制器建立连接，连接成功返回一个机器人对象
+    # Połączenie z kontrolerem robota, po pomyślnym połączeniu zwraca obiekt robota
     robot = Robot.RPC('192.168.58.2')
     axisPos = [20,0,0,0]
     robot.ExtAxisMove(axisPos, 50, -1)
     robot.CloseRPC()
     return 0
 
-UDP扩展轴与机器人关节运动同步运动
-++++++++++++++++++++++++++++++++++++++++
+Ruch synchroniczny UDP osi rozszerzenia z ruchem przegubowym robota
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. versionadded:: python SDK-v2.0.4
 
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "原型", "``ExtAxisSyncMoveJ(joint_pos,tool,user,exaxis_pos, desc_pos=[0.0, 0.0, 0.0, 0.0, 0.0, 0.0], vel=20.0, acc=0.0, ovl= 100.0,  blendT=-1.0, offset_flag=0, offset_pos=[0.0, 0.0, 0.0, 0.0, 0.0, 0.0])``"
-    "描述", "UDP扩展轴与机器人关节运动同步运动"
-    "必选参数", "
-    - ``joint_pos``： 目标关节位置，单位 [°]；
-    - ``desc_pos``：目标笛卡尔位姿，单位 [mm][°]
-    - ``tool``：工具号，[0~14]
-    - ``user``：工件号，[0~14]
-    - ``exaxis_pos``：外部轴 1 位置 ~ 外部轴 4 位"
-    "默认参数", "
-    - ``desc_pos``:目标笛卡尔位姿，单位 [mm][°] 默认初值为[0.0,0.0,0.0,0.0,0.0,0.0]，默认值调用正运动学求解返回值;
-    - ``vel``： 速度百分比，[0~100] 默认20.0；
-    - ``acc``：加速度百分比，[0~100] 暂不开放,默认0.0 ；
-    - ``ovl``：速度缩放因子，[0~100] 默认100.0  ；
-    - ``blendT``：[-1.0]-运动到位 (阻塞)，[0~500.0]-平滑时间 (非阻塞)，单位 [ms] 默认-1.0；
-    - ``offset_flag``：[0]-不偏移，[1]-工件/基坐标系下偏移，[2]-工具坐标系下偏移 默认 0；
-    - ``offset_pos``：位姿偏移量，单位 [mm][°] 默认[0.0,0.0,0.0,0.0,0.0,0.0] ；"
-    "返回值", "错误码 成功-0  失败- errcode；"
+    "Prototyp", "``ExtAxisSyncMoveJ(joint_pos,tool,user,exaxis_pos, desc_pos=[0.0, 0.0, 0.0, 0.0, 0.0, 0.0], vel=20.0, acc=0.0, ovl= 100.0,  blendT=-1.0, offset_flag=0, offset_pos=[0.0, 0.0, 0.0, 0.0, 0.0, 0.0])``"
+    "Opis", "Ruch synchroniczny UDP osi rozszerzenia z ruchem przegubowym robota"
+    "Parametry wymagane", "
+    - ``joint_pos``: Docelowa pozycja przegubów, jednostka [°];
+    - ``desc_pos``: Docelowa poza kartezjańska, jednostka [mm][°]
+    - ``tool``: Numer narzędzia, [0~14]
+    - ``user``: Numer przedmiotu, [0~14]
+    - ``exaxis_pos``: Pozycja osi zewnętrznej 1 ~ pozycja osi zewnętrznej 4"
+    "Parametry domyślne", "
+    - ``desc_pos``: Docelowa poza kartezjańska, jednostka [mm][°] domyślnie [0.0,0.0,0.0,0.0,0.0,0.0], wartość domyślna wywołuje wartość zwracaną z rozwiązania kinematyki prostej;
+    - ``vel``: Procent prędkości, [0~100] domyślnie 20.0;
+    - ``acc``: Procent przyspieszenia, [0~100] tymczasowo niedostępne, domyślnie 0.0;
+    - ``ovl``: Współczynnik skalowania prędkości, [0~100] domyślnie 100.0;
+    - ``blendT``: [-1.0]-ruch do pozycji (blokujący), [0~500.0]-czas wygładzania (nieblokujący), jednostka [ms] domyślnie -1.0;
+    - ``offset_flag``: [0]-brak przesunięcia, [1]-przesunięcie w układzie przedmiotu/bazowym, [2]-przesunięcie w układzie narzędzia domyślnie 0;
+    - ``offset_pos``: Wartość przesunięcia pozy, jednostka [mm][°] domyślnie [0.0,0.0,0.0,0.0,0.0,0.0];"
+    "Wartość zwracana", "Kod błędu sukces-0 błąd- errcode;"
                                         
-UDP扩展轴与机器人关节运动同步运动代码示例
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Przykład kodu ruchu synchronicznego UDP osi rozszerzenia z ruchem przegubowym robota
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. code-block:: python
     :linenos:
 
     from fairino import Robot
-    # 与机器人控制器建立连接，连接成功返回一个机器人对象
+    # Połączenie z kontrolerem robota, po pomyślnym połączeniu zwraca obiekt robota
     robot = Robot.RPC('192.168.58.2')
-    # 设置UDP通信参数并加载
+    # Ustawienie parametrów komunikacji UDP i załadowanie
     robot.ExtDevSetUDPComParam("192.168.58.88", 2021, 2, 100, 3, 100, 1, 100, 10)
     robot.ExtDevLoadUDPDriver()
-    # 设置扩展轴参数
+    # Ustawienie parametrów osi rozszerzenia
     robot.SetAxisDHParaConfig(4, 200, 200, 0, 0, 0, 0, 0, 0)
     robot.SetRobotPosToAxis(1)
     robot.ExtAxisParamConfig(1, 0, 1, 100, -100, 10, 10, 12, 131072, 0, 1, 0, 0)
-    # 扩展轴使能、回零
+    # Włączenie i powrót do zera osi rozszerzenia
     robot.ExtAxisServoOn(1, 0)
     robot.ExtAxisSetHoming(1, 0, 20, 3)
-    # 扩展轴坐标系标定
-    pos = []  # 请在此填写标定点坐标
+    # Kalibracja układu współrzędnych osi rozszerzenia
+    pos = []  # Proszę wpisać współrzędne punktu kalibracyjnego
     robot.SetRefPointInExAxisEnd(pos)
-    robot.PositionorSetRefPoint(1)  # 此操作应重复4次（用4个点）
+    robot.PositionorSetRefPoint(1)  # Tę operację należy powtórzyć 4 razy (używając 4 punktów)
     error,coord = robot.PositionorComputeECoordSys()
     robot.ExtAxisActiveECoordSys(1, 1, coord, 1)
-    # 同步运动起点与终点
-    startdescPose = []  # 请填写具体坐标
-    startjointPos = []  # 请填写具体坐标
-    startexaxisPos = []  # 请填写具体坐标
-    enddescPose = []  # 请填写具体坐标
-    endjointPos = []  # 请填写具体坐标
-    endexaxisPos = []  # 请填写具体坐标
-    # 运动到起始点
+    # Punkt początkowy i końcowy ruchu synchronicznego
+    startdescPose = []  # Proszę wpisać konkretne współrzędne
+    startjointPos = []  # Proszę wpisać konkretne współrzędne
+    startexaxisPos = []  # Proszę wpisać konkretne współrzędne
+    enddescPose = []  # Proszę wpisać konkretne współrzędne
+    endjointPos = []  # Proszę wpisać konkretne współrzędne
+    endexaxisPos = []  # Proszę wpisać konkretne współrzędne
+    # Ruch do punktu początkowego
     robot.ExtAxisMove(startexaxisPos, 20, -1)
     offdese = [0, 0, 0, 0, 0, 0]
     robot.MoveJ(joint_pos=startjointPos,tool= 1,user= 1,vel= 100,acc= 100,ovl= 100,exaxis_pos= startexaxisPos,blendT= 0,offset_flag= 0,offset_pos= offdese)
     robot.ExtAxisSyncMoveJ(endjointPos, enddescPose, 1, 1, endexaxisPos, 100, 100, 100, -1, 0, offdese)
     robot.CloseRPC()
                   
-UDP扩展轴与机器人直线运动同步运动
-++++++++++++++++++++++++++++++++++++++++
+Ruch synchroniczny UDP osi rozszerzenia z ruchem liniowym robota
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. versionadded:: python SDK-v2.1.5
 
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "原型", "``ExtAxisSyncMoveL(desc_pos, tool, user, exaxis_pos, joint_pos=[0.0, 0.0, 0.0, 0.0, 0.0, 0.0], vel=20.0, acc=0.0, ovl=100.0, blendR=-1.0, search=0, offset_flag=0, offset_pos=[0.0, 0.0, 0.0, 0.0, 0.0, 0.0],config=-1)``"
-    "描述", "UDP扩展轴与机器人直线运动同步运动"
-    "必选参数", "
-    - ``desc_pos``：目标笛卡尔位姿，单位 [mm][°]；
-    - ``tool``：工具号，[0~14]；
-    - ``user``：工件号，[0~14]；
-    - ``exaxis_pos``：外部轴 1 位置 ~ 外部轴 4 位；"
-    "默认参数", "
-    - ``joint_pos``:目标关节位置，单位 [°] 默认初值为[0.0,0.0,0.0,0.0,0.0,0.0]，默认值调用逆运动学求解返回值;
-    - ``vel``： 速度百分比，[0~100] 默认20.0；
-    - ``acc``：加速度百分比，[0~100] 暂不开放,默认0.0；
-    - ``ovl``：速度缩放因子，[0~100] 默认100.0；
-    - ``blendR``：[-1.0]-运动到位 (阻塞)，[0~500.0]-平滑时间 (非阻塞)，单位 [ms] 默认-1.0；
-    - ``search``：[0]-不焊丝寻位，[1]-焊丝寻位；
-    - ``offset_flag``：[0]-不偏移，[1]-工件/基坐标系下偏移，[2]-工具坐标系下偏移 默认 0；
-    - ``offset_pos``：位姿偏移量，单位 [mm][°] 默认[0.0,0.0,0.0,0.0,0.0,0.0] ；
-    - ``config``:逆解关节空间配置，[-1]-参考当前关节位置解算，[0~7]-依据特定关节空间配置求解，默认-1"
-    "返回值", "错误码 成功-0  失败- errcode；"
+    "Prototyp", "``ExtAxisSyncMoveL(desc_pos, tool, user, exaxis_pos, joint_pos=[0.0, 0.0, 0.0, 0.0, 0.0, 0.0], vel=20.0, acc=0.0, ovl=100.0, blendR=-1.0, search=0, offset_flag=0, offset_pos=[0.0, 0.0, 0.0, 0.0, 0.0, 0.0],config=-1)``"
+    "Opis", "Ruch synchroniczny UDP osi rozszerzenia z ruchem liniowym robota"
+    "Parametry wymagane", "
+    - ``desc_pos``: Docelowa poza kartezjańska, jednostka [mm][°];
+    - ``tool``: Numer narzędzia, [0~14];
+    - ``user``: Numer przedmiotu, [0~14];
+    - ``exaxis_pos``: Pozycja osi zewnętrznej 1 ~ pozycja osi zewnętrznej 4;"
+    "Parametry domyślne", "
+    - ``joint_pos``: Docelowa pozycja przegubów, jednostka [°] domyślnie [0.0,0.0,0.0,0.0,0.0,0.0], wartość domyślna wywołuje wartość zwracaną z rozwiązania kinematyki odwrotnej;
+    - ``vel``: Procent prędkości, [0~100] domyślnie 20.0;
+    - ``acc``: Procent przyspieszenia, [0~100] tymczasowo niedostępne, domyślnie 0.0;
+    - ``ovl``: Współczynnik skalowania prędkości, [0~100] domyślnie 100.0;
+    - ``blendR``: [-1.0]-ruch do pozycji (blokujący), [0~500.0]-czas wygładzania (nieblokujący), jednostka [ms] domyślnie -1.0;
+    - ``search``: [0]-brak poszukiwania pozycji drutu, [1]-poszukiwanie pozycji drutu;
+    - ``offset_flag``: [0]-brak przesunięcia, [1]-przesunięcie w układzie przedmiotu/bazowym, [2]-przesunięcie w układzie narzędzia domyślnie 0;
+    - ``offset_pos``: Wartość przesunięcia pozy, jednostka [mm][°] domyślnie [0.0,0.0,0.0,0.0,0.0,0.0];
+    - ``config``: Konfiguracja przestrzeni przegubów dla kinematyki odwrotnej, [-1]-obliczenia względem bieżącej pozycji przegubów, [0~7]-obliczenia według określonej konfiguracji przestrzeni przegubów, domyślnie -1"
+    "Wartość zwracana", "Kod błędu sukces-0 błąd- errcode;"
                                             
-UDP扩展轴与机器人直线运动同步运动代码示例
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Przykład kodu ruchu synchronicznego UDP osi rozszerzenia z ruchem liniowym robota
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. code-block:: python
     :linenos:
 
     from fairino import Robot
-    # 与机器人控制器建立连接，连接成功返回一个机器人对象
+    # Połączenie z kontrolerem robota, po pomyślnym połączeniu zwraca obiekt robota
     robot = Robot.RPC('192.168.58.2')
-    # 设置UDP通信参数并加载
+    # Ustawienie parametrów komunikacji UDP i załadowanie
     robot.ExtDevSetUDPComParam("192.168.58.88", 2021, 2, 100, 3, 100, 1, 100, 10)
     robot.ExtDevLoadUDPDriver()
-    # 设置扩展轴参数
+    # Ustawienie parametrów osi rozszerzenia
     robot.SetAxisDHParaConfig(4, 200, 200, 0, 0, 0, 0, 0, 0)
     robot.SetRobotPosToAxis(1)
     robot.ExtAxisParamConfig(1, 0, 1, 100, -100, 10, 10, 12, 131072, 0, 1, 0, 0)
-    # 扩展轴使能、回零
+    # Włączenie i powrót do zera osi rozszerzenia
     robot.ExtAxisServoOn(1, 0)
     robot.ExtAxisSetHoming(1, 0, 20, 3)
-    # 扩展轴坐标系标定
-    pos = []  # 请填写标定点坐标
+    # Kalibracja układu współrzędnych osi rozszerzenia
+    pos = []  # Proszę wpisać współrzędne punktu kalibracyjnego
     robot.SetRefPointInExAxisEnd(pos)
-    robot.PositionorSetRefPoint(1)  # 需调用4次用于标定
+    robot.PositionorSetRefPoint(1)  # Należy wywołać 4 razy w celu kalibracji
     error,coord = robot.PositionorComputeECoordSys()
     robot.ExtAxisActiveECoordSys(1, 1, coord, 1)
-    # 同步运动起点与终点
-    startdescPose = []  # 填写坐标
-    startjointPos = []  # 填写坐标
-    startexaxisPos = []  # 填写坐标
-    enddescPose = []  # 填写坐标
-    endjointPos = []  # 填写坐标
-    endexaxisPos = []  # 填写坐标
-    # 运动到起始点
+    # Punkt początkowy i końcowy ruchu synchronicznego
+    startdescPose = []  # Proszę wpisać współrzędne
+    startjointPos = []  # Proszę wpisać współrzędne
+    startexaxisPos = []  # Proszę wpisać współrzędne
+    enddescPose = []  # Proszę wpisać współrzędne
+    endjointPos = []  # Proszę wpisać współrzędne
+    endexaxisPos = []  # Proszę wpisać współrzędne
+    # Ruch do punktu początkowego
     robot.ExtAxisMove(startexaxisPos, 20, -1)
     offdese = [0, 0, 0, 0, 0, 0]
     robot.MoveJ(joint_pos=startjointPos, tool= 1,user= 1,vel= 100,acc= 100,ovl= 100,exaxis_pos= startexaxisPos,blendT= 0)
-    # 执行同步直线运动
+    # Wykonanie synchronicznego ruchu liniowego
     robot.ExtAxisSyncMoveL(endjointPos, enddescPose, 1, 1, endexaxisPos, 100, 100, 100, 0, 0, offdese)
     robot.CloseRPC()
                       
-UDP扩展轴与机器人圆弧运动同步运动
-++++++++++++++++++++++++++++++++++++++++
+Ruch synchroniczny UDP osi rozszerzenia z ruchem po łuku robota
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. versionadded:: python SDK-v2.1.5
 
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "原型", "``ExtAxisSyncMoveC(desc_pos_p, tool_p, user_p,exaxis_pos_p, desc_pos_t, tool_t, user_t,exaxis_pos_t,joint_pos_p=[0.0, 0.0, 0.0, 0.0, 0.0, 0.0], joint_pos_t=[0.0, 0.0, 0.0, 0.0, 0.0, 0.0],vel_p=20.0, acc_p=100.0, offset_flag_p=0, offset_pos_p =[0.0, 0.0, 0.0, 0.0, 0.0, 0.0], vel_t=20.0, acc_t=100.0, offset_flag_t=0, offset_pos_t=[0.0, 0.0, 0.0, 0.0, 0.0, 0.0], ovl=100.0, blendR=-1.0, config=-1)``"
-    "描述", " UDP扩展轴与机器人圆弧运动同步运动"
-    "必选参数", "
-    - ``desc_pos_p``：路径点笛卡尔位姿，单位 [mm][°]；
-    - ``tool_p``：路径点工具号，[0~14]；
-    - ``user_p``：路径点工件号，[0~14]；
-    - ``exaxis_pos_p``：路径点外部轴 1 位置 ~ 外部轴 4 位置 默认[0.0,0.0,0.0,0.0]；
-    - ``desc_pos_t``：目标点笛卡尔位姿，单位 [mm][°]；
-    - ``tool_t``：工具号，[0~14]；
-    - ``user_t``：工件号，[0~14]；
-    - ``exaxis_pos_t``：目标点外部轴 1 位置 ~ 外部轴 4 位置 默认[0.0,0.0,0.0,0.0]；"
-    "默认参数", "
-    - ``joint_pos_p``:目标关节位置，单位 [°] 默认初值为[0.0,0.0,0.0,0.0,0.0,0.0]，默认值调用逆运动学求解返回值;
-    - ``joint_pos_t``:目标关节位置，单位 [°] 默认初值为[0.0,0.0,0.0,0.0,0.0,0.0]，默认值调用逆运动学求解返回值;
-    - ``vel_p``: 路径点速度百分比，[0~100] 默认20.0；
-    - ``acc_p``: 路径点加速度百分比，[0~100] 暂不开放,默认0.0 ；   
-    - ``offset_flag_p``: 路径点是否偏移[0]-不偏移，[1]-工件/基坐标系下偏移，[2]-工具坐标系下偏移 默认 0；
-    - ``offset_pos_p``: 路径点位姿偏移量，单位 [mm][°] 默认[0.0,0.0,0.0,0.0,0.0,0.0]；
-    - ``vel_t``: 目标点速度百分比，[0~100] 默认20.0；
-    - ``acc_t``: 目标点加速度百分比，[0~100] 暂不开放 默认0.0；
-    - ``offset_flag_t``: 目标点是否偏移[0]-不偏移，[1]-工件/基坐标系下偏移，[2]-工具坐标系下偏移 默认 0；
-    - ``offset_pos_t``: 目标点位姿偏移量，单位 [mm][°] 默认[0.0,0.0,0.0,0.0,0.0,0.0]；
-    - ``ovl``: 速度缩放因子，[0~100] 默认100.0；
-    - ``blendR``：[-1.0]-运动到位 (阻塞)，[0~1000]-平滑半径 (非阻塞)，单位 [mm] 默认-1.0；
-    - ``config``:逆解关节空间配置，[-1]-参考当前关节位置解算，[0~7]-依据特定关节空间配置求解，默认-1"
-    "返回值", "错误码 成功-0  失败- errcode；"
+    "Prototyp", "``ExtAxisSyncMoveC(desc_pos_p, tool_p, user_p,exaxis_pos_p, desc_pos_t, tool_t, user_t,exaxis_pos_t,joint_pos_p=[0.0, 0.0, 0.0, 0.0, 0.0, 0.0], joint_pos_t=[0.0, 0.0, 0.0, 0.0, 0.0, 0.0],vel_p=20.0, acc_p=100.0, offset_flag_p=0, offset_pos_p =[0.0, 0.0, 0.0, 0.0, 0.0, 0.0], vel_t=20.0, acc_t=100.0, offset_flag_t=0, offset_pos_t=[0.0, 0.0, 0.0, 0.0, 0.0, 0.0], ovl=100.0, blendR=-1.0, config=-1)``"
+    "Opis", "Ruch synchroniczny UDP osi rozszerzenia z ruchem po łuku robota"
+    "Parametry wymagane", "
+    - ``desc_pos_p``: Pozycja kartezjańska punktu pośredniego, jednostka [mm][°];
+    - ``tool_p``: Numer narzędzia punktu pośredniego, [0~14];
+    - ``user_p``: Numer przedmiotu punktu pośredniego, [0~14];
+    - ``exaxis_pos_p``: Pozycja osi zewnętrznej 1 ~ pozycja osi zewnętrznej 4 punktu pośredniego domyślnie [0.0,0.0,0.0,0.0];
+    - ``desc_pos_t``: Docelowa poza kartezjańska punktu docelowego, jednostka [mm][°];
+    - ``tool_t``: Numer narzędzia, [0~14];
+    - ``user_t``: Numer przedmiotu, [0~14];
+    - ``exaxis_pos_t``: Pozycja osi zewnętrznej 1 ~ pozycja osi zewnętrznej 4 punktu docelowego domyślnie [0.0,0.0,0.0,0.0];"
+    "Parametry domyślne", "
+    - ``joint_pos_p``: Docelowa pozycja przegubów, jednostka [°] domyślnie [0.0,0.0,0.0,0.0,0.0,0.0], wartość domyślna wywołuje wartość zwracaną z rozwiązania kinematyki odwrotnej;
+    - ``joint_pos_t``: Docelowa pozycja przegubów, jednostka [°] domyślnie [0.0,0.0,0.0,0.0,0.0,0.0], wartość domyślna wywołuje wartość zwracaną z rozwiązania kinematyki odwrotnej;
+    - ``vel_p``: Procent prędkości punktu pośredniego, [0~100] domyślnie 20.0;
+    - ``acc_p``: Procent przyspieszenia punktu pośredniego, [0~100] tymczasowo niedostępne, domyślnie 0.0;   
+    - ``offset_flag_p``: Czy przesunięcie punktu pośredniego [0]-brak przesunięcia, [1]-przesunięcie w układzie przedmiotu/bazowym, [2]-przesunięcie w układzie narzędzia domyślnie 0;
+    - ``offset_pos_p``: Wartość przesunięcia pozy punktu pośredniego, jednostka [mm][°] domyślnie [0.0,0.0,0.0,0.0,0.0,0.0];
+    - ``vel_t``: Procent prędkości punktu docelowego, [0~100] domyślnie 20.0;
+    - ``acc_t``: Procent przyspieszenia punktu docelowego, [0~100] tymczasowo niedostępne domyślnie 0.0;
+    - ``offset_flag_t``: Czy przesunięcie punktu docelowego [0]-brak przesunięcia, [1]-przesunięcie w układzie przedmiotu/bazowym, [2]-przesunięcie w układzie narzędzia domyślnie 0;
+    - ``offset_pos_t``: Wartość przesunięcia pozy punktu docelowego, jednostka [mm][°] domyślnie [0.0,0.0,0.0,0.0,0.0,0.0];
+    - ``ovl``: Współczynnik skalowania prędkości, [0~100] domyślnie 100.0;
+    - ``blendR``: [-1.0]-ruch do pozycji (blokujący), [0~1000]-promień wygładzania (nieblokujący), jednostka [mm] domyślnie -1.0;
+    - ``config``: Konfiguracja przestrzeni przegubów dla kinematyki odwrotnej, [-1]-obliczenia względem bieżącej pozycji przegubów, [0~7]-obliczenia według określonej konfiguracji przestrzeni przegubów, domyślnie -1"
+    "Wartość zwracana", "Kod błędu sukces-0 błąd- errcode;"
                                                 
-UDP扩展轴与机器人圆弧运动同步运动代码示例
+Przykład kodu ruchu synchronicznego UDP osi rozszerzenia z ruchem po łuku robota
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. code-block:: python
     :linenos:
 
     from fairino import Robot
-    # 与机器人控制器建立连接，连接成功返回一个机器人对象
+    # Połączenie z kontrolerem robota, po pomyślnym połączeniu zwraca obiekt robota
     robot = Robot.RPC('192.168.58.2')
-    # 设置UDP通信参数并加载
+    # Ustawienie parametrów komunikacji UDP i załadowanie
     robot.ExtDevSetUDPComParam("192.168.58.88", 2021, 2, 100, 3, 100, 1, 100, 10)
     robot.ExtDevLoadUDPDriver()
-    # 设置扩展轴参数
+    # Ustawienie parametrów osi rozszerzenia
     robot.SetAxisDHParaConfig(4, 200, 200, 0, 0, 0, 0, 0, 0)
     robot.SetRobotPosToAxis(1)
     robot.ExtAxisParamConfig(1, 0, 1, 100, -100, 10, 10, 12, 131072, 0, 1, 0, 0)
-    # 扩展轴使能、回零
+    # Włączenie i powrót do zera osi rozszerzenia
     robot.ExtAxisServoOn(1, 0)
     robot.ExtAxisSetHoming(1, 0, 20, 3)
-    # 扩展轴坐标系标定
-    pos = []  # 输入标定点坐标
+    # Kalibracja układu współrzędnych osi rozszerzenia
+    pos = []  # Wprowadź współrzędne punktu kalibracyjnego
     robot.SetRefPointInExAxisEnd(pos)
-    robot.PositionorSetRefPoint(1)  # 调用4次以完成标定
+    robot.PositionorSetRefPoint(1)  # Wywołaj 4 razy w celu wykonania kalibracji
     coord = []
     error,coord = robot.PositionorComputeECoordSys()
     robot.ExtAxisActiveECoordSys(1, 1, coord, 1)
-    # 同步圆弧起始点、中间点、终点
-    startdescPose = []# 输入坐标
-    startjointPos = []# 输入坐标
-    startexaxisPos =[]  # 输入扩展轴坐标
-    middescPose = []# 输入中间点
+    # Punkt początkowy, pośredni i końcowy łuku synchronicznego
+    startdescPose = []# Wprowadź współrzędne
+    startjointPos = []# Wprowadź współrzędne
+    startexaxisPos =[]  # Wprowadź współrzędne osi rozszerzenia
+    middescPose = []# Wprowadź punkt pośredni
     midjointPos = []
     midexaxisPos =[]
     enddescPose = []
     endjointPos = []
     endexaxisPos =[]
-    # 运动到起始点
+    # Ruch do punktu początkowego
     robot.ExtAxisMove(startexaxisPos, 20, -1)
     offdese = [0, 0, 0, 0, 0, 0]
     robot.MoveJ(joint_pos=startjointPos,tool= 1,user= 1,vel= 100,acc= 100,ovl= 100,exaxis_pos= startexaxisPos,blendT= 0,offset_flag= 0,offset_pos= offdese)
-    # 开始同步圆弧运动
+    # Rozpoczęcie synchronicznego ruchu po łuku
     robot.ExtAxisSyncMoveC(midjointPos,middescPose,1,1,midexaxisPos,
                            endjointPos,enddescPose,1,1,endexaxisPos,
                            100,100,0,offdese,
@@ -1147,151 +1189,160 @@ UDP扩展轴与机器人圆弧运动同步运动代码示例
                            100,0)
     robot.CloseRPC()
 
-设置扩展DO
-++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: python SDK-v2.0.4
-
-.. csv-table:: 
-    :stub-columns: 1
-    :widths: 10 30
-
-    "原型", "``SetAuxDO(DONum,bOpen,smooth,block)``"
-    "描述", "设置扩展DO"
-    "必选参数", "
-    - ``DONum``： DO编号；
-    - ``bOpen``：开关 True-开,False-关；
-    - ``smooth``：是否平滑 True -是, False -否；
-    - ``block``：是否阻塞 True -是, False -否；"
-    "默认参数", "无"
-    "返回值", "错误码 成功-0  失败- errcode"
-
-设置扩展AO
-++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: python SDK-v2.0.4
-
-.. csv-table:: 
-    :stub-columns: 1
-    :widths: 10 30
-
-    "原型", "``SetAuxAO(AONum,value,block)``"
-    "描述", "设置扩展AO"
-    "必选参数", "
-    - ``AONum``： AO编号；
-    - ``value``：模拟量值[0-4095]；
-    - ``block``：是否阻塞 True -是, False -否；"
-    "默认参数", "无"
-    "返回值", "错误码 成功-0  失败- errcode"
-        
-设置扩展DI输入滤波时间
-++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: python SDK-v2.0.4
-
-.. csv-table:: 
-    :stub-columns: 1
-    :widths: 10 30
-
-    "原型", "``SetAuxDIFilterTime(filterTime)``"
-    "描述", "设置扩展DI输入滤波时间"
-    "必选参数", "- ``filterTime``： 滤波时间(ms)；"
-    "默认参数", "无"
-    "返回值", "错误码 成功-0  失败- errcode"
-        
-设置扩展AI输入滤波时间
-++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: python SDK-v2.0.4
-
-.. csv-table:: 
-    :stub-columns: 1
-    :widths: 10 30
-
-    "原型", "``SetAuxAIFilterTime(AINum,filterTime)``"
-    "描述", "设置扩展AI输入滤波时间"
-    "必选参数", "
-    - ``AINum``： AI编号；
-    - ``filterTime``： 滤波时间(ms)；"
-    "默认参数", "无"
-    "返回值", "错误码 成功-0  失败- errcode"
-        
-等待扩展DI输入
-++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: python SDK-v2.0.4
-
-.. csv-table:: 
-    :stub-columns: 1
-    :widths: 10 30
-
-    "原型", "``WaitAuxDI(DINum,bOpen,time,errorAlarm)``"
-    "描述", "等待扩展DI输入"
-    "必选参数", "
-    - ``DINum``： DI编号；
-    - ``bOpen``：开关 True-开,False-关；
-    - ``time``：最大等待时间(ms)；
-    - ``errorAlarm``：是否继续运动 True-是,False-否"
-    "默认参数", "无"
-    "返回值", "错误码 成功-0  失败- errcode"
-        
-等待扩展AI输入
-++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: python SDK-v2.0.4
-
-.. csv-table:: 
-    :stub-columns: 1
-    :widths: 10 30
-
-    "原型", "``WaitAuxAI(,AINum,sign,value,time,errorAlarm)``"
-    "描述", "等待扩展AI输入"
-    "必选参数", "
-    - ``AINum``： AI编号；
-    - ``sign``：0-大于；1-小于；
-    - ``value``：AI值；
-    - ``time``：最大等待时间(ms)；
-    - ``errorAlarm``：是否继续运动 True-是,False-否"
-    "默认参数", "无"
-    "返回值", "错误码 成功-0  失败- errcode"
-        
-获取扩展DI值
-++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: python SDK-v2.0.4
-
-.. csv-table:: 
-    :stub-columns: 1
-    :widths: 10 30
-
-    "原型", "``GetAuxDI(DINum,isNoBlock)``"
-    "描述", "获取扩展DI值"
-    "必选参数", "
-    - ``DINum``： DI编号；
-    - ``isNoBlock``：是否阻塞 True-阻塞 false-非阻塞；"
-    "默认参数", "无"
-    "返回值", "- 错误码 成功-0  失败- errcode；
-    - ``isOpen``： 0-关；1-开；"
-          
-获取扩展AI值
-++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: python SDK-v2.0.4
-
-.. csv-table:: 
-    :stub-columns: 1
-    :widths: 10 30
-
-    "原型", "``GetAuxAI(AINum,isNoBlock)``"
-    "描述", "获取扩展AI值"
-    "必选参数", "
-    - ``AINum``： AI编号；
-    - ``isNoBlock``：是否阻塞 True-阻塞 False-非阻塞"
-    "默认参数", "无"
-    "返回值", "- 错误码 成功-0  失败- errcode；
-    - ``value``：输入值；"
-
-扩展IO代码示例
+Ustawianie rozszerzonego DO
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. versionadded:: python SDK-v2.0.4
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototyp", "``SetAuxDO(DONum,bOpen,smooth,block)``"
+    "Opis", "Ustawianie rozszerzonego DO"
+    "Parametry wymagane", "
+    - ``DONum``: Numer DO;
+    - ``bOpen``: Przełącznik True-wł., False-wył.;
+    - ``smooth``: Czy wygładzać True - tak, False - nie;
+    - ``block``: Czy blokować True - tak, False - nie;"
+    "Parametry domyślne", "Brak"
+    "Wartość zwracana", "Kod błędu sukces-0 błąd- errcode"
+
+Ustawianie rozszerzonego AO
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. versionadded:: python SDK-v2.0.4
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototyp", "``SetAuxAO(AONum,value,block)``"
+    "Opis", "Ustawianie rozszerzonego AO"
+    "Parametry wymagane", "
+    - ``AONum``: Numer AO;
+    - ``value``: Wartość analogowa [0-4095];
+    - ``block``: Czy blokować True - tak, False - nie;"
+    "Parametry domyślne", "Brak"
+    "Wartość zwracana", "Kod błędu sukces-0 błąd- errcode"
+        
+Ustawianie czasu filtracji wejścia rozszerzonego DI
+++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. versionadded:: python SDK-v2.0.4
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototyp", "``SetAuxDIFilterTime(filterTime)``"
+    "Opis", "Ustawianie czasu filtracji wejścia rozszerzonego DI"
+    "Parametry wymagane", "- ``filterTime``: Czas filtracji (ms);"
+    "Parametry domyślne", "Brak"
+    "Wartość zwracana", "Kod błędu sukces-0 błąd- errcode"
+        
+Ustawianie czasu filtracji wejścia rozszerzonego AI
+++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. versionadded:: python SDK-v2.0.4
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototyp", "``SetAuxAIFilterTime(AINum,filterTime)``"
+    "Opis", "Ustawianie czasu filtracji wejścia rozszerzonego AI"
+    "Parametry wymagane", "
+    - ``AINum``: Numer AI;
+    - ``filterTime``: Czas filtracji (ms);"
+    "Parametry domyślne", "Brak"
+    "Wartość zwracana", "Kod błędu sukces-0 błąd- errcode"
+        
+Oczekiwanie na wejście rozszerzonego DI
+++++++++++++++++++++++++++++++++++++++++
+
+.. versionadded:: python SDK-v2.0.4
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototyp", "``WaitAuxDI(DINum,bOpen,time,errorAlarm)``"
+    "Opis", "Oczekiwanie na wejście rozszerzonego DI"
+    "Parametry wymagane", "
+    - ``DINum``: Numer DI;
+    - ``bOpen``: Przełącznik True-wł., False-wył.;
+    - ``time``: Maksymalny czas oczekiwania (ms);
+    - ``errorAlarm``: Czy kontynuować ruch True-tak, False-nie"
+    "Parametry domyślne", "Brak"
+    "Wartość zwracana", "Kod błędu sukces-0 błąd- errcode"
+        
+Oczekiwanie na wejście rozszerzonego AI
+++++++++++++++++++++++++++++++++++++++++
+
+.. versionadded:: python SDK-v2.0.4
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototyp", "``WaitAuxAI(,AINum,sign,value,time,errorAlarm)``"
+    "Opis", "Oczekiwanie na wejście rozszerzonego AI"
+    "Parametry wymagane", "
+    - ``AINum``: Numer AI;
+    - ``sign``: 0-większe niż; 1-mniejsze niż;
+    - ``value``: Wartość AI;
+    - ``time``: Maksymalny czas oczekiwania (ms);
+    - ``errorAlarm``: Czy kontynuować ruch True-tak, False-nie"
+    "Parametry domyślne", "Brak"
+    "Wartość zwracana", "Kod błędu sukces-0 błąd- errcode"
+        
+Pobieranie wartości rozszerzonego DI
+++++++++++++++++++++++++++++++++++++
+
+.. versionadded:: python SDK-v2.0.4
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototyp", "``GetAuxDI(DINum,isNoBlock)``"
+    "Opis", "Pobieranie wartości rozszerzonego DI"
+    "Parametry wymagane", "
+    - ``DINum``: Numer DI;
+    - ``isNoBlock``: Czy blokować True-blokujący false-nieblokujący;"
+    "Parametry domyślne", "Brak"
+    "Wartość zwracana", "- Kod błędu sukces-0 błąd- errcode;
+    - ``isOpen``: 0-wył.; 1-wł.;"
+          
+Pobieranie wartości rozszerzonego AI
+++++++++++++++++++++++++++++++++++++
+
+.. versionadded:: python SDK-v2.0.4
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototyp", "``GetAuxAI(AINum,isNoBlock)``"
+    "Opis", "Pobieranie wartości rozszerzonego AI"
+    "Parametry wymagane", "
+    - ``AINum``: Numer AI;
+    - ``isNoBlock``: Czy blokować True-blokujący False-nieblokujący"
+    "Parametry domyślne", "Brak"
+    "Wartość zwracana", "- Kod błędu sukces-0 błąd- errcode;
+    - ``value``: Wartość wejściowa;"
+
+Przykład kodu rozszerzonego IO
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: python
     :linenos:
 
     from fairino import Robot
     import time
     import threading
-    # 与机器人控制器建立连接，连接成功返回一个机器人对象
+    # Połączenie z kontrolerem robota, po pomyślnym połączeniu zwraca obiekt robota
     robot = Robot.RPC('192.168.58.2')
     for i in range(128):
         robot.SetAuxDO(i, True, False, True)
@@ -1311,97 +1362,102 @@ UDP扩展轴与机器人圆弧运动同步运动代码示例
     robot.SetAuxAIFilterTime(0, 10)
     for i in range(20):
         curValue = False
-        error, curValue = robot.GetAuxDI(i, False)  # 注意：如库内部需引用方式，这里需修改
+        error, curValue = robot.GetAuxDI(i, False)  # Uwaga: w zależności od implementacji biblioteki, może wymagać modyfikacji
         print(f"DI{i}   {curValue}")
     curValue = -1
     for i in range(4):
-        error, curValue = robot.GetAuxAI(i, True)  # 同样注意引用传参问题
+        error, curValue = robot.GetAuxAI(i, True)  # Podobnie uwaga na przekazywanie przez referencję
         print(f"AI{i}   {curValue}")
     robot.WaitAuxDI(1, False, 1000, False)
     robot.WaitAuxAI(1, 1, 132, 1000, False)
     robot.CloseRPC()
 
-可移动装置使能
-++++++++++++++++++++++++++++++++++
+Włączanie urządzenia ruchomego
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. versionadded:: python SDK-v2.0.5
 
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "原型", "``TractorEnable(enable)``"
-    "描述", "可移动装置使能"
-    "必选参数", "- ``enable``：使能状态，0-去使能，1-使能"
-    "默认参数", "无"
-    "返回值", "错误码 成功-0  失败- errcode"
+    "Prototyp", "``TractorEnable(enable)``"
+    "Opis", "Włączanie urządzenia ruchomego"
+    "Parametry wymagane", "- ``enable``: Stan włączenia, 0-wyłącz, 1-włącz"
+    "Parametry domyślne", "Brak"
+    "Wartość zwracana", "Kod błędu sukces-0 błąd- errcode"
 
-可移动装置回零
-++++++++++++++++++++++++++++++++++
+Powrót do zera urządzenia ruchomego
++++++++++++++++++++++++++++++++++++
+
 .. versionadded:: python SDK-v2.0.5
 
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "原型", "``TractorHoming()``"
-    "描述", "可移动装置回零"
-    "必选参数", "无"
-    "默认参数", "无"
-    "返回值", "错误码 成功-0  失败- errcode"
+    "Prototyp", "``TractorHoming()``"
+    "Opis", "Powrót do zera urządzenia ruchomego"
+    "Parametry wymagane", "Brak"
+    "Parametry domyślne", "Brak"
+    "Wartość zwracana", "Kod błędu sukces-0 błąd- errcode"
 
-可移动装置直线运动
-++++++++++++++++++++++++++++++++++
+Ruch liniowy urządzenia ruchomego
++++++++++++++++++++++++++++++++++
+
 .. versionadded:: python SDK-v2.0.5
 
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "原型", "``TractorMoveL(distance, vel)``"
-    "描述", "可移动装置直线运动"
-    "必选参数", "- ``distance``：直线运动距离（mm）
-    - ``vel``：直线运动速度百分比（0-100）"
-    "默认参数", "无"
-    "返回值", "错误码 成功-0  失败- errcode"
+    "Prototyp", "``TractorMoveL(distance, vel)``"
+    "Opis", "Ruch liniowy urządzenia ruchomego"
+    "Parametry wymagane", "- ``distance``: Odległość ruchu liniowego (mm)
+    - ``vel``: Procent prędkości ruchu liniowego (0-100)"
+    "Parametry domyślne", "Brak"
+    "Wartość zwracana", "Kod błędu sukces-0 błąd- errcode"
 
-可移动装置圆弧运动
-++++++++++++++++++++++++++++++++++
+Ruch po łuku urządzenia ruchomego
++++++++++++++++++++++++++++++++++
+
 .. versionadded:: python SDK-v2.0.5
 
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "原型", "``TractorMoveC(radio, angle, vel)``"
-    "描述", "可移动装置圆弧运动"
-    "必选参数", "- ``radio``：圆弧运动半径（mm）
-    - ``angle``：圆弧运动角度（°）
-    - ``vel``：圆弧运动速度百分比（0-100）"
-    "默认参数", "无"
-    "返回值", "错误码 成功-0  失败- errcode"
+    "Prototyp", "``TractorMoveC(radio, angle, vel)``"
+    "Opis", "Ruch po łuku urządzenia ruchomego"
+    "Parametry wymagane", "- ``radio``: Promień ruchu po łuku (mm)
+    - ``angle``: Kąt ruchu po łuku (°)
+    - ``vel``: Procent prędkości ruchu po łuku (0-100)"
+    "Parametry domyślne", "Brak"
+    "Wartość zwracana", "Kod błędu sukces-0 błąd- errcode"
 
-可移动装置停止运动
-++++++++++++++++++++++++++++++++++
+Zatrzymanie ruchu urządzenia ruchomego
+++++++++++++++++++++++++++++++++++++++
+
 .. versionadded:: python SDK-v2.0.5
 
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "原型", "``ProgramStop()``"
-    "描述", "可移动装置停止运动"
-    "必选参数", "无"
-    "默认参数", "无"
-    "返回值", "错误码 成功-0  失败- errcode"
+    "Prototyp", "``ProgramStop()``"
+    "Opis", "Zatrzymanie ruchu urządzenia ruchomego"
+    "Parametry wymagane", "Brak"
+    "Parametry domyślne", "Brak"
+    "Wartość zwracana", "Kod błędu sukces-0 błąd- errcode"
 
-可移动装置代码示例
+Przykład kodu urządzenia ruchomego
 ++++++++++++++++++++++++++++++++++
 
 .. code-block:: python
     :linenos:
 
     from fairino import Robot
-    # 与机器人控制器建立连接，连接成功返回一个机器人对象
+    # Połączenie z kontrolerem robota, po pomyślnym połączeniu zwraca obiekt robota
     robot = Robot.RPC('192.168.58.2')
     robot.ExtDevSetUDPComParam("192.168.58.2", 2021, 2, 50, 5, 50, 1, 50, 10, 1)
     robot.ExtDevLoadUDPDriver()
@@ -1432,32 +1488,34 @@ UDP扩展轴与机器人圆弧运动同步运动代码示例
     time.sleep(1)
     robot.CloseRPC()
 
-激光传感器记录点
-++++++++++++++++++++++++++++++++++
+Punkt rejestracji czujnika laserowego
++++++++++++++++++++++++++++++++++++++
+
 .. versionadded:: python SDK-v2.1.4
 
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "原型", "``LaserRecordPoint(coordID)``"
-    "描述", "激光传感器记录点"
-    "必选参数", "- ``coordID``：激光传感器坐标系"
-    "默认参数", "无"
-    "返回值", "- 错误码 成功-0  失败- errcode
-    - ``joint``：激光传感器识别点关节位置
-    - ``desc``：激光传感器识别点笛卡尔位置
-    - ``exaxis``：激光传感器识别点扩展轴位置"
+    "Prototyp", "``LaserRecordPoint(coordID)``"
+    "Opis", "Punkt rejestracji czujnika laserowego"
+    "Parametry wymagane", "- ``coordID``: Układ współrzędnych czujnika laserowego"
+    "Parametry domyślne", "Brak"
+    "Wartość zwracana", "- Kod błędu sukces-0 błąd- errcode
+    - ``joint``: Pozycja przegubów punktu rozpoznanego przez czujnik laserowy
+    - ``desc``: Pozycja kartezjańska punktu rozpoznanego przez czujnik laserowy
+    - ``exaxis``: Pozycja osi rozszerzenia punktu rozpoznanego przez czujnik laserowy"
 
-激光传感器记录点代码示例
-++++++++++++++++++++++++++++++++++
+Przykład kodu punktu rejestracji czujnika laserowego
+++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. versionadded:: python SDK-v2.1.4
 
 .. code-block:: python
     :linenos:
 
     from fairino import Robot
-    # 与机器人控制器建立连接，连接成功返回一个机器人对象
+    # Połączenie z kontrolerem robota, po pomyślnym połączeniu zwraca obiekt robota
     robot = Robot.RPC('192.168.58.2')
     direction_point = [0, 0, 0]
     rtn = robot.LaserTrackingSearchStart(2, direction_point, 10, 100, 10000, 2)
@@ -1474,29 +1532,31 @@ UDP扩展轴与机器人圆弧运动同步运动代码示例
     robot.MoveJ(joint,tool=1,user=0,vel=100,acc=100,ovl=50,exaxis_pos=exaxis,blendT=-1,offset_flag=0,offset_pos=off)
     robot.CloseRPC()
 
-设置扩展轴与机器人同步运动策略
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Ustawianie strategii ruchu synchronicznego osi rozszerzenia z robotem
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. versionadded:: python SDK-v2.1.5
 
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "原型", "``SetExAxisRobotPlan(strategy)``"
-    "描述", "设置扩展轴与机器人同步运动策略"
-    "必选参数", "- ``strategy``：策略；0-以机器人为主；1-扩展轴与机器人同步"
-    "默认参数", "无"
-    "返回值", "错误码 成功-0  失败- errcode"
+    "Prototyp", "``SetExAxisRobotPlan(strategy)``"
+    "Opis", "Ustawianie strategii ruchu synchronicznego osi rozszerzenia z robotem"
+    "Parametry wymagane", "- ``strategy``: Strategia; 0-z robotem jako głównym; 1-oś rozszerzenia synchroniczna z robotem"
+    "Parametry domyślne", "Brak"
+    "Wartość zwracana", "Kod błędu sukces-0 błąd- errcode"
 
-设置扩展轴与机器人同步运动策略代码示例
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Przykład kodu ustawiania strategii ruchu synchronicznego osi rozszerzenia z robotem
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. versionadded:: python SDK-v2.1.5
 
 .. code-block:: python
     :linenos:
 
     from fairino import Robot
-    # 与机器人控制器建立连接，连接成功返回一个机器人对象
+    # Połączenie z kontrolerem robota, po pomyślnym połączeniu zwraca obiekt robota
     robot = Robot.RPC('192.168.58.2')
     joint_pos1 = [-22.016, -49.217, 124.714, -161.100, -85.108, -0.333]
     joint_pos2 = [-21.083, -46.613, 110.079, -147.796, -80.757, -0.330]
@@ -1520,16 +1580,17 @@ UDP扩展轴与机器人圆弧运动同步运动代码示例
     time.sleep(8)
     robot.CloseRPC()
 
-UDP扩展轴定位完成时间设置
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Ustawianie czasu zakończenia pozycjonowania UDP osi rozszerzenia
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. versionadded:: python SDK-v2.1.5
 
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "原型", "``SetExAxisCmdDoneTime(time)``"
-    "描述", "UDP扩展轴定位完成时间设置"
-    "必选参数", "- ``time``：定位完成时间[ms]"
-    "默认参数", "无"
-    "返回值", "错误码 成功-0  失败- errcode"
+    "Prototyp", "``SetExAxisCmdDoneTime(time)``"
+    "Opis", "Ustawianie czasu zakończenia pozycjonowania UDP osi rozszerzenia"
+    "Parametry wymagane", "- ``time``: Czas zakończenia pozycjonowania [ms]"
+    "Parametry domyślne", "Brak"
+    "Wartość zwracana", "Kod błędu sukces-0 błąd- errcode"

@@ -1,10 +1,10 @@
-数据结构说明
-==========================
+Opis struktur danych
+====================
 
 .. toctree:: 
     :maxdepth: 5
 
-机器人状态反馈结构体类型
+Typ struktury pakietu sprzężenia zwrotnego stanu robota
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: python
@@ -13,401 +13,405 @@
     class ROBOT_AUX_STATE(Structure):
         _pack_ = 1
         _fields_ = [
-            ("servoId", c_uint8),         # 伺服驱动器ID号
-            ("servoErrCode", c_int),     # 伺服驱动器故障码
-            ("servoState", c_int),       # 伺服驱动器状态
-            ("servoPos", c_double),      # 伺服当前位置
-            ("servoVel", c_float),       # 伺服当前速度
-            ("servoTorque", c_float),    # 伺服当前转矩
+            ("servoId", c_uint8),         # Numer ID serwonapędu
+            ("servoErrCode", c_int),     # Kod błędu serwonapędu
+            ("servoState", c_int),       # Stan serwonapędu
+            ("servoPos", c_double),      # Bieżąca pozycja serwonapędu
+            ("servoVel", c_float),       # Bieżąca prędkość serwonapędu
+            ("servoTorque", c_float),    # Bieżący moment obrotowy serwonapędu
         ]
 
     class EXT_AXIS_STATUS(Structure):
         _pack_ = 1
         _fields_ = [
-            ("pos", c_double),        # 扩展轴位置
-            ("vel", c_double),        # 扩展轴速度
-            ("errorCode", c_int),     # 扩展轴故障码
-            ("ready", c_uint8),        # 伺服准备好
-            ("inPos", c_uint8),        # 伺服到位
-            ("alarm", c_uint8),        # 伺服报警
-            ("flerr", c_uint8),        # 跟随误差
-            ("nlimit", c_uint8),       # 到负限位
-            ("pLimit", c_uint8),       # 到正限位
-            ("mdbsOffLine", c_uint8),  # 驱动器485总线掉线
-            ("mdbsTimeout", c_uint8),  # 控制卡与控制箱485通信超时
-            ("homingStatus", c_uint8), # 扩展轴回零状态
+            ("pos", c_double),        # Pozycja osi rozszerzenia
+            ("vel", c_double),        # Prędkość osi rozszerzenia
+            ("errorCode", c_int),     # Kod błędu osi rozszerzenia
+            ("ready", c_uint8),        # Serwonapęd gotowy
+            ("inPos", c_uint8),        # Serwonapęd na pozycji
+            ("alarm", c_uint8),        # Alarm serwonapędu
+            ("flerr", c_uint8),        # Błąd śledzenia
+            ("nlimit", c_uint8),       # Osiągnięto ujemnego ograniczenia
+            ("pLimit", c_uint8),       # Osiągnięto dodatniego ograniczenia
+            ("mdbsOffLine", c_uint8),  # Utrata połączenia magistrali 485 sterownika
+            ("mdbsTimeout", c_uint8),  # Przekroczenie czasu komunikacji 485 między kartą sterującą a skrzynką kontrolną
+            ("homingStatus", c_uint8), # Stan powrotu do zera osi rozszerzenia
         ]
 
     class WELDING_BREAKOFF_STATE(Structure):
         _pack_ = 1
         _fields_ = [
-            ("breakOffState", c_uint8),        # 焊接中断状态
-            ("weldArcState", c_uint8),        # 焊接电弧中断状态
+            ("breakOffState", c_uint8),        # Stan przerwania spawania
+            ("weldArcState", c_uint8),        # Stan przerwania łuku spawalniczego
         ]
 
-    # ==================== 完整机器人状态结构体 ====================
+    # ==================== Pełna struktura stanu robota ====================
     class RobotStatePkg(Structure):
         """
-        机器人状态反馈数据包
+        Pakiet danych sprzężenia zwrotnego stanu robota
         """
         _pack_ = 1
         _fields_ = [
-            # 帧头信息
-            ("frame_head", c_uint16),           # 帧头，约定为0x5A5A
-            ("frame_cnt", c_uint8),             # 帧计数，循环计数0-255
-            ("data_len", c_uint16),             # 数据内容的长度
-            ("program_state", c_uint8),         # 程序运行状态，1-停止；2-运行；3-暂停
-            ("robot_state", c_uint8),             # 机器人运动状态，1-停止；2-运行；3-暂停；4-拖动
-            ("main_code", c_int),               # 主故障码
-            ("sub_code", c_int),                # 子故障码
-            ("robot_mode", c_uint8),            # 机器人模式，1-手动模式；0-自动模式
+            # Informacje nagłówka ramki
+            ("frame_head", c_uint16),           # Nagłówek ramki, ustalony na 0x5A5A
+            ("frame_cnt", c_uint8),             # Licznik ramek, licznik cykliczny 0-255
+            ("data_len", c_uint16),             # Długość zawartości danych
+            ("program_state", c_uint8),         # Stan wykonania programu, 1-zatrzymany; 2-działa; 3-wstrzymany
+            ("robot_state", c_uint8),             # Stan ruchu robota, 1-zatrzymany; 2-działa; 3-wstrzymany; 4-przeciąganie
+            ("main_code", c_int),               # Główny kod błędu
+            ("sub_code", c_int),                # Podrzędny kod błędu
+            ("robot_mode", c_uint8),            # Tryb robota, 1-tryb ręczny; 0-tryb automatyczny
 
-            # 关节位置和速度
-            ("jt_cur_pos", c_double * 6),       # 6个轴当前关节位置，单位deg
-            ("tl_cur_pos", c_double * 6),       # 工具当前位置 [x,y,z,rx,ry,rz]
-            ("flange_cur_pos", c_double * 6),   # 末端法兰当前位置 [x,y,z,rx,ry,rz]
-            ("actual_qd", c_double * 6),        # 当前6个关节速度，单位deg/s
-            ("actual_qdd", c_double * 6),       # 当前6个关节加速度，单位deg/s^2
-            ("target_TCP_CmpSpeed", c_double * 2),  # TCP合成指令速度[位置mm/s,姿态deg/s]
-            ("target_TCP_Speed", c_double * 6), # TCP指令速度[x,y,z,rx,ry,rz]
-            ("actual_TCP_CmpSpeed", c_double * 2),  # TCP合成实际速度[位置mm/s,姿态deg/s]
-            ("actual_TCP_Speed", c_double * 6), # TCP实际速度[x,y,z,rx,ry,rz]
-            ("jt_cur_tor", c_double * 6),       # 6个轴当前扭矩，单位N·m
+            # Pozycje i prędkości przegubów
+            ("jt_cur_pos", c_double * 6),       # Bieżące pozycje 6 przegubów, jednostka deg
+            ("tl_cur_pos", c_double * 6),       # Bieżąca pozycja narzędzia [x,y,z,rx,ry,rz]
+            ("flange_cur_pos", c_double * 6),   # Bieżąca pozycja kołnierza końcowego [x,y,z,rx,ry,rz]
+            ("actual_qd", c_double * 6),        # Bieżące prędkości 6 przegubów, jednostka deg/s
+            ("actual_qdd", c_double * 6),       # Bieżące przyspieszenia 6 przegubów, jednostka deg/s^2
+            ("target_TCP_CmpSpeed", c_double * 2),  # Prędkość wypadkowa zadana TCP [pozycja mm/s, postawa deg/s]
+            ("target_TCP_Speed", c_double * 6), # Prędkość zadana TCP [x,y,z,rx,ry,rz]
+            ("actual_TCP_CmpSpeed", c_double * 2),  # Prędkość wypadkowa rzeczywista TCP [pozycja mm/s, postawa deg/s]
+            ("actual_TCP_Speed", c_double * 6), # Prędkość rzeczywista TCP [x,y,z,rx,ry,rz]
+            ("jt_cur_tor", c_double * 6),       # Bieżące momenty obrotowe 6 przegubów, jednostka N·m
 
-            # 工具和用户坐标系
-            ("tool", c_int),                    # 应用的工具坐标系编号
-            ("user", c_int),                    # 应用的工件坐标系编号
+            # Układy narzędzia i przedmiotu
+            ("tool", c_int),                    # Numer zastosowanego układu narzędzia
+            ("user", c_int),                    # Numer zastosowanego układu przedmiotu
 
-            # 数字IO
-            ("cl_dgt_output_h", c_uint8),       # 控制箱数字量IO输出15-8
-            ("cl_dgt_output_l", c_uint8),       # 控制箱数字量IO输出7-0
-            ("tl_dgt_output_l", c_uint8),       # 工具数字量IO输出7-0，仅bit0-bit1有效
-            ("cl_dgt_input_h", c_uint8),        # 控制箱数字量IO输入15-8
-            ("cl_dgt_input_l", c_uint8),        # 控制箱数字量IO输入7-0
-            ("tl_dgt_input_l", c_uint8),        # 工具数字量IO输入7-0，仅bit0-bit1有效
+            # Wejścia/wyjścia cyfrowe
+            ("cl_dgt_output_h", c_uint8),       # Wyjście IO cyfrowego skrzynki kontrolnej 15-8
+            ("cl_dgt_output_l", c_uint8),       # Wyjście IO cyfrowego skrzynki kontrolnej 7-0
+            ("tl_dgt_output_l", c_uint8),       # Wyjście IO cyfrowego narzędzia 7-0, tylko bit0-bit1 są ważne
+            ("cl_dgt_input_h", c_uint8),        # Wejście IO cyfrowego skrzynki kontrolnej 15-8
+            ("cl_dgt_input_l", c_uint8),        # Wejście IO cyfrowego skrzynki kontrolnej 7-0
+            ("tl_dgt_input_l", c_uint8),        # Wejście IO cyfrowego narzędzia 7-0, tylko bit0-bit1 są ważne
 
-            # 模拟量IO 
-            ("cl_analog_input", c_uint16 * 2),  # 控制箱模拟量输入[0],[1]
-            ("tl_anglog_input", c_uint16),      # 工具模拟量输入
+            # Wejścia/wyjścia analogowe 
+            ("cl_analog_input", c_uint16 * 2),  # Wejście analogowe skrzynki kontrolnej [0],[1]
+            ("tl_anglog_input", c_uint16),      # Wejście analogowe narzędzia
 
-            # 力矩传感器
-            ("ft_sensor_raw_data", c_double * 6),   # 力矩传感器原始数据
-            ("ft_sensor_data", c_double * 6),      # 力矩传感器数据
-            ("ft_sensor_active", c_uint8),          # 力矩传感器激活状态
+            # Czujnik momentu
+            ("ft_sensor_raw_data", c_double * 6),   # Surowe dane czujnika momentu
+            ("ft_sensor_data", c_double * 6),      # Dane czujnika momentu
+            ("ft_sensor_active", c_uint8),          # Stan aktywacji czujnika momentu
 
-            # 状态信号
-            ("EmergencyStop", c_uint8),         # 急停标志，0-急停未按下，1-急停按下
-            ("motion_done", c_int),             # 运动到位信号，1-到位，0-未到位
-            ("gripper_motiondone", c_uint8),    # 夹爪运动完成信号，1-完成，0-未完成
-            ("mc_queue_len", c_int),            # 运动指令队列长度
-            ("collisionState", c_uint8),        # 碰撞检测，1-碰撞，0-无碰撞
-            ("trajectory_pnum", c_int),         # 轨迹点编号
-            ("safety_stop0_state", c_uint8),    # 安全停止信号SI0
-            ("safety_stop1_state", c_uint8),    # 安全停止信号SI1
+            # Sygnały stanu
+            ("EmergencyStop", c_uint8),         # Flaga zatrzymania awaryjnego, 0-brak zatrzymania awaryjnego, 1-zatrzymanie awaryjne wciśnięte
+            ("motion_done", c_int),             # Sygnał osiągnięcia pozycji ruchu, 1-osiągnięto, 0-nie osiągnięto
+            ("gripper_motiondone", c_uint8),    # Sygnał zakończenia ruchu chwytaka, 1-zakończono, 0-nie zakończono
+            ("mc_queue_len", c_int),            # Długość kolejki instrukcji ruchu
+            ("collisionState", c_uint8),        # Wykrycie kolizji, 1-kolizja, 0-brak kolizji
+            ("trajectory_pnum", c_int),         # Numer punktu trajektorii
+            ("safety_stop0_state", c_uint8),    # Sygnał bezpiecznego zatrzymania SI0
+            ("safety_stop1_state", c_uint8),    # Sygnał bezpiecznego zatrzymania SI1
 
-            # 夹爪信息
-            ("gripper_fault_id", c_uint8),      # 错误夹爪号
-            ("gripper_fault", c_uint16),        # 夹爪故障
-            ("gripper_active", c_uint16),      # 夹爪激活状态
-            ("gripper_position", c_uint8),      # 夹爪位置
-            ("gripper_speed", c_int8),          # 夹爪速度
-            ("gripper_current", c_int8),        # 夹爪电流
-            ("gripper_temp", c_int),            # 夹爪温度
-            ("gripper_voltage", c_int),         # 夹爪电压
+            # Informacje o chwytaku
+            ("gripper_fault_id", c_uint8),      # Numer chwytaka z błędem
+            ("gripper_fault", c_uint16),        # Usterka chwytaka
+            ("gripper_active", c_uint16),      # Stan aktywacji chwytaka
+            ("gripper_position", c_uint8),      # Pozycja chwytaka
+            ("gripper_speed", c_int8),          # Prędkość chwytaka
+            ("gripper_current", c_int8),        # Prąd chwytaka
+            ("gripper_temp", c_int),            # Temperatura chwytaka
+            ("gripper_voltage", c_int),         # Napięcie chwytaka
 
-            # 扩展轴状态
-            ("aux_axis_state", ROBOT_AUX_STATE * 25),    # 485扩展轴状态 (25个)
-            ("extAxisStatus", EXT_AXIS_STATUS * 4), # UDP扩展轴状态 (4个)
+            # Stan osi rozszerzenia
+            ("aux_axis_state", ROBOT_AUX_STATE * 25),    # Stan osi rozszerzenia 485 (25)
+            ("extAxisStatus", EXT_AXIS_STATUS * 4), # Stan osi rozszerzenia UDP (4)
 
-            # 扩展IO状态
-            ("extDIState", c_uint16 * 8),       # 扩展DI输入
-            ("extDOState", c_uint16 * 8),       # 扩展DO输出
-            ("extAIState", c_uint16 * 4),        # 扩展AI输入
-            ("extAOState", c_uint16 * 4),        # 扩展AO输出
+            # Stan rozszerzonych IO
+            ("extDIState", c_uint16 * 8),       # Wejście rozszerzonego DI
+            ("extDOState", c_uint16 * 8),       # Wyjście rozszerzonego DO
+            ("extAIState", c_uint16 * 4),        # Wejście rozszerzonego AI
+            ("extAOState", c_uint16 * 4),        # Wyjście rozszerzonego AO
 
-            # 机器人和关节状态
-            ("rbtEnableState", c_int),                  # 机器人使能状态
-            ("jointDriverTorque", c_double * 6),        # 机器人关节驱动器扭矩
-            ("jointDriverTemperature", c_double * 6),   # 机器人关节驱动器温度
+            # Stan robota i przegubów
+            ("rbtEnableState", c_int),                  # Stan włączenia robota
+            ("jointDriverTorque", c_double * 6),        # Moment obrotowy sterownika przegubu robota
+            ("jointDriverTemperature", c_double * 6),   # Temperatura sterownika przegubu robota
 
-            # 机器人时间
-            #("robotTime", c_int * 7),             # 机器人系统时间 [year,month,day,hour,min,sec,ms]
-            ("year", ctypes.c_uint16),  # 年
-            ("mouth", ctypes.c_uint8),  # 月
-            ("day", ctypes.c_uint8),  # 日
-            ("hour", ctypes.c_uint8),  # 小时
-            ("minute", ctypes.c_uint8),  # 分
-            ("second", ctypes.c_uint8),  # 秒
-            ("millisecond", ctypes.c_uint16),  # 毫秒
+            # Czas robota
+            #("robotTime", c_int * 7),             # Czas systemowy robota [rok,miesiąc, dzień, godzina, minuta, sekunda, ms]
+            ("year", ctypes.c_uint16),  # Rok
+            ("mouth", ctypes.c_uint8),  # Miesiąc
+            ("day", ctypes.c_uint8),  # Dzień
+            ("hour", ctypes.c_uint8),  # Godzina
+            ("minute", ctypes.c_uint8),  # Minuta
+            ("second", ctypes.c_uint8),  # Sekunda
+            ("millisecond", ctypes.c_uint16),  # Milisekunda
 
-            ("softwareUpgradeState", c_int),      # 机器人软件升级状态
-            ("endLuaErrCode", c_uint16),          # 末端LUA运行状态
+            ("softwareUpgradeState", c_int),      # Stan aktualizacji oprogramowania robota
+            ("endLuaErrCode", c_uint16),          # Stan wykonania LUA końcówki
 
-            # 模拟量输出
-            ("cl_analog_output", c_uint16 * 2), # 控制箱模拟量输出[0],[1]
-            ("tl_analog_output", c_uint16),       # 工具模拟量输出
+            # Wyjścia analogowe
+            ("cl_analog_output", c_uint16 * 2), # Wyjście analogowe skrzynki kontrolnej [0],[1]
+            ("tl_analog_output", c_uint16),       # Wyjście analogowe narzędzia
 
-            # 旋转夹爪
-            ("gripperRotNum", c_float),         # 旋转夹爪当前旋转圈数
-            ("gripperRotSpeed", c_uint8),       # 旋转夹爪当前旋转速度百分比
-            ("gripperRotTorque", c_uint8),      # 旋转夹爪当前旋转力矩百分比
+            # Chwytak obrotowy
+            ("gripperRotNum", c_float),         # Bieżąca liczba obrotów chwytaka obrotowego
+            ("gripperRotSpeed", c_uint8),       # Bieżący procent prędkości obrotowej chwytaka obrotowego
+            ("gripperRotTorque", c_uint8),      # Bieżący procent momentu obrotowego chwytaka obrotowego
 
-            # 焊接中断状态 - 使用结构体
-            ("weldingBreakOffState", WELDING_BREAKOFF_STATE),  # 焊接中断状态
+            # Stan przerwania spawania - przy użyciu struktury
+            ("weldingBreakOffState", WELDING_BREAKOFF_STATE),  # Stan przerwania spawania
 
-            # 目标关节扭矩
-            ("jt_tgt_tor", c_double * 6),       # 关节指令力矩
+            # Docelowy moment obrotowy przegubów
+            ("jt_tgt_tor", c_double * 6),       # Docelowy moment obrotowy przegubów
 
-            ("smartToolState", c_int),          # SmartTool手柄按钮状态
-            ("wideVoltageCtrlBoxTemp", c_float),        # 宽电压控制箱温度
-            ("wideVoltageCtrlBoxFanCurrent", c_uint16), # 宽电压控制箱风扇电流(mA)
+            ("smartToolState", c_int),          # Stan przycisków uchwytu SmartTool
+            ("wideVoltageCtrlBoxTemp", c_float),        # Temperatura szerokonapięciowej skrzynki kontrolnej
+            ("wideVoltageCtrlBoxFanCurrent", c_uint16), # Prąd wentylatora szerokonapięciowej skrzynki kontrolnej (mA)
 
-            # 坐标系数值
-            ("toolCoord", c_double * 6),        # 当前工具坐标系数值；x,y,z,rx,ry,rz
-            ("wobjCoord", c_double * 6),        # 当前工件坐标系数值；x,y,z,rx,ry,rz
-            ("extoolCoord", c_double * 6),      # 当前外部工具坐标系数值；x,y,z,rx,ry,rz
-            ("exAxisCoord", c_double * 6),      # 当前扩展轴坐标系数值；x,y,z,rx,ry,rz
+            # Wartości układów współrzędnych
+            ("toolCoord", c_double * 6),        # Bieżące wartości układu narzędzia; x,y,z,rx,ry,rz
+            ("wobjCoord", c_double * 6),        # Bieżące wartości układu przedmiotu; x,y,z,rx,ry,rz
+            ("extoolCoord", c_double * 6),      # Bieżące wartości zewnętrznego układu narzędzia; x,y,z,rx,ry,rz
+            ("exAxisCoord", c_double * 6),      # Bieżące wartości układu osi rozszerzenia; x,y,z,rx,ry,rz
 
-            # 负载
-            ("load", c_double),                 # 负载质量
-            ("loadCog", c_double * 3),            # 负载质心
+            # Obciążenie
+            ("load", c_double),                 # Masa obciążenia
+            ("loadCog", c_double * 3),            # Środek ciężkości obciążenia
 
-            # 伺服指令
-            ("lastServoTarget", c_double * 6),  # 队列中最后一个ServoJ目标位置
-            ("servoJCmdNum", c_int),            # servoJ指令计数
+            # Instrukcje serwo
+            ("lastServoTarget", c_double * 6),  # Ostatnia pozycja docelowa ServoJ w kolejce
+            ("servoJCmdNum", c_int),            # Licznik instrukcji servoJ
 
-            # 目标关节数据
-            ("targetJointPos", c_double * 6),   # 6个关节指令位置，单位°
-            ("targetJointVel", c_double * 6),   # 6个关节指令速度，单位°/s
-            ("targetJointAcc", c_double * 6),   # 6个关节指令加速度，单位°/s2
-            ("targetJointCurrent", c_double * 6), # 6个关节指令电流，单位A
-            ("actualJointCurrent", c_double * 6), # 6个关节当前电流，单位A
-            ("actualTCPForce", c_double * 6),   # 机器人末端力矩Nm；x,y,z,rx,ry,rz
-            ("targetTCPPos", c_double * 6),     # 机器人TCP指令位置mm；x,y,z,rx,ry,rz
+            # Dane docelowe przegubów
+            ("targetJointPos", c_double * 6),   # Instrukcje pozycji 6 przegubów, jednostka °
+            ("targetJointVel", c_double * 6),   # Instrukcje prędkości 6 przegubów, jednostka °/s
+            ("targetJointAcc", c_double * 6),   # Instrukcje przyspieszenia 6 przegubów, jednostka °/s2
+            ("targetJointCurrent", c_double * 6), # Instrukcje prądu 6 przegubów, jednostka A
+            ("actualJointCurrent", c_double * 6), # Bieżące prądy 6 przegubów, jednostka A
+            ("actualTCPForce", c_double * 6),   # Moment na końcówce robota Nm; x,y,z,rx,ry,rz
+            ("targetTCPPos", c_double * 6),     # Instrukcja pozycji TCP robota mm; x,y,z,rx,ry,rz
 
-            ("collisionLevel", c_uint8 * 6),    # 机器人碰撞等级
-            ("speedScaleManual", c_double),     # 手动模式全局速度百分比
-            ("speedScaleAuto", c_double),       # 自动模式全局速度百分比
-            ("luaLineNum", c_int),              # 当前lua程序运行行号
-            ("abnomalStop", c_uint8),           # 0-无异常；1-有异常
-            ("currentLuaFileName", c_uint8 * 256),  # 当前运行lua程序名称
-            ("programTotalLine", c_uint8),      # lua程序总行数
-            ("safetyBoxSingal", c_uint8 * 6),   # 机器人按钮盒按钮状态
+            ("collisionLevel", c_uint8 * 6),    # Poziom kolizji robota
+            ("speedScaleManual", c_double),     # Procent prędkości globalnej w trybie ręcznym
+            ("speedScaleAuto", c_double),       # Procent prędkości globalnej w trybie automatycznym
+            ("luaLineNum", c_int),              # Bieżący numer linii wykonania programu lua
+            ("abnomalStop", c_uint8),           # 0-brak nieprawidłowości; 1-występuje nieprawidłowość
+            ("currentLuaFileName", c_uint8 * 256),  # Nazwa bieżącego działającego programu lua
+            ("programTotalLine", c_uint8),      # Całkowita liczba linii programu lua
+            ("safetyBoxSingal", c_uint8 * 6),   # Stan przycisków na puszce przyciskowej robota
 
-            # 焊接数据
-            ("weldVoltage", c_double),          # 焊接电压 V
-            ("weldCurrent", c_double),          # 焊接电流
-            ("weldTrackVel", c_double),         # 焊缝跟踪速度 mm/s
+            # Dane spawalnicze
+            ("weldVoltage", c_double),          # Napięcie spawania V
+            ("weldCurrent", c_double),          # Prąd spawania
+            ("weldTrackVel", c_double),         # Prędkość śledzenia spoiny mm/s
 
-            ("tpdException", c_uint8),            # TPD轨迹加载数量超限，0-未超限，1-超限
-            ("alarmRebootRobot", c_uint8),      # 警告，1-松开急停按钮请断电重启控制箱，2-关节通讯异常请断电重启控制箱
-            ("modbusMasterConnect", c_uint8),   # bit0-bit7位对应ModbusTCP的0-7主站连接状态
-            ("modbusSlaveConnect", c_uint8),    # ModbusTCP从站连接状态
-            ("btnBoxStopSignal", c_uint8),      # 按钮盒急停信号
-            ("dragAlarm", c_uint8),             # 拖动警告
-            ("safetyDoorAlarm", c_uint8),       # 安全门警告
-            ("safetyPlaneAlarm", c_uint8),      # 进入安全墙警告
-            ("motonAlarm", c_uint8),            # 运动警告
-            ("interfaceAlarm", c_uint8),        # 进入干涉区警告
-            ("udpCmdState", c_int),             # 20007端口UDP通讯连接状态
-            ("weldReadyState", c_uint8),        # 焊机准备完成状态
-            ("alarmCheckEmergStopBtn", c_uint8),    # 0-正常；1-通信异常，检查急停按钮是否松开
-            ("tsTmCmdComError", c_uint8),       # 0-正常；1-扭矩指令通讯失败
-            ("tsTmStateComError", c_uint8),     # 0-正常；1-扭矩状态通讯失败
-            ("ctrlBoxError", c_int),            # 控制箱错误
-            ("safetyDataState", c_uint8),       # 安全数据状态标志
-            ("forceSensorErrState", c_uint8),   # 力传感器连接超时故障
-            ("ctrlOpenLuaErrCode", c_uint8 * 4),  # 4个控制器外设协议错误码
-            ("strangePosFlag", c_uint8),        # 当前处于奇异位姿标志
-            ("alarm", c_uint8),                 # 警告
-            ("driverAlarm", c_uint8),           # 驱动器报警轴号
-            ("aliveSlaveNumError", c_uint8),    # 活动从站数量错误
-            ("slaveComError", c_uint8 * 8),     # 从站错误状态
-            ("cmdPointError", c_uint8),         # 指令点错误
-            ("IOError", c_uint8),               # IO错误
-            ("gripperError", c_uint8),          # 夹爪错误
-            ("fileError", c_uint8),             # 文件错误
-            ("paraError", c_uint8),             # 参数错误
-            ("exaxisOutLimitError", c_uint8),   # 外部轴超出软限位错误
-            ("driverComError", c_uint8 * 6),    # 与驱动器通信故障
-            ("driverError", c_uint8),           # 驱动器通信故障轴号
-            ("outSoftLimitError", c_uint8),     # 超出软限位故障
-            ("axleGenComData", c_uint8 * 130),   # 轴通用通讯非周期数据
-            ("socketConnTimeout", c_uint8),     # socket连接超时
-            ("socketReadTimeout", c_uint8),     # socket读取超时
-            ("tsWebStateComErr", c_uint8),      # TS_WEB状态通讯错误
-            ("exaxisCoordID", c_uint8),         # 外部扩展轴ID
-            ("check_sum", c_uint16)          # 和校验
+            ("tpdException", c_uint8),            # Przekroczenie limitu ładowania trajektorii TPD, 0-nie przekroczono, 1-przekroczono
+            ("alarmRebootRobot", c_uint8),      # Ostrzeżenie, 1-zwolnij przycisk zatrzymania awaryjnego i wyłącz zasilanie skrzynki kontrolnej, 2-nieprawidłowość komunikacji przegubu, wyłącz zasilanie skrzynki kontrolnej
+            ("modbusMasterConnect", c_uint8),   # bity bit0-bit7 odpowiadają stanom połączenia mastera 0-7 ModbusTCP
+            ("modbusSlaveConnect", c_uint8),    # Stan połączenia slave ModbusTCP
+            ("btnBoxStopSignal", c_uint8),      # Sygnał zatrzymania awaryjnego puszki przyciskowej
+            ("dragAlarm", c_uint8),             # Ostrzeżenie przeciągania
+            ("safetyDoorAlarm", c_uint8),       # Ostrzeżenie drzwi bezpieczeństwa
+            ("safetyPlaneAlarm", c_uint8),      # Ostrzeżenie wejścia w ścianę bezpieczeństwa
+            ("motonAlarm", c_uint8),            # Ostrzeżenie ruchu
+            ("interfaceAlarm", c_uint8),        # Ostrzeżenie wejścia w strefę interferencji
+            ("udpCmdState", c_int),             # Stan połączenia komunikacyjnego UDP portu 20007
+            ("weldReadyState", c_uint8),        # Stan gotowości spawarki
+            ("alarmCheckEmergStopBtn", c_uint8),    # 0-normalny; 1-nieprawidłowość komunikacji, sprawdź czy przycisk zatrzymania awaryjnego jest zwolniony
+            ("tsTmCmdComError", c_uint8),       # 0-normalny; 1-niepowodzenie komunikacji instrukcji momentu
+            ("tsTmStateComError", c_uint8),     # 0-normalny; 1-niepowodzenie komunikacji stanu momentu
+            ("ctrlBoxError", c_int),            # Błąd skrzynki kontrolnej
+            ("safetyDataState", c_uint8),       # Flaga stanu danych bezpieczeństwa
+            ("forceSensorErrState", c_uint8),   # Błąd timeout połączenia czujnika siły
+            ("ctrlOpenLuaErrCode", c_uint8 * 4),  # Kody błędów protokołu 4 urządzeń peryferyjnych kontrolera
+            ("strangePosFlag", c_uint8),        # Flaga bieżącej osobliwej pozy
+            ("alarm", c_uint8),                 # Ostrzeżenie
+            ("driverAlarm", c_uint8),           # Numer osi z alarmem sterownika
+            ("aliveSlaveNumError", c_uint8),    # Błąd liczby aktywnych węzłów podrzędnych
+            ("slaveComError", c_uint8 * 8),     # Stan błędu węzła podrzędnego
+            ("cmdPointError", c_uint8),         # Błąd punktu instrukcji
+            ("IOError", c_uint8),               # Błąd IO
+            ("gripperError", c_uint8),          # Błąd chwytaka
+            ("fileError", c_uint8),             # Błąd pliku
+            ("paraError", c_uint8),             # Błąd parametru
+            ("exaxisOutLimitError", c_uint8),   # Błąd przekroczenia miękkiego ograniczenia osi zewnętrznej
+            ("driverComError", c_uint8 * 6),    # Błąd komunikacji ze sterownikiem
+            ("driverError", c_uint8),           # Numer osi z błędem komunikacji sterownika
+            ("outSoftLimitError", c_uint8),     # Błąd przekroczenia miękkiego ograniczenia
+            ("axleGenComData", c_uint8 * 130),   # Dane aperiodyczne ogólnej komunikacji osi
+            ("socketConnTimeout", c_uint8),     # Przekroczenie czasu połączenia socket
+            ("socketReadTimeout", c_uint8),     # Przekroczenie czasu odczytu socket
+            ("tsWebStateComErr", c_uint8),      # Błąd komunikacji stanu TS_WEB
+            ("exaxisCoordID", c_uint8),         # ID zewnętrznej osi rozszerzenia
+            ("check_sum", c_uint16)          # Suma kontrolna
         ]
 
-控制器状态反馈数据包
-~~~~~~~~~~~~~~~~~~~~~~~~
+Pakiet danych sprzężenia zwrotnego stanu kontrolera
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 .. versionadded:: python SDK-v2.1.7
     
 .. csv-table:: 
     :header-rows: 1
-    :name: 控制器状态反馈数据包
+    :name: Pakiet danych sprzężenia zwrotnego stanu kontrolera
     :widths: 20 30
 
-    "变量","含义"
-    "program_state","程序运行状态，1-停止；2-运行；3-暂停"
-    "robot_state","机器人运动状态，1-停止；2-运行；3-暂停；4-拖动"
-    "main_code","主故障码"
-    "sub_code",	子故障码"
-    "robot_mode","机器人模式，0-自动模式；1-手动模式"
-    "jt_cur_pos[i]","关节当前位置,单位deg,i:0~5"
-    "tl_cur_pos[i]","工具当前位姿,单位deg&mm,i:0~5"
-    "flange_cur_pos[i]","末端法兰当前位姿,单位deg&mm,i:0~5"
-    "actual_qd[i]","机器人当前关节速度,单位deg/s,i:0~5"
-    "actual_qdd[i]","机器人当前关节加速度,单位deg/s^2,i:0~5"
-    "target_TCP_CmpSpeed[i]","机器人TCP合成指令速度,单位mm/s&deg/s,i:0~1"
-    "target_TCP_Speed[i]","机器人TCP指令速度,单位mm/s&deg/s,i:0~5"
-    "actual_TCP_CmpSpeed[i]","机器人TCP合成实际速度,单位mm/s&deg/s,i:0~1"
-    "actual_TCP_Speed[i]","机器人TCP实际速度,单位mm/s&deg/s,i:0~5"
-    "jt_cur_tor[i]","当前扭矩,单位N·m ,i:0~5"
-    "tool","应用的工具坐标系编号"
-    "user","应用的工件坐标系编号"
-    "cl_dgt_output_h","控制箱数字量IO输出15-8"
-    "cl_dgt_output_l","控制箱数字量IO输出7-0"
-    "tl_dgt_output_l","工具数字量IO输出7-0，仅bit0-bit1有效"
-    "dgt_input_h","控制箱数字量IO输入15-8"
-    "cl_dgt_input_l","控制箱数字量IO输入7-0"
-    "tl_dgt_input_l","工具数字量IO输入7-0，仅bit0-bit1有效"
-    "cl_analog_input[i]","控制箱模拟量输入,i:0~2"
-    "tl_anglog_input","工具模拟量输入"
-    "ft_sensor_raw_data","力矩传感器原始数据,单位N&Nm,i:0~5"
-    "ft_sensor_data","力矩传感器数据,单位N&Nm,i:0~5"
-    "ft_sensor_active","力矩传感器激活状态，0-复位，1-激活"
-    "EmergencyStop","急停标志,0-急停未按下,1-急停按下"
-    "motion_done","运动到位信号,1-到位，0-未到位"
-    "gripper_motiondone","夹爪运动完成信号,1-完成，0-未完成 "
-    "mc_queue_len","运动指令队列长度"
-    "collisionState","碰撞检测,1-碰撞，0-无碰撞 "
-    "trajectory_pnum","轨迹点编号"
-    "safety_stop0_state","安全停止信号SI0"
-    "safety_stop1_state","安全停止信号SI1"
-    "gripper_fault_id","错误夹爪号"
-    "gripper_fault","夹爪故障"
-    "gripper_active","夹爪激活状态，0-未激活，1-激活"
-    "gripper_position","夹爪位置(百分比)"
-    "gripper_speed","夹爪速度(百分比)"
-    "gripper_current","夹爪电流(百分比)"
-    "gripper_tmp","夹爪温度,单位℃"
-    "gripper_voltage","夹爪电压,单位V"
-    "auxState.servoId","485扩展轴,伺服驱动器ID号,i:0~3"
-    "auxState.servoErrCode","485扩展轴,伺服驱动器故障码,i:0~3"
-    "auxState.servoState","485扩展轴,伺服驱动器状态,i:0~3"
-    "auxState.servoPos","485扩展轴,伺服当前位置,i:0~3"
-    "auxState.servoVel","485扩展轴,伺服当前速度,i:0~3"
-    "auxState.servoTorque","485扩展轴,伺服当前转矩,i:0~3"
-    "extAxisStatus[i].pos","UDP扩展轴,位置,i:0~3"
-    "extAxisStatus[i].vel","UDP扩展轴,速度,i:0~3"
-    "extAxisStatus[i].errorCode","UDP扩展轴,故障码,i:0~3"
-    "extAxisStatus[i].ready","UDP扩展轴,伺服准备好,i:0~3"
-    "extAxisStatus[i].inPos","UDP扩展轴,伺服到位,i:0~3"
-    "extAxisStatus[i].alarm","UDP扩展轴,伺服报警,i:0~3"
-    "extAxisStatus[i].flerr","UDP扩展轴,跟随误差,i:0~3"
-    "extAxisStatus[i].nlimit","UDP扩展轴,到负限位,i:0~3"
-    "extAxisStatus[i].pLimit","UDP扩展轴,到正限位,i:0~3"
-    "extAxisStatus[i].mdbsOffLine","UDP扩展轴,驱动器485总线掉线"
-    "extAxisStatus[i].mdbsTimeout","UDP扩展轴,控制卡与控制箱485通信超时"
-    "extAxisStatus[i].homingStatus","UDP扩展轴,回零状态"
-    "extDIState","扩展数字输入状态"
-    "extDOState","扩展数字输出状态"
-    "extAIState","扩展模拟输入状态"
-    "extAOState","扩展模拟输出状态"
-    "rbtEnableState","机器人使能状态"
-    "jointDriverTorque","关节驱动器当前扭矩"
-    "jointDriverTemperature","关节驱动器当前温度"
-    "year","年"
-    "mouth","月"
-    "day","日"
-    "hour","小时"
-    "minute","分"
-    "second","秒"
-    "millisecond","毫秒"
-    "softwareUpgradeState","机器人软件升级状态"
-    "endLuaErrCode","末端LUA运行状态"
-    "cl_analog_output[i]","控制箱模拟量输出,i:0~1"
-    "tl_analog_output","工具模拟量输出"
-    "gripperRotNum","旋转夹爪当前旋转圈数"
-    "gripperRotSpeed","旋转夹爪当前旋转速度百分比"
-    "gripperRotTorque","旋转夹爪当前旋转力矩百分比"
-    "weldingBreakOffState","焊接中断状态"
-    "jt_tgt_tor","关节指令力矩"
-    "smartToolState","SmartTool手柄按钮状态"
-    "wideVoltageCtrlBoxTemp","宽电压控制箱温度"
-    "wideVoltageCtrlBoxFanCurrent","宽电压控制箱风扇电流(ma)"
-    "toolCoord[i]","工具坐标系,i:0~5"
-    "wobjCoord[i]","工件坐标系,i:0~5"
-    "extoolCoord[i]","外部工具坐标系,i:0~5"
-    "exAxisCoord[i]","扩展轴坐标系,i:0~5"
-    "load","负载质量"
-    "loadCog[i]","负载质心,i:0~2"
-    "lastServoTarget[i]","队列中最后一个ServoJ目标位置,i:0~5"
-    "servoJCmdNum","ServoJ指令计数"
+    "Zmienna","Znaczenie"
+    "program_state","Stan wykonania programu, 1-zatrzymany; 2-działa; 3-wstrzymany"
+    "robot_state","Stan ruchu robota, 1-zatrzymany; 2-działa; 3-wstrzymany; 4-przeciąganie"
+    "main_code","Główny kod błędu"
+    "sub_code",	Podrzędny kod błędu"
+    "robot_mode","Tryb robota, 0-tryb automatyczny; 1-tryb ręczny"
+    "jt_cur_pos[i]","Bieżąca pozycja przegubów, jednostka deg, i:0~5"
+    "tl_cur_pos[i]","Bieżąca poza narzędzia, jednostka deg&mm, i:0~5"
+    "flange_cur_pos[i]","Bieżąca poza kołnierza końcowego, jednostka deg&mm, i:0~5"
+    "actual_qd[i]","Bieżąca prędkość przegubów robota, jednostka deg/s, i:0~5"
+    "actual_qdd[i]","Bieżące przyspieszenie przegubów robota, jednostka deg/s^2, i:0~5"
+    "target_TCP_CmpSpeed[i]","Prędkość wypadkowa zadana TCP robota, jednostka mm/s&deg/s, i:0~1"
+    "target_TCP_Speed[i]","Prędkość zadana TCP robota, jednostka mm/s&deg/s, i:0~5"
+    "actual_TCP_CmpSpeed[i]","Prędkość wypadkowa rzeczywista TCP robota, jednostka mm/s&deg/s, i:0~1"
+    "actual_TCP_Speed[i]","Prędkość rzeczywista TCP robota, jednostka mm/s&deg/s, i:0~5"
+    "jt_cur_tor[i]","Bieżący moment obrotowy, jednostka N·m, i:0~5"
+    "tool","Numer zastosowanego układu narzędzia"
+    "user","Numer zastosowanego układu przedmiotu"
+    "cl_dgt_output_h","Wyjście IO cyfrowego skrzynki kontrolnej 15-8"
+    "cl_dgt_output_l","Wyjście IO cyfrowego skrzynki kontrolnej 7-0"
+    "tl_dgt_output_l","Wyjście IO cyfrowego narzędzia 7-0, tylko bit0-bit1 są ważne"
+    "dgt_input_h","Wejście IO cyfrowego skrzynki kontrolnej 15-8"
+    "cl_dgt_input_l","Wejście IO cyfrowego skrzynki kontrolnej 7-0"
+    "tl_dgt_input_l","Wejście IO cyfrowego narzędzia 7-0, tylko bit0-bit1 są ważne"
+    "cl_analog_input[i]","Wejście analogowe skrzynki kontrolnej, i:0~2"
+    "tl_anglog_input","Wejście analogowe narzędzia"
+    "ft_sensor_raw_data","Surowe dane czujnika momentu, jednostka N&Nm, i:0~5"
+    "ft_sensor_data","Dane czujnika momentu, jednostka N&Nm, i:0~5"
+    "ft_sensor_active","Stan aktywacji czujnika momentu, 0-reset, 1-aktywacja"
+    "EmergencyStop","Flaga zatrzymania awaryjnego, 0-brak zatrzymania awaryjnego, 1-zatrzymanie awaryjne wciśnięte"
+    "motion_done","Sygnał osiągnięcia pozycji ruchu, 1-osiągnięto, 0-nie osiągnięto"
+    "gripper_motiondone","Sygnał zakończenia ruchu chwytaka, 1-zakończono, 0-nie zakończono"
+    "mc_queue_len","Długość kolejki instrukcji ruchu"
+    "collisionState","Wykrycie kolizji, 1-kolizja, 0-brak kolizji"
+    "trajectory_pnum","Numer punktu trajektorii"
+    "safety_stop0_state","Sygnał bezpiecznego zatrzymania SI0"
+    "safety_stop1_state","Sygnał bezpiecznego zatrzymania SI1"
+    "gripper_fault_id","Numer chwytaka z błędem"
+    "gripper_fault","Usterka chwytaka"
+    "gripper_active","Stan aktywacji chwytaka, 0-nieaktywny, 1-aktywny"
+    "gripper_position","Pozycja chwytaka (procent)"
+    "gripper_speed","Prędkość chwytaka (procent)"
+    "gripper_current","Prąd chwytaka (procent)"
+    "gripper_tmp","Temperatura chwytaka, jednostka ℃"
+    "gripper_voltage","Napięcie chwytaka, jednostka V"
+    "auxState.servoId","Oś rozszerzenia 485, numer ID serwonapędu, i:0~3"
+    "auxState.servoErrCode","Oś rozszerzenia 485, kod błędu serwonapędu, i:0~3"
+    "auxState.servoState","Oś rozszerzenia 485, stan serwonapędu, i:0~3"
+    "auxState.servoPos","Oś rozszerzenia 485, bieżąca pozycja serwonapędu, i:0~3"
+    "auxState.servoVel","Oś rozszerzenia 485, bieżąca prędkość serwonapędu, i:0~3"
+    "auxState.servoTorque","Oś rozszerzenia 485, bieżący moment obrotowy serwonapędu, i:0~3"
+    "extAxisStatus[i].pos","Oś rozszerzenia UDP, pozycja, i:0~3"
+    "extAxisStatus[i].vel","Oś rozszerzenia UDP, prędkość, i:0~3"
+    "extAxisStatus[i].errorCode","Oś rozszerzenia UDP, kod błędu, i:0~3"
+    "extAxisStatus[i].ready","Oś rozszerzenia UDP, serwonapęd gotowy, i:0~3"
+    "extAxisStatus[i].inPos","Oś rozszerzenia UDP, serwonapęd na pozycji, i:0~3"
+    "extAxisStatus[i].alarm","Oś rozszerzenia UDP, alarm serwonapędu, i:0~3"
+    "extAxisStatus[i].flerr","Oś rozszerzenia UDP, błąd śledzenia, i:0~3"
+    "extAxisStatus[i].nlimit","Oś rozszerzenia UDP, osiągnięto ujemnego ograniczenia, i:0~3"
+    "extAxisStatus[i].pLimit","Oś rozszerzenia UDP, osiągnięto dodatniego ograniczenia, i:0~3"
+    "extAxisStatus[i].mdbsOffLine","Oś rozszerzenia UDP, utrata połączenia magistrali 485 sterownika"
+    "extAxisStatus[i].mdbsTimeout","Oś rozszerzenia UDP, przekroczenie czasu komunikacji 485 między kartą sterującą a skrzynką kontrolną"
+    "extAxisStatus[i].homingStatus","Oś rozszerzenia UDP, stan powrotu do zera"
+    "extDIState","Stan rozszerzonego wejścia cyfrowego"
+    "extDOState","Stan rozszerzonego wyjścia cyfrowego"
+    "extAIState","Stan rozszerzonego wejścia analogowego"
+    "extAOState","Stan rozszerzonego wyjścia analogowego"
+    "rbtEnableState","Stan włączenia robota"
+    "jointDriverTorque","Bieżący moment obrotowy sterownika przegubu"
+    "jointDriverTemperature","Bieżąca temperatura sterownika przegubu"
+    "year","Rok"
+    "mouth","Miesiąc"
+    "day","Dzień"
+    "hour","Godzina"
+    "minute","Minuta"
+    "second","Sekunda"
+    "millisecond","Milisekunda"
+    "softwareUpgradeState","Stan aktualizacji oprogramowania robota"
+    "endLuaErrCode","Stan wykonania LUA końcówki"
+    "cl_analog_output[i]","Wyjście analogowe skrzynki kontrolnej, i:0~1"
+    "tl_analog_output","Wyjście analogowe narzędzia"
+    "gripperRotNum","Bieżąca liczba obrotów chwytaka obrotowego"
+    "gripperRotSpeed","Bieżący procent prędkości obrotowej chwytaka obrotowego"
+    "gripperRotTorque","Bieżący procent momentu obrotowego chwytaka obrotowego"
+    "weldingBreakOffState","Stan przerwania spawania"
+    "jt_tgt_tor","Docelowy moment obrotowy przegubów"
+    "smartToolState","Stan przycisków uchwytu SmartTool"
+    "wideVoltageCtrlBoxTemp","Temperatura szerokonapięciowej skrzynki kontrolnej"
+    "wideVoltageCtrlBoxFanCurrent","Prąd wentylatora szerokonapięciowej skrzynki kontrolnej (ma)"
+    "toolCoord[i]","Układ narzędzia, i:0~5"
+    "wobjCoord[i]","Układ przedmiotu, i:0~5"
+    "extoolCoord[i]","Zewnętrzny układ narzędzia, i:0~5"
+    "exAxisCoord[i]","Układ osi rozszerzenia, i:0~5"
+    "load","Masa obciążenia"
+    "loadCog[i]","Środek ciężkości obciążenia, i:0~2"
+    "lastServoTarget[i]","Ostatnia pozycja docelowa ServoJ w kolejce, i:0~5"
+    "servoJCmdNum","Licznik instrukcji ServoJ"
 
-伺服控制器状态
-~~~~~~~~~~~~~~~~~~~~~~~~
+Stan serwonapędu
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 .. versionadded:: python SDK-v2.1.3
     
 .. csv-table:: 
     :header-rows: 1
-    :name: 伺服控制器状态
+    :name: Stan serwonapędu
     :widths: 20 30
 
-    "变量","含义"
-    "servoId","伺服驱动器ID号"
-    "servoErrCode","伺服驱动器故障码"
-    "servoState","伺服驱动器状态"
-    "servoPos","伺服当前位置"
-    "servoVel","伺服当前速度"
-    "servoTorque","伺服当前转矩"
+    "Zmienna","Znaczenie"
+    "servoId","Numer ID serwonapędu"
+    "servoErrCode","Kod błędu serwonapędu"
+    "servoState","Stan serwonapędu"
+    "servoPos","Bieżąca pozycja serwonapędu"
+    "servoVel","Bieżąca prędkość serwonapędu"
+    "servoTorque","Bieżący moment obrotowy serwonapędu"
 
-扩展轴状态
-~~~~~~~~~~~~~~~~~~~~~~~~
+Stan osi rozszerzenia
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 .. versionadded:: python SDK-v2.1.3
     
 .. csv-table:: 
     :header-rows: 1
-    :name: 扩展轴状态
+    :name: Stan osi rozszerzenia
     :widths: 20 30
 
-    "变量","含义"
-    "pos","扩展轴位置"
-    "vel","扩展轴速度"
-    "errorCode","扩展轴故障码"
-    "ready","伺服准备好"
-    "inPos","伺服到位"
-    "alarm","伺服报警"
-    "flerr","跟随误差"
-    "nlimit","到负限位"
-    "pLimit","到正限位"
-    "mdbsOffLine","驱动器485总线掉线"
-    "mdbsTimeout","控制卡与控制箱485通信超时"
-    "homingStatus","扩展轴回零状态"
+    "Zmienna","Znaczenie"
+    "pos","Pozycja osi rozszerzenia"
+    "vel","Prędkość osi rozszerzenia"
+    "errorCode","Kod błędu osi rozszerzenia"
+    "ready","Serwonapęd gotowy"
+    "inPos","Serwonapęd na pozycji"
+    "alarm","Alarm serwonapędu"
+    "flerr","Błąd śledzenia"
+    "nlimit","Osiągnięto ujemnego ograniczenia"
+    "pLimit","Osiągnięto dodatniego ograniczenia"
+    "mdbsOffLine","Utrata połączenia magistrali 485 sterownika"
+    "mdbsTimeout","Przekroczenie czasu komunikacji 485 między kartą sterującą a skrzynką kontrolną"
+    "homingStatus","Stan powrotu do zera osi rozszerzenia"
 
-焊接中断状态
-~~~~~~~~~~~~~~~~~~~~~~~~
+Stan przerwania spawania
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 .. versionadded:: python SDK-v2.1.3
     
 .. csv-table:: 
     :header-rows: 1
-    :name: 焊接中断状态
+    :name: Stan przerwania spawania
     :widths: 20 30
 
-    "变量","含义"
-    "breakOffState","焊接中断状态"
-    "weldArcState","焊接电弧中断状态"
+    "Zmienna","Znaczenie"
+    "breakOffState","Stan przerwania spawania"
+    "weldArcState","Stan przerwania łuku spawalniczego"
 
-代码示例
-~~~~~~~~~~~~~~~~~~~~~~~~
+Przykład kodu
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: python
     :linenos:
 
     from fairino import Robot
-    # 与机器人控制器建立连接，连接成功返回一个机器人对象
+    # Połączenie z kontrolerem robota, po pomyślnym połączeniu zwraca obiekt robota
     robot = Robot.RPC('192.168.58.2')
     print("program_state:", robot.robot_state_pkg.program_state)
     print("robot_state:", robot.robot_state_pkg.robot_state)
@@ -599,14 +603,14 @@
     print("lastServoTarget5:", robot.robot_state_pkg.lastServoTarget[5])
     print("servoJCmdNum:", robot.robot_state_pkg.servoJCmdNum)
 
-机器人状态反馈配置列表枚举类型
+Typ wyliczeniowy listy konfiguracyjnej sprzężenia zwrotnego stanu robota
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: python
     :linenos:
 
     class RobotState(enum.Enum):
-        """CNDE状态类型枚举"""
+        """Wyliczenie typów stanów CNDE"""
         FrameHead = 0
         FrameCnt = 1
         DataLen = 2

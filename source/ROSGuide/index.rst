@@ -1,5 +1,5 @@
 frcobot_ros
-==============
+===========
 
 .. toctree:: 
     :maxdepth: 5
@@ -8,7 +8,7 @@ frcobot_ros
     ros1guide
 
 frcobot_ros2
-==============
+============
 
 .. toctree:: 
     :maxdepth: 5
@@ -16,8 +16,8 @@ frcobot_ros2
 
     ros2guide
 
-moveIt2插件应用
-================
+Zastosowanie wtyczki moveIt2
+============================
 
 .. toctree:: 
     :maxdepth: 5

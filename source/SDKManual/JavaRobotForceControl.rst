@@ -1,163 +1,163 @@
-机器人力控
-============
+Sterowanie siłą robota
+======================
 
-.. toctree:: 
+.. toctree::
     :maxdepth: 5
 
-配置力传感器
-+++++++++++++++++++++++
+Konfiguracja czujnika siły
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief  配置力传感器
-    * @param  config company:力传感器厂商，17-坤维科技，19-航天十一院，20-ATI传感器，21-中科米点，22-伟航敏芯，23-NBIT，24-鑫精诚(XJC)，26-NSR
-    * @param  config device: 设备号，坤维(0-KWR75B)，航天十一院(0-MCS6A-200-4)，ATI(0-AXIA80-M8)，中科米点(0-MST2010)，伟航敏芯(0-WHC6L-YB-10A)，NBIT(0-XLH93003ACS)，鑫精诚XJC(0-XJC-6F-D82)，NSR(0-NSR-FTSensorA)
-    * @param  config softvesion:软件版本号，暂不使用，默认为0
-    * @param  config bus:设备挂在末端总线位置，暂不使用，默认为0
-    * @return  错误码
+    * @brief  Konfiguruje czujnik siły
+    * @param  config company: Producent czujnika siły, 17-Kunwei Technology, 19-Instytut Kosmiczny 11, 20-Czujnik ATI, 21-Zhongke Midian, 22-Weihang Minxin, 23-NBIT, 24-Xinjingcheng (XJC), 26-NSR
+    * @param  config device: Numer urządzenia, Kunwei (0-KWR75B), Instytut Kosmiczny 11 (0-MCS6A-200-4), ATI (0-AXIA80-M8), Zhongke Midian (0-MST2010), Weihang Minxin (0-WHC6L-YB-10A), NBIT (0-XLH93003ACS), Xinjingcheng XJC (0-XJC-6F-D82), NSR (0-NSR-FTSensorA)
+    * @param  config softvesion: Numer wersji oprogramowania, tymczasowo nieużywany, domyślnie 0
+    * @param  config bus: Pozycja magistrali końcowej, na której zamontowane jest urządzenie, tymczasowo nieużywane, domyślnie 0
+    * @return  Kod błędu
     */
-    int FT_SetConfig(DeviceConfig config); 
+    int FT_SetConfig(DeviceConfig config);
 
-获取力传感器配置 
-+++++++++++++++++++++++
-.. code-block:: Java
-    :linenos:
-
-    /** 
-    * @brief 获取力传感器配置 
-    * @param [out] config company:力传感器厂商，17-坤维科技，19-航天十一院，20-ATI传感器，21-中科米点，22-伟航敏芯
-    * @param [out] config device:设备号，坤维(0-KWR75B)，航天十一院(0-MCS6A-200-4)，ATI(0-AXIA80-M8)，中科米点(0-MST2010)，伟航敏芯(0-WHC6L-YB-10A)
-    * @param [out] config softvesion:软件版本号，暂不使用，默认为0
-    * @param [out] config bus:设备挂在末端总线位置，暂不使用，默认为0
-    * @return 错误码 
-    */ 
-    int FT_GetConfig(DeviceConfig config); 
-
-力传感器激活
-+++++++++++++++++++++++
+Pobieranie konfiguracji czujnika siły
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief  力传感器激活
-    * @param  [in] act  0-复位，1-激活
-    * @return  错误码
+    * @brief Pobiera konfigurację czujnika siły
+    * @param [out] config company: Producent czujnika siły, 17-Kunwei Technology, 19-Instytut Kosmiczny 11, 20-ATI, 21-Zhongke Midian, 22-Weihang Minxin
+    * @param [out] config device: Numer urządzenia, Kunwei (0-KWR75B), Instytut Kosmiczny 11 (0-MCS6A-200-4), ATI (0-AXIA80-M8), Zhongke Midian (0-MST2010), Weihang Minxin (0-WHC6L-YB-10A)
+    * @param [out] config softvesion: Numer wersji oprogramowania, tymczasowo nieużywany, domyślnie 0
+    * @param [out] config bus: Pozycja magistrali końcowej, na której zamontowane jest urządzenie, tymczasowo nieużywane, domyślnie 0
+    * @return Kod błędu
     */
-    int FT_Activate(int act); 
+    int FT_GetConfig(DeviceConfig config);
 
-力传感器校零
-+++++++++++++++++++++++
+Aktywacja czujnika siły
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief  力传感器校零
-    * @param  [in] act  0-去除零点，1-零点矫正
-    * @return  错误码
+    * @brief  Aktywuje czujnik siły
+    * @param [in] act  0-reset, 1-aktywacja
+    * @return  Kod błędu
     */
-    int FT_SetZero(int act); 
+    int FT_Activate(int act);
 
-设置力传感器参考坐标系
-+++++++++++++++++++++++
+Zerowanie czujnika siły
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief  设置力传感器参考坐标系
-    * @param  [in] type  0-工具坐标系，1-基坐标系, 2-自由坐标系
-    * @param  [in] coord  自由坐标系值
-    * @return  错误码
+    * @brief  Zeruje czujnik siły
+    * @param [in] act  0-usuń punkt zerowy, 1-korekcja zera
+    * @return  Kod błędu
+    */
+    int FT_SetZero(int act);
+
+Ustawianie układu odniesienia czujnika siły
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief  Ustawia układ odniesienia czujnika siły
+    * @param [in] type  0-układ współrzędnych narzędzia, 1-układ współrzędnych bazowych, 2-swobodny układ współrzędnych
+    * @param [in] coord  Wartości swobodnego układu współrzędnych
+    * @return  Kod błędu
     */
     int FT_SetRCS(int type, DescPose coord);
 
-设置力传感器下负载重量
-+++++++++++++++++++++++++++++++++++++++++++++
+Ustawianie masy obciążenia pod czujnikiem siły
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief 设置力传感器下负载重量
-    * @param [in] weight 负载重量 kg
-    * @return 错误码
+    * @brief Ustawia masę obciążenia pod czujnikiem siły
+    * @param [in] weight Masa obciążenia [kg]
+    * @return Kod błędu
     */
     int SetForceSensorPayLoad(double weight);
 
-设置力传感器下负载质心
-+++++++++++++++++++++++++++++++++++++++++++++
+Ustawianie środka ciężkości obciążenia pod czujnikiem siły
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief 设置力传感器下负载质心
-    * @param [in] cog 负载质心 mm
-    * @return 错误码
+    * @brief Ustawia środek ciężkości obciążenia pod czujnikiem siły
+    * @param [in] cog Środek ciężkości obciążenia [mm]
+    * @return Kod błędu
     */
     int SetForceSensorPayLoadCog(DescTran cog);
 
-获取力传感器下负载重量
-+++++++++++++++++++++++++++++++++++++++++++++
+Pobieranie masy obciążenia pod czujnikiem siły
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief 获取力传感器下负载重量
-    * @return List[0]:错误码; List[1] : weight 负载重量 kg
+    * @brief Pobiera masę obciążenia pod czujnikiem siły
+    * @return List[0]:kod błędu; List[1] : weight masa obciążenia [kg]
     */
     List<Number> GetForceSensorPayLoad();
 
-获取力传感器下负载质心
-+++++++++++++++++++++++++++++++++++++++++++++
+Pobieranie środka ciężkości obciążenia pod czujnikiem siły
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief 获取力传感器下负载质心
-    * @param [out] cog 负载质心 mm
-    * @return 错误码
+    * @brief Pobiera środek ciężkości obciążenia pod czujnikiem siły
+    * @param [out] cog Środek ciężkości obciążenia [mm]
+    * @return Kod błędu
     */
     int GetForceSensorPayLoadCog(DescTran cog);
 
-力传感器自动校零
-+++++++++++++++++++++++++++++++++++++++++++++
+Automatyczne zerowanie czujnika siły
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief 力传感器自动校零
-    * @param [in] massCenter 传感器质量(kg) 及 质心(mm)
-    * @return 错误码
+    * @brief Automatyczne zerowanie czujnika siły
+    * @param [in] massCenter Masa czujnika (kg) i środek ciężkości (mm)
+    * @return Kod błędu
     */
     int ForceSensorAutoComputeLoad(MassCenter massCenter);
 
-获取参考坐标系下力/扭矩数据
-+++++++++++++++++++++++++++++++++++++++++++++
+Pobieranie danych siły/momentu w układzie odniesienia
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief  获取参考坐标系下力/扭矩数据
-    * @param  [in] flag 0-阻塞，1-非阻塞
-    * @param  [out] ft  力/扭矩，fx,fy,fz,tx,ty,tz
-    * @return  错误码
-    */   
-    int FT_GetForceTorqueRCS(int flag, ForceTorque ft); 
+    * @brief  Pobiera dane siły/momentu w układzie odniesienia
+    * @param  [in] flag 0-blokujący, 1-nieblokujący
+    * @param  [out] ft   Siła/moment, fx, fy, fz, tx, ty, tz
+    * @return  Kod błędu
+    */
+    int FT_GetForceTorqueRCS(int flag, ForceTorque ft);
 
-获取力传感器原始力/扭矩数据
-+++++++++++++++++++++++++++++++++++++++++++++
+Pobieranie surowych danych siły/momentu z czujnika siły
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief  获取力传感器原始力/扭矩数据
-    * @param  [in] flag 0-阻塞，1-非阻塞
-    * @param  [out] ft  力/扭矩，fx,fy,fz,tx,ty,tz
-    * @return  错误码
-    */   
-    int FT_GetForceTorqueOrigin(int flag, ForceTorque ft); 
+    * @brief  Pobiera surowe dane siły/momentu z czujnika siły
+    * @param  [in] flag 0-blokujący, 1-nieblokujący
+    * @param  [out] ft   Siła/moment, fx, fy, fz, tx, ty, tz
+    * @return  Kod błędu
+    */
+    int FT_GetForceTorqueOrigin(int flag, ForceTorque ft);
 
-力传感器配置及自动校零代码示例
-+++++++++++++++++++++++++++++++++++++++++++++
+Przykład kodu konfiguracji czujnika siły i automatycznego zerowania
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
@@ -219,56 +219,56 @@
         return 0;
     }
 
-负载重量辨识记录
-+++++++++++++++++++++++
+Rejestracja identyfikacji masy obciążenia
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief  负载重量辨识记录
-    * @param  [in] id  传感器坐标系编号，范围[1~14]
-    * @return  错误码
+    * @brief  Rejestracja identyfikacji masy obciążenia
+    * @param  [in] id   Numer układu współrzędnych czujnika, zakres [1~14]
+    * @return  Kod błędu
     */
     int FT_PdIdenRecord(int id);
 
-负载重量辨识计算
-+++++++++++++++++++++++
+Obliczanie identyfikacji masy obciążenia
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief  负载重量辨识计算
-    * @return  List[0]:错误码; List[1] : double weight  负载重量，单位kg
-    */   
+    * @brief  Obliczanie identyfikacji masy obciążenia
+    * @return  List[0]:kod błędu; List[1] : double weight  Masa obciążenia, jednostka kg
+    */
     List<Number> FT_PdIdenCompute();
 
-负载质心辨识记录
-+++++++++++++++++++++++
+Rejestracja identyfikacji środka ciężkości obciążenia
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief  负载质心辨识记录
-    * @param  [in] id  传感器坐标系编号，范围[1~14]
-    * @param  [in] index 点编号，范围[1~3]
-    * @return  错误码
+    * @brief  Rejestracja identyfikacji środka ciężkości obciążenia
+    * @param  [in] id   Numer układu współrzędnych czujnika, zakres [1~14]
+    * @param  [in] index Numer punktu, zakres [1~3]
+    * @return  Kod błędu
     */
-    int FT_PdCogIdenRecord(int id, int index); 
+    int FT_PdCogIdenRecord(int id, int index);
 
-负载质心辨识计算
-++++++++++++++++++++++++++++++++++
+Obliczanie identyfikacji środka ciężkości obciążenia
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief  负载质心辨识计算
-    * @param  [out] cog  负载质心，单位mm
-    * @return  错误码
-    */   
+    * @brief  Obliczanie identyfikacji środka ciężkości obciążenia
+    * @param  [out] cog   Środek ciężkości obciążenia, jednostka mm
+    * @return  Kod błędu
+    */
     int FT_PdCogIdenCompute(DescTran cog);
 
-力传感器负载辨识代码示例
-+++++++++++++++++++++++++++++++++++++
+Przykład kodu identyfikacji obciążenia czujnika siły
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
@@ -335,47 +335,47 @@
         return 0;
     }
 
-碰撞守护
-+++++++++++++++++++++++++++++++++++++++++++++
+Ochrona przed kolizją
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief  碰撞守护
-    * @param  [in] flag 0-关闭碰撞守护，1-开启碰撞守护
-    * @param  [in] sensor_id 力传感器编号
-    * @param  [in] select  选择六个自由度是否检测碰撞，0-不检测，1-检测
-    * @param  [in] ft  碰撞力/扭矩，fx,fy,fz,tx,ty,tz
-    * @param  [in] max_threshold 最大阈值
-    * @param  [in] min_threshold 最小阈值
-    * @note   力/扭矩检测范围：(ft-min_threshold, ft+max_threshold)
-    * @return  错误码
-    */   
-    int FT_Guard(int flag, int sensor_id, Object[] select, ForceTorque ft, Object[] max_threshold, Object[] min_threshold); 
+    * @brief  Ochrona przed kolizją
+    * @param  [in] flag 0-wyłącz ochronę przed kolizją, 1-włącz ochronę przed kolizją
+    * @param  [in] sensor_id Numer czujnika siły
+    * @param  [in] select  Wybór, czy wykrywać kolizję dla sześciu stopni swobody, 0-nie wykrywaj, 1-wykrywaj
+    * @param  [in] ft   Siła/moment kolizji, fx, fy, fz, tx, ty, tz
+    * @param  [in] max_threshold Maksymalny próg
+    * @param  [in] min_threshold Minimalny próg
+    * @note   Zakres wykrywania siły/momentu: (ft-min_threshold, ft+max_threshold)
+    * @return  Kod błędu
+    */
+    int FT_Guard(int flag, int sensor_id, Object[] select, ForceTorque ft, Object[] max_threshold, Object[] min_threshold);
 
-碰撞守护代码示例
-+++++++++++++++++++++++++++++++++++++++++++++
+Przykład kodu ochrony przed kolizją
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
     public static void main(String[] args)
     {
         Robot robot = new Robot();
-        robot.SetReconnectParam(true,20,500);//设置重连次数、间隔
+        robot.SetReconnectParam(true,20,500);
         robot.LoggerInit(FrLogType.DIRECT, FrLogLevel.INFO, "D://log", 10, 10);
         int rtn = robot.RPC("192.168.58.2");
         if(rtn == 0)
         {
-            System.out.println("rpc连接 success");
+            System.out.println("rpc połączenie success");
         }
         else
         {
-            System.out.println("rpc连接 fail");
+            System.out.println("rpc połączenie fail");
             return ;
         }
         byte flag = 1;
         byte sensor_id = 8;
-        Object[] select = { 1, 0, 0, 0, 0, 0 };//只启用x轴碰撞守护
+        Object[] select = { 1, 0, 0, 0, 0, 0 };
         Object[] max_threshold = { 5.0, 0.01, 0.01, 0.01, 0.01, 0.01 };
         Object[] min_threshold = { 3.0, 0.01, 0.01, 0.01, 0.01, 0.01 };
 
@@ -392,36 +392,36 @@
         robot.MoveCart(desc_p3, 0, 0, 20, 100.0f, 100.0f, -1.0f, -1);
     }
 
-恒力控制
-+++++++++++++++++++++++++++++++++++++++++++++
+Sterowanie stałą siłą
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief  恒力控制
-    * @param  flag 0-关闭恒力控制，1-开启恒力控制
-    * @param  sensor_id 力传感器编号
-    * @param  select  选择六个自由度是否检测碰撞，0-不检测，1-检测
-    * @param  ft  碰撞力/扭矩，fx,fy,fz,tx,ty,tz
-    * @param  ft_pid 力pid参数，力矩pid参数
-    * @param  adj_sign 自适应启停控制，0-关闭，1-开启
-    * @param  ILC_sign ILC启停控制， 0-停止，1-训练，2-实操
-    * @param  max_dis 最大调整距离，单位mm
-    * @param  max_ang 最大调整角度，单位deg
-    * @param  M rx、ry质量参数[0.1-10],默认2
-    * @param  B rx、ry阻尼参数[0.1-50],默认8
-    * @param  threshold rx、ry启动阈值[0-10],默认0.2
-    * @param  adjustCoeff rx、ry力矩调节系数[0-1],默认1
-    * @param  polishRadio 打磨半径，单位mm
-    * @param  filter_Sign 滤波开启标志 0-关；1-开，默认关闭
-    * @param  posAdapt_sign 姿态顺应开启标志 0-关；1-开，默认关闭
-    * @param  isNoBlock 阻塞标志，0-阻塞；1-非阻塞
-    * @return  错误码
+    * @brief  Sterowanie stałą siłą
+    * @param  flag 0-wyłącz sterowanie stałą siłą, 1-włącz sterowanie stałą siłą
+    * @param  sensor_id Numer czujnika siły
+    * @param  select  Wybór, czy wykrywać kolizję dla sześciu stopni swobody, 0-nie wykrywaj, 1-wykrywaj
+    * @param  ft   Siła/moment kolizji, fx, fy, fz, tx, ty, tz
+    * @param  ft_pid Parametry PID siły, parametry PID momentu
+    * @param  adj_sign Sterowanie uruchamianiem/zatrzymywaniem adaptacyjnym, 0-wyłącz, 1-włącz
+    * @param  ILC_sign Sterowanie uruchamianiem/zatrzymywaniem ILC, 0-zatrzymaj, 1-trening, 2-praktyka
+    * @param  max_dis Maksymalna odległość regulacji, jednostka mm
+    * @param  max_ang Maksymalny kąt regulacji, jednostka deg
+    * @param  M Parametry masy rx, ry [0.1-10], domyślnie 2
+    * @param  B Parametry tłumienia rx, ry [0.1-50], domyślnie 8
+    * @param  threshold Próg uruchomienia rx, ry [0-10], domyślnie 0.2
+    * @param  adjustCoeff Współczynnik regulacji momentu rx, ry [0-1], domyślnie 1
+    * @param  polishRadio Promień szlifowania, jednostka mm
+    * @param  filter_Sign Flaga włączenia filtracji 0-wył.; 1-wł., domyślnie wył.
+    * @param  posAdapt_sign Flaga włączenia dostosowania postawy 0-wył.; 1-wł., domyślnie wył.
+    * @param  isNoBlock Flaga blokowania, 0-blokuj; 1-nie blokuj
+    * @return  Kod błędu
     */
     public int FT_Control(int flag, int sensor_id, int[] select, ForceTorque ft, double[] ft_pid, int adj_sign, int ILC_sign, double max_dis, double max_ang,double[] M,double[] B, double[] threshold, double[] adjustCoeff, double polishRadio,int filter_Sign, int posAdapt_sign, int isNoBlock)
 
-具有阻尼的恒力控制代码示例
-+++++++++++++++++++++++++++++++++++++++++++++
+Przykład kodu sterowania stałą siłą z tłumieniem
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
@@ -461,27 +461,27 @@
         }
     }
 
-旋转插入
-+++++++++++++++++++++++++++++++++++++++++++++
+Wstawianie obrotowe
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief 旋转插入
-    * @param rcs 参考坐标系，0-工具坐标系，1-基坐标系
-    * @param angVelRot 旋转角速度，单位deg/s
-    * @param ft  力/扭矩阈值，fx,fy,fz,tx,ty,tz，范围[0~100]
-    * @param max_angle 最大旋转角度，单位deg
-    * @param orn 力/扭矩方向，1-沿z轴方向，2-绕z轴方向
-    * @param max_angAcc 最大旋转加速度，单位deg/s^2，暂不使用，默认为0
-    * @param rotorn  旋转方向，1-顺时针，2-逆时针
-    * @param strategy 未检测到力/力矩的处理策略，0-报错；1-警告，继续运动
-    * @return  错误码
+    * @brief Wstawianie obrotowe
+    * @param rcs Układ odniesienia, 0-układ współrzędnych narzędzia, 1-układ współrzędnych bazowych
+    * @param angVelRot Prędkość kątowa obrotu, jednostka deg/s
+    * @param ft  Próg siły/momentu, fx, fy, fz, tx, ty, tz, zakres [0~100]
+    * @param max_angle Maksymalny kąt obrotu, jednostka deg
+    * @param orn Kierunek siły/momentu, 1-wzdłuż osi Z, 2-wokół osi Z
+    * @param max_angAcc Maksymalne przyspieszenie kątowe obrotu, jednostka deg/s^2, tymczasowo nieużywane, domyślnie 0
+    * @param rotorn  Kierunek obrotu, 1-zgodnie z ruchem wskazówek zegara, 2-przeciwnie do ruchu wskazówek zegara
+    * @param strategy Strategia postępowania w przypadku niewykrycia siły/momentu, 0-zgłoś błąd; 1-ostrzeżenie, kontynuuj ruch
+    * @return  Kod błędu
     */
     public int FT_RotInsertion(int rcs, double angVelRot, double ft, double max_angle, int orn, double max_angAcc, int rotorn, int strategy)
 
-机器人力传感器旋转插入代码示例
-+++++++++++++++++++++++++++++++++++++++++++++
+Przykład kodu wstawiania obrotowego z czujnikiem siły robota
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
@@ -536,32 +536,32 @@
         return 0;
     }
 
-柔顺控制开启
-+++++++++++++++++++++++++++++++++++++++++++++
+Włączenie sterowania podatnego
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief  柔顺控制开启
-    * @param  [in] p 位置调节系数或柔顺系数
-    * @param  [in] force 柔顺开启力阈值，单位N
-    * @return  错误码
-    */   
+    * @brief  Włączenie sterowania podatnego
+    * @param  [in] p Współczynnik regulacji pozycji lub współczynnik podatności
+    * @param  [in] force Próg siły włączenia podatności, jednostka N
+    * @return  Kod błędu
+    */
     int FT_ComplianceStart(double p, double force);
 
-柔顺控制关闭
-+++++++++++++++++++++++++++++++++++++++++++++
+Wyłączenie sterowania podatnego
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief  柔顺控制关闭
-    * @return  错误码
-    */   
-    int FT_ComplianceStop(); 
+    * @brief  Wyłączenie sterowania podatnego
+    * @return  Kod błędu
+    */
+    int FT_ComplianceStop();
 
-柔顺控制代码示例
-+++++++++++++++++++++++++++++++++++++++++++++
+Przykład kodu sterowania podatnego
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
@@ -635,56 +635,56 @@
         return 0;
     }
 
-负载辨识初始化
-+++++++++++++++++++++++++++++++++++++++++++++
+Inicjalizacja filtracji dynamicznej identyfikacji obciążenia
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief 负载辨识初始化
-    * @return 错误码
+    * @brief Inicjalizacja filtracji dynamicznej identyfikacji obciążenia
+    * @return Kod błędu
     */
     int LoadIdentifyDynFilterInit();
 
-负载辨识变量初始化
-+++++++++++++++++++++++++++++++++++++++++++++
+Inicjalizacja zmiennych dynamicznych identyfikacji obciążenia
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief 负载辨识变量初始化
-    * @return 错误码
+    * @brief Inicjalizacja zmiennych dynamicznych identyfikacji obciążenia
+    * @return Kod błędu
     */
     int LoadIdentifyDynVarInit();
 
-负载辨识主程序
-+++++++++++++++++++++++++++++++++++++++++++++
+Program główny identyfikacji obciążenia
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief 负载辨识主程序
-    * @param [in] joint_torque 关节扭矩
-    * @param [in] joint_pos 关节位置
-    * @param [in] t 采样周期
-    * @return 错误码
+    * @brief Program główny identyfikacji obciążenia
+    * @param [in] joint_torque Moment stawów
+    * @param [in] joint_pos Pozycja stawów
+    * @param [in] t Okres próbkowania
+    * @return Kod błędu
     */
     int LoadIdentifyMain(Object[] joint_torque, Object[] joint_pos, double t);
 
-获取负载辨识结果
-+++++++++++++++++++++++++++++++++++++++++++++
+Pobieranie wyniku identyfikacji obciążenia
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief 获取负载辨识结果
+    * @brief Pobiera wynik identyfikacji obciążenia
     * @param [in] gain
-    * @return List[0]:错误码; List[1] : double weight 负载重量; List[2]: x 负载质心X mm; List[3] : y 负载质心Y mm; List[2]: z 负载质心Z mm
+    * @return List[0]:kod błędu; List[1] : double weight masa obciążenia; List[2]: x środek ciężkości obciążenia X mm; List[3] : y środek ciężkości obciążenia Y mm; List[2]: z środek ciężkości obciążenia Z mm
     */
     List<Number> LoadIdentifyGetResult(Object[] gain);
 
-机器人负载辨识代码示例
-+++++++++++++++++++++++++++++++++++++++++++++
+Przykład kodu identyfikacji obciążenia robota
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
@@ -714,55 +714,55 @@
 
     }
 
-力传感器辅助拖动
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Wspomaganie przeciągania przez czujnik siły
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionchanged:: Java SDK-v1.0.6-3.8.3
 
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief 力传感器辅助拖动
-    * @param [in] status 控制状态，0-关闭；1-开启
-    * @param [in] asaptiveFlag 自适应开启标志，0-关闭；1-开启
-    * @param [in] interfereDragFlag 干涉区拖动标志，0-关闭；1-开启
-    * @param [in] ingularityConstraintsFlag 奇异点策略，0-规避；1-穿越
-    * @param [in] forceCollisionFlag 辅助拖动时机器人碰撞检测标志；0-关闭；1-开启
-    * @param [in] M 惯性系数
-    * @param [in] B 阻尼系数
-    * @param [in] K 刚度系数
-    * @param [in] F 拖动六维力阈值
-    * @param [in] Fmax 最大拖动力限制 Nm
-    * @param [in] Vmax 最大关节速度限制 °/s
-    * @return 错误码
+    * @brief Wspomaganie przeciągania przez czujnik siły
+    * @param [in] status Stan sterowania, 0-wyłączone; 1-włączone
+    * @param [in] asaptiveFlag Flaga włączenia adaptacji, 0-wyłączona; 1-włączona
+    * @param [in] interfereDragFlag Flaga przeciągania w obszarze interferencji, 0-wyłączona; 1-włączona
+    * @param [in] ingularityConstraintsFlag Strategia punktów osobliwych, 0-omijanie; 1-przechodzenie
+    * @param [in] forceCollisionFlag Flaga wykrywania kolizji robota podczas wspomaganego przeciągania; 0-wyłączona; 1-włączona
+    * @param [in] M Współczynnik bezwładności
+    * @param [in] B Współczynnik tłumienia
+    * @param [in] K Współczynnik sztywności
+    * @param [in] F Próg sześcioosiowej siły przeciągania
+    * @param [in] Fmax Maksymalne ograniczenie siły przeciągania Nm
+    * @param [in] Vmax Maksymalne ograniczenie prędkości stawów °/s
+    * @return Kod błędu
     */
     int EndForceDragControl(int status, int asaptiveFlag, int interfereDragFlag,int ingularityConstraintsFlag, int forceCollisionFlag, Object[] M, Object[] B, Object[] K, Object[] F, double Fmax, double Vmax)
 
-获取力传感器拖动开关状态
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Pobieranie stanu przełącznika przeciągania dla czujnika siły
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief 获取力传感器拖动开关状态
-    * @return List[0]:错误码; List[1] : dragState 力传感器辅助拖动控制状态，0-关闭；1-开启; List[1] : sixDimensionalDragState 六维力辅助拖动控制状态，0-关闭；1-开启
+    * @brief Pobiera stan przełącznika przeciągania dla czujnika siły
+    * @return List[0]:kod błędu; List[1] : dragState Stan sterowania wspomaganiem przeciągania przez czujnik siły, 0-wyłączone; 1-włączone; List[1] : sixDimensionalDragState Stan sterowania wspomaganiem przeciągania przez siłę sześcioosiową, 0-wyłączone; 1-włączone
     */
     List<Integer> GetForceAndTorqueDragState();
 
-报错清除后力传感器自动开启
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Automatyczne włączanie czujnika siły po wyczyszczeniu błędu
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief 报错清除后力传感器自动开启
-    * @param [in] status 控制状态，0-关闭；1-开启
-    * @return 错误码
+    * @brief Automatyczne włączanie czujnika siły po wyczyszczeniu błędu
+    * @param [in] status Stan sterowania, 0-wyłączone; 1-włączone
+    * @return Kod błędu
     */
     int SetForceSensorDragAutoFlag(int status)
 
-力传感器辅助拖动代码示例
-++++++++++++++++++++++++++++++++++++++++++
+Przykład kodu wspomagania przeciągania przez czujnik siły
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
@@ -791,26 +791,26 @@
         return 0;
     }
 
-设置六维力和关节阻抗混合拖动开关及参数
-+++++++++++++++++++++++++++++++++++++++++++++
+Ustawianie przełącznika i parametrów mieszanego przeciągania z wykorzystaniem siły sześcioosiowej i impedancji stawów
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief 设置六维力和关节阻抗混合拖动开关及参数
-    * @param [in] status 控制状态，0-关闭；1-开启
-    * @param [in] impedanceFlag 阻抗开启标志，0-关闭；1-开启
-    * @param [in] lamdeGain 拖动增益
-    * @param [in] KGain 刚度增益
-    * @param [in] BGain 阻尼增益
-    * @param [in] dragMaxTcpVel 拖动末端最大线速度限制
-    * @param [in] dragMaxTcpOriVel 拖动末端最大角速度限制
-    * @return 错误码
+    * @brief Ustawia przełącznik i parametry mieszanego przeciągania z wykorzystaniem siły sześcioosiowej i impedancji stawów
+    * @param [in] status Stan sterowania, 0-wyłączone; 1-włączone
+    * @param [in] impedanceFlag Flaga włączenia impedancji, 0-wyłączona; 1-włączona
+    * @param [in] lamdeGain Wzmocnienie przeciągania
+    * @param [in] KGain Wzmocnienie sztywności
+    * @param [in] BGain Wzmocnienie tłumienia
+    * @param [in] dragMaxTcpVel Maksymalne ograniczenie prędkości liniowej końcówki podczas przeciągania
+    * @param [in] dragMaxTcpOriVel Maksymalne ograniczenie prędkości kątowej końcówki podczas przeciągania
+    * @return Kod błędu
     */
     int ForceAndJointImpedanceStartStop(int status, int impedanceFlag, Object[] lamdeGain, Object[] KGain, Object[] BGain, double dragMaxTcpVel, double dragMaxTcpOriVel);
 
-六维力和关节阻抗混合拖动代码示例
-+++++++++++++++++++++++++++++++++++++++++++++
+Przykład kodu mieszanego przeciągania z wykorzystaniem siły sześcioosiowej i impedancji stawów
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
@@ -831,30 +831,29 @@
         return 0;
     }
 
-阻抗启停控制
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Sterowanie uruchamianiem/zatrzymywaniem impedancji
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief 阻抗启停控制
-    * @param [in] status 0：关闭；1-开启
-    * @param [in] workSpace 0-关节空间；1-迪卡尔空间
-    * @param [in] forceThreshold 触发力阈值(N)
-    * @param [in] m 质量参数
-    * @param [in] b 阻尼参数
-    * @param [in] k 刚度参数
-    * @param [in] maxV 最大线速度(mm/s)
-    * @param [in] maxVA 最大线加速度(mm/s2)
-    * @param [in] maxW 最大角速度(°/s)
-    * @param [in] maxWA 最大角加速度(°/s2)
-    * @return 错误码
+    * @brief Sterowanie uruchamianiem/zatrzymywaniem impedancji
+    * @param [in] status 0: wyłączone; 1: włączone
+    * @param [in] workSpace 0-przestrzeń stawów; 1-przestrzeń kartezjańska
+    * @param [in] forceThreshold Próg siły wyzwalającej (N)
+    * @param [in] m Parametr masy
+    * @param [in] b Parametr tłumienia
+    * @param [in] k Parametr sztywności
+    * @param [in] maxV Maksymalna prędkość liniowa (mm/s)
+    * @param [in] maxVA Maksymalne przyspieszenie liniowe (mm/s2)
+    * @param [in] maxW Maksymalna prędkość kątowa (°/s)
+    * @param [in] maxWA Maksymalne przyspieszenie kątowe (°/s2)
+    * @return Kod błędu
     */
     public int ImpedanceControlStartStop(int status, int workSpace, double[] forceThreshold, double[] m, double[] b, double[] k, double maxV, double maxVA, double maxW, double maxWA)
 
-
-机器人阻抗启停控制代码示例
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Przykład kodu sterowania uruchamianiem/zatrzymywaniem impedancji robota
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
@@ -913,15 +912,15 @@
         return 0;
     }
 
-开启力矩补偿功能及补偿系数
-+++++++++++++++++++++++++++++++++++++++++++++
+Włączanie funkcji kompensacji momentu i współczynnik kompensacji
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief 开启力矩补偿功能及补偿系数
-    * @param  status 开关，0-关闭；1-开启
-    * @param  torqueCoeff J1-J6力矩补偿系数[0-1]
-    * @return 错误码
+    * @brief Włączanie funkcji kompensacji momentu i współczynnik kompensacji
+    * @param status Przełącznik, 0-wyłączone; 1-włączone
+    * @param torqueCoeff Współczynniki kompensacji momentu dla J1-J6 [0-1]
+    * @return Kod błędu
     */
     public int SerCoderCompenParams(int status, double[] torqueCoeff)

@@ -1,23 +1,23 @@
-CNDE简介
-==================
+Wprowadzenie do CNDE
+====================
 
-协作机器人可配置网络数据交换协议（以下简称CNDE）是一种客户端通过UDP通讯进行机器人控制和获取机器人反馈状态的方式。
+Konfigurowalny protokół wymiany danych sieciowych dla robota współpracującego (zwany dalej CNDE) to sposób, w jaki klient może sterować robotem i uzyskiwać informacje zwrotne o jego stanie za pośrednictwem komunikacji UDP.
 
-表1-1为CNDE可以获取到的机器人所有状态集合，客户端可以从表中任意挑选若干个需要的状态，并使机器人按照设定的反馈周期进行状态反馈。
+Tabela 1-1 przedstawia wszystkie stany robota, które można uzyskać za pośrednictwem CNDE. Klient może wybrać dowolną liczbę potrzebnych stanów z tabeli i sprawić, aby robot przekazywał informację zwrotną o stanie zgodnie z ustawionym okresem.
 
-同样，客户端也可以从表1-2中挑选需要的机器人控制功能组合进行机器人控制操作。客户端和机器人CNDE通信数据需按照指定的帧格式，机器人CNDE通讯端口为20005和20006，20005端口用于TCP通信，20006端口用于UDP通信。
+Podobnie klient może również wybrać potrzebne kombinacje funkcji sterowania robotem z Tabeli 1-2 w celu wykonania operacji sterowania robotem. Dane komunikacyjne CNDE między klientem a robotem muszą być zgodne z określonym formatem ramki. Porty komunikacyjne CNDE robota to 20005 i 20006. Port 20005 jest używany do komunikacji TCP, a port 20006 do komunikacji UDP.
 
-使用机器人CNDE功能主要有以下四个步骤：
+Korzystanie z funkcji CNDE robota obejmuje głównie następujące cztery kroki:
 
-①输入、输出数据内容配置：客户端向机器人发送一条输入、输出配置指令，其中指令内容形如“std_DI_box,cfg_DI_box,motion_queue_len”等一系列控制或状态功能名称，机器人端记录并识别这些名称后向客户端反馈对应功能数据类型如“UINT8,UINT8,INT32”，即表示配置成功。
+① Konfiguracja treści danych wejściowych i wyjściowych: Klient wysyła do robota instrukcję konfiguracji wejść i wyjść. Treść instrukcji ma postać ciągu nazw funkcji sterowania lub stanu, takich jak „std_DI_box,cfg_DI_box,motion_queue_len”. Po zarejestrowaniu i rozpoznaniu tych nazw przez robot, robot wysyła do klienta informację zwrotną z typami danych odpowiadających funkcji, np. „UINT8,UINT8,INT32”, co oznacza pomyślną konfigurację.
 
-②启动机器人CNDE数据输出：客户端向机器人发送一条启动CNDE数据输出指令，机器人即开始按照配置的周期以字节数组(小端模式)的形式将机器人状态数据通过UDP发送至客户端。
+② Uruchomienie wyjścia danych CNDE robota: Klient wysyła do robota instrukcję uruchomienia wyjścia danych CNDE. Robot zaczyna następnie wysyłać dane stanu robota do klienta za pośrednictwem UDP w postaci tablicy bajtów (tryb little-endian) zgodnie ze skonfigurowanym okresem.
 
-③解析机器人状态数据：客户端循环接收机器人反馈的状态数据，并根据输出配置时机器人反馈的数据类型和表1-3中每个数据类型对应的字节长度进行数据解析，得到每个状态的实际数值。机器人CNDE输出数据最多支持4096个字节，可配置CNDE输出周期为1 ~ 200ms。
+③ Parsowanie danych stanu robota: Klient odbiera dane stanu zwracane przez robota w pętli i parsuje dane na podstawie typów danych zwróconych przez robota podczas konfiguracji wyjść oraz długości bajtowej odpowiadającej każdemu typowi danych w Tabeli 1-3, uzyskując rzeczywiste wartości każdego stanu. Dane wyjściowe CNDE robota obsługują maksymalnie 4096 bajtów. Okres wyjścia CNDE można skonfigurować w zakresie od 1 do 200 ms.
 
-④发送机器人控制数据：客户端根据输入配置时机器人反馈的数据类型和表1-3中每个数据类型对应的字节长度进行控制数据组包，并通过UDP通讯发送到机器人，机器人端收到控制数据后进行数据解析和机器人控制操作。机器人CNDE输入支持256个配方，客户端可以根据需要先配置多个输入配方，在向机器人发送输入数据时需要指定当前数据对应的配方编号。
+④ Wysyłanie danych sterujących do robota: Klient pakuje dane sterujące na podstawie typów danych zwróconych przez robota podczas konfiguracji wejść oraz długości bajtowej odpowiadającej każdemu typowi danych w Tabeli 1-3, a następnie wysyła je do robota za pośrednictwem komunikacji UDP. Po otrzymaniu danych sterujących robot parsuje je i wykonuje operacje sterowania robotem. CNDE wejściowe robota obsługuje 256 receptur. Klient może najpierw skonfigurować wiele receptur wejściowych zgodnie z potrzebami. Podczas wysyłania danych wejściowych do robota należy określić numer receptury odpowiadający bieżącym danym.
 
-.. centered:: 表1-1 机器人输出配置功能
+.. centered:: Tabela 1-1 Funkcje konfiguracji wyjść robota
 
 .. list-table::
    :widths: 20 40 80
@@ -25,768 +25,768 @@ CNDE简介
    :align: center
    :class: sheet-center
 
-   * - **名称**
-     - **数据类型**
-     - **描述**
+   * - **Nazwa**
+     - **Typ danych**
+     - **Opis**
 
    * - std_DI_box
      - UINT8
-     - 控制箱标准DI输入(bit0 ~ bit7表示DI0 ~ DI7)
+     - Standardowe wejście DI skrzynki sterowniczej (bit0 ~ bit7 oznaczają DI0 ~ DI7)
 
    * - cfg_DI_box
      - UINT8
-     - 控制箱可配置CI输入(bit0 ~ bit7表示CI0 ~ CI7)
+     - Konfigurowalne wejście CI skrzynki sterowniczej (bit0 ~ bit7 oznaczają CI0 ~ CI7)
 
    * - cfg_DI_tool
      - UINT8
-     - 控制箱可配置工具DI输入(bit0 ~ bit2表示toolDI0 ~ toolDI1)
+     - Konfigurowalne wejście DI narzędzia skrzynki sterowniczej (bit0 ~ bit2 oznaczają toolDI0 ~ toolDI1)
 
    * - std_AI0_box
      - DOUBLE
-     - 控制箱模拟量输入AI0(0 ~ 4095)
+     - Wejście analogowe AI0 skrzynki sterowniczej (0 ~ 4095)
 
    * - std_AI1_box
      - DOUBLE
-     - 控制箱模拟量输入AI1(0 ~ 4095)
+     - Wejście analogowe AI1 skrzynki sterowniczej (0 ~ 4095)
 
    * - std_AI_tool
      - DOUBLE
-     - 末端工具模拟量输入tool_AI0(0 ~ 4095)
+     - Wejście analogowe tool_AI0 narzędzia końcowego (0 ~ 4095)
 
    * - run_up_time
      - DOUBLE
-     - 机器人开机时间统计(s)
+     - Statystyka czasu pracy robota od uruchomienia (s)
 
    * - target_joint_pos
      - DOUBLE_6
-     - 关节1-6目标位置(°)
+     - Pozycja docelowa stawów 1-6 (°)
 
    * - target_joint_vel
      - DOUBLE_6
-     - 关节1-6目标速度(°/s)
+     - Prędkość docelowa stawów 1-6 (°/s)
 
    * - target_joint_acc
      - DOUBLE_6
-     - 关节1-6目标加速度(°/s2)
+     - Przyspieszenie docelowe stawów 1-6 (°/s²)
 
    * - target_joint_current
      - DOUBLE_6
-     - 关节1-6目标电流(A)
+     - Prąd docelowy stawów 1-6 (A)
 
    * - target_joint_torque
      - DOUBLE_6
-     - 关节1-6目标扭矩(Nm)
+     - Moment obrotowy docelowy stawów 1-6 (Nm)
 
    * - actual_joint_pos
      - DOUBLE_6
-     - 关节1-6当前位置(°)
+     - Bieżąca pozycja stawów 1-6 (°)
 
    * - actual_joint_vel
      - DOUBLE_6
-     - 关节1-6当前速度(°/s)
+     - Bieżąca prędkość stawów 1-6 (°/s)
 
    * - actual_joint_current
      - DOUBLE_6
-     - 关节1-6当前电流(A)
+     - Bieżący prąd stawów 1-6 (A)
 
    * - actual_joint_torque
      - DOUBLE_6
-     - 关节1-6目标扭矩(Nm)
+     - Rzeczywisty moment obrotowy stawów 1-6 (Nm)
 
    * - actual_TCP_pos
      - DOUBLE_6
-     - 工具当前位置DKR(mm)
+     - Bieżąca pozycja narzędzia DKR (mm)
 
    * - actual_TCP_vel
      - DOUBLE_6
-     - 工具当前速度DKR(mm/s)
+     - Bieżąca prędkość narzędzia DKR (mm/s)
 
    * - actual_TCP_force
      - DOUBLE_6
-     - 工具合力DKR(N)
+     - Całkowita siła narzędzia DKR (N)
 
    * - target_TCP_pos
      - DOUBLE_6
-     - 工具目标位置DKR(mm)
+     - Docelowa pozycja narzędzia DKR (mm)
 
    * - target_TCP_vel
      - DOUBLE_6
-     - 工具目标速度DKR(mm/s)
+     - Docelowa prędkość narzędzia DKR (mm/s)
 
    * - std_DO_box
      - UINT8
-     - 控制箱标准DO输出(bit0 ~ bit7表示DO0 ~ DO7)
+     - Standardowe wyjście DO skrzynki sterowniczej (bit0 ~ bit7 oznaczają DO0 ~ DO7)
 
    * - cfg_DO_box
      - UINT8
-     - 控制箱可配置CO输出(bit0 ~ bit7表示CO0 ~ CO7)
+     - Konfigurowalne wyjście CO skrzynki sterowniczej (bit0 ~ bit7 oznaczają CO0 ~ CO7)
 
    * - cfg_DO_tool
      - UINT8
-     - 控制箱标准工具DO输出(bit0 ~ bit1表示toolDO0 ~ toolDO1)
+     - Standardowe wyjście DO narzędzia skrzynki sterowniczej (bit0 ~ bit1 oznaczają toolDO0 ~ toolDO1)
 
    * - std_AO0_box
      - DOUBLE
-     - 控制箱模拟量AO0 (0.0 ~ 4095.0)
+     - Wyjście analogowe AO0 skrzynki sterowniczej (0.0 ~ 4095.0)
 
    * - std_AO1_box
      - DOUBLE
-     - 控制箱模拟量AO1 (0.0 ~ 4095.0)
+     - Wyjście analogowe AO1 skrzynki sterowniczej (0.0 ~ 4095.0)
 
    * - std_AO_tool
      - DOUBLE
-     - 工具模拟量AO1 (0.0 ~ 4095.0)
+     - Wyjście analogowe AO1 narzędzia (0.0 ~ 4095.0)
 
    * - robot_mode
      - UINT8
-     - 机器人模式(0-自动；1-手动)
+     - Tryb robota (0-automatyczny; 1-ręczny)
 
    * - collision_level
      - UINT8_6
-     - 关节1-6碰撞等级(1 ~ 10)
+     - Poziom kolizji stawów 1-6 (1 ~ 10)
 
    * - speed_scaling_man
      - DOUBLE
-     - 手动模式速度百分比(0 ~ 100)
+     - Procent prędkości w trybie ręcznym (0 ~ 100)
 
    * - speed_scaling_auto
      - DOUBLE
-     - 自动模式速度百分比(0 ~ 100)
+     - Procent prędkości w trybie automatycznym (0 ~ 100)
 
    * - program_state
      - UINT8
-     - 机器人程序运行状态(1-停止；2-运动中；3-暂停；4-拖动)
+     - Stan działania programu robota (1-zatrzymany; 2-w ruchu; 3-wstrzymany; 4-przeciąganie)
 
    * - line_number
      - INT32
-     - 当前程序运行行号
+     - Numer bieżącej linii wykonywanego programu
 
    * - payload
      - DOUBLE
-     - 负载质量(kg)
+     - Masa ładunku (kg)
 
    * - pay_cog
      - DOUBLE_3
-     - 负载质心(x,y,z)(mm)
+     - Środek ciężkości ładunku (x, y, z) (mm)
 
    * - motion_queue_len
      - INT32
-     - 当前运动队列长度
+     - Długość bieżącej kolejki ruchu
    
    * - ft_sensor_data
      - DOUBLE_6
-     - 力传感器原始数据
+     - Surowe dane czujnika siły
 
    * - main_code
      - INT32
-     - 主故障码
+     - Główny kod usterki
 
    * - sub_code
      - INT32
-     - 子故障码
+     - Podrzędny kod usterki
 
    * - emergency_stop
      - UINT8
-     - 急停状态
+     - Stan awaryjnego zatrzymania
 
    * - motion_done
      - INT32
-     - 运动完成状态
+     - Stan ukończenia ruchu
 
    * - timestamp_us
      - UINT64
-     - 机器人系统时间(us)
+     - Czas systemowy robota (µs)
 
    * - output_BIT_reg_8xX
      - UINT8_X
-     - BIT型机器人输出寄存器(8xX表示寄存器个数，若您需要16个BIT型输出寄存器，则实际名称为：“output_BIT_reg_8x2”，机器人最多支持128个BIT型输出寄存器)
+     - Rejestry wyjściowe robota typu BIT (8xX oznacza liczbę rejestrów, jeśli potrzebujesz 16 rejestrów wyjściowych typu BIT, rzeczywista nazwa to: „output_BIT_reg_8x2”, robot obsługuje maksymalnie 128 rejestrów wyjściowych typu BIT)
 
    * - output_INT_reg_X
      - INT32_X
-     - INT型机器人输出寄存器(X表示寄存器个数，若您需要16个INT型输出寄存器，则实际名称为：“output_INT_reg_16”，机器人最多支持64个INT型输出寄存器)
+     - Rejestry wyjściowe robota typu INT (X oznacza liczbę rejestrów, jeśli potrzebujesz 16 rejestrów wyjściowych typu INT, rzeczywista nazwa to: „output_INT_reg_16”, robot obsługuje maksymalnie 64 rejestry wyjściowe typu INT)
 
    * - output_DOUBLE_reg_X
      - DOUBLE_X
-     - DOUBLE型机器人输出寄存器(X表示寄存器个数，若您需要16个DOUBLE型输出寄存器，则实际名称为：“output_DOUBLE_reg_16”，机器人最多支持64个DOUBLE型输出寄存器)
+     - Rejestry wyjściowe robota typu DOUBLE (X oznacza liczbę rejestrów, jeśli potrzebujesz 16 rejestrów wyjściowych typu DOUBLE, rzeczywista nazwa to: „output_DOUBLE_reg_16”, robot obsługuje maksymalnie 64 rejestry wyjściowe typu DOUBLE)
 
    * - servoj_time
      - UINT64_5
-     - servoj时间戳数据,单位纳秒
+     - Dane znacznika czasu servoj, jednostka nanosekundy
 
    * - actual_joint_temp
      - DOUBLE_6
-     - 关节j1-j6驱动器温度，单位°
+     - Temperatura napędów stawów j1-j6, jednostka °
 
    * - axle_gen_com_data
      - UINT8_130
-     - 末端通用周期性数据
+     - Ogólne dane okresowe końcówki
 
    * - abnormal_stop
      - UINT8
-     - 异常状态，0：无异常，1：有异常
+     - Stan nieprawidłowy, 0: brak nieprawidłowości, 1: występuje nieprawidłowość
 
    * - cur_lua_file_name
      - UINT8_256
-     - 当前运行lua文件名称
+     - Nazwa bieżącego pliku lua
 
    * - prog_total_line
      - UINT8
-     - 当前文件总行数
+     - Całkowita liczba linii bieżącego pliku
 
    * - safety_box_signal
      - UINT8_6
-     - 按钮盒按键信号 0：按下  1：松开
+     - Sygnały przycisków panelu przyciskowego 0: naciśnięty 1: zwolniony
 
    * - welding_voltage
      - DOUBLE
-     - 实际焊接电压，单位V
+     - Rzeczywiste napięcie spawania, jednostka V
 
    * - welding_current
      - DOUBLE
-     - 实际焊接电流，单位A
+     - Rzeczywisty prąd spawania, jednostka A
 
    * - welding_track_speed
      - DOUBLE
-     - 焊缝跟踪速度mm/s
+     - Prędkość śledzenia spoiny mm/s
 
    * - tpd_exception
      - UINT8
-     - TPD异常
+     - Wyjątek TPD
 
    * - alarm_reboot_robot
      - UINT8
-     - 机器人重启警告
+     - Ostrzeżenie o ponownym uruchomieniu robota
 
    * - modbus_master_connect
      - UINT8
-     - | Modbus8个主站的连接状态  
-       | bit0-bit7代表0-7个主站0-未连接，1-已连接
+     - | Stan połączenia 8 masterów Modbus  
+       | bit0-bit7 oznaczają masterów 0-7, 0-odłączony, 1-połączony
 
    * - modbus_slave_connect
      - UINT8
-     - Modbus从站连接状态 0-未连接 1-已连接
+     - Stan połączenia slave Modbus 0-odłączony 1-połączony
 
    * - btn_box_stop_signal
      - UINT8
-     - 急停按钮信号
+     - Sygnał przycisku awaryjnego zatrzymania
 
    * - drag_alarm
      - UINT8
-     - 拖动警告
+     - Ostrzeżenie przeciągania
 
    * - safety_door_alarm
      - UINT8
-     - 安全门警告，0无警告，1安全门触发
+     - Ostrzeżenie drzwi bezpieczeństwa, 0 brak ostrzeżenia, 1 drzwi bezpieczeństwa wyzwolone
 
    * - safety_plane_alarm
      - UINT8
-     - 安全墙警告，0无警告，1进入安全墙
+     - Ostrzeżenie ściany bezpieczeństwa, 0 brak ostrzeżenia, 1 wejście w ścianę bezpieczeństwa
 
    * - motion_alarm
      - UINT8
-     - | 运动警告，0-无警告，
-       | 1-LIN指令姿态变化过大，  
-       | 2-TCP超速，
-       | 3-发生碰撞，  
-       | 4-1轴超过最大速度，
-       | 5-2轴超过最大速度，  
-       | 6-3轴超过最大速度，
-       | 7-4轴超过最大速度，  
-       | 8-5轴超过最大速度，
-       | 9-6轴超过最大速度，  
-       | 10-1轴关节指令与反馈偏差过大，
-       | 11-2轴关节指令与反馈偏差过大，  
-       | 12-3轴关节指令与反馈偏差过大，
-       | 13-4轴关节指令与反馈偏差过大，  
-       | 14-5轴关节指令与反馈偏差过大，
-       | 15-6轴关节指令与反馈偏差过大，  
-       | 16-奇异位姿，
-       | 17-LIN指令运动速度自适应，  
-       | 18-目标速度调整超时或调速未完成，
-       | 19-旋转插入运动失败，  
-       | 20-螺旋插入运动失败，
-       | 21-直线插入运动失败，  
-       | 22-表面定位运动失败
+     - | Ostrzeżenie ruchu, 0-brak ostrzeżenia,
+       | 1-Zbyt duża zmiana orientacji w instrukcji LIN,
+       | 2-Przekroczenie prędkości TCP,
+       | 3-Wystąpiła kolizja,
+       | 4-Przekroczenie maksymalnej prędkości osi 1,
+       | 5-Przekroczenie maksymalnej prędkości osi 2,
+       | 6-Przekroczenie maksymalnej prędkości osi 3,
+       | 7-Przekroczenie maksymalnej prędkości osi 4,
+       | 8-Przekroczenie maksymalnej prędkości osi 5,
+       | 9-Przekroczenie maksymalnej prędkości osi 6,
+       | 10-Zbyt duże odchylenie między instrukcją a sprzężeniem zwrotnym stawu 1,
+       | 11-Zbyt duże odchylenie między instrukcją a sprzężeniem zwrotnym stawu 2,
+       | 12-Zbyt duże odchylenie między instrukcją a sprzężeniem zwrotnym stawu 3,
+       | 13-Zbyt duże odchylenie między instrukcją a sprzężeniem zwrotnym stawu 4,
+       | 14-Zbyt duże odchylenie między instrukcją a sprzężeniem zwrotnym stawu 5,
+       | 15-Zbyt duże odchylenie między instrukcją a sprzężeniem zwrotnym stawu 6,
+       | 16-Osobliwa pozycja,
+       | 17-Adaptacja prędkości ruchu instrukcji LIN,
+       | 18-Przekroczenie limitu czasu regulacji prędkości docelowej lub regulacja nieukończona,
+       | 19-Nieudany ruch wstawiania obrotowego,
+       | 20-Nieudany ruch wstawiania spiralnego,
+       | 21-Nieudany ruch wstawiania liniowego,
+       | 22-Nieudany ruch lokalizacji powierzchni
 
    * - interfere_alarm
      - UINT8
-     - 干涉区警告，0无警告，1进入干涉区
+     - Ostrzeżenie strefy interferencji, 0 brak ostrzeżenia, 1 wejście w strefę interferencji
 
    * - udp_cmd_state
      - INT32
-     - UDP连接状态
+     - Stan połączenia UDP
 
    * - weld_ready_state
      - UINT8
-     - 焊机准备好状态，1：准备好，0：焊机错误
+     - Stan gotowości spawarki, 1: gotowa, 0: błąd spawarki
 
    * - alarm_check_emerg_stop_btn
      - UINT8
-     - 关节通讯异常警告
+     - Ostrzeżenie o nieprawidłowej komunikacji stawów
 
    * - ts_tm_cmd_com_error
      - UINT8
-     - 扭矩系统指令错误
+     - Błąd instrukcji systemu momentu obrotowego
 
    * - ts_tm_state_com_error
      - UINT8
-     - 扭矩系统状态错误
+     - Błąd stanu systemu momentu obrotowego
 
    * - ctrl_box_error
      - INT32
-     - 控制箱错误
+     - Błąd skrzynki sterowniczej
 
    * - safety_data_state
      - UINT8
-     - 安全数据状态标志，0无异常，1-异常
+     - Znacznik stanu danych bezpieczeństwa, 0 brak nieprawidłowości, 1-nieprawidłowość
 
    * - force_sensor_err_state
      - UINT8
-     - 力传感器连接超时故障；bit0-bit1对应力传感器ID1-ID2
+     - Błąd przekroczenia limitu czasu połączenia czujnika siły; bit0-bit1 odpowiadają ID1-ID2 czujnika siły
 
    * - ctrl_open_lua_errcode
      - UINT8_4
-     - 控制器开放协议错误码
+     - Kod błędu protokołu otwartego kontrolera
 
    * - servo_id
      - UINT8
-     - 伺服驱动器ID号
+     - Numer ID serwonapędu
 
    * - servo_errcode
      - INT32
-     - 伺服驱动器故障码
+     - Kod usterki serwonapędu
 
    * - servo_state
      - INT32
-     - 伺服器驱动器状态
+     - Stan serwonapędu
 
    * - servo_actual_pos
      - DOUBLE
-     - 伺服当前位置
+     - Bieżąca pozycja serwa
 
    * - servo_actual_speed
      - DOUBLE
-     - 伺服当前速度
+     - Bieżąca prędkość serwa
    
    * - servo_actual_torque
      - DOUBLE
-     - 伺服当前转矩
+     - Bieżący moment obrotowy serwa
    
    * - gripper_active
      - INT32
-     - 夹爪激活状态
+     - Stan aktywacji chwytaka
    
    * - gripper_position
      - UINT8
-     - 夹爪位置反馈（百分比）
+     - Informacja zwrotna o pozycji chwytaka (procent)
    
    * - gripper_speed
      - INT32
-     - 夹爪速度反馈（百分比）
+     - Informacja zwrotna o prędkości chwytaka (procent)
    
    * - gripper_current
      - INT32
-     - 夹爪电流反馈（百分比）
+     - Informacja zwrotna o prądzie chwytaka (procent)
    
    * - gripper_temp
      - INT32
-     - 夹爪当前温度，单位°
+     - Bieżąca temperatura chwytaka, jednostka °
    
    * - gripper_voltage
      - INT32
-     - 夹爪当前电压，单位V
+     - Bieżące napięcie chwytaka, jednostka V
    
    * - rotating_gripper_num
      - DOUBLE
-     - 旋转夹爪旋转圈数反馈
+     - Informacja zwrotna o liczbie obrotów chwytaka obrotowego
    
    * - rotating_gripper_speed
      - UINT8
-     - 旋转夹爪旋转速度反馈（百分比）
+     - Informacja zwrotna o prędkości obrotowej chwytaka obrotowego (procent)
    
    * - rotating_gripper_tor
      - UINT8
-     - 旋转夹爪旋转力矩反馈（百分比）
+     - Informacja zwrotna o momencie obrotowym chwytaka obrotowego (procent)
    
    * - weld_break_off_state
      - UINT8
-     - 焊接中断状态：0-焊接未中断   1-焊接中断
+     - Stan przerwania spawania: 0-spawanie nieprzerwane, 1-spawanie przerwane
    
    * - weld_arc_state
      - UINT8
-     - 焊接电弧状态 0-电弧未中断 1-电弧已中断
+     - Stan łuku spawalniczego 0-łuk nieprzerwany, 1-łuk przerwany
    
    * - smarttool_state
      - UINT32
-     - 末端扩展IO数据(Smart-Tool)
+     - Rozszerzone dane I/O końcówki (Smart-Tool)
    
    * - tool_coord
      - DOUBLE_6
-     - 当前工具相对于末端位姿
+     - Bieżąca pozycja narzędzia względem końcówki
    
    * - wobj_coord
      - DOUBLE_6
-     - 当前工件相对于基座位姿
+     - Bieżąca pozycja przedmiotu względem podstawy
    
    * - exTool_coord
      - DOUBLE_6
-     - 当前外部工具相对于工具位姿
+     - Bieżąca pozycja zewnętrznego narzędzia względem pozycji narzędzia
    
    * - exAxis_coord
      - DOUBLE_6
-     - 当前外部轴相对于基坐标系位姿
+     - Bieżąca pozycja zewnętrznej osi względem podstawowego układu współrzędnych
    
    * - robot_state
      - UINT8
-     - | 机器人运行状态， 
-       | 1.已经停止;2.正在运动;3.已经暂停;4.拖动
+     - | Stan pracy robota,
+       | 1. zatrzymany; 2. w ruchu; 3. wstrzymany; 4. przeciąganie
    
    * - actual_flange_pos
      - DOUBLE_6
-     - 末端实际位姿
+     - Rzeczywista pozycja końcówki
    
    * - target_TCP_cmpvel
      - DOUBLE_2
-     - TCP指令线性、姿态速度，单位mm/s、°/s
+     - Prędkość liniowa i orientacji instrukcji TCP, jednostka mm/s, °/s
    
    * - actual_TCP_cmpvel
      - DOUBLE_2
-     - TCP实际线性、姿态速度，单位mm/s、°/s
+     - Rzeczywista prędkość liniowa i orientacji TCP, jednostka mm/s, °/s
    
    * - tool_id
      - INT32
-     - 工具号
+     - Numer narzędzia
    
    * - wobj_id
      - INT32
-     - 工件号
+     - Numer przedmiotu
    
    * - ft_sensor_raw_data
      - DOUBLE_6
-     - 末端力/力矩-传感器坐标系下原始数据
+     - Surowe dane siły/momentu końcowego - w układzie współrzędnych czujnika
    
    * - ft_sensor_active
      - UINT8
-     - 力/扭矩传感器激活状态
+     - Stan aktywacji czujnika siły/momentu
    
    * - gripper_motion_done
      - UINT8
-     - 夹爪运动完成
+     - Ruch chwytaka zakończony
    
    * - collision_state
      - UINT8
-     - 碰撞检测状态
+     - Stan wykrywania kolizji
    
    * - trajectory_pnum
      - INT32
-     - 离散点运动当前序号
+     - Bieżący numer punktu w ruchu dyskretnym
    
    * - safety_stop0_state
      - UINT8
-     - 安全停止SI0信号状态
+     - Stan sygnału bezpiecznego zatrzymania SI0
    
    * - safety_stop1_state
      - UINT8
-     - 安全停止SI1信号状态
+     - Stan sygnału bezpiecznego zatrzymania SI1
    
    * - gripper_fault_id
      - UINT8
-     - 错误夹爪号
+     - Numer uszkodzonego chwytaka
    
    * - gripper_fault
      - INT32
-     - 夹爪错误编号
+     - Numer błędu chwytaka
    
    * - ext_DI_state
      - UINT8_16
-     - 扩展DI
+     - Rozszerzone DI
    
    * - ext_DO_state
      - UINT8_16
-     - 扩展DO
+     - Rozszerzone DO
    
    * - ext_AI_state
      - INT32_4
-     - 扩展AI
+     - Rozszerzone AI
    
    * - ext_AO_state
      - INT32_4
-     - 扩展AO
+     - Rozszerzone AO
    
    * - rbt_enable_state
      - INT32
-     - 驱动器使能完成状态
+     - Stan ukończenia załączenia napędu
    
    * - joint_driver_torque
      - DOUBLE_6
-     - 关节j1-j6实际扭矩值，单位Nm
+     - Rzeczywiste wartości momentu obrotowego stawów j1-j6, jednostka Nm
    
    * - robot_time
      - INT32_7
-     - 机器人系统时间，年，月，日，时，分，秒，毫秒
+     - Czas systemowy robota, rok, miesiąc, dzień, godzina, minuta, sekunda, milisekunda
    
    * - software_upgrade_state
      - INT32
-     - 机器人软件升级状态
+     - Stan aktualizacji oprogramowania robota
    
    * - end_lua_err_code
      - INT32
-     - 末端按钮信号状态
+     - Stan sygnału przycisku końcowego
    
    * - wide_voltage_ctrl_box_temp
      - DOUBLE
-     - 宽电压控制箱温度，单位°
+     - Temperatura skrzynki sterowniczej szerokiego napięcia, jednostka °
    
    * - wide_voltage_ctrl_box_fan_current
      - INT32
-     - 宽电压控制箱风扇电流
+     - Prąd wentylatora skrzynki sterowniczej szerokiego napięcia
    
    * - last_servoJ_target
      - DOUBLE_6
-     - 最后一个servoJ目标指令位姿
+     - Pozycja ostatniej docelowej instrukcji servoJ
    
    * - servoJ_cmd_num
      - INT32
-     - servoJ指令计数
+     - Licznik instrukcji servoJ
    
    * - strange_pos_flag
      - UINT8
-     - 奇异位姿标志
+     - Znacznik osobliwej pozycji
    
    * - alarm
      - UINT8
-     - | 警告，0-无警告，  
-       | 1-肩关节配置变化，
-       | 2-肘关节配置变化，  
-       | 3-腕关节配置变化，
-       | 4-RPY初始化失败，  
-       | 5-WaitDI等待超时，
-       | 6-WaitAI等待超时，  
-       | 7-WaitToolDI等待超时，
-       | 8-WaitToolAI等待超时，  
-       | 9-起弧成功DI未配置，
-       | 10-WaitAuxDI等待超时，  
-       | 11-WaitAuxAI等待超时，
-       | 12-摆动轨迹中存在不可到达点位，  
-       | 13-传送带跟踪抓取点计算失败，
-       | 14-关节扭矩传感器数据异常
+     - | Ostrzeżenie, 0-brak ostrzeżenia,
+       | 1-Zmiana konfiguracji stawu barkowego,
+       | 2-Zmiana konfiguracji stawu łokciowego,
+       | 3-Zmiana konfiguracji stawu nadgarstkowego,
+       | 4-Nieudana inicjalizacja RPY,
+       | 5-Przekroczenie limitu czasu WaitDI,
+       | 6-Przekroczenie limitu czasu WaitAI,
+       | 7-Przekroczenie limitu czasu WaitToolDI,
+       | 8-Przekroczenie limitu czasu WaitToolAI,
+       | 9-Nieskonfigurowane DI pomyślnego zajarzenia łuku,
+       | 10-Przekroczenie limitu czasu WaitAuxDI,
+       | 11-Przekroczenie limitu czasu WaitAuxAI,
+       | 12-Nieosiągalny punkt w trajektorii oscylacji,
+       | 13-Nieudane obliczenie punktu chwytania śledzenia taśmociągu,
+       | 14-Nieprawidłowe dane czujnika momentu obrotowego stawu
    
    * - dr_alarm
      - UINT8
-     - | 驱动器警告，0-无警告，
-       | 1-1轴驱动器警告，可复位，  
-       | 2-2轴驱动器警告，可复位，
-       | 3-3轴驱动器警告，可复位，  
-       | 4-4轴驱动器警告，可复位，
-       | 5-5轴驱动器警告，可复位，  
-       | 6-6轴驱动器警告，可复位
+     - | Ostrzeżenie napędu, 0-brak ostrzeżenia,
+       | 1-Ostrzeżenie napędu osi 1, możliwe do zresetowania,
+       | 2-Ostrzeżenie napędu osi 2, możliwe do zresetowania,
+       | 3-Ostrzeżenie napędu osi 3, możliwe do zresetowania,
+       | 4-Ostrzeżenie napędu osi 4, możliwe do zresetowania,
+       | 5-Ostrzeżenie napędu osi 5, możliwe do zresetowania,
+       | 6-Ostrzeżenie napędu osi 6, możliwe do zresetowania
    
    * - alive_slave_num_error
      - UINT8
-     - 活动从站数量故障，0-无故障，1-错误，不可复位
+     - Błąd liczby aktywnych stacji podrzędnych, 0-brak błędu, 1-błąd, niemożliwy do resetowania
    
    * - slave_com_error
      - UINT8_8
-     - | 从站通信故障，0-无故障，
-       | 1-从站掉线，  
-       | 2-从站状态与设置值不一致，
-       | 3-从站未配置，  
-       | 4-从站配置错误，
-       | 5-从站初始化错误，  
-       | 6-从站邮箱通信初始化错误
+     - | Błąd komunikacji stacji podrzędnej, 0-brak błędu,
+       | 1-Utrata połączenia ze stacją podrzędną,
+       | 2-Stan stacji podrzędnej niezgodny z ustawioną wartością,
+       | 3-Stacja podrzędna nieskonfigurowana,
+       | 4-Błąd konfiguracji stacji podrzędnej,
+       | 5-Błąd inicjalizacji stacji podrzędnej,
+       | 6-Błąd inicjalizacji komunikacji e-mail stacji podrzędnej
    
    * - cmd_point_error
      - UINT8
-     - | 指令点故障，0-无故障，
-       | 1-关节指令点错误，  
-       | 2-直线目标点错误，
-       | 3-圆弧中间点错误，  
-       | 4-圆弧目标点错误，
-       | 5-圆弧指令点间距过小，  
-       | 6-整圆/螺旋线中间点1错误，
-       | 7-整圆/螺旋线中间点2错误，  
-       | 8-整圆/螺旋线中间点3错误，
-       | 9-整圆/螺旋线指令点间距过小，  
-       | 10-TPD指令点错误，
-       | 11-TPD指令工具与当前工具不符，  
-       | 12-TPD当前指令与下一指令起始点偏差过大，
-       | 13-内外部工具切换错误，  
-       | 14-新螺旋线起点错误，
-       | 15-新样条曲线指令点错误，  
-       | 17-PTP关节指令超限，
-       | 18-TPD关节指令超限，  
-       | 19-LIN\ARC下发关节指令超限，
-       | 20-笛卡尔空间内指令超速，  
-       | 21-关节空间内扭矩指令超限，
-       | 22-JOG关节指令超限，  
-       | 23-轴1关节空间内指令速度超限，
-       | 24-轴2关节空间内指令速度超限，  
-       | 25-轴3关节空间内指令速度超限，
-       | 26-轴4关节空间内指令速度超限，  
-       | 27-轴5关节空间内指令速度超限，
-       | 28-轴6关节空间内指令速度超限，  
-       | 29-关节反馈速度超限，
-       | 30-关节指令与反馈偏差过大，  
-       | 31-DMP目标点错误（包括工具不符），
-       | 32-TCP速度超限，  
-       | 33-下一指令关节配置发生变化，
-       | 34-当前指令关节配置发生变化，  
-       | 35-LIN指令中关节速度超限，
-       | 36-LIN指令自适应速度超出阈值，  
-       | 37-轨迹中存在不可到达点位，
-       | 38-轨迹中存在不可到达点位-奇异位姿，  
-       | 49-ARCSTART和ARCEND之间不允许PTP和SPTP指令，
-       | 50-WEAVESTART和WEAVEEND之间不允许PTP和SPTP指令，  
-       | 51-摆焊参数错误，
-       | 52-摆焊指令点间距过小，  
-       | 53-摆动轨迹中存在不可到达点位-奇异位姿，
-       | 54-摆动轨迹中存在不可到达点位-关节指令超限，
-       | 55-摆动轨迹中存在不可到达点位-规划异常（工具Z与前进方向X夹角重合），
-       | 56-摆动轨迹中存在不可到达点位-规划异常（圆弧路点错误），
-       | 65-激光传感器指令偏差过大，  
-       | 66-激光传感器指令中断，焊缝跟踪提前结束，
-       | 81-外部轴指令速度超限，  
-       | 82-外部轴指令与反馈偏差过大，
-       | 83-扩展外设(外部轴/IO)通信中断，  
-       | 84-扩展外设(外部轴/IO)通信丢包异常，
-       | 85-外部轴1关节空间内指令速度超限，  
-       | 86-外部轴2关节空间内指令速度超限，
-       | 87-外部轴3关节空间内指令速度超限，  
-       | 88-外部轴4关节空间内指令速度超限，
-       | 89-扩展外设(外部轴/IO)Ethercat通信错误，  
-       | 90-扩展外设(外部轴/IO)Canopen通信错误，
-       | 97-传送带跟踪-起始点与参考点姿态变化过大，  
-       | 113-恒力控制-X方向超过最大调整距离，
-       | 114-恒力控制-Y方向超过最大调整距离，  
-       | 115-恒力控制-Z方向超过最大调整距离，
-       | 116-恒力控制-RX方向超过最大调整角度，  
-       | 117-恒力控制-RY方向超过最大调整角度，
-       | 118-恒力控制-RZ方向超过最大调整角度，  
-       | 119-外部传感器数据错误，
-       | 120-螺旋线探索运动失败，  
-       | 121-旋转插入运动失败，
-       | 122-直线插入运动失败，  
-       | 123-表面定位运动失败，
-       | 124-拖动力异常，进入拖动失败，  
-       | 129-超过最大扭矩记录点数，
-       | 130-速度切换错误，  
-       | 131-工具方向超限，  
-       | 132-动量超限，
-       | 133-功率超限，  
-       | 134-STL-Flash诊断异常，  
-       | 135-STL-RAM诊断异常，
-       | 136-STL-CPU诊断异常，  
-       | 137-安全板II-ECAT安全数据异常，
-       | 138-1轴ECAT安全数据异常，  
-       | 139-2轴ECAT安全数据异常，
-       | 140-3轴ECAT安全数据异常，  
-       | 141-4轴ECAT安全数据异常，
-       | 142-5轴ECAT安全数据异常，  
-       | 143-6轴ECAT安全数据异常，
-       | 145-安全板与控制器通讯异常，  
-       | 147-焦点跟随错误，
-       | 148-姿态速度超限，  
-       | 149-关节状态字反馈异常
+     - | Błąd punktu instrukcji, 0-brak błędu,
+       | 1-Błąd punktu instrukcji stawu,
+       | 2-Błąd punktu docelowego linii,
+       | 3-Błąd punktu pośredniego łuku,
+       | 4-Błąd punktu docelowego łuku,
+       | 5-Odstęp między punktami łuku zbyt mały,
+       | 6-Błąd punktu pośredniego 1 okręgu/linii śrubowej,
+       | 7-Błąd punktu pośredniego 2 okręgu/linii śrubowej,
+       | 8-Błąd punktu pośredniego 3 okręgu/linii śrubowej,
+       | 9-Odstęp między punktami okręgu/linii śrubowej zbyt mały,
+       | 10-Błąd punktu instrukcji TPD,
+       | 11-Niezgodność narzędzia instrukcji TPD z bieżącym narzędziem,
+       | 12-Zbyt duże odchylenie między bieżącą instrukcją TPD a punktem początkowym następnej instrukcji,
+       | 13-Błąd przełączania narzędzia wewnętrznego/zewnętrznego,
+       | 14-Błąd punktu początkowego nowej linii śrubowej,
+       | 15-Błąd punktu instrukcji nowej krzywej średniej,
+       | 17-Przekroczenie limitu instrukcji stawu PTP,
+       | 18-Przekroczenie limitu instrukcji stawu TPD,
+       | 19-Przekroczenie limitu instrukcji stawu LIN/ARC,
+       | 20-Przekroczenie prędkości w przestrzeni kartezjańskiej,
+       | 21-Przekroczenie limitu instrukcji momentu obrotowego w przestrzeni stawów,
+       | 22-Przekroczenie limitu instrukcji stawu JOG,
+       | 23-Przekroczenie limitu prędkości instrukcji w przestrzeni stawu dla osi 1,
+       | 24-Przekroczenie limitu prędkości instrukcji w przestrzeni stawu dla osi 2,
+       | 25-Przekroczenie limitu prędkości instrukcji w przestrzeni stawu dla osi 3,
+       | 26-Przekroczenie limitu prędkości instrukcji w przestrzeni stawu dla osi 4,
+       | 27-Przekroczenie limitu prędkości instrukcji w przestrzeni stawu dla osi 5,
+       | 28-Przekroczenie limitu prędkości instrukcji w przestrzeni stawu dla osi 6,
+       | 29-Przekroczenie limitu prędkości sprzężenia zwrotnego stawu,
+       | 30-Zbyt duże odchylenie między instrukcją a sprzężeniem zwrotnym stawu,
+       | 31-Błąd punktu docelowego DMP (w tym niezgodność narzędzia),
+       | 32-Przekroczenie limitu prędkości TCP,
+       | 33-Zmiana konfiguracji stawu w następnej instrukcji,
+       | 34-Zmiana konfiguracji stawu w bieżącej instrukcji,
+       | 35-Przekroczenie limitu prędkości stawu w instrukcji LIN,
+       | 36-Przekroczenie progu prędkości adaptacyjnej w instrukcji LIN,
+       | 37-Nieosiągalny punkt w trajektorii,
+       | 38-Nieosiągalny punkt w trajektorii - osobliwa pozycja,
+       | 49-ARCSTART i ARCEND nie pozwalają na instrukcje PTP i SPTP,
+       | 50-WEAVESTART i WEAVEEND nie pozwalają na instrukcje PTP i SPTP,
+       | 51-Błąd parametrów spawania z oscylacją,
+       | 52-Odstęp między punktami instrukcji spawania z oscylacją zbyt mały,
+       | 53-Nieosiągalny punkt w trajektorii oscylacji - osobliwa pozycja,
+       | 54-Nieosiągalny punkt w trajektorii oscylacji - przekroczenie limitu instrukcji stawu,
+       | 55-Nieosiągalny punkt w trajektorii oscylacji - błąd planowania (zgodność kierunku Z narzędzia z kierunkiem X ruchu do przodu),
+       | 56-Nieosiągalny punkt w trajektorii oscylacji - błąd punktu pośredniego łuku,
+       | 65-Zbyt duże odchylenie instrukcji czujnika laserowego,
+       | 66-Przrwanie instrukcji czujnika laserowego, przedwczesne zakończenie śledzenia spoiny,
+       | 81-Przekroczenie limitu prędkości instrukcji zewnętrznej osi,
+       | 82-Zbyt duże odchylenie między instrukcją a sprzężeniem zwrotnym zewnętrznej osi,
+       | 83-Przerwanie komunikacji z rozszerzonym urządzeniem peryferyjnym (zewnętrzna oś/IO),
+       | 84-Nieprawidłowa utrata pakietów w komunikacji z rozszerzonym urządzeniem peryferyjnym (zewnętrzna oś/IO),
+       | 85-Przekroczenie limitu prędkości instrukcji w przestrzeni stawu dla zewnętrznej osi 1,
+       | 86-Przekroczenie limitu prędkości instrukcji w przestrzeni stawu dla zewnętrznej osi 2,
+       | 87-Przekroczenie limitu prędkości instrukcji w przestrzeni stawu dla zewnętrznej osi 3,
+       | 88-Przekroczenie limitu prędkości instrukcji w przestrzeni stawu dla zewnętrznej osi 4,
+       | 89-Błąd komunikacji EtherCAT z rozszerzonym urządzeniem peryferyjnym (zewnętrzna oś/IO),
+       | 90-Błąd komunikacji Canopen z rozszerzonym urządzeniem peryferyjnym (zewnętrzna oś/IO),
+       | 97-Śledzenie taśmociągu - zbyt duża zmiana orientacji między punktem początkowym a punktem odniesienia,
+       | 113-Sterowanie stałą siłą - przekroczenie maksymalnej odległości regulacji w kierunku X,
+       | 114-Sterowanie stałą siłą - przekroczenie maksymalnej odległości regulacji w kierunku Y,
+       | 115-Sterowanie stałą siłą - przekroczenie maksymalnej odległości regulacji w kierunku Z,
+       | 116-Sterowanie stałą siłą - przekroczenie maksymalnego kąta regulacji w kierunku RX,
+       | 117-Sterowanie stałą siłą - przekroczenie maksymalnego kąta regulacji w kierunku RY,
+       | 118-Sterowanie stałą siłą - przekroczenie maksymalnego kąta regulacji w kierunku RZ,
+       | 119-Błąd danych zewnętrznego czujnika,
+       | 120-Nieudana próba ruchu eksploracyjnego po linii śrubowej,
+       | 121-Nieudany ruch wstawiania obrotowego,
+       | 122-Nieudany ruch wstawiania liniowego,
+       | 123-Nieudany ruch lokalizacji powierzchni,
+       | 124-Nieprawidłowa siła przeciągania, nieudane wejście w tryb przeciągania,
+       | 129-Przekroczenie maksymalnej liczby punktów rejestracji momentu obrotowego,
+       | 130-Błąd przełączania prędkości,
+       | 131-Przekroczenie limitu kierunku narzędzia,
+       | 132-Przekroczenie limitu pędu,
+       | 133-Przekroczenie limitu mocy,
+       | 134-Nieprawidłowość diagnostyki STL-Flash,
+       | 135-Nieprawidłowość diagnostyki STL-RAM,
+       | 136-Nieprawidłowość diagnostyki STL-CPU,
+       | 137-Nieprawidłowe dane bezpieczeństwa II-ECAT płyty bezpieczeństwa,
+       | 138-Nieprawidłowe dane bezpieczeństwa ECAT osi 1,
+       | 139-Nieprawidłowe dane bezpieczeństwa ECAT osi 2,
+       | 140-Nieprawidłowe dane bezpieczeństwa ECAT osi 3,
+       | 141-Nieprawidłowe dane bezpieczeństwa ECAT osi 4,
+       | 142-Nieprawidłowe dane bezpieczeństwa ECAT osi 5,
+       | 143-Nieprawidłowe dane bezpieczeństwa ECAT osi 6,
+       | 145-Nieprawidłowa komunikacja między płytą bezpieczeństwa a kontrolerem,
+       | 147-Błąd śledzenia ogniska,
+       | 148-Przekroczenie limitu prędkości orientacji,
+       | 149-Nieprawidłowe sprzężenie zwrotne słowa stanu stawu
    
    * - IO_error
      - UINT8
-     - | IO故障，0-无故障，
-       | 1-通道错误，可复位，  
-       | 2-数值错误，可复位，
-       | 3-WaitDI等待超时，可复位，  
-       | 4-WaitAI等待超时，可复位，
-       | 5-WaitAxleDI等待超时，可复位，  
-       | 6-WaitAxleAI等待超时，可复位，
-       | 7-通道已配置功能错误，可复位，  
-       | 8-起弧超时，可复位，
-       | 9-收弧超时，可复位，  
-       | 10-寻位超时，可复位，
-       | 11-传送带IO检测超时，可复位，  
-       | 12-WaitAuxDI等待超时，可复位，
-       | 13-WaitAuxAI等待超时，可复位，  
-       | 14-焊丝寻位超时，可复位
+     - | Błąd I/O, 0-brak błędu,
+       | 1-Błąd kanału, możliwy do zresetowania,
+       | 2-Błąd wartości, możliwy do zresetowania,
+       | 3-Przekroczenie czasu oczekiwania WaitDI, możliwy do zresetowania,
+       | 4-Przekroczenie czasu oczekiwania WaitAI, możliwy do zresetowania,
+       | 5-Przekroczenie czasu oczekiwania WaitAxleDI, możliwy do zresetowania,
+       | 6-Przekroczenie czasu oczekiwania WaitAxleAI, możliwy do zresetowania,
+       | 7-Błąd funkcji skonfigurowanej dla kanału, możliwy do zresetowania,
+       | 8-Przekroczenie czasu łuku początkowego, możliwy do zresetowania,
+       | 9-Przekroczenie czasu łuku końcowego, możliwy do zresetowania,
+       | 10-Przekroczenie czasu pozycjonowania, możliwy do zresetowania,
+       | 11-Przekroczenie czasu wykrywania IO taśmociągu, możliwy do zresetowania,
+       | 12-Przekroczenie czasu oczekiwania WaitAuxDI, możliwy do zresetowania,
+       | 13-Przekroczenie czasu oczekiwania WaitAuxAI, możliwy do zresetowania,
+       | 14-Przekroczenie czasu pozycjonowania drutu spawalniczego, możliwy do zresetowania
    
    * - gripper_error
      - UINT8
-     - 夹爪故障，0-无故障，1-夹爪运动超时错误，可复位
+     - Błąd chwytaka, 0-brak błędu, 1-błąd przekroczenia czasu ruchu chwytaka, możliwy do zresetowania
    
    * - file_error
      - UINT8
-     - | 配置文件故障，0-无故障，
-       | 1-zbt配置文件版本错误，初始化错误-不可复位，
-       | 2-zbt配置文件加载失败，初始化错误-不可复位，
-       | 3-user配置文件版本错误，初始化错误-不可复位，
-       | 4-user配置文件加载失败，初始化错误-不可复位，
-       | 5-exaxis配置文件版本错误，初始化错误-不可复位，
-       | 6-exaxis配置文件加载失败，初始化错误-不可复位，
-       | 7-机器人型号不一致，需要重新设置-不可复位，
-       | 8-dhpara配置文件版本错误，初始化错误-不可复位，
-       | 9-dhpara配置文件加载失败，初始化错误-不可复位，
-       | 10-机器人型号未设置-不可复位，
-       | 11-load配置文件版本错误，初始化错误-不可复位，
-       | 12-load配置文件加载失败，初始化错误-不可复位，
-       | 13-speed配置文件版本错误，初始化错误-不可复位，
-       | 14-speed配置文件加载失败，初始化错误-不可复位，
-       | 15-weavepara配置文件版本错误，初始化错误-不可复位，
-       | 16-weavepara配置文件加载失败，初始化错误-不可复位
+     - | Błąd pliku konfiguracyjnego, 0-brak błędu,
+       | 1-Błąd wersji pliku konfiguracyjnego zbt, błąd inicjalizacji - niemożliwy do resetowania,
+       | 2-Nieudane ładowanie pliku konfiguracyjnego zbt, błąd inicjalizacji - niemożliwy do resetowania,
+       | 3-Błąd wersji pliku konfiguracyjnego user, błąd inicjalizacji - niemożliwy do resetowania,
+       | 4-Nieudane ładowanie pliku konfiguracyjnego user, błąd inicjalizacji - niemożliwy do resetowania,
+       | 5-Błąd wersji pliku konfiguracyjnego exaxis, błąd inicjalizacji - niemożliwy do resetowania,
+       | 6-Nieudane ładowanie pliku konfiguracyjnego exaxis, błąd inicjalizacji - niemożliwy do resetowania,
+       | 7-Niezgodność modelu robota, wymagane ponowne ustawienie - niemożliwy do resetowania,
+       | 8-Błąd wersji pliku konfiguracyjnego dhpara, błąd inicjalizacji - niemożliwy do resetowania,
+       | 9-Nieudane ładowanie pliku konfiguracyjnego dhpara, błąd inicjalizacji - niemożliwy do resetowania,
+       | 10-Model robota nieustawiony - niemożliwy do resetowania,
+       | 11-Błąd wersji pliku konfiguracyjnego load, błąd inicjalizacji - niemożliwy do resetowania,
+       | 12-Nieudane ładowanie pliku konfiguracyjnego load, błąd inicjalizacji - niemożliwy do resetowania,
+       | 13-Błąd wersji pliku konfiguracyjnego speed, błąd inicjalizacji - niemożliwy do resetowania,
+       | 14-Nieudane ładowanie pliku konfiguracyjnego speed, błąd inicjalizacji - niemożliwy do resetowania,
+       | 15-Błąd wersji pliku konfiguracyjnego weavepara, błąd inicjalizacji - niemożliwy do resetowania,
+       | 16-Nieudane ładowanie pliku konfiguracyjnego weavepara, błąd inicjalizacji - niemożliwy do resetowania
    
    * - para_error
      - UINT8
-     - | 配置参数故障，0-无故障，
-       | 1-工具号超限错误-可复位，  
-       | 2-定位完成阈值错误-可复位，
-       | 3-碰撞等级错误-可复位，  
-       | 4-负载重量错误-可复位，
-       | 5-负载质心X错误-可复位，  
-       | 6-负载质心Y错误-可复位，
-       | 7-负载质心Z错误-可复位，  
-       | 8-DI滤波时间错误-可复位，
-       | 9-AxleDI滤波时间错误-可复位，  
-       | 10-AI滤波时间错误-可复位，
-       | 11-AxleAI滤波时间错误-可复位，  
-       | 12-DI高低电平范围错误-可复位，
-       | 13-DO高低电平范围错误-可复位，  
-       | 14-工件号超限错误-可复位，
-       | 15-外部轴号超限错误-可复位，  
-       | 16-传送带跟踪-编码器通道错误-可复位，
-       | 17-传送带跟踪-工件轴号错误-可复位，  
-       | 18-FR30L安装方式-非正装错误-可复位
+     - | Błąd parametru konfiguracyjnego, 0-brak błędu,
+       | 1-Błąd przekroczenia limitu numeru narzędzia - możliwy do zresetowania,
+       | 2-Błąd progu ukończenia pozycjonowania - możliwy do zresetowania,
+       | 3-Błąd poziomu kolizji - możliwy do zresetowania,
+       | 4-Błąd masy ładunku - możliwy do zresetowania,
+       | 5-Błąd X środka ciężkości ładunku - możliwy do zresetowania,
+       | 6-Błąd Y środka ciężkości ładunku - możliwy do zresetowania,
+       | 7-Błąd Z środka ciężkości ładunku - możliwy do zresetowania,
+       | 8-Błąd czasu filtrowania DI - możliwy do zresetowania,
+       | 9-Błąd czasu filtrowania AxleDI - możliwy do zresetowania,
+       | 10-Błąd czasu filtrowania AI - możliwy do zresetowania,
+       | 11-Błąd czasu filtrowania AxleAI - możliwy do zresetowania,
+       | 12-Błąd zakresu wysokiego/niskiego poziomu DI - możliwy do zresetowania,
+       | 13-Błąd zakresu wysokiego/niskiego poziomu DO - możliwy do zresetowania,
+       | 14-Błąd przekroczenia limitu numeru przedmiotu - możliwy do zresetowania,
+       | 15-Błąd przekroczenia limitu numeru zewnętrznej osi - możliwy do zresetowania,
+       | 16-Błąd kanału enkodera śledzenia taśmociągu - możliwy do zresetowania,
+       | 17-Błąd numeru osi przedmiotu śledzenia taśmociągu - możliwy do zresetowania,
+       | 18-Błąd instalacji FR30L - nieprawidłowa instalacja normalna - możliwy do zresetowania
    
    * - exaxis_out_slimit_error
      - UINT8
-     - | 外部轴软限位故障，0-无故障，
-       | 1-外部轴1轴超出软限位故障，可复位，  
-       | 2-外部轴2轴超出软限位故障，可复位，
-       | 3-外部轴3轴超出软限位故障，可复位，  
-       | 4-外部轴4轴超出软限位故障，可复位，
-       | 5-外部轴5轴超出软限位故障，可复位，  
-       | 6-外部轴6轴超出软限位故障，可复位
+     - | Błąd miękkiego limitu zewnętrznej osi, 0-brak błędu,
+       | 1-Błąd przekroczenia miękkiego limitu zewnętrznej osi 1, możliwy do zresetowania,
+       | 2-Błąd przekroczenia miękkiego limitu zewnętrznej osi 2, możliwy do zresetowania,
+       | 3-Błąd przekroczenia miękkiego limitu zewnętrznej osi 3, możliwy do zresetowania,
+       | 4-Błąd przekroczenia miękkiego limitu zewnętrznej osi 4, możliwy do zresetowania,
+       | 5-Błąd przekroczenia miękkiego limitu zewnętrznej osi 5, możliwy do zresetowania,
+       | 6-Błąd przekroczenia miękkiego limitu zewnętrznej osi 6, możliwy do zresetowania
    
    * - dr_com_err
      - UINT8_6
-     - 驱动器通信故障，0-无故障，1-故障
+     - Błąd komunikacji napędu, 0-brak błędu, 1-błąd
    
    * - dr_err
      - UINT8
-     - | 驱动器故障，0-无故障，
-       | 1-1轴驱动器故障，不可复位，  
-       | 2-2轴驱动器故障，不可复位，
-       | 3-3轴驱动器故障，不可复位，  
-       | 4-4轴驱动器故障，不可复位，
-       | 5-5轴驱动器故障，不可复位，  
-       | 6-6轴驱动器故障，不可复位
+     - | Błąd napędu, 0-brak błędu,
+       | 1-Błąd napędu osi 1, niemożliwy do resetowania,
+       | 2-Błąd napędu osi 2, niemożliwy do resetowania,
+       | 3-Błąd napędu osi 3, niemożliwy do resetowania,
+       | 4-Błąd napędu osi 4, niemożliwy do resetowania,
+       | 5-Błąd napędu osi 5, niemożliwy do resetowania,
+       | 6-Błąd napędu osi 6, niemożliwy do resetowania
    
    * - out_sflimit_err
      - UINT8
-     - | 软限位故障，0-无故障，
-       | 1-1轴超出软限位故障，可复位，  
-       | 2-2轴超出软限位故障，可复位，
-       | 3-3轴超出软限位故障，可复位，  
-       | 4-4轴超出软限位故障，可复位，
-       | 5-5轴超出软限位故障，可复位，  
-       | 6-6轴超出软限位故障，可复位
+     - | Błąd miękkiego limitu, 0-brak błędu,
+       | 1-Błąd przekroczenia miękkiego limitu osi 1, możliwy do zresetowania,
+       | 2-Błąd przekroczenia miękkiego limitu osi 2, możliwy do zresetowania,
+       | 3-Błąd przekroczenia miękkiego limitu osi 3, możliwy do zresetowania,
+       | 4-Błąd przekroczenia miękkiego limitu osi 4, możliwy do zresetowania,
+       | 5-Błąd przekroczenia miękkiego limitu osi 5, możliwy do zresetowania,
+       | 6-Błąd przekroczenia miękkiego limitu osi 6, możliwy do zresetowania
 
-.. centered:: 表1-2 机器人输入控制配置功能
+.. centered:: Tabela 1-2 Funkcje konfiguracji wejść sterowania robotem
 
 .. list-table::
    :widths: 20 40 80
@@ -794,71 +794,71 @@ CNDE简介
    :align: center
    :class: sheet-center
 
-   * - **名称**
-     - **数据类型**
-     - **描述**
+   * - **Nazwa**
+     - **Typ danych**
+     - **Opis**
 
    * - speed_mask
      - UINT8
-     - 全局速度设置掩码：0-不生效；1-生效
+     - Maska ustawienia prędkości globalnej: 0-nieaktywne; 1-aktywne
 
    * - speed
      - UINT8
-     - 设置全局速度（0-100）
+     - Ustawienie prędkości globalnej (0-100)
 
    * - std_DO_mask
      - UINT8
-     - 控制箱标准DO输出控制掩码(bit0 ~ bit7表示DO0 ~ DO7)
+     - Maska sterowania standardowym wyjściem DO skrzynki sterowniczej (bit0 ~ bit7 oznaczają DO0 ~ DO7)
 
    * - std_DO_box
      - UINT8
-     - 控制箱标准DO输出(bit0 ~ bit7表示DO0 ~ DO7)
+     - Standardowe wyjście DO skrzynki sterowniczej (bit0 ~ bit7 oznaczają DO0 ~ DO7)
 
    * - cfg_DO_mask
      - UINT8
-     - 控制箱可配置CO输出控制掩码(bit0 ~ bit7表示CO0 ~ CO7)
+     - Maska sterowania konfigurowalnym wyjściem CO skrzynki sterowniczej (bit0 ~ bit7 oznaczają CO0 ~ CO7)
 
    * - cfg_DO_box
      - UINT8
-     - 控制箱可配置CO输出(bit0 ~ bit7表示CO0 ~ CO7)
+     - Konfigurowalne wyjście CO skrzynki sterowniczej (bit0 ~ bit7 oznaczają CO0 ~ CO7)
 
    * - cfg_DO_tool_mask
      - UINT8
-     - 控制箱标准工具DO输出控制掩码(bit0 ~ bit1表示toolDO0 ~ toolDO1)
+     - Maska sterowania standardowym wyjściem DO narzędzia skrzynki sterowniczej (bit0 ~ bit1 oznaczają toolDO0 ~ toolDO1)
 
    * - cfg_DO_tool
      - UINT8
-     - 控制箱标准工具DO输出(bit0 ~ bit1表示toolDO0 ~ toolDO1)
+     - Standardowe wyjście DO narzędzia skrzynki sterowniczej (bit0 ~ bit1 oznaczają toolDO0 ~ toolDO1)
 
    * - std_AO_mask
      - UINT8
-     - 机器人模拟量输出控制掩码(bit0 ~ bit1表示控制箱AO0 ~ AO1；bit2表示工具AO0)
+     - Maska sterowania wyjściem analogowym robota (bit0 ~ bit1 oznaczają AO0 ~ AO1 skrzynki sterowniczej; bit2 oznacza AO0 narzędzia)
 
    * - std_AO0_box
      - DOUBLE
-     - 控制箱模拟量AO0 (0.0 ~ 4095.0)
+     - Wyjście analogowe AO0 skrzynki sterowniczej (0.0 ~ 4095.0)
 
    * - std_AO1_box
      - DOUBLE
-     - 控制箱模拟量AO1 (0.0 ~ 4095.0)
+     - Wyjście analogowe AO1 skrzynki sterowniczej (0.0 ~ 4095.0)
 
    * - std_AO0_tool
      - DOUBLE
-     - 工具模拟量AO1 (0.0 ~ 4095.0)
+     - Wyjście analogowe AO1 narzędzia (0.0 ~ 4095.0)
 
    * - input_BIT_reg_8xX
      - UINT8_X
-     - BIT型机器人输入寄存器(8xX表示寄存器个数，若您需要16个BIT型输入寄存器，则实际名称为：“input_BIT_reg_8x2”，机器人最多支持128个BIT型寄存器)
+     - Rejestry wejściowe robota typu BIT (8xX oznacza liczbę rejestrów, jeśli potrzebujesz 16 rejestrów wejściowych typu BIT, rzeczywista nazwa to: „input_BIT_reg_8x2”, robot obsługuje maksymalnie 128 rejestrów typu BIT)
 
    * - input_INT_reg_X
      - INT32_X
-     - INT型机器人输入寄存器(X表示寄存器个数，若您需要16个INT型输入寄存器，则实际名称为：“input_INT_reg_16”，机器人最多支持64个INT型寄存器)
+     - Rejestry wejściowe robota typu INT (X oznacza liczbę rejestrów, jeśli potrzebujesz 16 rejestrów wejściowych typu INT, rzeczywista nazwa to: „input_INT_reg_16”, robot obsługuje maksymalnie 64 rejestry typu INT)
   
    * - input_DOUBLE_reg_X
      - DOUBLE_X
-     - DOUBLE型机器人输入寄存器(X表示寄存器个数，若您需要16个DOUBLE型输入寄存器，则实际名称为：“input_DOUBLE_reg_16”，机器人最多支持64个DOUBLE型寄存器)
+     - Rejestry wejściowe robota typu DOUBLE (X oznacza liczbę rejestrów, jeśli potrzebujesz 16 rejestrów wejściowych typu DOUBLE, rzeczywista nazwa to: „input_DOUBLE_reg_16”, robot obsługuje maksymalnie 64 rejestry typu DOUBLE)
 
-.. centered:: 表1-3 数据类型及字节长度对应关系
+.. centered:: Tabela 1-3 Odpowiedniość typów danych i długości bajtowych
 
 .. list-table::
    :widths: 60 40
@@ -866,8 +866,8 @@ CNDE简介
    :align: center
    :class: sheet-center
 
-   * - **数据类型**
-     - **字节长度**
+   * - **Typ danych**
+     - **Długość bajtowa**
 
    * - UINT8
      - 1

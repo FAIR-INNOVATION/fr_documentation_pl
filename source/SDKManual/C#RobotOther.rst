@@ -1,22 +1,22 @@
-其他接口
-================
+Inne interfejsy
+===============
 
 .. toctree:: 
     :maxdepth: 5
 
-获取SSH公钥
-+++++++++++++++++++++++++++++
+Pobranie klucza publicznego SSH
+++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /** 
-    * @brief 获取SSH公钥 
-    * @param [out] keygen 公钥
-    * @return 错误码 
+    * @brief Pobiera klucz publiczny SSH 
+    * @param [out] keygen Klucz publiczny
+    * @return Kod błędu 
     */
     int GetSSHKeygen(ref string keygen);
 
-下发SCP指令
+Wysłanie instrukcji SCP
 +++++++++++++++++++++++++++++
 .. versionadded:: C#SDK-V1.1.4  Web-3.8.3
     
@@ -24,31 +24,31 @@
     :linenos:
 
     /**
-    * @brief 下发SCP指令
-    * @param [in] mode 0-上传（上位机->控制器），1-下载（控制器->上位机）
-    * @param [in] sshname 上位机用户名
-    * @param [in] sship 上位机ip地址
-    * @param [in] usr_file_url 上位机文件路径
-    * @param [in] robot_file_url 机器人控制器文件路径
-    * @return 错误码
+    * @brief Wysyła instrukcję SCP
+    * @param [in] mode 0-przesyłanie (komputer nadrzędny -> kontroler), 1-pobieranie (kontroler -> komputer nadrzędny)
+    * @param [in] sshname Nazwa użytkownika komputera nadrzędnego
+    * @param [in] sship Adres IP komputera nadrzędnego
+    * @param [in] usr_file_url Ścieżka pliku na komputerze nadrzędnym
+    * @param [in] robot_file_url Ścieżka pliku w kontrolerze robota
+    * @return Kod błędu
     */
     int SetSSHScpCmd(int mode, string sshname, string sship, string usr_file_url, string robot_file_url);
 
-计算指定路径下文件的MD5值
-+++++++++++++++++++++++++++++
+Obliczenie wartości MD5 pliku w określonej ścieżce
++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /** 
-    * @brief 计算指定路径下文件的MD5值 
-    * @param [in] file_path 文件路径包含文件名，默认Traj文件夹路径为:"/fruser/traj/",如"/fruser/traj/trajHelix_aima_1.txt"
-    * @param [out] md5 文件MD5值
-    * @return 错误码 
+    * @brief Oblicza wartość MD5 pliku w określonej ścieżce 
+    * @param [in] file_path Ścieżka pliku wraz z nazwą pliku, domyślna ścieżka folderu Traj to:"/fruser/traj/", np."/fruser/traj/trajHelix_aima_1.txt"
+    * @param [out] md5 Wartość MD5 pliku
+    * @return Kod błędu 
     */
     int ComputeFileMD5(string file_path, ref string md5);
 
-机器人SSH、MD5指令代码示例
-+++++++++++++++++++++++++++++
+Przykład kodu instrukcji SSH i MD5 robota
++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C#SDK-V1.1.4  Web-3.8.3
     
 .. code-block:: c#
@@ -80,32 +80,32 @@
         Console.WriteLine("md5 is: {0}", md5);
     }
 
-设置机器人 20004 端口反馈周期
-+++++++++++++++++++++++++++++
+Ustawienie okresu informacji zwrotnej na porcie 20004 robota
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief 设置机器人 20004 端口反馈周期
-    * @param [in] period 机器人 20004 端口反馈周期(ms)
-    * @return 错误码
+    * @brief Ustawia okres informacji zwrotnej na porcie 20004 robota
+    * @param [in] period Okres informacji zwrotnej na porcie 20004 robota (ms)
+    * @return Kod błędu
     */
     int SetRobotRealtimeStateSamplePeriod(int period);
 
-获取机器人 20004 端口反馈周期
-+++++++++++++++++++++++++++++
+Pobranie okresu informacji zwrotnej na porcie 20004 robota
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief 获取机器人 20004 端口反馈周期
-    * @param [out] period 机器人 20004 端口反馈周期(ms)
-    * @return 错误码
+    * @brief Pobiera okres informacji zwrotnej na porcie 20004 robota
+    * @param [out] period Okres informacji zwrotnej na porcie 20004 robota (ms)
+    * @return Kod błędu
     */
     int GetRobotRealtimeStateSamplePeriod((ref int period);   
 
-机器人20004端口状态反馈周期配置代码示例
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Przykład kodu konfiguracji okresu informacji zwrotnej o stanie na porcie 20004 robota
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
@@ -118,33 +118,33 @@
         Thread.Sleep(1000);
     }
 
-机器人软件升级
-+++++++++++++++++++++++++++++
+Aktualizacja oprogramowania robota
+++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief 机器人软件升级
-    * @param [in] filePath 软件升级包全路径
-    * @param [in] block 是否阻塞至升级完成 true:阻塞；false:非阻塞
-    * @return  错误码
+    * @brief Aktualizacja oprogramowania robota
+    * @param [in] filePath Pełna ścieżka pakietu aktualizacyjnego oprogramowania
+    * @param [in] block Czy blokować do zakończenia aktualizacji true: blokujące; false: nieblokujące
+    * @return  Kod błędu
     */
     int SoftwareUpgrade(string filePath, bool block);
 
-获取机器人软件升级状态
-+++++++++++++++++++++++++++++
+Pobranie stanu aktualizacji oprogramowania robota
++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief  获取机器人软件升级状态
-    * @param [out] state 机器人软件包升级状态  0-空闲中或上传升级包中；1~100：升级完成百分比；-1:升级软件失败；-2：校验失败；-3：版本校验失败；-4：解压失败；-5：用户配置升级失败；-6：外设配置升级失败；-7：扩展轴配置升级失败；-8：机器人配置升级失败；-9：DH参数配置升级失败
-    * @return  错误码
+    * @brief  Pobiera stan aktualizacji oprogramowania robota
+    * @param [out] state Stan aktualizacji pakietu oprogramowania robota 0-bezczynny lub przesyłanie pakietu aktualizacyjnego; 1~100: procent ukończenia aktualizacji; -1: aktualizacja oprogramowania nieudana; -2: weryfikacja nieudana; -3: weryfikacja wersji nieudana; -4: dekompresja nieudana; -5: aktualizacja konfiguracji użytkownika nieudana; -6: aktualizacja konfiguracji urządzeń peryferyjnych nieudana; -7: aktualizacja konfiguracji osi rozszerzonej nieudana; -8: aktualizacja konfiguracji robota nieudana; -9: aktualizacja konfiguracji parametrów DH nieudana
+    * @return  Kod błędu
     */
     int GetSoftwareUpgradeState(ref int state);
 
-机器人软件升级代码示例
-+++++++++++++++++++++++++++++
+Przykład kodu aktualizacji oprogramowania robota
+++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
@@ -160,60 +160,60 @@
         }
     }
 
-下载点位表
+Pobranie tabeli punktów
 +++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /** 
-    * @brief 点位表从机器人控制器下载到本地计算机 
-    * @param [in] pointTableName 控制器中的点位表名称：pointTable1.db
-    * @param [in] saveFilePath 点位表下载到计算机的路径 C://test/
-    * @return 错误码 
+    * @brief Pobranie tabeli punktów z kontrolera robota do komputera lokalnego 
+    * @param [in] pointTableName Nazwa tabeli punktów w kontrolerze: pointTable1.db
+    * @param [in] saveFilePath Ścieżka zapisu tabeli punktów na komputerze C://test/
+    * @return Kod błędu 
     */
     int PointTableDownLoad(string pointTableName, string saveFilePath);
 
-上传点位表
+Przesłanie tabeli punktów
 +++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /** 
-    * @brief 点位表从本地计算机上传至机器人控制器 
-    * @param [in] pointTableFilePath 点位表在本地计算机的绝对路径C://test/pointTabl e1.db
-    * @return 错误码 
+    * @brief Przesłanie tabeli punktów z komputera lokalnego do kontrolera robota 
+    * @param [in] pointTableFilePath Bezwzględna ścieżka tabeli punktów na komputerze lokalnym C://test/pointTable1.db
+    * @return Kod błędu 
     */
     int PointTableUpLoad(string pointTableFilePath);
 
-点位表更新Lua程序
-+++++++++++++++++++++++++++++
+Aktualizacja programu Lua za pomocą podanej tabeli punktów
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /** 
-    * @brief 使用给定的点位表更新lua程序中的点
-    * @param [in] pointTableName 控制器中的点位表名称："pointTable1.db", 当点位表为空，即""时，表示将lua程序更新为未应用点位表的初始程序
-    * @param [in] luaFileName 要更新的lua文件名称   "test.lua"
-    * @param [out] errorStr 点位表更新lua错误信息  
-    * @return 错误码 
+    * @brief Aktualizacja punktów w programie lua za pomocą podanej tabeli punktów
+    * @param [in] pointTableName Nazwa tabeli punktów w kontrolerze: "pointTable1.db", gdy tabela punktów jest pusta, czyli "", oznacza aktualizację programu lua do programu początkowego bez zastosowania tabeli punktów
+    * @param [in] luaFileName Nazwa pliku lua do aktualizacji   "test.lua"
+    * @param [out] errorStr Informacja o błędzie podczas aktualizacji tabeli punktów w lua  
+    * @return Kod błędu 
     */
     int PointTableUpdateLua(string pointTableName, string luaFileName, ref string errorStr);
 
-切换点位表并应用
-+++++++++++++++++++++++++++++
+Przełączenie tabeli punktów i zastosowanie
++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /** 
-    * @brief 切换点位表并应用
-    * @param [in] pointTableName 要切换的点位表名称   "pointTable1.db"
-    * @param [out] errorStr 切换点位表错误信息   
-    * @return 错误码 
+    * @brief Przełączenie tabeli punktów i zastosowanie
+    * @param [in] pointTableName Nazwa tabeli punktów do przełączenia   "pointTable1.db"
+    * @param [out] errorStr Informacja o błędzie podczas przełączania tabeli punktów   
+    * @return Kod błędu 
     */
     int PointTableSwitch(string pointTableName, ref string errorStr);
 
-机器人点位表操作代码示例
-++++++++++++++++++++++++++++++++++++
+Przykład kodu operacji na tabeli punktów robota
++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
@@ -236,44 +236,44 @@
         Console.WriteLine("retval is: {0}", rtn);
     }
 
-控制器日志下载
-+++++++++++++++++++++++++++++
+Pobranie dziennika kontrolera
+++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief  控制器日志下载
-    * @param [in] savePath 保存文件路径"D://zDown/"
-    * @return  错误码
+    * @brief  Pobranie dziennika kontrolera
+    * @param [in] savePath Ścieżka zapisu pliku "D://zDown/"
+    * @return  Kod błędu
     */
     int RbLogDownload(string savePath);
 
-所有数据源下载
-+++++++++++++++++++++++++++++
+Pobranie wszystkich źródeł danych
+++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief 所有数据源下载
-    * @param [in] savePath 保存文件路径"D://zDown/"
-    * @return  错误码
+    * @brief Pobranie wszystkich źródeł danych
+    * @param [in] savePath Ścieżka zapisu pliku "D://zDown/"
+    * @return  Kod błędu
     */
     int AllDataSourceDownload(string savePath);
 
-数据备份包下载
-+++++++++++++++++++++++++++++
+Pobranie pakietu kopii zapasowej danych
+++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief 数据备份包下载
-    * @param [in] savePath 保存文件路径"D://zDown/"
-    * @return  错误码
+    * @brief Pobranie pakietu kopii zapasowej danych
+    * @param [in] savePath Ścieżka zapisu pliku "D://zDown/"
+    * @return  Kod błędu
     */
     int DataPackageDownload(string savePath);
 
-下载控制器数据代码示例
-+++++++++++++++++++++++++++++
+Przykład kodu pobierania danych kontrolera
+++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
@@ -289,109 +289,109 @@
         Console.WriteLine("DataPackageDownload rtn is {0}", rtn);
     }
 
-机器人操作系统升级(LA控制箱)
-+++++++++++++++++++++++++++++++++++++++++++++++++++++
+Aktualizacja systemu operacyjnego robota (skrzynka sterownicza LA)
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C#SDK-V1.1.8  Web-3.8.6
 
 .. code-block:: c#
     :linenos:
 
     /**
-     * @brief 机器人操作系统升级(LA控制箱)
-     * @param [in] filePath 操作系统升级包全路径
-     * @return  错误码
+     * @brief Aktualizacja systemu operacyjnego robota (skrzynka sterownicza LA)
+     * @param [in] filePath Pełna ścieżka pakietu aktualizacyjnego systemu operacyjnego
+     * @return  Kod błędu
      */
     public int KernelUpgrade(string filePath)
 
-获取机器人操作系统升级结果(LA控制箱)
-+++++++++++++++++++++++++++++++++++++++++++++++++++++
+Pobranie wyniku aktualizacji systemu operacyjnego robota (skrzynka sterownicza LA)
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C#SDK-V1.1.8  Web-3.8.6
 
 .. code-block:: c#
     :linenos:
 
     /**
-     * @brief 获取机器人操作系统升级结果(LA控制箱)
-     * @param [out] result 升级结果：0:成功；-1:失败
-     * @return  错误码
+     * @brief Pobranie wyniku aktualizacji systemu operacyjnego robota (skrzynka sterownicza LA)
+     * @param [out] result Wynik aktualizacji: 0:sukces; -1:porażka
+     * @return  Kod błędu
      */
     public int GetKernelUpgradeResult(ref int[] result)
 
-设置编码器升级
-++++++++++++++++++++++++++++++++++++++++++++++++++
+Ustawienie aktualizacji enkodera
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C#SDK-V1.1.5  Web-3.8.4
     
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief 设置编码器升级
-    * @param [in] path 本地升级包全路径(D://zUP/XXXXX.bin)
-    * @return 错误码
+    * @brief Ustawia aktualizację enkodera
+    * @param [in] path Pełna ścieżka lokalnego pakietu aktualizacyjnego (D://zUP/XXXXX.bin)
+    * @return Kod błędu
     */
     int SetEncoderUpgrade(string path);
 
-设置关节固件升级
-++++++++++++++++++++++++++++++++++++++++++++++++++
+Ustawienie aktualizacji oprogramowania sprzętowego stawu
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C#SDK-V1.1.5  Web-3.8.4
     
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief 设置关节固件升级
-    * @param [in] type 升级文件类型；1-升级固件；2-升级从站配置文件
-    * @param [in] path 本地升级包全路径(D://zUP/XXXXX.bin)
-    * @return 错误码
+    * @brief Ustawia aktualizację oprogramowania sprzętowego stawu
+    * @param [in] type Typ pliku aktualizacyjnego; 1-aktualizacja oprogramowania sprzętowego; 2-aktualizacja pliku konfiguracyjnego stacji podrzędnej
+    * @param [in] path Pełna ścieżka lokalnego pakietu aktualizacyjnego (D://zUP/XXXXX.bin)
+    * @return Kod błędu
     */
     int SetJointFirmwareUpgrade(int type, string path);
 
-设置控制箱固件升级
-++++++++++++++++++++++++++++++++++++++++++++++++++
+Ustawienie aktualizacji oprogramowania sprzętowego skrzynki sterowniczej
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C#SDK-V1.1.5  Web-3.8.4
     
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief 设置控制箱固件升级
-    * @param [in] type 升级文件类型；1-升级固件；2-升级从站配置文件
-    * @param [in] path 本地升级包全路径(D://zUP/XXXXX.bin)
-    * @return 错误码
+    * @brief Ustawia aktualizację oprogramowania sprzętowego skrzynki sterowniczej
+    * @param [in] type Typ pliku aktualizacyjnego; 1-aktualizacja oprogramowania sprzętowego; 2-aktualizacja pliku konfiguracyjnego stacji podrzędnej
+    * @param [in] path Pełna ścieżka lokalnego pakietu aktualizacyjnego (D://zUP/XXXXX.bin)
+    * @return Kod błędu
     */
     int SetCtrlFirmwareUpgrade(int type, string path);
 
-设置末端固件升级
-++++++++++++++++++++++++++++++++++++++++++++++++++
+Ustawienie aktualizacji oprogramowania sprzętowego końcówki
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C#SDK-V1.1.5  Web-3.8.4
     
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief 设置末端固件升级
-    * @param [in] type 升级文件类型；1-升级固件；2-升级从站配置文件
-    * @param [in] path 本地升级包全路径(D://zUP/XXXXX.bin)
-    * @return 错误码
+    * @brief Ustawia aktualizację oprogramowania sprzętowego końcówki
+    * @param [in] type Typ pliku aktualizacyjnego; 1-aktualizacja oprogramowania sprzętowego; 2-aktualizacja pliku konfiguracyjnego stacji podrzędnej
+    * @param [in] path Pełna ścieżka lokalnego pakietu aktualizacyjnego (D://zUP/XXXXX.bin)
+    * @return Kod błędu
     */
     int SetEndFirmwareUpgrade(int type, string path);
 
-关节全参数配置文件升级
-++++++++++++++++++++++++++++++++++++++++++++++++++
+Aktualizacja pliku konfiguracyjnego pełnych parametrów stawu
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C#SDK-V1.1.5  Web-3.8.4
     
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief 关节全参数配置文件升级
-    * @param [in] path 本地升级包全路径(D://zUP/XXXXX.bin)
-    * @return 错误码
+    * @brief Aktualizacja pliku konfiguracyjnego pełnych parametrów stawu
+    * @param [in] path Pełna ścieżka lokalnego pakietu aktualizacyjnego (D://zUP/XXXXX.bin)
+    * @return Kod błędu
     */
     int JointAllParamUpgrade(string path);
 
-机器人从站固件升级代码示例
-++++++++++++++++++++++++++++++++++++++++++++++++++
+Przykład kodu aktualizacji oprogramowania sprzętowego stacji podrzędnej robota
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C#SDK-V1.1.5  Web-3.8.4
     
 .. code-block:: c#
@@ -416,52 +416,52 @@
         Console.WriteLine($"robot SetJointFirmwareUpgrade rtn is{rtn}");
     }
 
-机器人MCU日志生成
-++++++++++++++++++++++++++++++++++++++++++++++++++
+Generowanie dziennika MCU robota
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C#SDK-V1.1.9  Web-3.8.7
     
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief 机器人MCU日志生成
-    * @return 错误码
+    * @brief Generowanie dziennika MCU robota
+    * @return Kod błędu
     */
     public int RobotMCULogCollect();
 
-设置端口通讯断开时停止机器人运行
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-    
+Ustawienie zatrzymania robota po przerwaniu komunikacji portu
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: c#
     :linenos:
     
     /**
-    * @brief 设置端口通讯断开时停止机器人运行
-    * @param [in] pordID 端口编号 0-8080；1-8083；2-20002；3-20004
-    * @param [in] enable 0-关闭；1-开启
-    * @param [in] confirmTime 通讯中断确认时长(ms)[0-5000]
-    * @return  错误码
+    * @brief Ustawienie zatrzymania robota po przerwaniu komunikacji portu
+    * @param [in] pordID Numer portu 0-8080; 1-8083; 2-20002; 3-20004
+    * @param [in] enable 0-wyłączone; 1-włączone
+    * @param [in] confirmTime Czas potwierdzenia przerwania komunikacji (ms)[0-5000]
+    * @return  Kod błędu
     */
     public int SetRobotStopOnComDisc(int portID, bool enable, int confirmTime)
 
-获取端口通讯断开时停止机器人运行参数
+Pobranie parametrów zatrzymania robota po przerwaniu komunikacji portu
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-    
+
 .. code-block:: c#
     :linenos:
     
     /**
-    * @brief 获取端口通讯断开时停止机器人运行参数
-    * @param [in] pordID 端口编号 0-8080；1-8083；2-20002；3-20004
-    * @param [out] enable 0-关闭；1-开启
-    * @param [out] confirmTime 通讯中断确认时长(ms)[0-5000]
-    * @return  错误码
+    * @brief Pobranie parametrów zatrzymania robota po przerwaniu komunikacji portu
+    * @param [in] pordID Numer portu 0-8080; 1-8083; 2-20002; 3-20004
+    * @param [out] enable 0-wyłączone; 1-włączone
+    * @param [out] confirmTime Czas potwierdzenia przerwania komunikacji (ms)[0-5000]
+    * @return  Kod błędu
     */
     public int GetRobotStopOnComDisc(int portID, ref bool enable, ref int confirmTime)
     
-端口通讯断开时停止机器人运行参数代码示例
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-    
+Przykład kodu parametrów zatrzymania robota po przerwaniu komunikacji portu
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: c#
     :linenos:
     
@@ -469,7 +469,7 @@
     {
         int rtn = 0;
 
-        // 设置四个端口的参数
+        // Ustawienie parametrów dla czterech portów
         rtn = robot.SetRobotStopOnComDisc(0, true, 330);
         rtn = robot.SetRobotStopOnComDisc(1, true, 550);
         rtn = robot.SetRobotStopOnComDisc(2, true, 110);
@@ -479,7 +479,7 @@
         bool enable = false;
         int confirmTime = 0;
 
-        // 获取并打印每个端口的设置
+        // Pobranie i wydrukowanie ustawień dla każdego portu
         robot.GetRobotStopOnComDisc(0, ref enable, ref confirmTime);
         Console.WriteLine($"GetRobotStopOnComDisc 8080 rtn {rtn}; enable is {(enable ? 1 : 0)}; confirm time is {confirmTime}");
 
@@ -494,21 +494,21 @@
 
     }
 
-UDP发送指令帧
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Wysłanie ramki instrukcji UDP
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief UDP发送指令帧
-    * @param [in] 指令帧
-    * @return 错误码
+    * @brief Wysyła ramkę instrukcji UDP
+    * @param [in] Ramka instrukcji
+    * @return Kod błędu
     */
     public int SendUDPFrame(string frame)
         
-基于UDP通信的SDK代码示例
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Przykład kodu SDK opartego na komunikacji UDP
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. code-block:: c#
     :linenos:
@@ -517,11 +517,11 @@ UDP发送指令帧
     {
         robot.OnUdpFrameReceived += (comType, frameCount, frameCmdID, contentLen, content) =>
         {
-            Console.WriteLine($"[UDP响应] comType={comType}, count={frameCount}, cmdID={frameCmdID}, content={content}");
+            Console.WriteLine($"[UDP odpowiedź] comType={comType}, count={frameCount}, cmdID={frameCmdID}, content={content}");
         };
 
 
-        //发送帧
+        //Wysłanie ramki
         string frameToSend = "/f/bIII52III236III7IIIMode(1)III/b/f";
         robot.SendUDPFrame(frameToSend);
         Thread.Sleep(2000);
@@ -540,23 +540,23 @@ UDP发送指令帧
 
     }
         
-设置用户自定义机器人末端灯色
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Ustawienie niestandardowego koloru lampki końcowej robota przez użytkownika
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief 设置用户自定义机器人末端灯色
-    * @param [in] r 末端红灯控制；0-灭；1-亮
-    * @param [in] g 末端绿灯控制；0-灭；1-亮
-    * @param [in] b 末端蓝灯控制；0-灭；1-亮
-    * @return 错误码
+    * @brief Ustawienie niestandardowego koloru lampki końcowej robota przez użytkownika
+    * @param [in] r Sterowanie czerwoną lampką końcową; 0-wyłączona; 1-włączona
+    * @param [in] g Sterowanie zieloną lampką końcową; 0-wyłączona; 1-włączona
+    * @param [in] b Sterowanie niebieską lampką końcową; 0-wyłączona; 1-włączona
+    * @return Kod błędu
     */
     public int SetUserLEDColor(bool r, bool g, bool b)
             
-设置用户自定义机器人末端灯色的SDK代码示例
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Przykład kodu SDK ustawienia niestandardowego koloru lampki końcowej robota przez użytkownika
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. code-block:: c#
     :linenos:

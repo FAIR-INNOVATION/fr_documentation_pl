@@ -1,116 +1,116 @@
-机器人WebAPP程序使用
-======================
+Używanie programu WebAPP robota
+===============================
 
 .. toctree:: 
     :maxdepth: 5
 
-设置开机自动加载默认的作业程序
-+++++++++++++++++++++++++++++++++++
+Ustawienie automatycznego ładowania domyślnego programu roboczego przy starcie
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief  设置开机自动加载默认的作业程序
-    * @param  [in] flag  0-开机不自动加载默认程序，1-开机自动加载默认程序
-    * @param  [in] program_name 作业程序名及路径，如"/fruser/movej.lua"，其中"/fruser/"为QX固定路径，"/usr/local/etc/controller/lua/"为LA固定路径
-    * @return  错误码
+    * @brief  Ustawia automatyczne ładowanie domyślnego programu roboczego przy starcie
+    * @param  [in] flag  0-nie ładuj automatycznie domyślnego programu przy starcie, 1-ładuj automatycznie domyślny program przy starcie
+    * @param  [in] program_name Nazwa i ścieżka programu roboczego, np. "/fruser/movej.lua", gdzie "/fruser/" to stała ścieżka dla QX, a "/usr/local/etc/controller/lua/" to stała ścieżka dla LA
+    * @return  Kod błędu
     */
     int LoadDefaultProgConfig(byte flag, string program_name); 
 
-加载指定的作业程序
-+++++++++++++++++++++++++++++++++++
+Ładowanie określonego programu roboczego
++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief  加载指定的作业程序
-    * @param  [in] program_name 作业程序名及路径，如"/fruser/movej.lua"，其中"/fruser/"为QX固定路径，"/usr/local/etc/controller/lua/"为LA固定路径
-    * @return  错误码
+    * @brief  Ładuje określony program roboczy
+    * @param  [in] program_name Nazwa i ścieżka programu roboczego, np. "/fruser/movej.lua", gdzie "/fruser/" to stała ścieżka dla QX, a "/usr/local/etc/controller/lua/" to stała ścieżka dla LA
+    * @return  Kod błędu
     */
     int ProgramLoad(string program_name); 
 
-获取已加载的作业程序名
-+++++++++++++++++++++++++++++++++++
+Pobranie nazwy załadowanego programu roboczego
++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief  获取已加载的作业程序名
-    * @param  [out] program_name 作业程序名及路径，如"/fruser/movej.lua"，其中"/fruser/"为QX固定路径，"/usr/local/etc/controller/lua/"为LA固定路径
-    * @return  错误码
+    * @brief  Pobiera nazwę załadowanego programu roboczego
+    * @param  [out] program_name Nazwa i ścieżka programu roboczego, np. "/fruser/movej.lua", gdzie "/fruser/" to stała ścieżka dla QX, a "/usr/local/etc/controller/lua/" to stała ścieżka dla LA
+    * @return  Kod błędu
     */
     int GetLoadedProgram(ref string program_name); 
 
-获取当前机器人作业程序的执行行号
-+++++++++++++++++++++++++++++++++++
+Pobranie bieżącego numeru linii wykonywanego programu roboczego robota
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief  获取当前机器人作业程序执行的行号
-    * @param  [out] line  行号
-    * @return  错误码
+    * @brief  Pobiera bieżący numer linii wykonywanego programu roboczego robota
+    * @param  [out] line  Numer linii
+    * @return  Kod błędu
     */   
     int GetCurrentLine(ref int line);
 
-运行当前加载的作业程序
-+++++++++++++++++++++++++++++++++++
+Uruchomienie aktualnie załadowanego programu roboczego
++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief  运行当前加载的作业程序
-    * @return  错误码
+    * @brief  Uruchamia aktualnie załadowany program roboczy
+    * @return  Kod błędu
     */
     int ProgramRun();
 
-暂停当前运行的作业程序
-+++++++++++++++++++++++++++++++++++
+Wstrzymanie aktualnie działającego programu roboczego
+++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief  暂停当前运行的作业程序
-    * @return  错误码
+    * @brief  Wstrzymuje aktualnie działający program roboczy
+    * @return  Kod błędu
     */ 
     int ProgramPause();
 
-恢复当前暂停的作业程序
-+++++++++++++++++++++++++++++++++++
+Wznowienie aktualnie wstrzymanego programu roboczego
++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief  恢复当前暂停的作业程序
-    * @return  错误码
+    * @brief  Wznawia aktualnie wstrzymany program roboczy
+    * @return  Kod błędu
     */ 
     int ProgramResume(); 
 
-终止当前运行的作业程序
-+++++++++++++++++++++++++++++++++++
+Zatrzymanie aktualnie działającego programu roboczego
+++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief  终止当前运行的作业程序
-    * @return  错误码
+    * @brief  Zatrzymuje aktualnie działający program roboczy
+    * @return  Kod błędu
     */ 
     int ProgramStop();   
 
-获取机器人作业程序执行状态
-+++++++++++++++++++++++++++++++++++
+Pobranie stanu wykonania programu roboczego robota
+++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief  获取机器人作业程序执行状态
-    * @param  [out]  state 1-程序停止或无程序运行，2-程序运行中，3-程序暂停
-    * @return  错误码
+    * @brief  Pobiera stan wykonania programu roboczego robota
+    * @param  [out]  state 1-program zatrzymany lub brak działającego programu, 2-program działa, 3-program wstrzymany
+    * @return  Kod błędu
     */
     int GetProgramState(ref byte state);
 
-机器人LUA程序操作代码示例
-++++++++++++++++++++++++++++++++++++
+Przykład kodu operacji na programie LUA robota
+++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
@@ -140,38 +140,38 @@
         Thread.Sleep(1000);
     }
 
-下载Lua文件
-+++++++++++++++++++++++++++++++++++
+Pobranie pliku Lua
+++++++++++++++++++++++++++++++++++++
 .. versionadded:: C#SDK-v1.0.5
 
 .. code-block:: c#
     :linenos:
 
     /** 
-    * @brief 下载Lua文件
-    * @param [in] fileName 要下载的作业程序"test.lua"或"test.tar.gz"
-    * @param [in] savePath 保存作业程序本地路径“D://Down/”
-    * @return 错误码 
+    * @brief Pobiera plik Lua
+    * @param [in] fileName Program roboczy do pobrania "test.lua" lub "test.tar.gz"
+    * @param [in] savePath Lokalna ścieżka zapisu programu roboczego "D://Down/"
+    * @return Kod błędu 
     */
     public int LuaDownLoad(string fileName, string savePath);
 
-上传Lua文件
-+++++++++++++++++++++++++++++++++++
+Przesłanie pliku Lua
+++++++++++++++++++++++++++++++++++++
 .. versionadded:: C#SDK-v1.0.5
 
 .. code-block:: c#
     :linenos:
 
     /** 
-    * @brief 上传Lua文件
-    * @param [in] filePath 本地作业程序路径名 ".../test.lua"或".../test.tar.gz"
-    * @param [out] errStr 错误信息
-    * @return 错误码 
+    * @brief Przesyła plik Lua
+    * @param [in] filePath Lokalna ścieżka programu roboczego ".../test.lua" lub ".../test.tar.gz"
+    * @param [out] errStr Informacja o błędzie
+    * @return Kod błędu 
     */
     public int LuaUpload(string filePath, ref string errStr);
 
-删除Lua文件
-+++++++++++++++++++++++++++++++++++
+Usunięcie pliku Lua
+++++++++++++++++++++++++++++++++++++
 
 .. versionadded:: C#SDK-v1.0.5
 
@@ -179,14 +179,14 @@
     :linenos:
 
     /** 
-    * @brief 删除Lua文件
-    * @param [in] fileName 要删除的作业程序名"test.lua"
-    * @return 错误码 
+    * @brief Usuwa plik Lua
+    * @param [in] fileName Nazwa programu roboczego do usunięcia "test.lua"
+    * @return Kod błędu 
     */
     public int LuaDelete(string fileName);
 
-获取当前所有lua文件名称
-+++++++++++++++++++++++++++++++++++
+Pobranie listy wszystkich bieżących nazw plików Lua
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. versionadded:: C#SDK-v1.0.5
 
@@ -194,15 +194,14 @@
     :linenos:
 
     /** 
-    * @brief 获取当前所有lua文件名称
-    * @param [out] luaNames 作业程序名称列表
-    * @return 错误码 
+    * @brief Pobiera listę wszystkich bieżących nazw plików Lua
+    * @param [out] luaNames Lista nazw programów roboczych
+    * @return Kod błędu 
     */
     public int GetLuaList(ref List<string> luaNames) ;
 
-
-机器人LUA文件上传下载代码示例
-++++++++++++++++++++++++++++++++++++++++++++++++
+Przykład kodu przesyłania i pobierania pliku Lua robota
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. versionadded:: C#SDK-v1.0.5
 

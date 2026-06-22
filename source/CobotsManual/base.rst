@@ -1,814 +1,806 @@
-基础
+Podstawy
 ===============
 
 .. toctree:: 
    :maxdepth: 6
 
-安装
+Instalacja
 --------------
 
-机器人安装方式设置和展示
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Ustawienie i wyświetlanie sposobu instalacji robota
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-在Web端示教页面，点击“初始设置”→“基础”→“安装”，其页面布局如下所示。具体的说明如下：
+Na stronie nauczania w interfejsie sieciowym, kliknij "Ustawienia początkowe" → "Podstawowe" → "Instalacja". Układ strony jest pokazany poniżej. Szczegółowy opis znajduje się poniżej:
 
-1. 快速安装用于机械臂常见的安装设置，从左到右分别对应：正装、侧装和倒装。当点击对应的按钮后，界面将自动下发并更改基座倾斜和旋转角。
-2. 若所需的安装方式不符合快速安装，则可通过自行设置基座倾斜及旋转角进行配置。
-3. 不论是快速安装还是自行设置基座倾斜及旋转角，均需要点击应用后方可生效。
+1. Szybka instalacja służy do typowych ustawień instalacji ramienia mechanicznego. Od lewej do prawej odpowiadają odpowiednio: instalacja normalna, instalacja boczna i instalacja odwrócona. Po kliknięciu odpowiedniego przycisku interfejs automatycznie wyśle i zmieni kąt nachylenia i obrotu podstawy.
+2. Jeśli wymagany sposób instalacji nie jest zgodny z szybką instalacją, można go skonfigurować poprzez samodzielne ustawienie kąta nachylenia i obrotu podstawy.
+3. Niezależnie od tego, czy jest to szybka instalacja, czy samodzielne ustawienie kąta nachylenia i obrotu podstawy, należy kliknąć "Zastosuj", aby ustawienia zaczęły obowiązywać.
    
-.. note:: 请确保所设置的安装方式与实际机械臂一致后，再进行拖动操作，否则会有安全隐患。
+.. note:: Przed wykonaniem operacji przeciągania należy upewnić się, że ustawiony sposób instalacji jest zgodny z rzeczywistym ramieniem mechanicznym. W przeciwnym razie istnieje zagrożenie bezpieczeństwa.
 
 .. image:: teaching_pendant_software/026.png
    :width: 6in
    :align: center
    
-.. centered:: 图表 6.1‑1 360度自由安装
+.. centered:: Wykres 6.1‑1 Instalacja pod dowolnym kątem 360 stopni
 
 .. important:: 
-   机器人安装完成后，必须正确设置机器人的安装方式，否则会影响机器人的拖动功能以及碰撞检测功能使用。
+   Po zakończeniu instalacji robota należy prawidłowo ustawić sposób instalacji robota. W przeciwnym razie wpłynie to na funkcję przeciągania robota oraz funkcję wykrywania kolizji.
 
-坐标系
---------------
+Układy współrzędnych
+----------------------------
 
-工具坐标
-~~~~~~~~~~~~~
+Współrzędne narzędzia
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-在“初始设置”->“基础”菜单栏下，点击“工具坐标”进入工具坐标页面 。
+W menu "Ustawienia początkowe" -> "Podstawowe" kliknij "Współrzędne narzędzia", aby przejść do strony współrzędnych narzędzia.
 
-工具坐标可实现工具坐标的修改、清空、重命名与应用。在工具坐标系的下拉列表中，选择对应的坐标系后会在下方显示对应坐标值（坐标系名称可自定义），工具类型以及安装位置（仅在传感器类型工具下显示），选择某一坐标系后点击“应用”按钮，当前使用的工具坐标系变为所选择的坐标，如下所示。
+Współrzędne narzędzia umożliwiają modyfikację, czyszczenie, zmianę nazwy i zastosowanie współrzędnych narzędzia. Na liście rozwijanej układów współrzędnych narzędzia, po wybraniu odpowiedniego układu współrzędnych, poniżej wyświetlone zostaną odpowiadające mu wartości współrzędnych (nazwa układu współrzędnych może być dostosowana przez użytkownika), typ narzędzia oraz pozycja instalacji (wyświetlana tylko dla narzędzi typu czujnikowego). Po wybraniu układu współrzędnych kliknij przycisk "Zastosuj", a aktualnie używany układ współrzędnych narzędzia zmieni się na wybrany układ współrzędnych, jak pokazano poniżej.
 
 .. image:: base/001.png
    :width: 4in
    :align: center
    
-.. centered:: 图表 6.2‑1-1 设置工具坐标
+.. centered:: Wykres 6.2‑1-1 Ustawianie współrzędnych narzędzia
 
-点击“重命名”按钮，可进行坐标系名称重命名，再次点击或应用完成修改，如下图。
+Kliknij przycisk "Zmień nazwę", aby zmienić nazwę układu współrzędnych. Kliknij ponownie lub naciśnij "Zastosuj", aby zakończyć modyfikację, jak pokazano na poniższym rysunku.
 
 .. image:: base/075.png
    :width: 4in
    :align: center
 
-.. centered:: 图表 6.2‑1-2 坐标系名称重命名
+.. centered:: Wykres 6.2‑1-2 Zmiana nazwy układu współrzędnych
 
-点击“修改”可根据提示对该编号的工具坐标系进行重新设置。工具标定方法分为四点法和六点法，四点法只标定工具TCP，即工具中心点的位置，其姿态默认与末端姿态一致，六点法则在四点法的基础上增加了两点，用于标定工具的姿态，这里我们以六点法为例进行讲解。
+Kliknij "Modyfikuj", aby ponownie ustawić układ współrzędnych narzędzia o danym numerze zgodnie z instrukcjami. Metody kalibracji narzędzia dzielą się na metodę czteropunktową i metodę sześciopunktową. Metoda czteropunktowa kalibruje tylko TCP narzędzia, czyli pozycję środka punktu narzędzia, a jego orientacja jest domyślnie zgodna z orientacją końcówki. Metoda sześciopunktowa dodaje dwa punkty do metody czteropunktowej w celu kalibracji orientacji narzędzia. Tutaj omówimy metodę sześciopunktową jako przykład.
 
 .. image:: base/002.png
    :width: 4in
    :align: center
 
-.. centered:: 图表 6.2‑2 设置工具坐标
+.. centered:: Wykres 6.2‑2 Ustawianie współrzędnych narzędzia
 
-在机器人空间选择一个固定的点，将工具以三个不同的姿态移至固定点，依次设置1-3点。如下图左上方所示。将工具垂直移至固定点设置点4，如下图右上方所示。保持该姿态不变，利用基坐标移动，在水平方向移动一段距离，设定点5，该方向即设定的工具坐标系X轴正方向。回到固定点，垂直往上移动一段距离，设定点6，该方向即工具坐标系Z轴正方向，工具坐标系Y正方向则通过右手定则确定。点击计算按钮计算工具位姿，若需重新设置，点击取消按修改钮重新进行新建工具坐标系步骤。
+Wybierz stały punkt w przestrzeni robota. Przesuń narzędzie do stałego punktu w trzech różnych orientacjach, ustawiając kolejno punkty 1-3, jak pokazano w lewym górnym rogu poniższego rysunku. Przesuń narzędzie pionowo do stałego punktu, aby ustawić punkt 4, jak pokazano w prawym górnym rogu poniższego rysunku. Utrzymując tę orientację, użyj ruchu wzdłuż podstawowych współrzędnych, aby przesunąć się w kierunku poziomym o pewną odległość i ustaw punkt 5. Ten kierunek jest dodatnim kierunkiem osi X ustawianego układu współrzędnych narzędzia. Wróć do stałego punktu, przesuń się pionowo w górę o pewną odległość i ustaw punkt 6. Ten kierunek jest dodatnim kierunkiem osi Z układu współrzędnych narzędzia. Dodatni kierunek osi Y układu współrzędnych narzędzia jest określany za pomocą reguły prawej dłoni. Kliknij przycisk "Oblicz", aby obliczyć pozycję i orientację narzędzia. Jeśli potrzebujesz ponownie ustawić, kliknij przycisk "Anuluj", a następnie "Modyfikuj", aby ponownie przejść przez kroki tworzenia nowego układu współrzędnych narzędzia.
 
 .. image:: base/003.png
    :width: 3in
    :align: center
 
-.. centered:: 图表 6.2‑3 六点法示意图
+.. centered:: Wykres 6.2‑3 Schemat metody sześciopunktowej
 
-完成最后步骤后，点击“完成”可返回工具坐标界面，点击“保存”即可存储刚才建立的工具坐标系。
+Po wykonaniu ostatnich kroków kliknij "Zakończ", aby wrócić do interfejsu współrzędnych narzędzia. Kliknij "Zapisz", aby zapisać właśnie utworzony układ współrzędnych narzędzia.
 
 .. important:: 
-   1. 末端安装工具后，必须要进行工具坐标系的标定及应用，否则会导致机器人执行运动指令时工具中心点的位置和姿态不符合预期值。
-   2. 工具坐标系一般使用toolcoord1~toolcoord19，应用toolcoord0代表工具TCP的位置中心在末端法兰中心，在进行工具坐标系标定时，首先需将工具坐标系应用至toolcoord0，然后选择其他工具坐标系进行标定及应用。
+   1. Po zamontowaniu narzędzia na końcówce konieczna jest kalibracja i zastosowanie układu współrzędnych narzędzia. W przeciwnym razie pozycja i orientacja środka punktu narzędzia podczas wykonywania przez robota instrukcji ruchu nie będą zgodne z oczekiwanymi wartościami.
+   2. Układ współrzędnych narzędzia jest zwykle używany jako toolcoord1~toolcoord19. Zastosowanie toolcoord0 oznacza, że środek TCP narzędzia znajduje się w środku kołnierza końcówki. Podczas kalibracji układu współrzędnych narzędzia należy najpierw zastosować układ współrzędnych narzędzia do toolcoord0, a następnie wybrać inny układ współrzędnych narzędzia do kalibracji i zastosowania.
 
+Zewnętrzne współrzędne narzędzia
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-外部工具坐标
-~~~~~~~~~~~~~
+W menu "Ustawienia początkowe" -> "Podstawowe" kliknij "Zewnętrzne współrzędne narzędzia", aby przejść do interfejsu zewnętrznych współrzędnych narzędzia.
 
-在“初始设置”->“基础”菜单栏下，点击“外部工具坐标”进入外部工具坐标系界面。
+Interfejs ustawień zewnętrznych współrzędnych narzędzia umożliwia modyfikację, czyszczenie i zastosowanie zewnętrznych współrzędnych narzędzia.
 
-外部工具坐标系设置界面中可实现外部工具坐标的修改、清空与应用。
-
-外部工具坐标系的下拉列表中共有15个编号，从etoolcoord0~etoolcoord14，选择对应的坐标系后会在下方显示对应坐标值，选择某一坐标系后点击“应用”按钮，当前使用的工具坐标系变为所选择的坐标，如下图所示。
+Lista rozwijana zewnętrznych współrzędnych narzędzia zawiera łącznie 15 numerów, od etoolcoord0 do etoolcoord14. Po wybraniu odpowiedniego układu współrzędnych poniżej wyświetlone zostaną odpowiadające mu wartości współrzędnych. Po wybraniu układu współrzędnych kliknij przycisk "Zastosuj", a aktualnie używany układ współrzędnych narzędzia zmieni się na wybrany układ współrzędnych, jak pokazano na poniższym rysunku.
 
 .. image:: base/004.png
    :width: 4in
    :align: center
 
-.. centered:: 图表 6.2‑4 外部工具坐标
+.. centered:: Wykres 6.2‑4 Zewnętrzne współrzędne narzędzia
 
-点击“修改”可根据提示对该编号的工具坐标系进行重新设置，如下图所示。
+Kliknij "Modyfikuj", aby ponownie ustawić układ współrzędnych narzędzia o danym numerze zgodnie z instrukcjami, jak pokazano na poniższym rysunku.
 
 .. image:: base/005.png
    :width: 4in
    :align: center
 
-.. centered:: 图表 6.2‑5 六点法示意图
+.. centered:: Wykres 6.2‑5 Schemat metody sześciopunktowej
 
-**1.三点法确定外部TCP**
+**1. Określenie zewnętrznego TCP za pomocą metody trzech punktów**
 
-- **设置点1**：已测量工具的TCP移动至外部TCP，点击设置点1按钮；
+- **Ustaw punkt 1**: Przesuń zmierzone TCP narzędzia do zewnętrznego TCP, kliknij przycisk ustaw punkt 1;
+- **Ustaw punkt 2**: Przesuń się z punktu 1 wzdłuż osi X zewnętrznego układu współrzędnych TCF o pewną odległość, kliknij przycisk ustaw punkt 2;
+- **Ustaw punkt 3**: Wróć do punktu 1, przesuń się z punktu 1 wzdłuż osi Z zewnętrznego układu współrzędnych TCF o pewną odległość, kliknij przycisk ustaw punkt 3;
+- **Oblicz**: Kliknij przycisk "Oblicz", aby uzyskać zewnętrzny TCF;
 
-- **设置点2**：由点1沿外部TCF坐标系X轴移动一段距离，点击设置点2按钮；
+**2. Określenie TCF narzędzia za pomocą metody sześciu punktów**
 
-- **设置点3**：回到点1，由点1沿外部TCF坐标系Z轴移动一段距离，点击设置点3按钮；
+- **Ustaw punkty 1-4**: Wybierz stały punkt w przestrzeni robota, przesuń narzędzie do wybranego punktu z czterech różnych kątów, ustawiając kolejno punkty 1-4;
+- **Ustaw punkt 5**: Wróć do stałego punktu, przesuń się wzdłuż osi X TCF narzędzia o pewną odległość, kliknij przycisk ustaw punkt 5;
+- **Ustaw punkt 6**: Wróć do stałego punktu, przesuń się wzdłuż osi Y TCF narzędzia o pewną odległość, kliknij przycisk ustaw punkt 6;
+- **Oblicz**: Kliknij przycisk "Oblicz", aby uzyskać TCF narzędzia;
 
-- **计算**：点击计算按钮得到外部TCF；
+Jeśli potrzebujesz ponownie ustawić, kliknij przycisk "Anuluj", aby ponownie przejść przez kroki tworzenia nowego układu współrzędnych narzędzia.
 
-**2.六点法确定工具TCF**
-
-- **设置点1-4**：在机器人空间选择一个固定的点，将工具从四个不同的角度移至所选的点上，依次设置1-4点；
-
-- **设置点5**：回到固定的点沿工具TCF坐标系X轴移动一段距离，点击设置点5按钮；
-
-- **设置点6**：回到固定的点沿工具TCF坐标系Y轴移动一段距离，点击设置点6按钮；
-
-- **计算**：点击计算按钮得到工具TCF；
-
-若需重新设置，点击取消按钮重新进去新建工具坐标系步骤。
-
-完成最后步骤后，点击“完成”可返回工具坐标界面，点击“保存”即可存储刚才建立的工具坐标系。
+Po wykonaniu ostatnich kroków kliknij "Zakończ", aby wrócić do interfejsu współrzędnych narzędzia. Kliknij "Zapisz", aby zapisać właśnie utworzony układ współrzędnych narzędzia.
 
 .. important:: 
-   1. 使用外部工具必须要进行外部工具坐标系的标定及应用，否则会导致机器人执行运动指令时工具中心点的位置和姿态不符合预期值。
-   2. 外部工具坐标系一般使用etoolcoord1~etoolcoord14，应用etoolcoord0代表外部工具TCP的中心位置在末端法兰中心，在进行工具坐标系标定时，首先需将工具坐标系应用至etoolcoord0，然后选择其他工具坐标系进行标定。
+   1. Korzystanie z zewnętrznego narzędzia wymaga kalibracji i zastosowania zewnętrznego układu współrzędnych narzędzia. W przeciwnym razie pozycja i orientacja środka punktu narzędzia podczas wykonywania przez robota instrukcji ruchu nie będą zgodne z oczekiwanymi wartościami.
+   2. Zewnętrzny układ współrzędnych narzędzia jest zwykle używany jako etoolcoord1~etoolcoord14. Zastosowanie etoolcoord0 oznacza, że środek TCP zewnętrznego narzędzia znajduje się w środku kołnierza końcówki. Podczas kalibracji układu współrzędnych narzędzia należy najpierw zastosować układ współrzędnych narzędzia do etoolcoord0, a następnie wybrać inny układ współrzędnych narzędzia do kalibracji.
 
-工件坐标
-~~~~~~~~~~~~~
+Współrzędne przedmiotu
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-在“初始设置”->“基础”菜单栏下，点击“工件坐标”进入工件坐标界面。工件坐标可实现工件坐标的修改、清空与应用。工件坐标系的下拉列表中共有15个编号，选择对应的坐标系（wobjcoord0~
-wobjcoord14），后会在下方的“坐标系坐标”中显示对应坐标值，选择某一坐标系后点击“应用”按钮，当前使用的工件坐标系变为所选择的坐标，如下图所示。
+W menu "Ustawienia początkowe" -> "Podstawowe" kliknij "Współrzędne przedmiotu", aby przejść do interfejsu współrzędnych przedmiotu. Współrzędne przedmiotu umożliwiają modyfikację, czyszczenie i zastosowanie współrzędnych przedmiotu. Lista rozwijana układów współrzędnych przedmiotu zawiera łącznie 15 numerów. Po wybraniu odpowiedniego układu współrzędnych (wobjcoord0 ~ wobjcoord14), poniżej w sekcji "Współrzędne układu współrzędnych" wyświetlone zostaną odpowiadające mu wartości współrzędnych. Po wybraniu układu współrzędnych kliknij przycisk "Zastosuj", a aktualnie używany układ współrzędnych przedmiotu zmieni się na wybrany układ współrzędnych, jak pokazano na poniższym rysunku.
 
 .. image:: base/006.png
    :width: 4in
    :align: center
 
-.. centered:: 图表 6.2‑6 设置工件坐标
+.. centered:: Wykres 6.2‑6 Ustawianie współrzędnych przedmiotu
 
-工件坐标系一般是基于工具基础上进行标定的，需要在已建立工具坐标系的基础上进行工件坐标系的建立。点击“修改”可根据提示对该编号的工件坐标系进行重新设置。固定好工件，选择标定方法“原点-X轴-Z轴”或“原点-X轴-XY+平面”，两种标定方法前两点的选取都是一致的，第三点有所区别，选第一种方法标定的是工件坐标系的Z方向，选第二种方法标定的是XY+平面上一点，根据图示标定即可。点击计算按钮计算工件位姿，若需重新设置，点击取消按修改钮重新进行新建工件坐标系步骤。
+Układ współrzędnych przedmiotu jest zwykle kalibrowany w oparciu o narzędzie. Należy go utworzyć na podstawie już utworzonego układu współrzędnych narzędzia. Kliknij "Modyfikuj", aby ponownie ustawić układ współrzędnych przedmiotu o danym numerze zgodnie z instrukcjami. Zamocuj przedmiot, wybierz metodę kalibracji "Początek układu - Oś X - Oś Z" lub "Początek układu - Oś X - Płaszczyzna XY+". Wybór pierwszych dwóch punktów jest taki sam dla obu metod kalibracji, trzeci punkt różni się. Wybór pierwszej metody kalibruje kierunek Z układu współrzędnych przedmiotu, wybór drugiej metody kalibruje punkt na płaszczyźnie XY+. Kalibruj zgodnie z ilustracją. Kliknij przycisk "Oblicz", aby obliczyć pozycję i orientację przedmiotu. Jeśli potrzebujesz ponownie ustawić, kliknij przycisk "Anuluj", a następnie "Modyfikuj", aby ponownie przejść przez kroki tworzenia nowego układu współrzędnych przedmiotu.
 
 .. image:: base/007.png
    :width: 3in
    :align: center
 
-.. centered:: 图表 6.2‑7 三点法示意图
+.. centered:: Wykres 6.2‑7 Schemat metody trzech punktów
 
-完成最后步骤后，点击“完成”可返回工件坐标界面，点击“保存”即可存储刚才建立的工件坐标系。
+Po wykonaniu ostatnich kroków kliknij "Zakończ", aby wrócić do interfejsu współrzędnych przedmiotu. Kliknij "Zapisz", aby zapisać właśnie utworzony układ współrzędnych przedmiotu.
 
 .. important:: 
-   1. 工件坐标系是基于工具基础上进行标定的，需要在已建立工具坐标系的基础上进行工件坐标系的建立。
-   2. 工件坐标系一般使用wobjcoord1~wobjcoord14，应用wobjcoord0代表工件坐标系原点在基坐标原点，在进行工件坐标系标定时，首先需将工件坐标系应用至wobjcoord0，然后选择其他工件坐标系进行标定及应用。
+   1. Układ współrzędnych przedmiotu jest kalibrowany w oparciu o narzędzie. Należy go utworzyć na podstawie już utworzonego układu współrzędnych narzędzia.
+   2. Układ współrzędnych przedmiotu jest zwykle używany jako wobjcoord1~wobjcoord14. Zastosowanie wobjcoord0 oznacza, że początek układu współrzędnych przedmiotu znajduje się w początku podstawowych współrzędnych. Podczas kalibracji układu współrzędnych przedmiotu należy najpierw zastosować układ współrzędnych przedmiotu do wobjcoord0, a następnie wybrać inny układ współrzędnych przedmiotu do kalibracji i zastosowania.
 
-负载
+Obciążenie
 --------------
 
-末端
+Końcówka
 ~~~~~~~~~~~~~
 
-在“初始设置”->“基础”->“负载”的菜单栏下，点击“轨迹辨识”进入轨迹辨识界面。
+W menu "Ustawienia początkowe" -> "Podstawowe" -> "Obciążenie" kliknij "Identyfikacja trajektorii", aby przejść do interfejsu identyfikacji trajektorii.
 
-在配置末端负载时请将所使用的末端工具的质量以及对应的质心坐标分别输入“负载质量”和“负载质心坐标X、Y和Z”输入框中并应用。
+Podczas konfigurowania obciążenia końcówki należy wprowadzić masę używanego narzędzia końcowego oraz odpowiadające mu współrzędne środka ciężkości odpowiednio w polach "Masa obciążenia" i "Współrzędne środka ciężkości obciążenia X, Y i Z", a następnie kliknąć "Zastosuj".
 
 .. important:: 
-    负载质量不可超过机器人的最大负载范围。具体机器人型号对应的负载范围请参考2.1. 基本参数，质心坐标设置范围为0-1000，单位mm。
+    Masa obciążenia nie może przekraczać maksymalnego zakresu obciążenia robota. Zakres obciążenia dla konkretnego modelu robota można znaleźć w sekcji 2.1. Podstawowe parametry. Zakres ustawiania współrzędnych środka ciężkości wynosi 0-1000 mm.
 
 .. image:: base/016.png
    :width: 4in
    :align: center
 
-.. centered:: 图表 6.3‑1 负载设定示意图
+.. centered:: Wykres 6.3‑1 Schemat ustawiania obciążenia
 
 .. important:: 
-   机器人末端安装负载后，必须正确设置末端负载重量以及质心坐标，否则会影响机器人的拖动功能以及碰撞检测功能使用。
+   Po zamontowaniu obciążenia na końcówce robota należy prawidłowo ustawić masę obciążenia końcówki oraz współrzędne środka ciężkości. W przeciwnym razie wpłynie to na funkcję przeciągania robota oraz funkcję wykrywania kolizji.
 
-用户对工具质量或质心不确定的情况下，可以通过点击“自动辨识”进入负载辨识功能对工具数据测定。
+Jeśli użytkownik nie jest pewien masy narzędzia lub środka ciężkości, może kliknąć "Automatyczna identyfikacja", aby przejść do funkcji identyfikacji obciążenia w celu pomiaru danych narzędzia.
 
-在进行测定之前，确保负载已安装后选择版本。点击“工具数据测定”按键，进入负载运动测试界面。
+Przed przystąpieniem do pomiaru upewnij się, że obciążenie jest zamontowane, a następnie wybierz wersję. Kliknij przycisk "Pomiar danych narzędzia", aby przejść do interfejsu testu ruchu obciążenia.
 
 .. image:: base/017.png
    :width: 4in
    :align: center
 
-.. centered:: 图表 6.3‑2 负载辨识关节设置
+.. centered:: Wykres 6.3‑2 Ustawienia stawów do identyfikacji obciążenia
 
-点击“负载辨识启动”进行测试，如遇紧急情况请及时停止运动。
+Kliknij "Uruchom identyfikację obciążenia", aby przeprowadzić test. W razie sytuacji awaryjnej niezwłocznie zatrzymaj ruch.
 
 .. image:: base/018.png
    :width: 4in
    :align: center
 
-.. centered:: 图表 6.3‑3 负载辨识启动
+.. centered:: Wykres 6.3‑3 Uruchomienie identyfikacji obciążenia
 
-运动结束后，点击“获取辨识结果”按键，获取计算出的工具数据，并显示在页面上，如需应用到负载数据中，点击应用即可。
+Po zakończeniu ruchu kliknij przycisk "Pobierz wyniki identyfikacji", aby uzyskać obliczone dane narzędzia, które zostaną wyświetlone na stronie. Jeśli chcesz zastosować je w danych obciążenia, kliknij "Zastosuj".
 
 .. image:: base/019.png
    :width: 4in
    :align: center
 
-.. centered:: 图表 6.3‑4 负载辨识结果
+.. centered:: Wykres 6.3‑4 Wyniki identyfikacji obciążenia
 
-关节
+Stawy
 --------------
 
-软限位
+Miękki limit
 ~~~~~~~~~~~~~
 
-在“初始设置”->“基础”->“关节”的菜单栏下，点击“软限位”进入软限位界面。
+W menu "Ustawienia początkowe" -> "Podstawowe" -> "Stawy" kliknij "Miękki limit", aby przejść do interfejsu miękkiego limitu.
 
-机器人行程内可能存在其它设备，限位角度可对机器人进行软限位，使机器人运动不超过某个坐标值，防止机器人碰撞。触发软限位机器人停止为机器人自动触发，无停止距离。
+W zakresie ruchu robota mogą znajdować się inne urządzenia. Kąt limitu może ustawić miękki limit dla robota, zapobiegając przekroczeniu przez robota pewnych wartości współrzędnych i zapobiegając kolizjom. Zatrzymanie robota po przekroczeniu miękkiego limitu jest automatycznie wyzwalane przez robota i nie ma odległości zatrzymania.
 
-管理员可使用默认值也可输入角度值。输入角度值，可分别对机器人关节正负角度进行限位，当输入值超出2.1-基本参数中的机器人基本参数表格所列出的机器人关节软限位角度值，会将限位角度调整为所能设定最大值。当机器人报出超出指令超限时，需要进入拖动模式，将机器人关节拖动至限位角度之内。界面如下图所示：
+Administrator może używać wartości domyślnych lub wprowadzić wartości kątów. Po wprowadzeniu wartości kątów można ograniczyć dodatnie i ujemne kąty stawów robota. Jeśli wprowadzona wartość przekracza wartości kątów miękkiego limitu stawów robota wymienione w tabeli podstawowych parametrów robota w sekcji 2.1, kąt limitu zostanie dostosowany do maksymalnej możliwej do ustawienia wartości. Gdy robot zgłosi przekroczenie limitu instrukcji, należy przejść do trybu przeciągania i przeciągnąć staw robota z powrotem do zakresu kąta limitu. Interfejs jest pokazany na poniższym rysunku:
 
 .. image:: base/020.png
    :width: 4in
    :align: center
 
-.. centered:: 图表 6.4‑1-1 机器人限位示意图
+.. centered:: Wykres 6.4‑1-1 Schemat ograniczenia robota
 
-关节软限位保护
+Ochrona miękkim limitem stawu
 +++++++++++++++++++++++++++++++++++
 
-概述
+Omówienie
 ************************
 
-关节软限位保护功能是一种通过实时监测机械臂关节运动状态，动态限制操作者在拖动示教过程中超出设置软限位范围的主动防护机制。该功能使得软限位在拖动示教下同样存在意义，从而提升人机协作安全性。
+Funkcja ochrony miękkim limitem stawu to aktywny mechanizm ochrony, który dynamicznie ogranicza zakres miękkiego limitu ustawionego przez operatora podczas procesu nauczania przeciągania poprzez monitorowanie w czasie rzeczywistym stanu ruchu stawów ramienia mechanicznego. Funkcja ta sprawia, że miękki limit ma również znaczenie podczas nauczania przeciągania, zwiększając w ten sposób bezpieczeństwo współpracy człowiek-robot.
 
-关节软限位保护
-************************
+Ochrona miękkim limitem stawu
+***********************************
 
-关节软限位保护功能需要确保软件包与固件版本匹配，从而获取最佳体验。
+Funkcja ochrony miękkim limitem stawu wymaga zgodności wersji pakietu oprogramowania i oprogramowania sprzętowego, aby uzyskać optymalne doświadczenie.
 
-软限位设置及功能启停
-""""""""""""""""""""""""""""""""""""
+Ustawienie miękkiego limitu oraz uruchamianie i zatrzymywanie funkcji
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-**Step1**：登录web界面，依次点击“初始设置”->“基础”->“关节”->“软限位”，进入机器人软限位设置模块。
+**Krok 1**: Zaloguj się do interfejsu sieciowego, kolejno kliknij "Ustawienia początkowe" -> "Podstawowe" -> "Stawy" -> "Miękki limit", aby przejść do modułu ustawiania miękkiego limitu robota.
 
 .. image:: base/056.png
    :width: 4in
    :align: center
 
-.. centered:: 图表 6.4‑1-2 机器人软限位设置模块
+.. centered:: Wykres 6.4‑1-2 Moduł ustawiania miękkiego limitu robota
 
-**Step2**：基于机器人实际的工作范围，合理设置各关节软限位。此时，需要检查当前机器人各关节的角位置是否在预设软限位范围内，若是则可点击“应用”下发预设软限位；若不是，则需将各关节移动至预设范围内，否则当点击“应用”时将提示超限，见下图所示。此时，可朝进入软限位范围方向单轴点动或拖动超限关节，从而清除错误。
+**Krok 2**: W oparciu o rzeczywisty zakres roboczy robota, odpowiednio ustaw miękki limit dla każdego stawu. W tym momencie należy sprawdzić, czy aktualne pozycje kątowe każdego stawu robota mieszczą się w zakresie ustawionego miękkiego limitu. Jeśli tak, kliknij "Zastosuj", aby wysłać ustawiony miękki limit. Jeśli nie, należy przesunąć każdy staw do zakresu ustawionego limitu, w przeciwnym razie po kliknięciu "Zastosuj" pojawi się komunikat o przekroczeniu limitu, jak pokazano na poniższym rysunku. W takim przypadku można pojedynczo punktowo lub przeciągnąć staw, który przekroczył limit, w kierunku wejścia w zakres miękkiego limitu, aby wyczyścić błąd.
 
 .. image:: base/057.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 6.4‑1-3 机器人各关节实际角位置超出所设软限位范围时报错
+.. centered:: Wykres 6.4‑1-3 Błąd, gdy rzeczywista pozycja kątowa każdego stawu robota przekracza ustawiony zakres miękkiego limitu
 
-**Step3**：当软限位范围设置成功后，点击“关节软限位保护”滑块，可开启该功能，具体见下图所示。此时，拖动模式下，所设软限位将起到限制作用，同时，在拖动至软限位附近时，将感受到阻力。
+**Krok 3**: Po pomyślnym ustawieniu zakresu miękkiego limitu kliknij suwak "Ochrona miękkim limitem stawu", aby włączyć tę funkcję, jak pokazano na poniższym rysunku. W trybie przeciągania ustawiony miękki limit będzie działał ograniczająco, a podczas przeciągania w pobliże miękkiego limitu wyczuwalny będzie opór.
 
 .. image:: base/058.png
    :width: 4in
    :align: center
 
-.. centered:: 图表 6.4‑1-4 开启关节软限位保护功能
+.. centered:: Wykres 6.4‑1-4 Włączenie funkcji ochrony miękkim limitem stawu
 
-**Step4**：若需关闭关节软限位保护功能，可通过点击“关节软限位保护”滑块实现。
+**Krok 4**: Jeśli chcesz wyłączyć funkcję ochrony miękkim limitem stawu, kliknij suwak "Ochrona miękkim limitem stawu".
 
-碰撞等级
-~~~~~~~~~~~~~
+Poziom kolizji
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-在“初始设置”->“基础”->“关节”的菜单栏下，点击“碰撞等级”进入碰撞等级界面。
+W menu "Ustawienia początkowe" -> "Podstawowe" -> "Stawy" kliknij "Poziom kolizji", aby przejść do interfejsu poziomu kolizji.
 
-碰撞等级分为一到十级，一到三级检测比较灵敏，机器人需要在推荐速度下运行。同时可以选择自定义百分比设置，100%即对应十级。碰撞策略可以设置机器人碰撞后的处理方式，分为报错停止和继续运动，用户可以根据具体使用需求来设定。如下图所示：
+Poziom kolizji dzieli się na poziomy od pierwszego do dziesiątego. Poziomy od pierwszego do trzeciego są bardziej czułe. Robot musi działać z zalecaną prędkością. Jednocześnie można wybrać ustawienie niestandardowego procentu, gdzie 100% odpowiada poziomowi dziesiątemu. Strategia kolizji może ustawić sposób postępowania robota po kolizji, dzieląc się na zatrzymanie z błędem i kontynuację ruchu. Użytkownik może ustawić odpowiednią opcję w zależności od konkretnych potrzeb użytkowania. Jak pokazano na poniższym rysunku:
 
 .. image:: base/021.png
    :width: 4in
    :align: center
 
-.. centered:: 图表 6.4‑2 碰撞等级示意图
+.. centered:: Wykres 6.4‑2 Schemat poziomu kolizji
 
-碰撞后响应策略
-++++++++++++++++
+Strategia reakcji po kolizji
+++++++++++++++++++++++++++++++
 
-在原有运动中碰撞策略的基础上，增加“重力矩模式”和“振荡响应模式”，旨在保证人机协作的安全。
+Na podstawie istniejącej strategii kolizji podczas ruchu dodano "tryb momentu grawitacyjnego" i "tryb odpowiedzi oscylacyjnej", aby zapewnić bezpieczeństwo współpracy człowiek-robot.
 
-两种策略在触发时，均会从自动模式或手动模式，切换至拖动模式，重力矩模式会根据碰撞力大小及方向远离碰撞点，而振荡响应模式则会在远离碰撞点后，回到碰撞位置。同时，新增静止下的碰撞检测。
+Po wyzwoleniu obu strategii, robot przełączy się z trybu automatycznego lub ręcznego do trybu przeciągania. Tryb momentu grawitacyjnego oddali się od punktu kolizji zgodnie z wielkością i kierunkiem siły kolizji, podczas gdy tryb odpowiedzi oscylacyjnej powróci do pozycji kolizji po oddaleniu się od niej. Jednocześnie dodano wykrywanie kolizji w stanie spoczynku.
 
-碰撞策略
-++++++++++++++++
+Strategia kolizji
+++++++++++++++++++++++++++++++
 
-FT_Guard指令用于实现基于力传感器的碰撞检测。之前的碰撞策略为“碰撞停止”、“碰撞暂停”和“继续运动”。为了避免碰撞后机器人与物体产生挤压力，增加策略“重力矩模式”、“振荡响应模式”和“碰撞回弹模式”。
+Instrukcja FT_Guard służy do implementacji wykrywania kolizji opartego na czujniku siły. Dotychczasowe strategie kolizji to "zatrzymanie kolizji", "wstrzymanie kolizji" i "kontynuacja ruchu". Aby uniknąć siły ściskającej między robotem a obiektem po kolizji, dodano strategie "tryb momentu grawitacyjnego", "tryb odpowiedzi oscylacyjnej" i "tryb odbicia kolizyjnego".
 
-三种策略在触发时，均会从自动模式或手动模式，切换至拖动模式，之后再切换至手动模式。其中重力矩模式会根据碰撞力大小及方向远离碰撞点；振荡响应模式会在远离碰撞点后，回到碰撞位置；碰撞回弹模式会根据设置的参数，加速远离碰撞点。
+Po wyzwoleniu wszystkich trzech strategii, robot przełączy się z trybu automatycznego lub ręcznego do trybu przeciągania, a następnie z powrotem do trybu ręcznego. Tryb momentu grawitacyjnego oddala się od punktu kolizji zgodnie z wielkością i kierunkiem siły kolizji; tryb odpowiedzi oscylacyjnej powraca do pozycji kolizji po oddaleniu się od niej; tryb odbicia kolizyjnego przyspiesza oddalanie się od punktu kolizji zgodnie z ustawionymi parametrami.
 
-重力矩模式
-**********************
+Tryb momentu grawitacyjnego
+*******************************
 
-碰撞策略中的重力矩模式，设置步骤如下。
+Kroki ustawiania trybu momentu grawitacyjnego w strategii kolizji są następujące.
 
-**Step1**：在“初始设置”->“基础”->“关节”菜单栏下，点击“碰撞等级”，进入对应界面。
+**Krok 1**: W menu "Ustawienia początkowe" -> "Podstawowe" -> "Stawy" kliknij "Poziom kolizji", aby przejść do odpowiedniego interfejsu.
 
-**Step2**：在“碰撞策略”一栏中， 点击下拉框选择“重力矩模式”，界面如下图所示；然后，点击“应用”按钮，功能即可启用。
+**Krok 2**: W sekcji "Strategia kolizji" kliknij listę rozwijaną i wybierz "Tryb momentu grawitacyjnego". Interfejs jest pokazany na poniższym rysunku. Następnie kliknij przycisk "Zastosuj", aby włączyć funkcję.
 
-.. note:: 在机器人运行中，若负载质量变化较大，不建议使用该策略；若运行速度过快，不建议使用该策略。
+.. note:: Podczas pracy robota, jeśli masa obciążenia znacznie się zmienia, nie zaleca się stosowania tej strategii. Jeśli prędkość robocza jest zbyt wysoka, nie zaleca się stosowania tej strategii.
 
 .. image:: base/022.png
    :width: 4in
    :align: center
 
-.. centered:: 图表 6.4-3 碰撞策略之重力矩模式
+.. centered:: Wykres 6.4-3 Strategia kolizji - tryb momentu grawitacyjnego
 
-振荡响应模式
-**********************
+Tryb odpowiedzi oscylacyjnej
+*******************************
 
-碰撞策略中的振荡响应模式，设置步骤如下。
+Kroki ustawiania trybu odpowiedzi oscylacyjnej w strategii kolizji są następujące.
 
-**Step1**：在“初始设置”->“基础”->“关节”菜单栏下，点击“碰撞等级”，进入对应界面。
+**Krok 1**: W menu "Ustawienia początkowe" -> "Podstawowe" -> "Stawy" kliknij "Poziom kolizji", aby przejść do odpowiedniego interfejsu.
 
-**Step2**：在“碰撞策略”一栏中， 点击下拉框选择“振荡响应模式”，界面如下图所示；然后，点击“应用”按钮，功能即可启用。
+**Krok 2**: W sekcji "Strategia kolizji" kliknij listę rozwijaną i wybierz "Tryb odpowiedzi oscylacyjnej". Interfejs jest pokazany na poniższym rysunku. Następnie kliknij przycisk "Zastosuj", aby włączyć funkcję.
 
-.. note:: 在机器人运行中，若运行速度过快，不建议使用该策略。
+.. note:: Podczas pracy robota, jeśli prędkość robocza jest zbyt wysoka, nie zaleca się stosowania tej strategii.
 
 .. image:: base/023.png
    :width: 4in
    :align: center
 
-.. centered:: 图表 6.4-4 碰撞策略之振荡响应模式
+.. centered:: Wykres 6.4-4 Strategia kolizji - tryb odpowiedzi oscylacyjnej
 
-碰撞回弹模式
-**********************
+Tryb odbicia kolizyjnego
+*******************************
 
-碰撞策略中的碰撞回弹模式，设置步骤如下。
+Kroki ustawiania trybu odbicia kolizyjnego w strategii kolizji są następujące.
 
-**Step1**：在初始设置中的“机器人设置”菜单栏下，点击“碰撞等级”，进入对应界面。
+**Krok 1**: W menu "Ustawienia początkowe" -> "Ustawienia robota" kliknij "Poziom kolizji", aby przejść do odpowiedniego interfejsu.
 
-**Step2**：在“碰撞策略”一栏中， 点击下拉框选择“碰撞回弹模式”，依次设置安全时间1000ms，安全距离150mm，安全速度150mm/s，各关节安全系数为5，具体界面如下图所示。
+**Krok 2**: W sekcji "Strategia kolizji" kliknij listę rozwijaną i wybierz "Tryb odbicia kolizyjnego". Kolejno ustaw czas bezpieczeństwa 1000 ms, odległość bezpieczeństwa 150 mm, prędkość bezpieczeństwa 150 mm/s, współczynnik bezpieczeństwa dla każdego stawu 5. Konkretny interfejs jest pokazany na poniższym rysunku.
 
 .. image:: base/049.png
    :width: 4in
    :align: center
 
-.. centered:: 图表 6.4-5 碰撞策略之碰撞回弹模式
+.. centered:: Wykres 6.4-5 Strategia kolizji - tryb odbicia kolizyjnego
 
-各项参数的含义：
-  - 安全时间：表示从自动模式切换至拖动模式后，在拖动模式下的持续时间，范围是[1000-2000]ms；
-  - 安全距离：表示碰撞后机器人远离碰撞点的位置，范围是[150-200]mm；
-  - 安全速度：表示碰撞后机器人远离碰撞点的最大TCP速度，超出速度限制后，会约束反弹力，范围是[50-250]mm/s；
-  - 安全系数：表示反弹力的衰减速度，系数越小，衰减越快，反弹速度越快，反之越慢；范围是[1-10]，无量纲。
+Znaczenie poszczególnych parametrów:
+  - Czas bezpieczeństwa: oznacza czas trwania w trybie przeciągania po przełączeniu z trybu automatycznego do trybu przeciągania. Zakres wynosi [1000-2000] ms;
+  - Odległość bezpieczeństwa: oznacza pozycję, w jakiej robot oddala się od punktu kolizji po kolizji. Zakres wynosi [150-200] mm;
+  - Prędkość bezpieczeństwa: oznacza maksymalną prędkość TCP robota podczas oddalania się od punktu kolizji po kolizji. Po przekroczeniu limitu prędkości, siła odbicia będzie ograniczana. Zakres wynosi [50-250] mm/s;
+  - Współczynnik bezpieczeństwa: oznacza szybkość tłumienia siły odbicia. Im mniejszy współczynnik, tym szybsze tłumienie i szybsza prędkość odbicia, i odwrotnie. Zakres wynosi [1-10], bezwymiarowy.
 
-FT_Guard指令
+Instrukcja FT_Guard
 **********************
 
-FT_Guard指令用于实现力传感器的碰撞检测。首先选择检测的方向，也可设置所有方向。之后获取当前力传感器数据作为初始值，再设定最大阈值和最小阈值确定碰撞力触发的上下限，即可完成碰撞检测功能设置。以Z向配置为例，详细设置见下图。
+Instrukcja FT_Guard służy do implementacji wykrywania kolizji za pomocą czujnika siły. Najpierw wybierz kierunek wykrywania, możesz też ustawić wszystkie kierunki. Następnie pobierz bieżące dane czujnika siły jako wartość początkową, a następnie ustaw maksymalny i minimalny próg, aby określić górną i dolną granicę wyzwolenia siły kolizji. W ten sposób zakończysz ustawianie funkcji wykrywania kolizji. Na przykładzie konfiguracji kierunku Z, szczegółowe ustawienia pokazano na poniższym rysunku.
 
 .. image:: base/050.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 6.4-6 FT_Guard指令参数配置
+.. centered:: Wykres 6.4-6 Konfiguracja parametrów instrukcji FT_Guard
 
-FT_Guard指令通常与运动指令搭配使用，可用PTP或Lin等指令，简单示例如图所示。
+Instrukcja FT_Guard jest zwykle używana razem z instrukcjami ruchu, takimi jak PTP lub Lin. Prosty przykład pokazano na rysunku.
 
 .. image:: base/051.png
    :width: 5in
    :align: center
 
-.. centered:: 图表 6.3-7 FT_Guard与运动指令结合示例
+.. centered:: Wykres 6.3-7 Przykład połączenia instrukcji FT_Guard z instrukcjami ruchu
 
-第一行为设置力传感器碰撞检测开启，最后一行为关闭力传感器碰撞检测功能。
+Pierwszy wiersz to włączenie wykrywania kolizji czujnika siły, ostatni wiersz to wyłączenie funkcji wykrywania kolizji czujnika siły.
 
-静态下碰撞检测
-++++++++++++++++
+Wykrywanie kolizji w stanie spoczynku
+++++++++++++++++++++++++++++++++++++++++++++++++
 
-静态下碰撞检测的设置步骤如下。
+Kroki ustawiania wykrywania kolizji w stanie spoczynku są następujące.
 
-**Step1**：在“初始设置”->“基础”->“关节”菜单栏下，点击“碰撞等级”，进入对应界面。
+**Krok 1**: W menu "Ustawienia początkowe" -> "Podstawowe" -> "Stawy" kliknij "Poziom kolizji", aby przejść do odpowiedniego interfejsu.
 
-**Step2**：将静态下碰撞检测的开关打开，如下图所示。当检测到关节扭矩指令与扭矩反馈差距过大，机器人将进入拖动模式，避免产生持续的挤压力。
+**Krok 2**: Włącz przełącznik wykrywania kolizji w stanie spoczynku, jak pokazano na poniższym rysunku. Gdy różnica między instrukcją momentu obrotowego stawu a sprzężeniem zwrotnym momentu obrotowego jest zbyt duża, robot przejdzie do trybu przeciągania, aby uniknąć generowania ciągłej siły ściskającej.
 
 .. image:: base/024.png
    :width: 4in
    :align: center
 
-.. centered:: 图表 6.4-8 静态下碰撞检测
+.. centered:: Wykres 6.4-8 Wykrywanie kolizji w stanie spoczynku
 
-拖动前的力矩检测功能
-++++++++++++++++++++++++++++++++++++++
+Funkcja wykrywania momentu obrotowego przed przeciąganiem
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-概述
+Omówienie
 ***********************
-在机器人进入拖动模式之前，需要进行力矩检测。该功能的作用是防止由于操作者设置了错误的负载参数或选择了错误的安装方式，导致机器人进入拖动模式后出现上抬或下坠等异常现象。若检测到关节力矩超出允许范围，控制器会立即报错，并禁止机器人进入拖动模式。
+Przed wejściem robota w tryb przeciągania konieczne jest wykrycie momentu obrotowego. Funkcja ta ma na celu zapobieganie nieprawidłowym zjawiskom, takim jak unoszenie się lub opadanie robota po wejściu w tryb przeciągania, spowodowanym przez operatora ustawieniem nieprawidłowych parametrów obciążenia lub wyborem niewłaściwego sposobu instalacji. Jeśli wykryty moment obrotowy stawu przekracza dozwolony zakres, kontroler natychmiast zgłosi błąd i zablokuje wejście robota w tryb przeciągania.
 
-拖动前力矩检测
-**************************************
+Wykrywanie momentu obrotowego przed przeciąganiem
+********************************************************
 
-**Step1**：点击“初始设置”->“基础”-> “关节”->“碰撞等级”，进入碰撞等级设置界面，开启拖动前力矩检测功能，如图所示。
+**Krok 1**: Kliknij "Ustawienia początkowe" -> "Podstawowe" -> "Stawy" -> "Poziom kolizji", aby przejść do interfejsu ustawiania poziomu kolizji. Włącz funkcję wykrywania momentu obrotowego przed przeciąganiem, jak pokazano na rysunku.
 
 .. image:: base/069.png
    :width: 4in
    :align: center
 
-.. centered:: 图表 6.4-9 拖动前力矩检测功能开启
+.. centered:: Wykres 6.4-9 Włączenie funkcji wykrywania momentu obrotowego przed przeciąganiem
 
-**Step2**：切换拖动模式。Web界面通过点击机器人状态区—机器人拖动状态、长按按钮盒“示教模式”按钮、长按机器人末端拖动按钮进入拖动模式，若控制器报错且机器人未切换至拖动模式，如图2-2所示，检查机器人负载配置及安装方式是否正确。
+**Krok 2**: Przełącz tryb przeciągania. Interfejs sieciowy umożliwia wejście w tryb przeciągania poprzez kliknięcie w obszar stanu robota - stan przeciągania robota, długie naciśnięcie przycisku "Tryb nauczania" na panelu przycisków lub długie naciśnięcie przycisku przeciągania na końcówce robota. Jeśli kontroler zgłosi błąd, a robot nie przełączy się w tryb przeciągania, jak pokazano na rysunku 2-2, sprawdź, czy konfiguracja obciążenia robota i sposób instalacji są prawidłowe.
 
 .. image:: base/070.png
    :width: 4in
    :align: center
 
-.. centered:: 图表 6.4-10 力矩超限，控制器报错
+.. centered:: Wykres 6.4-10 Przekroczenie momentu obrotowego, kontroler zgłasza błąd
 
-**Step3**：检查负载配置及安装方式。点击“初始设置”->“基础”-> “负载”->“末端”，查看web界面末端负载配置与实际安装负载是否相同；点击“初始设置”->“基础”-> “安装”->“自由安装”，查看web界面安装方式与实际安装方式是否相同。
+**Krok 3**: Sprawdź konfigurację obciążenia i sposób instalacji. Kliknij "Ustawienia początkowe" -> "Podstawowe" -> "Obciążenie" -> "Końcówka", aby sprawdzić, czy konfiguracja obciążenia końcówki w interfejsie sieciowym jest zgodna z rzeczywiście zamontowanym obciążeniem. Kliknij "Ustawienia początkowe" -> "Podstawowe" -> "Instalacja" -> "Instalacja swobodna", aby sprawdzić, czy sposób instalacji w interfejsie sieciowym jest zgodny z rzeczywistym sposobem instalacji.
 
-误报检测功能
+Funkcja wykrywania fałszywych alarmów
 ++++++++++++++++++++++++++++++++++++++
 
-概述
+Omówienie
 ***********************
 
-碰撞功能优化是在碰撞检测的基础上，增加误报开关，可以避免碰撞误报风险。
+Optymalizacja funkcji kolizji polega na dodaniu przełącznika fałszywych alarmów na podstawie wykrywania kolizji, co pozwala uniknąć ryzyka fałszywych alarmów kolizji.
 
-碰撞等级设置
+Ustawienie poziomu kolizji
 *****************************************
 
-**Step1**：登录web界面，依次点击“初始设置”→“基础”→“关节”→“碰撞等级”，进入碰撞等级设置模块。
+**Krok 1**: Zaloguj się do interfejsu sieciowego, kolejno kliknij "Ustawienia początkowe" → "Podstawowe" → "Stawy" → "Poziom kolizji", aby przejść do modułu ustawiania poziomu kolizji.
 
-碰撞等级越高，碰撞发生时所需的力矩越大，碰撞响应越不灵敏。目前碰撞等级对应的力矩值，如10级的38.4NM为1轴碰撞触发时所需的理论力矩。
+Im wyższy poziom kolizji, tym większy moment obrotowy jest wymagany do wystąpienia kolizji i tym mniej czuła jest reakcja na kolizję. Obecnie wartości momentu obrotowego odpowiadające poziomom kolizji, na przykład 38,4 NM dla poziomu 10, to teoretyczny moment obrotowy wymagany do wyzwolenia kolizji dla osi 1.
 
 .. image:: base/093.png
    :width: 4in
    :align: center
 
-.. centered:: 图表 6.4-11 碰撞等级的设置模块
+.. centered:: Wykres 6.4-11 Moduł ustawiania poziomu kolizji
 
-**Step2**：误报检测开关，默认开启生效。若不使用，则可以把检测开关“关闭”，如下图所示。
+**Krok 2**: Przełącznik wykrywania fałszywych alarmów jest domyślnie włączony i aktywny. Jeśli nie jest używany, można go "wyłączyć", jak pokazano na poniższym rysunku.
 
 .. image:: base/094.png
    :width: 4in
    :align: center
 
-.. centered:: 图表 6.4-12 误报检测开关
+.. centered:: Wykres 6.4-12 Przełącznik wykrywania fałszywych alarmów
 
-摩擦力补偿
-~~~~~~~~~~~~~
+Kompensacja tarcia
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-在“初始设置”->“基础”->“关节”的菜单栏下，点击“摩擦力补偿”进入摩擦力补偿设置界面。
+W menu "Ustawienia początkowe" -> "Podstawowe" -> "Stawy" kliknij "Kompensacja tarcia", aby przejść do interfejsu ustawiania kompensacji tarcia.
 
-**摩擦力补偿系数**：摩擦力补偿所针对的使用场景仅在拖动模式下，摩擦力补偿系数可设置范围为0~1，数值越高，拖动时补偿的力就越大。摩擦力补偿系数根据安装方式的不同需要单独设置每个轴的补偿系数。
+**Współczynnik kompensacji tarcia**: Scenariusz użycia kompensacji tarcia dotyczy tylko trybu przeciągania. Zakres ustawiania współczynnika kompensacji tarcia wynosi 0~1. Im wyższa wartość, tym większa siła kompensacji podczas przeciągania. Współczynnik kompensacji tarcia wymaga oddzielnego ustawienia współczynnika kompensacji dla każdej osi w zależności od sposobu instalacji.
 
-**摩擦力补偿开关**：用户可根据实际机器人及使用习惯开启或关闭摩擦力补偿。
+**Przełącznik kompensacji tarcia**: Użytkownik może włączyć lub wyłączyć kompensację tarcia w zależności od rzeczywistego robota i nawyków użytkowania.
 
 .. image:: base/025.png
    :width: 4in
    :align: center
 
-.. centered:: 图表 6.4-13 摩擦力补偿设置
+.. centered:: Wykres 6.4-13 Ustawianie kompensacji tarcia
 
 .. important:: 
-   机器人摩擦力补偿功能需要谨慎使用，根据实际情况，设置合理的补偿系数，一般推荐中间值0.5左右。
+   Funkcja kompensacji tarcia robota wymaga ostrożnego używania. Ustaw rozsądny współczynnik kompensacji w zależności od rzeczywistych warunków. Ogólnie zalecana wartość środkowa to około 0,5.
 
-摩擦力补偿系数调整功能
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Funkcja regulacji współczynnika kompensacji tarcia
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-概述
+Omówienie
 ++++++++++++++++++++++++
-摩擦力补偿系数调整功能主要用于调整控制器内部对摩擦力补偿数值大小。
+Funkcja regulacji współczynnika kompensacji tarcia służy głównie do regulacji wartości współczynnika kompensacji tarcia wewnątrz kontrolera.
 
-在拖动模式下，摩擦力补偿系数调整可以使机器人拖动轻松；在自动模式下，摩擦力补偿系数调整可以使转矩指令和转矩反馈曲线的拟合优度。
+W trybie przeciągania regulacja współczynnika kompensacji tarcia może ułatwić przeciąganie robota. W trybie automatycznym regulacja współczynnika kompensacji tarcia może poprawić dopasowanie krzywej instrukcji momentu obrotowego i sprzężenia zwrotnego momentu obrotowego.
 
-摩擦力补偿系数调整
+Regulacja współczynnika kompensacji tarcia
 ++++++++++++++++++++++++++++++++++++++++++++++++
 
-摩擦力补偿系数出厂默认为0.5，为通用参数；用户可以根据实际情况对摩擦力增益进行调整，从而获得较好体验。
+Współczynnik kompensacji tarcia w ustawieniach fabrycznych wynosi domyślnie 0,5 i jest parametrem ogólnym. Użytkownik może dostosować wzmocnienie tarcia w zależności od rzeczywistej sytuacji, aby uzyskać lepsze wrażenia.
 
-摩擦力补偿系数配置
+Konfiguracja współczynnika kompensacji tarcia
 ******************************************************************
 
-**Step1**：登录web界面，依次点击“初始设置”→“基础”→“关节”→“摩擦力补偿”，进入摩擦力补偿设置模块。
+**Krok 1**: Zaloguj się do interfejsu sieciowego, kolejno kliknij "Ustawienia początkowe" → "Podstawowe" → "Stawy" → "Kompensacja tarcia", aby przejść do modułu ustawiania kompensacji tarcia.
 
 .. image:: base/092.png
    :width: 4in
    :align: center
 
-.. centered:: 图表 6.4-14 摩擦力补偿设置模块
+.. centered:: Wykres 6.4-14 Moduł ustawiania kompensacji tarcia
 
-**Step2**：摩擦力补偿系数默认为0.5，摩擦力补偿开关开启状态如图所示。功能开启后，拖动手感相较于功能开启前，较为柔顺；功能不开启，则拖动手感较重。
+**Krok 2**: Domyślny współczynnik kompensacji tarcia wynosi 0,5. Stan włączonego przełącznika kompensacji tarcia pokazano na rysunku. Po włączeniu funkcji odczucie przeciągania jest gładsze w porównaniu do stanu przed włączeniem. Jeśli funkcja nie jest włączona, odczucie przeciągania jest cięższe.
 
-**Step3**：参数调整，摩擦力补偿系数的范围是[0-1]。若参数拖动略重，可以根据实际情况，对各个轴的参数进行加大调整；若拖动过程中出现不能停止现象或出现关节振动现象，需要对应轴的参数进行调小处理。
+**Krok 3**: Regulacja parametrów. Zakres współczynnika kompensacji tarcia wynosi [0-1]. Jeśli odczucie przeciągania jest nieco ciężkie, możesz zwiększyć parametry dla poszczególnych osi w zależności od rzeczywistej sytuacji. Jeśli podczas przeciągania występuje zjawisko braku możliwości zatrzymania lub wibracje stawów, należy zmniejszyć parametry dla odpowiednich osi.
 
-**Step4**：若需关闭摩擦力补偿功能，可通过补偿开关选择“关闭”实现。
+**Krok 4**: Jeśli chcesz wyłączyć funkcję kompensacji tarcia, możesz to zrobić, wybierając "Wyłącz" na przełączniku kompensacji.
 
-拖动力补偿
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Kompensacja siły przeciągania
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-概述
+Omówienie
 +++++++++++++++++++++++++++++
 
-拖动力优化是在当前电流环拖动的基础上，根据机器人运动趋势，补偿一定的力矩，用于克服建模不准确等引入的力矩误差，使机器人拖动柔顺。
+Optymalizacja siły przeciągania polega na kompensowaniu pewnego momentu obrotowego na podstawie trendu ruchu robota, przy użyciu obecnego przeciągania w pętli prądowej, w celu pokonania błędów momentu wprowadzonych przez niedokładne modelowanie, dzięki czemu przeciąganie robota jest płynne.
 
-机器人拖动力优化
+Optymalizacja siły przeciągania robota
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-拖动力优化功能需要确保软件版本和固件版本匹配，从而获得较好体验。
+Funkcja optymalizacji siły przeciągania wymaga zgodności wersji oprogramowania i oprogramowania sprzętowego, aby uzyskać lepsze wrażenia.
 
-拖动力优化功能配置
-***************************************************
-**Step1**：登录web界面，依次点击“初始设置”->“基础”->“关节”->“摩擦力补偿”，进入拖动力补偿设置模块，见图所示。
+Konfiguracja funkcji optymalizacji siły przeciągania
+*****************************************************************
+**Krok 1**: Zaloguj się do interfejsu sieciowego, kolejno kliknij "Ustawienia początkowe" -> "Podstawowe" -> "Stawy" -> "Kompensacja tarcia", aby przejść do modułu ustawiania kompensacji siły przeciągania, jak pokazano na rysunku.
 
 .. image:: base/068.png
    :width: 4in
    :align: center
 
-.. centered:: 图表 6.4-15 拖动力补偿设置模块
+.. centered:: Wykres 6.4-15 Moduł ustawiania kompensacji siły przeciągania
 
-**Step2**：补偿开关选择“开启”，自适应开关选择“关闭”，配置参数如图所示，点击“应用”，功能开启成功。按下拖动按钮，就可以拖动机器人，拖动手感相较于功能开启前，比较柔顺。
+**Krok 2**: Wybierz "Włącz" na przełączniku kompensacji i "Wyłącz" na przełączniku adaptacyjnym. Skonfiguruj parametry jak pokazano na rysunku i kliknij "Zastosuj". Funkcja zostanie pomyślnie włączona. Naciśnij przycisk przeciągania, aby przeciągnąć robota. Odczucie przeciągania jest gładsze w porównaniu do stanu przed włączeniem funkcji.
 
-**Step3**：参数调整，补偿系数的范围是[0-1]。若参数拖动略重，可以对应轴的参数进行加大调整；若拖动过程中出现不能停止现象或出现关节振动现象，需要对应轴的参数进行调小处理。同时，在拖动过程中会出现阻尼感，用于减速，使机器人停止。
+**Krok 3**: Regulacja parametrów. Zakres współczynnika kompensacji wynosi [0-1]. Jeśli odczucie przeciągania jest nieco ciężkie, możesz zwiększyć parametry dla odpowiednich osi. Jeśli podczas przeciągania występuje zjawisko braku możliwości zatrzymania lub wibracje stawów, należy zmniejszyć parametry dla odpowiednich osi. Jednocześnie podczas przeciągania pojawi się odczucie tłumienia, które służy do zmniejszania prędkości i zatrzymania robota.
 
-**Step4**：若需关闭拖动力补偿功能，可通过补偿开关选择“关闭”实现。
+**Krok 4**: Jeśli chcesz wyłączyć funkcję kompensacji siły przeciągania, możesz to zrobić, wybierając "Wyłącz" na przełączniku kompensacji.
 
-I/O设置
------------
+Ustawienia I/O
+----------------------
 
-LUA程序暂停
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Wstrzymywanie programu Lua
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-机器人LUA程序运行中点击“暂停/恢复”按钮可暂停LUA程序执行，机器人运行状态变为“Pause”状态。再次点击该按钮，程序将从暂停的位置继续执行，机器人运行状态再次变为“Running”状态。
+Podczas wykonywania programu Lua robota kliknij przycisk "Wstrzymaj/Wznów", aby wstrzymać wykonanie programu Lua. Stan robota zmieni się na "Pause" (Wstrzymany). Kliknij przycisk ponownie, a program będzie kontynuował wykonywanie od miejsca wstrzymania, a stan robota zmieni się z powrotem na "Running" (Działający).
 
-所有启动的后台程序在上述过程中也将同步暂停和恢复。不同类型的LUA指令在暂停时的表现有所差异：
+Wszystkie uruchomione programy działające w tle zostaną również synchronicznie wstrzymane i wznowione podczas powyższego procesu. Różne typy instrukcji Lua różnią się w swoim zachowaniu podczas wstrzymania:
 
-**①运动类指令**：暂停时机器人立即停止运动，恢复时机器人恢复运动，并运动到该指令的目标位置。
+**① Instrukcje ruchu**: Robot natychmiast zatrzymuje ruch podczas wstrzymania, a po wznowieniu robot wznawia ruch i dociera do pozycji docelowej tej instrukcji.
 
-**②SetDO、GetDI、GetInverseKinRef等逻辑指令**：在指令执行过程中触发程序暂停，则该类指令执行完成后等待LUA程序退出暂停状态再执行下一条指令。
+**② Instrukcje logiczne, takie jak SetDO, GetDI, GetInverseKinRef itp.**: Jeśli program zostanie wstrzymany podczas wykonywania instrukcji, to po zakończeniu wykonywania tej instrukcji program będzie czekał na wyjście programu Lua ze stanu wstrzymania przed wykonaniem następnej instrukcji.
 
-**③WaitDI、ModbusMasterWaitDI等待指令**：在等待过程中触发程序暂停，暂停时间不占用等待超时时间。
+**③ Instrukcje oczekiwania, takie jak WaitDI, ModbusMasterWaitDI**: Jeśli program zostanie wstrzymany podczas oczekiwania, czas wstrzymania nie wlicza się do czasu oczekiwania na przekroczenie limitu czasu.
 
-**④sleep_ms、WaitMs睡眠指令**：在睡眠过程中触发程序暂停，暂停时间不占用设置的睡眠时间。
+**④ Instrukcje uśpienia, takie jak sleep_ms, WaitMs**: Jeśli program zostanie wstrzymany podczas uśpienia, czas wstrzymania nie wlicza się do ustawionego czasu snu.
 
 .. image:: base/066.png
    :width: 4in
    :align: center
 
-.. centered:: 图表 6.5‑1 LUA程序暂停状态
+.. centered:: Wykres 6.5‑1 Stan wstrzymania programu Lua
 
 .. image:: base/067.png
    :width: 4in
    :align: center
 
-.. centered:: 图表 6.5‑2 LUA程序运行中状态
+.. centered:: Wykres 6.5‑2 Stan działania programu Lua
 
-I/O配置
-~~~~~~~~~
+Konfiguracja I/O
+~~~~~~~~~~~~~~~~~~
 
-点击菜单栏“初始设置”->“基础”->“I/O设置”，点击“DI”、“DO”子菜单进入DI和DO配置界面。其中控制箱CI0-CI7和CO0-CO7可配置，末端DI0和DI1可配置。
+Kliknij menu "Ustawienia początkowe" -> "Podstawowe" -> "Ustawienia I/O", kliknij podmenu "DI" i "DO", aby przejść do interfejsów konfiguracji DI i DO. W skrzynce sterowniczej można skonfigurować CI0-CI7 i CO0-CO7, a na końcówce można skonfigurować DI0 i DI1.
 
-DI配置
+Konfiguracja DI
 ++++++++++++++++
 
-在生产中协作机器人需要连接外设时或因故障或者其它因素突然停止，需要输出DO信号，实现声光报警提示，输入可配置功能如下表格所示：
+W produkcji, gdy robot współpracujący musi podłączyć urządzenia peryferyjne lub zatrzymuje się nagle z powodu awarii lub innych czynników, konieczne jest wyjście sygnału DO, aby zrealizować alarm dźwiękowo-świetlny. Funkcje konfigurowalne dla wejść przedstawiono w poniższej tabeli:
 
-.. centered:: 表格 6.5‑1 控制箱输入可配置功能
+.. centered:: Tabela 6.5‑1 Funkcje konfigurowalne dla wejść skrzynki sterowniczej
 
 .. list-table:: 
    :widths: 15 30 100
    :header-rows: 1
    :align: center
 
-   * - 功能编号
-     - 功能名称
-     - 功能描述
+   * - Numer funkcji
+     - Nazwa funkcji
+     - Opis funkcji
    * - 0
-     - 无
-     - 无
+     - Brak
+     - Brak
    * - 1
-     - 起弧成功信号
-     - 焊机起弧成功，机器人输出起弧信号至焊机
+     - Sygnał pomyślnego zajarzenia łuku
+     - Zajarzenie łuku przez spawarkę zakończone sukcesem, robot wysyła sygnał zajarzenia łuku do spawarki
    * - 2
-     - 焊接准备信号
-     - 机器人焊机准备成功信号
+     - Sygnał gotowości do spawania
+     - Sygnał pomyślnego przygotowania spawarki robota
    * - 3
-     - 传送带检测
-     - 传送带检测开关DI配置信号
+     - Wykrywanie taśmociągu
+     - Sygnał konfiguracji DI przełącznika wykrywania taśmociągu
    * - 4
-     - 暂停
-     - 机器人焊接过程中暂停运动信号
+     - Wstrzymaj
+     - Sygnał wstrzymania ruchu podczas spawania robota
    * - 5
-     - 恢复
-     - 机器人焊接过程中电弧意外中断或操作人员主动暂停焊接时会触发焊接中断，焊接中断后外部向机器人输入该信号从无效变为有效时，机器人自动从原来中断的位置自动恢复焊接
+     - Wznów
+     - Gdy łuk zostanie nieoczekiwanie przerwany podczas spawania robota lub operator aktywnie wstrzyma spawanie, zostanie wyzwolone przerwanie spawania. Po przerwaniu spawania, gdy zewnętrzny sygnał wejściowy do robota zmieni się z nieaktywnego na aktywny, robot automatycznie wznowi spawanie od miejsca, w którym zostało przerwane
    * - 6
-     - 启动 
-     - 在DI配置可配置输入中，选择CIO为“启动”，点击“应用”。可配置输入有效状态选择“高电平有效”，则当CI0电平从低电平变为高电平时，触发“启动”功能，可启动当前示教程序界面打开的程序，若未打开界面，则运行上次保存的程序；可配置输入有效状态选择“低电平有效”，则当CI0电平从高电平变为低电平时，触发“启动”功能，可启动当前示教程序界面打开的程序，若未打开界面，则运行上次保存的程序
+     - Uruchom 
+     - W konfigurowalnych wejściach DI wybierz CIO jako "Uruchom" i kliknij "Zastosuj". Wybierz stan aktywny wejścia konfigurowalnego jako "Aktywny wysoki poziom", to gdy poziom CI0 zmieni się z niskiego na wysoki, wyzwolona zostanie funkcja "Uruchom", uruchamiając program otwarty na bieżącym interfejsie programu nauczania. Jeśli interfejs nie jest otwarty, zostanie uruchomiony ostatnio zapisany program. Wybierz stan aktywny wejścia konfigurowalnego jako "Aktywny niski poziom", to gdy poziom CI0 zmieni się z wysokiego na niski, wyzwolona zostanie funkcja "Uruchom", uruchamiając program otwarty na bieżącym interfejsie programu nauczania. Jeśli interfejs nie jest otwarty, zostanie uruchomiony ostatnio zapisany program
    * - 7
-     - 停止  
-     - 机器人焊接过程中停止运动信号
+     - Zatrzymaj  
+     - Sygnał zatrzymania ruchu podczas spawania robota
    * - 8
-     - 暂停/恢复
-     - 机器人运动后，循环触发暂停/恢复运动信号
+     - Wstrzymaj/Wznów
+     - Po ruchu robota, cyklicznie wyzwalany sygnał wstrzymania/wznowienia ruchu
    * - 9
-     - 启动/停止
-     - 机器人运动后，循环触发启动/停止运动信号
+     - Uruchom/Zatrzymaj
+     - Po ruchu robota, cyklicznie wyzwalany sygnał uruchomienia/zatrzymania ruchu
    * - 10
-     - 脚踏拖动开关
-     - 机器人脚踏拖动开关运动信号
+     - Przełącznik przeciągania nożnego
+     - Sygnał ruchu przełącznika przeciągania nożnego robota
    * - 11
-     - 移至作业原点
-     - 以当前机器人位姿作为作业原点，机器人运动至作业原点信号
+     - Przejdź do punktu początkowego zadania
+     - Użyj bieżącej pozycji robota jako punktu początkowego zadania, sygnał ruchu robota do punktu początkowego zadania
    * - 12
-     - 手自动切换（脉冲信号）
-     - 在DI配置可配置输入中，选择CIO为“手自动切换（脉冲信号）”，点击“应用”。可配置输入有效状态选择“高电平有效”，则当CI0电平从低电平变为高电平时，触发“手自动切换（脉冲信号）”功能，机器人切换一次运行状态；可配置输入有效状态选择“低电平有效”，则当CI0电平从高电平变为低电平时，触发“手自动切换（脉冲信号）”功能，机器人切换一次运行状态
+     - Przełączanie ręczny/automatyczny (sygnał impulsowy)
+     - W konfigurowalnych wejściach DI wybierz CIO jako "Przełączanie ręczny/automatyczny (sygnał impulsowy)" i kliknij "Zastosuj". Wybierz stan aktywny wejścia konfigurowalnego jako "Aktywny wysoki poziom", to gdy poziom CI0 zmieni się z niskiego na wysoki, wyzwolona zostanie funkcja "Przełączanie ręczny/automatyczny (sygnał impulsowy)", powodując jednokrotne przełączenie stanu pracy robota. Wybierz stan aktywny wejścia konfigurowalnego jako "Aktywny niski poziom", to gdy poziom CI0 zmieni się z wysokiego na niski, wyzwolona zostanie funkcja "Przełączanie ręczny/automatyczny (sygnał impulsowy)", powodując jednokrotne przełączenie stanu pracy robota
    * - 13
-     - 焊丝寻位成功
-     - 机器人焊丝寻位成功信号
+     - Pozycjonowanie drutu spawalniczego zakończone sukcesem
+     - Sygnał pomyślnego pozycjonowania drutu spawalniczego robota
    * - 14
-     - 运动中断
-     - 机器人运动程序中断信号
+     - Przerwanie ruchu
+     - Sygnał przerwania programu ruchu robota
    * - 15
-     - 启动主程序
-     - 启动机器人主程序信号
+     - Uruchom program główny
+     - Sygnał uruchomienia programu głównego robota
    * - 16
-     - 启动倒带
-     - 机器人程序运行后，程序倒带启动信号。
+     - Uruchom przewijanie wstecz
+     - Po uruchomieniu programu robota, sygnał uruchomienia przewijania wstecz programu
    * - 17
-     - 启动确认
-     - 机器人程序启动确认信号
+     - Potwierdzenie uruchomienia
+     - Sygnał potwierdzenia uruchomienia programu robota
    * - 18
-     - 激光检测信号 X
-     - 机器人激光传感器检测信号X
+     - Sygnał wykrywania lasera X
+     - Sygnał wykrywania lasera X czujnika laserowego robota
    * - 19
-     - 激光检测信号 Y
-     - 机器人激光传感器检测信号Y
+     - Sygnał wykrywania lasera Y
+     - Sygnał wykrywania lasera Y czujnika laserowego robota
    * - 20
-     - 外部急停输入信号1
-     - 机器人外部急停输入信号1，①仅在QX下显示。②LA下可在“初始设置”->“安全”->"I/O安全"->“DIO安全功能配置”界面进行相关配置
+     - Sygnał wejściowy awaryjnego zatrzymania zewnętrznego 1
+     - Sygnał wejściowy awaryjnego zatrzymania zewnętrznego robota 1. ① Wyświetlany tylko w QX. ② W LA odpowiednia konfiguracja dostępna w interfejsie "Ustawienia początkowe" -> "Bezpieczeństwo" -> "Bezpieczeństwo I/O" -> "Konfiguracja funkcji bezpieczeństwa DIO"
    * - 21
-     - 外部急停输入信号2
-     - 机器人外部急停输入信号2，①仅在QX下显示。②LA下可在“初始设置”->“安全”->"I/O安全"->“DIO安全功能配置”界面进行相关配置
+     - Sygnał wejściowy awaryjnego zatrzymania zewnętrznego 2
+     - Sygnał wejściowy awaryjnego zatrzymania zewnętrznego robota 2. ① Wyświetlany tylko w QX. ② W LA odpowiednia konfiguracja dostępna w interfejsie "Ustawienia początkowe" -> "Bezpieczeństwo" -> "Bezpieczeństwo I/O" -> "Konfiguracja funkcji bezpieczeństwa DIO"
    * - 22
-     - 一级缩减模式
-     - 机器人一级缩减模式，①仅在QX下显示。②LA下可在“初始设置”->“安全”->"I/O安全"->“DIO安全功能配置”界面进行相关配置
+     - Tryb redukcji pierwszego poziomu
+     - Tryb redukcji pierwszego poziomu robota. ① Wyświetlany tylko w QX. ② W LA odpowiednia konfiguracja dostępna w interfejsie "Ustawienia początkowe" -> "Bezpieczeństwo" -> "Bezpieczeństwo I/O" -> "Konfiguracja funkcji bezpieczeństwa DIO"
    * - 23
-     - 二级缩减模式
-     - 机器人二级缩减模式，①仅在QX下显示。②LA下可在“初始设置”->“安全”->"I/O安全"->“DIO安全功能配置”界面进行相关配置
+     - Tryb redukcji drugiego poziomu
+     - Tryb redukcji drugiego poziomu robota. ① Wyświetlany tylko w QX. ② W LA odpowiednia konfiguracja dostępna w interfejsie "Ustawienia początkowe" -> "Bezpieczeństwo" -> "Bezpieczeństwo I/O" -> "Konfiguracja funkcji bezpieczeństwa DIO"
    * - 24
-     - 三级缩减模式（停止）
-     - 机器人三级缩减模式（停止），①仅在QX下显示。②LA下可在“初始设置”->“安全”->"I/O安全"->“DIO安全功能配置”界面进行相关配置
+     - Tryb redukcji trzeciego poziomu (zatrzymanie)
+     - Tryb redukcji trzeciego poziomu robota (zatrzymanie). ① Wyświetlany tylko w QX. ② W LA odpowiednia konfiguracja dostępna w interfejsie "Ustawienia początkowe" -> "Bezpieczeństwo" -> "Bezpieczeństwo I/O" -> "Konfiguracja funkcji bezpieczeństwa DIO"
    * - 25
-     - 恢复焊接
-     - 机器人发生焊接中断后，恢复焊接操作信号
+     - Wznów spawanie
+     - Sygnał operacji wznowienia spawania po przerwaniu spawania przez robota
    * - 26
-     - 终止焊接
-     - 机器人焊接过程中，终止焊接操作信号
+     - Zakończ spawanie
+     - Sygnał operacji zakończenia spawania podczas procesu spawania robota
    * - 27
-     - 辅助拖动开启
-     - 控制箱DI功能配置力传感器拖动功能开启信号
+     - Włącz pomocnicze przeciąganie
+     - Sygnał włączenia funkcji przeciągania z czujnikiem siły w konfiguracji funkcji DI skrzynki sterowniczej
    * - 28
-     - 辅助拖动关闭
-     - 控制箱DI功能配置力传感器拖动功能关闭信号
+     - Wyłącz pomocnicze przeciąganie
+     - Sygnał wyłączenia funkcji przeciągania z czujnikiem siły w konfiguracji funkcji DI skrzynki sterowniczej
    * - 29
-     - 辅助拖动开启/关闭
-     - 控制箱DI功能配置力传感器拖动功能，循环开启/关闭信号
+     - Włącz/Wyłącz pomocnicze przeciąganie
+     - Funkcja przeciągania z czujnikiem siły w konfiguracji funkcji DI skrzynki sterowniczej, sygnał cyklicznego włączania/wyłączania
    * - 30
-     - 清除所有错误
-     - 清除机器人触发的所有错误信号
+     - Wyczyść wszystkie błędy
+     - Sygnał wyczyszczenia wszystkich błędów wyzwolonych przez robota
    * - 31
-     - 手自动切换（高低电平）
-     - 在DI配置可配置输入中，选择CIO为“手自动切换（高低电平）”，点击“应用”。可配置输入有效状态选择“高电平有效”，则当CI0切换为高电平时，触发“手自动切换（高低电平）”功能，机器人状态切换为自动状态；可配置输入有效状态选择“低电平有效”，则当CI0切换为低电平时，触发“手自动切换（高低电平）”功能，机器人状态切换为自动状态
+     - Przełączanie ręczny/automatyczny (poziom wysoki/niski)
+     - W konfigurowalnych wejściach DI wybierz CIO jako "Przełączanie ręczny/automatyczny (poziom wysoki/niski)" i kliknij "Zastosuj". Wybierz stan aktywny wejścia konfigurowalnego jako "Aktywny wysoki poziom", to gdy CI0 przełączy się na wysoki poziom, wyzwolona zostanie funkcja "Przełączanie ręczny/automatyczny (poziom wysoki/niski)", a stan robota przełączy się na automatyczny. Wybierz stan aktywny wejścia konfigurowalnego jako "Aktywny niski poziom", to gdy CI0 przełączy się na niski poziom, wyzwolona zostanie funkcja "Przełączanie ręczny/automatyczny (poziom wysoki/niski)", a stan robota przełączy się na automatyczny
    * - 32
-     - 使能
-     - 控制机器人使能
+     - Załącz
+     - Sterowanie załączeniem robota
    * - 33
-     - 去使能
-     - 控制机器人去使能
+     - Odłącz
+     - Sterowanie odłączeniem robota
    * - 34
-     - 使能/去使能(上升下降沿)
-     - 信号输入有效状态上升下降沿分别触发机器人使能和去使能动作
+     - Załącz/Odłącz (zbocze narastające/opadające)
+     - Zbocze narastające i opadające aktywnego stanu wejścia sygnału odpowiednio wyzwalają załączenie i odłączenie robota
 
-末端CI增加可配置功能
+Dodanie funkcji konfigurowalnych dla końcowego CI
 **********************************************************
 
-概述
+Omówienie
 """"""""""""""""""""""""""""""""""""""""
 
-将机器人控制箱CI的全部功能同步至末端CI，其核心在于构建一个逻辑功能对等、物理位置互补的控制体系。两个接口在逻辑功能上完全对等，可并行或选择性地使用，使机器人控制系统能够根据任务场景、设备物理布局和可靠性要求，智能地分配信号路径。
+Synchronizacja wszystkich funkcji CI skrzynki sterowniczej robota do końcowego CI. Jej sednem jest zbudowanie systemu sterowania, w którym funkcje logiczne są równoważne, a pozycje fizyczne się uzupełniają. Oba interfejsy są całkowicie równoważne pod względem funkcji logicznych i mogą być używane równolegle lub selektywnie, umożliwiając systemowi sterowania robotem inteligentne przydzielanie ścieżek sygnałów w zależności od scenariusza zadania, fizycznego układu urządzeń i wymagań dotyczących niezawodności.
 
-操作流程
+Procedura operacyjna
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-**Step1**：依次点击菜单栏“初始设置”-“基础”-“I/O设置”-“DI”等按钮，进入DI配置界面，选择End DI0和End DI1配置机器人末端输入的功能。
+**Krok 1**: Kolejno kliknij przyciski menu "Ustawienia początkowe" - "Podstawowe" - "Ustawienia I/O" - "DI", aby przejść do interfejsu konfiguracji DI. Wybierz End DI0 i End DI1, aby skonfigurować funkcje wejścia końcowego robota.
 
 .. image:: base/095.png
    :width: 4in
    :align: center
 
-.. centered:: 图表 6.5‑3 末端DI参数配置
+.. centered:: Wykres 6.5‑3 Konfiguracja parametrów końcowego DI
 
-**Step2**：机器人末端支持的DI信号如下表，用户可根据实际使用需求配置对应的信号。
+**Krok 2**: Sygnały DI obsługiwane przez końcówkę robota przedstawiono w poniższej tabeli. Użytkownik może skonfigurować odpowiednie sygnały zgodnie z rzeczywistymi potrzebami użytkowania.
 
-.. centered:: 表格 6.5‑2 末端输入可配置功能
+.. centered:: Tabela 6.5‑2 Funkcje konfigurowalne dla wejść końcowych
 
 .. list-table:: 
    :widths: 15 30 100 
    :header-rows: 1
    :align: center
 
-   * - 功能编号
-     - 功能名称
-     - 功能描述
+   * - Numer funkcji
+     - Nazwa funkcji
+     - Opis funkcji
    * - 0
-     - 无
-     - 无
+     - Brak
+     - Brak
    * - 1
-     - 拖动模式
-     - 机器人末端启用拖动模式信号
+     - Tryb przeciągania
+     - Sygnał włączenia trybu przeciągania na końcówce robota
    * - 2
-     - 示教点记录
-     - 机器人末端启用示教点记录信号，保存当前机器人点位数据
+     - Zapis punktu nauczania
+     - Sygnał włączenia zapisu punktu nauczania na końcówce robota, zapisuje bieżące dane punktu robota
    * - 3
-     - 手自动切换
-     - 机器人手自动切换触发信号
+     - Przełączanie ręczny/automatyczny
+     - Sygnał wyzwalający przełączanie ręczny/automatyczny robota
    * - 4
-     - TPD 轨迹记录启动/停止
-     - 机器人开始TPD运动后，轨迹记录启动/停止信号
+     - Uruchom/zatrzymaj rejestrację trajektorii TPD
+     - Po rozpoczęciu ruchu TPD przez robota, sygnał uruchomienia/zatrzymania rejestracji trajektorii
    * - 5
-     - 暂停
-     - 机器人运动暂停信号
+     - Wstrzymaj
+     - Sygnał wstrzymania ruchu robota
    * - 6
-     - 恢复
-     - 机器人恢复运动信号
+     - Wznów
+     - Sygnał wznowienia ruchu robota
    * - 7
-     - 启动
-     - 机器人程序启动信号
+     - Uruchom
+     - Sygnał uruchomienia programu robota
    * - 8
-     - 停止
-     - 机器人程序停止信号
+     - Zatrzymaj
+     - Sygnał zatrzymania programu robota
    * - 9
-     - 暂停/恢复
-     - 机器人运动后，循环触发暂停/恢复运动信号
+     - Wstrzymaj/Wznów
+     - Po ruchu robota, cyklicznie wyzwalany sygnał wstrzymania/wznowienia ruchu
    * - 10
-     - 启动/停止
-     - 机器人运动后，循环触发启动/停止运动信号
+     - Uruchom/Zatrzymaj
+     - Po ruchu robota, cyklicznie wyzwalany sygnał uruchomienia/zatrzymania ruchu
    * - 11
-     - 辅助拖动开启
-     - 控制箱DI功能配置力传感器拖动功能开启信号
+     - Włącz pomocnicze przeciąganie
+     - Sygnał włączenia funkcji przeciągania z czujnikiem siły w konfiguracji funkcji DI skrzynki sterowniczej
    * - 12
-     - 辅助拖动关闭
-     - 控制箱DI功能配置力传感器拖动功能关闭信号
+     - Wyłącz pomocnicze przeciąganie
+     - Sygnał wyłączenia funkcji przeciągania z czujnikiem siły w konfiguracji funkcji DI skrzynki sterowniczej
    * - 13
-     - 辅助拖动开启/关闭
-     - 控制箱DI功能配置力传感器拖动功能，循环开启/关闭信号
+     - Włącz/Wyłącz pomocnicze przeciąganie
+     - Funkcja przeciągania z czujnikiem siły w konfiguracji funkcji DI skrzynki sterowniczej, sygnał cyklicznego włączania/wyłączania
    * - 14
-     - 激光检测信号 X
-     - 机器人激光传感器检测信号X
+     - Sygnał wykrywania lasera X
+     - Sygnał wykrywania lasera X czujnika laserowego robota
    * - 15
-     - 激光检测信号 Y
-     - 机器人激光传感器检测信号Y
+     - Sygnał wykrywania lasera Y
+     - Sygnał wykrywania lasera Y czujnika laserowego robota
    * - 16
-     - 移至作业原点
-     - 机器人运动至作业原点信号
+     - Przejdź do punktu początkowego zadania
+     - Sygnał ruchu robota do punktu początkowego zadania
    * - 17
-     - 运动中断
-     - 机器人运动程序中断信号
+     - Przerwanie ruchu
+     - Sygnał przerwania programu ruchu robota
    * - 18
-     - 启动主程序
-     - 启动机器人主程序信号
+     - Uruchom program główny
+     - Sygnał uruchomienia programu głównego robota
    * - 19
-     - 启动倒带
-     - 机器人程序运行后，程序倒带启动信号
+     - Uruchom przewijanie wstecz
+     - Po uruchomieniu programu robota, sygnał uruchomienia przewijania wstecz programu
    * - 20
-     - 启动确认
-     - 机器人程序启动确认信号
+     - Potwierdzenie uruchomienia
+     - Sygnał potwierdzenia uruchomienia programu robota
    * - 21
-     - 恢复焊接
-     - 机器人发生焊接中断后，恢复焊接操作信号
+     - Wznów spawanie
+     - Sygnał operacji wznowienia spawania po przerwaniu spawania przez robota
    * - 22
-     - 终止焊接
-     - 机器人焊接过程中，终止焊接操作信号
+     - Zakończ spawanie
+     - Sygnał operacji zakończenia spawania podczas procesu spawania robota
    * - 23
-     - 报错信息清除
-     - 清除机器人触发的所有错误信号
+     - Wyczyść informacje o błędach
+     - Sygnał wyczyszczenia wszystkich błędów wyzwolonych przez robota
    * - 24
-     - 手自动切换（高低电平）
-     - 当可配置输入选择“高电平有效”，输入信号为高电平时，机器人切换为自动；当可配置输入选择“低电平有效”，输入信号为低电平时，机器人切换为自动
+     - Przełączanie ręczny/automatyczny (poziom wysoki/niski)
+     - Gdy konfigurowalne wejście wybierze "Aktywny wysoki poziom", a sygnał wejściowy jest wysokiego poziomu, robot przełącza się na automatyczny; gdy konfigurowalne wejście wybierze "Aktywny niski poziom", a sygnał wejściowy jest niskiego poziomu, robot przełącza się na automatyczny
    * - 25
-     - 使能
-     - 控制机器人使能
+     - Załącz
+     - Sterowanie załączeniem robota
    * - 26
-     - 去使能
-     - 控制机器人去使能
+     - Odłącz
+     - Sterowanie odłączeniem robota
    * - 27
-     - 使能/去使能(上升下降沿)
-     - 信号输入有效状态上升下降沿分别触发机器人使能和去使能动作
+     - Załącz/Odłącz (zbocze narastające/opadające)
+     - Zbocze narastające i opadające aktywnego stanu wejścia sygnału odpowiednio wyzwalają załączenie i odłączenie robota
    * - 28
-     - 激光伺服跟踪启停信号
-     - 机器人激光边记录边跟踪且io启停功能开启时，触发对应末端CI，开始激光跟踪；解除对应末端CI，跟踪结束
+     - Sygnał uruchamiania/zatrzymywania śledzenia serwomechanizmu laserowego
+     - Gdy robot rejestruje i śledzi jednocześnie za pomocą lasera, a funkcja uruchamiania/zatrzymywania przez I/O jest włączona, wyzwolenie odpowiedniego końcowego CI rozpoczyna śledzenie laserowe; zwolnienie odpowiedniego końcowego CI kończy śledzenie
 
-其中控制箱默认配置：CO0为1-机器人报错，CO1为2-机器人运动中。
+Domyślna konfiguracja skrzynki sterowniczej: CO0 to 1 - błąd robota, CO1 to 2 - robot w ruchu.
 
 .. image:: base/026.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 6.5‑3 控制箱DI和DO配置
+.. centered:: Wykres 6.5‑3 Konfiguracja DI i DO skrzynki sterowniczej
 
-**末端DI默认配置**：DI0拖动示教，DI1示教点记录。
+**Domyślna konfiguracja końcowego DI**: DI0 przeciąganie nauczania, DI1 zapis punktu nauczania.
 
 .. image:: base/027.png
    :width: 4in
    :align: center
 
-.. centered:: 图表 6.5‑4 末端DI配置
+.. centered:: Wykres 6.5‑4 Konfiguracja końcowego DI
 
-配置完成后，可在对应状态下，于控制箱I/O页面中查看相应的输出DO状态。
+Po zakończeniu konfiguracji w odpowiednim stanie można sprawdzić odpowiadające im stany wyjściowe DO na stronie I/O skrzynki sterowniczej.
 
 .. important:: 
-   已配置DI、DO禁止在程序编程中使用。
+   Zabrania się używania skonfigurowanych DI i DO w programowaniu.
 
-**缩减模式配置（一级、二级、三级）**：一级和二级缩减模式可以配置关节速度和末端TCP速度，三级缩减模式是停止可以不用配置速度。
+**Konfiguracja trybów redukcji (pierwszego, drugiego, trzeciego poziomu)**: Dla trybów redukcji pierwszego i drugiego poziomu można skonfigurować prędkość stawów i prędkość TCP końcówki. Tryb redukcji trzeciego poziomu to zatrzymanie i nie wymaga konfiguracji prędkości.
 
 .. image:: base/032.png
    :width: 4in
@@ -818,217 +810,217 @@ DI配置
    :width: 4in
    :align: center
 
-.. centered:: 图表 6.5‑5 缩减模式配置
+.. centered:: Wykres 6.5‑5 Konfiguracja trybów redukcji
 
-DO配置
+Konfiguracja DO
 ++++++++++++++++
 
-输出可配置功能如下表格所示：
+Funkcje konfigurowalne dla wyjść przedstawiono w poniższej tabeli:
 
-.. centered:: 表格 6.5‑3 控制箱输出可配置功能
+.. centered:: Tabela 6.5‑3 Funkcje konfigurowalne dla wyjść skrzynki sterowniczej
 
 .. list-table:: 
    :widths: 15 30 100
    :header-rows: 1
    :align: center
 
-   * - 功能编号
-     - 功能名称
-     - 功能描述
+   * - Numer funkcji
+     - Nazwa funkcji
+     - Opis funkcji
    * - 0
-     - 无
-     - 无
+     - Brak
+     - Brak
    * - 1
-     - 报错
-     - DO输出报错信号
+     - Błąd
+     - Sygnał błędu wyjścia DO
    * - 2
-     - 运动
-     - 机器人运动信号
+     - Ruch
+     - Sygnał ruchu robota
    * - 3
-     - 喷涂启停
-     - 机器人喷涂启停操作信号
+     - Uruchom/zatrzymaj natryskiwanie
+     - Sygnał operacji uruchomienia/zatrzymania natryskiwania robota
    * - 4
-     - 喷涂清枪
-     - 机器人喷涂清枪操作信号
+     - Czyszczenie pistoletu natryskowego
+     - Sygnał operacji czyszczenia pistoletu natryskowego robota
    * - 5
-     - 起弧
-     - 机器人控制焊机起弧的DO输出端口，当机器人程序执行起弧指令时，焊机起弧对应DO输出端口自动输出有效
+     - Zajarzenie łuku
+     - Port wyjściowy DO robota sterujący zajarzeniem łuku spawarki. Gdy program robota wykona instrukcję zajarzenia łuku, odpowiadający port wyjściowy DO zajarzenia łuku automatycznie wygeneruje sygnał aktywny
    * - 6
-     - 送气
-     - 机器人控制焊机送气的DO输出端口，当机器人执行焊接送气指令时，送气对应的DO输出端口自动输出有效
+     - Podawanie gazu
+     - Port wyjściowy DO robota sterujący podawaniem gazu spawarki. Gdy robot wykonuje instrukcję podawania gazu spawalniczego, odpowiadający port wyjściowy DO podawania gazu automatycznie wygeneruje sygnał aktywny
    * - 7
-     - 正向送丝
-     - 机器人控制焊机正向送丝的DO输出端口，当机器人执行正向送丝指令时，正向送丝对应的DO输出端口自动输出有效
+     - Podawanie drutu do przodu
+     - Port wyjściowy DO robota sterujący podawaniem drutu do przodu w spawarce. Gdy robot wykonuje instrukcję podawania drutu do przodu, odpowiadający port wyjściowy DO podawania drutu do przodu automatycznie wygeneruje sygnał aktywny
    * - 8
-     - 反向送丝
-     - 机器人控制焊机反向送丝的DO输出端口，当机器人执行反向送丝指令时，反向送丝对应的DO输出端口自动输出有效
+     - Podawanie drutu do tyłu
+     - Port wyjściowy DO robota sterujący podawaniem drutu do tyłu w spawarce. Gdy robot wykonuje instrukcję podawania drutu do tyłu, odpowiadający port wyjściowy DO podawania drutu do tyłu automatycznie wygeneruje sygnał aktywny
    * - 9
-     - JOB 输入口 1
-     - JOB输入端口1信号
+     - Wejście JOB 1
+     - Sygnał portu wejściowego JOB 1
    * - 10
-     - JOB 输入口 2
-     - JOB输入端口2信号
+     - Wejście JOB 2
+     - Sygnał portu wejściowego JOB 2
    * - 11
-     - JOB 输入口 3
-     - JOB输入端口3信号
+     - Wejście JOB 3
+     - Sygnał portu wejściowego JOB 3
    * - 12
-     - 传送带启停
-     - 传送带运动启停操作信号
+     - Uruchom/zatrzymaj taśmociąg
+     - Sygnał operacji uruchomienia/zatrzymania ruchu taśmociągu
    * - 13
-     - 暂停
-     - 机器人运动暂停信号
+     - Wstrzymaj
+     - Sygnał wstrzymania ruchu robota
    * - 14
-     - 到达作业原点
-     - 机器人运动至作业原点信号
+     - Osiągnięto punkt początkowy zadania
+     - Sygnał dotarcia robota do punktu początkowego zadania
    * - 15
-     - 进入干涉区
-     - 机器人运动至干涉区信号
+     - Wejście w strefę interferencji
+     - Sygnał wejścia robota w strefę interferencji
    * - 16
-     - 焊丝寻位启停控制
-     - 机器人焊丝寻位启停控制操作信号
+     - Sterowanie uruchomieniem/zatrzymaniem pozycjonowania drutu spawalniczego
+     - Sygnał operacji sterowania uruchomieniem/zatrzymaniem pozycjonowania drutu spawalniczego robota
    * - 17
-     - 机器人启动完成
-     - 机器人启动完成信号
+     - Robot zakończył uruchamianie
+     - Sygnał zakończenia uruchamiania robota
    * - 18
-     - 程序启动停止
-     - 机器人运动程序启动停止信号
+     - Uruchomienie/zatrzymanie programu
+     - Sygnał uruchomienia/zatrzymania programu ruchu robota
    * - 19
-     - 自动手动模式
-     - 机器人手自动模式切换信号
+     - Tryb automatyczny/ręczny
+     - Sygnał przełączania trybu ręczny/automatyczny robota
    * - 20
-     - 急停输出信号1
-     - 机器人急停输出信号1，①仅在QX下显示。②LA下可在“初始设置”->“安全”->"I/O安全"->“DIO安全功能配置”界面进行相关配置
+     - Sygnał wyjściowy awaryjnego zatrzymania 1
+     - Sygnał wyjściowy awaryjnego zatrzymania robota 1. ① Wyświetlany tylko w QX. ② W LA odpowiednia konfiguracja dostępna w interfejsie "Ustawienia początkowe" -> "Bezpieczeństwo" -> "Bezpieczeństwo I/O" -> "Konfiguracja funkcji bezpieczeństwa DIO"
    * - 21
-     - 急停输出信号2
-     - 机器人急停输出信号2，①仅在QX下显示。②LA下可在“初始设置”->“安全”->"I/O安全"->“DIO安全功能配置”界面进行相关配置
+     - Sygnał wyjściowy awaryjnego zatrzymania 2
+     - Sygnał wyjściowy awaryjnego zatrzymania robota 2. ① Wyświetlany tylko w QX. ② W LA odpowiednia konfiguracja dostępna w interfejsie "Ustawienia początkowe" -> "Bezpieczeństwo" -> "Bezpieczeństwo I/O" -> "Konfiguracja funkcji bezpieczeństwa DIO"
    * - 22
-     - Lua脚本程序运行/停止
-     - 机器人运动Lua脚本程序运行/停止信号
+     - Działanie/zatrzymanie programu skryptowego Lua
+     - Sygnał działania/zatrzymania programu skryptowego Lua ruchu robota
    * - 23
-     - 安全状态输出
-     - 机器人安全状态输出信号，①仅在QX下显示。②LA下可在“初始设置”->“安全”->"I/O安全"->“DIO安全功能配置”界面进行相关配置
+     - Wyjście stanu bezpieczeństwa
+     - Sygnał wyjściowy stanu bezpieczeństwa robota. ① Wyświetlany tylko w QX. ② W LA odpowiednia konfiguracja dostępna w interfejsie "Ustawienia początkowe" -> "Bezpieczeństwo" -> "Bezpieczeństwo I/O" -> "Konfiguracja funkcji bezpieczeństwa DIO"
    * - 24
-     - 保护性停止状态输出
-     - 机器人保护性停止状态输出信号，①仅在QX下显示。②LA下可在“初始设置”->“安全”->"I/O安全"->“DIO安全功能配置”界面进行相关配置
+     - Wyjście stanu ochronnego zatrzymania
+     - Sygnał wyjściowy stanu ochronnego zatrzymania robota. ① Wyświetlany tylko w QX. ② W LA odpowiednia konfiguracja dostępna w interfejsie "Ustawienia początkowe" -> "Bezpieczeństwo" -> "Bezpieczeństwo I/O" -> "Konfiguracja funkcji bezpieczeństwa DIO"
    * - 25
-     - 机器人运动中
-     - 机器人运动中状态信号，①仅在QX下显示。②LA下可在“初始设置”->“安全”->"I/O安全"->“DIO安全功能配置”界面进行相关配置
+     - Robot w ruchu
+     - Sygnał stanu robota w ruchu. ① Wyświetlany tylko w QX. ② W LA odpowiednia konfiguracja dostępna w interfejsie "Ustawienia początkowe" -> "Bezpieczeństwo" -> "Bezpieczeństwo I/O" -> "Konfiguracja funkcji bezpieczeństwa DIO"
    * - 26
-     - 机器人缩减模式
-     - 机器人缩减模式信号，①仅在QX下显示。②LA下可在“初始设置”->“安全”->"I/O安全"->“DIO安全功能配置”界面进行相关配置
+     - Tryb redukcji robota
+     - Sygnał trybu redukcji robota. ① Wyświetlany tylko w QX. ② W LA odpowiednia konfiguracja dostępna w interfejsie "Ustawienia początkowe" -> "Bezpieczeństwo" -> "Bezpieczeństwo I/O" -> "Konfiguracja funkcji bezpieczeństwa DIO"
    * - 27
-     - 机器人非缩减模式
-     - 机器人非缩减模式信号，①仅在QX下显示。②LA下可在“初始设置”->“安全”->"I/O安全"->“DIO安全功能配置”界面进行相关配置
+     - Tryb nieredukcji robota
+     - Sygnał trybu nieredukcji robota. ① Wyświetlany tylko w QX. ② W LA odpowiednia konfiguracja dostępna w interfejsie "Ustawienia początkowe" -> "Bezpieczeństwo" -> "Bezpieczeństwo I/O" -> "Konfiguracja funkcji bezpieczeństwa DIO"
    * - 28
-     - 预留
-     - 预留
+     - Zarezerwowane
+     - Zarezerwowane
    * - 29
-     - 指令点错误
-     - 关节指令点错误信号
+     - Błąd punktu instrukcji
+     - Sygnał błędu punktu instrukcji stawu
    * - 30
-     - 驱动器错误
-     - 驱动器错误信号
+     - Błąd napędu
+     - Sygnał błędu napędu
    * - 31
-     - 超出软限位错误
-     - 机器人超出软限位错误信号，需调整相应关节软限位
+     - Błąd przekroczenia miękkiego limitu
+     - Sygnał błędu przekroczenia miękkiego limitu przez robota, wymagana regulacja miękkiego limitu odpowiedniego stawu
    * - 32
-     - 碰撞错误
-     - 机器人发生碰撞错误信号
+     - Błąd kolizji
+     - Sygnał błędu kolizji robota
    * - 33
-     - 活动从站数量错误
-     - 活动从站数量错误异常信号
+     - Błąd liczby aktywnych stacji podrzędnych
+     - Sygnał nieprawidłowości błędu liczby aktywnych stacji podrzędnych
    * - 34
-     - 从站错误
-     - 从站发生异常错误信号
+     - Błąd stacji podrzędnej
+     - Sygnał nieprawidłowości błędu stacji podrzędnej
    * - 35
-     - I/O错误
-     - I/O错误信号
+     - Błąd I/O
+     - Sygnał błędu I/O
    * - 36
-     - 夹爪错误
-     - 夹爪相关配置异常信号
+     - Błąd chwytaka
+     - Sygnał nieprawidłowości konfiguracji związanej z chwytakiem
    * - 37
-     - 文件错误
-     - 配置文件加载错误信号 
+     - Błąd pliku
+     - Sygnał błędu ładowania pliku konfiguracyjnego
    * - 38
-     - 奇异位姿错误
-     - 机器人运动过程中，运动至奇异位姿错误信号
+     - Błąd osobliwej pozycji
+     - Sygnał błędu osiągnięcia osobliwej pozycji podczas ruchu robota
    * - 39
-     - 驱动器通信错误
-     - 机器人驱动器通信异常错误信号
+     - Błąd komunikacji z napędem
+     - Sygnał błędu nieprawidłowej komunikacji z napędem robota
    * - 40
-     - 参数错误
-     - DO高低电平范围错误错误
+     - Błąd parametru
+     - Błąd zakresu wysokiego/niskiego poziomu DO
    * - 41
-     - 外部轴超出软限位错误
-     - 外部轴1-4轴超出软限位故障信号
+     - Błąd przekroczenia miękkiego limitu zewnętrznej osi
+     - Sygnał błędu przekroczenia miękkiego limitu dla zewnętrznych osi 1-4
    * - 42
-     - 规划与超时警告
-     - 机器人规划与超时报警状态
+     - Ostrzeżenie planowania i przekroczenia czasu
+     - Stan ostrzeżenia planowania i przekroczenia czasu robota
    * - 43
-     - 安全门警告
-     - 安全门触发状态
+     - Ostrzeżenie drzwi bezpieczeństwa
+     - Stan wyzwolenia drzwi bezpieczeństwa
    * - 44
-     - 运动警告
-     - 运动警告状态
+     - Ostrzeżenie ruchu
+     - Stan ostrzeżenia ruchu
    * - 45
-     - 干涉区警告
-     - 机器人进入干涉区警告状态
+     - Ostrzeżenie strefy interferencji
+     - Stan ostrzeżenia wejścia robota w strefę interferencji
    * - 46
-     - 安全墙警告
-     - 机器人进入安全墙警告状态
+     - Ostrzeżenie ściany bezpieczeństwa
+     - Stan ostrzeżenia wejścia robota w ścianę bezpieczeństwa
    * - 47
-     - 机器人使能
-     - 机器人使能状态
-  
-控制箱DO高低有效可配置功能
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     - Załączenie robota
+     - Stan załączenia robota
 
-概述
+Funkcja konfigurowalna wysokiego/niskiego stanu aktywnego DO skrzynki sterowniczej
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Omówienie
 ++++++++++++
 
-控制箱上电启动直到机器人使能的整个过程中，DO可根据具体使用场景配置为所需的输出状态，使用更加灵活和便捷。
+Podczas całego procesu od włączenia zasilania skrzynki sterowniczej do załączenia robota, DO mogą być skonfigurowane do wymaganego stanu wyjściowego w zależności od konkretnego scenariusza użycia, co zapewnia większą elastyczność i wygodę użytkowania.
 
-操作步骤
-++++++++++++
+Kroki operacyjne
+++++++++++++++++++++++++
 
-进入初始设置->基础->I/O设置->DO界面，将上电期间控制箱DO输出配置为所需的高/低电平。
+Przejdź do Ustawienia początkowe -> Podstawowe -> Ustawienia I/O -> interfejs DO. Skonfiguruj wyjście DO skrzynki sterowniczej podczas zasilania jako wymagany wysoki/niski poziom.
 
 .. image:: base/055.png
    :width: 4in
    :align: center
 
-.. centered:: 图表 6.5‑6 上电期间控制箱DO输出配置
+.. centered:: Wykres 6.5‑6 Konfiguracja wyjścia DO skrzynki sterowniczej podczas zasilania
 
-I/O别名配置
-~~~~~~~~~~~~~~~~~~~~
+Konfiguracja aliasów I/O
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-点击菜单栏“初始设置”->“基础”->“I/O设置”，点击“别名”子菜单进入配置界面，根据实际使用场景配置控制箱和末端IO信号的给定含义名称。配置成功后，有关IO信号内容的模块显示对应别名，模块如下：
+Kliknij menu "Ustawienia początkowe" -> "Podstawowe" -> "Ustawienia I/O", kliknij podmenu "Aliasy", aby przejść do interfejsu konfiguracji. W zależności od rzeczywistego scenariusza użycia skonfiguruj nadane nazwy znaczeń dla sygnałów I/O skrzynki sterowniczej i końcówki. Po pomyślnej konfiguracji moduły dotyczące treści sygnałów I/O wyświetlą odpowiednie aliasy, jak pokazano poniżej:
 
 .. image:: base/028.png
    :width: 4in
    :align: center
 
-.. centered:: 图表 6.5‑7 IO别名配置
+.. centered:: Wykres 6.5‑7 Konfiguracja aliasów I/O
 
-I/O滤波
-~~~~~~~~~~
+Filtrowanie I/O
+~~~~~~~~~~~~~~~~~~~~~~~
 
-点击菜单栏“初始设置”->“基础”->“I/O设置”，点击“滤波”子菜单进入IO滤波时间设置界面，滤波时间设置界面包括：
+Kliknij menu "Ustawienia początkowe" -> "Podstawowe" -> "Ustawienia I/O", kliknij podmenu "Filtrowanie", aby przejść do interfejsu ustawiania czasu filtrowania I/O. Interfejs ustawiania czasu filtrowania obejmuje:
 
-- 控制箱DI滤波时间
-- 末端板DI滤波时间
-- 控制箱AI0滤波时间
-- 控制箱AI1滤波时间
-- 末端板AI0滤波时间
-- 按钮盒DI滤波时间
-- 扩展DI滤波时间
-- 扩展AI0滤波时间
-- 扩展AI1滤波时间
-- 扩展AI2滤波时间
-- 扩展AI3滤波时间
-- Smart DI 滤波时间
+- Czas filtrowania DI skrzynki sterowniczej
+- Czas filtrowania DI płyty końcowej
+- Czas filtrowania AI0 skrzynki sterowniczej
+- Czas filtrowania AI1 skrzynki sterowniczej
+- Czas filtrowania AI0 płyty końcowej
+- Czas filtrowania DI panelu przycisków
+- Czas filtrowania rozszerzonego DI
+- Czas filtrowania rozszerzonego AI0
+- Czas filtrowania rozszerzonego AI1
+- Czas filtrowania rozszerzonego AI2
+- Czas filtrowania rozszerzonego AI3
+- Czas filtrowania Smart DI
 
-用户可以查看所有滤波参数值表并根据自己的需求来设定对应的参数，选择相应的参数输入参数值设置即可。如下图所示：
+Użytkownik może wyświetlić tabelę wszystkich wartości parametrów filtrowania i ustawić odpowiednie parametry zgodnie z własnymi potrzebami, wybierając odpowiedni parametr i wprowadzając wartość parametru. Jak pokazano na poniższym rysunku:
 
 .. image:: base/029.png
    :width: 4in
@@ -1038,440 +1030,421 @@ I/O滤波
    :width: 4in
    :align: center
 
-.. centered:: 图表 6.5‑8 滤波界面
+.. centered:: Wykres 6.5‑8 Interfejs filtrowania
 
 .. important:: 
-   I/O滤波时间范围为[0~200]，单位ms。
+   Zakres czasu filtrowania I/O wynosi [0~200] ms.
 
-输出复位配置
-~~~~~~~~~~~~~
+Konfiguracja resetowania wyjść
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-点击菜单栏“初始设置”->“基础”->“I/O设置”，点击“输出复位”子菜单进入配置界面，根据实际使用过程中是否复位的需求，配置不同输出在停止/暂停后是否需要复位。目前输出包括：
+Kliknij menu "Ustawienia początkowe" -> "Podstawowe" -> "Ustawienia I/O", kliknij podmenu "Resetowanie wyjść", aby przejść do interfejsu konfiguracji. W zależności od potrzeb dotyczących resetowania w rzeczywistym procesie użytkowania, skonfiguruj, czy różne wyjścia mają być resetowane po zatrzymaniu/wstrzymaniu. Obecnie wyjścia obejmują:
 
-- 控制箱DO
-- 控制箱AO
-- 末端版DO
-- 末端版AO
-- 扩展DO
-- 扩展AO
+- DO skrzynki sterowniczej
+- AO skrzynki sterowniczej
+- DO płyty końcowej
+- AO płyty końcowej
+- Rozszerzone DO
+- Rozszerzone AO
 - SmartTool DO
 
 .. image:: base/030.png
    :width: 4in
    :align: center
 
-.. centered:: 图表 6.5‑9 输出复位配置
+.. centered:: Wykres 6.5‑9 Konfiguracja resetowania wyjść
 
-暂停恢复DO复位状态可配置功能
+Funkcja konfigurowalnego stanu resetowania DO po wstrzymaniu/wznowieniu
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-概述
+Omówienie
 ++++++++++++++++++++++++
-本功能对现有的输出复位功能进行优化，在I/O设置中增加可配置选项，可设置为保持或复位两种类型，其中复位又可分为恢复至复位前状态、不恢复至复位前状态，用户可根据实际需要设置不同的配置选项。
+Funkcja ta optymalizuje istniejącą funkcję resetowania wyjść, dodając konfigurowalną opcję w ustawieniach I/O. Można ustawić jeden z dwóch typów: "Zachowaj" lub "Resetuj", gdzie resetowanie dzieli się dalej na "Przywróć stan sprzed resetu" i "Nie przywracaj stanu sprzed resetu". Użytkownik może ustawić różne opcje konfiguracji w zależności od rzeczywistych potrzeb.
 
-操作流程
+Procedura operacyjna
 +++++++++++++++++++++++++++++++
-**Step1**：依次点击“初始设置”-“I/O设置”-“输出复位”指令，根据实际使用需要设置DO或AO的停止/暂停后输出状态，其中状态可设置为“保持”或“复位”，仅当设置为“复位”时，可进一步设置“恢复至复位前状态”。
+**Krok 1**: Kolejno kliknij "Ustawienia początkowe" - "Ustawienia I/O" - "Resetowanie wyjść". W zależności od rzeczywistych potrzeb użytkowania ustaw stan wyjścia DO lub AO po zatrzymaniu/wstrzymaniu. Stan może być ustawiony na "Zachowaj" lub "Resetuj". Tylko gdy ustawione jest "Resetuj", można dalej ustawić "Przywróć stan sprzed resetu".
 
-**Step2**：将状态可设置为“保持”，在lua程序运行时点击暂停，再点击恢复，DO/AO输出状态全程不变，为触发状态；在lua程序运行时点击停止，DO/AO输出状态不变，设置参数如下图。
+**Krok 2**: Ustaw stan na "Zachowaj". Podczas działania programu Lua kliknij wstrzymaj, a następnie wznowij. Stan wyjścia DO/AO pozostaje niezmieniony przez cały czas, w stanie wyzwolonym. Podczas działania programu Lua kliknij zatrzymaj, stan wyjścia DO/AO się nie zmienia. Ustawienia parametrów pokazano na poniższym rysunku.
 
 .. image:: base/030.png
    :width: 4in
    :align: center
 
-.. centered:: 图表 6.5‑10 状态设置为“保持”
+.. centered:: Wykres 6.5‑10 Ustawienie stanu na "Zachowaj"
  
-**Step3**：将状态可设置为“复位”，恢复至复位前状态设置为“否”，在lua程序运行时点击暂停时，DO/AO输出状态将被复位，再点击恢复，DO/AO输出状态仍被复位；在lua程序运行时点击停止，DO/AO输出状态将被复位，设置参数如下图。
+**Krok 3**: Ustaw stan na "Resetuj", a "Przywróć stan sprzed resetu" ustaw na "Nie". Podczas działania programu Lua kliknij wstrzymaj, stan wyjścia DO/AO zostanie zresetowany. Po kliknięciu wznowij, stan wyjścia DO/AO nadal pozostanie zresetowany. Podczas działania programu Lua kliknij zatrzymaj, stan wyjścia DO/AO zostanie zresetowany. Ustawienia parametrów pokazano na poniższym rysunku.
 
 .. image:: base/096.png
    :width: 4in
    :align: center
 
-.. centered:: 图表 6.5‑11 状态设置为“复位”+“否”
+.. centered:: Wykres 6.5‑11 Ustawienie stanu na "Resetuj" + "Nie"
 
-**Step4**：将状态可设置为“复位”，恢复至复位前状态设置为“是”，在lua程序运行时点击暂停时，DO/AO输出状态将被复位，再点击恢复，DO/AO输出状态重载；在lua程序运行时点击停止，DO/AO输出状态将被复位，设置参数如下图。
+**Krok 4**: Ustaw stan na "Resetuj", a "Przywróć stan sprzed resetu" ustaw na "Tak". Podczas działania programu Lua kliknij wstrzymaj, stan wyjścia DO/AO zostanie zresetowany. Po kliknięciu wznowij, stan wyjścia DO/AO zostanie przeładowany. Podczas działania programu Lua kliknij zatrzymaj, stan wyjścia DO/AO zostanie zresetowany. Ustawienia parametrów pokazano na poniższym rysunku.
 
 .. image:: base/097.png
    :width: 4in
    :align: center
 
-.. centered:: 图表 6.5‑12 状态设置为“复位”+“是”
+.. centered:: Wykres 6.5‑12 Ustawienie stanu na "Resetuj" + "Tak"
 
-作业原点
------------
+Punkt początkowy zadania
+-------------------------------------
 
-在“初始设置”->“基础”的菜单栏下，点击“作业原点”进入作业原点配置功能界面。
+W menu "Ustawienia początkowe" -> "Podstawowe" kliknij "Punkt początkowy zadania", aby przejść do interfejsu konfiguracji funkcji punktu początkowego zadania.
 
-该页面显示作业原点的名称和关节位置信息，作业原点命名为固定名pHome，点击“设置”以当前机器人位姿作为作业原点，点击“移至该点”机器人会运动到作业原点。此外DI配置中增加移动至作业原点可配置选项，DO配置中增加到达作业原点可配置选项。
+Ta strona wyświetla nazwę punktu początkowego zadania i informacje o pozycji stawów. Punkt początkowy zadania ma ustaloną nazwę pHome. Kliknij "Ustaw", aby ustawić bieżącą pozycję robota jako punkt początkowy zadania. Kliknij "Przejdź do tego punktu", a robot przemiesci się do punktu początkowego zadania. Ponadto w konfiguracji DI dodano konfigurowalną opcję przejścia do punktu początkowego zadania, a w konfiguracji DO dodano konfigurowalną opcję osiągnięcia punktu początkowego zadania.
 
 .. image:: base/077.png
    :width: 4in
    :align: center
 
-.. centered:: 图表 6.6‑1 作业原点
+.. centered:: Wykres 6.6‑1 Punkt początkowy zadania
 
-.. 配置导入导出
-.. ~~~~~~~~~~~~~~~
+Funkcja automatycznej kalibracji TCP za pomocą czujnika fotoelektrycznego
+--------------------------------------------------------------------------------
 
-.. 在“初始设置”中的“机器人设置”的菜单栏下，点击“配置导入导出”进入配置导入导出界面。
-
-.. **导入机器人配置文件**：用户导入文件名为user.config的机器人配置文件，该文件包含机器人设置功能中的各个参数。点击“选择文件”按钮，选中修改完且内容符合规范的配置文件，点击“导入”按钮，当出现导入完成的提示时，文件中的参数即被成功设置。
-
-.. **导出机器人配置文件**：点击“导出”按钮，即可将机器人配置文件user.config导出到本地。
-
-.. **导入控制器数据库**：用户导入文件名为fr_controller_data.db的控制器数据库文件。点击“选择文件”按钮，选中修改完且内容符合规范的数据库文件，点击“导入”按钮，当出现导入完成的提示时，文件中的参数即被成功设置。
-
-.. **控制器数据库**：点击“导出”按钮，即可将机器人控制器数据库文件导出到本地。
-
-.. .. image:: base/031.png
-..    :width: 3in
-..    :align: center
-
-.. .. centered:: 图表 6.5-1 配置导入导出
-
-光电传感器TCP自动标定功能
--------------------------------------------------------------------
-
-概述
+Omówienie
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-当机器人工具发生碰撞导致TCP位置偏移时，可启用基于光电传感器的TCP自动标定功能。该功能通过自动计算并补偿位置偏差，快速完成工具坐标系的重新校准，大幅减少停机时间，提升设备运行效率与生产稳定性。
+Gdy pozycja TCP narzędzia robota ulegnie przesunięciu z powodu kolizji z narzędziem, można włączyć funkcję automatycznej kalibracji TCP opartej na czujniku fotoelektrycznym. Funkcja ta szybko ponownie kalibruje układ współrzędnych narzędzia poprzez automatyczne obliczanie i kompensację odchylenia pozycji, znacznie skracając przestoje i poprawiając wydajność sprzętu oraz stabilność produkcji.
 
-操作流程
+Procedura operacyjna
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-**Step1**：将光电传感器置于机器人的工作空间中，并将光电传感器设备的两组棕、蓝及黑色信号线，分别接线至机器人控制箱两组24V、0V和CI0、CI1端口（任意可用的可配置数字信号输入端口即可）或者接线至机器人末端两组24V、0V和End-DI0、End-DI1端口。
+**Krok 1**: Umieść czujnik fotoelektryczny w przestrzeni roboczej robota. Podłącz dwie grupy brązowych, niebieskich i czarnych przewodów sygnałowych czujnika fotoelektrycznego odpowiednio do dwóch grup 24V, 0V i CI0, CI1 w skrzynce sterowniczej robota (dowolne dostępne konfigurowalne porty wejściowego sygnału cyfrowego) lub do dwóch grup 24V, 0V i End-DI0, End-DI1 na końcówce robota.
 
-**Step2**：标定光电传感器坐标系。光电传感器坐标系本质上是工件坐标系，其准确度对后面工具TCP的标定有着重要的影响，可通过多种形式确定：
+**Krok 2**: Kalibracja układu współrzędnych czujnika fotoelektrycznego. Układ współrzędnych czujnika fotoelektrycznego jest w istocie układem współrzędnych przedmiotu. Jego dokładność ma istotny wpływ na późniejszą kalibrację TCP narzędzia. Można go określić na kilka sposobów:
 
-- （1）采用工件坐标系的标定方法，原点为两激光束的交点，两激光束分别为X轴和Y轴，Z轴垂直光电传感器向外；
-- （2）通过外部测量设备（如相机）给出；
-- （3）使用光电自动标定功能中的光电设备配置进行标定，在该选项中需要使用已知精确尺寸的工具和大致准确的工件坐标系并应用：先点击“初始设置”-“工具坐标”，应用工具坐标系0，然后点击该精确尺寸的工具坐标系（以坐标系1为例）的“坐标系标定”按钮，再点击“应用”，然后选择“光电自动标定功能”。
+- (1) Stosując metodę kalibracji układu współrzędnych przedmiotu, początek układu to punkt przecięcia dwóch wiązek laserowych, dwie wiązki laserowe to odpowiednio oś X i oś Y, a oś Z jest skierowana prostopadle na zewnątrz czujnika fotoelektrycznego;
+- (2) Poprzez zewnętrzne urządzenie pomiarowe (np. kamerę);
+- (3) Używając konfiguracji urządzenia fotoelektrycznego w funkcji automatycznej kalibracji fotoelektrycznej. W tej opcji należy użyć narzędzia o znanych precyzyjnych wymiarach i w przybliżeniu dokładnego układu współrzędnych przedmiotu, a następnie zastosować: najpierw kliknij "Ustawienia początkowe" - "Współrzędne narzędzia", zastosuj układ współrzędnych narzędzia 0, następnie kliknij przycisk "Kalibracja układu współrzędnych" dla narzędzia o precyzyjnych wymiarach (na przykład układ współrzędnych 1), następnie kliknij "Zastosuj", a następnie wybierz "Automatyczna kalibracja fotoelektryczna".
 
 .. image:: base/034.png
    :width: 4in
    :align: center
 
-.. centered:: 图表 6.7-1 光电自动标定选择
+.. centered:: Wykres 6.7-1 Wybór automatycznej kalibracji fotoelektrycznej
  
-进入“光电设备已配置”内容中，进行IO触发信号的配置、设置示教中心点、设置偏移参数，然后点击“运行”即可标定传感器的坐标系，后续将标定结果手动应用到工件坐标系中。
+Przejdź do treści "Skonfigurowano urządzenie fotoelektryczne", wykonaj konfigurację sygnału wyzwalającego I/O, ustaw punkt środkowy nauczania, ustaw parametry przesunięcia, a następnie kliknij "Uruchom", aby skalibrować układ współrzędnych czujnika. Następnie ręcznie zastosuj wyniki kalibracji do układu współrzędnych przedmiotu.
 
 .. image:: base/035.png
    :width: 4in
    :align: center
 
-.. centered:: 图表 6.7-2 标定传感器坐标系
+.. centered:: Wykres 6.7-2 Kalibracja układu współrzędnych czujnika
 
-**Step3**：标定工具坐标系。通过Step2已经得到精确的工件坐标系并应用，并且知道碰撞前的工具坐标系并应用：先点击“初始设置”-“工具坐标”，应用工具坐标系0，然后点击碰撞前的工具坐标系（以坐标系1为例）的“坐标系标定”按钮，再点击“应用”，然后选择“光电自动标定功能”，在“光电校准参数已配置”中设置校准参数。
+**Krok 3**: Kalibracja układu współrzędnych narzędzia. Dzięki Krokowi 2 uzyskano dokładny układ współrzędnych przedmiotu i został on zastosowany, a także znany jest układ współrzędnych narzędzia przed kolizją i został on zastosowany. Najpierw kliknij "Ustawienia początkowe" - "Współrzędne narzędzia", zastosuj układ współrzędnych narzędzia 0, następnie kliknij przycisk "Kalibracja układu współrzędnych" dla układu współrzędnych narzędzia sprzed kolizji (na przykład układ współrzędnych 1), następnie kliknij "Zastosuj", a następnie wybierz "Automatyczna kalibracja fotoelektryczna". W "Skonfigurowano parametry kalibracji fotoelektrycznej" ustaw parametry kalibracji.
 
 .. image:: base/036.png
    :width: 4in
    :align: center
 
-.. centered:: 图表 6.7-3 光电自动标定校准参数设置
+.. centered:: Wykres 6.7-3 Ustawianie parametrów kalibracji automatycznej kalibracji fotoelektrycznej
  
-设置完成后，点击“完成”按钮返回上一级菜单，然后点击“校准”按钮进行TCP的标定，待标定结束后，点击“保存”按钮对标定结果进行保存。
+Po zakończeniu ustawiania kliknij przycisk "Zakończ", aby wrócić do poprzedniego menu, a następnie kliknij przycisk "Kalibruj", aby przeprowadzić kalibrację TCP. Po zakończeniu kalibracji kliknij przycisk "Zapisz", aby zapisać wyniki kalibracji.
 
 .. image:: base/037.png
    :width: 4in
    :align: center
 
-.. centered:: 图表 6.7-4 光电自动标定校准与保存
+.. centered:: Wykres 6.7-4 Kalibracja i zapisywanie automatycznej kalibracji fotoelektrycznej
 
-基于平板工具的TCP标定
------------------------------------
+Kalibracja TCP za pomocą narzędzia płytkowego
+------------------------------------------------
 
-概述
+Omówienie
 ~~~~~~~~~
 
-使用“四点法”进行工具的TCP标定时，需要手动控制机器人运动，并通过肉眼实现点与点的精确重合，标定效率和精度都受操作人员熟练度的影响。
+Podczas kalibracji TCP narzędzia za pomocą metody "czteropunktowej" konieczne jest ręczne sterowanie ruchem robota i precyzyjne pokrywanie punktów gołym okiem. Zarówno wydajność, jak i dokładność kalibracji zależą od doświadczenia operatora.
 
-基于平板工具的TCP标定原理如下：利用机器人工具与平板任意位置多次触碰，并通过建立标定模型以求解工具的TCP。整个标定过程自动完成，可提高标定的效率和减少对人工的依赖。
+Zasada kalibracji TCP za pomocą narzędzia płytkowego jest następująca: wykorzystuje się wielokrotne dotknięcia narzędzia robota w dowolne miejsce płytki, a następnie buduje model kalibracji w celu wyznaczenia TCP narzędzia. Cały proces kalibracji odbywa się automatycznie, co zwiększa wydajność kalibracji i zmniejsza zależność od pracy człowieka.
 
-基于平板工具的TCP标定功能操作流程
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Procedura operacyjna funkcji kalibracji TCP za pomocą narzędzia płytkowego
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-固定标定平板于机器人作业空间内，平板不可有晃动，且平板的导电性要好，将工具末端近似垂直标定板，并位于平板上方50mm处。
+Zamocuj płytkę kalibracyjną w przestrzeni roboczej robota. Płytka nie może się trząść, a jej przewodność musi być dobra. Umieść końcówkę narzędzia mniej więcej prostopadle do płytki kalibracyjnej, około 50 mm nad płytką.
 
 .. image:: base/043.png
    :width: 4in
    :align: center
 
-.. centered:: 图表 6.8‑1 标定布局示意
+.. centered:: Wykres 6.8‑1 Schemat rozmieszczenia kalibracji
 
-依次点击“示教程序”—“程序编程”按钮，选择“FR_CalibrateTheToolTcpPlane.lua”标定文件并打开。
+Kolejno kliknij przyciski "Program nauczania" - "Programowanie", wybierz plik kalibracyjny "FR_CalibrateTheToolTcpPlane.lua" i otwórz go.
 
 .. image:: base/044.png
    :width: 4in
    :align: center
 
-.. centered:: 图表 6.8‑2 打开标定文件
+.. centered:: Wykres 6.8‑2 Otwieranie pliku kalibracyjnego
 
-依次点击“初始设置”->“基础”->“坐标系”—“工具”按钮，会进入“当前坐标系”界面。在“坐标系名称”中选择要进行标定的坐标系（以toolcord1坐标系为例），点击“修改”按钮，即可进入TCP标定方法选择界面。
+Kolejno kliknij "Ustawienia początkowe" -> "Podstawowe" -> "Układy współrzędnych" - przycisk "Narzędzie", aby przejść do interfejsu "Bieżący układ współrzędnych". W "Nazwa układu współrzędnych" wybierz układ współrzędnych do kalibracji (na przykład układ współrzędnych toolcord1), kliknij przycisk "Modyfikuj", aby przejść do interfejsu wyboru metody kalibracji TCP.
 
 .. image:: base/001.png
    :width: 4in
    :align: center
 
-.. centered:: 图表 6.8‑3 工具坐标系设置
+.. centered:: Wykres 6.8‑3 Ustawianie układu współrzędnych narzędzia
 
-在“修改向导”中，选择“平板工具标定”，即可进入平板工具标定界面。
+W "Kreatorze modyfikacji" wybierz "Kalibracja narzędziem płytkowym", aby przejść do interfejsu kalibracji narzędziem płytkowym.
 
 .. image:: base/045.png
    :width: 4in
    :align: center
 
-.. centered:: 图表 6.8‑4 标定方法选择
+.. centered:: Wykres 6.8‑4 Wybór metody kalibracji
 
-在“平板工具标定”界面中，点击“进入”按钮，可以进行平板工具配置，点击“记录”按钮，记录标定参考点。配置完成后，点击“完成”按钮，将会返回“平板工具标定”界面。
+W interfejsie "Kalibracja narzędziem płytkowym" kliknij przycisk "Wejdź", aby skonfigurować narzędzie płytkowe. Kliknij przycisk "Zapisz", aby zapisać punkt odniesienia kalibracji. Po zakończeniu konfiguracji kliknij przycisk "Zakończ", aby wrócić do interfejsu "Kalibracja narzędziem płytkowym".
 
 .. image:: base/046.png
    :width: 4in
    :align: center
 
-.. centered:: 图表 6.8‑5 平板工具配置
+.. centered:: Wykres 6.8‑5 Konfiguracja narzędzia płytkowego
 
-在“平板工具标定”界面点击“运行”按钮，机器人将自动进行工具的TCP标定，标定完成后，将显示工具的TCP坐标，点击“保存”按钮，会将标定结果返回到“当前工具坐标系”界面中。
+W interfejsie "Kalibracja narzędziem płytkowym" kliknij przycisk "Uruchom", a robot automatycznie przeprowadzi kalibrację TCP narzędzia. Po zakończeniu kalibracji wyświetlone zostaną współrzędne TCP narzędzia. Kliknij przycisk "Zapisz", a wyniki kalibracji zostaną zwrócone do interfejsu "Bieżący układ współrzędnych narzędzia".
 
 .. image:: base/047.png
    :width: 4in
    :align: center
 
-.. centered:: 图表 6.8‑6 标定结果
+.. centered:: Wykres 6.8‑6 Wyniki kalibracji
 
-在“当前工具坐标系”界面点击“应用”按钮，即可保存工具的TCP标定结果并应用。
+W interfejsie "Bieżący układ współrzędnych narzędzia" kliknij przycisk "Zastosuj", aby zapisać i zastosować wyniki kalibracji TCP narzędzia.
 
 .. image:: base/048.png
    :width: 4in
    :align: center
 
-.. centered:: 图表 6.8‑7 标定结果应用
+.. centered:: Wykres 6.8‑7 Zastosowanie wyników kalibracji
 
-控制箱模拟量反馈电弧跟踪功能
---------------------------------------------------------------
+Funkcja śledzenia łuku z analogowym sprzężeniem zwrotnym skrzynki sterowniczej
+-----------------------------------------------------------------------------------------------------
 
-概述
+Omówienie
 ~~~~~~~~~~~~~~~~
 
-控制箱模拟量反馈电弧跟踪功能采集焊机电压、电流模拟信号实现电弧跟踪补偿，功能的实现由配置控制箱模拟量对应的AI、AO通道完成。
+Funkcja śledzenia łuku z analogowym sprzężeniem zwrotnym skrzynki sterowniczej zbiera analogowe sygnały napięcia i prądu spawarki w celu realizacji kompensacji śledzenia łuku. Funkcja ta jest realizowana przez konfigurację kanałów AI i AO odpowiadających analogowym sygnałom skrzynki sterowniczej.
 
 .. image:: base/059.png
    :width: 4in
    :align: center
 
-.. centered:: 图表 6.9‑1 基于模拟信号通信的电弧跟踪功能拓扑图
-.. centered:: a表示计算机；b表示机器人及控制箱；c表示焊机
+.. centered:: Wykres 6.9‑1 Schemat topologii funkcji śledzenia łuku opartej na komunikacji analogowej
+.. centered:: a oznacza komputer; b oznacza robota i skrzynkę sterowniczą; c oznacza spawarkę
 
-控制箱模拟量AI配置流程
+Procedura konfiguracji analogowego AI skrzynki sterowniczej
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-在机器人Web控制界面，依次点击“初始设置”->“基础”->“I/O设置”->“AI”，进入“AI配置”界面。
+W interfejsie sterowania sieciowego robota, kolejno kliknij "Ustawienia początkowe" -> "Podstawowe" -> "Ustawienia I/O" -> "AI", aby przejść do interfejsu "Konfiguracja AI".
 
-在“AI配置”界面的“电弧跟踪通道”栏，在“焊接电流控制AI”和“焊接电压控制AI”下拉框，分别选择“Ctrl-AI0”和“Ctrl-AI1”作为电流、电压的模拟量通道，分别点击“配置”，完成控制箱模拟量AI配置。
+W sekcji "Kanał śledzenia łuku" interfejsu "Konfiguracja AI", w listach rozwijanych "AI sterowania prądem spawania" i "AI sterowania napięciem spawania", wybierz odpowiednio "Ctrl-AI0" i "Ctrl-AI1" jako kanały analogowe dla prądu i napięcia. Kliknij odpowiednio "Konfiguruj", aby zakończyć konfigurację analogowego AI skrzynki sterowniczej.
 
 .. image:: base/060.png
    :width: 3in
    :align: center
 
-.. centered:: 图表 6.9‑2 AI通道配置
+.. centered:: Wykres 6.9‑2 Konfiguracja kanałów AI
 
-在上图所示AI通道配置中的“模拟量电流电压关系图”栏，“A-V”和“V-V”界面的参数配置，需参考所使用的焊机模拟量接收与输出表/图。
+W sekcji "Wykres zależności analogowego prądu i napięcia" w konfiguracji kanałów AI pokazanej na powyższym rysunku, konfiguracja parametrów na interfejsach "A-V" i "V-V" wymaga odniesienia do tabeli/wykresu odbioru i wyjścia analogowego używanej spawarki.
 
-例如，配置控制箱电流模拟量AI的焊接电流的下限与上限分别为0A和500A；配置控制箱电流模拟量AI的输出电压的下限与上限分别为0V和5V，作为AI通道配置中的“模拟量电流电压关系图”栏的“A-V”界面的配置参数，点击“配置”，完成配置控制箱模拟量电流AI通道。
+Na przykład, skonfiguruj dolną i górną granicę prądu spawania dla analogowego AI prądu skrzynki sterowniczej odpowiednio jako 0 A i 500 A; skonfiguruj dolną i górną granicę napięcia wyjściowego dla analogowego AI prądu skrzynki sterowniczej odpowiednio jako 0 V i 5 V, jako parametry konfiguracyjne na interfejsie "A-V" w sekcji "Wykres zależności analogowego prądu i napięcia". Kliknij "Konfiguruj", aby zakończyć konfigurację analogowego kanału AI prądu skrzynki sterowniczej.
 
 .. image:: base/061.png
    :width: 3in
    :align: center
 
-.. centered:: 图表 6.9‑3 控制箱模拟量电流AI配置
+.. centered:: Wykres 6.9‑3 Konfiguracja analogowego AI prądu skrzynki sterowniczej
 
-例如，配置控制箱电压模拟量AI的焊接电压的下限与上限分别为0V和50V；配置控制箱电压模拟量AI的输出电压的下限与上限分别为1.018V和10V，作为AI通道配置中“模拟量电流电压关系图”栏的“V-V”界面的配置参数，点击“配置”，完成配置控制箱模拟量电压AI通道。
+Na przykład, skonfiguruj dolną i górną granicę napięcia spawania dla analogowego AI napięcia skrzynki sterowniczej odpowiednio jako 0 V i 50 V; skonfiguruj dolną i górną granicę napięcia wyjściowego dla analogowego AI napięcia skrzynki sterowniczej odpowiednio jako 1,018 V i 10 V, jako parametry konfiguracyjne na interfejsie "V-V" w sekcji "Wykres zależności analogowego prądu i napięcia". Kliknij "Konfiguruj", aby zakończyć konfigurację analogowego kanału AI napięcia skrzynki sterowniczej.
 
 .. image:: base/062.png
    :width: 3in
    :align: center
 
-.. centered:: 图表 6.9‑4 控制箱模拟量电压AI配置
+.. centered:: Wykres 6.9‑4 Konfiguracja analogowego AI napięcia skrzynki sterowniczej
 
-控制箱模拟量AO配置流程
+Procedura konfiguracji analogowego AO skrzynki sterowniczej
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-在机器人Web控制界面，依次点击“初始设置”->“外设”->“焊机”，进入“焊机配置”界面。
+W interfejsie sterowania sieciowego robota, kolejno kliknij "Ustawienia początkowe" -> "Urządzenia peryferyjne" -> "Spawarka", aby przejść do interfejsu "Konfiguracja spawarki".
 
 .. image:: base/063.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 6.9‑5 焊机配置
+.. centered:: Wykres 6.9‑5 Konfiguracja spawarki
 
-在“焊机配置”界面“焊接功能I/O配置”栏，“DI”和“DO”界面的参数配置，可以自定义配置控制箱CI、CO通道；在“控制类型”下拉框中选择“控制器I/O”，进入配置控制器模拟量AO通道流程。
+W sekcji "Konfiguracja I/O funkcji spawania" interfejsu "Konfiguracja spawarki", parametry na interfejsach "DI" i "DO" można konfigurować samodzielnie dla kanałów CI, CO skrzynki sterowniczej. W liście rozwijanej "Typ sterowania" wybierz "I/O kontrolera", aby przejść do procedury konfiguracji analogowego AO kontrolera.
 
-在“焊机配置”界面“模拟量电流电压关系图”栏，“A-V”和“V-V”界面的参数配置，需参考所使用的焊机模拟量接收与输出表/图。
+W sekcji "Wykres zależności analogowego prądu i napięcia" interfejsu "Konfiguracja spawarki", konfiguracja parametrów na interfejsach "A-V" i "V-V" wymaga odniesienia do tabeli/wykresu odbioru i wyjścia analogowego używanej spawarki.
 
-例如，配置控制箱电流模拟量AO的焊接电流的下限与上限分别为0A和495A；配置控制箱电流模拟量AO的输出电压的下限与上限分别为1V和10V，作为控制箱AO通道配置中模拟量电流的配置参数，
-并在“焊机电流控制AO”下拉框中选择“Ctrl-AO0”，点击“配置”，完成配置控制箱模拟量电流AO通道。
+Na przykład, skonfiguruj dolną i górną granicę prądu spawania dla analogowego AO prądu skrzynki sterowniczej odpowiednio jako 0 A i 495 A; skonfiguruj dolną i górną granicę napięcia wyjściowego dla analogowego AO prądu skrzynki sterowniczej odpowiednio jako 1 V i 10 V, jako parametry konfiguracyjne dla analogowego prądu w konfiguracji kanału AO skrzynki sterowniczej.
+Następnie w liście rozwijanej "AO sterowania prądem spawarki" wybierz "Ctrl-AO0" i kliknij "Konfiguruj", aby zakończyć konfigurację analogowego kanału AO prądu skrzynki sterowniczej.
 
 .. image:: base/064.png
    :width: 3in
    :align: center
 
-.. centered:: 图表 6.9‑6 控制箱模拟量电流AO配置
+.. centered:: Wykres 6.9‑6 Konfiguracja analogowego AO prądu skrzynki sterowniczej
 
-例如，配置控制箱电压模拟量AO的焊接电压的下限与上限分别为10V和45V；配置控制箱电压模拟量AO的输出电压的下限与上限分别为1V和10V，作为控制箱AO通道配置中模拟量电压的配置参数。
+Na przykład, skonfiguruj dolną i górną granicę napięcia spawania dla analogowego AO napięcia skrzynki sterowniczej odpowiednio jako 10 V i 45 V; skonfiguruj dolną i górną granicę napięcia wyjściowego dla analogowego AO napięcia skrzynki sterowniczej odpowiednio jako 1 V i 10 V, jako parametry konfiguracyjne dla analogowego napięcia w konfiguracji kanału AO skrzynki sterowniczej.
 
-并在“焊机电压控制AO”下拉框中选择“Ctrl-AO1”，点击“配置”，完成配置控制箱模拟量电压AO通道。
+Następnie w liście rozwijanej "AO sterowania napięciem spawarki" wybierz "Ctrl-AO1" i kliknij "Konfiguruj", aby zakończyć konfigurację analogowego kanału AO napięcia skrzynki sterowniczej.
 
 .. image:: base/065.png
    :width: 3in
    :align: center
 
-.. centered:: 图表 6.9‑7 控制箱模拟量电压AO配置
+.. centered:: Wykres 6.9‑7 Konfiguracja analogowego AO napięcia skrzynki sterowniczej
 
-直线齿条导轨碰撞检测
+Wykrywanie kolizji dla prostej szyny zębatej
 ----------------------------------------------------------------------
 
-概述
+Omówienie
 ~~~~~~~~~~~~~~~~
 
-直线齿条导轨碰撞检测功能用于实现在异步或同步运行时，导轨或机器人与环境物体发生碰撞时的报警并紧急停机。通过监控导轨转矩反馈变化情况，基于设定阈值判断是否发生碰撞，若发生则导轨立即停止运动，从而避免导轨及机器人对被撞物体施加持续力，可进一步提升人机协作安全性。
+Funkcja wykrywania kolizji dla prostej szyny zębatej służy do alarmowania i awaryjnego zatrzymania, gdy szyna lub robot zderzy się z obiektem środowiskowym podczas pracy asynchronicznej lub synchronicznej. Poprzez monitorowanie zmian sprzężenia zwrotnego momentu obrotowego szyny i na podstawie ustawionego progu określa się, czy nastąpiła kolizja. Jeśli tak, szyna natychmiast zatrzymuje ruch, zapobiegając w ten sposób wywieraniu ciągłej siły przez szynę i robota na uderzony obiekt, co może dodatkowo poprawić bezpieczeństwo współpracy człowiek-robot.
 
-直线齿条导轨碰撞检测功能
+Funkcja wykrywania kolizji dla prostej szyny zębatej
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-直线齿条导轨碰撞检测功能，需要在导轨激活后执行“Rail_Adaptation_Pro-gram.lua”程序，确保功能可以适配不同的到导轨及带载情况，从而获取最佳的碰撞检测性能。若未进行适配，则碰撞检测性能将明显下降，且触发碰撞的外力较大。
+Funkcja wykrywania kolizji dla prostej szyny zębatej wymaga wykonania programu "Rail_Adaptation_Program.lua" po aktywacji szyny, aby zapewnić, że funkcja może dostosować się do różnych szyn i warunków obciążenia, uzyskując w ten sposób optymalną wydajność wykrywania kolizji. Jeśli adaptacja nie zostanie przeprowadzona, wydajność wykrywania kolizji znacznie się pogorszy, a siła zewnętrzna wyzwalająca kolizję będzie większa.
 
-直线齿条导轨参数设置并使能
+Ustawianie parametrów i załączanie prostej szyny zębatej
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-**Step1**：登录web界面，依次点击“初始设置”→“外设”→“扩展轴”，进入扩展轴坐标系设置模块，见图所示。
+**Krok 1**: Zaloguj się do interfejsu sieciowego, kolejno kliknij "Ustawienia początkowe" → "Urządzenia peryferyjne" → "Oś rozszerzona", aby przejść do modułu ustawiania układu współrzędnych osi rozszerzonej, jak pokazano na rysunku.
 
 .. image:: base/078.png
    :width: 4in
    :align: center
 
-.. centered:: 图表 6.10‑1 扩展轴坐标系设置模块
+.. centered:: Wykres 6.10‑1 Moduł ustawiania układu współrzędnych osi rozszerzonej
 
-**Step2**：基于扩展轴与机器人的实际工作情况，进行参数设置并按需进行标定。在图中，点击编辑，扩展轴坐标系名称设置为“exaxis1”，方案选择为“0-单自由度直线滑轨”，扩展轴编号选择为“1”。若导轨与机器人仅异步运行，则可不进行标定，若需同步运行，则必须进行标定，标定流程可参考相应用户手册或询问专业人员。当参数设置完后，点击“保存”，并应用相应坐标系，具体见图2-2所示。
+**Krok 2**: W oparciu o rzeczywiste warunki pracy osi rozszerzonej i robota, ustaw parametry i wykonaj kalibrację w razie potrzeby. Na rysunku kliknij "Edytuj", ustaw nazwę układu współrzędnych osi rozszerzonej na "exaxis1", wybierz opcję "0 - prostoliniowa szyna przesuwna o jednym stopniu swobody" w sekcji "Wybór rozwiązania", wybierz numer osi rozszerzonej jako "1". Jeśli szyna i robot działają tylko asynchronicznie, kalibracja nie jest wymagana. Jeśli wymagana jest praca synchroniczna, kalibracja jest konieczna. Procedurę kalibracji można znaleźć w odpowiedniej instrukcji użytkownika lub skonsultować się z personelem technicznym. Po ustawieniu parametrów kliknij "Zapisz" i zastosuj odpowiedni układ współrzędnych, jak pokazano szczegółowo na rysunku 2-2.
 
 .. image:: base/079.png
    :width: 4in
    :align: center
 
-.. centered:: 图表 6.10‑2 扩展轴坐标系参数设置
+.. centered:: Wykres 6.10‑2 Ustawianie parametrów układu współrzędnych osi rozszerzonej
 
-**Step3**：建立扩展轴与机器人的UDP通讯，并确保扩展轴PLC程序可将扩展轴驱动电机经减速器后的转矩反馈数据回传至机器人控制器。依次点击“初始设置”→“外设”→“扩展轴”，进入UDP通讯配置页面，选择Step2中设置的坐标系并应用，点击UDP通讯配置“编辑”图标，进行通讯配置并加载。其中，PLC和笔记本电脑IP地址需与控制器网段一致，具体可见图2-3所示。需要注意地是，需要确保扩展轴PLC程序可将扩展轴驱动电机经减速器后的转矩反馈数据回传至机器人控制器，且采样周期尽可能为1ms，最大不能超过4ms，否则碰撞检测功能将失效。
+**Krok 3**: Ustanów komunikację UDP między osią rozszerzoną a robotem i upewnij się, że program PLC osi rozszerzonej może przesłać dane sprzężenia zwrotnego momentu obrotowego z silnika napędowego osi rozszerzonej po przejściu przez reduktor z powrotem do kontrolera robota. Kolejno kliknij "Ustawienia początkowe" → "Urządzenia peryferyjne" → "Oś rozszerzona", aby przejść do strony konfiguracji komunikacji UDP. Wybierz układ współrzędnych ustawiony w Kroku 2 i zastosuj go. Kliknij ikonę "Edytuj" w sekcji konfiguracji komunikacji UDP, aby przeprowadzić konfigurację komunikacji i załadować ją. Adresy IP PLC i laptopa muszą być zgodne z segmentem sieciowym kontrolera, co pokazano szczegółowo na rysunku 2-3. Należy pamiętać, że konieczne jest upewnienie się, że program PLC osi rozszerzonej może przesłać dane sprzężenia zwrotnego momentu obrotowego z silnika napędowego osi rozszerzonej po przejściu przez reduktor z powrotem do kontrolera robota, a okres próbkowania powinien wynosić 1 ms, jeśli to możliwe, i nie może przekraczać 4 ms. W przeciwnym razie funkcja wykrywania kolizji nie będzie działać.
 
 .. image:: base/080.png
    :width: 4in
    :align: center
 
-.. centered:: 图表 6.10‑3 UDP通讯配置页面
+.. centered:: Wykres 6.10‑3 Strona konfiguracji komunikacji UDP
 
-**Step4**：进行UDP扩展轴参数设置。UDP扩展轴参数设置页面见图2-4所示，轴类型选择为“直线导轨”，轴方向为“正”，其余参数需按实际情况进行配置。其中，导程和编码器分辨率是固定不变的，受导轨影响；运行速度和加速度的上限受电机性能影响，本功能测试所用上限即图2-4中所示，用户进行不同上限的配置时请联系专业人员。
+**Krok 4**: Ustaw parametry osi rozszerzonej UDP. Strona ustawiania parametrów osi rozszerzonej UDP pokazana jest na rysunku 2-4. Wybierz typ osi jako "Prostoliniowa szyna przesuwna", kierunek osi jako "Dodatni", a pozostałe parametry należy skonfigurować zgodnie z rzeczywistą sytuacją. Skok i rozdzielczość enkodera są stałe i zależą od szyny. Górne granice prędkości roboczej i przyspieszenia zależą od wydajności silnika. Górne granice użyte w teście tej funkcji są pokazane na rysunku 2-4. W przypadku konfiguracji różnych górnych granic należy skonsultować się z personelem technicznym.
 
 .. image:: base/081.png
    :width: 4in
    :align: center
 
-.. centered:: 图表 6.10‑4 UDP扩展轴参数设置
+.. centered:: Wykres 6.10‑4 Ustawianie parametrów osi rozszerzonej UDP
 
-**Step5**：使能直线齿条导轨，并移动导轨至起点。通过图2-4中“去除使能”按钮或图2-5中的“伺服使能”按钮使能直线齿条导轨。若导轨上滑块远离起点，则可通过“反向转动”或“正向转动”将滑块移动至起点（需要注意的是，运行速度需要远离15%）。当移动到起点后，然后点击“零点设置”并以“当前位置回零”方式进行回零。
+**Krok 5**: Załącz prostą szynę zębatą i przesuń szynę do punktu początkowego. Załącz szynę zębatą za pomocą przycisku "Usuń załączenie" na rysunku 2-4 lub przycisku "Załącz serwo" na rysunku 2-5. Jeśli suwak na szynie znajduje się daleko od punktu początkowego, możesz przesunąć suwak do punktu początkowego za pomocą "Obrót w kierunku przeciwnym" lub "Obrót w kierunku zgodnym" (należy pamiętać, że prędkość robocza musi być znacznie niższa niż 15%). Po przesunięciu do punktu początkowego kliknij "Ustaw punkt zerowy" i wykonaj powrót do zera w trybie "Powrót do zera z bieżącej pozycji".
 
 .. image:: base/082.png
    :width: 4in
    :align: center
 
-.. centered:: 图表 6.10‑4 使能直线齿条导轨并移动
+.. centered:: Wykres 6.10‑4 Załączanie prostej szyny zębatej i przemieszczanie
  
-启用直线齿条导轨碰撞检测功能
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Włączanie funkcji wykrywania kolizji dla prostej szyny zębatej
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-**Step1**：确保导轨及机器人安装方式均为正装。在开启直线齿条导轨碰撞检测功能前，需要检查安装方式是否为正装。具体地，先确保导轨和机器人安装方式为正装，然后，依次点击“初始设置”→“基础”→“安装”，进入自由安装页面，若“基座旋转”和“基座倾斜”均为0则软件设置为正装，否则须将其改为0，若不为0界面将提示错误，具体见图2-6所示。
+**Krok 1**: Upewnij się, że zarówno szyna, jak i robot są zainstalowane w sposób normalny. Przed włączeniem funkcji wykrywania kolizji dla prostej szyny zębatej należy sprawdzić, czy sposób instalacji jest normalny. W szczególności najpierw upewnij się, że sposób instalacji szyny i robota jest normalny, następnie kolejno kliknij "Ustawienia początkowe" → "Podstawowe" → "Instalacja", aby przejść do strony instalacji swobodnej. Jeśli "Obrót podstawy" i "Nachylenie podstawy" wynoszą 0, oprogramowanie jest ustawione na instalację normalną. W przeciwnym razie należy je zmienić na 0. Jeśli nie są równe 0, interfejs wyświetli błąd, jak pokazano na rysunku 2-6.
 
 .. image:: base/083.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 6.10‑6 若安装方式非正装，将提示错误
+.. centered:: Wykres 6.10‑6 Jeśli sposób instalacji nie jest normalny, wyświetlony zostanie błąd
 
-**Step2**：启用直线齿条导轨碰撞检测功能并设置参数。依次点击“初始设置”→“基础”→“关节”→“碰撞等级”，进入碰撞等级设置页面。点击“直线齿条导轨碰撞检测”功能滑块后，设置齿轮半径及滑块质量，其中齿轮半径可由导程和减速比计算得到，滑块质量不包括机器人及其携带的末端负载。导轨等级共11个选项，其中Level1最易触发碰撞，Level10则最难。控制器刚上电，未执行适配程序前，碰撞等级先设置为“关闭”。
+**Krok 2**: Włącz funkcję wykrywania kolizji dla prostej szyny zębatej i ustaw parametry. Kolejno kliknij "Ustawienia początkowe" → "Podstawowe" → "Stawy" → "Poziom kolizji", aby przejść do strony ustawiania poziomu kolizji. Po kliknięciu suwaka funkcji "Wykrywanie kolizji dla prostej szyny zębatej" ustaw promień koła zębatego i masę suwaka. Promień koła zębatego można obliczyć na podstawie skoku i przełożenia przekładni. Masa suwaka nie obejmuje robota i zamontowanego na końcówce obciążenia. Poziom szyny ma 11 opcji, z których Level1 najłatwiej wyzwala kolizję, a Level10 najtrudniej. Bezpośrednio po włączeniu zasilania kontrolera, przed wykonaniem programu adaptacyjnego, ustaw poziom kolizji na "Wyłączony".
 
 .. image:: base/084.png
    :width: 4in
    :align: center
 
-.. centered:: 图表 6.10‑7 直线齿条导轨碰撞检测功能
+.. centered:: Wykres 6.10‑7 Funkcja wykrywania kolizji dla prostej szyny zębatej
 
-**Step3**：执行“Rail_Adaptation_Program.lua”程序，从而适配当前导轨。控制器重启后，均需执行“Rail_Adaptation_Program.lua”程序（目的是防止机器人类型等因素发生变更时影响导轨动态特性）。在执行程序前，需确保导轨碰撞等级为“关闭”，自动模式下，以界面速度100%运行lua程序，待程序执行一个循环后适配完成，可停止运行。
+**Krok 3**: Wykonaj program "Rail_Adaptation_Program.lua", aby dostosować bieżącą szynę. Po każdym ponownym uruchomieniu kontrolera należy wykonać program "Rail_Adaptation_Program.lua" (w celu zapobieżenia wpływowi zmian, takich jak typ robota, na charakterystykę dynamiczną szyny). Przed wykonaniem programu upewnij się, że poziom kolizji szyny jest ustawiony na "Wyłączony". W trybie automatycznym, przy prędkości interfejsu 100%, uruchom program lua. Po wykonaniu przez program jednego cyklu adaptacja jest zakończona i można zatrzymać działanie.
 
 .. image:: base/085.png
    :width: 5in
    :align: center
 
-.. centered:: 图表 6.10‑8 执行“Rail_Adaptation_Program.lua”程序，从而适配当前导轨
+.. centered:: Wykres 6.10‑8 Wykonanie programu "Rail_Adaptation_Program.lua" w celu dostosowania bieżącej szyny
 
-**Step4**：合理设置导轨碰撞等级并执行任务。用户可根据电机驱动器性能及任务运行速度合理设置导轨碰撞等级。若导轨与机器人为异步运行，当碰撞机器人或导轨时可触发“8轴碰撞故障，可复位”，此时，导轨停止运行，具体见图2-9所示。若导轨与机器人为同步运行时，碰撞机器人可触发报警，并使得导轨停止运行，机器人则按设置碰撞策略进行反应。
+**Krok 4**: Ustaw odpowiedni poziom kolizji szyny i wykonaj zadanie. Użytkownik może ustawić odpowiedni poziom kolizji szyny w zależności od wydajności sterownika silnika i prędkości roboczej zadania. Jeśli szyna i robot działają asynchronicznie, kolizja z robotem lub szyną może wyzwolić "Błąd kolizji osi 8, możliwy do zresetowania". W takim przypadku szyna zatrzymuje się, jak pokazano szczegółowo na rysunku 2-9. Jeśli szyna i robot działają synchronicznie, kolizja z robotem może wyzwolić alarm i spowodować zatrzymanie szyny, a robot zareaguje zgodnie z ustawioną strategią kolizji.
 
 .. image:: base/086.png
    :width: 4in
    :align: center
 
-.. centered:: 图表 6.10‑9 导轨触发碰撞故障
+.. centered:: Wykres 6.10‑9 Szyna wyzwala błąd kolizji
 
-力传感器带载校零及开放姿态顺应的导纳参数
-------------------------------------------------------------------------------------------
+Zerowanie z obciążeniem czujnika siły i parametry admitancji dla otwartej zgodności orientacji
+-------------------------------------------------------------------------------------------------
 
-概述
+Omówienie
 ~~~~~~~~~~~~~~~~
 
-力传感器带载校零功能是用于实现机器人带着快换头，在不拆除快换头情况，更换负载时可快速清除传感器的零漂数据：开放姿态顺应时的导纳参数，用于客户根据恒力控制中实际力矩的大小进行姿态的调节。
+Funkcja zerowania z obciążeniem czujnika siły służy do szybkiego usunięcia danych dryftu zera czujnika podczas wymiany obciążenia, gdy robot przenosi szybkozmienną głowicę, bez konieczności demontażu szybkozmiennej głowicy. Parametry admitancji dla otwartej zgodności orientacji są udostępniane klientowi w celu regulacji orientacji w oparciu o rzeczywistą wielkość momentu w sterowaniu stałą siłą.
 
-力传感器带载校零
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Zerowanie z obciążeniem czujnika siły
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-**Step1**：安装并激活力传感器。在“初始设置”->“外设”->“力传感器”的菜单栏下，点击“已适配设备”进入配置界面。力传感器配置完成后，选择配置完成的力传感器编号，点击“复位”按钮，页面弹出命令发送成功后，再点击“激活”按钮，可查看力传感器信息表中的激活状态，来判断是否激活成功；此外，力传感器会有初始值，用户根据使用需求选择“零点矫正”和“去除零点”，如图所示。力传感器零点矫正需要确保力传感器水平竖直向下，且传感器下未配置负载。
+**Krok 1**: Zainstaluj i aktywuj czujnik siły. W menu "Ustawienia początkowe" -> "Urządzenia peryferyjne" -> "Czujnik siły" kliknij "Zainstalowane urządzenia", aby przejść do interfejsu konfiguracji. Po zakończeniu konfiguracji czujnika siły wybierz numer skonfigurowanego czujnika siły, kliknij przycisk "Resetuj". Po wyświetleniu na stronie komunikatu o pomyślnym wysłaniu polecenia kliknij przycisk "Aktywuj", aby sprawdzić stan aktywacji w tabeli informacji o czujniku siły, co pozwoli określić, czy aktywacja się powiodła. Ponadto czujnik siły będzie miał wartość początkową. Użytkownik może wybrać "Korekta punktu zerowego" i "Usuń punkt zerowy" w zależności od potrzeb użytkowania, jak pokazano na rysunku. Korekta punktu zerowego czujnika siły wymaga upewnienia się, że czujnik siły jest skierowany pionowo w dół i że pod czujnikiem nie ma zamontowanego obciążenia.
 
 .. image:: base/087.png
    :width: 4in
    :align: center
 
-.. centered:: 图表 6.11‑1 力传感器配置信息
+.. centered:: Wykres 6.11‑1 Informacje o konfiguracji czujnika siły
 
-**Step2**：力传感器负载辨识。在“初始设置”->“基础”->“负载”菜单栏下，点击“自动辨识”，进入力/扭矩传感器负载界面。进行传感器自动校零，记录初始位置后，切换机器人为自动模式，点击“自动校零”，如图2-2所示。
+**Krok 2**: Identyfikacja obciążenia czujnika siły. W menu "Ustawienia początkowe" -> "Podstawowe" -> "Obciążenie" kliknij "Automatyczna identyfikacja", aby przejść do interfejsu obciążenia czujnika siły/momentu obrotowego. Wykonaj automatyczne zerowanie czujnika. Po zapisaniu pozycji początkowej przełącz robota w tryb automatyczny i kliknij "Automatyczne zerowanie", jak pokazano na rysunku 2-2.
 
 .. image:: base/088.png
    :width: 4in
    :align: center
 
-.. centered:: 图表 6.11‑2 力传感器负载辨识
+.. centered:: Wykres 6.11‑2 Identyfikacja obciążenia czujnika siły
 
-**Step3**：若力传感器末端实际负载拆换，在负载配置模块输入负载重量及质心坐标，点击“应用”更新负载配置并完成力传感器带载校零。
+**Krok 3**: Jeśli rzeczywiste obciążenie końcówki czujnika siły zostanie wymienione, w module konfiguracji obciążenia wprowadź masę obciążenia i współrzędne środka ciężkości, kliknij "Zastosuj", aby zaktualizować konfigurację obciążenia i zakończyć zerowanie z obciążeniem czujnika siły.
 
-开放姿态顺应的导纳参数
+Parametry admitancji dla otwartej zgodności orientacji
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-**Step1**：点击“初始设置”->“基础”-> “工具坐标”，进入工具坐标系设置界面，选择“坐标系名称”并设置末端工具对应的坐标系参数，如图3-1所示。
+**Krok 1**: Kliknij "Ustawienia początkowe" -> "Podstawowe" -> "Współrzędne narzędzia", aby przejść do interfejsu ustawiania układu współrzędnych narzędzia. Wybierz "Nazwa układu współrzędnych" i ustaw parametry układu współrzędnych odpowiadające narzędziu końcowemu, jak pokazano na rysunku 3-1.
 
 .. image:: base/089.png
    :width: 4in
    :align: center
 
-.. centered:: 图表 6.11‑3 工具坐标系设置
+.. centered:: Wykres 6.11‑3 Ustawianie układu współrzędnych narzędzia
 
-**Step2**：点击“示教程序”->“程序编程”，编写恒力控制lua脚本，选择“力控集”->“Control”，添加力控运动指令，姿态顺应设置“开启”，设置惯性系数及阻尼系数，最大调整角度设置为姿态顺应角度的阈值，如图3-2所示。
+**Krok 2**: Kliknij "Program nauczania" -> "Programowanie", napisz skrypt lua do sterowania stałą siłą, wybierz "Zestaw sterowania siłą" -> "Control", dodaj instrukcję ruchu ze sterowaniem siłą, ustaw "Zgodność orientacji" na "Włączony", ustaw współczynnik bezwładności i współczynnik tłumienia, ustaw maksymalny kąt regulacji jako próg kąta zgodności orientacji, jak pokazano na rysunku 3-2.
 
 .. image:: base/090.png
    :width: 4in
    :align: center
 
-.. centered:: 图表 6.11‑4 开放姿态顺应的导纳参数
+.. centered:: Wykres 6.11‑4 Parametry admitancji dla otwartej zgodności orientacji
 
-**Step3**：web界面点击“FT”，设置力传感器参考坐标系，选择参考坐标系为“自定义坐标系”并设置对应的坐标系参数为“0”，如图3-3所示。
+**Krok 3**: W interfejsie sieciowym kliknij "FT", ustaw odniesienie układu współrzędnych czujnika siły, wybierz odniesienie jako "Niestandardowy układ współrzędnych" i ustaw odpowiadające mu parametry układu współrzędnych na "0", jak pokazano na rysunku 3-3.
 
 .. image:: base/091.png
    :width: 4in
    :align: center
 
-.. centered:: 图表 6.11‑4 设置力传感器的参考坐标系
+.. centered:: Wykres 6.11‑4 Ustawianie odniesienia układu współrzędnych czujnika siły
 
-**Step4**：运行脚本，查看姿态顺应效果，惯性参数调节加速度响应和抗扰能力，惯性越大，机器人迟滞越明显；阻尼系数影响姿态顺应时的平滑度，阻尼越大，姿态顺应越困难。
+**Krok 4**: Uruchom skrypt, sprawdź efekt zgodności orientacji. Regulacja parametru bezwładności wpływa na reakcję przyspieszenia i zdolność odporności na zakłócenia. Im większa bezwładność, tym bardziej wyraźne opóźnienie robota. Współczynnik tłumienia wpływa na gładkość podczas zgodności orientacji. Im większe tłumienie, tym trudniejsza jest zgodność orientacji.

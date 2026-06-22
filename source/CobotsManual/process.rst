@@ -1,406 +1,406 @@
-工艺包
-=============
+Pakiety procesowe
+=================
 
 .. toctree:: 
   :maxdepth: 5
 
-焊接专家库
-----------------
+Baza wiedzy spawalniczej
+-------------------------
 
-点击“辅助应用”->“工艺包”中的“焊接专家库”的菜单栏，进入焊接专家库功能界面，包含直焊、圆弧焊、多层多道焊和姿态调整。
+Kliknij "Aplikacje pomocnicze" -> "Pakiety procesowe" w menu "Baza wiedzy spawalniczej", aby przejść do interfejsu funkcji bazy wiedzy spawalniczej, który obejmuje spawanie proste, spawanie łukowe, spawanie wielowarstwowe i wielościeżkowe oraz regulację orientacji.
 
 .. image:: process/001.png
    :width: 4in
    :align: center
 
-.. centered:: 图表 15.1‑1 扩展轴配置
+.. centered:: Wykres 15.1‑1 Konfiguracja osi rozszerzonej
 
-直焊
-~~~~~~~~~~~~
+Spawanie proste
+~~~~~~~~~~~~~~~
 
-点击“直焊”，进入直焊指导界面。在各项机器人基础设置配置完成的基础上，我们可以通过几个简单的步骤快速生成焊接示教程序。主要包含以下五个步骤，由于功能间存在互斥，所以实际生成一个焊接示教程序的步骤少于五步。
+Kliknij "Spawanie proste", aby przejść do interfejsu prowadzenia spawania prostego. Po zakończeniu konfiguracji podstawowych ustawień robota, możemy szybko wygenerować program nauczania spawania za pomocą kilku prostych kroków. Obejmuje to głównie następujących pięć kroków. Ponieważ funkcje wzajemnie się wykluczają, rzeczywista liczba kroków do wygenerowania programu nauczania spawania jest mniejsza niż pięć.
 
-步骤一，是否使用扩展轴，如果使用扩展轴需要配置好扩展轴相关坐标系以及使能扩展轴。使用扩展轴时，无法使用摆焊功能。
+Krok pierwszy, czy używać osi rozszerzonej. Jeśli tak, należy skonfigurować odpowiednie układy współrzędnych osi rozszerzonej i włączyć oś rozszerzoną. Podczas używania osi rozszerzonej nie można używać funkcji spawania z oscylacją.
 
 .. image:: process/002.png
    :width: 4in
    :align: center
 
-.. centered:: 图表 15.1‑2 扩展轴配置
+.. centered:: Wykres 15.1‑2 Konfiguracja osi rozszerzonej
 
-步骤二，选择是否需要传感器跟踪，如果是的话，需要编辑激光寻位指令的参数。使用传感器跟踪时，无法使用摆焊功能。
+Krok drugi, wybór, czy potrzebne jest śledzenie czujnikiem. Jeśli tak, należy edytować parametry instrukcji pozycjonowania laserowego. Podczas używania śledzenia czujnikiem nie można używać funkcji spawania z oscylacją.
 
 .. image:: process/003.png
    :width: 4in
    :align: center
 
-.. centered:: 图表 15.1‑3 激光寻位配置
+.. centered:: Wykres 15.1‑3 Konfiguracja pozycjonowania laserowego
 
-步骤三，选择是否需要摆焊，如果需要摆焊，需要编辑摆焊相关参数。
+Krok trzeci, wybór, czy potrzebne jest spawanie z oscylacją. Jeśli tak, należy edytować odpowiednie parametry spawania z oscylacją.
 
 .. image:: process/004.png
    :width: 4in
    :align: center
 
-.. centered:: 图表 15.1‑4 摆焊配置
+.. centered:: Wykres 15.1‑4 Konfiguracja spawania z oscylacją
 
-步骤四，标定起点，起点安全点，终点，终点安全点。若第一步选择了扩展轴，会加载扩展轴移动功能，配合相关点的标定。
+Krok czwarty, kalibracja punktu początkowego, bezpiecznego punktu początkowego, punktu końcowego i bezpiecznego punktu końcowego. Jeśli w pierwszym kroku wybrano oś rozszerzoną, zostanie załadowana funkcja ruchu osi rozszerzonej w celu kalibracji odpowiednich punktów.
 
 .. image:: process/005.png
    :width: 4in
    :align: center
 
-.. centered:: 图表 15.1‑5 标定相关点
+.. centered:: Wykres 15.1‑5 Kalibracja odpowiednich punktów
 
-步骤五，给程序命名，并在程序示教界面中自动打开该程序。
+Krok piąty, nadanie nazwy programowi i automatyczne otwarcie go w interfejsie nauczania programowania.
 
 .. image:: process/006.png
    :width: 4in
    :align: center
 
-.. centered:: 图表 15.1‑6 保存程序
+.. centered:: Wykres 15.1‑6 Zapisywanie programu
 
-程序保存成功后，可以在工艺参数中修改焊接速度。
+Po pomyślnym zapisaniu programu można zmodyfikować prędkość spawania w parametrach procesu.
 
 .. image:: process/007.png
    :width: 4in
    :align: center
 
-.. centered:: 图表 15.1‑7 工艺参数
+.. centered:: Wykres 15.1‑7 Parametry procesu
 
-圆弧焊
-~~~~~~~~~~~~
+Spawanie łukowe
+~~~~~~~~~~~~~~~
 
-点击“焊件形状”下的“圆弧焊”，进入圆弧焊指导界面。在各项机器人基础设置配置完成的基础上，我们可以通过两个简单的步骤快速生成焊接示教程序。主要包含以下两个步骤。
+Kliknij "Spawanie łukowe" w sekcji "Kształt spawanego elementu", aby przejść do interfejsu prowadzenia spawania łukowego. Po zakończeniu konfiguracji podstawowych ustawień robota możemy szybko wygenerować program nauczania spawania za pomocą dwóch prostych kroków. Obejmuje to głównie następujące dwa kroki.
 
-步骤一，标定起点，起点安全点，圆弧过渡点，终点和终点安全点。
+Krok pierwszy, kalibracja punktu początkowego, bezpiecznego punktu początkowego, punktu przejściowego łuku, punktu końcowego i bezpiecznego punktu końcowego.
 
 .. image:: process/008.png
    :width: 4in
    :align: center
 
-.. centered:: 图表 15.1‑8 标定点
+.. centered:: Wykres 15.1‑8 Punkty kalibracji
 
-步骤二，给程序命名，并在程序示教界面中自动打开该程序。
+Krok drugi, nadanie nazwy programowi i automatyczne otwarcie go w interfejsie nauczania programowania.
 
 .. image:: process/009.png
    :width: 4in
    :align: center
 
-.. centered:: 图表 15.1‑9 保存程序
+.. centered:: Wykres 15.1‑9 Zapisywanie programu
 
-程序保存成功后，可以在工艺参数中修改焊接速度。
+Po pomyślnym zapisaniu programu można zmodyfikować prędkość spawania w parametrach procesu.
 
 .. image:: process/010.png
    :width: 4in
    :align: center
 
-.. centered:: 图表 15.1‑10 工艺参数
+.. centered:: Wykres 15.1‑10 Parametry procesu
 
-多层多道焊
-~~~~~~~~~~~~
+Spawanie wielowarstwowe i wielościeżkowe
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-当焊脚尺寸大于10mm的焊缝时，通常会采用多层多道焊接功能。本功能能够模板化配置焊接程序，在多层多道焊接的第一道焊接过程种加入电弧跟踪功能，并在后续的多道直线焊接过程中修正焊缝偏差，从而提高焊缝质量。
+Gdy rozmiar spoiny pachwinowej jest większy niż 10 mm, zwykle stosuje się funkcję spawania wielowarstwowego i wielościeżkowego. Funkcja ta umożliwia szablonową konfigurację programów spawania, dodanie funkcji śledzenia łuku w pierwszym przejściu spawania wielowarstwowego i wielościeżkowego oraz korektę odchylenia spoiny w kolejnych prostych przejściach spawania, poprawiając w ten sposób jakość spoiny.
 
-电弧跟踪多层多道焊接功能操作流程如下：
+Procedura operacyjna funkcji spawania wielowarstwowego i wielościeżkowego ze śledzeniem łuku jest następująca:
 
-1) 设置工具坐标系，填入焊枪的工具尺寸与姿态。
+1) Ustaw układ współrzędnych narzędzia, wprowadź wymiary i orientację palnika spawalniczego.
 
 .. note::
-   界面数值仅为示例，以实际工具状态为准。
+   Wartości na interfejsie są tylko przykładowe. Należy je dostosować do rzeczywistego stanu narzędzia.
 
 .. image:: process/011.png
    :width: 4in
    :align: center
 
-.. centered:: 图表 15.1-11 设置工具坐标系
+.. centered:: Wykres 15.1-11 Ustawianie układu współrzędnych narzędzia
 
-2) 点击“多层多道焊”进入界面。
+2) Kliknij "Spawanie wielowarstwowe i wielościeżkowe", aby przejść do interfejsu.
 
 .. image:: process/012.png
    :width: 4in
    :align: center
 
-.. centered:: 图表 15.1-12 打开多层多道焊接界面
+.. centered:: Wykres 15.1-12 Otwieranie interfejsu spawania wielowarstwowego i wielościeżkowego
 
-3) 若要使用电弧跟踪功能，务必打开“首层焊接摆动功能”开关，并配置对应的摆动参数。
+3) Aby użyć funkcji śledzenia łuku, należy włączyć przełącznik "Funkcja oscylacji w pierwszej warstwie" i skonfigurować odpowiednie parametry oscylacji.
 
 .. image:: process/013.png
    :width: 4in
    :align: center
 
-.. centered:: 图表 15.1-13 打开首层焊接摆动功能
+.. centered:: Wykres 15.1-13 Włączanie funkcji oscylacji w pierwszej warstwie
 
-4) 点击“配置”按钮， 编辑摆动参数，之后点击“配置”。
+4) Kliknij przycisk "Konfiguruj", edytuj parametry oscylacji, a następnie kliknij "Konfiguruj".
 
 .. note::
-   若需要电弧跟踪进行左右补偿的情况，仅可选择“三角波摆动”和“正弦波摆动”类型，摆动频率不得低于0.5Hz，摆动幅度不得小于3mm，摆动左右等待时间需一致，摆动方位角需为0。
+   Jeśli wymagana jest kompensacja lewo-prawo podczas śledzenia łuku, można wybrać tylko typy "Oscylacja trójkątna" i "Oscylacja sinusoidalna". Częstotliwość oscylacji nie może być niższa niż 0,5 Hz, amplituda oscylacji nie może być mniejsza niż 3 mm, czasy oczekiwania w lewo i prawo muszą być takie same, a azymut oscylacji musi wynosić 0.
 
 .. image:: process/014.png
    :width: 4in
    :align: center
 
-.. centered:: 图表 15.1-14 配置摆动参数
+.. centered:: Wykres 15.1-14 Konfiguracja parametrów oscylacji
 
-5) 打开“电弧跟踪功能”开关，编辑对应的上下与左右补偿参数。
+5) Włącz przełącznik "Funkcja śledzenia łuku" i edytuj odpowiednie parametry kompensacji góra-dół i lewo-prawo.
 
 .. note::
-   电弧跟踪参数根据实际焊接情况参考《电弧跟踪功能操作手册》或联系相关技术人员进行配置。
+   Parametry śledzenia łuku należy konfigurować zgodnie z rzeczywistymi warunkami spawania, odnosząc się do "Instrukcji obsługi funkcji śledzenia łuku" lub kontaktując się z odpowiednim personelem technicznym.
 
 .. image:: process/015.png
    :width: 4in
    :align: center
 
-.. centered:: 图表 15.1-15 配置电弧跟踪参数
+.. centered:: Wykres 15.1-15 Konfiguracja parametrów śledzenia łuku
 
-6) 根据控制类型点击对应类型进入界面，首先在第一组点中设置“焊接点”为焊接开始位置；“X+点”为自定义偏置坐标系相对焊接点X+方向上的一点；“Z+点”为自定义偏置坐标系相对焊接点Z+方向上的一点；“安全点”为上一次焊接完成到下一次焊接开始的过渡位置。示教并设置完成后自动进入第二组点设置。
+6) W zależności od typu sterowania kliknij odpowiedni typ, aby przejść do interfejsu. Najpierw w pierwszej grupie punktów ustaw "Punkt spawania" jako pozycję początkową spawania; "Punkt X+" jako punkt w kierunku X+ względem punktu spawania w niestandardowym układzie współrzędnych przesunięcia; "Punkt Z+" jako punkt w kierunku Z+ względem punktu spawania w niestandardowym układzie współrzędnych przesunięcia; "Punkt bezpieczny" jako pozycję przejściową od poprzedniego zakończenia spawania do następnego rozpoczęcia spawania. Po wyuczeniu i ustawieniu, automatycznie przejdź do ustawiania drugiej grupy punktów.
 
 .. image:: process/016.png
    :width: 4in
    :align: center
 
-.. centered:: 图表 15.1-16 多层多道焊接直线开始点位置设置
+.. centered:: Wykres 15.1-16 Ustawianie pozycji punktu początkowego linii prostej dla spawania wielowarstwowego i wielościeżkowego
 
-7) 选择“直线点”，此处“焊接点”为焊接结束位置；“X+点”为自定义偏置坐标系相对“焊接点”X+方向上的一点；“Z+点”为自定义偏置坐标系相对“焊接点”Z+方向上的一点。示教并设置完成后点击“完成”按钮设置多层多道焊接参数。
+7) Wybierz "Punkt linii prostej". Tutaj "Punkt spawania" jest pozycją końcową spawania; "Punkt X+" jest punktem w kierunku X+ względem "punktu spawania" w niestandardowym układzie współrzędnych przesunięcia; "Punkt Z+" jest punktem w kierunku Z+ względem "punktu spawania" w niestandardowym układzie współrzędnych przesunięcia. Po wyuczeniu i ustawieniu kliknij przycisk "Zakończ", aby ustawić parametry spawania wielowarstwowego i wielościeżkowego.
 
 .. image:: process/017.png
    :width: 4in
    :align: center
 
-.. centered:: 图表 15.1-17 多层多道焊接直线结束点位置设置
+.. centered:: Wykres 15.1-17 Ustawianie pozycji punktu końcowego linii prostej dla spawania wielowarstwowego i wielościeżkowego
 
-8) 在此页面能够设置多层多道焊接的数量，以及分布位置。点击参数表“On/Off”框选择激活的多层多道焊接位置对应值，在“X”“Z”“B”列填入期望的在自定义坐标系中的对应偏移位置与角度。
+8) Na tej stronie można ustawić liczbę warstw i ścieżek spawania wielowarstwowego i wielościeżkowego oraz ich rozmieszczenie. Kliknij pole "On/Off" w tabeli parametrów, aby wybrać odpowiednią wartość dla aktywowanej pozycji spawania wielowarstwowego i wielościeżkowego. W kolumnach "X", "Z", "B" wprowadź oczekiwane odpowiednie wartości przesunięcia i kąta w niestandardowym układzie współrzędnych.
 
 .. image:: process/018.png
    :width: 4in
    :align: center
 
-.. centered:: 图表 15.1-18 多层多道焊接参数设置
+.. centered:: Wykres 15.1-18 Ustawianie parametrów spawania wielowarstwowego i wielościeżkowego
 
-9) 至此已完成全部参数配置，输入希望保存的程序名，点击“保存”按钮可自动生产对应的多层多道焊接程序。
+9) W tym momencie wszystkie parametry zostały skonfigurowane. Wprowadź żądaną nazwę programu do zapisania i kliknij przycisk "Zapisz", aby automatycznie wygenerować odpowiedni program spawania wielowarstwowego i wielościeżkowego.
 
 .. image:: process/019.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 15.1-19 多层多道焊接程序生成
+.. centered:: Wykres 15.1-19 Generowanie programu spawania wielowarstwowego i wielościeżkowego
 
-10) 点击“打开程序”按钮，读取上一步骤保存的lua程序，程序内容如下图所示。
+10) Kliknij przycisk "Otwórz program", aby odczytać program lua zapisany w poprzednim kroku. Zawartość programu jest pokazana na poniższym rysunku.
 
 .. image:: process/020.png
    :width: 4in
    :align: center
 
-.. centered:: 图表 15.1-20 电弧跟踪多层多道焊接程序示例
+.. centered:: Wykres 15.1-20 Przykład programu spawania wielowarstwowego i wielościeżkowego ze śledzeniem łuku
 
-姿态调整
-~~~~~~~~~~~~~~~~~~
+Regulacja orientacji
+~~~~~~~~~~~~~~~~~~~~
 
-姿态自适应配置步骤
-+++++++++++++++++++++++++++++++++++
+Kroki konfiguracji adaptacji orientacji
+++++++++++++++++++++++++++++++++++++++++
 
-**Step1**：进入姿态调整配置界面，选择板材类型和机器人实际工作运动方向，调整机器人姿态，分别设置姿态点A，姿态点B和姿态点C，通常A为平面姿态点，B为上升沿姿态点，C为下降沿姿态点。
+**Krok 1**: Przejdź do interfejsu konfiguracji regulacji orientacji, wybierz typ materiału i rzeczywisty kierunek ruchu robota, dostosuj orientację robota, ustaw odpowiednio punkt orientacji A, punkt orientacji B i punkt orientacji C. Zazwyczaj A jest punktem orientacji płaskiej, B jest punktem orientacji krawędzi narastającej, a C jest punktem orientacji krawędzi opadającej.
 
 .. figure:: process/021.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 15.1‑21 姿态调整配置
+.. centered:: Wykres 15.1‑21 Konfiguracja regulacji orientacji
 
 .. important:: 
-	A姿态和B姿态，A姿态和C姿态之间的姿态变化在满足应用需求下姿态变化越小越好。姿态自适应功能为辅助应用功能，通常配合焊缝跟踪使用。
+	Zmiana orientacji między orientacją A i B oraz między orientacją A i C powinna być jak najmniejsza, pod warunkiem spełnienia wymagań aplikacji. Funkcja adaptacji orientacji jest funkcją pomocniczą i jest zwykle używana w połączeniu ze śledzeniem spoiny.
 
-**Step2**：在程序示教命令界面选择“Adjust”命令。根据具体的程序示教需求，在相应的地方添加指令。
+**Krok 2**: Wybierz polecenie "Adjust" w interfejsie poleceń programowania nauczania. Dodaj instrukcje w odpowiednich miejscach zgodnie z konkretnymi wymaganiami programowania nauczania.
 
 .. figure:: process/022.png
    :align: center
    :width: 6in
 
-.. centered:: 图表 15.1‑22 姿态调整指令编辑
+.. centered:: Wykres 15.1‑22 Edycja instrukcji regulacji orientacji
 
-姿态自适应配合扩展轴和激光跟踪焊接示教程序
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Program nauczania spawania z adaptacją orientacji w połączeniu z osią rozszerzoną i śledzeniem laserowym
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. list-table::
    :widths: 50 80 80
    :header-rows: 0
    :align: center
 
-   * - **序号**
-     - **指令格式**
-     - **注释**
+   * - **Nr**
+     - **Format instrukcji**
+     - **Komentarz**
 
    * - 1
      - EXT_AXIS_PTP(1,1laserstart)
-     - #外部轴运动激光传感器起始点
+     - #Ruch osi rozszerzonej do punktu początkowego czujnika laserowego
 
    * - 2
      - PTP(laserstart,10,-1,0)
-     - #机器人运动激光传感器起始点
+     - #Ruch robota do punktu początkowego czujnika laserowego
 
    * - 3
      - LTSearchStart(3,20,10,10000)
-     - #开始寻位
+     - #Rozpoczęcie pozycjonowania
 
    * - 4
      - LTSearchStop()
-     - #停止寻位
+     - #Zatrzymanie pozycjonowania
 
    * - 5
      - EXT_AXIS_PTP(1,1,seamPos)
-     - #外部轴运动焊缝起点
+     - #Ruch osi rozszerzonej do punktu początkowego spoiny
 
    * - 6
      - Lin(seamPos,20,-1,00,0)
-     - #机器人运动焊缝起点
+     - #Ruch robota do punktu początkowego spoiny
 
    * - 7
      - LTTrackOn()
-     - #激光跟踪
+     - #Śledzenie laserowe
 
    * - 8
      - ARCStart(0,10000)
-     - #焊机起弧
+     - #Zajarzenie łuku spawarki
 
    * - 9
      - PostureAdjustOn(0,PosA,PosC,PosB,1000)
-     - #姿态自适应调整开启
+     - #Włączenie adaptacji orientacji
 
    * - 10
      - EXT_AXIS_PTP(1,1,laserend)
-     - #外部轴运动焊缝终点
+     - #Ruch osi rozszerzonej do punktu końcowego spoiny
 
    * - 11
      - Lin( laserend,10,-1,0,0)
-     - #机器人运动焊缝终点
+     - #Ruch robota do punktu końcowego spoiny
 
    * - 12
      - ARCEnd(0,10000)
-     - #焊机收弧
+     - #Wygaśnięcie łuku spawarki
 
    * - 13
      - PostureAdjustOff(0)
-     - #姿态自适应调整关闭
+     - #Wyłączenie adaptacji orientacji
 
    * - 14
      - LTTrackOff
-     - #激光跟踪关闭
+     - #Wyłączenie śledzenia laserowego
 
-码垛系统配置
----------------
+Konfiguracja systemu paletyzacji
+--------------------------------
 
-码垛系统配置步骤
-~~~~~~~~~~~~~~~~~~~~~~
+Kroki konfiguracji systemu paletyzacji
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-**Step1**：在“辅助应用”->“工艺包”中点击“码垛”菜单项，进入码垛系统配置界面。
+**Krok 1**: W "Aplikacje pomocnicze" -> "Pakiety procesowe" kliknij element menu "Paletyzacja", aby przejść do interfejsu konfiguracji systemu paletyzacji.
 
-第一次使用，需要首先进行配方创建，点击“配方创建”，输入配方名称，点击“创建”，创建成功后点击“开始配置”进入码垛配置页面。
+Przy pierwszym użyciu należy najpierw utworzyć recepturę. Kliknij "Utwórz recepturę", wprowadź nazwę receptury, kliknij "Utwórz". Po pomyślnym utworzeniu kliknij "Rozpocznij konfigurację", aby przejść do strony konfiguracji paletyzacji.
 
 .. figure:: process/023.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 15.2‑1 码垛配方配置
+.. centered:: Wykres 15.2‑1 Konfiguracja receptury paletyzacji
 
-**Step2**：在工件配置栏中点击“配置”进入工件配置弹窗，设置工件的“长度”，“宽度”，“高度”以及工件的抓取点，点击“确认配置”完成工件信息设置。
+**Krok 2**: W sekcji konfiguracji przedmiotu kliknij "Konfiguruj", aby otworzyć okno konfiguracji przedmiotu. Ustaw "Długość", "Szerokość", "Wysokość" przedmiotu oraz punkt chwytania przedmiotu. Kliknij "Potwierdź konfigurację", aby zakończyć ustawianie informacji o przedmiocie.
 
 .. figure:: process/024.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 15.2‑2 码垛工件配置
+.. centered:: Wykres 15.2‑2 Konfiguracja przedmiotu paletyzacji
 
-**Step3**：在托盘配置栏中点击“配置”进入托盘配置弹窗，设置托盘“前边”，“侧边”和“高度”，接着设置工位和工位过渡点，点击“确认配置”完成托盘信息设置。
+**Krok 3**: W sekcji konfiguracji palety kliknij "Konfiguruj", aby otworzyć okno konfiguracji palety. Ustaw "Przednią krawędź", "Boczną krawędź" i "Wysokość" palety. Następnie ustaw stanowisko i punkt przejściowy stanowiska. Kliknij "Potwierdź konfigurację", aby zakończyć ustawianie informacji o palecie.
 
 .. figure:: process/025.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 15.2‑3 码垛托盘配置
+.. centered:: Wykres 15.2‑3 Konfiguracja palety paletyzacji
 
-**Step4**：在码垛设备尺寸配置栏中点击“配置”进入码垛设备尺寸配置配置弹窗，设置设备“X”、“Y”、“Z”和“Angle”，点击“确认配置”完成码垛设备尺寸配置信息设置。
+**Krok 4**: W sekcji konfiguracji wymiarów urządzenia paletyzacyjnego kliknij "Konfiguruj", aby otworzyć okno konfiguracji wymiarów urządzenia paletyzacyjnego. Ustaw "X", "Y", "Z" i "Angle" urządzenia. Kliknij "Potwierdź konfigurację", aby zakończyć ustawianie informacji o konfiguracji wymiarów urządzenia paletyzacyjnego.
 
 .. important:: 
-   X、Y、Z为左托盘右上角或者右托盘左上角点相对于机器人基坐标系坐标值的绝对值，Angle为机器人安装时的旋转角度，推荐安装时为0。
+   X, Y, Z to wartości bezwzględne współrzędnych punktu w prawym górnym rogu lewej palety lub w lewym górnym rogu prawej palety względem podstawowego układu współrzędnych robota. Angle to kąt obrotu robota podczas instalacji. Zaleca się, aby wynosił 0.
 
 .. figure:: process/026.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 15.2‑4 码垛设备尺寸配置
+.. centered:: Wykres 15.2‑4 Konfiguracja wymiarów urządzenia paletyzacyjnego
 
-**Step5**：在模式配置栏中点击“配置”进入模式配置弹窗。
+**Krok 5**: W sekcji konfiguracji trybu kliknij "Konfiguruj", aby otworzyć okno konfiguracji trybu.
 
-   **模式B开启/关闭**：开启：可以切换模式A/B，配置码垛每层模式的B模式；关闭：不可切换模式B，不可配置码垛每层模式的B模式；
+   **Włącz/Wyłącz tryb B**: Włączony: umożliwia przełączanie między trybem A/B i konfigurację trybu B dla każdej warstwy paletyzacji. Wyłączony: uniemożliwia przełączanie na tryb B i konfigurację trybu B dla każdej warstwy paletyzacji.
 
-   **模式A/B切换**：选择模式A：添加工件为模式A，工件序号为A1，A2...，不可调整工件透明度；选择模式B：添加工件为模式B，工件序号为B1，B2...，此时可以开启/关闭“显示模式A配置”显示模式A工件；
+   **Przełączanie tryb A/B**: Wybór trybu A: dodaje przedmioty jako tryb A, numery przedmiotów to A1, A2... Nie można regulować przezroczystości przedmiotów. Wybór trybu B: dodaje przedmioty jako tryb B, numery przedmiotów to B1, B2... W tym trybie można włączyć/wyłączyć "Pokaż konfigurację trybu A", aby wyświetlić przedmioty trybu A.
 
-   **显示模式A开启/关闭**：开启：调整模式B工件透明度来查看A/B模式配置效果是否合理，此时只能对模式B工件进行选中、添加、批量添加、删除和删除全部的操作；关闭：无法设置模式B工件透明度；
-
-.. important:: 
-   配置工件时，工件之间有碰撞时工件背景颜色变红，此时以上操作无法进行。如需操作，请配置工件为无碰撞。
-
-配置工件时，先设置工件间隔，右侧框框为模拟工件在右托盘的放置方式，可以单个添加也可以批量添加。接着设置码垛层数和各层的模式，点击“确认配置”完成模式信息设置。
+   **Włącz/Wyłącz pokaż tryb A**: Włączony: reguluje przezroczystość przedmiotów w trybie B, aby sprawdzić, czy konfiguracja trybu A/B jest rozsądna. W tym trybie można tylko wybierać, dodawać, dodawać wsadowo, usuwać i usuwać wszystkie przedmioty w trybie B. Wyłączony: nie można ustawić przezroczystości przedmiotów w trybie B.
 
 .. important:: 
-   码垛方向：以右托盘为例，右下角为最远处，从右下角竖向或者横向摆放一排工件，再向上一排横向或竖向摆放工件，以此类推（Web页面已标注码垛方向，请注意查看）。
+   Podczas konfigurowania przedmiotów, jeśli między przedmiotami dojdzie do kolizji, kolor tła przedmiotu zmieni się na czerwony. W takim przypadku powyższe operacje nie są możliwe. Aby przeprowadzić operację, skonfiguruj przedmioty tak, aby nie kolidowały ze sobą.
+
+Podczas konfigurowania przedmiotów najpierw ustaw odstępy między przedmiotami. Pole po prawej stronie symuluje sposób umieszczania przedmiotów na prawej palecie. Można dodawać pojedynczo lub wsadowo. Następnie ustaw liczbę warstw paletyzacji i tryb dla każdej warstwy. Kliknij "Potwierdź konfigurację", aby zakończyć ustawianie informacji o trybie.
+
+.. important:: 
+   Kierunek paletyzacji: na przykładzie prawej palety, prawy dolny róg jest najdalszym punktem. Układa się jeden rząd przedmiotów pionowo lub poziomo od prawego dolnego rogu, następnie kolejny rząd poziomo lub pionowo powyżej, i tak dalej (kierunek paletyzacji jest oznaczony na stronie internetowej, należy go sprawdzić).
    
-   左托盘依据右托盘模式镜像放置工件。
+   Lewa paleta odzwierciedla umieszczanie przedmiotów zgodnie z trybem prawej palety.
 
 .. figure:: process/027.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 15.2‑5 码垛模式A配置
+.. centered:: Wykres 15.2‑5 Konfiguracja trybu A paletyzacji
 
 .. figure:: process/028.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 15.2‑6 码垛模式B配置
+.. centered:: Wykres 15.2‑6 Konfiguracja trybu B paletyzacji
 
-**Step6**：在示教程序生成栏点击“高级配置”进入高级配置弹窗，此时配置“取料抬升高度”、“第一次偏移距离”、“第二次偏移距离”和“吸料等待时间”。
+**Krok 6**: W sekcji generowania programu nauczania kliknij "Konfiguracja zaawansowana", aby otworzyć okno konfiguracji zaawansowanej. W tym miejscu skonfiguruj "Wysokość podnoszenia pobranego materiału", "Pierwszą odległość przesunięcia", "Drugą odległość przesunięcia" i "Czas oczekiwania na przyssanie".
 
-   **取料抬升高度**：用户自定义取料成功后，从抓取点取料成功后抬升的高度；
+   **Wysokość podnoszenia pobranego materiału**: Wysokość, na jaką robot podnosi się po pomyślnym pobraniu materiału z punktu chwytania, zdefiniowana przez użytkownika.
 
-   **第一/二次偏移距离**：用户自定义配置机器人倾斜堆放至目标点的偏移距离；
+   **Pierwsza/druga odległość przesunięcia**: Odległość przesunięcia zdefiniowana przez użytkownika dla pochylonego układania robota do punktu docelowego.
    
-   **吸料等待时间**：用户自定义配置吸料等待时间，监控吸料后负压到位信号，未到位时重复吸取动作；
+   **Czas oczekiwania na przyssanie**: Czas oczekiwania na przyssanie zdefiniowany przez użytkownika. Monitoruje sygnał obecności podciśnienia po przyssaniu. Jeśli sygnał nie zostanie odebrany, czynność przyssania jest powtarzana.
 
-   **平滑过渡**：开启平滑过渡按钮，可进行码垛/拆垛PTP平滑时间和LIN平滑半径相关参数配置。
+   **Płynne przejście**: Włączenie przycisku płynnego przejścia umożliwia konfigurację odpowiednich parametrów, takich jak czas wygładzania PTP i promień wygładzania LIN dla paletyzacji/rozpaletyzacji.
    
-   - PTP平滑时间：无平滑过渡时间/等级1(200ms)/等级2(400ms)/等级3(600ms)/等级4(800ms)/等级5(1000ms)
-   - LIN平滑半径：无平滑过渡半径/等级1(200mm)/等级2(400mm)/等级3(600mm)/等级4(800mm)/等级5(1000mm)
+   - Czas wygładzania PTP: Brak czasu wygładzania / poziom 1 (200 ms) / poziom 2 (400 ms) / poziom 3 (600 ms) / poziom 4 (800 ms) / poziom 5 (1000 ms)
+   - Promień wygładzania LIN: Brak promienia wygładzania / poziom 1 (200 mm) / poziom 2 (400 mm) / poziom 3 (600 mm) / poziom 4 (800 mm) / poziom 5 (1000 mm)
 
 .. figure:: process/029.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 15.2‑7 码垛高级配置
+.. centered:: Wykres 15.2‑7 Konfiguracja zaawansowana paletyzacji
 
-**Step7**：在示教程序生成栏选择“方式选择”，点击“生成程序”，打开“码垛监控页”，在此页面可以对“生成信息”，“报警信息”和“码垛程序”显示和查看。
+**Krok 7**: W sekcji generowania programu nauczania wybierz "Wybór metody", kliknij "Generuj program", otwórz "Stronę monitorowania paletyzacji". Na tej stronie można wyświetlać i przeglądać "Informacje o generowaniu", "Informacje o alarmach" i "Program paletyzacji".
 
 .. figure:: process/030.png
    :align: center
    :width: 6in
 
-.. centered:: 图表 15.2‑8 码垛系统监控
+.. centered:: Wykres 15.2‑8 Monitoring systemu paletyzacji
 
-**Step8**：码垛运行程序中途报错后，程序停止，用户首先清除报错后，再次选择码垛程序运行，此时会弹出“上次程序中断”弹出框，点击“接续”按钮接续运行，点击“重新开始”按钮重新开始运行程序。
+**Krok 8**: Jeśli program paletyzacji zgłosi błąd w trakcie działania, program zostanie zatrzymany. Użytkownik najpierw czyści błąd, a następnie ponownie wybiera program paletyzacji do uruchomienia. W tym momencie pojawi się okno dialogowe "Poprzedni program przerwany". Kliknij przycisk "Kontynuuj", aby kontynuować działanie, lub kliknij przycisk "Rozpocznij od nowa", aby uruchomić program od początku.
 
 .. figure:: process/031.png
    :align: center
    :width: 3in
 
-.. centered:: 图表 15.2‑9 码垛程序接续
+.. centered:: Wykres 15.2‑9 Kontynuacja programu paletyzacji
 
-传送带跟踪
------------------
+Śledzenie taśmociągu
+--------------------
 
-传送带跟踪配置步骤
-~~~~~~~~~~~~~~~~~~~~~
+Kroki konfiguracji śledzenia taśmociągu
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-**Step1**：在“辅助应用”->“工艺包”中选择“传送带”菜单项，进入传送带跟踪配置界面，点击“配置传送带IO”按键快速配置传送带功能所需IO，之后根据实际使用功能情况配置对应的参数，此处以无视觉跟踪抓取功能为例，需要配置传送带编码器通道，分辨率，导程，视觉搭配选择否，点击配置。
+**Krok 1**: W "Aplikacje pomocnicze" -> "Pakiety procesowe" wybierz element menu "Taśmociąg", aby przejść do interfejsu konfiguracji śledzenia taśmociągu. Kliknij przycisk "Konfiguruj I/O taśmociągu", aby szybko skonfigurować I/O wymagane do funkcji taśmociągu. Następnie skonfiguruj odpowiednie parametry w zależności od rzeczywistej używanej funkcji. Na przykładzie funkcji chwytania bez śledzenia wizyjnego, należy skonfigurować kanał enkodera taśmociągu, rozdzielczość, skok, wybrać "Nie" dla współpracy z wizją i kliknąć "Konfiguruj".
 
 .. figure:: process/032.png
    :align: center
@@ -410,300 +410,300 @@
    :align: center
    :width: 4in
 
-.. centered:: 图表 15.3‑1 传送带配置
+.. centered:: Wykres 15.3‑1 Konfiguracja taśmociągu
 
-**Step2**：接下来设置抓取点补偿值，为X,Y,Z三个方向上的补偿距离，可在调试过程中根据实际情况设置。
+**Krok 2**: Następnie ustaw wartości kompensacji punktu chwytania w trzech kierunkach X, Y, Z. Można je ustawić w trakcie debugowania w zależności od rzeczywistej sytuacji.
 
 .. figure:: process/034.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 15.3‑2 传送带抓取点补偿配置
+.. centered:: Wykres 15.3‑2 Konfiguracja kompensacji punktu chwytania taśmociągu
 
-**Step3**：开启传送带，将标定的物体移动到定义的A点位置，停止传送带。移动机器人，将机器人末端的标定杆尖点与所标定的物体尖点对齐，点击起始点A按键，跳出对话框，显示当前编码器值和机器人位姿，点击标定完成起始点A标定。
+**Krok 3**: Uruchom taśmociąg, przesuń kalibrowany obiekt do zdefiniowanej pozycji punktu A i zatrzymaj taśmociąg. Przesuń robota, wyrównaj czubek pręta kalibracyjnego na końcówce robota z czubkiem kalibrowanego obiektu. Kliknij przycisk punktu początkowego A, pojawi się okno dialogowe wyświetlające bieżącą wartość enkodera i pozycję robota. Kliknij "Kalibruj", aby zakończyć kalibrację punktu początkowego A.
 
 .. figure:: process/035.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 15.3‑3 起始点A配置
+.. centered:: Wykres 15.3‑3 Konfiguracja punktu początkowego A
 
-**Step4**：点击参考点按键，进入参考点标定，记录参考点时记录机器人抓取时的高度和姿态，每次跟踪时都会以记录参考点的高度和姿态区跟踪抓取，可以和AB点不在一个高度，点击标定完成参考点标定。
+**Krok 4**: Kliknij przycisk punktu odniesienia, aby przejść do kalibracji punktu odniesienia. Podczas zapisywania punktu odniesienia zapisz wysokość i orientację robota podczas chwytania. Podczas każdego śledzenia śledzenie i chwytanie będą odbywać się z wysokością i orientacją zapisanego punktu odniesienia. Może to być inna wysokość niż punkty A i B. Kliknij "Kalibruj", aby zakończyć kalibrację punktu odniesienia.
 
 .. figure:: process/036.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 15.3‑4 参考点配置
+.. centered:: Wykres 15.3‑4 Konfiguracja punktu odniesienia
 
-**Step5**：开启传送带，将标定的物体移动到定义的B点位置，停止传送带。移动机器人，将机器人末端的标定杆尖点与所标定的物体尖点对齐，点击终点B按键，弹出对话框，显示当前编码器值和机器人位姿，点击标定完成终点B标定。
+**Krok 5**: Uruchom taśmociąg, przesuń kalibrowany obiekt do zdefiniowanej pozycji punktu B i zatrzymaj taśmociąg. Przesuń robota, wyrównaj czubek pręta kalibracyjnego na końcówce robota z czubkiem kalibrowanego obiektu. Kliknij przycisk punktu końcowego B, pojawi się okno dialogowe wyświetlające bieżącą wartość enkodera i pozycję robota. Kliknij "Kalibruj", aby zakończyć kalibrację punktu końcowego B.
 
 .. figure:: process/037.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 15.3‑5 终点B配置
+.. centered:: Wykres 15.3‑5 Konfiguracja punktu końcowego B
 
-传送带跟踪示教程序
-~~~~~~~~~~~~~~~~~~~~~~~
+Program nauczania śledzenia taśmociągu
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. list-table::
    :widths: 50 80 80
    :header-rows: 0
    :align: center
 
-   * - **序号**
-     - **指令格式**
-     - **注释**
+   * - **Nr**
+     - **Format instrukcji**
+     - **Komentarz**
 
    * - 1
      - PTP(conveyorstart,30,-1,0)
-     - #机器人抓取起点
+     - #Punkt początkowy chwytania robota
 
    * - 2
      - While(1) do
-     - #循环抓取
+     - #Pętla chwytania
 
    * - 3
      - ConveyorlODetect(10000)
-     - #Io实时检测物体
+     - #Wykrywanie obiektu w czasie rzeczywistym przez I/O
 
    * - 4
      - ConveyorGetTrackData(1)
-     - #物体位置获取
+     - #Pobranie pozycji obiektu
 
    * - 5
      - ConveyorTrackStart(1)
-     - #传送带跟踪开始
+     - #Rozpoczęcie śledzenia taśmociągu
 
    * - 6
      - Lin(cvrCatchPoint,10,-1,0,0)
-     - #机器人到达抓取点
+     - #Robot dociera do punktu chwytania
 
    * - 7
      - MoveGripper(1,255,255,0,10000)
-     - #夹爪抓取物体
+     - #Chwytak chwyta obiekt
 
    * - 8
      - Lin(cvrRaisePoint,10,-1,0,0)
-     - #机器人提起
+     - #Robot podnosi
 
    * - 9
      - ConveyorTrackEnd()
-     - #传送带跟踪结束
+     - #Zakończenie śledzenia taśmociągu
 
    * - 10
      - PTP(conveyorraise,30,-1,0)
-     - #机器人到达等待点
+     - #Robot dociera do punktu oczekiwania
 
    * - 11
      - PTP(conveyorend,30,-1,0)
-     - #机器人到达放置点
+     - #Robot dociera do punktu umieszczenia
 
    * - 12
      - MoveGripper(1,0,255,0,10000)
-     - #夹爪松开
+     - #Chwytak zwalnia
 
    * - 13
      - PTP(conveyorstart,50,-1,0)
-     - #机器人再次回到抓取起点,等待下次抓取
+     - #Robot wraca do punktu początkowego chwytania, oczekując na następne chwytanie
 
    * - 14
      - end
-     - #结束
+     - #Koniec
 
-机器人传送带跟踪系统构成
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Struktura systemu śledzenia taśmociągu robota
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-传送带编码器数据通信连接方式
-+++++++++++++++++++++++++++++++++++
+Sposób podłączenia komunikacji danych enkodera taśmociągu
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-为了在机床加工中，实现自动化上下料流程，开发了基于FOCAS通信的CNC功能包，可实现协作机器人与CNC机床的通信交互与协同运动。
+Aby zrealizować zautomatyzowany proces załadunku i rozładunku w obróbce skrawaniem, opracowano pakiet CNC oparty na komunikacji FOCAS, który umożliwia wymianę komunikacyjną i ruch współpracujący między robotem współpracującym a obrabiarką CNC.
 
-如图所示，FOCAS通信是基于以太网的，通过网线连接机器人控制箱网口与机床内嵌网口，即可建立机器人与机床的FOCAS通信，实现在机器人端的CNC控制和机床状态监控。
+Jak pokazano na rysunku, komunikacja FOCAS opiera się na Ethernet. Podłączając kabel sieciowy do portu sieciowego skrzynki sterowniczej robota i wbudowanego portu sieciowego obrabiarki, można ustanowić komunikację FOCAS między robotem a obrabiarką, umożliwiając sterowanie CNC i monitorowanie stanu obrabiarki po stronie robota.
 
 .. figure:: process/038.png
    :align: center
    :width: 6in
 
-.. centered:: 图表 15.3‑6 机器人传送带跟踪系统构成拓扑图
+.. centered:: Wykres 15.3‑6 Schemat topologii systemu śledzenia taśmociągu robota
 
-系统中，（a）为计算机，（b）为机器人及其控制箱，（c）为传送带、光电传感器及编码器组成的传送带系统。机器人控制箱通过数字IO通信与光电传感器、传送带相连，通过RS485与传送带编码器相连。
+W systemie (a) to komputer, (b) to robot i jego skrzynka sterownicza, (c) to system taśmociągu składający się z taśmociągu, czujnika fotoelektrycznego i enkodera. Skrzynka sterownicza robota jest połączona z czujnikiem fotoelektrycznym i taśmociągiem za pomocą komunikacji cyfrowej I/O, a z enkoderem taśmociągu za pomocą RS485.
 
-传送带配置
+Konfiguracja taśmociągu
 +++++++++++++++++++++++++++++++++++
 
-进入机器人Web页面“基础设置”、“外设”、“跟踪”下属的“传送带”功能配置界面进行传送带跟踪功能属性配置。
+Przejdź do interfejsu konfiguracji funkcji śledzenia taśmociągu w roboczej stronie internetowej, w sekcji "Ustawienia podstawowe", "Urządzenia peryferyjne", "Śledzenie" w podmenu "Taśmociąg".
 
 .. figure:: process/039.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 15.3‑7 传送带跟踪配置页面
+.. centered:: Wykres 15.3‑7 Strona konfiguracji śledzenia taśmociągu
 
-在传送带跟踪配置页面，点击“传送带I/O一键配置”按钮一键配置传送带物理连接。
-之后在“参数配置”下的“功能选择”下拉框中选择“跟踪运动”，再后配置编码器属性、跟踪工件坐标系工件轴、视觉搭配，并在“跟踪类型”下拉框中选中“追检运动”，此时可输入跟踪起始距离以及跟踪终止距离。
-跟踪起始距离：触发跟踪信号后传送带运行到设置距离后机器人开始动作，当设置为-1时为自动触发。
-跟踪终止距离：机器人开始动作后，跟随传送带同步运动的最远距离。
+Na stronie konfiguracji śledzenia taśmociągu kliknij przycisk "Jednokliknięciowa konfiguracja I/O taśmociągu", aby skonfigurować fizyczne połączenie taśmociągu.
+Następnie w polu "Wybór funkcji" w sekcji "Konfiguracja parametrów" wybierz z listy rozwijanej "Ruch śledzenia". Następnie skonfiguruj właściwości enkodera, oś przedmiotu w śledzonym układzie współrzędnych przedmiotu, współpracę z wizją, a w polu "Typ śledzenia" wybierz z listy rozwijanej "Ruch doganiający". W tym miejscu można wprowadzić odległość początkową śledzenia i odległość końcową śledzenia.
+Odległość początkowa śledzenia: po wyzwoleniu sygnału śledzenia, taśmociąg uruchamia się, a robot zaczyna działać po przebyciu ustawionej odległości. Gdy ustawiona jest na -1, jest wyzwalana automatycznie.
+Odległość końcowa śledzenia: maksymalna odległość, na której robot podąża synchronicznie z ruchem taśmociągu po rozpoczęciu działania.
 
-跟踪坐标系配置
-+++++++++++++++++++++++++++++++++++
+Konfiguracja układu współrzędnych śledzenia
++++++++++++++++++++++++++++++++++++++++++++
 
-跟踪运动使用工件坐标系作为传送带坐标系，因此需要设置工件坐标系。
+Ruch śledzenia wykorzystuje układ współrzędnych przedmiotu jako układ współrzędnych taśmociągu, dlatego konieczne jest ustawienie układu współrzędnych przedmiotu.
 
-点击“初始设置”、“基础”，在“坐标系”下选择“工件坐标系”，点击选择“wobjcoord0”以外的工件坐标系进行标定，标定方式此处不赘述。
+Kliknij "Ustawienia początkowe", "Podstawowe", w sekcji "Układy współrzędnych" wybierz "Układ współrzędnych przedmiotu". Kliknij, aby wybrać układ współrzędnych przedmiotu inny niż "wobjcoord0" do kalibracji. Sposób kalibracji nie zostanie tutaj szczegółowo opisany.
 
 .. figure:: process/040.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 15.3‑8 跟踪坐标系设置
+.. centered:: Wykres 15.3‑8 Ustawianie układu współrzędnych śledzenia
 
-传送带跟踪追检运动功能
-+++++++++++++++++++++++++++++++++++
+Funkcja ruchu doganiającego śledzenia taśmociągu
+++++++++++++++++++++++++++++++++++++++++++++++++
 
-追检运动属于传送带跟踪运动的一种，与跟踪运动相比追检运动的运动点示教无需在工件坐标系上方进行示教运动，可以在工件坐标系任意位置进行示教，再通过“跟踪起始距离”的参数进行末端与传送带同步运动，是一种比较灵活的跟踪方式。
+Ruch doganiający jest rodzajem ruchu śledzenia taśmociągu. W porównaniu z ruchem śledzenia, punkty ruchu w ruchu doganiającym nie wymagają uczenia ruchu nad układem współrzędnych przedmiotu. Można je uczyć w dowolnym miejscu układu współrzędnych przedmiotu, a następnie synchronizować ruch końcówki z taśmociągiem za pomocą parametru "Odległość początkowa śledzenia". Jest to bardziej elastyczny sposób śledzenia.
 
-传送带跟踪追检运动功能简介
-+++++++++++++++++++++++++++++++++++
+Wprowadzenie do funkcji ruchu doganiającego śledzenia taśmociągu
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-以下给出追检运动示例以介绍运动特性。
+Poniżej podano przykład ruchu doganiającego w celu zilustrowania charakterystyki ruchu.
 
 .. figure:: process/041.png
    :align: center
    :width: 6in
 
-.. centered:: 图表 15.3‑9 传送带跟踪追检运动示教示例
+.. centered:: Wykres 15.3‑9 Przykład uczenia ruchu doganiającego śledzenia taśmociągu
 
-其中，以x为工件坐标中传送带运动的方向，a为传送带平面，b为抓取目标工件，c为光电传感器，d为跟踪起始距离，e为跟踪终止距离。P1到P4为示教路点及其依次顺序，P2到P3为相同路点，包含夹爪运动。
+Gdzie x to kierunek ruchu taśmociągu w układzie współrzędnych przedmiotu, a to płaszczyzna taśmociągu, b to docelowy przedmiot do chwytania, c to czujnik fotoelektryczny, d to odległość początkowa śledzenia, e to odległość końcowa śledzenia. P1 do P4 to punkty pośrednie uczenia i ich kolejność, P2 do P3 to te same punkty pośrednie, zawierające ruch chwytaka.
 
 .. figure:: process/042.png
    :align: center
    :width: 6in
 
-.. centered:: 图表 15.3‑10 传送带跟踪追检运动示教后执行示例
+.. centered:: Wykres 15.3‑10 Przykład wykonania po uczeniu ruchu doganiającego śledzenia taśmociągu
 
-当上述示教程序开始运行，工件触发光电开关信号后，机器人会等待目标运动到P1下方后开始跟踪运动，机器人夹爪将如上图所示轨迹运动。
+Gdy powyższy program nauczania rozpocznie działanie, a przedmiot wyzwoli sygnał przełącznika fotoelektrycznego, robot będzie czekał, aż cel przemieści się pod P1, a następnie rozpocznie ruch śledzenia. Ruch chwytaka robota będzie odbywał się po trajektorii pokazanej na powyższym rysunku.
 
-追检运动程序示教
-+++++++++++++++++++++++++++++++++++
+Nauczanie programu ruchu doganiającego
++++++++++++++++++++++++++++++++++++++++
 
-追检运动程序逻辑与跟踪运动逻辑基本一致，包含获取触发信号、获取传送带数据以及开始跟踪运动部分。
+Logika programu ruchu doganiającego jest zasadniczo taka sama jak logika ruchu śledzenia i obejmuje pozyskiwanie sygnału wyzwalającego, pobieranie danych taśmociągu oraz rozpoczęcie części ruchu śledzenia.
 
-**Step 1**：点击“示教程序”，“程序编程”，选择并点击“外设指令”下属的“传送带”按钮进入传送带指令配置页面。
+**Krok 1**: Kliknij "Program nauczania", "Programowanie", wybierz i kliknij przycisk "Taśmociąg" w sekcji "Instrukcje urządzeń peryferyjnych", aby przejść do strony konfiguracji instrukcji taśmociągu.
 
 .. figure:: process/043.png
    :align: center
    :width: 6in
 
-.. centered:: 图表 15.3‑11 I/O实时监测指令
+.. centered:: Wykres 15.3‑11 Instrukcja monitorowania I/O w czasie rzeczywistym
 
-**Step 2**：点击“I/O实时监测”并设置“最大等待示教(ms)”，实时检测跟踪触发信号。点击“添加”与“应用”按钮将指令添加到程序中。
+**Krok 2**: Kliknij "Monitorowanie I/O w czasie rzeczywistym" i ustaw "Maksymalny czas oczekiwania na nauczanie (ms)", aby wykrywać sygnał wyzwalający śledzenie w czasie rzeczywistym. Kliknij przyciski "Dodaj" i "Zastosuj", aby dodać instrukcję do programu.
 
 .. figure:: process/044.png
    :align: center
    :width: 6in
 
-.. centered:: 图表 15.3‑12 位置实时检测指令
+.. centered:: Wykres 15.3‑12 Instrukcja wykrywania pozycji w czasie rzeczywistym
 
-**Step 3**：点击“位置实时检测”并将工作模式选定“跟踪运动”。点击“添加”与“应用”按钮将指令添加到程序中。
+**Krok 3**: Kliknij "Wykrywanie pozycji w czasie rzeczywistym" i wybierz "Ruch śledzenia" jako tryb pracy. Kliknij przyciski "Dodaj" i "Zastosuj", aby dodać instrukcję do programu.
 
 .. figure:: process/045.png
    :align: center
    :width: 6in
 
-.. centered:: 图表 15.3‑13 跟踪开启指令
+.. centered:: Wykres 15.3‑13 Instrukcja włączenia śledzenia
 
-**Step 4**：点击“跟踪开启”并工作模式选定“跟踪运动”。点击“添加”与“应用”按钮将指令添加到程序中。
+**Krok 4**: Kliknij "Włączenie śledzenia" i wybierz "Ruch śledzenia" jako tryb pracy. Kliknij przyciski "Dodaj" i "Zastosuj", aby dodać instrukcję do programu.
 
-**Step 5**：示教在跟踪开启后的笛卡尔空间运动以及夹爪外设运动，运动过程中将保持与传送带的跟踪同步运动。
+**Krok 5**: Nauczanie ruchu w przestrzeni kartezjańskiej po włączeniu śledzenia oraz ruchu urządzeń peryferyjnych chwytaka. Podczas ruchu zachowana będzie synchronizacja z ruchem śledzącym taśmociągu.
 
 .. figure:: process/046.png
    :align: center
    :width: 6in
 
-.. centered:: 图表 15.3‑14 跟踪关闭指令
+.. centered:: Wykres 15.3‑14 Instrukcja wyłączenia śledzenia
 
-**Step 6**：点击“跟踪关闭”并点击“添加”与“应用”按钮将指令添加到程序中。
+**Krok 6**: Kliknij "Wyłączenie śledzenia", a następnie kliknij przyciski "Dodaj" i "Zastosuj", aby dodać instrukcję do programu.
 
 .. figure:: process/047.png
    :align: center
    :width: 6in
 
-.. centered:: 图表 15.3‑15 一段典型的传送带程序跟踪运动程序
+.. centered:: Wykres 15.3‑15 Typowy program śledzenia ruchu taśmociągu
 
-当连续示教两个相同的跟踪运动目标（可包含偏置距离），机器人运动将阻塞在该目标位置，实现持续同步跟踪直到跟踪距离达到终止跟踪距离为止。
+Gdy dwa identyczne cele ruchu śledzenia (mogą zawierać odległość przesunięcia) są nauczane kolejno, ruch robota zostanie zablokowany w tej pozycji docelowej, realizując ciągłe synchroniczne śledzenie, aż odległość śledzenia osiągnie odległość końcową śledzenia.
 
 .. figure:: process/048.png
    :align: center
    :width: 6in
 
-.. centered:: 图表 15.3‑16 一段典型的传送带阻塞跟踪抓取运动程序
+.. centered:: Wykres 15.3‑16 Typowy program blokującego ruchu chwytania śledzenia taśmociągu
 
-当连续示教两个相同的跟踪运动目标（可包含偏置距离），同时中间插入夹爪运动时，机器人将在该目标位置位置持续跟踪传送带直至夹爪运动完成，实现阻塞跟踪抓取。
+Gdy dwa identyczne cele ruchu śledzenia (mogą zawierać odległość przesunięcia) są nauczane kolejno, a pomiędzy nimi wstawiony jest ruch chwytaka, robot będzie kontynuował śledzenie taśmociągu w tej pozycji docelowej aż do zakończenia ruchu chwytaka, realizując blokujące chwytanie śledzące.
 
-矩阵移动指令优化功能
+Funkcja optymalizacji instrukcji ruchu matrycowego
 ------------------------------------------------------------------
 
-概述
+Omówienie
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-在CNC设备的自动化加工以及码垛作业的过程中，矩阵移动指令广泛应用于多个关键工序环节，包括毛坯上料、成品下料、工件翻转、二次装夹。通过在矩阵移动配方中示教矩阵三点确定矩阵位置，配置矩阵的行、列、层和运动路径后，在指令界面可快速切换矩阵配方进行部署运行。
+W procesie zautomatyzowanej obróbki urządzeń CNC oraz operacji paletyzacji, instrukcje ruchu matrycowego są szeroko stosowane w wielu kluczowych etapach procesu, w tym w załadunku półfabrykatów, rozładunku gotowych produktów, obracaniu przedmiotów i ponownym mocowaniu. Po wyznaczeniu pozycji matrycy poprzez nauczanie trzech punktów matrycy w recepturze ruchu matrycowego i skonfigurowaniu liczby wierszy, kolumn, warstw i ścieżki ruchu matrycy, można szybko przełączać receptury matrycy w interfejsie instrukcji w celu wdrożenia i uruchomienia.
 
-矩阵移动配方配置
+Konfiguracja receptury ruchu matrycowego
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-**Step1**：进入“辅助应用—>工艺包—>矩阵移动”界面，进行配方新增、编辑、重命名和删除操作；
+**Krok 1**: Przejdź do interfejsu "Aplikacje pomocnicze —> Pakiety procesowe —> Ruch matrycowy", aby dodawać, edytować, zmieniać nazwy i usuwać receptury.
 
 .. figure:: process/049.png
    :align: center
    :width: 6in
 
-.. centered:: 图表 15.4‑1 矩阵配方界面
+.. centered:: Wykres 15.4‑1 Interfejs receptury matrycy
 
 .. note:: 
    .. image:: process/050.png
       :height: 0.75in
       :align: left
 
-   名称：**新增按钮**
+   Nazwa: **Przycisk Dodaj**
    
-   作用：新增矩阵配方
+   Funkcja: Dodaje nową recepturę matrycy
 
 .. note:: 
    .. image:: process/051.png
       :height: 0.75in
       :align: left
 
-   名称：**编辑按钮**
+   Nazwa: **Przycisk Edytuj**
    
-   作用：编辑矩阵配方参数
+   Funkcja: Edytuje parametry receptury matrycy
 
 .. note:: 
    .. image:: process/052.png
       :height: 0.75in
       :align: left
 
-   名称：**重命名按钮**
+   Nazwa: **Przycisk Zmień nazwę**
    
-   作用：矩阵配方重命名
+   Funkcja: Zmienia nazwę receptury matrycy
 
 .. note:: 
    .. image:: process/053.png
       :height: 0.75in
       :align: left
 
-   名称：**删除按钮**
+   Nazwa: **Przycisk Usuń**
    
-   作用：删除矩阵配方
+   Funkcja: Usuwa recepturę matrycy
 
-**Step2**：新增矩阵配方。点击“新增”按钮，弹出“新增矩阵”模态窗，输入矩阵名称（禁止输入特殊字符,只允许输入数字常用汉字和下划线“_”）后进入配方详情界面输入行数、层数、列数、层高、运动配置和过渡点偏移量X、Y、Z，示教矩阵三个路径点。点击“配置”按钮确认配置。
+**Krok 2**: Dodaj nową recepturę matrycy. Kliknij przycisk "Dodaj", pojawi się okno modalne "Dodaj matrycę". Wprowadź nazwę matrycy (zabronione jest wprowadzanie znaków specjalnych, dozwolone są tylko cyfry, popularne chińskie znaki i podkreślenie "_"), a następnie przejdź do strony szczegółów receptury, aby wprowadzić liczbę wierszy, warstw, kolumn, wysokość warstwy, konfigurację ruchu oraz przesunięcia punktu przejściowego X, Y, Z. Naucz trzy punkty ścieżki matrycy. Kliknij przycisk "Konfiguruj", aby potwierdzić konfigurację.
 
 .. figure:: process/054.png
    :align: center
    :width: 6in
 
-.. centered:: 图表 15.4‑2 新增矩阵弹出模态窗
+.. centered:: Wykres 15.4‑2 Okno modalne dodawania matrycy
 
 .. figure:: process/055.png
    :align: center
@@ -713,7 +713,7 @@
    :align: center
    :width: 6in
 
-.. centered:: 图表 15.4‑3 第一路径点示教
+.. centered:: Wykres 15.4‑3 Nauczanie pierwszego punktu ścieżki
 
 .. figure:: process/057.png
    :align: center
@@ -723,7 +723,7 @@
    :align: center
    :width: 6in
 
-.. centered:: 图表 15.4‑4 第二路径点示教
+.. centered:: Wykres 15.4‑4 Nauczanie drugiego punktu ścieżki
 
 .. figure:: process/059.png
    :align: center
@@ -733,110 +733,110 @@
    :align: center
    :width: 6in
 
-.. centered:: 图表 15.4‑5 第三路径点示教
+.. centered:: Wykres 15.4‑5 Nauczanie trzeciego punktu ścieżki
 
-运动路径分为头到尾走法和弓字行走法。说明如下：
+Ścieżki ruchu dzielą się na metodę od początku do końca i metodę w kształcie łuku. Opis poniżej:
 
-**头到尾走法**：从左向右走完第一行回到左侧起点，再从左向右走完第二行再回到左侧起点，从左向右走完第三行，直到覆盖完成。
+**Metoda od początku do końca**: Przejście pierwszego rzędu od lewej do prawej, powrót do lewego punktu początkowego, następnie przejście drugiego rzędu od lewej do prawej, powrót do lewego punktu początkowego, przejście trzeciego rzędu od lewej do prawej, aż do pokrycia całego obszaru.
 
 .. figure:: process/061.png
    :align: center
    :width: 1in
 
-.. centered:: 图表 15.4‑6 头到尾走法
+.. centered:: Wykres 15.4‑6 Metoda od początku do końca
 
-**弓字形走法**：从左向右走完第一行，垂直向下移动，再从右向左走完第二行。再垂直向下移动，再从左向右走完第三行，直到区域覆盖完成。
+**Metoda w kształcie łuku**: Przejście pierwszego rzędu od lewej do prawej, ruch pionowo w dół, następnie przejście drugiego rzędu od prawej do lewej. Następnie ruch pionowo w dół, a następnie przejście trzeciego rzędu od lewej do prawej, aż do pokrycia całego obszaru.
 
 .. figure:: process/062.png
    :align: center
    :width: 1in
 
-.. centered:: 图表 15.4‑7 弓字形走法
+.. centered:: Wykres 15.4‑7 Metoda w kształcie łuku
 
-**Step3**：配方编辑、重命名和删除。点击“编辑”按钮，获取当前选择矩阵配方的数据，根据需求修改参数或重新示教路径点即可。当需要重命名时，点击“重命名”按钮，输入名称后再次点击“重命名”按钮完成重命名。点击“删除”按钮，需要二次确认是否删除矩阵配方，再次点击“删除”按钮后确认删除。如下图：
+**Krok 3**: Edycja, zmiana nazwy i usuwanie receptury. Kliknij przycisk "Edytuj", aby pobrać dane aktualnie wybranej receptury matrycy. Modyfikuj parametry lub naucz ponownie punkty ścieżki zgodnie z potrzebami. Gdy potrzebna jest zmiana nazwy, kliknij przycisk "Zmień nazwę", wprowadź nazwę i kliknij ponownie przycisk "Zmień nazwę", aby zakończyć zmianę nazwy. Kliknij przycisk "Usuń", pojawi się prośba o potwierdzenie usunięcia receptury matrycy. Kliknij ponownie przycisk "Usuń", aby potwierdzić usunięcie. Jak poniżej:
 
 .. figure:: process/063.png
    :align: center
    :width: 6in
 
-.. centered:: 图表 15.4‑8 矩阵配方重命名
+.. centered:: Wykres 15.4‑8 Zmiana nazwy receptury matrycy
 
 .. figure:: process/064.png
    :align: center
    :width: 6in
 
-.. centered:: 图表 15.4‑9 矩阵配方删除提示
+.. centered:: Wykres 15.4‑9 Monit o usunięcie receptury matrycy
 
-矩阵移动指令添加
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Dodawanie instrukcji ruchu matrycowego
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-**Step1**：进入“示教程序->程序编程->码垛指令->矩阵移动”界面后，查看界面是否存在配方。当未创建配方时，显示提示内容，在提示语下方可点击“配置”按钮快速进入“辅助应用->工艺包->矩阵移动”界面。如下图所示：
+**Krok 1**: Po przejściu do interfejsu "Program nauczania -> Programowanie -> Instrukcje paletyzacji -> Ruch matrycowy" sprawdź, czy na interfejsie istnieją receptury. Gdy nie utworzono receptury, wyświetlona zostanie treść podpowiedzi. Pod tekstem podpowiedzi można kliknąć przycisk "Konfiguruj", aby szybko przejść do interfejsu "Aplikacje pomocnicze -> Pakiety procesowe -> Ruch matrycowy". Jak pokazano na poniższym rysunku:
 
 .. figure:: process/065.png
    :align: center
    :width: 6in
 
-.. centered:: 图表 15.4‑10 矩阵移动指令无配方界面
+.. centered:: Wykres 15.4‑10 Interfejs instrukcji ruchu matrycowego bez receptury
 
-存在配方时，显示矩阵移动指令界面。当前指令类型为：
+Gdy receptury istnieją, wyświetlony zostanie interfejs instrukcji ruchu matrycowego. Bieżące typy instrukcji to:
 
-- **矩阵移动**：设置机器人移动到上下料抓取作业的过渡点；
-- **矩阵运行计数**：机器人上下料抓取完成后进行第几行第几列第几层计数；
-- **配置起始计数**：设置机器人上下料抓取时从第几行第几列第几层开始；
-- **获取矩阵计数**：获取机器人上下料抓取完成到第几行第几列第几层。
+- **Ruch matrycowy**: Ustawia przejście robota do punktu przejściowego dla operacji załadunku i rozładunku;
+- **Licznik działania matrycy**: Liczy, który wiersz, kolumnę i warstwę robot wykonał po zakończeniu załadunku i rozładunku;
+- **Konfiguracja początku liczenia**: Ustawia, od którego wiersza, kolumny i warstwy robot ma rozpocząć załadunek i rozładunek;
+- **Pobierz licznik matrycy**: Pobiera informację, do którego wiersza, kolumny i warstwy robot zakończył załadunek i rozładunek.
 
 .. figure:: process/066.png
    :align: center
    :width: 6in
 
-.. centered:: 图表 15.4‑11 矩阵移动指令存在配方界面
+.. centered:: Wykres 15.4‑11 Interfejs instrukcji ruchu matrycowego z istniejącą recepturą
 
-**Step2**：添加“矩阵移动”指令。新建程序名称为“matrix”，选择配方“matrix1”，移动方向“下移”，速度输入100。机器人从安全点移动到过渡点后再运行到抓取点。点击“添加”按钮后应用到程序中。如下图所示：
+**Krok 2**: Dodaj instrukcję "Ruch matrycowy". Utwórz nowy program o nazwie "matrix", wybierz recepturę "matrix1", kierunek ruchu "w dół", wprowadź prędkość 100. Robot przemieszcza się z punktu bezpiecznego do punktu przejściowego, a następnie do punktu chwytania. Kliknij przycisk "Dodaj", aby zastosować w programie. Jak pokazano na poniższym rysunku:
 
 .. figure:: process/067.png
    :align: center
    :width: 6in
 
-.. centered:: 图表 15.4‑12 矩阵移动指令下移
+.. centered:: Wykres 15.4‑12 Instrukcja ruchu matrycowego w dół
 
-**Step3**：添加“矩阵运行计数”指令。选择配方“matrix1”，点击“添加”按钮后应用到程序中。如下图所示：
+**Krok 3**: Dodaj instrukcję "Licznik działania matrycy". Wybierz recepturę "matrix1", kliknij przycisk "Dodaj", aby zastosować w programie. Jak pokazano na poniższym rysunku:
 
 .. figure:: process/068.png
    :align: center
    :width: 6in
 
-.. centered:: 图表 15.4‑13 矩阵运行计数指令
+.. centered:: Wykres 15.4‑13 Instrukcja licznika działania matrycy
 
-**Step4**：添加“矩阵移动”指令。选择配方“matrix1”，移动方向“上移”，速度输入100。机器人从抓取点移动到过渡点后回到安全点。点击“添加”按钮后应用到程序中。如下图所示：
+**Krok 4**: Dodaj instrukcję "Ruch matrycowy". Wybierz recepturę "matrix1", kierunek ruchu "w górę", wprowadź prędkość 100. Robot przemieszcza się z punktu chwytania do punktu przejściowego, a następnie wraca do punktu bezpiecznego. Kliknij przycisk "Dodaj", aby zastosować w programie. Jak pokazano na poniższym rysunku:
 
 .. figure:: process/069.png
    :align: center
    :width: 6in
 
-.. centered:: 图表 15.4‑14 矩阵移动指令上移
+.. centered:: Wykres 15.4‑14 Instrukcja ruchu matrycowego w górę
 
-**Step5**：添加while指令进行始终循环。点击“保存”按钮，保存程序，切换自动模式运行程序。机器人一直进行矩阵移动的上下料抓取作业。如下图所示：
+**Krok 5**: Dodaj instrukcję while, aby zapętlić działanie. Kliknij przycisk "Zapisz", aby zapisać program, przełącz w tryb automatyczny i uruchom program. Robot będzie kontynuował operację załadunku i rozładunku w ruchu matrycowym. Jak pokazano na poniższym rysunku:
 
 .. figure:: process/070.png
    :align: center
    :width: 6in
 
-.. centered:: 图表 15.4‑15 矩阵移动指令运行
+.. centered:: Wykres 15.4‑15 Działanie instrukcji ruchu matrycowego
 
-**Step6**：添加“配置起始计数”指令。选择配方“matrix1”，输入行数1、列数1、层数1。点击“添加”按钮后应用到程序中。如下图所示：
+**Krok 6**: Dodaj instrukcję "Konfiguracja początku liczenia". Wybierz recepturę "matrix1", wprowadź liczbę wierszy 1, kolumn 1, warstw 1. Kliknij przycisk "Dodaj", aby zastosować w programie. Jak pokazano na poniższym rysunku:
 
-.. note:: 输入的行数、列数、层数，在此基础上加1代表实际的行数、列数和层数。即输入行数1、列数1、层数1，实际机器人从指定位置第2行第2列第2层开始运行。
+.. note:: Wprowadzona liczba wierszy, kolumn i warstw oznacza, że rzeczywista liczba wierszy, kolumn i warstw jest o 1 większa. Oznacza to, że przy wprowadzeniu wierszy 1, kolumn 1, warstw 1, robot faktycznie rozpocznie działanie od 2 wiersza, 2 kolumny, 2 warstwy.
 
 .. figure:: process/071.png
    :align: center
    :width: 6in
 
-.. centered:: 图表 15.4‑16 配置起始计数指令
+.. centered:: Wykres 15.4‑16 Instrukcja konfiguracji początku liczenia
 
-**Step7**：当矩阵发送改变时，进入“辅助应用->工艺包->矩阵移动”界面，选择矩阵配方“matrix1”，点击编辑按钮修改参数后，点击配置按钮即可完成矩阵修改。此时回到程序编程界面，打开程序“matrix”后，直接运行即可进行新的矩阵场景作业。
+**Krok 7**: Gdy matryca ulegnie zmianie, przejdź do interfejsu "Aplikacje pomocnicze -> Pakiety procesowe -> Ruch matrycowy", wybierz recepturę matrycy "matrix1", kliknij przycisk edycji, zmodyfikuj parametry, a następnie kliknij przycisk "Konfiguruj", aby zakończyć modyfikację matrycy. Wróć do interfejsu programowania, otwórz program "matrix" i uruchom go, aby przeprowadzić nowy scenariusz pracy z matrycą.
 
 .. figure:: process/072.png
    :align: center
    :width: 6in
 
-.. centered:: 图表 15.4‑17 修改矩阵配方
+.. centered:: Wykres 15.4‑17 Modyfikacja receptury matrycy

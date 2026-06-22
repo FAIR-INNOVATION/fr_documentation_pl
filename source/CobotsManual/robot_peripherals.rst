@@ -1,231 +1,232 @@
-外设
-=============
+Urządzenia peryferyjne
+======================
 
 .. toctree:: 
   :maxdepth: 5
 
-末端Lua自定义开放协议
--------------------------
+Niestandardowy otwarty protokół Lua na końcówce
+------------------------------------------------
 
-概述
+Przegląd
 ~~~~~~~~
 
-在机器人末端提供了硬件接口用于连接485通信的外设，目前支持的外设包括夹爪、旋转夹爪、力传感器、焊接手柄等设备。以上末端设备均可通过撰写lua开放协议实现协议适配，实现控制外设及获取外设状态。其中针对SmartTool焊接手柄，用户还可以选择通过登录网页配置按键功能自动生成开放协议文件，生成后的协议会自动应用到末端。
+Na końcówce robota znajduje się interfejs sprzętowy do podłączania urządzeń peryferyjnych komunikujących się przez 485. Obecnie obsługiwane urządzenia peryferyjne obejmują chwytaki, obrotowe chwytaki, czujniki siły, uchwyty spawalnicze itp. Wszystkie powyższe urządzenia końcowe można dostosować, pisząc otwarty protokół Lua, aby zaimplementować sterowanie urządzeniami peryferyjnymi i uzyskiwanie ich stanu. W przypadku uchwytu spawalniczego SmartTool użytkownik może również skonfigurować funkcje przycisków przez stronę internetową, aby automatycznie wygenerować plik otwartego protokołu. Wygenerowany protokół zostanie automatycznie zastosowany na końcówce.
 
-操作步骤
-~~~~~~~~~~~
+Procedura operacyjna
+~~~~~~~~~~~~~~~~~~~~
 
-**Step1**：进入系统设置->关于->固件升级界面，选择末端固件.bin文件，升级末端固件。
+**Krok 1**: Przejdź do interfejsu Ustawienia systemowe -> Informacje -> Aktualizacja oprogramowania sprzętowego, wybierz plik .bin oprogramowania sprzętowego końcówki i zaktualizuj oprogramowanie sprzętowe końcówki.
 
 .. important:: 
-   需先确认末端固件版本 FV2.010.06及其之后软件版本是不是符合，若版本不符合，对应软件固件升级，否则不需要升级固件。
+   Należy najpierw potwierdzić, czy wersja oprogramowania sprzętowego końcówki FV2.010.06 i nowsze są zgodne. Jeśli wersja jest niezgodna, zaktualizuj odpowiednie oprogramowanie sprzętowe. W przeciwnym razie aktualizacja oprogramowania sprzętowego nie jest wymagana.
 
-   上传末端固件升级包之前，需要先将机器人去使能，再进入boot模式。
+   Przed przesłaniem pakietu aktualizacyjnego oprogramowania sprzętowego końcówki należy najpierw wyłączyć zasilanie robota, a następnie wejść w tryb boot.
 
 .. figure:: robot_peripherals/001.png
    :align: center
    :width: 6in
 
-.. centered:: 图表 8.1‑1 升级末端固件
+.. centered:: Schemat 8.1‑1 Aktualizacja oprogramowania sprzętowego końcówki
 
-**Step2**：打开WebApp，依次点击“初始设置”、“外设”，选择需要配置的末端外设(如夹爪)；外设的控制类型有已适配设备和外设开放协议两种：
+**Krok 2**: Otwórz WebApp, kolejno kliknij „Ustawienia początkowe”, „Urządzenia peryferyjne”, wybierz urządzenie peryferyjne końcówki do skonfigurowania (np. chwytak). Typy sterowania urządzeniami peryferyjnymi to dwa: „Urządzenia dostosowane” i „Otwarty protokół urządzeń peryferyjnych”:
 
-- **已适配设备**：采用机器人控制器进行通信，不需要上传和应用。
-- **外设开放协议**：用户基于Lua撰写需要适配的末端开放协议实现通信控制其中末端协议分为两类，一类为用户自行上传的协议，另一类为机器人预设内置协议。自3.9.2版本开始，用户可不对需要上传到末端的lua协议通过额外的软件进行校验加密操作，直接上传即可，并且之前已校验加密的协议仍然可以正常上传使用，机器人会主动区分文件是否进行了校验加密，如果未校验则会进行校验加密后上传应用到末端，如果已加密则直接上传应用到末端。
+- **Urządzenia dostosowane**: Używa sterownika robota do komunikacji, nie wymaga przesyłania i stosowania.
+- **Otwarty protokół urządzeń peryferyjnych**: Użytkownik pisze w Lua otwarty protokół końcówki, który ma być dostosowany, aby zaimplementować komunikację i sterowanie. Protokoły końcówek dzielą się na dwa typy: jeden to protokoły przesyłane samodzielnie przez użytkownika, drugi to protokoły wbudowane domyślnie w robocie. Od wersji 3.9.2 użytkownik nie musi dodatkowo weryfikować i szyfrować protokołu Lua przesyłanego na końcówkę za pomocą dodatkowego oprogramowania. Może go po prostu przesłać. Wcześniej zweryfikowane i zaszyfrowane protokoły nadal mogą być normalnie przesyłane i używane. Robot aktywnie rozróżnia, czy plik został zweryfikowany i zaszyfrowany. Jeśli nie został zweryfikowany, zostanie zweryfikowany i zaszyfrowany przed przesłaniem i zastosowaniem na końcówce. Jeśli jest już zaszyfrowany, zostanie bezpośrednio przesłany i zastosowany na końcówce.
 
 .. figure:: robot_peripherals/002.png
    :align: center
    :width: 6in
 
-.. centered:: 图表 8.1‑2 夹爪控制类型
+.. centered:: Schemat 8.1‑2 Typ sterowania chwytakiem
 
-**Step3**：进入外设->夹爪/力传感器/焊接手柄的内容界面，点击“自定义协议”卡片进入界面，上传Lua末端开放协议，选择需要上传的Lua末端开放协议，进行上传操作。
+**Krok 3**: Przejdź do interfejsu treści Urządzenia peryferyjne -> Chwytak / Czujnik siły / Uchwyt spawalniczy, kliknij kartę „Niestandardowy protokół”, aby przejść do interfejsu. Prześlij otwarty protokół Lua końcówki, wybierz otwarty protokół Lua końcówki do przesłania i wykonaj operację przesyłania.
 
 .. important:: 
-  上传文件名需要以AXLE_LUA_开头命名。
+  Nazwa przesyłanego pliku musi zaczynać się od `AXLE_LUA_`.
 
-**Step4**：配置末端通讯参数，通讯参数包含波特率、数据位、停止位等，配置完成后，点击“配置”按钮。
+**Krok 4**: Skonfiguruj parametry komunikacji końcówki. Parametry komunikacji obejmują prędkość transmisji, bity danych, bity stopu itp. Po zakończeniu konfiguracji kliknij przycisk „Konfiguruj”.
 
 .. figure:: robot_peripherals/003.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.1‑3 配置末端通讯参数
+.. centered:: Schemat 8.1‑3 Konfiguracja parametrów komunikacji końcówki
 
-末端通讯详细参数如下：
+Szczegółowe parametry komunikacji końcówki są następujące:
 
-- **波特率**：支持1-9600，2-14400，3-19200，4-38400，5-56000，6-67600，7-115200，8-128000；末端Rs485驱动芯片为低速485，波特率不能>200k；
-- **数据位**：数据位支持（8,9），目前常用为8；
-- **停止位**：1-1，2-0.5，3-2，4-1.5，目前常用为1；
-- **校验位**：0-None，1-Odd，2-Even,目前常用为0；
-- **超时时间**：1~1000ms，此值需要结合外设搭配设置合理的时间参数；
-- **超时次数**：1~10，主要进行超时重发，减少偶发异常提高用户体验；
-- **周期性指令时间间隔**：1~1000ms，主要用于周期性指令每次下发的时间间隔；
+- **Prędkość transmisji**: Obsługiwane wartości: 1-9600, 2-14400, 3-19200, 4-38400, 5-56000, 6-67600, 7-115200, 8-128000; Układ scalony sterownika Rs485 na końcówce to niskoprędkościowy 485, prędkość transmisji nie może być > 200k;
+- **Bity danych**: Obsługiwane bity danych (8,9), obecnie często używane jest 8;
+- **Bity stopu**: 1-1, 2-0.5, 3-2, 4-1.5, obecnie często używane jest 1;
+- **Bit parzystości**: 0-None, 1-Odd, 2-Even, obecnie często używane jest 0;
+- **Czas timeoutu**: 1~1000 ms, tę wartość należy ustawić rozsądnie w połączeniu z urządzeniem peryferyjnym;
+- **Liczba timeoutów**: 1~10, służy głównie do ponownego wysyłania po przekroczeniu timeoutu, aby zmniejszyć sporadyczne błędy i poprawić komfort użytkowania;
+- **Odstęp czasu między instrukcjami okresowymi**: 1~1000 ms, służy głównie do ustawienia odstępu czasu między każdym wysłaniem instrukcji okresowych;
 
-**Step5**：末端Lua启用，点击“开启”按钮。
+**Krok 5**: Włącz Lua na końcówce, kliknij przycisk „Włącz”.
 
 .. figure:: robot_peripherals/004.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.1‑4 末端Lua启用
+.. centered:: Schemat 8.1‑4 Włączanie Lua na końcówce
 
-当Lua文件发生异常时，提示“末端Lua文件异常”警告，可进行“不恢复/恢复”处理。关闭Lua启用按钮，警告提示关闭。
+Gdy plik Lua jest nieprawidłowy, pojawi się ostrzeżenie „Nieprawidłowy plik Lua na końcówce”. Można wybrać opcję „Nie przywracaj / Przywróć”. Zamknij przycisk włączania Lua, aby zamknąć ostrzeżenie.
 
 .. figure:: robot_peripherals/005.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.1‑5 Lua文件异常
+.. centered:: Schemat 8.1‑5 Nieprawidłowy plik Lua
 
-当设备类型为夹爪时，可以进行状态监控。
+Gdy typ urządzenia to chwytak, można monitorować jego stan.
 
-**打开“状态监控”**：右侧夹爪状态栏展示实时显示夹爪运行速度、力矩、位置等状态信息。
+**Włącz „Monitorowanie stanu”**: Pasek stanu chwytaka po prawej stronie wyświetla w czasie rzeczywistym informacje o stanie, takie jak prędkość robocza chwytaka, moment obrotowy, pozycja itp.
 
-**关闭“状态监控”**：右侧夹爪数据状态栏关闭。
+**Wyłącz „Monitorowanie stanu”**: Pasek danych stanu chwytaka po prawej stronie zostanie zamknięty.
 
 .. figure:: robot_peripherals/006.png
    :align: center
    :width: 6in
 
-.. centered:: 图表 8.1‑6 状态监控
+.. centered:: Schemat 8.1‑6 Monitorowanie stanu
 
-夹爪
+Chwytak
 -------------------
 
-在“初始设置”->“外设”->“夹爪”界面中，当前可以通过已适配设备和末端Lua自定义开放协议使用夹爪。
+W interfejsie „Ustawienia początkowe” -> „Urządzenia peryferyjne” -> „Chwytak” można obecnie używać chwytaka za pomocą „Urządzeń dostosowanych” i „Niestandardowego otwartego protokołu Lua na końcówce”.
 
-已适配设备
-~~~~~~~~~~~~~~~~~~~
+Urządzenia dostosowane
+~~~~~~~~~~~~~~~~~~~~~~
 
-**Step1**：点击“已适配设备”进入末端外设配置界面。夹爪的配置信息分为夹爪厂商、夹爪类型、软件版本和挂载位置，用户可根据具体的生产需求来配置相应的夹爪信息。若用户需要更改配置，可先选择相应的夹爪编号，点击“清除”按钮，来清除相应的按钮，并重新根据需求配置；
+**Krok 1**: Kliknij „Urządzenia dostosowane”, aby przejść do interfejsu konfiguracji urządzeń peryferyjnych końcówki. Informacje konfiguracyjne chwytaka dzielą się na producenta chwytaka, typ chwytaka, wersję oprogramowania i lokalizację montażu. Użytkownik może skonfigurować odpowiednie informacje o chwytaku zgodnie z konkretnymi potrzebami produkcyjnymi. Jeśli użytkownik chce zmienić konfigurację, może najpierw wybrać odpowiedni numer chwytaka, kliknąć przycisk „Wyczyść”, aby wyczyścić odpowiedni przycisk, a następnie ponownie skonfigurować zgodnie z potrzebami;
 
 .. figure:: robot_peripherals/007.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.2‑1 夹爪配置
+.. centered:: Schemat 8.2‑1 Konfiguracja chwytaka
 
 .. important:: 
-	点击清除配置前，相应的夹爪应处于未激活状态。
+    Przed kliknięciem „Wyczyść konfigurację” odpowiedni chwytak powinien być w stanie nieaktywnym.
 
-**Step2**：夹爪配置完成后，用户可在页面下方的夹爪信息表中查看相应的夹爪信息，若发现配置错误，可点击“清除”按钮，重新配置夹爪；
+**Krok 2**: Po zakończeniu konfiguracji chwytaka użytkownik może wyświetlić odpowiednie informacje o chwytaku w tabeli informacji o chwytaku na dole strony. Jeśli zostanie znaleziony błąd konfiguracji, może kliknąć przycisk „Wyczyść”, aby ponownie skonfigurować chwytak;
 
 .. figure:: robot_peripherals/008.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.2‑2 夹爪配置信息
+.. centered:: Schemat 8.2‑2 Informacje konfiguracyjne chwytaka
 
-**Step3**：选择配置完成的夹爪，点击“复位”按钮，页面弹出命令发送成功后，再点击“激活”按钮，可查看夹爪信息表中的激活状态，来判断是否激活成功；
+**Krok 3**: Wybierz w pełni skonfigurowany chwytak, kliknij przycisk „Resetuj”. Po wyświetleniu na stronie komunikatu o pomyślnym wysłaniu polecenia, kliknij przycisk „Aktywuj”. Sprawdź stan aktywacji w tabeli informacji o chwytaku, aby określić, czy aktywacja się powiodła;
 
 .. important::
-	激活夹爪时，夹爪不可有夹持物。
+    Podczas aktywacji chwytaka chwytak nie może trzymać żadnego przedmiotu.
 
-**Step4**：程序示教命令界面中选择“Gripper”命令。在夹爪命令界面中，用户可以选择想要控制的夹爪编号（已经完成配置并且被激活的夹爪），设置相应的开闭状态、开闭速度、开闭力矩已经等待夹爪动作的最大时间。完成设置后点击添加应用即可。此外还可以添加夹爪激活和复位指令，以便于在运行程序时去激活/复位夹爪。
+**Krok 4**: W interfejsie poleceń programowania nauczania wybierz polecenie „Gripper”. W interfejsie poleceń chwytaka użytkownik może wybrać numer chwytaka, który chce kontrolować (chwytak, który został już skonfigurowany i aktywowany), ustawić odpowiedni stan otwarcia/zamknięcia, prędkość otwierania/zamykania, moment otwierania/zamykania oraz maksymalny czas oczekiwania na ruch chwytaka. Po zakończeniu ustawień kliknij Dodaj i Zastosuj. Ponadto można dodać instrukcje aktywacji i resetu chwytaka, aby aktywować/resetować chwytak podczas uruchamiania programu.
 
 .. figure:: robot_peripherals/009.png
    :align: center
    :width: 6in
 
-.. centered:: 图表 8.2‑3 夹爪指令编辑
+.. centered:: Schemat 8.2‑3 Edycja instrukcji chwytaka
 
-夹爪程序示教
-+++++++++++++++++
+Nauczanie programu chwytaka
++++++++++++++++++++++++++++
 
 .. list-table:: 
    :widths: 15 40 100
    :header-rows: 1
 
-   * - 序号
-     - 指令格式
-     - 注释
+   * - Nr
+     - Format instrukcji
+     - Komentarz
    * - 1
      - PTP(template2,100,-1,0)
-     - #等待夹取点
+     - # Oczekiwanie na punkt chwytania
    * - 2
      - PTP(template1,100,-1,0)
-     - #夹取点
+     - # Punkt chwytania
    * - 3
      - MoveGripper(1,255,255,0,1000,0)
-     - #夹爪闭合
+     - # Zamknięcie chwytaka
    * - 4
      - PTP(template2,100,-1,0)
      - /
    * - 5
      - PTP(template3,100,-1,0)
-     - #等待放件点
+     - # Oczekiwanie na punkt zwolnienia
    * - 6
      - PTP(template3,100,-1,0)
-     - #放件点
+     - # Punkt zwolnienia
    * - 7
      - MoveGripper(1,0,255,0,1000,0)
-     - #夹爪开启
+     - # Otwarcie chwytaka
 
-夹爪Lua末端协议配置
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-打开WebApp，依次点击“初始设置”、“外设”、“夹爪”、“自定义协议”。点击“协议管理”，则可以进行末端协议的配置。
+Konfiguracja protokołu Lua końcówki dla chwytaka
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-用户上传的文件名需要以“AXLE_LUA_End”开头命名，上传后列表中的协议名称会变为以“Custom_End”开头，该类协议可以下载和删除，用户上传的重名的文件会自动覆盖为最新Lua。
+Otwórz WebApp, kolejno kliknij „Ustawienia początkowe”, „Urządzenia peryferyjne”, „Chwytak”, „Niestandardowy protokół”. Kliknij „Zarządzanie protokołami”, aby przejść do konfiguracji protokołu końcówki.
+
+Nazwa pliku przesyłanego przez użytkownika musi zaczynać się od „AXLE_LUA_End”. Po przesłaniu nazwa protokołu na liście zmieni się na zaczynającą się od „Custom_End”. Protokoły tego typu można pobierać i usuwać. Przesłany przez użytkownika plik o tej samej nazwie zostanie automatycznie zastąpiony najnowszym Lua.
 
 .. figure:: robot_peripherals/277.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.2‑4-1 夹爪自定义协议上传
+.. centered:: Schemat 8.2‑4-1 Przesyłanie niestandardowego protokołu chwytaka
 
-机器人预设内嵌的协议以End_作为前缀，仅可下载，无法删除，其中夹爪（旋转夹爪、吸盘）的外设的内嵌协议如下图所示。
+Wbudowane domyślnie protokoły robota mają prefiks `End_` i można je tylko pobrać, nie można ich usunąć. Wbudowane protokoły dla urządzeń peryferyjnych chwytaka (chwytak obrotowy, przyssawka) pokazano na poniższym rysunku.
 
 .. figure:: robot_peripherals/278.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.2‑4-2 夹爪（旋转夹爪、吸盘）预设内嵌协议
+.. centered:: Schemat 8.2‑4-2 Wbudowane domyślnie protokoły dla chwytaka (chwytaka obrotowego, przyssawki)
 
-在确保选择协议正确的情况下，可去使能机器人，并应用开放协议，应用后机器人会自动进入boot模式，并将选择的协议应用到末端，当页面提示“升级成功，请重启控制箱”后，可重新上电控制箱。
+Po upewnieniu się, że wybrany protokół jest prawidłowy, można wyłączyć zasilanie robota i zastosować otwarty protokół. Po zastosowaniu robot automatycznie przejdzie w tryb boot i zastosuje wybrany protokół na końcówce. Gdy strona wyświetli komunikat „Aktualizacja powiodła się, proszę ponownie uruchomić szafę sterowniczą”, można ponownie włączyć zasilanie szafy sterowniczej.
 
 .. figure:: robot_peripherals/279.png
    :align: center
    :width: 6in
 
-.. centered:: 图表 8.2‑4-3 末端开放协议应用到末端板
+.. centered:: Schemat 8.2‑4-3 Zastosowanie otwartego protokołu końcówki na płycie końcowej
 
-重启进入WebApp页面后，页面会显示当前应用的协议名称，点击末端协议启用和设备启用后，则末端协议开始运行，其中设备ID为末端外设的Modbus从站地址，需要和协议中的内容配合使用。
+Po ponownym uruchomieniu i wejściu na stronę WebApp, strona wyświetli nazwę aktualnie zastosowanego protokołu. Po kliknięciu włączenia protokołu końcówki i włączeniu urządzenia, protokół końcówki zacznie działać. ID urządzenia to adres slave Modbus urządzenia peryferyjnego końcówki i musi być używany zgodnie z treścią protokołu.
 
 .. figure:: robot_peripherals/280.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.2‑4-4 夹爪末端协议配置显示及启用
+.. centered:: Schemat 8.2‑4-4 Wyświetlanie konfiguracji protokołu końcówki chwytaka i jego włączanie
 
-末端板会对上传的Lua协议进行校验，当Lua文件存在异常时，提示“末端Lua文件异常”警告，可进行“不恢复/恢复”处理。关闭Lua启用按钮，警告提示关闭。
+Płyta końcowa sprawdzi przesłany protokół Lua. Gdy plik Lua jest nieprawidłowy, pojawi się ostrzeżenie „Nieprawidłowy plik Lua na końcówce”. Można wybrać opcję „Nie przywracaj / Przywróć”. Zamknij przycisk włączania Lua, aby zamknąć ostrzeżenie.
 
 .. figure:: robot_peripherals/005.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.2‑4-5 夹爪末端协议配置显示及启用
+.. centered:: Schemat 8.2‑4-5 Wyświetlanie konfiguracji protokołu końcówki chwytaka i jego włączanie
 
-夹爪外设的Lua末端外设协议示例
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Przykład protokołu Lua urządzenia peryferyjnego końcówki dla chwytaka
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. code-block:: console
   
-  function Getbit(X,Bit)--Getbit(),提取字节对应Bit函数，参数：X：被提取bit的字节；Bit：需要提取第几位，可选范围为0-7
+  function Getbit(X,Bit)--Getbit(), funkcja do wyodrębnienia bitu z bajtu, parametry: X: bajt, z którego wyodrębniany jest bit; Bit: który bit wyodrębnić, zakres 0-7
   return ((X&(1<<Bit))>>Bit)
   end
 
-  function GetOneByte(U32)--GetOneByte(),提取数据0x1234,获取其低字节，返回值为0x34
+  function GetOneByte(U32)--GetOneByte(), wyodrębnia dane 0x1234, pobiera niski bajt, zwraca 0x34
   return ((U32>>0)&0xFF)
   end
 
-  function GetTwoByte(U32)--GetTwoByte(),提取数据0x1234,获取其高字节，返回值为0x12
+  function GetTwoByte(U32)--GetTwoByte(), wyodrębnia dane 0x1234, pobiera wysoki bajt, zwraca 0x12
   return ((U32>>8)&0xFF)
   end
-  function GetThreeByte(U32)--GetThreeByte(),提取数据0x56781234,提取后其返回值为0x78
+  function GetThreeByte(U32)--GetThreeByte(), wyodrębnia dane 0x56781234, zwraca 0x78
   return ((U32>>16)&0xFF)
   end
-  function GetFourByte(U32)--GetFourByte(),提取数据0x56781234,提取后其返回值为0x56
+  function GetFourByte(U32)--GetFourByte(), wyodrębnia dane 0x56781234, zwraca 0x56
   return ((U32>>24)&0xFF)
   end
   X,Speed,Torque=0,0,0
@@ -239,22 +240,22 @@
   local BFlag=LuaBreak()
   if(BFlag==1)then
   break
-  end--此处到文件末尾LuaGc(),end为固定用法
+  end--tutaj do końca pliku LuaGc(), end to stałe użycie
 
-  T1={0x01,0x06,0x03,0xE8,0x00,0x09,0xC9,0xBC}--填充夹爪指令(Modbus RTU指令)，T1-T5依次为夹爪动作执行指令，夹爪初始化指令，夹爪下发位置指令，夹爪下发速度指令，夹爪下发力矩指令
-  --/指令解析：T1[1]=0X01,为夹爪地址；T1[2]=0x06,写单个保持寄存器功能码；T1[3],T1[4]：0x03,0xE8,动作执行指令需要操作的寄存器的地址；T1[5],T1[6]：0x00,0x09,写入寄存器的数据；T1[7],T1[8]：0xC9,0xBC，CRC校验码，需要根据夹爪用户手册进行修改
+  T1={0x01,0x06,0x03,0xE8,0x00,0x09,0xC9,0xBC}--Wypełnij instrukcję chwytaka (instrukcja Modbus RTU), T1-T5 to kolejno instrukcja wykonania ruchu chwytaka, instrukcja inicjalizacji chwytaka, instrukcja ustawienia pozycji chwytaka, instrukcja ustawienia prędkości chwytaka, instrukcja ustawienia momentu chwytaka
+  --/Analiza instrukcji: T1[1]=0X01, adres chwytaka; T1[2]=0x06, kod funkcji zapisu pojedynczego rejestru holdingowego; T1[3], T1[4]: 0x03,0xE8, adres rejestru, na którym ma działać instrukcja wykonania ruchu; T1[5], T1[6]: 0x00,0x09, dane do zapisu w rejestrze; T1[7], T1[8]: 0xC9,0xBC, kod CRC, należy zmodyfikować zgodnie z instrukcją użytkownika chwytaka
   T2={}
   T3={}
   T4={}
   T5={}
 
-  T7={0x01,0x03,0x07,0xD0,0x00,0x01,0x84,0x87}--T7-T12，夹爪状态读取指令，依次为读取夹爪状态指令,读取夹爪初始化指令,读取夹爪故障码指令,读取夹爪位置指令,读取夹爪速度指令,读取夹爪力矩指令
+  T7={0x01,0x03,0x07,0xD0,0x00,0x01,0x84,0x87}--T7-T12, instrukcje odczytu stanu chwytaka, kolejno instrukcja odczytu stanu chwytaka, instrukcja odczytu inicjalizacji chwytaka, instrukcja odczytu kodu błędu chwytaka, instrukcja odczytu pozycji chwytaka, instrukcja odczytu prędkości chwytaka, instrukcja odczytu momentu chwytaka
   T8={}
   T9={}
   T10={}
   T11={}
   T12={}
-  Rcmd1,Rcmd2,Rcmd3,Rcmd4=GetGripCmd()--固定用法，不需要进行修改，Rcm2为控制器下发的夹爪地址，Rcmd4为控制器下发的数据
+  Rcmd1,Rcmd2,Rcmd3,Rcmd4=GetGripCmd()--stałe użycie, nie wymaga modyfikacji, Rcm2 to adres chwytaka wysyłany przez sterownik, Rcmd4 to dane wysyłane przez sterownik
   if(Rcmd1==1) then
   T1[1]=Rcmd2                   
   T2[1]=Rcmd2
@@ -267,12 +268,12 @@
   T9[1]=Rcmd2
   T10[1]=Rcmd2
   T11[1]=Rcmd2
-  T12[1]=Rcmd2                    --**夹爪地址更新
-  if (Rcmd3==1) then              --夹爪动作执行指令
-  T1[7],T1[8]=CrcValue(T1[1],T1[2],T1[3],T1[4],T1[5],T1[6])--计算Modbus RTU指令CRC值，两字节
-  EndTxGripData(T1[1],T1[2],T1[3],T1[4],T1[5],T1[6],T1[7],T1[8])--末端发送指令给夹爪
-  DelayMs(10)                                                   --延时10ms
-  A,Rxd1,Rxd2,Rxd3,Rxd4,Rxd5,Rxd6,Rxd7=EndRxGripData()--末端将接收到的夹爪的反馈数据返回到Lua中，具体反馈内容需要查阅夹爪用户手册
+  T12[1]=Rcmd2                    --** Aktualizacja adresu chwytaka
+  if (Rcmd3==1) then              -- Instrukcja wykonania ruchu chwytaka
+  T1[7],T1[8]=CrcValue(T1[1],T1[2],T1[3],T1[4],T1[5],T1[6])--Oblicz wartość CRC instrukcji Modbus RTU, dwa bajty
+  EndTxGripData(T1[1],T1[2],T1[3],T1[4],T1[5],T1[6],T1[7],T1[8])--Końcówka wysyła instrukcję do chwytaka
+  DelayMs(10)                                                   --Opóźnienie 10 ms
+  A,Rxd1,Rxd2,Rxd3,Rxd4,Rxd5,Rxd6,Rxd7=EndRxGripData()--Końcówka zwraca dane zwrotne odebrane z chwytaka do Lua, szczegółowa treść zwrotna wymaga zapoznania się z instrukcją użytkownika chwytaka
   GripStateBack(Rxd3)
   end
   if (Rcmd3==2) then
@@ -376,205 +377,205 @@
   LuaGc()
   end
 
-设备启用
-+++++++++++++++++++++++++++++
+Włączanie urządzenia
+++++++++++++++++++++
 
-**Step1**：启用夹爪->选择夹爪ID->勾选夹爪适配的功能码->点击配置，已配置设备中显示夹爪的ID及功能码。
+**Krok 1**: Włącz chwytak -> wybierz ID chwytaka -> zaznacz kody funkcji dostosowane do chwytaka -> kliknij Konfiguruj. W skonfigurowanych urządzeniach wyświetlane są ID chwytaka i kody funkcji.
 
 .. figure:: robot_peripherals/010.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.2‑4 配置夹爪
+.. centered:: Schemat 8.2‑4 Konfiguracja chwytaka
 
 .. note:: 
-  由于末端开放功能目前对夹爪设备地址支持范围为1~8，使用前应通过夹爪厂商的上位机调整夹爪设备地址。
+  Ponieważ obecna funkcja otwartej końcówki obsługuje zakres adresów urządzeń chwytaka od 1 do 8, przed użyciem należy dostosować adres urządzenia chwytaka za pomocą oprogramowania nadrzędnego producenta chwytaka.
 
-  勾选功能码应通过夹爪厂商提供的产品说明书查询夹爪适配的功能，且应与末端Lua功能码保持对应，具体请查询《末端Lua适配夹爪说明手册》。
+  Zaznaczenie kodów funkcji powinno odbywać się na podstawie instrukcji produktu dostarczonej przez producenta chwytaka, aby sprawdzić funkcje dostosowane do chwytaka i powinny one odpowiadać kodom funkcji Lua końcówki. Szczegóły można znaleźć w „Podręczniku dostosowywania chwytaka do Lua końcówki”.
 
-**Step2**：选择夹爪ID->复位->激活，夹爪进行一次初始化，具体初始化情况请参考夹爪厂商提供的产品说明书。
+**Krok 2**: Wybierz ID chwytaka -> Resetuj -> Aktywuj. Chwytak wykonuje inicjalizację. Szczegóły inicjalizacji można znaleźć w instrukcji produktu dostarczonej przez producenta chwytaka.
 
 .. figure:: robot_peripherals/011.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.2‑5 激活夹爪
+.. centered:: Schemat 8.2‑5 Aktywacja chwytaka
 
-**Step3**：进入示教程序->程序编程->添加夹爪运动指令。
+**Krok 3**: Przejdź do Program nauczania -> Programowanie -> dodaj instrukcję ruchu chwytaka.
 
 .. figure:: robot_peripherals/012.png
    :align: center
    :width: 6in
 
-.. centered:: 图表 8.2‑6 添加夹爪运动指令
+.. centered:: Schemat 8.2‑6 Dodawanie instrukcji ruchu chwytaka
 
 .. figure:: robot_peripherals/013.png
    :align: center
    :width: 6in
 
-.. centered:: 图表 8.2‑7 夹爪运动指令示例
+.. centered:: Schemat 8.2‑7 Przykład instrukcji ruchu chwytaka
 
-多个夹爪
-+++++++++++
+Wiele chwytaków
++++++++++++++++
 
-激活和运动控制参考夹爪步骤。 
+Aktywacja i sterowanie ruchem — patrz kroki dla chwytaka.
 
 .. figure:: robot_peripherals/014.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.2‑8 配置多个夹爪
+.. centered:: Schemat 8.2‑8 Konfiguracja wielu chwytaków
 
-.. note:: 由于末端开放功能目前对夹爪设备地址支持范围为1~8，使用前应通过夹爪厂商的上位机调整夹爪设备地址。
+.. note:: Ponieważ obecna funkcja otwartej końcówki obsługuje zakres adresów urządzeń chwytaka od 1 do 8, przed użyciem należy dostosować adres urządzenia chwytaka za pomocą oprogramowania nadrzędnego producenta chwytaka.
 
-旋转夹爪
-+++++++++++
+Chwytak obrotowy
+++++++++++++++++
 
-**Step1**：启用夹爪->选择夹爪ID->勾选夹爪适配的功能码->点击配置，已配置设备中显示夹爪的ID及功能码。
+**Krok 1**: Włącz chwytak -> wybierz ID chwytaka -> zaznacz kody funkcji dostosowane do chwytaka -> kliknij Konfiguruj. W skonfigurowanych urządzeniach wyświetlane są ID chwytaka i kody funkcji.
 
 .. figure:: robot_peripherals/010.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.2‑9 配置夹爪及功能码
+.. centered:: Schemat 8.2‑9 Konfiguracja chwytaka i kodów funkcji
 
-.. note:: 勾选功能码应通过夹爪厂商提供的产品说明书查询夹爪适配的功能，且应与末端Lua功能码保持对应，具体请查询《FR05-末端全外设协议-V2.5-20241101.xlsx》。
+.. note:: Zaznaczenie kodów funkcji powinno odbywać się na podstawie instrukcji produktu dostarczonej przez producenta chwytaka, aby sprawdzić funkcje dostosowane do chwytaka i powinny one odpowiadać kodom funkcji Lua końcówki. Szczegóły można znaleźć w „FR05-Protokół wszystkich urządzeń peryferyjnych końcówki-V2.5-20241101.xlsx”.
 
-**Step2**：选择夹爪ID->复位->激活，夹爪进行一次初始化，具体初始化情况请参考夹爪厂商提供的产品说明书。
+**Krok 2**: Wybierz ID chwytaka -> Resetuj -> Aktywuj. Chwytak wykonuje inicjalizację. Szczegóły inicjalizacji można znaleźć w instrukcji produktu dostarczonej przez producenta chwytaka.
 
 .. figure:: robot_peripherals/011.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.2‑10 激活夹爪
+.. centered:: Schemat 8.2‑10 Aktywacja chwytaka
 
-**Step3**：进入示教程序->程序编程->添加夹爪运动指令。
+**Krok 3**: Przejdź do Program nauczania -> Programowanie -> dodaj instrukcję ruchu chwytaka.
 
 .. figure:: robot_peripherals/012.png
    :align: center
    :width: 6in
 
-.. centered:: 图表 8.2‑11 添加旋转夹爪运动指令
+.. centered:: Schemat 8.2‑11 Dodawanie instrukcji ruchu chwytaka obrotowego
 
 .. figure:: robot_peripherals/015.png
    :align: center
    :width: 6in
 
-.. centered:: 图表 8.2‑12 旋转夹爪运动指令示例
+.. centered:: Schemat 8.2‑12 Przykład instrukcji ruchu chwytaka obrotowego
 
-.. note:: 旋转圈数为绝对旋转圈数，正转圈数最大为90圈，反转圈数最大为90圈，旋转后需要进行复位处理。
+.. note:: Liczba obrotów to absolutna liczba obrotów. Maksymalna liczba obrotów w przód to 90, maksymalna liczba obrotów w tył to 90. Po wykonaniu obrotu należy wykonać reset.
 
-力传感器
--------------------------
+Czujnik siły
+------------
 
-在“初始设置”->“外设”->“力传感器”界面中，当前可以通过已适配设备和末端Lua自定义开放协议使用力传感器。
+W interfejsie „Ustawienia początkowe” -> „Urządzenia peryferyjne” -> „Czujnik siły” można obecnie używać czujnika siły za pomocą „Urządzeń dostosowanych” i „Niestandardowego otwartego protokołu Lua na końcówce”.
 
-已适配设备
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Urządzenia dostosowane
+~~~~~~~~~~~~~~~~~~~~~~
 
-**Step1**：点击“已适配设备”进入末端外设配置界面。
+**Krok 1**: Kliknij „Urządzenia dostosowane”, aby przejść do interfejsu konfiguracji urządzeń peryferyjnych końcówki.
 
-力传感器配置信息分为厂商、类型、软件版本和挂载位置，用户可根据具体的生产需求来配置相应的力传感器信息。若用户需要更改配置，可先选择相应的编号，点击“清除”按钮，来清除相应的信息，并重新根据需求配置；
+Informacje konfiguracyjne czujnika siły dzielą się na producenta, typ, wersję oprogramowania i lokalizację montażu. Użytkownik może skonfigurować odpowiednie informacje o czujniku siły zgodnie z konkretnymi potrzebami produkcyjnymi. Jeśli użytkownik chce zmienić konfigurację, może najpierw wybrać odpowiedni numer, kliknąć przycisk „Wyczyść”, aby wyczyścić odpowiednie informacje, a następnie ponownie skonfigurować zgodnie z potrzebami;
 
 .. figure:: robot_peripherals/016.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.3‑1 力传感器配置
+.. centered:: Schemat 8.3‑1 Konfiguracja czujnika siły
 
 .. important:: 
-	点击清除配置前，相应的传感器应处于未激活状态。
+    Przed kliknięciem „Wyczyść konfigurację” odpowiedni czujnik powinien być w stanie nieaktywnym.
 
-**Step2**：力传感器配置完成后，用户可在页面下方的信息表中查看相应的力传感器信息，若发现配置错误，可点击“清除”按钮，重新配置。
+**Krok 2**: Po zakończeniu konfiguracji czujnika siły użytkownik może wyświetlić odpowiednie informacje o czujniku siły w tabeli informacji na dole strony. Jeśli zostanie znaleziony błąd konfiguracji, może kliknąć przycisk „Wyczyść”, aby ponownie skonfigurować.
 
 .. figure:: robot_peripherals/017.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.3‑2 力传感器配置信息
+.. centered:: Schemat 8.3‑2 Informacje konfiguracyjne czujnika siły
 
-**Step3**：选择配置完成的力传感器编号，点击“复位”按钮，页面弹出命令发送成功后，再点击“激活”按钮，可查看力传感器信息表中的激活状态，来判断是否激活成功；此外，力传感器会有初始值，用户根据使用需求选择“零点矫正”和“去除零点”。力传感器零点矫正需要确保力传感器水平垂直向下，且机器人未配置负载。
+**Krok 3**: Wybierz w pełni skonfigurowany numer czujnika siły, kliknij przycisk „Resetuj”. Po wyświetleniu na stronie komunikatu o pomyślnym wysłaniu polecenia, kliknij przycisk „Aktywuj”. Sprawdź stan aktywacji w tabeli informacji o czujniku siły, aby określić, czy aktywacja się powiodła. Ponadto czujnik siły ma wartość początkową. Użytkownik może w razie potrzeby wybrać „Korekcja zera” i „Usuń punkt zerowy”. Korekcja zera czujnika siły wymaga upewnienia się, że czujnik siły jest skierowany poziomo i pionowo w dół, a robot nie ma skonfigurowanego obciążenia.
 
-**Step4**：力传感器配置完成后，需要配置传感器类型工具坐标系，可根据传感器与末端工具中心的距离直接输入传感器工具坐标系值并应用。
+**Krok 4**: Po zakończeniu konfiguracji czujnika siły należy skonfigurować układ współrzędnych narzędzia typu czujnik. Można bezpośrednio wprowadzić wartości układu współrzędnych narzędzia czujnika na podstawie odległości między czujnikiem a środkiem narzędzia końcówki i zastosować je.
 
-力传感器末端Lua协议
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Protokół Lua końcówki dla czujnika siły
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-打开WebApp，依次点击“初始设置”、“外设”、“力传感器”、“自定义协议”。点击“协议管理”，则可以进行末端协议的配置。目前力传感器预设内嵌的协议如下图所示。3.9.2版本新增内嵌End_JD_XJC_V1.0.lua、End_JD_GZCX_V1.0.lua两个夹爪+力传感器的组合协议。
+Otwórz WebApp, kolejno kliknij „Ustawienia początkowe”, „Urządzenia peryferyjne”, „Czujnik siły”, „Niestandardowy protokół”. Kliknij „Zarządzanie protokołami”, aby przejść do konfiguracji protokołu końcówki. Obecnie wbudowane domyślnie protokoły dla czujnika siły pokazano na poniższym rysunku. Wersja 3.9.2 dodaje dwa wbudowane protokoły kombinowane dla chwytaka + czujnika siły: End_JD_XJC_V1.0.lua, End_JD_GZCX_V1.0.lua.
 
 .. figure:: robot_peripherals/281.png
    :align: center
    :width: 6in
 
-.. centered:: 图表 8.3‑2-2 力传感器预设内嵌协议
+.. centered:: Schemat 8.3‑2-2 Wbudowane domyślnie protokoły dla czujnika siły
 
-焊接手柄末端Lua协议
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Protokół Lua końcówki dla uchwytu spawalniczego
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-打开WebApp，依次点击“初始设置”、“外设”、“焊接手柄”、“自定义协议”。点击“协议管理”，则可以进行末端协议的配置。目前焊接手柄预设内嵌的协议如下图所示。3.9.2版本新增内嵌End_SM_JD_V1.3.lua、End_SM_GZCX_V1.3.lua、End_SM_XJC_V1.3.lua三个SmartTool+夹爪或力传感器的组合协议。
+Otwórz WebApp, kolejno kliknij „Ustawienia początkowe”, „Urządzenia peryferyjne”, „Uchwyt spawalniczy”, „Niestandardowy protokół”. Kliknij „Zarządzanie protokołami”, aby przejść do konfiguracji protokołu końcówki. Obecnie wbudowane domyślnie protokoły dla uchwytu spawalniczego pokazano na poniższym rysunku. Wersja 3.9.2 dodaje trzy wbudowane protokoły kombinowane dla SmartTool + chwytaka lub czujnika siły: End_SM_JD_V1.3.lua, End_SM_GZCX_V1.3.lua, End_SM_XJC_V1.3.lua.
 
 .. figure:: robot_peripherals/283.png
    :align: center
    :width: 6in
 
-.. centered:: 图表 8.3‑2-3 焊接手柄预设内嵌协议
+.. centered:: Schemat 8.3‑2-3 Wbudowane domyślnie protokoły dla uchwytu spawalniczego
 
-末端lua协议自动生成
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Automatyczne generowanie protokołu Lua końcówki
++++++++++++++++++++++++++++++++++++++++++++++++
 
-本次新增功能，可对内嵌SmartTool焊接手柄外设相关的协议（目前仅支持End_SmartTool_V1.3.lua、End_SM_JD_V1.3.lua、End_SM_GZCX_V1.3.lua、End_SM_XJC_V1.3.lua四种协议可配置自动生成），通过Web页面配置后自动生成末端lua协议并上传应用到末端，无需用户撰写。用户按照需求对SmartTool焊接手柄的A、B、C、D、E、IO键进行配置，配置完成后需要去使能机器人，并点击“应用”， 此时页面会提示“是否进入boot并应用开放协议”，点击确认后机器人进入boot状态并自动上传自动生成的末端lua协议，重启机器人后则可以按照配置的按键进行SmartTool的使用。
+Ta nowa funkcja umożliwia automatyczne wygenerowanie protokołu Lua końcówki dla wbudowanych protokołów związanych z urządzeniem peryferyjnym SmartTool (obecnie obsługiwane są tylko cztery protokoły: End_SmartTool_V1.3.lua, End_SM_JD_V1.3.lua, End_SM_GZCX_V1.3.lua, End_SM_XJC_V1.3.lua). Po skonfigurowaniu na stronie internetowej, protokół Lua końcówki jest automatycznie generowany, przesyłany i stosowany na końcówce, bez konieczności pisania przez użytkownika. Użytkownik konfiguruje przyciski A, B, C, D, E, IO uchwytu spawalniczego SmartTool zgodnie z potrzebami. Po zakończeniu konfiguracji należy wyłączyć zasilanie robota i kliknąć „Zastosuj”. Wtedy strona wyświetli pytanie „Czy wejść w tryb boot i zastosować otwarty protokół?”. Po potwierdzeniu robot przechodzi w stan boot i automatycznie przesyła automatycznie wygenerowany protokół Lua końcówki. Po ponownym uruchomieniu robota można używać SmartTool zgodnie ze skonfigurowanymi przyciskami.
 
 .. figure:: robot_peripherals/284.png
    :align: center
    :width: 6in
 
-.. centered:: 图表 8.3‑2-4 SmartTool焊接手柄配置协议自动生成
+.. centered:: Schemat 8.3‑2-4 Automatyczne generowanie protokołu konfiguracji uchwytu spawalniczego SmartTool
 
 .. figure:: robot_peripherals/285.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.3‑2-5 页面提示“是否进入boot并应用开放协议”
+.. centered:: Schemat 8.3‑2-5 Komunikat strony „Czy wejść w tryb boot i zastosować otwarty protokół?”
 
-SmartTool程序生成模板程序导入
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Import szablonu programu generowanego przez SmartTool
+++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-如果SmartTool按键配置了程序生成的功能，则基于开放协议可提供两种生成的程序，默认生成空白的lua程序，或者用户可以选择上传template_开头的模板作为新建程序的模板，当新建程序选择模板程序时，SmartTool触发“新建程序”生成的lua文件包含上传的模板文件内容，后续添加的指令均在模板内容之后新增添加。
+Jeśli przycisk SmartTool został skonfigurowany z funkcją generowania programu, to na podstawie otwartego protokołu można dostarczyć dwa rodzaje generowanych programów. Domyślnie generowany jest pusty program lua, albo użytkownik może przesłać szablon zaczynający się od `template_` jako szablon dla nowego programu. Gdy podczas tworzenia nowego programu zostanie wybrany program szablonowy, wygenerowany plik lua przez wyzwolenie „Nowy program” na SmartTool będzie zawierał treść przesłanego pliku szablonu, a późniejsze dodane instrukcje będą dodawane po treści szablonu.
 
 .. figure:: robot_peripherals/286.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.3‑2-6 SmartTool程序生成模板程序导入
+.. centered:: Schemat 8.3‑2-6 Import szablonu programu generowanego przez SmartTool
 
-SmartTool运动指令点配置
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Konfiguracja punktów instrukcji ruchu SmartTool
+++++++++++++++++++++++++++++++++++++++++++++++++
 
-SmartTool在配置“PTP”“LIN”“ARC”三条指令时，可选择生成指令点的存储数据库为“全局示教点”还是“局部示教点”。当选择“全局示教点”时，生成的指令点可通过“示教程序”、“示教点”查看；当选择为“局部示教点”时，生成的指令点可通过“示教程序”、“程序编程”、“局部示教点”查看。
+Podczas konfigurowania trzech instrukcji „PTP”, „LIN”, „ARC” w SmartTool, można wybrać, czy baza danych przechowująca generowane punkty instrukcji to „Globalne punkty nauczania” czy „Lokalne punkty nauczania”. Gdy wybrano „Globalne punkty nauczania”, wygenerowane punkty instrukcji można wyświetlić przez „Program nauczania”, „Punkty nauczania”. Gdy wybrano „Lokalne punkty nauczania”, wygenerowane punkty instrukcji można wyświetlić przez „Program nauczania”, „Programowanie”, „Lokalne punkty nauczania”.
 
 .. figure:: robot_peripherals/287.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.3‑2-7 SmartTool运动指令点“全局示教点”、“局部示教点”配置
+.. centered:: Schemat 8.3‑2-7 Konfiguracja „Globalnych punktów nauczania” i „Lokalnych punktów nauczania” dla punktów instrukcji ruchu SmartTool
 
-SmartTool防误触模式
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Tryb zapobiegania przypadkowemu dotknięciu SmartTool
++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-基于开放协议的SmartTool新增了防误触模式，依次点击“初始设置”、“外设”、“焊接手柄”、“自定义协议”。在启用末端协议后，可看到“防误触模式”的开关，当启用该功能时，SmartTool的“撤销程序”、“清空程序”两个按键功能需要按两次才能触发。
+SmartTool oparty na otwartym protokole zyskał nowy tryb zapobiegania przypadkowemu dotknięciu. Kolejno kliknij „Ustawienia początkowe”, „Urządzenia peryferyjne”, „Uchwyt spawalniczy”, „Niestandardowy protokół”. Po włączeniu protokołu końcówki widać przełącznik „Tryb zapobiegania przypadkowemu dotknięciu”. Gdy ta funkcja jest włączona, funkcje przycisków SmartTool „Cofnij program” i „Wyczyść program” wymagają dwukrotnego naciśnięcia, aby zadziałać.
 
 .. figure:: robot_peripherals/288.png
    :align: center
    :width: 6in
 
-.. centered:: 图表 8.3‑2-8 SmartTool“防误触模式”功能
+.. centered:: Schemat 8.3‑2-8 Funkcja „Tryb zapobiegania przypadkowemu dotknięciu” w SmartTool
 
-焊接手柄的Lua末端外设协议示例
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Przykład protokołu Lua urządzenia peryferyjnego końcówki dla uchwytu spawalniczego
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-A、B、C、D、E、IO键六个按键功能可通过代码中的31行的key值进行修改定义，其中K38=Getbit(R[7],1)，K0=Getbit(R[7],2)为“清空程序”和“撤销按键”，不可修改，后续5个K值可按照《末端全外设协议》文档中的定义进行修改。本次示例（内嵌SmartTool协议）中对应的按键功能为，A:LIN、B:PTP、C:创建程序、D:焊接中断恢复、E:焊接中断退出、IO：LIN+焊接+摆动。
+Funkcje sześciu przycisków A, B, C, D, E, IO można modyfikować i definiować za pomocą wartości key w linii 31 kodu, gdzie K38=Getbit(R[7],1), K0=Getbit(R[7],2) to „Wyczyść program” i „Cofnij przycisk” i nie można ich modyfikować. Kolejne 5 wartości K można modyfikować zgodnie z definicjami w dokumencie „Protokół wszystkich urządzeń peryferyjnych końcówki”. W tym przykładzie (wbudowany protokół SmartTool) odpowiadające funkcje przycisków to: A: LIN, B: PTP, C: Utwórz program, D: Wznów po przerwaniu spawania, E: Wyjdź po przerwaniu spawania, IO: LIN + spawanie + wahadło.
 
-.. centered:: 焊接手柄的Lua末端外设协议示例（SmartTool）
+.. centered:: Przykład protokołu Lua urządzenia peryferyjnego końcówki dla uchwytu spawalniczego (SmartTool)
   
 .. code-block:: 
    :linenos:
@@ -584,7 +585,7 @@ A、B、C、D、E、IO键六个按键功能可通过代码中的31行的key值�
    end
 
    if(Getbit(GetRobotState(),0)==1)then
-   local SetParams={B6=3}-- B6-操作DO端口号为DO3
+   local SetParams={B6=3}-- B6- obsługiwany numer portu DO to DO3
    SetWeldParams(SetParams)
    while(1)
    do
@@ -610,117 +611,113 @@ A、B、C、D、E、IO键六个按键功能可通过代码中的31行的key值�
    Len=EndRxWeldData(R)
    if((Len==13)and(R[1]==0x7D)and(R[2]==0x01)and(R[3]==0x30))then
    local key={K38=Getbit(R[7],1),K0=Getbit(R[7],2),K3=Getbit(R[7],3),K25=Getbit(R[7],4),K39=Getbit(R[7],5),K27=Getbit(R[7],6),K28=Getbit(R[7],7), K44=Getbit(R[8],0),
-   K6=Getbit(R[8],1),K7=Getbit(R[8],2)}--smarttool焊接手柄按键设置，撤销按键-K38撤销程序；清空按键-K0清空程序；A按键-K3 LIN；B按键-K25 PTP；C按键-K39 创建程序；D按键-K27焊接中断恢复；E按键-K28焊接中断退出；IO键-K44 LIN+焊接+摆动手/自动按键-K6手/自动；运行/暂停按键-K7运行/暂停
+   K6=Getbit(R[8],1),K7=Getbit(R[8],2)}--Ustawienia przycisków uchwytu spawalniczego smarttool, przycisk cofania-K38 cofnij program; przycisk czyszczenia-K0 wyczyść program; przycisk A-K3 LIN; przycisk B-K25 PTP; przycisk C-K39 utwórz program; przycisk D-K27 wznowienie po przerwaniu spawania; przycisk E-K28 wyjście po przerwaniu spawania; przycisk IO-K44 LIN+spawanie+wahadło; przycisk ręczny/automatyczny-K6 ręczny/automatyczny; przycisk uruchom/zatrzymaj-K7 uruchom/zatrzymaj
    SetWeldToolKeys(key)
    end
    LuaGc()
    end
    end
 
-传感器负载辨识
-~~~~~~~~~~~~~~~~~~~~~~~~
+Identyfikacja obciążenia czujnika
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-在“初始设置”->“基础”->“负载”菜单栏下，点击“传感器辨识”，进入传感器负载辨识界面。
+W menu „Ustawienia początkowe” -> „Podstawowe” -> „Obciążenie” kliknij „Identyfikacja czujnika”, aby przejść do interfejsu identyfikacji obciążenia czujnika.
 
-特定姿态辨识：清除末端负载数据，配置好力传感器后，建立传感器坐标系，将机器人末端姿态调整为垂直向下，进行“零点矫正”后安装末端负载。首先选择对应传感器工具坐标系，调整机器人，使得传感器及工具垂直向下，记录数据，计算质量。接着，调整机器人3个不同姿态，分别记录三组数据，计算出质心，确认无误后点击应用。
+Identyfikacja w określonej pozie: Wyczyść dane obciążenia końcówki. Po skonfigurowaniu czujnika siły utwórz układ współrzędnych czujnika. Ustaw pozę końcówki robota na pionową w dół, wykonaj „Korekcję zera”, a następnie zamontuj obciążenie końcowe. Najpierw wybierz odpowiedni układ współrzędnych narzędzia czujnika, dostosuj robota tak, aby czujnik i narzędzie były skierowane pionowo w dół, zapisz dane, oblicz masę. Następnie dostosuj robota do 3 różnych poz, zapisz trzy zestawy danych, oblicz środek ciężkości, a po potwierdzeniu, że jest prawidłowy, kliknij Zastosuj.
 
-**动态辨识**：清除末端负载数据，配置好力传感器后，建立传感器坐标系，将机器人末端姿态调整为垂直向下，进行“零点矫正”后安装末端负载。点击“辨识开启”，拖动机器人进行运动，接着点击“辨识关闭”，即可自动将负载结果应用到机器人中。
+**Identyfikacja dynamiczna**: Wyczyść dane obciążenia końcówki. Po skonfigurowaniu czujnika siły utwórz układ współrzędnych czujnika. Ustaw pozę końcówki robota na pionową w dół, wykonaj „Korekcję zera”, a następnie zamontuj obciążenie końcowe. Kliknij „Włącz identyfikację”, przeciągnij robota, aby się poruszał, a następnie kliknij „Wyłącz identyfikację”. Wynik obciążenia zostanie automatycznie zastosowany w robocie.
 
-**自动校零**：传感器记录初始位置后，可自动校零。
+**Automatyczna kalibracja zera**: Po zapisaniu pozycji początkowej przez czujnik, można automatycznie wyzerować.
 
 .. figure:: robot_peripherals/018.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.3‑3 传感器负载辨识
+.. centered:: Schemat 8.3‑3 Identyfikacja obciążenia czujnika
 
-力传感器辅助拖动
-~~~~~~~~~~~~~~~~~~~~~~~
+Wspomaganie przeciągania przez czujnik siły
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-配置好传感器后，可以搭配传感器对拖动机器人进行更好的辅助。第一次使用时可以按照右侧图片的数据进行配置，应用完成后，此时无需进入拖动模式，直接对末端力传感器进行拖拽，即可控制机器人在固定姿态进行移动。（如下图中的数据为参考标准）
+Po skonfigurowaniu czujnika można go użyć do lepszego wspomagania przeciągania robota. Przy pierwszym użyciu można skonfigurować dane zgodnie z obrazkiem po prawej stronie. Po zakończeniu stosowania, bez wchodzenia w tryb przeciągania, wystarczy bezpośrednio przeciągnąć czujnik siły na końcówce, aby kontrolować ruch robota w ustalonej pozie. (Dane na poniższym rysunku są przykładowymi wartościami odniesienia)
 
 .. figure:: robot_peripherals/019.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.3‑4 力/扭矩传感器拖动锁定
+.. centered:: Schemat 8.3‑4 Blokowanie przeciągania za pomocą czujnika siły/momentu
 
 .. note:: 
-   奇异点策略是力传感器辅助锁定下开发的奇异点穿越及规避功能。
+   Strategia punktów osobliwych to funkcja przechodzenia i omijania punktów osobliwych opracowana dla wspomagania blokowania przez czujnik siły.
 
-   奇异点规避策略是默认功能选项，开启辅助拖动后即默认开启规避功能，奇异点规避是当机器人处于奇异构型时，施加虚拟力使机器人远离奇异构型的功能。
+   Strategia omijania punktów osobliwych to domyślna opcja funkcji. Po włączeniu wspomagania przeciągania domyślnie włączana jest funkcja omijania. Omijanie punktów osobliwych polega na przykładaniu wirtualnej siły, gdy robot znajduje się w konfiguracji osobliwej, aby oddalić go od tej konfiguracji.
 
-   奇异构型：
+   Konfiguracje osobliwe:
 
-   **肘奇异**：旋转轴2、3、4处于同一平面内，此时肘关节处于完全伸展或完全收缩，由于FR机器人机械限位，完全收缩这种形位机器人无法到达。
+   **Osobliwość łokcia**: Osie obrotu 2, 3, 4 znajdują się w tej samej płaszczyźnie. Wtedy staw łokciowy jest całkowicie wyprostowany lub całkowicie zgięty. Z powodu ograniczeń mechanicznych robota FR, całkowicie zgięta konfiguracja jest nieosiągalna dla robota.
 
-   **腕奇异**：旋转轴4、6平行，此时由于FR机器人机械限位，这种形位机器人无法到达。
+   **Osobliwość nadgarstka**: Osie obrotu 4 i 6 są równoległe. Z powodu ograniczeń mechanicznych robota FR, ta konfiguracja jest nieosiągalna dla robota.
 
-   **肩奇异**：腕中心点位于旋转轴1、2所构成的平面。
+   **Osobliwość ramienia**: Środek nadgarstka znajduje się na płaszczyźnie utworzonej przez osie obrotu 1 i 2.
 
-   奇异点穿越功能，选择“奇异点策略”为“穿越”并应用，当机器人检测到当前位姿处于奇异构型，自动切换为电流环拖动模式，当检测退出奇异构型，拖动模式切换为力传感器辅助拖动继续运动。
+   Funkcja przechodzenia przez punkt osobliwy: Wybierz „Strategia punktów osobliwych” jako „Przejście” i zastosuj. Gdy robot wykryje, że bieżąca poza i orientacja znajdują się w konfiguracji osobliwej, automatycznie przełączy się w tryb przeciągania z pętlą prądową. Gdy wykryje wyjście z konfiguracji osobliwej, tryb przeciągania przełączy się z powrotem na wspomaganie przez czujnik siły, aby kontynuować ruch.
 
-**自适应选择**：在需要装配时开启，开启后拖动变重；
+**Wybór adaptacyjny**: Włącz podczas potrzeb montażu. Po włączeniu przeciąganie staje się cięższe.
 
-**惯性参数**：调节拖动过程中的手感，需在技术人员指导下谨慎操作。
+**Parametry bezwładności**: Regulują odczucia podczas przeciągania. Należy ostrożnie operować pod kierunkiem technika.
 
-**阻尼参数**：
+**Parametry tłumienia**:
 
--  平动方向：建议设置参数在[100-200]之间；
+-  Kierunki translacji: Zalecane ustawienie parametrów w zakresie [100-200];
+-  Kierunki rotacji: Zalecane ustawienie parametrów w zakresie [3-10], dla kierunku RZ zakres [0.1-5];
+-  Efekt: Podczas przeciągania z użyciem czujnika, zwiększenie tłumienia utrudnia przeciąganie, zmniejszenie tłumienia sprawia, że przeciąganie robota jest zbyt lekkie (zaleca się, aby nie było zbyt małe);
+-  Ogólny zakres parametrów tłumienia: Translacja XYZ: [100-1000]; Rotacja RX, RY: [3-50], RZ: [2-10];
+-  Maksymalna siła przeciągania wynosi 50, maksymalna prędkość przeciągania wynosi 180.
 
--  转动方向：建议设置参数在[3-10]之间，其中RZ方向设置范围在[0.1-5]；
+**Parametry sztywności**: Ustaw wszystkie na 0;
 
--  效果：借助传感器拖动时，增大阻尼会导致拖动困难，减小阻尼会导致拖动机器人过于轻松（建议不要太小）；
-
--  阻尼参数整体范围：平动XYZ：[100-1000]；转动RX、RY：[3-50],RZ:[2-10]；
-
--  最大拖动力为50，最大拖动速度为180。
-
-**刚度参数**：均设为0；
-
-**拖动力阈值**：平动XYZ为[5-10]；转动RX、RY、RZ为[0.5-5]；
+**Próg siły przeciągania**: Translacja XYZ: [5-10]; Rotacja RX, RY, RZ: [0.5-5];
 
 .. important:: 
-   通过加大平动方向XYZ或转动方向RX、RY、RZ的力阈值来实现锁定的方式。
+   Blokowanie osiąga się poprzez zwiększenie progu siły dla kierunków translacji XYZ lub rotacji RX, RY, RZ.
 
-力/扭矩传感器碰撞检测
-~~~~~~~~~~~~~~~~~~~~~~~~~
+Wykrywanie kolizji za pomocą czujnika siły/momentu
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-指令说明：“FT_Guard”指令为碰撞检测指令。选择对应的传感器坐标系，勾选生效的力矩方向检测，设置当前值，碰撞最大阈值和碰撞最小阈值三项，碰撞检测条件正常范围为（当前值-最小阈值，当前值+最大阈值），将“开启”和“关闭”指令加入到程序中在。
+Opis instrukcji: Instrukcja „FT_Guard” to instrukcja wykrywania kolizji. Wybierz odpowiedni układ współrzędnych czujnika, zaznacz aktywne kierunki wykrywania momentu, ustaw bieżącą wartość, maksymalny próg kolizji i minimalny próg kolizji. Normalny zakres warunku wykrywania kolizji to (wartość bieżąca - próg minimalny, wartość bieżąca + próg maksymalny). Dodaj instrukcje „Włącz” i „Wyłącz” do programu.
 
 .. figure:: robot_peripherals/020.png
    :align: center
    :width: 6in
 
-.. centered:: 图表 8.3‑5 FT_Guard指令编辑
+.. centered:: Schemat 8.3‑5 Edycja instrukcji FT_Guard
 
-程序示例：
+Przykład programu:
 
 .. list-table::
    :widths: 50 80 80
    :header-rows: 0
    :align: center
 
-   * - **序号**
-     - **指令格式**
-     - **注释**
+   * - **Nr**
+     - **Format instrukcji**
+     - **Komentarz**
 
    * - 1
      - FT_Guard(1,1,1,1,1,0,0,0,5,0,0,0,0,0,10,0,0,0,0,0,5,0,0,0,0,0)
-     - #力/矩碰撞检测开启
+     - # Włączenie wykrywania kolizji siły/momentu
 
    * - 2
      - PTP(template1,100,-1,0)
-     - #运动指令
+     - # Instrukcja ruchu
 
    * - 3
      - FT_Guard(0,1,1,1,1,0,0,0,5,0,0,0,0,0,10,0,0,0,0,0,5,0,0,0,0,0)
-     - #力/矩碰撞检测关闭
+     - # Wyłączenie wykrywania kolizji siły/momentu
 
-力/扭矩传感器力控运动
-~~~~~~~~~~~~~~~~~~~~~~~~
+Sterowanie ruchem ze stałą siłą za pomocą czujnika siły/momentu
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-指令说明：“FT_Control”指令为力控运动指令，可以使机器人在设定力的附近运动，常用于打磨场景中。选择对应的传感器坐标系，勾选生效的力矩方向检测，设置检测阈值，以及各个方向上PID比例系数(一般设置p为0.001)，设置最大调整距离（对应X,Y,Z）和最大调整角度（对应RX,RY,RZ），将“开启”和“关闭”指令加入到程序中在。
+Opis instrukcji: Instrukcja „FT_Control” to instrukcja ruchu ze sterowaniem siłą, umożliwiająca robotowi poruszanie się w pobliżu zadanej siły, często używana w scenariuszach szlifowania. Wybierz odpowiedni układ współrzędnych czujnika, zaznacz aktywne kierunki wykrywania momentu, ustaw próg wykrywania oraz współczynniki proporcjonalności PID dla każdego kierunku (zazwyczaj ustawia się p na 0.001). Ustaw maksymalną odległość regulacji (dla X, Y, Z) i maksymalny kąt regulacji (dla RX, RY, RZ). Dodaj instrukcje „Włącz” i „Wyłącz” do programu.
 
 .. figure:: robot_peripherals/021.png
    :align: center
@@ -730,349 +727,349 @@ A、B、C、D、E、IO键六个按键功能可通过代码中的31行的key值�
    :align: center
    :width: 6in
 
-.. centered:: 图表 8.3‑6 FT_Control指令编辑
+.. centered:: Schemat 8.3‑6 Edycja instrukcji FT_Control
 
-程序示例：
+Przykład programu:
 
 .. list-table::
    :widths: 50 80 80
    :header-rows: 0
    :align: center
 
-   * - **序号**
-     - **指令格式**
-     - **注释**
+   * - **Nr**
+     - **Format instrukcji**
+     - **Komentarz**
 
    * - 1
      - FT_Control(1,11,1,0,1,0,0,0,10,0,5,0,0,0,0.001,0,0,0,0,0,0,0,0,10,5)
-     - #力/矩运动控制开启
+     - # Włączenie sterowania ruchem siły/momentu
 
    * - 2
      - Lin(template3,100,-1,0,0)
-     - #运动指令
+     - # Instrukcja ruchu
 
    * - 3
      - FT_Control(0,11,1,0,1,0,0,0,10,0,5,0,0,0,0.001,0,0,0,0,0,0,0,10,5)
-     - #力/矩运动控制关闭
+     - # Wyłączenie sterowania ruchem siły/momentu
 
-力/扭矩传感器螺旋插入
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+Wstawianie spiralne za pomocą czujnika siły/momentu
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-指令说明：“FT_Spiral”指令为螺旋线探索插入，一般用于圆柱轴的轴孔装配动作。在运行动作之前，需要将机器人末端拖动至孔位的大致位置，根据当前场景，设定指令的参数，添加到程序中，运行后，机器人会以螺旋形的运动进行探索。
+Opis instrukcji: Instrukcja „FT_Spiral” to wstawianie przez eksplorację po spirali, zwykle używane do montażu wałów w otworach. Przed wykonaniem czynności należy przeciągnąć końcówkę robota w przybliżoną pozycję otworu. Ustaw parametry instrukcji zgodnie z bieżącym scenariuszem, dodaj do programu i uruchom. Robot będzie eksplorować ruchem spiralnym.
 
 .. figure:: robot_peripherals/023.png
    :align: center
    :width: 6in
 
-.. centered:: 图表 8.3‑7 FT_Spiral指令编辑
+.. centered:: Schemat 8.3‑7 Edycja instrukcji FT_Spiral
 
-程序示例：
+Przykład programu:
 
 .. list-table::
    :widths: 50 80 80
    :header-rows: 0
    :align: center
 
-   * - **序号**
-     - **指令格式**
-     - **注释**
+   * - **Nr**
+     - **Format instrukcji**
+     - **Komentarz**
 
    * - 1
      - FT_Control(1,10,0,0,1,0,0,0,0,0,5,0,0,0,0.0005,0,0,0,0,0,0,10,0)
-     - #力/矩运动控制开启
+     - # Włączenie sterowania ruchem siły/momentu
 
    * - 2
      - FT_SpiralSearch(0,0.7,0,60000,5)
-     - #螺旋插入
+     - # Wstawianie spiralne
 
    * - 3
      - FT_Control(0,10,0,0,1,0,0,0,0,0,5,0,0,0,0.0005,0,0,0,0,0,0,10,0)
-     - #力/矩运动控制关闭
+     - # Wyłączenie sterowania ruchem siły/momentu
 
-力/扭矩传感器旋转插入
-~~~~~~~~~~~~~~~~~~~~~~~~~
+Wstawianie obrotowe za pomocą czujnika siły/momentu
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-指令说明：“FT_Rot”指令为旋转探索插入，一般用于承接螺旋线插入动作，用于键轴的轴孔装配。在运行动作之前，需要将机器人末端移动至螺旋线探索找到的孔位或者完全对齐的示教孔位，根据当前场景，设定指令的参数，添加到程序中，运行后，机器人会以缓慢的旋转进行探索。
+Opis instrukcji: Instrukcja „FT_Rot” to wstawianie przez eksplorację obrotową, zwykle używane jako kontynuacja wstawiania spiralnego, do montażu wałów z wpustami w otworach. Przed wykonaniem czynności należy przesunąć końcówkę robota do otworu znalezionego przez eksplorację spiralną lub do całkowicie wyrównanego, nauczonego otworu. Ustaw parametry instrukcji zgodnie z bieżącym scenariuszem, dodaj do programu i uruchom. Robot będzie eksplorować powolnym obrotem.
 
 .. figure:: robot_peripherals/024.png
    :align: center
    :width: 6in
 
-.. centered:: 图表 8.3‑8 FT_Rot指令编辑
+.. centered:: Schemat 8.3‑8 Edycja instrukcji FT_Rot
 
-程序示例：
+Przykład programu:
 
 .. list-table::
    :widths: 50 80 80
    :header-rows: 0
    :align: center
 
-   * - **序号**
-     - **指令格式**
-     - **注释**
+   * - **Nr**
+     - **Format instrukcji**
+     - **Komentarz**
 
    * - 1
      - FT_Control(1,10,0,0,1,0,0,0,0,0,5,0,0,0,0.0005,0,0,0,0,0,0,10,0)
-     - #力/矩运动控制开启
+     - # Włączenie sterowania ruchem siły/momentu
 
    * - 2
      - FT_RotInsertion(0,3,0,5,1,0,1)
-     - #旋转插入
+     - # Wstawianie obrotowe
 
    * - 3
      - FT_Control(0,10,0,0,1,0,0,0,0,0,5,0,0,0,0.0005,0,0,0,0,0,0,10,0)
-     - #力/矩运动控制关闭
+     - # Wyłączenie sterowania ruchem siły/momentu
 
-力/扭矩传感器直线插入
-~~~~~~~~~~~~~~~~~~~~~~~~~
+Wstawianie liniowe za pomocą czujnika siły/momentu
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-指令说明：“FT_Lin”指令为旋转探索插入，一般用于承接螺旋线插入动作或旋转插入动作，用于键轴的轴孔装配。在运行动作之前，需要将机器人末端移动至螺旋线探索找到的孔位，旋转插入动作结束的位置或者完全对齐的示教孔位，根据当前场景，设定指令的参数，添加到程序中，运行后，机器人会以设定的方向进行直线运动。
+Opis instrukcji: Instrukcja „FT_Lin” to wstawianie przez eksplorację obrotową, zwykle używane jako kontynuacja wstawiania spiralnego lub obrotowego, do montażu wałów z wpustami w otworach. Przed wykonaniem czynności należy przesunąć końcówkę robota do otworu znalezionego przez eksplorację spiralną, pozycji po zakończeniu wstawiania obrotowego lub do całkowicie wyrównanego, nauczonego otworu. Ustaw parametry instrukcji zgodnie z bieżącym scenariuszem, dodaj do programu i uruchom. Robot będzie poruszać się ruchem liniowym w ustawionym kierunku.
 
 .. figure:: robot_peripherals/025.png
    :align: center
    :width: 6in
 
-.. centered:: 图表 8.3‑9 FT_Lin指令编辑
+.. centered:: Schemat 8.3‑9 Edycja instrukcji FT_Lin
 
-程序示例：
+Przykład programu:
 
 .. list-table::
    :widths: 50 80 80
    :header-rows: 0
    :align: center
 
-   * - **序号**
-     - **指令格式**
-     - **注释**
+   * - **Nr**
+     - **Format instrukcji**
+     - **Komentarz**
 
    * - 1
      - FT_Control(1,10,0,0,1,0,0,0,0,0,5,0,0,0,0.0005,0,0,0,0,0,0,10,0)
-     - #力/矩运动控制开启
+     - # Włączenie sterowania ruchem siły/momentu
 
    * - 2
      - FT LinInsertion(0,50,1,0,100,1)
-     - #直线插入
+     - # Wstawianie liniowe
 
    * - 3
      - FT_Control(0,10,0,0,1,0,0,0,0,0,5,0,0,0,0.0005,0,0,0,0,0,0,10,0)
-     - #力/矩运动控制关闭
+     - # Wyłączenie sterowania ruchem siły/momentu
 
-力/扭矩传感器表面定位
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Lokalizacja powierzchni za pomocą czujnika siły/momentu
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-指令说明：“FT_FindSurface”指令为表面定位，一般用于寻找物体表面。根据当前场景，设置对应坐标系，移动方向、移动轴、探索直线速度、探索直线加速度、最大探索距离、动作终止力阈值等参数，添加到程序中，运行程序，动作开始执行，机器人末端开始缓慢向表面所在方向移动。
+Opis instrukcji: Instrukcja „FT_FindSurface” to lokalizacja powierzchni, zwykle używana do znajdowania powierzchni przedmiotów. Zgodnie z bieżącym scenariuszem ustaw odpowiedni układ współrzędnych, kierunek ruchu, oś ruchu, prędkość liniową eksploracji, przyspieszenie liniowe eksploracji, maksymalną odległość eksploracji, próg siły kończącej działanie itp. Dodaj do programu i uruchom. Czynność rozpocznie się, a końcówka robota zacznie powoli przesuwać się w kierunku powierzchni.
 
 .. figure:: robot_peripherals/026.png
    :align: center
    :width: 6in
 
-.. centered:: 图表 8.3‑10 FT_FindSurface指令编辑
+.. centered:: Schemat 8.3‑10 Edycja instrukcji FT_FindSurface
 
-程序示例：
+Przykład programu:
 
 .. list-table::
    :widths: 50 80 80
    :header-rows: 0
    :align: center
 
-   * - **序号**
-     - **指令格式**
-     - **注释**
+   * - **Nr**
+     - **Format instrukcji**
+     - **Komentarz**
 
    * - 1
      - PTP(1,30,-1,0)
-     - #初始位置
+     - # Pozycja początkowa
 
    * - 2
      - FT FindSurface(0,1,3,1,0,100,5)
-     - #平面定位
+     - # Lokalizacja płaszczyzny
 
-力/扭矩传感器中心定位
-~~~~~~~~~~~~~~~~~~~~~~~
+Lokalizacja środka za pomocą czujnika siły/momentu
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-指令说明：“FT_CalCenter”指令为中心定位，一般用于寻找两表面的中间平面表面。根据当前场景，设置对应坐标系，移动方向、移动轴、探索直线速度、探索直线加速度、最大探索距离、动作终止力阈值等参数，分别寻找A平面和B平面，添加到程序中，运行程序，动作开始执行，机器人缓慢向表面A所在方向移动，定位到A面后，机器人缓慢向表面B所在方向移动，定位到B面后，即可算出中心平面位置。
+Opis instrukcji: Instrukcja „FT_CalCenter” to lokalizacja środka, zwykle używana do znajdowania środkowej płaszczyzny między dwiema powierzchniami. Zgodnie z bieżącym scenariuszem ustaw odpowiedni układ współrzędnych, kierunek ruchu, oś ruchu, prędkość liniową eksploracji, przyspieszenie liniowe eksploracji, maksymalną odległość eksploracji, próg siły kończącej działanie itp. Znajdź odpowiednio powierzchnię A i powierzchnię B, dodaj do programu i uruchom. Czynność rozpocznie się, robot powoli przesunie się w kierunku powierzchni A, po zlokalizowaniu powierzchni A, robot powoli przesunie się w kierunku powierzchni B, a po zlokalizowaniu powierzchni B, pozycja środkowej płaszczyzny zostanie obliczona.
 
 .. figure:: robot_peripherals/027.png
    :align: center
    :width: 6in
 
-.. centered:: 图表 8.3‑11 FT_CalCenter指令编辑
+.. centered:: Schemat 8.3‑11 Edycja instrukcji FT_CalCenter
 
-程序示例：
+Przykład programu:
 
 .. list-table::
    :widths: 20 40 50
    :header-rows: 0
    :align: center
 
-   * - **序号**
-     - **指令格式**
-     - **注释**
+   * - **Nr**
+     - **Format instrukcji**
+     - **Komentarz**
 
    * - 1
      - PTP(1,30,-1,0)
-     - #初始位置
+     - # Pozycja początkowa
 
    * - 2
      - FT_CalCenterStart()
-     - #表面定位开始
+     - # Rozpoczęcie lokalizacji powierzchni
 
    * - 3
      - FT_Control(1,10,0,0,1,0,0,0,0,0,-10,0,0,0,0.00001,0,0,0,0,0,0,100,0)
-     - #力/矩运动控制开启
+     - # Włączenie sterowania ruchem siły/momentu
 
    * - 4
      - FT_FindSurface(1,2,2,10,0,200,5)
-     - #定位平面A
+     - # Lokalizacja powierzchni A
 
    * - 5
      - FT_Control(0,10,0,0,1,0,0,0,0,0,-10,0,0,0,0.00001,0,0,0,0,0,0,100,0)
-     - #力/矩运动控制关闭
+     - # Wyłączenie sterowania ruchem siły/momentu
 
    * - 6
      - PTP(1,30,-1,0)
-     - #初始位置
+     - # Pozycja początkowa
 
    * - 7
      - FT_Control(1,10,0,0,1,0,0,0,0,0,-10,0,0,0,0.00001,0,0,0,0,0,0,100,0)
-     - #力/矩运动控制开启
+     - # Włączenie sterowania ruchem siły/momentu
      
    * - 8
      - FT FindSurface(1,1,2,20,0,200,5)
-     - #定位平面B
+     - # Lokalizacja powierzchni B
 
    * - 9
      - FT_Control(0,10,0,0,1,0,0,0,0,0,10,0,0,0,0.00001,0,0,0,0,0,0,100,0)
-     - #力/矩运动控制关闭
+     - # Wyłączenie sterowania ruchem siły/momentu
 
    * - 10
      - pos={}
-     - #定义数组pos
+     - # Definicja tablicy pos
 
    * - 11
      - pos = FT_CalCenterEnd()
-     - #获取定位中心笛卡尔位姿
+     - # Pobranie pozy i orientacji środka lokalizacji w kartezjańskim układzie współrzędnych
 
    * - 12
      - MoveCart(pos,GetActualTCPNum(),GetActualWObjNum(),30,10,100,-1,0)
-     - #运动至定位的中心位置
+     - # Ruch do środkowej pozycji lokalizacji
 
-自定义开放协议
-~~~~~~~~~~~~~~~~
+Niestandardowy otwarty protokół
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-点击“自定义协议”卡片进入界面，启用力传感器，已配置设备中显示力传感器。点击进入FT界面，查询力传感器数据。
+Kliknij kartę „Niestandardowy protokół”, aby przejść do interfejsu. Włącz czujnik siły. W skonfigurowanych urządzeniach wyświetlany jest czujnik siły. Kliknij, aby przejść do interfejsu FT i wyświetlić dane czujnika siły.
 
 .. figure:: robot_peripherals/028.png
    :align: center
    :width: 6in
 
-.. centered:: 图表 8.3‑12 启用力传感器
+.. centered:: Schemat 8.3‑12 Włączanie czujnika siły
 
-焊接手柄
--------------------------------------------------------------
+Uchwyt spawalniczy
+---------------------------------------------------
 
-在“初始设置”->“外设”->“焊接手柄”界面中，当前可以通过已适配设备和末端Lua自定义开放协议使用焊接手柄。
+W interfejsie „Ustawienia początkowe” -> „Urządzenia peryferyjne” -> „Uchwyt spawalniczy” można obecnie używać uchwytu spawalniczego za pomocą „Urządzeń dostosowanych” i „Niestandardowego otwartego protokołu Lua na końcówce”.
 
-已适配设备
+Urządzenia dostosowane
 ~~~~~~~~~~~~~~~~~~~~~~
 
-配置步骤
-++++++++++++
+Kroki konfiguracji
+++++++++++++++++++
 
-**Step1**：点击“已适配设备”卡片进入已适配设备界面。配置信息分为厂商、类型、软件版本和挂载位置，用户可根据具体的生产需求来配置相应的信息。若用户需要更改配置，可先选择相应的厂商，点击“清除”按钮，来清除相应的信息，并重新根据需求配置；
+**Krok 1**: Kliknij kartę „Urządzenia dostosowane”, aby przejść do interfejsu urządzeń dostosowanych. Informacje konfiguracyjne dzielą się na producenta, typ, wersję oprogramowania i lokalizację montażu. Użytkownik może skonfigurować odpowiednie informacje zgodnie z konkretnymi potrzebami produkcyjnymi. Jeśli użytkownik chce zmienić konfigurację, może najpierw wybrać odpowiedniego producenta, kliknąć przycisk „Wyczyść”, aby wyczyścić odpowiednie informacje, a następnie ponownie skonfigurować zgodnie z potrzebami;
 
 .. figure:: robot_peripherals/029.png
    :align: center
    :width: 3in
 
-.. centered:: 图表 8.4‑1 焊接手柄已适配设备配置
+.. centered:: Schemat 8.4‑1 Konfiguracja urządzeń dostosowanych dla uchwytu spawalniczego
 
 .. important:: 
-	点击清除配置前，相应的设备应处于未激活状态。
+    Przed kliknięciem „Wyczyść konfigurację” odpowiednie urządzenie powinno być w stanie nieaktywnym.
 
-**Step2**：依次配置A-E键位和IO键。Smart Tool配置完成后，任务管理器内部维护每个按钮对应的功能，当检测到某按钮被按下时，自动执行该按钮对应功能项。
+**Krok 2**: Kolejno skonfiguruj przyciski A-E i przycisk IO. Po zakończeniu konfiguracji SmartTool menedżer zadań wewnętrznie utrzymuje funkcję odpowiadającą każdemu przyciskowi. Po wykryciu naciśnięcia przycisku, automatycznie wykonywana jest funkcja odpowiadająca temu przyciskowi.
 
-A-E键位功能：
+Funkcje przycisków A-E:
 
-- 运动指令：选择PTP、LIN、ARC运动指令时，需要输入对应点速度。其中LIN、ARC指令可选择“百分比”或“物理速度”：
-- 百分比：输入调试速度百分比，机器人按照最大速度的百分比进行运动，实际机器人运动速度换算为：V = 机器人最大速度×全局速度百分比×点速度百分比。将鼠标移至“点速度”输入框右侧的小眼睛上，将显示当前设置速度下，机器人在手动模式和自动模式下的实际物理速度(单位：mm/s)。
+- Instrukcje ruchu: Wybierając instrukcje ruchu PTP, LIN, ARC, należy wprowadzić odpowiednią prędkość punktową. Instrukcje LIN, ARC mogą wybierać między „Procent” a „Prędkość fizyczna”:
+- Procent: Wprowadź procent prędkości testowej. Robot porusza się z procentem maksymalnej prędkości. Rzeczywista prędkość ruchu robota jest przeliczana jako: V = maksymalna prędkość robota × globalny procent prędkości × procent prędkości punktowej. Najedź myszą na małe oko po prawej stronie pola wejściowego „Prędkość punktowa”, aby wyświetlić rzeczywistą prędkość fizyczną (jednostka: mm/s) robota w trybie ręcznym i automatycznym przy aktualnie ustawionej prędkości.
 
 .. image:: coding/469.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 8.4‑2-1 输入百分比显示实际物理速度值
+.. centered:: Schemat 8.4‑2-1 Wprowadzenie procentu wyświetla rzeczywistą wartość prędkości fizycznej
  
-- 物理速度：输入速度即为机器人实际运行速度，单位mm/s；输入加速度常设置为速度的2倍。(LIN指令最大物理速度受全局速度百分比限制，若机器人最大运行速度为1000mm/s，全局速度为50%，则LIN指令的最大物理速度为1000 × 50% = 500mm/s)。
+- Prędkość fizyczna: Wprowadzona prędkość to rzeczywista prędkość robota, jednostka mm/s; wprowadzone przyspieszenie jest zwykle ustawiane jako 2-krotność prędkości. (Maksymalna prędkość fizyczna instrukcji LIN jest ograniczona przez globalny procent prędkości. Jeśli maksymalna prędkość robota wynosi 1000 mm/s, a prędkość globalna 50%, to maksymalna prędkość fizyczna instrukcji LIN wynosi 1000 × 50% = 500 mm/s).
 
 .. image:: coding/470.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 8.4‑2-2 输入实际物理速度
+.. centered:: Schemat 8.4‑2-2 Wprowadzenie rzeczywistej prędkości fizycznej
 
-配置成功后，示教程序新增一条相关运动指令。配置ARC运动指令时，需先配置PTP/LIN指令。
+Po pomyślnej konfiguracji, program nauczania otrzymuje nową powiązaną instrukcję ruchu. Podczas konfigurowania instrukcji ruchu ARC, należy najpierw skonfigurować instrukcję PTP/LIN.
 
-- DO输出：选择“DO输出”时，显示下拉框可选择输出DO0⁓DO7选项。
+- Wyjście DO: Po wybraniu „Wyjście DO” pojawi się lista rozwijana umożliwiająca wybór opcji wyjścia DO0⁓DO7.
 
 .. image:: coding/471.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 8.4‑2-3 Smart Tool配置（A-E键位）
+.. centered:: Schemat 8.4‑2-3 Konfiguracja Smart Tool (przyciski A-E)
 
-IO键位功能：
+Funkcje przycisków IO:
 
--  **IO信号配置**：下拉框可选择DO0⁓DO7选项、CO0⁓CO7选项、End-DO0、End-DO1和扩展IO（Aux-DO0⁓Aux-DO127）；
+-  **Konfiguracja sygnału IO**: Z listy rozwijanej można wybrać opcje DO0⁓DO7, CO0⁓CO7, End-DO0, End-DO1 i rozszerzone IO (Aux-DO0⁓Aux-DO127);
 
--  **组合指令**：选择“IO信号”后，特定条件下显示“焊机选择”和“点速度”配置项，生成不同程序指令。
+-  **Instrukcje kombinowane**: Po wybraniu „Sygnał IO”, w określonych warunkach wyświetlane są opcje konfiguracji „Wybór spawarki” i „Prędkość punktowa”, generując różne instrukcje programu.
 
 .. important::
-   -  当IO信号配置为DO0~DO7或CO0~CO7（未配置"起弧"）时，程序添加SetDO；此时隐藏“焊接选择”和“点速度”。
-   -  当IO信号配置为End-DO0、End-DO1时，程序添加SetToolDO；此时隐藏“焊接选择”和“点速度”。
-   -  当IO信号配置为扩展IO（未配置"焊机起弧"）时，程序添加SetAuxDO；此时隐藏“焊接选择”和“点速度”。
-   -  当IO信号配置为CO0~CO7（配置"起弧"）时，"焊机选择"为"无"时，程序添加SetDO；此时隐藏“焊接选择”和“点速度”。
-   -  当IO信号配置项为扩展IO（配置""焊机起弧"）时，"焊机选择"为"无"时，程序添加SetAuxDO；此时隐藏“焊接选择”和“点速度”。
-   -  当IO信号配置为CO0~CO7（配置"起弧"）或扩展IO（配置"焊机起弧"）时，"焊机选择"为"焊接"时，首次按下程序添加ARCStart，第二次程序添加ARCEnd，第三次程序添加ArcStart,第四次程序添加ARCStart,交替往复以上操作；此时隐藏“焊接选择”和“点速度”。
-   -  当IO信号配置为CO0~CO7（配置"起弧"）或扩展IO（配置"焊机起弧"）时，"焊机选择"为"LIN+焊接"时，首次按下程序添加LIN和ARCStart，第二次程序添加LIN和ARCEnd，第三次程序添加LIN和ARCStart,第四次程序添加LIN和ARCEnd,交替往复以上操作；此时显示“焊接选择”和“点速度”。
-   -  当IO信号配置为CO0~CO7（配置"起弧"）或扩展IO（配置"焊机起弧"）时，"焊机选择"为"LIN+焊接+摆动"时，首次按下程序添加LIN、ARCStart和WeaveStart，第二次程序添加LIN、ARCEnd和WeaveEnd，第三次程序添加LIN、ARCStart和WeaveStart,第四次程序添加LIN、ARCEnd和WeaveEnd,交替往复以上操作；此时隐藏“焊接选择”和“点速度”。
+   -  Gdy sygnał IO jest skonfigurowany jako DO0~DO7 lub CO0~CO7 (bez konfiguracji „Rozpoczęcie łuku”), program dodaje SetDO; w tym przypadku ukrywane są „Wybór spawarki” i „Prędkość punktowa”.
+   -  Gdy sygnał IO jest skonfigurowany jako End-DO0, End-DO1, program dodaje SetToolDO; w tym przypadku ukrywane są „Wybór spawarki” i „Prędkość punktowa”.
+   -  Gdy sygnał IO jest skonfigurowany jako rozszerzone IO (bez konfiguracji „Rozpoczęcie łuku spawarki”), program dodaje SetAuxDO; w tym przypadku ukrywane są „Wybór spawarki” i „Prędkość punktowa”.
+   -  Gdy sygnał IO jest skonfigurowany jako CO0~CO7 (z konfiguracją „Rozpoczęcie łuku”), a „Wybór spawarki” to „Brak”, program dodaje SetDO; w tym przypadku ukrywane są „Wybór spawarki” i „Prędkość punktowa”.
+   -  Gdy sygnał IO jest skonfigurowany jako rozszerzone IO (z konfiguracją „Rozpoczęcie łuku spawarki”), a „Wybór spawarki” to „Brak”, program dodaje SetAuxDO; w tym przypadku ukrywane są „Wybór spawarki” i „Prędkość punktowa”.
+   -  Gdy sygnał IO jest skonfigurowany jako CO0~CO7 (z konfiguracją „Rozpoczęcie łuku”) lub rozszerzone IO (z konfiguracją „Rozpoczęcie łuku spawarki”), a „Wybór spawarki” to „Spawanie”, to po pierwszym naciśnięciu program dodaje ARCStart, po drugim ARCEnd, po trzecim ArcStart, po czwartym ARCStart, naprzemiennie; w tym przypadku ukrywane są „Wybór spawarki” i „Prędkość punktowa”.
+   -  Gdy sygnał IO jest skonfigurowany jako CO0~CO7 (z konfiguracją „Rozpoczęcie łuku”) lub rozszerzone IO (z konfiguracją „Rozpoczęcie łuku spawarki”), a „Wybór spawarki” to „LIN+spawanie”, to po pierwszym naciśnięciu program dodaje LIN i ARCStart, po drugim LIN i ARCEnd, po trzecim LIN i ARCStart, po czwartym LIN i ARCEnd, naprzemiennie; w tym przypadku wyświetlane są „Wybór spawarki” i „Prędkość punktowa”.
+   -  Gdy sygnał IO jest skonfigurowany jako CO0~CO7 (z konfiguracją „Rozpoczęcie łuku”) lub rozszerzone IO (z konfiguracją „Rozpoczęcie łuku spawarki”), a „Wybór spawarki” to „LIN+spawanie+wahadło”, to po pierwszym naciśnięciu program dodaje LIN, ARCStart i WeaveStart, po drugim LIN, ARCEnd i WeaveEnd, po trzecim LIN, ARCStart i WeaveStart, po czwartym LIN, ARCEnd i WeaveEnd, naprzemiennie; w tym przypadku ukrywane są „Wybór spawarki” i „Prędkość punktowa”.
   
 .. image:: robot_peripherals/031.png
    :width: 4in
    :align: center
 
-.. centered:: 图表 8.4‑3 IO键位
+.. centered:: Schemat 8.4‑3 Przyciski IO
 
-焊接手柄末端Lua协议
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Protokół Lua końcówki dla uchwytu spawalniczego
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-点击“自定义协议”进入末端Lua开放协议适配焊接手柄功能界面。
+Kliknij „Niestandardowy protokół”, aby przejść do interfejsu funkcji dostosowywania uchwytu spawalniczego do otwartego protokołu Lua końcówki.
 
-协议管理
-++++++++++++++++++++++++++++++++++++++++++
+Zarządzanie protokołami
++++++++++++++++++++++++
 
-打开WebApp，依次点击“初始设置”、“外设”、“焊接手柄”、“自定义协议”。点击“协议管理”，则可以进行末端协议的配置。目前焊接手柄预设内嵌的协议如下图所示。
+Otwórz WebApp, kolejno kliknij „Ustawienia początkowe”, „Urządzenia peryferyjne”, „Uchwyt spawalniczy”, „Niestandardowy protokół”. Kliknij „Zarządzanie protokołami”, aby przejść do konfiguracji protokołu końcówki. Obecnie wbudowane domyślnie protokoły dla uchwytu spawalniczego pokazano na poniższym rysunku.
 
 .. figure:: robot_peripherals/032.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.4‑4 焊接手柄预设内嵌协议
+.. centered:: Schemat 8.4‑4 Wbudowane domyślnie protokoły dla uchwytu spawalniczego
 
-打开“末端协议启用”滑块即可适配焊接手柄，启用后断电重启参数保持。
+Otwórz suwak „Włącz protokół końcówki”, aby dostosować uchwyt spawalniczy. Po włączeniu parametry zostaną zachowane po odcięciu zasilania i ponownym uruchomieniu.
 
 .. figure:: robot_peripherals/033.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.4‑5 末端开放协议启用
+.. centered:: Schemat 8.4‑5 Włączanie otwartego protokołu końcówki
 
-组合设备Lua末端外设协议示例
-++++++++++++++++++++++++++++++
+Przykład protokołu Lua urządzenia peryferyjnego końcówki dla urządzenia kombinowanego
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-A、B、C、D、E五个按键功能可通过代码中的30行的key值进行修改定义，其中K38=Getbit(R[7],1)，K0=Getbit(R[7],2)为“清空程序”和“撤销按键”，不可修改，后续5个K值可按照《末端全外设协议》文档中的定义进行修改。
+Funkcje pięciu przycisków A, B, C, D, E można modyfikować i definiować za pomocą wartości key w linii 30 kodu, gdzie K38=Getbit(R[7],1), K0=Getbit(R[7],2) to „Wyczyść program” i „Cofnij przycisk” i nie można ich modyfikować. Kolejne 5 wartości K można modyfikować zgodnie z definicjami w dokumencie „Protokół wszystkich urządzeń peryferyjnych końcówki”.
 
-本次示例（内嵌SmartTool协议）中对应的按键功能为，A:MoveL,B:ArcStart,C:ArcEnd,D:rewelding start,E:rewelding quit。
+W tym przykładzie (wbudowany protokół SmartTool) odpowiadające funkcje przycisków to: A: MoveL, B: ArcStart, C: ArcEnd, D: rewelding start, E: rewelding quit.
 
 .. code-block:: console
 
@@ -1081,7 +1078,7 @@ A、B、C、D、E五个按键功能可通过代码中的30行的key值进行修�
   end
 
   if(Getbit(GetRobotState(),0)==1)then
-  local SetParams={A3=2000,B6=3}--设置焊接参数，A3-起、收弧超时时间为2000ms，B6-操作DO端口号为3，如需配置焊接参数请查阅《RD36-焊接手柄自定义参数表-V0.2-20250903》
+  local SetParams={A3=2000,B6=3}--Ustawienie parametrów spawania, A3- czas timeoutu rozpoczęcia/zakończenia łuku 2000ms, B6- obsługiwany numer portu DO to 3. Aby skonfigurować parametry spawania, zapoznaj się z „RD36-Niestandardowa tabela parametrów uchwytu spawalniczego-V0.2-20250903”
   SetWeldParams(SetParams)
   while(1)
   do
@@ -1106,21 +1103,21 @@ A、B、C、D、E五个按键功能可通过代码中的30行的key值进行修�
   Len=EndRxWeldData(R)
   if((Len==13)and(R[1]==0x7D)and(R[2]==0x01)and(R[3]==0x30))then
   local key={K38=Getbit(R[7],1),K0=Getbit(R[7],2),K3=Getbit(R[7],3),K32=Getbit(R[7],4),K33=Getbit(R[7],5),K27=Getbit(R[7],6),K28=Getbit(R[7],7),
-  K6=Getbit(R[8],1),K7=Getbit(R[8],2)}--smarttool焊接手柄按键设置，撤销按键-K38撤销程序；清空按键-K0清空程序；A按键-K3直线；B按键-K32起弧ArcStart；C按键-K33收弧ArcEnd；D按键-K27焊接中断恢复；E按键-K28焊接中断退出；手/自动按键-K6手/自动；运行/暂停按键-K7运行/暂停
+  K6=Getbit(R[8],1),K7=Getbit(R[8],2)}--Ustawienia przycisków uchwytu spawalniczego smarttool, przycisk cofania-K38 cofnij program; przycisk czyszczenia-K0 wyczyść program; przycisk A-K3 linia prosta; przycisk B-K32 rozpoczęcie łuku ArcStart; przycisk C-K33 zakończenie łuku ArcEnd; przycisk D-K27 wznowienie po przerwaniu spawania; przycisk E-K28 wyjście po przerwaniu spawania; przycisk ręczny/automatyczny-K6 ręczny/automatyczny; przycisk uruchom/zatrzymaj-K7 uruchom/zatrzymaj
   SetWeldToolKeys(key)
   end
   LuaGc()
   end
   end
 
-开放协议模板
-++++++++++++++++++++++++++++++
+Szablon otwartego protokołu
++++++++++++++++++++++++++++
 
-以佳士达适配开放协议为例：
+Na przykładzie dostosowania do spawarki Jiasida:
 
 .. code-block:: console
 
-   function Getbit(X,Bit)                   --提取X的对应bit位
+   function Getbit(X,Bit)                   -- Wyodrębnij odpowiedni bit X
    return ((X&(1<<Bit))>>Bit)
    end
    while(1)
@@ -1139,30 +1136,30 @@ A、B、C、D、E五个按键功能可通过代码中的30行的key值进行修�
    T1={0x7D,0x08,0x22,0xB4,0x03,0x00}
    T2={0x7D,0X08,0X22,0XB5,0x1E,0x00}
    DelayMs(5)
-   RxLen=WeldToolMasterGetCmd(RxData)                                    --WeldToolMasterGetCmd()函数用于获取焊接手柄发送的指令（用于焊接手柄作为主站的情况）。使用时需要入栈一个空表（X={}）
+   RxLen=WeldToolMasterGetCmd(RxData)                                    --Funkcja WeldToolMasterGetCmd() służy do pobierania instrukcji wysłanych przez uchwyt spawalniczy (gdy uchwyt spawalniczy działa jako master). Podczas używania należy przekazać pustą tabelę (X={})
    if (RxData[1]==0x7D)and(RxData[2]==0x08)and(RxData[3]==0x22) then
    if(RxData[4] == 0xB3)then                                              
-      --以佳士达焊接手柄的功能码为例，此处为0xB3(设置焊接参数)。
+      --Na przykładzie kodu funkcji spawarki Jiasida, tutaj 0xB3 (ustawienie parametrów spawania).
    local SetParams={A2=RxData[7],A1=RxData[8],A6=(ByteToDwFloat(RxData[9],RxData[10],RxData[11],RxData[12]))*1000,
    A8=(ByteToDwFloat(RxData[13],RxData[14],RxData[15],RxData[16])),A7=(ByteToDwFloat(RxData[17],RxData[18],RxData[19],RxData[20])),
    A4=(ByteToDwFloat(RxData[21],RxData[22],RxData[23],RxData[24]))*1000,A5=(ByteToDwFloat(RxData[25],RxData[26],RxData[27],RxData[28]))*1000}
-   SetWeldParams(SetParams)                                                --SetWeldParams()函数用于设置控制器的焊接参数，需要参考焊接手柄自定义参数表，确定需要修改的焊接参数（总共划分了3个区域A,B,C）
-   Dword=GetRobotState()                                                   --GetRobotState()函数用于获取机器人的相关状态，目前bit0为机器人使能状况，bit1为机器人故障状态,bit2为机器人移动状态，bit3为起弧收弧指令信号，可参考末端全外设协议V2.7
+   SetWeldParams(SetParams)                                                --Funkcja SetWeldParams() służy do ustawiania parametrów spawania sterownika. Należy odnieść się do niestandardowej tabeli parametrów uchwytu spawalniczego, aby określić, które parametry spawania należy zmodyfikować (podzielone na 3 obszary A, B, C)
+   Dword=GetRobotState()                                                   --Funkcja GetRobotState() służy do uzyskiwania powiązanych stanów robota. Obecnie bit0 to stan włączenia robota, bit1 to stan usterki robota, bit2 to stan ruchu robota, bit3 to sygnał instrukcji rozpoczęcia/zakończenia łuku. Można odnieść się do protokołu wszystkich urządzeń peryferyjnych końcówki V2.7
    T0[7]=((Dword)&(1<<1))
-   T0[8],T0[9]=WeldToolCrcValue(T0)                                        --WeldToolCrcValue()法奥自定义协议CRC校验
+   T0[8],T0[9]=WeldToolCrcValue(T0)                                        --WeldToolCrcValue() niestandardowa suma kontrolna CRC protokołu FANUC
    T0[10]=0x0E
-   EndTxWeldData(T0)                                                       --EndTxWeldData()函数用于发送组包数据（此处为响应焊接手柄设置焊接参数指令）
+   EndTxWeldData(T0)                                                       --Funkcja EndTxWeldData() służy do wysyłania danych pakietowych (tutaj odpowiedź na instrukcję ustawienia parametrów spawania uchwytu spawalniczego)
    DelayMs(5)
    end
-   if(RxData[4] == 0xB4)then                                               --0xB4实时控制指令
+   if(RxData[4] == 0xB4)then                                               --0xB4 instrukcja sterowania w czasie rzeczywistym
    local key={K0=Getbit(RxData[7],0),K1=Getbit(RxData[7],1),K2=Getbit(RxData[7],2),K3=Getbit(RxData[7],3),
    K4=Getbit(RxData[7],4),K5=Getbit(RxData[7],5),K6=Getbit(RxData[7],6),K7=Getbit(RxData[7],7),
    K8=Getbit(RxData[8],0),K9=Getbit(RxData[8],1),K10=Getbit(RxData[8],2),K11=Getbit(RxData[8],3),
    K12=Getbit(RxData[8],4),K13=Getbit(RxData[8],5),K14=Getbit(RxData[8],6),K15=Getbit(RxData[9],0),
    K16=Getbit(RxData[9],1),K17=Getbit(RxData[9],2),K18=Getbit(RxData[9],3),K19=Getbit(RxData[9],4),
    K20=Getbit(RxData[9],5),K21=Getbit(RxData[9],6),K22=Getbit(RxData[9],7),K23=Getbit(RxData[10],0),
-   K24=Getbit(RxData[10],1)}                                               --按键值需要参考末端全外设协议V2.7表26，K0-K31对应DWordInput10的bit0-bit31,K32-K63对应DWordInput9的bit0-bit31
-   SetWeldToolKeys(key)                                                    --SetWeldToolKeys()函数用于将焊接手柄按键状态上传，可根据焊接手柄实际情况调整表中填写的按键值
+   K24=Getbit(RxData[10],1)}                                               --Wartości przycisków należy odnieść do Tabeli 26 protokołu wszystkich urządzeń peryferyjnych końcówki V2.7, K0-K31 odpowiadają bitom 0-31 DWordInput10, K32-K63 odpowiadają bitom 0-31 DWordInput9
+   SetWeldToolKeys(key)                                                    --Funkcja SetWeldToolKeys() służy do przesyłania stanu przycisków uchwytu spawalniczego. Wartości przycisków w tabeli można dostosować w zależności od rzeczywistej sytuacji uchwytu spawalniczego
    Dword=GetRobotState()
    T1[7]=(Dword)&(0x1)
    T1[8]=(Dword>>1)&(0x1)
@@ -1173,10 +1170,10 @@ A、B、C、D、E五个按键功能可通过代码中的30行的key值进行修�
    DelayMs(5)
    end
    if(RxData[4] == 0xB5)then                                               
-   --读取焊接参数(从控制器中获取，给到焊接手柄)
+   --Odczyt parametrów spawania (pobranie ze sterownika, wysłanie do uchwytu spawalniczego)
    local wldpams={"A2","A1","A6","A8","A7","A4","A5"}                      
-   --根据焊接手柄实际需要的焊接参数进行填写，此处佳士达需要这些，可参考末端全外设协议V2.7的表26
-   GetWeldParams(wldpams)                                                  --GetWeldParams()获取对应的焊接参数，并将其值替换到表中(假设A2=100，则调用函数后，wldpams[1]=100)
+   --Wypełnij zgodnie z rzeczywistymi parametrami spawania wymaganymi przez uchwyt spawalniczy. Tutaj Jiasida potrzebuje tych. Można odnieść się do Tabeli 26 protokołu wszystkich urządzeń peryferyjnych końcówki V2.7
+   GetWeldParams(wldpams)                                                  --GetWeldParams() pobiera odpowiednie parametry spawania i zastępuje nimi wartości w tabeli (zakładając, że A2=100, to po wywołaniu funkcji wldpams[1]=100)
    T2[7]=wldpams[1]
    T2[8]=wldpams[2]
    wldpams[3]=wldpams[3]/1000
@@ -1197,12 +1194,12 @@ A、B、C、D、E五个按键功能可通过代码中的30行的key值进行修�
    LuaGc()
    end
 
-开放协议可支持指令
-++++++++++++++++++++++++++++++
+Instrukcje obsługiwane przez otwarty protokół
+++++++++++++++++++++++++++++++++++++++++++++++
 
-可在开放协议中配置以下指令，同时39-63预留，后续可扩展。
+W otwartym protokole można skonfigurować następujące instrukcje. Jednocześnie 39-63 są zarezerwowane, z możliwością rozszerzenia w przyszłości.
 
-.. centered:: 表格 8.4-1 开放协议可支持指令
+.. centered:: Tabela 8.4-1 Instrukcje obsługiwane przez otwarty protokół
 
 .. list-table:: 
    :widths: 20 80
@@ -1211,75 +1208,75 @@ A、B、C、D、E五个按键功能可通过代码中的30行的key值进行修�
    :class: sheet-center
 
    * - **Bit**
-     - **说明**
+     - **Opis**
    * - 0
-     - 清空程序
+     - Wyczyść program
    * - 1
-     - 保存程序
+     - Zapisz program
    * - 2
-     - 生成安全点（LIN指令）
+     - Wygeneruj punkt bezpieczny (instrukcja LIN)
    * - 3
-     - 生成直线运行点（LIN指令）
+     - Wygeneruj punkt ruchu liniowego (instrukcja LIN)
    * - 4
-     - 添加圆弧过渡点
+     - Dodaj punkt przejściowy łuku
    * - 5
-     - 添加圆弧终点并生成ARC指令
+     - Dodaj punkt końcowy łuku i wygeneruj instrukcję ARC
    * - 6
-     - 切换模式，默认处于手动模式
+     - Przełącz tryb, domyślnie tryb ręczny
    * - 7
-     - 切换机器人运行状态
+     - Przełącz stan pracy robota
    * - 8
-     - 切换机器人拖动状态
+     - Przełącz stan przeciągania robota
    * - 9
-     - 开始点焊
+     - Rozpocznij spawanie punktowe
    * - 10
-     - 添加开始摆弧指令
+     - Dodaj instrukcję rozpoczęcia wahadła łuku
    * - 11
-     - 添加结束摆弧指令
+     - Dodaj instrukcję zakończenia wahadła łuku
    * - 12
-     - X正方向点动
+     - Ruch jałowy w kierunku +X
    * - 13
-     - X负方向点动
+     - Ruch jałowy w kierunku -X
    * - 14
-     - Y正方向点动
+     - Ruch jałowy w kierunku +Y
    * - 15
-     - Y负方向点动
+     - Ruch jałowy w kierunku -Y
    * - 16
-     - Z正方向点动
+     - Ruch jałowy w kierunku +Z
    * - 17
-     - Z负方向点动
+     - Ruch jałowy w kierunku -Z
    * - 18
-     - RX正方向点动
+     - Ruch jałowy w kierunku +RX
    * - 19
-     - RX负方向点动
+     - Ruch jałowy w kierunku -RX
    * - 20
-     - RY正方向点动
+     - Ruch jałowy w kierunku +RY
    * - 21
-     - RY负方向点动
+     - Ruch jałowy w kierunku -RY
    * - 22
-     - RZ正方向点动
+     - Ruch jałowy w kierunku +RZ
    * - 23
-     - RZ负方向点动
+     - Ruch jałowy w kierunku -RZ
    * - 24
-     - 生成起始点
+     - Wygeneruj punkt początkowy
    * - 25
      - PTP
    * - 26
-     - 固定姿态拖动
+     - Przeciąganie w ustalonej pozie
    * - 27
-     - 焊接中断恢复
+     - Wznów po przerwaniu spawania
    * - 28
-     - 焊接中断退出
+     - Wyjdź po przerwaniu spawania
    * - 29
      - SetDO
    * - 30
      - offline
    * - 31
-     - 配置参数更新
+     - Aktualizacja parametrów konfiguracji
    * - 32
-     - 起弧ArcStart
+     - Rozpoczęcie łuku ArcStart
    * - 33
-     - 收弧ArcEnd
+     - Zakończenie łuku ArcEnd
    * - 34
      - Lin+ArcStart+weaveStart
    * - 35
@@ -1289,20 +1286,20 @@ A、B、C、D、E五个按键功能可通过代码中的30行的key值进行修�
    * - 37
      - Lin+ArcEnd
    * - 38
-     - 撤销程序
+     - Cofnij program
    * - 39
-     - 预留
+     - Zarezerwowane
    * - ...
-     - 预留
+     - Zarezerwowane
    * - 63
-     - 预留
+     - Zarezerwowane
 
-开放协议可配置参数
-++++++++++++++++++++++++++++++
+Parametry konfigurowalne otwartego protokołu
++++++++++++++++++++++++++++++++++++++++++++++
 
-可在开放协议中配置以下参数。
+W otwartym protokole można skonfigurować następujące parametry.
 
-.. centered:: 表格 8.4-2 开放协议可配置参数
+.. centered:: Tabela 8.4-2 Parametry konfigurowalne otwartego protokołu
 
 .. list-table:: 
    :widths: 10 40 20 30
@@ -1310,2060 +1307,2058 @@ A、B、C、D、E五个按键功能可通过代码中的30行的key值进行修�
    :align: center
    :class: sheet-center
 
-   * - **索引**
-     - **数据内容**
-     - **数据类型**
-     - **范围**
+   * - **Indeks**
+     - **Zawartość danych**
+     - **Typ danych**
+     - **Zakres**
 
    * - 0
-     - 焊接速度
+     - Prędkość spawania
      - float
      - 0-100%
 
    * - 1
-     - 空行速度
+     - Prędkość jałowa
      - float
      - 0-100%
 
    * - 2
-     - 起、收弧超时时间
+     - Czas timeoutu rozpoczęcia/zakończenia łuku
      - float
      - 0-65535(ms)
 
    * - 3
-     - 摆动左停留时间
+     - Lewy czas postoju wahadła
      - float
-     - 0-99999（ms）
+     - 0-99999 (ms)
 
    * - 4
-     - 摆动右停留时间
+     - Prawy czas postoju wahadła
      - float
-     - 0-99999（ms）
+     - 0-99999 (ms)
 
    * - 5
-     - 点焊时间
+     - Czas spawania punktowego
      - float
-     - 0-99999（ms）
+     - 0-99999 (ms)
 
    * - 6
-     - 摆动宽度
+     - Szerokość wahadła
      - float
-     - 0-1000（0.1mm）
+     - 0-1000 (0.1mm)
 
    * - 7
-     - 摆动频率
+     - Częstotliwość wahadła
      - float
      - 0-100(0.1Hz)
 
    * - 8
-     - 焊机控制类型；0-控制箱IO；1-数字通信协议(UDP)
+     - Typ sterowania spawarką; 0- I/O szafy sterowniczej; 1- Protokół komunikacji cyfrowej (UDP)
      - float
      - 0-255
 
    * - 9
-     - 焊接工艺编号(0-99)
+     - Numer procesu spawania (0-99)
      - float
      - 0-99
 
    * - 10
-     - 摆动类型
+     - Typ wahadła
      - float
      - 0-255
 
    * - 11
-     - 电流控制输出模拟量输出端口
+     - Port wyjścia analogowego dla sterowania prądem
      - float
      - 0-1
 
    * - 12
-     - 电压控制输出模拟量输出端口
+     - Port wyjścia analogowego dla sterowania napięciem
      - float
      - 0-1
 
    * - 13
-     - 操作DO端口号
+     - Numer portu DO do operacji
      - float
      - 0-15
 
    * - 14
-     - 摆动参数编号
+     - Numer parametrów wahadła
      - float
      - 0-255
 
    * - 15
-     - 手动模式全局速度
+     - Globalna prędkość w trybie ręcznym
      - float
      - 0-100%
 
    * - 16
-     - 自动模式全局速度
+     - Globalna prędkość w trybie automatycznym
      - float
      - 0-100%
 
    * - 17
-     - 焊接电流
+     - Prąd spawania
      - float
-     - 0-999990（0.1A）
+     - 0-999990 (0.1A)
 
    * - 18
-     - 焊接电压
+     - Napięcie spawania
      - float
-     - 0-999990（0.1V）
+     - 0-999990 (0.1V)
 
    * - 19
-     - 单次点动最大距离
+     - Maksymalna odległość pojedynczego ruchu jałowego
      - float
-     - 0-1000（0.1mm）
+     - 0-1000 (0.1mm)
 
    * - 20
-     - 焊机准备扩展DI端口
+     - Rozszerzony port DI gotowości spawarki
      - float
      - 0-127
 
    * - 21
-     - 起弧成功扩展DI端口
+     - Rozszerzony port DI sukcesu rozpoczęcia łuku
      - float
      - 0-127
 
    * - 22
-     - 焊接中断恢复扩展DI端口
+     - Rozszerzony port DI wznowienia po przerwaniu spawania
      - float
      - 0-127
 
    * - 23
-     - 焊接中断退出扩展DI端口
+     - Rozszerzony port DI wyjścia po przerwaniu spawania
      - float
      - 0-127
 
    * - 24
-     - 焊机起弧扩展DO端口
+     - Rozszerzony port DO rozpoczęcia łuku spawarki
      - float
      - 0-127
 
    * - 25
-     - 气体检测扩展D0端口
+     - Rozszerzony port D0 detekcji gazu
      - float
      - 0-127
 
    * - 26
-     - 正向送丝扩展D0端口
+     - Rozszerzony port D0 podawania drutu w przód
      - float
      - 0-127
 
    * - 27
-     - 反向送丝扩展D0端口
+     - Rozszerzony port D0 podawania drutu w tył
      - float
      - 0-127
 
    * - 28
-     - 焊接中断恢复使能
+     - Włączenie wznowienia po przerwaniu spawania
      - float
      - 0-1
 
    * - 29
-     - 去再恢复点速度
+     - Prędkość do punktu ponownego rozpoczęcia
      - float
      - 0-100%
 
    * - 30
-     - 运动方式
+     - Sposób ruchu
      - float
      - 0-1
 
    * - 31
-     - 焊接电弧中断检测使能
+     - Włączenie detekcji przerwania łuku spawania
      - float
      - 0-1
 
    * - 32
-     - 是否包括等待时间(ms)
+     - Czy uwzględniać czas oczekiwania (ms)
      - float
      - 0-1
 
    * - 33
-     - 摆动回调比率
+     - Współczynnik powrotu wahadła
      - float
      - 0-100%
 
    * - 34
-     - 摆动位置等待类型
+     - Typ oczekiwania na pozycję wahadła
      - float
      - 0-255
 
    * - 35
-     - 起弧时间
+     - Czas rozpoczęcia łuku
      - float
-     - 0-65535（ms）
+     - 0-65535 (ms)
 
    * - 36
-     - 收弧时间
+     - Czas zakończenia łuku
      - float
-     - 0-65535（ms）
+     - 0-65535 (ms)
 
    * - 37
-     - 焊接电弧中断确认时长
+     - Czas potwierdzenia przerwania łuku spawania
      - float
-     - 0-65535（ms）
+     - 0-65535 (ms)
 
    * - 38
-     - 重叠距离
+     - Odległość nakładania
      - float
      - 0-1000(0.1mm)
 
    * - 39
-     - 起弧电流
+     - Prąd rozpoczęcia łuku
      - float
      - 0-999990(0.1A)
 
    * - 40
-     - 起弧电压
+     - Napięcie rozpoczęcia łuku
      - float
      - 0-999990(0.1V)
 
    * - 41
-     - 收弧电流
+     - Prąd zakończenia łuku
      - float
      - 0-999990(0.1A)
 
    * - 42
-     - 收弧电压
+     - Napięcie zakończenia łuku
      - float
      - 0-999990(0.1V)
 
    * - 43
-     - 最小焊接电流
+     - Minimalny prąd spawania
      - float
      - 0-999990(0.1A)
 
    * - 44
-     - 最大焊接电流
+     - Maksymalny prąd spawania
      - float
      - 0-999990(0.1A)
 
    * - 45
-     - 最小焊接电流对应输出模拟量
+     - Wartość analogowa wyjściowa odpowiadająca minimalnemu prądowi spawania
      - float
      - 0-100(0.1A)
 
    * - 46
-     - 最大焊接电流对应输出模拟量
+     - Wartość analogowa wyjściowa odpowiadająca maksymalnemu prądowi spawania
      - float
      - 0-100(0.1A)
 
    * - 47
-     - 最小焊接电压
+     - Minimalne napięcie spawania
      - float
      - 0-2000(0.1V)
 
    * - 48
-     - 最大焊接电压
+     - Maksymalne napięcie spawania
      - float
      - 0-2000(0.1V)
 
    * - 49
-     - 最小焊接电压对应输出模拟量
+     - Wartość analogowa wyjściowa odpowiadająca minimalnemu napięciu spawania
      - float
      - 0-100(0.1V)
 
    * - 50
-     - 最大焊接电压对应输出模拟量
+     - Wartość analogowa wyjściowa odpowiadająca maksymalnemu napięciu spawania
      - float
      - 0-100(0.1V)
 
    * - 51
-     - 立三角摆动左弦长度
+     - Długość lewej cięciwy wahadła trójkątnego pionowego
      - float
      - 0-1000(0.1mm)
 
    * - 52
-     - 立三角摆动右弦长度
+     - Długość prawej cięciwy wahadła trójkątnego pionowego
      - float
      - 0-1000(0.1mm)
 
    * - 53
-     - 摆动方向方位角
+     - Azymut kierunku wahadła
      - float
      - -1800-1800(0.1°)
 
    * - 54
-     - 摆动方向侧倾角
+     - Kąt przechyłu bocznego kierunku wahadła
      - float
      - -1800-1800(0.1°)
 
    * - 55
-     - 立三角摆动三角尖点等待时间
+     - Czas oczekiwania w wierzchołku trójkąta wahadła trójkątnego pionowego
      - float
      - 0-99999(ms)
 
-喷枪
--------------
+Pistolet natryskowy
+-------------------
 
-喷枪外设配置步骤
-~~~~~~~~~~~~~~~~~~
+Kroki konfiguracji urządzenia peryferyjnego pistoletu natryskowego
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-**Step1**：在“初始设置”->“外设”菜单栏中，点击“喷枪”进入喷枪配置界面。
+**Krok 1**: W menu „Ustawienia początkowe” -> „Urządzenia peryferyjne” kliknij „Pistolet natryskowy”, aby przejść do interfejsu konfiguracji pistoletu natryskowego.
 
-用户可以通过喷涂功能一键配置按键，对喷涂所需DO进行快速配置（默认配置DO10为喷涂启停，DO11为喷涂清枪）。 
+Użytkownik może użyć funkcji jednego przycisku do szybkiej konfiguracji DO wymaganych do natryskiwania (domyślnie DO10 to uruchamianie/zatrzymywanie natryskiwania, DO11 to czyszczenie pistoletu).
 
-用户也可以根据自己的需求在“初始设置”->“基础”->“I/O设置”中，自定义配置DO。
+Użytkownik może również dostosować konfigurację DO w „Ustawienia początkowe” -> „Podstawowe” -> „Ustawienia I/O” według własnych potrzeb.
 
 .. important:: 
-	使用喷涂功能之前，需要先建立相应的工具坐标系，并在程序示教时应用建立好的工具坐标系。
+    Przed użyciem funkcji natryskiwania należy najpierw utworzyć odpowiedni układ współrzędnych narzędzia i zastosować go podczas programowania nauczania.
 
-**Step2**：配置完成后，点击“开始喷涂”、“停止喷涂”、“开始清枪”和“停止清枪”四个按钮，进行喷枪调试。
+**Krok 2**: Po zakończeniu konfiguracji kliknij cztery przyciski „Rozpocznij natryskiwanie”, „Zatrzymaj natryskiwanie”, „Rozpocznij czyszczenie pistoletu” i „Zatrzymaj czyszczenie pistoletu”, aby przetestować pistolet natryskowy.
 
 .. figure:: robot_peripherals/034.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.5‑1 喷枪配置
+.. centered:: Schemat 8.5‑1 Konfiguracja pistoletu natryskowego
 
-**Step3**：在程序编程命令界面选择“喷枪”命令。根据具体的程序示教需求，在相应的地方添加应用“开始喷涂”、“停止喷涂”、“开始清枪”和“停止清枪”四个指令。
+**Krok 3**: W interfejsie poleceń programowania nauczania wybierz polecenie „Pistolet natryskowy”. Zgodnie z konkretnymi potrzebami programowania nauczania, dodaj i zastosuj cztery instrukcje „Rozpocznij natryskiwanie”, „Zatrzymaj natryskiwanie”, „Rozpocznij czyszczenie pistoletu” i „Zatrzymaj czyszczenie pistoletu” w odpowiednich miejscach.
 
 .. figure:: robot_peripherals/035.png
    :align: center
    :width: 6in
 
-.. centered:: 图表 8.5‑2 喷枪指令
+.. centered:: Schemat 8.5‑2 Instrukcje pistoletu natryskowego
 
-喷涂程序示教
-~~~~~~~~~~~~~~
+Nauczanie programu natryskiwania
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. list-table:: 
    :widths: 15 40 100
    :header-rows: 1
 
-   * - 序号
-     - 指令格式
-     - 注释
+   * - Nr
+     - Format instrukcji
+     - Komentarz
    * - 1
      - Lin(template1,100,-1,0,0)
-     - #开始喷涂点
+     - # Punkt rozpoczęcia natryskiwania
    * - 2
      - SprayStart()
-     - #开始喷涂
+     - # Rozpocznij natryskiwanie
    * - 3
      - Lin(template2,100,-1,0,0)
-     - #喷涂路径
+     - # Ścieżka natryskiwania
    * - 4
      - Lin(template3,100,-1,0,0)
-     - #停止喷涂点
+     - # Punkt zatrzymania natryskiwania
    * - 5
      - SprayStop()
-     - #停止喷涂
+     - # Zatrzymaj natryskiwanie
    * - 6
      - Lin(template4,100,-1,0,0)
-     - #清枪点
+     - # Punkt czyszczenia pistoletu
    * - 7
      - PowerCleanStart()
-     - #开始清枪
+     - # Rozpocznij czyszczenie pistoletu
    * - 8
      - WaitTime(5000)
-     - #清枪时间 ms
+     - # Czas czyszczenia pistoletu ms
    * - 9
      - PowerCleanStop()
-     - #停止清枪
+     - # Zatrzymaj czyszczenie pistoletu
 
-焊机
--------------
+Spawarka
+---------
 
-协作机器人携带焊枪进行焊接作业可以显著提高焊接效率和焊接质量，法奥协作机器人可以通过“控制器IO”或“数字通信协议（UDP）”或“数字通信协议（Modbus TCP）”三种方法进行焊接控制：
+Robot współpracujący wyposażony w palnik spawalniczy do wykonywania operacji spawania może znacznie zwiększyć wydajność i jakość spawania. Roboty współpracujące FANUC mogą sterować spawaniem na trzy sposoby: „I/O sterownika”, „Protokół komunikacji cyfrowej (UDP)” lub „Protokół komunikacji cyfrowej (Modbus TCP)”:
 
-**控制器IO**：机器人通过设置控制箱模拟量输出(0-10V)进行焊接电流和焊接电压的大小控制，通过控制箱数字输出进行焊接起弧、送丝、送气的控制，通过控制箱数字输入采集焊机准备、起弧成功等信号输入。
+**I/O sterownika**: Robot steruje wielkością prądu i napięcia spawania poprzez ustawienie wyjścia analogowego szafy sterowniczej (0-10V), steruje rozpoczęciem łuku, podawaniem drutu, podawaniem gazu poprzez wyjścia cyfrowe szafy sterowniczej, a poprzez wejścia cyfrowe szafy sterowniczej odbiera sygnały takie jak gotowość spawarki, sukces rozpoczęcia łuku itp.
 
-**数字通信协议（UDP）**：机器人通过UDP与PLC进行通信，PLC再通过CANOpen总线或其他协议与焊机通信，进而控制焊接电压、电流和焊机起弧、送丝、送气等操作(机器人UDP通信协议内容见附件一)。
+**Protokół komunikacji cyfrowej (UDP)**: Robot komunikuje się z PLC przez UDP, a PLC komunikuje się ze spawarką przez magistralę CANOpen lub inny protokół, sterując w ten sposób napięciem spawania, prądem oraz operacjami takimi jak rozpoczęcie łuku, podawanie drutu, podawanie gazu (treść protokołu komunikacji UDP robota znajduje się w Załączniku 1).
 
-**数字通信协议（Modbus TCP）**：即控制器外设开放协议，通常是一个可运行的LUA程序，程序包含通讯创建指令、循环向从站设备写入控制数据和读取实时状态数据指令，执行该LUA程序时，机器人与设备建立通讯，并进行数据交互。控制器外设开放协议LUA程序中可自定义IP地址、端口号、周期等通讯参数，用户在使用时需要根据实际设备情况对该协议内容进行修改。控制器外设开放协议支持的设备包括打磨头、激光传感器、CNC、焊机等。控制器外设开放协议文件名称需以CtrlDev_开头，如“CtrlDev_Welding.lua”，最多支持4个开放协议同时运行。
+**Protokół komunikacji cyfrowej (Modbus TCP)**: Jest to otwarty protokół urządzeń peryferyjnych sterownika. Zazwyczaj jest to wykonywalny program LUA zawierający instrukcje tworzenia komunikacji, cyklicznego zapisywania danych sterujących do urządzenia slave i odczytywania danych stanu w czasie rzeczywistym. Podczas wykonywania tego programu LUA, robot nawiązuje komunikację z urządzeniem i wymienia dane. W programie LUA otwartego protokołu urządzeń peryferyjnych sterownika można dostosować parametry komunikacji, takie jak adres IP, numer portu, okres itp. Użytkownik musi zmodyfikować treść tego protokołu zgodnie z rzeczywistym stanem urządzenia podczas użytkowania. Urządzenia obsługiwane przez otwarty protokół urządzeń peryferyjnych sterownika obejmują głowice szlifierskie, czujniki laserowe, CNC, spawarki itp. Nazwa pliku otwartego protokołu urządzeń peryferyjnych sterownika musi zaczynać się od `CtrlDev_`, np. „CtrlDev_Welding.lua”. Maksymalnie 4 otwarte protokoły mogą działać jednocześnie.
 
 .. figure:: robot_peripherals/036.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.6‑1 焊机
+.. centered:: Schemat 8.6‑1 Spawarka
 
-“控制器IO”或“数字通信协议（UDP）”进行焊接控制主要包括以下几个步骤：①焊枪安装及信号接线；②焊机参数配置；③编写焊接控制程序。
+Sterowanie spawaniem za pomocą „I/O sterownika” lub „Protokołu komunikacji cyfrowej (UDP)” obejmuje głównie następujące kroki: ① Instalacja palnika spawalniczego i podłączenie sygnałów; ② Konfiguracja parametrów spawarki; ③ Napisanie programu sterowania spawaniem.
 
-焊枪安装
-~~~~~~~~~~~~~~~~~~~~~
+Instalacja palnika spawalniczego
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-焊枪通过转接板安装于机器人末端，焊枪线缆需固定于机械臂上。
+Palnik spawalniczy jest montowany na końcówce robota za pomocą płyty przejściowej. Kabel palnika spawalniczego musi być zamocowany na ramieniu robota.
 
 .. figure:: robot_peripherals/037.png
    :align: center
    :width: 3in
 
-.. centered:: 图表 8.6‑2 焊枪安装于机器人末端
+.. centered:: Schemat 8.6‑2 Instalacja palnika spawalniczego na końcówce robota
 
-焊枪固定安装完成后，通过六点法进行焊枪工具坐标系标定，并应用为当前工具坐标系，焊枪工具坐标系标定精度会影响实际焊接精度。
+Po zamocowaniu palnika spawalniczego, skalibruj układ współrzędnych narzędzia palnika za pomocą metody 6 punktów i zastosuj go jako bieżący układ współrzędnych narzędzia. Dokładność kalibracji układu współrzędnych narzędzia palnika wpływa na rzeczywistą dokładność spawania.
 
 .. figure:: robot_peripherals/038.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.6-3 机器人工具坐标系标定及应用
+.. centered:: Schemat 8.6-3 Kalibracja i zastosowanie układu współrzędnych narzędzia robota
 
-焊机参数配置
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Konfiguracja parametrów spawarki
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-协作机器人可通过“控制器IO”信号或“数字通信协议”进行焊接过程控制，两种方式的配置操作主要有以下两个区别点：
+Robot współpracujący może sterować procesem spawania za pomocą sygnałów „I/O sterownika” lub „Protokołu komunikacji cyfrowej”. Główne różnice w operacjach konfiguracyjnych między tymi dwoma sposobami to:
 
-①使用“控制器IO”时需要设置实际控制焊接电流电压与控制箱模拟量输出值之间的对应关系；
+① Podczas korzystania z „I/O sterownika” należy ustawić zależność między rzeczywistym sterowaniem prądem i napięciem spawania a wartością wyjściową analogową szafy sterowniczej;
 
-②使用“数字通信协议”时需要配置通信参数。
+② Podczas korzystania z „Protokołu komunikacji cyfrowej” należy skonfigurować parametry komunikacji.
 
-“控制器IO”焊接控制配置
-+++++++++++++++++++++++++++++++++++
+Konfiguracja sterowania spawaniem „I/O sterownika”
+++++++++++++++++++++++++++++++++++++++++++++++++++
 
-在“初始设置”->“外设”->“焊机”菜单栏中，点击“控制器I/O”卡片进入界面。
+W menu „Ustawienia początkowe” -> „Urządzenia peryferyjne” -> „Spawarka” kliknij kartę „I/O sterownika”, aby przejść do interfejsu.
 
 .. figure:: robot_peripherals/039.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.6-4 控制器I/O
+.. centered:: Schemat 8.6-4 I/O sterownika
 
-焊接IO信号配置
-****************************
+Konfiguracja sygnałów IO spawarki
+*********************************
 
-如下图所示，选择焊机状态信号DI输入端口和焊机控制信号DO输出端口，点击“配置”按钮，各信号含义如下：
+Jak pokazano na poniższym rysunku, wybierz port wejścia DI dla sygnału stanu spawarki i port wyjścia DO dla sygnału sterującego spawarką. Kliknij przycisk „Konfiguruj”. Znaczenie poszczególnych sygnałów jest następujące:
 
 .. figure:: robot_peripherals/040.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.6-5 设置焊机信号端口
+.. centered:: Schemat 8.6-5 Ustawianie portów sygnałów spawarki
 
-**焊机准备**：当焊机已经准备完成可以进行焊接作业时，焊机输出该信号至机器人。
+**Gotowość spawarki**: Gdy spawarka jest gotowa do wykonania operacji spawania, wysyła ten sygnał do robota.
 
-当焊机故障或其他原因未准备完成时，焊机未将该信号输入至机器人，此时机器人WebApp右上角提示“焊机未准备好”。若您的焊机没有焊机准备好信号，可将该项端口设置为“无”。
+Gdy spawarka nie jest gotowa z powodu usterki lub innych przyczyn, nie wysyła tego sygnału do robota. Wtedy w prawym górnym rogu WebApp pojawi się komunikat „Spawarka niegotowa”. Jeśli Twoja spawarka nie ma sygnału gotowości spawarki, możesz ustawić ten port na „Brak”.
 
 .. figure:: robot_peripherals/041.png
    :align: center
    :width: 3in
 
-.. centered:: 图表 8.6-6 焊机未准备好报错
+.. centered:: Schemat 8.6-6 Błąd niegotowej spawarki
 
 .. figure:: robot_peripherals/042.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.6-7 焊机准备设置为“无”
+.. centered:: Schemat 8.6-7 Ustawienie gotowości spawarki na „Brak”
 
-**起弧成功**：焊机起弧已成功，机器人输出起弧信号至焊机后，等待焊机反馈起弧成功信号，在设定的超时时间内机器人未检测到焊机的起弧成功信号，机器人报“起弧超时”错误。
+**Sukces rozpoczęcia łuku**: Spawarka pomyślnie rozpoczęła łuk. Po wysłaniu przez robota sygnału rozpoczęcia łuku do spawarki, robot oczekuje na sygnał zwrotny sukcesu rozpoczęcia łuku. Jeśli robot nie wykryje sygnału sukcesu rozpoczęcia łuku w ustawionym czasie timeoutu, zgłasza błąd „Przekroczenie czasu rozpoczęcia łuku”.
 
-使用机器人焊接功能时若未配置起弧成功信号仍可进行焊接，但机器人会报“起弧成功DI未配置”警告；若您的焊机有起弧成功信号输出，我们建议您配置此信号以进行更安全的焊接。
+Podczas korzystania z funkcji spawania robota, jeśli sygnał sukcesu rozpoczęcia łuku nie jest skonfigurowany, spawanie nadal może być wykonywane, ale robot wyświetli ostrzeżenie „DI sukcesu rozpoczęcia łuku nieskonfigurowane”. Jeśli Twoja spawarka ma wyjście sygnału sukcesu rozpoczęcia łuku, zalecamy skonfigurowanie tego sygnału w celu bezpieczniejszego spawania.
 
 .. figure:: robot_peripherals/043.png
    :align: center
    :width: 3in
 
-.. centered:: 图表 8.6-8 起弧超时报错
+.. centered:: Schemat 8.6-8 Błąd przekroczenia czasu rozpoczęcia łuku
    
 .. figure:: robot_peripherals/044.png
    :align: center
    :width: 3in
 
-.. centered:: 图表 8.6-9 起弧成功DI未配置警告
+.. centered:: Schemat 8.6-9 Ostrzeżenie o nieskonfigurowanym DI sukcesu rozpoczęcia łuku
 
-**焊接中断恢复**：机器人焊接过程中电弧意外中断或操作人员主动暂停焊接时会触发焊接中断，焊接中断后外部向机器人输入该信号从无效变为有效时，机器人自动从原来中断的位置自动恢复焊接。
+**Wznowienie po przerwaniu spawania**: Podczas spawania robotem, w przypadku nieoczekiwanego przerwania łuku lub aktywnego wstrzymania spawania przez operatora, następuje przerwanie spawania. Gdy po przerwaniu spawania sygnał wejściowy z zewnątrz do robota zmieni się z nieaktywnego na aktywny, robot automatycznie wznowi spawanie od miejsca, w którym zostało przerwane.
 
-**焊接中断退出**：机器人焊接过程中电弧意外中断或操作人员主动暂停焊接时会触发焊接中断，焊接中断后外部向机器人输入该信号从无效变为有效时，机器人终止焊接，焊接终止后不可再次恢复焊接。
+**Wyjście po przerwaniu spawania**: Podczas spawania robotem, w przypadku nieoczekiwanego przerwania łuku lub aktywnego wstrzymania spawania przez operatora, następuje przerwanie spawania. Gdy po przerwaniu spawania sygnał wejściowy z zewnątrz do robota zmieni się z nieaktywnego na aktywny, robot zakończy spawanie. Po zakończeniu spawania nie można go już wznowić.
 
-**焊机起弧**：机器人控制焊机起弧的DO输出端口，当机器人程序执行起弧指令时，焊机起弧对应DO输出端口自动输出有效。
+**Rozpoczęcie łuku spawarki**: Port wyjścia DO, za pomocą którego robot steruje rozpoczęciem łuku spawarki. Gdy program robota wykonuje instrukcję rozpoczęcia łuku, odpowiedni port wyjścia DO dla rozpoczęcia łuku spawarki automatycznie staje się aktywny.
 
-**气体检测**：机器人控制焊机送气的DO输出端口，当机器人执行焊接送气指令时，送气对应的DO输出端口自动输出有效。
+**Detekcja gazu**: Port wyjścia DO, za pomocą którego robot steruje podawaniem gazu spawarki. Gdy robot wykonuje instrukcję podawania gazu spawania, odpowiedni port wyjścia DO dla podawania gazu automatycznie staje się aktywny.
 
-**正向送丝**：机器人控制焊机正向送丝的DO输出端口，当机器人执行正向送丝指令时，正向送丝对应的DO输出端口自动输出有效。
+**Podawanie drutu w przód**: Port wyjścia DO, za pomocą którego robot steruje podawaniem drutu w przód spawarki. Gdy robot wykonuje instrukcję podawania drutu w przód, odpowiedni port wyjścia DO dla podawania drutu w przód automatycznie staje się aktywny.
 
-**反向送丝**：机器人控制焊机反向送丝的DO输出端口，当机器人执行反向送丝指令时，反向送丝对应的DO输出端口自动输出有效。
+**Podawanie drutu w tył**: Port wyjścia DO, za pomocą którego robot steruje podawaniem drutu w tył spawarki. Gdy robot wykonuje instrukcję podawania drutu w tył, odpowiedni port wyjścia DO dla podawania drutu w tył automatycznie staje się aktywny.
 
-焊接工艺参数配置
-****************************
+Konfiguracja parametrów procesu spawania
+****************************************
 
-如下图所示，在焊接配置页面找到“焊接工艺参数”栏，协作机器人提供0 ~ 99共100组焊接工艺参数，其中工艺编号0表示不使用焊接工艺曲线，工艺编号1-99使用焊接工艺曲线。
+Jak pokazano na poniższym rysunku, znajdź sekcję „Parametry procesu spawania” na stronie konfiguracji spawarki. Robot współpracujący udostępnia 100 zestawów parametrów procesu spawania od 0 do 99. Numer procesu 0 oznacza brak użycia krzywej procesu spawania, a numery 1-99 używają krzywej procesu spawania.
    
 .. figure:: robot_peripherals/045.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.6-10 焊接工艺参数配置 
+.. centered:: Schemat 8.6-10 Konfiguracja parametrów procesu spawania 
 
-使用焊接工艺曲线时，以选择焊接工艺编号1为例，依次输入起弧电流 ~ 收弧时间参数如图8中所示，点击“配置”按钮，该工艺参数表示的实际焊接过程如下：
+Podczas korzystania z krzywej procesu spawania, na przykładzie wybrania numeru procesu spawania 1, kolejno wprowadź parametry od prądu rozpoczęcia łuku do czasu zakończenia łuku, jak pokazano na rysunku 8. Kliknij przycisk „Konfiguruj”. Rzeczywisty proces spawania reprezentowany przez te parametry jest następujący:
 
-①设置焊接电流200A、电压23V；
+① Ustaw prąd spawania na 200 A, napięcie na 23 V;
 
-②执行起弧，等待起弧成功；
+② Wykonaj rozpoczęcie łuku, oczekuj na sukces rozpoczęcia łuku;
 
-③起弧成功后电弧保持500ms(起弧时间，机器人不运动)；
+③ Po pomyślnym rozpoczęciu łuku, łuk utrzymuje się przez 500 ms (czas rozpoczęcia łuku, robot się nie porusza);
 
-④设置焊接电流150A、焊接电压21V，然后机器人开始运动并进行焊接；
+④ Ustaw prąd spawania na 150 A, napięcie spawania na 21 V, a następnie robot zaczyna się poruszać i spawać;
 
-⑤焊接到终点后，设置焊接电流为100A、焊接电压为19V(收弧电流、收弧电压)；
+⑤ Po dojechaniu do końca, ustaw prąd spawania na 100 A, napięcie spawania na 19 V (prąd i napięcie zakończenia łuku);
 
-⑥收弧电流、电压设置完成后保持500ms电弧燃烧(机器人不运动)，最后熄灭电弧。
+⑥ Po ustawieniu prądu i napięcia zakończenia łuku, łuk pali się przez 500 ms (robot się nie porusza), a następnie gaśnie.
 
-不使用焊接工艺曲线时，即选择焊接工艺参数编号为0时，如下图，焊接过程为：
+Gdy nie używasz krzywej procesu spawania, czyli wybierasz numer parametrów procesu spawania 0, proces spawania jest następujący:
 
-①设置焊接电流和焊接电压；
+① Ustaw prąd i napięcie spawania;
 
-②机器人控制焊机起弧，并等待起弧成功；
+② Robot steruje spawarką, aby rozpocząć łuk i czeka na sukces rozpoczęcia łuku;
 
-③起弧成功后，机器人开始运动并进行焊接；
+③ Po pomyślnym rozpoczęciu łuku, robot zaczyna się poruszać i spawać;
 
-④机器人焊接到终点后立即熄灭电弧。
+④ Robot natychmiast gasi łuk po dojechaniu do końca spawania.
    
 .. figure:: robot_peripherals/046.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.6-11 不使用焊接工艺曲线 
+.. centered:: Schemat 8.6-11 Nieużywanie krzywej procesu spawania 
 
-焊接电流电压与模拟量输出关系图设置
-***************************************
+Ustawienie zależności między prądem/napięciem spawania a wyjściem analogowym
+*****************************************************************************
 
-协作机器人焊接控制类型选择为“控制器IO”时，通过控制箱模拟量输出大小来控制焊接电流和焊接电压值(控制箱模拟量输出电压范围为0 ~ 10V)，此时需要配置控制箱模拟量输出值与实际焊接电流、焊接电压值的线性对应关系。
+Gdy typ sterowania spawaniem robota współpracującego jest wybrany jako „I/O sterownika”, wartości prądu i napięcia spawania są sterowane przez wielkość wyjścia analogowego szafy sterowniczej (zakres napięcia wyjścia analogowego szafy sterowniczej wynosi 0 ~ 10 V). W tym przypadku należy skonfigurować liniową zależność między wartością wyjścia analogowego szafy sterowniczej a rzeczywistymi wartościami prądu i napięcia spawania.
 
-如图12，在焊机配置页面找到“模拟量电流电压关系图”，其中“A-V”表示焊接电流与控制箱输出模拟量输出电压之间的对应关系，“V-V”表示焊接电压与控制箱输出模拟量电压之间的对应关系。
+Jak pokazano na rysunku 12, znajdź „Wykres zależności prądu i napięcia analogowego” na stronie konfiguracji spawarki. „A-V” oznacza zależność między prądem spawania a napięciem wyjściowym analogowym szafy sterowniczej, a „V-V” oznacza zależność między napięciem spawania a napięciem wyjściowym analogowym szafy sterowniczej.
 
-选择“A-V”，输入焊接电流范围0-1000A，模拟量输出电压0-10V，输出AO为“Ctrl-AO0”(焊接电流控制模拟量输出端口为AO0)，点击“配置”按钮；在该参数下，控制箱输出模拟量电压1.5V时，对应焊接电流为150A。
+Wybierz „A-V”, wprowadź zakres prądu spawania 0-1000 A, napięcie wyjściowe analogowe 0-10 V, wyjście AO jako „Ctrl-AO0” (port wyjścia analogowego dla sterowania prądem spawania to AO0), kliknij przycisk „Konfiguruj”. Przy tych parametrach, gdy napięcie wyjściowe analogowe szafy sterowniczej wynosi 1,5 V, odpowiada to prądowi spawania 150 A.
    
 .. figure:: robot_peripherals/047.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.6-12 焊接电流与输出模拟量对应关系配置
+.. centered:: Schemat 8.6-12 Konfiguracja zależności między prądem spawania a wyjściem analogowym
 
-如图13，点击“V-V”设置焊接电压与控制箱模拟量输出电压之间的对应关系，输入焊接电压范围为0-60V，模拟量输出电压值为0-10V，输出AO为“Ctrl-AO1”(焊接电流控制模拟量输出端口为AO0)，点击“配置”按钮，此时。若控制箱AO1模拟量输出3.5V，实际控制焊接电压为21V。
+Jak pokazano na rysunku 13, kliknij „V-V”, aby ustawić zależność między napięciem spawania a napięciem wyjściowym analogowym szafy sterowniczej. Wprowadź zakres napięcia spawania 0-60 V, wartość napięcia wyjściowego analogowego 0-10 V, wyjście AO jako „Ctrl-AO1” (port wyjścia analogowego dla sterowania prądem spawania to AO0), kliknij przycisk „Konfiguruj”. W tym przypadku, jeśli wyjście analogowe AO1 szafy sterowniczej wynosi 3,5 V, rzeczywiste sterowane napięcie spawania wynosi 21 V.
    
 .. figure:: robot_peripherals/048.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.6-13 焊接电压与输出模拟量对应关系配置
+.. centered:: Schemat 8.6-13 Konfiguracja zależności między napięciem spawania a wyjściem analogowym
 
-焊机调试
-******************
+Debugowanie spawarki
+********************
 
-如图14，在焊机配置页面中找到“焊机调试”，选择工艺编号1，输入超时时间为1000ms，点击“送气”，机器人即控制焊机开始输送保护气，点击“停气”按钮，机器人即控制焊机停止输送保护气。其他按钮“起弧”、“正向送丝”、“反向送丝”等操作方法相同，不再赘述。
+Jak pokazano na rysunku 14, znajdź „Debugowanie spawarki” na stronie konfiguracji spawarki. Wybierz proces numer 1, wprowadź czas timeoutu 1000 ms, kliknij „Podaj gaz”. Robot steruje spawarką, aby rozpocząć podawanie gazu ochronnego. Kliknij przycisk „Zatrzymaj gaz”. Robot steruje spawarką, aby zatrzymać podawanie gazu ochronnego. Sposób obsługi innych przycisków, takich jak „Rozpoczęcie łuku”, „Podawanie drutu w przód”, „Podawanie drutu w tył”, jest taki sam i nie będzie powtarzany.
    
 .. figure:: robot_peripherals/049.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.6-14 焊机调试
+.. centered:: Schemat 8.6-14 Debugowanie spawarki
 
-“数字通信协议（UDP）”焊接控制配置
-+++++++++++++++++++++++++++++++++++
+Konfiguracja sterowania spawaniem „Protokół komunikacji cyfrowej (UDP)”
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-机器人通过“数字通信协议”进行焊接控制，本质上是机器人与PLC进行UDP通信，机器人通过UDP通信将起弧、送丝、送气、电流、电压等控制数据传至PLC，再由PLC端进一步通过CANOpen总线(或其他方式)对焊机进行控制，同时PLC端采集实际的焊接电流电压、起弧成功信号反馈至机器人。(机器人UDP通信协议内容见附件一)。
+Sterowanie spawaniem przez robot za pomocą „Protokołu komunikacji cyfrowej” polega w istocie na komunikacji UDP między robotem a PLC. Robot przesyła dane sterujące, takie jak rozpoczęcie łuku, podawanie drutu, podawanie gazu, prąd, napięcie itp., do PLC przez komunikację UDP. PLC z kolei dalej steruje spawarką przez magistralę CANOpen (lub w inny sposób), jednocześnie zbierając rzeczywiste wartości prądu i napięcia spawania oraz sygnał sukcesu rozpoczęcia łuku i przesyłając je z powrotem do robota (treść protokołu komunikacji UDP robota znajduje się w Załączniku 1).
 
-在“初始设置”->“外设”菜单栏中，点击“焊机”进入焊机配置界面。如下图所示：
+W menu „Ustawienia początkowe” -> „Urządzenia peryferyjne” kliknij „Spawarka”, aby przejść do interfejsu konfiguracji spawarki. Jak pokazano poniżej:
    
 .. figure:: robot_peripherals/050.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.6-15 数字通信协议（UDP）
+.. centered:: Schemat 8.6-15 Protokół komunikacji cyfrowej (UDP)
 
-由于机器人与PLC进行UDP通信，因此需要配置UDP通信参数，其中各项参数的含义如下：
+Ponieważ robot komunikuje się z PLC przez UDP, należy skonfigurować parametry komunikacji UDP. Znaczenie poszczególnych parametrów jest następujące:
 
-**IP地址**：UDP通信PLC端的IP地址；
+**Adres IP**: Adres IP strony PLC komunikacji UDP;
 
-**端口号**：PLC端UDP通信端口号；
+**Numer portu**: Numer portu komunikacji UDP strony PLC;
 
-**通信周期**：机器人与PLC进行UDP通信的周期，默认为2ms；
+**Okres komunikacji**: Okres komunikacji UDP między robotem a PLC, domyślnie 2 ms;
 
-**丢包检测周期、丢包次数**：在丢包检测周期内的丢包个数超过设定值时，机器人报“UDP通信丢包异常”错误，同时通信自动切断。
+**Okres wykrywania utraty pakietów, liczba utraconych pakietów**: Gdy liczba utraconych pakietów w okresie wykrywania utraty pakietów przekroczy ustawioną wartość, robot zgłasza błąd „Utrata pakietów komunikacji UDP”, a komunikacja jest automatycznie przerywana.
 
-**通信中断确认时长**：机器人在该时长内未收到一帧完整的PLC反馈数据包即报“UDP通信中断”错误报警，同时切断UDP通信。
+**Czas potwierdzenia przerwania komunikacji**: Jeśli robot nie otrzyma pełnego pakietu danych zwrotnych PLC w tym czasie, zgłasza błąd „Przerwanie komunikacji UDP” i przerywa komunikację UDP.
 
-**断电重启自动重连**：机器人检测到机器人断电重启后是否自动进行重连恢复；
+**Automatyczne ponowne łączenie po ponownym uruchomieniu z odcięciem zasilania**: Czy robot ma automatycznie ponownie łączyć się po wykryciu ponownego uruchomienia z odcięciem zasilania;
 
-**通信中断自动重连**：机器人检测到UDP通信中断后是否自动进行重连恢复；
+**Automatyczne ponowne łączenie po przerwaniu komunikacji**: Czy robot ma automatycznie ponownie łączyć się po wykryciu przerwania komunikacji UDP;
 
-**重连周期、重连次数**：使能UDP通信中断自动重连且检测到UDP通信中断后，机器人以设定的周期进行重连，当重连次数达到最大设定值仍未连接成功时，机器人报“UDP通信中断”错误报警，同时切断UDP通信。
+**Okres ponownego łączenia, liczba ponownych łączeń**: Po włączeniu automatycznego ponownego łączenia po przerwaniu komunikacji UDP i wykryciu przerwania, robot próbuje ponownie połączyć się w ustawionych odstępach czasu. Gdy liczba prób ponownego łączenia osiągnie maksymalną ustawioną wartość, a połączenie nadal nie zostanie nawiązane, robot zgłasza błąd „Przerwanie komunikacji UDP” i przerywa komunikację UDP.
 
-配置完成上述参数后，点击“配置”按钮。配置成功后，点击“加载”按钮。
+Po skonfigurowaniu powyższych parametrów kliknij przycisk „Konfiguruj”. Po pomyślnej konfiguracji kliknij przycisk „Załaduj”.
    
 .. figure:: robot_peripherals/051.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.6-16 UDP通讯配置
+.. centered:: Schemat 8.6-16 Konfiguracja komunikacji UDP
 
 .. note:: 
    .. image:: robot_peripherals/052.png
       :height: 0.75in
       :align: left
 
-   名称：**编辑按钮**
+   Nazwa: **Przycisk edycji**
    
-   作用：UDP通讯参数配置打开/关闭
+   Działanie: Otwiera/zamyka konfigurację parametrów komunikacji UDP
 
 .. note:: 
    .. image:: robot_peripherals/053.png
       :height: 0.75in
       :align: left
 
-   名称：**加载按钮**
+   Nazwa: **Przycisk ładowania**
    
-   作用：UDP通讯加载
+   Działanie: Ładowanie komunikacji UDP
 
-焊接IO信号配置
-****************************
+Konfiguracja sygnałów IO spawarki
+*********************************
 
-选择焊机状态信号DI输入端口和焊机控制信号DO输出端口，点击“配置”按钮，各信号含义如下：
+Wybierz port wejścia DI dla sygnału stanu spawarki i port wyjścia DO dla sygnału sterującego spawarką. Kliknij przycisk „Konfiguruj”. Znaczenie poszczególnych sygnałów jest następujące:
    
 .. figure:: robot_peripherals/054.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.6-17 设置焊机信号端口
+.. centered:: Schemat 8.6-17 Ustawianie portów sygnałów spawarki
 
-**焊机准备**：当焊机已经准备完成可以进行焊接作业时，焊机输出该信号至机器人；
+**Gotowość spawarki**: Gdy spawarka jest gotowa do wykonania operacji spawania, wysyła ten sygnał do robota;
 
-当焊机故障或其他原因未准备完成时，焊机未将该信号输入至机器人，此时机器人WebApp右上角提示“焊机未准备好”。若您的焊机没有焊机准备好信号，可将该项端口设置为“-1”。
+Gdy spawarka nie jest gotowa z powodu usterki lub innych przyczyn, nie wysyła tego sygnału do robota. Wtedy w prawym górnym rogu WebApp pojawi się komunikat „Spawarka niegotowa”. Jeśli Twoja spawarka nie ma sygnału gotowości spawarki, możesz ustawić ten port na „-1”.
    
 .. figure:: robot_peripherals/041.png
    :align: center
    :width: 3in
 
-.. centered:: 图表 8.6-18 焊机未准备好报错
+.. centered:: Schemat 8.6-18 Błąd niegotowej spawarki
    
 .. figure:: robot_peripherals/055.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.6-19 焊机准备设置为“-1”
+.. centered:: Schemat 8.6-19 Ustawienie gotowości spawarki na „-1”
 
-**起弧成功**：焊机起弧已成功，机器人输出起弧信号至焊机后，等待焊机反馈起弧成功信号，在设定的超时时间内机器人未检测到焊机的起弧成功信号，机器人报“起弧超时”错误；
+**Sukces rozpoczęcia łuku**: Spawarka pomyślnie rozpoczęła łuk. Po wysłaniu przez robota sygnału rozpoczęcia łuku do spawarki, robot oczekuje na sygnał zwrotny sukcesu rozpoczęcia łuku. Jeśli robot nie wykryje sygnału sukcesu rozpoczęcia łuku w ustawionym czasie timeoutu, zgłasza błąd „Przekroczenie czasu rozpoczęcia łuku”;
 
-使用机器人焊接功能时若未配置起弧成功信号仍可进行焊接，但机器人会报“起弧成功DI未配置”警告；若您的焊机有起弧成功信号输出，我们建议您配置此信号以进行更安全的焊接。
+Podczas korzystania z funkcji spawania robota, jeśli sygnał sukcesu rozpoczęcia łuku nie jest skonfigurowany, spawanie nadal może być wykonywane, ale robot wyświetli ostrzeżenie „DI sukcesu rozpoczęcia łuku nieskonfigurowane”. Jeśli Twoja spawarka ma wyjście sygnału sukcesu rozpoczęcia łuku, zalecamy skonfigurowanie tego sygnału w celu bezpieczniejszego spawania.
    
 .. figure:: robot_peripherals/043.png
    :align: center
    :width: 3in
 
-.. centered:: 图表 8.6-20 起弧超时报错	
+.. centered:: Schemat 8.6-20 Błąd przekroczenia czasu rozpoczęcia łuku	
       
 .. figure:: robot_peripherals/044.png
    :align: center
    :width: 3in
 
-.. centered:: 图表 8.6-21 起弧成功DI未配置报错
+.. centered:: Schemat 8.6-21 Błąd nieskonfigurowanego DI sukcesu rozpoczęcia łuku
 
-**焊接中断恢复**：机器人焊接过程中电弧意外中断或操作人员主动暂停焊接时会触发焊接中断，焊接中断后外部向机器人输入该信号从无效变为有效时，机器人自动从原来中断的位置自动恢复焊接。
+**Wznowienie po przerwaniu spawania**: Podczas spawania robotem, w przypadku nieoczekiwanego przerwania łuku lub aktywnego wstrzymania spawania przez operatora, następuje przerwanie spawania. Gdy po przerwaniu spawania sygnał wejściowy z zewnątrz do robota zmieni się z nieaktywnego na aktywny, robot automatycznie wznowi spawanie od miejsca, w którym zostało przerwane.
 
-**焊接中断退出**：机器人焊接过程中电弧意外中断或操作人员主动暂停焊接时会触发焊接中断，焊接中断后外部向机器人输入该信号从无效变为有效时，机器人终止焊接，焊接终止后不可再次恢复焊接。
+**Wyjście po przerwaniu spawania**: Podczas spawania robotem, w przypadku nieoczekiwanego przerwania łuku lub aktywnego wstrzymania spawania przez operatora, następuje przerwanie spawania. Gdy po przerwaniu spawania sygnał wejściowy z zewnątrz do robota zmieni się z nieaktywnego na aktywny, robot zakończy spawanie. Po zakończeniu spawania nie można go już wznowić.
 
-**焊机起弧**：机器人控制焊机起弧的DO输出端口，当机器人程序执行起弧指令时，焊机起弧对应DO输出端口自动输出有效。
+**Rozpoczęcie łuku spawarki**: Port wyjścia DO, za pomocą którego robot steruje rozpoczęciem łuku spawarki. Gdy program robota wykonuje instrukcję rozpoczęcia łuku, odpowiedni port wyjścia DO dla rozpoczęcia łuku spawarki automatycznie staje się aktywny.
 
-**气体检测**：机器人控制焊机送气的DO输出端口，当机器人执行焊接送气指令时，送气对应的DO输出端口自动输出有效。
+**Detekcja gazu**: Port wyjścia DO, za pomocą którego robot steruje podawaniem gazu spawarki. Gdy robot wykonuje instrukcję podawania gazu spawania, odpowiedni port wyjścia DO dla podawania gazu automatycznie staje się aktywny.
 
-**正向送丝**：机器人控制焊机正向送丝的DO输出端口，当机器人执行正向送丝指令时，正向送丝对应的DO输出端口自动输出有效。
+**Podawanie drutu w przód**: Port wyjścia DO, za pomocą którego robot steruje podawaniem drutu w przód spawarki. Gdy robot wykonuje instrukcję podawania drutu w przód, odpowiedni port wyjścia DO dla podawania drutu w przód automatycznie staje się aktywny.
 
-**反向送丝**：机器人控制焊机反向送丝的DO输出端口，当机器人执行反向送丝指令时，反向送丝对应的DO输出端口自动输出有效。
+**Podawanie drutu w tył**: Port wyjścia DO, za pomocą którego robot steruje podawaniem drutu w tył spawarki. Gdy robot wykonuje instrukcję podawania drutu w tył, odpowiedni port wyjścia DO dla podawania drutu w tył automatycznie staje się aktywny.
 
-焊接工艺参数配置
-****************************
+Konfiguracja parametrów procesu spawania
+****************************************
 
-如图22，在焊接配置页面找到“焊接工艺参数”栏，协作机器人提供0 ~ 99共100组焊接工艺参数，其中工艺编号0表示不使用焊接工艺曲线，工艺编号1-99使用焊接工艺曲线。
+Jak pokazano na rysunku 22, znajdź sekcję „Parametry procesu spawania” na stronie konfiguracji spawarki. Robot współpracujący udostępnia 100 zestawów parametrów procesu spawania od 0 do 99. Numer procesu 0 oznacza brak użycia krzywej procesu spawania, a numery 1-99 używają krzywej procesu spawania.
       
 .. figure:: robot_peripherals/045.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.6-22 焊接工艺参数配置
+.. centered:: Schemat 8.6-22 Konfiguracja parametrów procesu spawania
 
-使用焊接工艺曲线时，以选择焊接工艺编号1为例，依次输入起弧电流 ~ 收弧时间参数如图8中所示，点击“配置”按钮，该工艺参数表示的实际焊接过程如下：
+Podczas korzystania z krzywej procesu spawania, na przykładzie wybrania numeru procesu spawania 1, kolejno wprowadź parametry od prądu rozpoczęcia łuku do czasu zakończenia łuku, jak pokazano na rysunku 8. Kliknij przycisk „Konfiguruj”. Rzeczywisty proces spawania reprezentowany przez te parametry jest następujący:
 
-①设置焊接电流200A、电压23V；
+① Ustaw prąd spawania na 200 A, napięcie na 23 V;
 
-②执行起弧，等待起弧成功；
+② Wykonaj rozpoczęcie łuku, oczekuj na sukces rozpoczęcia łuku;
 
-③起弧成功后电弧保持500ms(起弧时间，机器人不运动)；
+③ Po pomyślnym rozpoczęciu łuku, łuk utrzymuje się przez 500 ms (czas rozpoczęcia łuku, robot się nie porusza);
 
-④设置焊接电流150A、焊接电压21V，然后机器人开始运动并进行焊接；
+④ Ustaw prąd spawania na 150 A, napięcie spawania na 21 V, a następnie robot zaczyna się poruszać i spawać;
 
-⑤焊接到终点后，设置焊接电流为100A、焊接电压为19V(收弧电流、收弧电压)；
+⑤ Po dojechaniu do końca, ustaw prąd spawania na 100 A, napięcie spawania na 19 V (prąd i napięcie zakończenia łuku);
 
-⑥设置完收弧电流、电压后保持500ms电弧燃烧(机器人不运动)，最后熄灭电弧。
+⑥ Po ustawieniu prądu i napięcia zakończenia łuku, łuk pali się przez 500 ms (robot się nie porusza), a następnie gaśnie.
 
-不使用焊接工艺参数时，即选择焊接工艺参数编号为0时，焊接过程为：
+Gdy nie używasz krzywej procesu spawania, czyli wybierasz numer parametrów procesu spawania 0, proces spawania jest następujący:
 
-①通过设置电流、电压接口设置相应的焊接电流和焊接电压；
+① Ustaw prąd i napięcie spawania za pomocą interfejsu ustawiania prądu i napięcia;
 
-②机器人控制焊机起弧，并等待起弧成功；
+② Robot steruje spawarką, aby rozpocząć łuk i czeka na sukces rozpoczęcia łuku;
 
-③起弧成功后，机器人开始运动并进行焊接；
+③ Po pomyślnym rozpoczęciu łuku, robot zaczyna się poruszać i spawać;
 
-④机器人焊接到终点后立即熄灭电弧。
+④ Robot natychmiast gasi łuk po dojechaniu do końca spawania.
       
 .. figure:: robot_peripherals/046.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.6-23 不使用焊接工艺曲线
+.. centered:: Schemat 8.6-23 Nieużywanie krzywej procesu spawania
 
-焊机调试
-******************
+Debugowanie spawarki
+********************
 
-在焊机配置页面中找到“焊机调试”，选择工艺编号1，输入超时时间为1000ms，点击“送气”，机器人即控制焊机开始输送保护气，点击“停气”按钮，机器人即控制焊机停止输送保护气。其他按钮“起弧”、“正向送丝”、“反向送丝”等操作方法相同，不再赘述。
+Znajdź „Debugowanie spawarki” na stronie konfiguracji spawarki. Wybierz proces numer 1, wprowadź czas timeoutu 1000 ms, kliknij „Podaj gaz”. Robot steruje spawarką, aby rozpocząć podawanie gazu ochronnego. Kliknij przycisk „Zatrzymaj gaz”. Robot steruje spawarką, aby zatrzymać podawanie gazu ochronnego. Sposób obsługi innych przycisków, takich jak „Rozpoczęcie łuku”, „Podawanie drutu w przód”, „Podawanie drutu w tył”, jest taki sam i nie będzie powtarzany.
 
 .. figure:: robot_peripherals/049.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.5-24 焊机调试
+.. centered:: Schemat 8.5-24 Debugowanie spawarki
 
-焊接程序编写
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Pisanie programu spawania
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
-使用焊接工艺曲线的程序编写
-++++++++++++++++++++++++++++++++++++
+Pisanie programu z użyciem krzywej procesu spawania
+++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-选择使用焊接工艺曲线时(即选择焊接工艺参数编号1 ~ 99)，焊接过程中的电压电流控制遵循某个工艺参数编号设置的曲线参数，不需要再单独添加设置焊接电压和电流的指令。如图25，点击“示教程”->“程序编程”，新建用户程序“testWeld.lua”。
+Gdy zdecydujesz się użyć krzywej procesu spawania (czyli wybierzesz numer parametrów procesu spawania 1 ~ 99), sterowanie napięciem i prądem podczas spawania podlega parametrom krzywej ustawionym dla danego numeru procesu. Nie ma potrzeby dodawania oddzielnych instrukcji ustawiania napięcia i prądu spawania. Jak pokazano na rysunku 25, kliknij „Program nauczania” -> „Programowanie”, utwórz nowy program użytkownika „testWeld.lua”.
 
 .. figure:: robot_peripherals/056.png
    :align: center
    :width: 6in
 
-.. centered:: 图表 8.6-25 创建“testWeld.lua”程序
+.. centered:: Schemat 8.6-25 Tworzenie programu „testWeld.lua”
 
-在打开的焊接指令添加页面中选择控制类型为“控制器I/O”(根据实际配置的焊接控制方式选择)，选择焊接工艺编号为1(工艺编号0不使用焊接工艺曲线，工艺编号1-99使用焊接工艺曲线)，最大等待时间为10000ms，依次点击“起弧”按钮和“收弧”按钮，最后点击“应用”。
+Na otwartej stronie dodawania instrukcji spawania wybierz typ sterowania jako „I/O sterownika” (zgodnie z faktycznie skonfigurowanym sposobem sterowania spawaniem), wybierz numer procesu spawania jako 1 (numer procesu 0 nie używa krzywej procesu spawania, numery 1-99 używają krzywej procesu spawania), ustaw maksymalny czas oczekiwania na 10000 ms, kolejno kliknij przycisk „Rozpoczęcie łuku” i „Zakończenie łuku”, a na koniec kliknij „Zastosuj”.
 
 .. figure:: robot_peripherals/057.png
    :align: center
    :width: 6in
 
-.. centered:: 图表 8.6-26 焊接指令添加
+.. centered:: Schemat 8.6-26 Dodawanie instrukcji spawania
 
-此时“testWeld.lua”程序中已添加焊接起弧指令和焊接收弧指令，由于焊接起弧、收弧选择使用焊接工艺曲线编号1，因此焊接过程中的电压电流控制遵循工艺编号1设置的曲线参数，不需要再单独添加设置焊接电压和电流的指令。
+W tym momencie do programu „testWeld.lua” zostały dodane instrukcje rozpoczęcia i zakończenia łuku spawania. Ponieważ wybrano użycie krzywej procesu spawania numer 1 dla rozpoczęcia i zakończenia łuku, sterowanie napięciem i prądem podczas spawania podlega parametrom krzywej ustawionym dla numeru procesu 1. Nie ma potrzeby dodawania oddzielnych instrukcji ustawiania napięcia i prądu spawania.
 
 .. figure:: robot_peripherals/058.png
    :align: center
    :width: 6in
 
-.. centered:: 图表 8.6-27 起弧收弧程序
+.. centered:: Schemat 8.6-27 Program rozpoczęcia i zakończenia łuku
 
-添加两个直线运动指令，并调整指令顺序，使机器人先运动到“P1”点，执行起弧，再运动到“P2”点，执行收弧，实现机器人从“P1”点焊接至“P2”点。
+Dodaj dwie instrukcje ruchu liniowego i dostosuj kolejność instrukcji, tak aby robot najpierw przemieścił się do punktu „P1”, wykonał rozpoczęcie łuku, a następnie przemieścił się do punktu „P2” i wykonał zakończenie łuku, realizując spawanie robota od punktu „P1” do punktu „P2”.
 
 .. figure:: robot_peripherals/059.png
    :align: center
    :width: 6in
 
-.. centered:: 图表 8.6-28 机器人从P1点焊接至P2点
+.. centered:: Schemat 8.6-28 Spawanie robota od punktu P1 do punktu P2
 
-不使用焊接工艺曲线的程序编写
-++++++++++++++++++++++++++++++++++++
+Pisanie programu bez użycia krzywej procesu spawania
++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-选择不使用焊接工艺曲线时(即选择焊接工艺参数编号0)，焊接程序中需添加设置焊接电压、电流的指令以控制实际的焊接参数。点击“示教模拟”、“程序示教”，新建用户程序“testWeld.lua”。
+Gdy zdecydujesz się nie używać krzywej procesu spawania (czyli wybierzesz numer parametrów procesu spawania 0), program spawania musi zawierać instrukcje ustawiania napięcia i prądu spawania, aby kontrolować rzeczywiste parametry spawania. Kliknij „Symulacja nauczania”, „Program nauczania”, utwórz nowy program użytkownika „testWeld.lua”.
 
 .. figure:: robot_peripherals/056.png
    :align: center
    :width: 6in
 
-.. centered:: 图表 8.6-29 创建“testWeld.lua”程序
+.. centered:: Schemat 8.6-29 Tworzenie programu „testWeld.lua”
 
-在打开的焊接指令添加页面中选择控制类型为“控制器I/O”(根据实际配置的焊接控制方式选择)，选择焊接工艺编号为0(工艺编号0不使用焊接工艺曲线，工艺编号1-99使用焊接工艺曲线)，焊接电流控制AO为“Ctrl-AO0”，焊接电流为150A，点击“添加”按钮；设置焊接电压控制AO为“Ctrl-AO1”，焊接电压为21V，点击“添加”按钮；设置最大等待时间为10000ms，依次点击“起弧”按钮和“收弧”按钮，最后点击“应用”。
+Na otwartej stronie dodawania instrukcji spawania wybierz typ sterowania jako „I/O sterownika” (zgodnie z faktycznie skonfigurowanym sposobem sterowania spawaniem), wybierz numer procesu spawania jako 0 (numer procesu 0 nie używa krzywej procesu spawania, numery 1-99 używają krzywej procesu spawania), ustaw AO sterowania prądem spawania jako „Ctrl-AO0”, prąd spawania na 150 A, kliknij przycisk „Dodaj”; ustaw AO sterowania napięciem spawania jako „Ctrl-AO1”, napięcie spawania na 21 V, kliknij przycisk „Dodaj”; ustaw maksymalny czas oczekiwania na 10000 ms, kolejno kliknij przycisk „Rozpoczęcie łuku” i „Zakończenie łuku”, a na koniec kliknij „Zastosuj”.
 
 .. figure:: robot_peripherals/057.png
    :align: center
    :width: 6in
 
-.. centered:: 图表 8.6-30 焊接指令添加
+.. centered:: Schemat 8.6-30 Dodawanie instrukcji spawania
 
-此时“testWeld.lua”程序中已添加焊接起弧指令和焊接收弧指令，由于焊接起弧、收弧指令选择焊接工艺编号0，程序执行设置焊接电压、电流指令时，机器人将根据设置的焊接电压、电流数值和焊机配置页面中设置的“焊接电压、电流与输出模拟量对应关系”自动输出对应的控制箱模拟量。
+W tym momencie do programu „testWeld.lua” zostały dodane instrukcje rozpoczęcia i zakończenia łuku spawania. Ponieważ instrukcje rozpoczęcia i zakończenia łuku wybierają numer procesu spawania 0, podczas wykonywania instrukcji ustawiania napięcia i prądu spawania robot automatycznie wyprowadzi odpowiednie wartości analogowe szafy sterowniczej zgodnie z ustawionymi wartościami napięcia i prądu spawania oraz zależnością „napięcie/prąd spawania a wyjście analogowe” ustawioną na stronie konfiguracji spawarki.
 
 .. figure:: robot_peripherals/060.png
    :align: center
    :width: 6in
 
-.. centered:: 图表 8.6-31 设置焊接电压、电流、起弧、收弧程序
+.. centered:: Schemat 8.6-31 Program ustawiania napięcia spawania, prądu spawania, rozpoczęcia i zakończenia łuku
 
-添加两个直线运动指令，并调整指令顺序，使机器人先运动到“P1”点，执行起弧，再运动到“P2”点，执行收弧，实现机器人从“P1”点焊接至“P2”点。
+Dodaj dwie instrukcje ruchu liniowego i dostosuj kolejność instrukcji, tak aby robot najpierw przemieścił się do punktu „P1”, wykonał rozpoczęcie łuku, a następnie przemieścił się do punktu „P2” i wykonał zakończenie łuku, realizując spawanie robota od punktu „P1” do punktu „P2”.
 
 .. figure:: robot_peripherals/061.png
    :align: center
    :width: 6in 
 
-.. centered:: 图表 8.6-32 机器人从P1点焊接至P2点
+.. centered:: Schemat 8.6-32 Spawanie robota od punktu P1 do punktu P2
 
-运行上述程序，即可实现一条直线P1 ~ P2的焊接，在运行程序前请检查：
+Uruchom powyższy program, aby zrealizować spawanie po linii prostej od P1 do P2. Przed uruchomieniem programu sprawdź, czy:
 
-①焊枪是否已经正确安装，焊枪工具坐标系是否完成标定，并应用为当前的工具坐标系；
+① Palnik spawalniczy jest prawidłowo zamontowany, czy układ współrzędnych narzędzia palnika został skalibrowany i zastosowany jako bieżący układ współrzędnych narzędzia;
 
-②焊接电源、气路、丝路是否正常工作；
+② Zasilanie spawarki, obwód gazu, obwód drutu działają prawidłowo;
 
-③机器人与焊机之间的各信号线连接是否正常。
+③ Połączenia przewodów sygnałowych między robotem a spawarką są prawidłowe.
 
-焊接中断与恢复
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Przerwanie i wznowienie spawania
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-机器人焊接过程中可能在以下情况下发生中断：
+Spawanie robotem może zostać przerwane w następujących sytuacjach:
 
-①操作人员主动暂停焊接，以观察实际焊接情况或清理喷嘴等操作；
+① Operator aktywnie wstrzymuje spawanie, aby obserwować rzeczywisty przebieg spawania lub wyczyścić dyszę itp.;
 
-②焊接电弧意外中断；
+② Nieoczekiwane przerwanie łuku spawania;
 
-③机器人发生碰撞导致焊接暂停；
+③ Kolizja robota powodująca zatrzymanie spawania;
 
-机器人焊接过程中发生中断后，操作人员可以将机器人切换至手动模式，拖动机器人至安全位置，并对中断发生原因进行处理。
+Po przerwaniu spawania podczas pracy robota, operator może przełączyć robota w tryb ręczny, przeciągnąć robota w bezpieczne miejsce i usunąć przyczynę przerwania.
 
-问题处理完成后，协作机器人可以从当前位置自动移动到焊接中断发生的位置重新起弧并恢复焊接，具体的操作过程为：
+Po rozwiązaniu problemu, robot współpracujący może automatycznie przemieścić się z bieżącej pozycji do miejsca, w którym nastąpiło przerwanie spawania, ponownie rozpocząć łuk i wznowić spawanie. Konkretny proces operacyjny jest następujący:
 
-①焊接中断恢复参数配置；
+① Konfiguracja parametrów wznowienia po przerwaniu spawania;
 
-②执行焊接程序，在焊接过程中暂停焊接使焊接中断；
+② Wykonanie programu spawania, wstrzymanie spawania podczas procesu, aby spowodować przerwanie spawania;
 
-③将机器人切换至手动模式，并处理相关问题，处理完成后再将机器人切换至自动模式；
+③ Przełączenie robota w tryb ręczny, rozwiązanie powiązanych problemów, a następnie przełączenie robota z powrotem w tryb automatyczny;
 
-④点击“恢复焊接”按钮，机器人自动恢复焊接。
+④ Kliknięcie przycisku „Wznów spawanie”, robot automatycznie wznawia spawanie.
 
-焊接中断恢复参数配置
-+++++++++++++++++++++++++++++
+Konfiguracja parametrów wznowienia po przerwaniu spawania
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-在“初始设置”->“外设”菜单栏中，点击“焊机”进入焊机配置界面，找到“检测电弧中断参数配置”栏，打开“功能启用”，输入“确认时长”为20ms，点击“配置”按钮，即焊接过程中起弧成功信号无效时间超过20ms时，机器人会报出“焊接电弧中断”错误。
+W menu „Ustawienia początkowe” -> „Urządzenia peryferyjne” kliknij „Spawarka”, aby przejść do interfejsu konfiguracji spawarki. Znajdź sekcję „Konfiguracja parametrów wykrywania przerwania łuku”, włącz „Aktywacja funkcji”, wprowadź „Czas potwierdzenia” 20 ms, kliknij przycisk „Konfiguruj”. Oznacza to, że gdy czas nieaktywności sygnału sukcesu rozpoczęcia łuku podczas spawania przekroczy 20 ms, robot zgłosi błąd „Przerwanie łuku spawania”.
 
 .. figure:: robot_peripherals/062.png
    :align: center
    :width: 4in 
 
-.. centered:: 图表 8.6-33 检测电弧中断参数配置参数配置
+.. centered:: Schemat 8.6-33 Konfiguracja parametrów wykrywania przerwania łuku
 
+Znajdź sekcję „Konfiguracja parametrów wznowienia po przerwaniu spawania”, włącz „Aktywacja funkcji”, wprowadź „Odległość nakładania” 5 mm, „Prędkość” 10%, „Sposób ruchu” jako „PTP”, kliknij przycisk „Konfiguruj”. Wyjaśnienie powyższych trzech parametrów jest następujące:
 
-找到“焊接中断再恢复参数配置”栏，打开“功能启用”，输入“重叠距离”为5mm，“速度”为10%，“运动方式”为“PTP”，点击“配置”按钮，上述三个参数解释如下：
+**Odległość nakładania**: Aby zapewnić ciągłość spoiny po wznowieniu względem spoiny przed przerwaniem, punkt rozpoczęcia łuku po wznowieniu musi mieć pewną odległość nakładania z oryginalną spoiną.
 
-**重叠距离**：焊接恢复时为了保证恢复后焊缝与中断前焊缝的连续性，恢复焊接的起弧点与原焊缝需要有一定的重叠距离。
+**Prędkość**: Po przerwaniu spawania często konieczne jest przeniesienie robota w bezpieczne miejsce i oczyszczenie spoiny. Po zakończeniu oczyszczania, podczas wykonywania wznowienia spawania, robot przemieści się z bieżącej pozycji do punktu ponownego rozpoczęcia łuku. Ta „prędkość” oznacza prędkość robota podczas przemieszczania się do punktu ponownego rozpoczęcia łuku.
 
-**速度**：焊接中断后往往需要将机器人移至安全位置并对焊缝进行处理，处理完成后执行焊接恢复时，机器人将从当前位置移至焊接再起弧点，该“速度”即表示机器人移动至再起弧点的速度。
-
-**运动方式**：焊接中断后往往需要将机器人移至安全位置并对焊缝进行处理，处理完成后执行焊接恢复时，机器人将从当前位置移至焊接再起弧点，该“运动方式”即表示机器人移动至再起弧点的运动方式，有“LIN”和“PTP”两种方式可供选择。
+**Sposób ruchu**: Po przerwaniu spawania często konieczne jest przeniesienie robota w bezpieczne miejsce i oczyszczenie spoiny. Po zakończeniu oczyszczania, podczas wykonywania wznowienia spawania, robot przemieści się z bieżącej pozycji do punktu ponownego rozpoczęcia łuku. Ten „sposób ruchu” oznacza sposób ruchu robota podczas przemieszczania się do punktu ponownego rozpoczęcia łuku. Do wyboru są dwa sposoby: „LIN” i „PTP”.
 
 .. figure:: robot_peripherals/063.png
    :align: center
    :width: 4in 
 
-.. centered:: 图表 8.6-34 焊接中断再恢复参数配置
+.. centered:: Schemat 8.6-34 Konfiguracja parametrów wznowienia po przerwaniu spawania
 
-焊接中断恢复应用
-+++++++++++++++++++++++++++++
+Zastosowanie wznowienia po przerwaniu spawania
+++++++++++++++++++++++++++++++++++++++++++++++
 
-以“testWeld”程序为例，将机器人切换至自动模式，点击启动按钮，机器人开始进行焊接作业，在焊接过程中点击暂停按钮，此时焊接中断，在WebApp右上角弹出焊接中断恢复提示框，点击“恢复焊接”按钮，机器人自动移至再起弧点并执行后续的焊接作业。
+Na przykładzie programu „testWeld”, przełącz robota w tryb automatyczny, kliknij przycisk startu. Robot rozpoczyna operację spawania. Kliknij przycisk pauzy podczas spawania. Spawanie zostaje przerwane. W prawym górnym rogu WebApp pojawi się okno dialogowe wznowienia po przerwaniu spawania. Kliknij przycisk „Wznów spawanie”. Robot automatycznie przemieści się do punktu ponownego rozpoczęcia łuku i wykona dalszą operację spawania.
 
 .. figure:: robot_peripherals/064.png
    :align: center
    :width: 6in 
 
-.. centered:: 图表 8.6-35 执行焊接程序
+.. centered:: Schemat 8.6-35 Wykonanie programu spawania
 
 .. figure:: robot_peripherals/065.png
    :align: center
    :width: 6in 
 
-.. centered:: 图表 8.6-36 焊接恢复
+.. centered:: Schemat 8.6-36 Wznawianie spawania
 
 .. warning:: 
-   协作机器人焊接中断恢复功能仅可用于直线焊缝或圆弧焊缝，当使用while（1）循环焊接时，不支持嵌套多层while循环，不可包含含有局部变量的条件判断语句。如果使用段焊功能，请注意增加反馈段焊信息接口。
+   Funkcja wznowienia po przerwaniu spawania robota współpracującego może być używana tylko dla spoin prostych lub łukowych. Podczas korzystania z pętli while(1) do spawania, zagnieżdżanie wielu pętli while nie jest obsługiwane. Nie może zawierać instrukcji warunkowych ze zmiennymi lokalnymi. Jeśli używasz funkcji spawania odcinkowego, pamiętaj o dodaniu interfejsu informacji zwrotnej o spawaniu odcinkowym.
 
-机器人激光焊机通信适配
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Dostosowanie komunikacji robota z laserową spawarką
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-背景
-++++++++++++++++++++++++++++++++++++++++++++
+Kontekst
+++++++++
 
-本用户手册仅已当前已经适配的激光焊机REDSABERE 1500为例进行解释说明。机器人通过“数字通信协议”进行焊接控制，本质上是机器人与PLC进行UDP通信，机器人通过UDP通信将控制数据传至PLC，再由PLC端进一步通过Modbus RTU对激光焊机进行控制，同时PLC端采集实际的激光焊接工艺参数及控制信号等反馈至机器人。机器人UDP通信协议内容见附件一。
+Niniejsza instrukcja użytkownika wyjaśnia tylko na przykładzie aktualnie dostosowanej laserowej spawarki REDSABERE 1500. Sterowanie spawaniem przez robota za pomocą „Protokołu komunikacji cyfrowej” polega w istocie na komunikacji UDP między robotem a PLC. Robot przesyła dane sterujące do PLC przez komunikację UDP, a PLC z kolei dalej steruje laserową spawarką przez Modbus RTU, jednocześnie zbierając rzeczywiste parametry procesu spawania laserowego i sygnały sterujące i przesyłając je z powrotem do robota. Treść protokołu komunikacji UDP robota znajduje się w Załączniku 1.
 
-PLC配置
-++++++++++++++++++++++++++++++++++++++++++++
+Konfiguracja PLC
+++++++++++++++++
 
 .. list-table:: 
    :widths: 25 25 25 25
    :header-rows: 1
 
-   * - 品牌
-     - 型号
-     - 软件
-     - IP地址
-   * - 汇川
+   * - Marka
+     - Model
+     - Oprogramowanie
+     - Adres IP
+   * - Huichuan
      - EASY521-0808TN
      - AutoShopV4.11.0.1
      - 192.168.58.88
 			
-程序下载：打开测试程序，PLCIP地址默认是“192.168.1.88”，将PLC IP地址改为“192.168.58.88”；
+Pobranie programu: Otwórz program testowy. Domyślny adres IP PLC to „192.168.1.88”. Zmień adres IP PLC na „192.168.58.88”;
 
-单击test测试按钮，进行当前PLC通讯连接，如下图；     
+Kliknij przycisk testu test, aby przeprowadzić bieżące połączenie komunikacyjne PLC, jak poniżej;
 
 .. figure:: robot_peripherals/293.png
    :align: center
    :width: 6in 
 
-.. centered:: 图表 8.6-37 PLC通信连接
+.. centered:: Schemat 8.6-37 Połączenie komunikacyjne PLC
 
-连接当前PLC通讯成功后，进行修改IP，如下图；
+Po pomyślnym połączeniu z bieżącym PLC, zmodyfikuj adres IP, jak poniżej;
 
 .. figure:: robot_peripherals/294.png
    :align: center
    :width: 6in 
 
-.. centered:: 图表 8.6-38 PLC修改IP地址
+.. centered:: Schemat 8.6-38 Modyfikacja adresu IP PLC
 
-更改为192.168.58.88，默认网关更改为192.168.58.1，如下图；
+Zmień na 192.168.58.88, zmień domyślną bramę na 192.168.58.1, jak poniżej;
 
 .. figure:: robot_peripherals/295.png
    :align: center
    :width: 6in 
 
-.. centered:: 图表 8.6-39 PLC修改网关地址
+.. centered:: Schemat 8.6-39 Modyfikacja adresu bramy PLC
 
-更改电脑本地IP地址在58网段，再次单机test测试按钮，验证通讯是否成功，如下图；
+Zmień lokalny adres IP komputera na podsieć 58, ponownie kliknij przycisk testu test, aby sprawdzić, czy komunikacja jest pomyślna, jak poniżej;
 
 .. figure:: robot_peripherals/296.png
    :align: center
    :width: 6in 
 
-.. centered:: 图表 8.6-40 PLC连接测试
+.. centered:: Schemat 8.6-40 Test połączenia PLC
 
-单击下载按钮，进行程序下载，如下图。
+Kliknij przycisk pobierania, aby pobrać program, jak poniżej.
 
 .. figure:: robot_peripherals/297.png
    :align: center
    :width: 6in 
 
-.. centered:: 图表 8.6-41 PLC程序下载
+.. centered:: Schemat 8.6-41 Pobieranie programu PLC
 
-激光焊机参数配置
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Konfiguracja parametrów laserowej spawarki
++++++++++++++++++++++++++++++++++++++++++++
 
-协作机器人通过“数字通信协议”进行焊接过程控制，使用“数字通信协议”时需要先配置通信参数。
+Robot współpracujący steruje procesem spawania za pomocą „Protokołu komunikacji cyfrowej”. Podczas korzystania z „Protokołu komunikacji cyfrowej” należy najpierw skonfigurować parametry komunikacji.
 
-“数字通信协议”配置
-*************************************************************************************
+Konfiguracja „Protokołu komunikacji cyfrowej”
+*********************************************
 
-如下图所示，打开WebApp，依次点击“初始设置”、“外设”、“焊机”、“激光焊”、“数字通信协议（UDP）”、“UDP通讯配置”。
+Jak pokazano poniżej, otwórz WebApp, kolejno kliknij „Ustawienia początkowe”, „Urządzenia peryferyjne”, „Spawarka”, „Spawarka laserowa”, „Protokół komunikacji cyfrowej (UDP)”, „Konfiguracja komunikacji UDP”.
 
 .. figure:: robot_peripherals/298.png
    :align: center
    :width: 6in 
 
-.. centered:: 图表 8.6-42 通信协议配置
+.. centered:: Schemat 8.6-42 Konfiguracja protokołu komunikacji
 
-其中各项参数的含义如下：
+Znaczenie poszczególnych parametrów jest następujące:
 
-- **IP地址**：UDP通信PLC端的IP地址；
-- **端口号**：PLC端UDP通信端口号；
-- **通信周期**：机器人与PLC进行UDP通信的周期，默认为2ms；
-- **丢包检测周期、丢包次数**：在丢包检测周期内的丢包个数超过设定值时，机器人报“UDP通信丢包异常”错误，同时通信自动切断；
-- **通信中断确认时长**：机器人在该时长内未收到一帧完整的PLC反馈数据包即报“UDP通信中断”错误报警，同时切断UDP通信；
-- **通信中断自动重连**：机器人检测到UDP通信中断后是否自动进行重连恢复；
-- **重连周期、重连次数**：使能UDP通信中断自动重连且检测到UDP通信中断后，机器人以设定的周期进行重连，当重连次数达到最大设定值仍未连接成功时，机器人报“UDP通信中断”错误报警，同时切断UDP通信。
+- **Adres IP**: Adres IP strony PLC komunikacji UDP;
+- **Numer portu**: Numer portu komunikacji UDP strony PLC;
+- **Okres komunikacji**: Okres komunikacji UDP między robotem a PLC, domyślnie 2 ms;
+- **Okres wykrywania utraty pakietów, liczba utraconych pakietów**: Gdy liczba utraconych pakietów w okresie wykrywania utraty pakietów przekroczy ustawioną wartość, robot zgłasza błąd „Utrata pakietów komunikacji UDP”, a komunikacja jest automatycznie przerywana;
+- **Czas potwierdzenia przerwania komunikacji**: Jeśli robot nie otrzyma pełnego pakietu danych zwrotnych PLC w tym czasie, zgłasza błąd „Przerwanie komunikacji UDP” i przerywa komunikację UDP;
+- **Automatyczne ponowne łączenie po przerwaniu komunikacji**: Czy robot ma automatycznie ponownie łączyć się po wykryciu przerwania komunikacji UDP;
+- **Okres ponownego łączenia, liczba ponownych łączeń**: Po włączeniu automatycznego ponownego łączenia po przerwaniu komunikacji UDP i wykryciu przerwania, robot próbuje ponownie połączyć się w ustawionych odstępach czasu. Gdy liczba prób ponownego łączenia osiągnie maksymalną ustawioną wartość, a połączenie nadal nie zostanie nawiązane, robot zgłasza błąd „Przerwanie komunikacji UDP” i przerywa komunikację UDP.
 
-配置完成上述参数后，依此点击“配置”和“加载”按钮。
+Po skonfigurowaniu powyższych parametrów kolejno kliknij przyciski „Konfiguruj” i „Załaduj”.
 
-焊接功能IO配置
-*************************************************************************************
+Konfiguracja IO funkcji spawania
+********************************
 
-如下图，选择焊机状态信号DI输入端口和焊机控制信号DO输出端口，当前REDSABERE 1500激光焊机只支持焊机启动（出光）信号，其他信号暂未适配。选择端口后点击“配置”按钮进行配置。
+Jak poniżej, wybierz port wejścia DI dla sygnału stanu spawarki i port wyjścia DO dla sygnału sterującego spawarką. Obecna laserowa spawarka REDSABERE 1500 obsługuje tylko sygnał startu spawarki (emisja światła). Pozostałe sygnały nie są jeszcze dostosowane. Po wybraniu portu kliknij przycisk „Konfiguruj”, aby go skonfigurować.
 
 .. figure:: robot_peripherals/299.png
    :align: center
    :width: 4in 
 
-.. centered:: 图表 8.6-43 配置焊机功能IO
+.. centered:: Schemat 8.6-43 Konfiguracja IO funkcji spawarki
 
-AUX-DI信号含义如下：
+Znaczenie sygnałów AUX-DI jest następujące:
 
-- **焊机准备**：当焊机已经准备完成可以进行焊接作业时，焊机输出该信号至机器人；当焊机故障或其他原因未准备完成时，焊机未将该信号输入至机器人，此时机器人WebApp右上角提示“焊机未准备好”。REDSABERE 1500激光焊机不支持该信号，暂未适配。
-- **焊机运行状态**：当焊机进入运行状态时，焊机输出该信号至机器人。REDSABERE 1500激光焊机不支持该信号，暂未适配。
-- **焊机故障状态**：当焊机故障时，焊机将该信号输入至机器人。REDSABERE 1500激光焊机不支持该信号，暂未适配。
+- **Gotowość spawarki**: Gdy spawarka jest gotowa do wykonania operacji spawania, wysyła ten sygnał do robota; gdy spawarka nie jest gotowa z powodu usterki lub innych przyczyn, nie wysyła tego sygnału do robota. Wtedy w prawym górnym rogu WebApp pojawi się komunikat „Spawarka niegotowa”. Laserowa spawarka REDSABERE 1500 nie obsługuje tego sygnału, nie jest jeszcze dostosowana.
+- **Stan pracy spawarki**: Gdy spawarka przechodzi w stan pracy, wysyła ten sygnał do robota. Laserowa spawarka REDSABERE 1500 nie obsługuje tego sygnału, nie jest jeszcze dostosowana.
+- **Stan usterki spawarki**: Gdy spawarka ulegnie awarii, wysyła ten sygnał do robota. Laserowa spawarka REDSABERE 1500 nie obsługuje tego sygnału, nie jest jeszcze dostosowana.
 
-AUX-DO信号含义如下：
+Znaczenie sygnałów AUX-DO jest następujące:
 
-- **焊机使能**：机器人控制焊机使能的DO输出端口，当机器人程序执行焊机使能指令时，焊机使能对应DO输出端口自动输出有效。REDSABERE 1500激光焊机不支持该信号，暂未适配。
-- **焊机启动（出光）**：机器人控制焊机启动（出光）的DO输出端口，当机器人程序执行焊机启动（出光）指令时，焊机启动（出光）对应DO输出端口自动输出有效。修改DO输出端口时需要同时修改PLC程序对应的控制端口，当前PLC默认为DO1。
-- **气体检测**：机器人控制焊机送气的DO输出端口，当机器人执行焊接送气指令时，送气对应的DO输出端口自动输出有效。REDSABERE 1500激光焊机不支持该信号，暂未适配。
-- **焊机故障复位**：机器人控制焊机故障复位的DO输出端口，当机器人程序执行焊机故障复位指令时，焊机故障复位对应DO输出端口自动输出有效。REDSABERE 1500激光焊机不支持该信号，暂未适配。
-- **正向送丝**：机器人控制焊机正向送丝的DO输出端口，当机器人执行正向送丝指令时，正向送丝对应的DO输出端口自动输出有效。REDSABERE 1500激光焊机不支持该信号，暂未适配。
-- **反向送丝**：机器人控制焊机反向送丝的DO输出端口，当机器人执行反向送丝指令时，反向送丝对应的DO输出端口自动输出有效。REDSABERE 1500激光焊机不支持该信号，暂未适配。
+- **Włączenie spawarki**: Port wyjścia DO, za pomocą którego robot steruje włączeniem spawarki. Gdy program robota wykonuje instrukcję włączenia spawarki, odpowiedni port wyjścia DO dla włączenia spawarki automatycznie staje się aktywny. Laserowa spawarka REDSABERE 1500 nie obsługuje tego sygnału, nie jest jeszcze dostosowana.
+- **Start spawarki (emisja światła)**: Port wyjścia DO, za pomocą którego robot steruje startem spawarki (emisją światła). Gdy program robota wykonuje instrukcję startu spawarki (emisji światła), odpowiedni port wyjścia DO dla startu spawarki (emisji światła) automatycznie staje się aktywny. Podczas modyfikacji portu wyjścia DO należy jednocześnie zmodyfikować odpowiedni port sterowania w programie PLC. Obecnie PLC domyślnie używa DO1.
+- **Detekcja gazu**: Port wyjścia DO, za pomocą którego robot steruje podawaniem gazu spawarki. Gdy robot wykonuje instrukcję podawania gazu spawania, odpowiedni port wyjścia DO dla podawania gazu automatycznie staje się aktywny. Laserowa spawarka REDSABERE 1500 nie obsługuje tego sygnału, nie jest jeszcze dostosowana.
+- **Reset usterki spawarki**: Port wyjścia DO, za pomocą którego robot steruje resetem usterki spawarki. Gdy program robota wykonuje instrukcję resetu usterki spawarki, odpowiedni port wyjścia DO dla resetu usterki spawarki automatycznie staje się aktywny. Laserowa spawarka REDSABERE 1500 nie obsługuje tego sygnału, nie jest jeszcze dostosowana.
+- **Podawanie drutu w przód**: Port wyjścia DO, za pomocą którego robot steruje podawaniem drutu w przód spawarki. Gdy robot wykonuje instrukcję podawania drutu w przód, odpowiedni port wyjścia DO dla podawania drutu w przód automatycznie staje się aktywny. Laserowa spawarka REDSABERE 1500 nie obsługuje tego sygnału, nie jest jeszcze dostosowana.
+- **Podawanie drutu w tył**: Port wyjścia DO, za pomocą którego robot steruje podawaniem drutu w tył spawarki. Gdy robot wykonuje instrukcję podawania drutu w tył, odpowiedni port wyjścia DO dla podawania drutu w tył automatycznie staje się aktywny. Laserowa spawarka REDSABERE 1500 nie obsługuje tego sygnału, nie jest jeszcze dostosowana.
 
-焊接工艺参数配置
-*************************************************************************************
+Konfiguracja parametrów procesu spawania
+****************************************
 
-如下图，在焊接配置页面找到“焊接工艺参数”栏，协作机器人提供0 ~ 10共10组焊接工艺参数，其中工艺编号0表示不使用焊接工艺曲线，工艺编号1-10使用焊接工艺曲线。
+Jak poniżej, znajdź sekcję „Parametry procesu spawania” na stronie konfiguracji spawarki. Robot współpracujący udostępnia 10 zestawów parametrów procesu spawania od 0 do 10. Numer procesu 0 oznacza brak użycia krzywej procesu spawania, a numery 1-10 używają krzywej procesu spawania.
 
 .. figure:: robot_peripherals/300.png
    :align: center
    :width: 4in 
 
-.. centered:: 图表 8.6-44 焊接工艺参数配置
+.. centered:: Schemat 8.6-44 Konfiguracja parametrów procesu spawania
 
-使用焊接工艺曲线时，以选择焊接工艺编号1为例，依次输入“扫描速度（mm/s）”、“扫描宽度（mm）”、“峰值功率（W）”、“占空比（%）”、“频率（Hz）”。
+Podczas korzystania z krzywej procesu spawania, na przykładzie wybrania numeru procesu spawania 1, kolejno wprowadź „Prędkość skanowania (mm/s)”, „Szerokość skanowania (mm)”, „Moc szczytowa (W)”, „Współczynnik wypełnienia (%)”, „Częstotliwość (Hz)”.
 
-REDSABERE 1500激光焊机扫描速度受扫描宽度限制，限制关系：10≤ 扫描速度/(扫描宽度×2) ≤500。超出则⾃动变为限值。扫描宽度设为0时不扫描 （即点光源）。否则会报错，web会显示“焊机通信异常”，当配置正常后错误会自动消失。如下图。
+Prędkość skanowania laserowej spawarki REDSABERE 1500 jest ograniczona przez szerokość skanowania. Zależność ograniczenia: 10 ≤ prędkość skanowania / (szerokość skanowania × 2) ≤ 500. Wartości poza tym zakresem są automatycznie ograniczane do wartości granicznych. Gdy szerokość skanowania jest ustawiona na 0, nie ma skanowania (tj. punktowe źródło światła). W przeciwnym razie wystąpi błąd, a na stronie internetowej wyświetli się „Nieprawidłowa komunikacja ze spawarką”. Gdy konfiguracja wróci do normy, błąd automatycznie zniknie. Jak poniżej.
 
 .. figure:: robot_peripherals/301.png
    :align: center
    :width: 3in 
 
-.. centered:: 图表 8.6-45 焊机通信异常
+.. centered:: Schemat 8.6-45 Nieprawidłowa komunikacja ze spawarką
 
-焊机调试
-*************************************************************************************
+Debugowanie spawarki
+********************
 
-如下图，在焊机配置页面中找到“焊机调试”，当前REDSABERE 1500激光焊机只支持收光、出光功能调试，“超时时间”，“使能”等其他按钮暂未适配。
+Jak poniżej, znajdź „Debugowanie spawarki” na stronie konfiguracji spawarki. Obecna laserowa spawarka REDSABERE 1500 obsługuje tylko debugowanie funkcji zatrzymania i emisji światła. Inne przyciski, takie jak „Czas timeoutu”, „Włączenie”, nie są jeszcze dostosowane.
 
 .. figure:: robot_peripherals/302.png
    :align: center
    :width: 4in 
 
-.. centered:: 图表 8.6-46 焊机调试
+.. centered:: Schemat 8.6-46 Debugowanie spawarki
 
-焊接程序编写
-++++++++++++++++++++++++++++++++++++++++++++
+Pisanie programu spawania
++++++++++++++++++++++++++
 
-焊接功能指令已集成在示教程序内。如下图，点击“示教程序”、“程序编程”，新建用户程序“testWeld.lua”。
+Funkcje instrukcji spawania są zintegrowane w programie nauczania. Jak poniżej, kliknij „Program nauczania”, „Programowanie”, utwórz nowy program użytkownika „testWeld.lua”.
 
 .. figure:: robot_peripherals/303.png
    :align: center
    :width: 6in 
 
-.. centered:: 图表 8.6-47 创建“testWeld.lua”程序
+.. centered:: Schemat 8.6-47 Tworzenie programu „testWeld.lua”
 
-如下图，选择“焊接指令”，点击“激光焊”。
+Jak poniżej, wybierz „Instrukcje spawania”, kliknij „Spawarka laserowa”.
 
 .. figure:: robot_peripherals/304.png
    :align: center
    :width: 6in 
 
-.. centered:: 图表 8.6-48 激光焊相关指令
+.. centered:: Schemat 8.6-48 Instrukcje związane ze spawarką laserową
 
-如下图，激光焊接指令默认控制类型为“数字通信协议（UDP）”。可依此添加设置焊接工艺参数lua程序、获取焊接工艺参数lua程序、出光、收光指令。添加完lua指令后，点击“应用”按钮即可生成激光焊接lua程序，点击“保存”按钮，切换自动模式即可运行。
+Jak poniżej, domyślnym typem sterowania dla instrukcji spawania laserowego jest „Protokół komunikacji cyfrowej (UDP)”. Można kolejno dodawać program lua do ustawiania parametrów procesu spawania, program lua do pobierania parametrów procesu spawania, instrukcje emisji i zatrzymania światła. Po dodaniu instrukcji lua kliknij przycisk „Zastosuj”, aby wygenerować program lua spawania laserowego. Kliknij przycisk „Zapisz”, przełącz w tryb automatyczny i uruchom.
 
 .. figure:: robot_peripherals/305.png
    :align: center
    :width: 6in 
 
-.. centered:: 图表 8.6-49 生成焊接程序
+.. centered:: Schemat 8.6-49 Generowanie programu spawania
 
-附件一：机器人UDP通信协议
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+Załącznik 1: Protokół komunikacji UDP robota
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. warning:: 
-  1）CRC 校验方式：采用modbus 16 校验但只取低8位进行校验校验数据区域D100-D176，D200-D273。
+  1) Sposób sumy kontrolnej CRC: Używana jest suma kontrolna Modbus 16, ale brany jest tylko niższy bajt do weryfikacji. Obszar danych weryfikacji to D100-D176, D200-D273.
 
-  2）电弧跟踪：实际电流反馈是将PLC获取到焊机的实际电流转换成0-4095的模拟量传送到UDP数据协议的模拟量通道0即D168中。
+  2) Śledzenie łuku spawalniczego: Rzeczywiste sprzężenie zwrotne prądu polega na przeliczeniu rzeczywistego prądu uzyskanego przez PLC ze spawarki na wartość analogową 0-4095 i przesłaniu jej do kanału analogowego 0 protokołu danych UDP, czyli D168.
 
-  3）速度换算逻辑：机器人下发速度（单位mm/s）V÷导程×60=V'；
+  3) Logika przeliczania prędkości: Prędkość wysyłana przez robota (jednostka mm/s) V ÷ skok × 60 = V';
 
-    PLC将机器人下发速度进行转换V'×编码器分辨率÷60=V"单位（脉冲/s）。
+    PLC przelicza prędkość wysłaną przez robota: V' × rozdzielczość enkodera ÷ 60 = V" (jednostka impuls/s).
 
-机器人控制器->PLC
-++++++++++++++++++++++
+Sterownik robota -> PLC
++++++++++++++++++++++++
 
 .. list-table:: 
    :widths: 10 10 10 10 20
    :header-rows: 1
    :align: center
 
-   * - 序号
-     - 寄存器地址
-     - 数据类型
-     - 数据值
-     - 变量名
+   * - Nr
+     - Adres rejestru
+     - Typ danych
+     - Wartość danych
+     - Nazwa zmiennej
 
    * - 1
      - D199
      - INT
      - 0x5A5A
-     - 帧头
+     - Nagłówek ramki
 
    * - 2
      - D200
      - INT
      - 
-     - 1#电机控制字
+     - Słowo sterujące silnika 1#
 
    * - 3
      - D201
      - DINT
      - 
-     - 1#目标位置输入
+     - Wejście pozycji docelowej 1#
 
    * - 4
      - D202
      - DINT
      - 
-     - 1#目标位置输入
+     - Wejście pozycji docelowej 1#
 
    * - 5
      - D203
      - INT
      - 
-     - 1#回零控制字
+     - Słowo sterujące powrotem do zera 1#
 
    * - 6
      - D204
      - DINT
      - 
-     - 1#回零高速度输入
+     - Wejście wysokiej prędkości powrotu do zera 1#
 
    * - 7
      - D205
      - DINT
      - 
-     - 1#回零高速度输入
+     - Wejście wysokiej prędkości powrotu do zera 1#
 
    * - 8
      - D206
      - DINT
      - 
-     - 1#回零低速度输入
+     - Wejście niskiej prędkości powrotu do zera 1#
 
    * - 9
      - D207
      - DINT
      - 
-     - 1#回零低速度输入
+     - Wejście niskiej prędkości powrotu do zera 1#
 
    * - 10
      - D208
      - DINT
      - 
-     - 1#位置偏置（预留）
+     - Przesunięcie pozycji 1# (zarezerwowane)
 
    * - 11
      - D209
      - DINT
      - 
-     - 1#位置偏置（预留）
+     - Przesunięcie pozycji 1# (zarezerwowane)
 
    * - 12
      - D210
      - DINT
      - 
-     - 1#速度偏置（预留）
+     - Przesunięcie prędkości 1# (zarezerwowane)
 
    * - 13
      - D211
      - DINT
      - 
-     - 1#速度偏置（预留）
+     - Przesunięcie prędkości 1# (zarezerwowane)
 
    * - 14
      - D212
      - DINT
      - 
-     - 1#转矩偏置（预留）
+     - Przesunięcie momentu 1# (zarezerwowane)
 
    * - 15
      - D213
      - DINT
      - 
-     - 1#转矩偏置（预留）
+     - Przesunięcie momentu 1# (zarezerwowane)
 
    * - 16
      - D214
      - INT
      - 
-     - 2#电机控制字
+     - Słowo sterujące silnika 2#
 
    * - 17
      - D215
      - DINT
      - 
-     - 2#目标位置输入
+     - Wejście pozycji docelowej 2#
 
    * - 18
      - D216
      - DINT
      - 
-     - 2#目标位置输入
+     - Wejście pozycji docelowej 2#
 
    * - 19
      - D217
      - INT
      - 
-     - 2#回零控制字
+     - Słowo sterujące powrotem do zera 2#
 
    * - 20
      - D218
      - DINT
      - 
-     - 2#回零高速度输入
+     - Wejście wysokiej prędkości powrotu do zera 2#
 
    * - 21
      - D219
      - DINT
      - 
-     - 2#回零高速度输入
+     - Wejście wysokiej prędkości powrotu do zera 2#
 
    * - 22
      - D220
      - DINT
      - 
-     - 2#回零低速度输入
+     - Wejście niskiej prędkości powrotu do zera 2#
 
    * - 23
      - D221
      - DINT
      - 
-     - 2#回零低速度输入
+     - Wejście niskiej prędkości powrotu do zera 2#
 
    * - 24
      - D222
      - DINT
      - 
-     - 2#位置偏置（预留）
+     - Przesunięcie pozycji 2# (zarezerwowane)
 
    * - 25
      - D223
      - DINT
      - 
-     - 2#位置偏置（预留）
+     - Przesunięcie pozycji 2# (zarezerwowane)
 
    * - 26
      - D224
      - DINT
      - 
-     - 2#速度偏置（预留）
+     - Przesunięcie prędkości 2# (zarezerwowane)
 
    * - 27
      - D225
      - DINT
      - 
-     - 2#速度偏置（预留）
+     - Przesunięcie prędkości 2# (zarezerwowane)
 
    * - 28
      - D226
      - DINT
      - 
-     - 2#转矩偏置（预留）
+     - Przesunięcie momentu 2# (zarezerwowane)
 
    * - 29
      - D227
      - DINT
      - 
-     - 2#转矩偏置（预留）
+     - Przesunięcie momentu 2# (zarezerwowane)
 
    * - 30
      - D228
      - INT
      - 
-     - 3#电机控制字
+     - Słowo sterujące silnika 3#
   
    * - 31
      - D229
      - DINT
      - 
-     - 3#目标位置输入
+     - Wejście pozycji docelowej 3#
 
    * - 32
      - D230
      - DINT
      - 
-     - 3#目标位置输入
+     - Wejście pozycji docelowej 3#
 
    * - 33
      - D231
      - INT
      - 
-     - 3#回零控制字
+     - Słowo sterujące powrotem do zera 3#
 
    * - 34
      - D232
      - DINT
      - 
-     - 3#回零高速度输入
+     - Wejście wysokiej prędkości powrotu do zera 3#
 
    * - 35
      - D233
      - DINT
      - 
-     - 3#回零高速度输入
+     - Wejście wysokiej prędkości powrotu do zera 3#
 
    * - 36
      - D234
      - DINT
      - 
-     - 3#回零低速度输入
+     - Wejście niskiej prędkości powrotu do zera 3#
 
    * - 37
      - D235
      - DINT
      - 
-     - 3#回零低速度输入
+     - Wejście niskiej prędkości powrotu do zera 3#
 
    * - 38
      - D236
      - DINT
      - 
-     - 3#位置偏置（预留）
+     - Przesunięcie pozycji 3# (zarezerwowane)
 
    * - 39
      - D237
      - DINT
      - 
-     - 3#位置偏置（预留）
+     - Przesunięcie pozycji 3# (zarezerwowane)
 
    * - 40
      - D238
      - DINT
      - 
-     - 3#速度偏置（预留）
+     - Przesunięcie prędkości 3# (zarezerwowane)
 
    * - 41
      - D239
      - DINT
      - 
-     - 3#速度偏置（预留）
+     - Przesunięcie prędkości 3# (zarezerwowane)
 
    * - 42
      - D240
      - DINT
      - 
-     - 3#转矩偏置（预留）
+     - Przesunięcie momentu 3# (zarezerwowane)
 
    * - 43
      - D241
      - DINT
      - 
-     - 3#转矩偏置（预留）
+     - Przesunięcie momentu 3# (zarezerwowane)
 
    * - 44
      - D242
      - INT
      - 
-     - 扫描速度（激光焊机）
+     - Prędkość skanowania (spawarka laserowa)
   
    * - 45
      - D243
      - DINT
      - 
-     - 扫描宽度（激光焊机）
+     - Szerokość skanowania (spawarka laserowa)
 
    * - 46
      - D244
      - DINT
      - 
-     - 峰值功率（激光焊机）
+     - Moc szczytowa (spawarka laserowa)
 
    * - 47
      - D245
      - INT
      - 
-     - 占空比（激光焊机）
+     - Współczynnik wypełnienia (spawarka laserowa)
 
    * - 48
      - D246
      - DINT
      - 
-     - 扫描频率（激光焊机）
+     - Częstotliwość skanowania (spawarka laserowa)
 
    * - 49
      - D247
      - DINT
      - 
-     - 扫描频率（激光焊机）
+     - Częstotliwość skanowania (spawarka laserowa)
 
    * - 50
      - D248
      - DINT
      - 
-     - 激光焊机预留
+     - Zarezerwowane dla spawarki laserowej
 
    * - 51
      - D249
      - DINT
      - 
-     - 激光焊机预留
+     - Zarezerwowane dla spawarki laserowej
 
    * - 52
      - D250
      - DINT
      - 
-     - 激光焊机预留
+     - Zarezerwowane dla spawarki laserowej
 
    * - 53
      - D251
      - DINT
      - 
-     - 激光焊机预留
+     - Zarezerwowane dla spawarki laserowej
 
    * - 54
      - D252
      - DINT
      - 
-     - 激光焊机预留
+     - Zarezerwowane dla spawarki laserowej
 
    * - 55
      - D253
      - DINT
      - 
-     - 激光焊机预留
+     - Zarezerwowane dla spawarki laserowej
 
    * - 56
      - D254
      - INT
      - 
-     - 激光焊机预留
+     - Zarezerwowane dla spawarki laserowej
 
    * - 57
      - D255
      - INT
      - 
-     - 焊接模式设置（0-直流一元、1-脉冲一元、2-JOB模式、3-近控模式、4-分别模式、5-CC/CV、6-TIG、7-CMT模式）
+     - Ustawienie trybu spawania (0- stały prąd/napięcie, 1- impulsowy, 2- tryb JOB, 3- tryb zdalnego sterowania, 4- tryb oddzielny, 5- CC/CV, 6- TIG, 7- tryb CMT)
 
    * - 58
      - D256
      - INT
      - 
-     - 普通输出DO(0-15)
+     - Zwykłe wyjście DO (0-15)
 
    * - 59
      - D257
      - INT
      - 
-     - 普通输出DO(16-31)
+     - Zwykłe wyjście DO (16-31)
 
    * - 60
      - D258
      - INT
      - 
-     - 普通输出DO(32-47)
+     - Zwykłe wyjście DO (32-47)
 
    * - 61
      - D259
      - INT
      - 
-     - 普通输出DO(48-63)
+     - Zwykłe wyjście DO (48-63)
 
    * - 62
      - D260
      - INT
      - 
-     - 普通输出DO(64-79)
+     - Zwykłe wyjście DO (64-79)
 
    * - 63
      - D261
      - INT
      - 
-     - 普通输出DO(80-95)
+     - Zwykłe wyjście DO (80-95)
 
    * - 64
      - D262
      - INT
      - 
-     - 高速输出DO(96-111)
+     - Szybkie wyjście DO (96-111)
 
    * - 65
      - D263
      - INT
      - 
-     - 高速输出DO(112-127)
+     - Szybkie wyjście DO (112-127)
 
    * - 66
      - D264
      - INT
      - 
-     - 模拟量输出AO0
+     - Wyjście analogowe AO0
 
    * - 67
      - D265
      - INT
      - 
-     - 模拟量输出AO1
+     - Wyjście analogowe AO1
 
    * - 68
      - D266
      - INT
      - 
-     - 模拟量输出AO2
+     - Wyjście analogowe AO2
 
    * - 69
      - D267
      - INT
      - 
-     - 模拟量输出AO3
+     - Wyjście analogowe AO3
 
    * - 70
      - D268
      - REAL
      - 
-     - 下发焊接电压
+     - Wysyłane napięcie spawania
 
    * - 71
      - D269
      - REAL
      - 
-     - 下发焊接电压
+     - Wysyłane napięcie spawania
 
    * - 72
      - D270
      - REAL
      - 
-     - 下发焊接电流
+     - Wysyłany prąd spawania
 
    * - 73
      - D271
      - REAL
      - 
-     - 下发焊接电流
+     - Wysyłany prąd spawania
 
    * - 74
      - D272
      - REAL
      - 
-     - 丢包检测周期
+     - Okres wykrywania utraty pakietów
 
    * - 75
      - D273
      - INT
      - 
-     - 丢包个数
+     - Liczba utraconych pakietów
 
    * - 76
      - D274
      - INT
      - 
-     - 帧计数（0-255）
+     - Licznik ramek (0-255)
 
    * - 77
      - D275
      - INT
      - 
-     - CRC检验码
+     - Kod sumy kontrolnej CRC
 
-PLC -> 机器人控制器
-++++++++++++++++++++
-
+PLC -> Sterownik robota
++++++++++++++++++++++++
 
 .. list-table:: 
    :widths: 10 10 10 10 20
    :header-rows: 1
    :align: center
 
-   * - 序号
-     - 寄存器地址
-     - 数据类型
-     - 数据值
-     - 变量名
+   * - Nr
+     - Adres rejestru
+     - Typ danych
+     - Wartość danych
+     - Nazwa zmiennej
 
    * - 1
      - D99
      - INT
      - 0x5A5A
-     - 帧头
+     - Nagłówek ramki
 
    * - 2
      - D100
      - INT
      - 
-     - 1#电机状态字
+     - Słowo stanu silnika 1#
 
    * - 3
      - D101
      - DINT
      - 
-     - 1#当前位置
+     - Bieżąca pozycja 1#
 
    * - 4
      - D102
      - DINT
      - 
-     - 1#当前位置
+     - Bieżąca pozycja 1#
 
    * - 5
      - D103
      - INT
      - 
-     - 1#回零状态字
+     - Słowo stanu powrotu do zera 1#
 
    * - 6
      - D104
      - DINT
      - 
-     - 1#回零高速度反馈
+     - Sprzężenie zwrotne wysokiej prędkości powrotu do zera 1#
 
    * - 7
      - D105
      - DINT
      - 
-     - 1#回零高速度反馈
+     - Sprzężenie zwrotne wysokiej prędkości powrotu do zera 1#
 
    * - 8
      - D106
      - DINT
      - 
-     - 1#回零低速度反馈
+     - Sprzężenie zwrotne niskiej prędkości powrotu do zera 1#
 
    * - 9
      - D107
      - DINT
      - 
-     - 1#回零低速度反馈
+     - Sprzężenie zwrotne niskiej prędkości powrotu do zera 1#
 
    * - 10
      - D108
      - INT
      - 
-     - 1#故障码
+     - Kod błędu 1#
 
    * - 11
      - D109
      - DINT
      - 
-     - 1#随动偏差（预留）
+     - Odchylenie śledzenia 1# (zarezerwowane)
 
    * - 12
      - D110
      - DINT
      - 
-     - 1#随动偏差（预留）
+     - Odchylenie śledzenia 1# (zarezerwowane)
 
    * - 13
      - D111
      - DINT
      - 
-     - 1#速度反馈（预留）
+     - Sprzężenie zwrotne prędkości 1# (zarezerwowane)
 
    * - 14
      - D112
      - DINT
      - 
-     - 1#速度反馈（预留）
+     - Sprzężenie zwrotne prędkości 1# (zarezerwowane)
 
    * - 15
      - D113
      - DINT
      - 
-     - 1#实时转矩（预留）将电机扭矩按照经过减速比后的输出值×100后传递给上位机
+     - Rzeczywisty moment obrotowy 1# (zarezerwowany) Moment silnika, po uwzględnieniu przełożenia, jest mnożony przez 100 i przekazywany do urządzenia nadrzędnego
 
    * - 16
      - D114
      - DINT
      - 
-     - 1#实时转矩（预留）将电机扭矩按照经过减速比后的输出值×100后传递给上位机
+     - Rzeczywisty moment obrotowy 1# (zarezerwowany) Moment silnika, po uwzględnieniu przełożenia, jest mnożony przez 100 i przekazywany do urządzenia nadrzędnego
 
    * - 17
      - D115
      - INT
      - 
-     - 2#电机状态字
+     - Słowo stanu silnika 2#
 
    * - 18
      - D116
      - DINT
      - 
-     - 2#当前位置
+     - Bieżąca pozycja 2#
 
    * - 19
      - D117
      - DINT
      - 
-     - 2#当前位置
+     - Bieżąca pozycja 2#
 
    * - 20
      - D118
      - INT
      - 
-     - 2#回零状态字
+     - Słowo stanu powrotu do zera 2#
 
    * - 21
      - D119
      - DINT
      - 
-     - 2#回零高速度反馈
+     - Sprzężenie zwrotne wysokiej prędkości powrotu do zera 2#
 
    * - 22
      - D120
      - DINT
      - 
-     - 2#回零高速度反馈
+     - Sprzężenie zwrotne wysokiej prędkości powrotu do zera 2#
 
    * - 23
      - D121
      - DINT
      - 
-     - 2#回零低速度反馈
+     - Sprzężenie zwrotne niskiej prędkości powrotu do zera 2#
 
    * - 24
      - D122
      - DINT
      - 
-     - 2#回零低速度反馈
+     - Sprzężenie zwrotne niskiej prędkości powrotu do zera 2#
 
    * - 25
      - D123
      - INT
      - 
-     - 2#故障码
+     - Kod błędu 2#
 
    * - 26
      - D124
      - DINT
      - 
-     - 2#随动偏差（预留）
+     - Odchylenie śledzenia 2# (zarezerwowane)
 
    * - 27
      - D125
      - DINT
      - 
-     - 2#随动偏差（预留）
+     - Odchylenie śledzenia 2# (zarezerwowane)
 
    * - 28
      - D126
      - DINT
      - 
-     - 2#速度反馈（预留）
+     - Sprzężenie zwrotne prędkości 2# (zarezerwowane)
 
    * - 29
      - D127
      - DINT
      - 
-     - 2#速度反馈（预留）
+     - Sprzężenie zwrotne prędkości 2# (zarezerwowane)
 
    * - 30
      - D128
      - DINT
      - 
-     - 2#实时转矩（预留）
+     - Rzeczywisty moment obrotowy 2# (zarezerwowany)
   
    * - 31
      - D129
      - DINT
      - 
-     - 2#实时转矩（预留）
+     - Rzeczywisty moment obrotowy 2# (zarezerwowany)
 
    * - 32
      - D130
      - INT
      - 
-     - 3#电机状态字
+     - Słowo stanu silnika 3#
 
    * - 33
      - D131
      - DINT
      - 
-     - 3#当前位置
+     - Bieżąca pozycja 3#
 
    * - 34
      - D132
      - DINT
      - 
-     - 3#当前位置
+     - Bieżąca pozycja 3#
 
    * - 35
      - D133
      - INT
      - 
-     - 3#回零状态字
+     - Słowo stanu powrotu do zera 3#
 
    * - 36
      - D134
      - DINT
      - 
-     - 3#回零高速度反馈
+     - Sprzężenie zwrotne wysokiej prędkości powrotu do zera 3#
 
    * - 37
      - D135
      - DINT
      - 
-     - 3#回零高速度反馈
+     - Sprzężenie zwrotne wysokiej prędkości powrotu do zera 3#
 
    * - 38
      - D136
      - DINT
      - 
-     - 3#回零低速度反馈
+     - Sprzężenie zwrotne niskiej prędkości powrotu do zera 3#
 
    * - 39
      - D137
      - DINT
      - 
-     - 3#回零低速度反馈
+     - Sprzężenie zwrotne niskiej prędkości powrotu do zera 3#
 
    * - 40
      - D138
      - DINT
      - 
-     - 3#故障码
+     - Kod błędu 3#
 
    * - 41
      - D139
      - DINT
      - 
-     - 3#随动偏差(预留)
+     - Odchylenie śledzenia 3# (zarezerwowane)
 
    * - 42
      - D140
      - DINT
      - 
-     - 3#随动偏差(预留)
+     - Odchylenie śledzenia 3# (zarezerwowane)
 
    * - 43
      - D141
      - DINT
      - 
-     - 3#速度反馈（预留）
+     - Sprzężenie zwrotne prędkości 3# (zarezerwowane)
 
    * - 44
      - D142
      - DINT
      - 
-     - 3#速度反馈（预留）
+     - Sprzężenie zwrotne prędkości 3# (zarezerwowane)
   
    * - 45
      - D143
      - DINT
      - 
-     - 3#实时转矩（预留）
+     - Rzeczywisty moment obrotowy 3# (zarezerwowany)
 
    * - 46
      - D144
      - DINT
      - 
-     - 3#实时转矩（预留）
+     - Rzeczywisty moment obrotowy 3# (zarezerwowany)
 
    * - 47
      - D145
      - INT
      - 
-     - 扫描速度（激光焊机）
+     - Prędkość skanowania (spawarka laserowa)
 
    * - 48
      - D146
      - DINT
      - 
-     - 扫描宽度（激光焊机）
+     - Szerokość skanowania (spawarka laserowa)
 
    * - 49
      - D147
      - DINT
      - 
-     - 峰值功率（激光焊机）
+     - Moc szczytowa (spawarka laserowa)
 
    * - 50
      - D148
      - INT
      - 
-     - 占空比（激光焊机）
+     - Współczynnik wypełnienia (spawarka laserowa)
 
    * - 51
      - D149
      - DINT
      - 
-     - 扫描频率（激光焊机）
+     - Częstotliwość skanowania (spawarka laserowa)
 
    * - 52
      - D150
      - DINT
      - 
-     - 扫描频率（激光焊机）
+     - Częstotliwość skanowania (spawarka laserowa)
 
    * - 53
      - D151
      - DINT
      - 
-     - 激光焊机预留
+     - Zarezerwowane dla spawarki laserowej
 
    * - 54
      - D152
      - DINT
      - 
-     - 激光焊机预留
+     - Zarezerwowane dla spawarki laserowej
 
    * - 55
      - D153
      - DINT
      - 
-     - 激光焊机预留
+     - Zarezerwowane dla spawarki laserowej
 
    * - 56
      - D154
      - DINT
      - 
-     - 激光焊机预留
+     - Zarezerwowane dla spawarki laserowej
 
    * - 57
      - D155
      - DINT
      - 
-     - 激光焊机预留
+     - Zarezerwowane dla spawarki laserowej
 
    * - 58
      - D156
      - DINT
      - 
-     - 激光焊机预留
+     - Zarezerwowane dla spawarki laserowej
 
    * - 59
      - D157
      - DINT
      - 
-     - 激光焊机预留
+     - Zarezerwowane dla spawarki laserowej
 
    * - 60
      - D158
      - DINT
      - 
-     - 激光焊机预留
+     - Zarezerwowane dla spawarki laserowej
 
    * - 61
      - D159
      - DINT
      - 
-     - 激光焊机预留
+     - Zarezerwowane dla spawarki laserowej
 
    * - 62
      - D160
      - INT
      - 
-     - 普通输入DI(0-15)
+     - Zwykłe wejście DI (0-15)
 
    * - 63
      - D161
      - INT
      - 
-     - 普通输入DI(16-31)
+     - Zwykłe wejście DI (16-31)
 
    * - 64
      - D162
      - INT
      - 
-     - 普通输入DI(32-47)
+     - Zwykłe wejście DI (32-47)
 
    * - 65
      - D163
      - INT
      - 
-     - 普通输入DI(48-63)
+     - Zwykłe wejście DI (48-63)
 
    * - 66
      - D164
      - INT
      - 
-     - 普通输入DI(64-79)
+     - Zwykłe wejście DI (64-79)
 
    * - 67
      - D165
      - INT
      - 
-     - 普通输入DI(80-95)
+     - Zwykłe wejście DI (80-95)
 
    * - 68
      - D166
      - INT
      - 
-     - 高速输入DI(96-111)
+     - Szybkie wejście DI (96-111)
 
    * - 69
      - D167
      - INT
      - 
-     - 高速输入DI(112-127)
+     - Szybkie wejście DI (112-127)
 
    * - 70
      - D168
      - INT
      - 
-     - 模拟量AI0
+     - Wejście analogowe AI0
 
    * - 71
      - D169
      - INT
      - 
-     - 模拟量AI1
+     - Wejście analogowe AI1
 
    * - 72
      - D170
      - INT
      - 
-     - 模拟量AI2
+     - Wejście analogowe AI2
 
    * - 73
      - D171
      - INT
      - 
-     - 模拟量AI3
+     - Wejście analogowe AI3
 
    * - 74
      - D172
      - REAL
      - 
-     - 实际电流反馈
+     - Rzeczywiste sprzężenie zwrotne prądu
 
    * - 75
      - D173
      - REAL
      - 
-     - 实际电流反馈
+     - Rzeczywiste sprzężenie zwrotne prądu
 
    * - 76
      - D174
      - REAL
      - 
-     - 实际电压反馈
+     - Rzeczywiste sprzężenie zwrotne napięcia
 
    * - 77
      - D175
      - REAL
      - 
-     - 实际电压反馈
+     - Rzeczywiste sprzężenie zwrotne napięcia
 
    * - 78
      - D176
      - INT
      - 
-     - 故障码 0-无故障，1-UDP数据丢包 2-焊机通讯故障 3-扩展轴通讯故障 
+     - Kod błędu 0-brak błędu, 1-utrata pakietów UDP, 2-usterka komunikacji ze spawarką, 3-usterka komunikacji z osią rozszerzoną
 
    * - 79
      - D177
      - INT
      - 
-     - 帧计数
+     - Licznik ramek
 
    * - 80
      - D178
      - INT
      - 
-     - CRC检验码
+     - Kod sumy kontrolnej CRC
 
-数字通讯协议（Modbus TCP）
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Protokół komunikacji cyfrowej (Modbus TCP)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-点击“初始设置”->“外设”->“焊机”进入焊机界面，点击“数字通讯协议（Modbus TCP）”卡片进入焊机开放协议界面。
+Kliknij „Ustawienia początkowe” -> „Urządzenia peryferyjne” -> „Spawarka”, aby przejść do interfejsu spawarki. Kliknij kartę „Protokół komunikacji cyfrowej (Modbus TCP)”, aby przejść do interfejsu otwartego protokołu spawarki.
 
-协议配置
-++++++++++++++
+Konfiguracja protokołu
+++++++++++++++++++++++
 
-在开放协议配置中，点击“上传”按钮，将编写完成的开放协议LUA程序文件上传至控制器中。选择一个开放协议ID和开放协议名称，点击“配置”按钮(选择协议ID需与开放协议文件中编写的ID一致)，为每个开放协议指定一个ID。
+W konfiguracji otwartego protokołu kliknij przycisk „Prześlij”, aby przesłać napisany plik programu LUA otwartego protokołu do sterownika. Wybierz ID otwartego protokołu i nazwę otwartego protokołu, kliknij przycisk „Konfiguruj” (wybrany ID protokołu musi być zgodny z ID napisanym w pliku otwartego protokołu). Przypisz ID do każdego otwartego protokołu.
 
 .. figure:: robot_peripherals/066.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.6-50 控制器外设开放协议上传与配置
+.. centered:: Schemat 8.6-50 Przesyłanie i konfiguracja otwartego protokołu urządzeń peryferyjnych sterownika
 
-在已配置的协议中，点击“加载”按钮，运行状态指示灯亮起，表示该开放协议已正常加载。
+W skonfigurowanym protokole kliknij przycisk „Załaduj”. Wskaźnik stanu działania zaświeci się, co oznacza, że otwarty protokół został poprawnie załadowany.
 
 .. figure:: robot_peripherals/067.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.6-51 控制器外设开放协议加载与运行指示
+.. centered:: Schemat 8.6-51 Ładowanie i wskaźnik działania otwartego protokołu urządzeń peryferyjnych sterownika
 
-焊机开放协议
-++++++++++++++
+Otwarty protokół spawarki
++++++++++++++++++++++++++
 
-机器人与焊机通过控制器外设开放协议进行ModbusTCP通讯，根据焊机从站寄存器定义编写对应通讯协议LUA文件，在该文件中对焊机IP地址、端口号等通讯参数和起弧控制、送丝控制等寄存器地址进行配置，将该协议上传至机器人控制器，并加载该协议，即可实现机器人与焊机之间的通讯。
+Robot komunikuje się ze spawarką przez Modbus TCP za pomocą otwartego protokołu urządzeń peryferyjnych sterownika. Na podstawie definicji rejestrów slave spawarki, napisz odpowiedni plik LUA protokołu komunikacji. W tym pliku skonfiguruj parametry komunikacji, takie jak adres IP spawarki, numer portu, oraz adresy rejestrów dla sterowania rozpoczęciem łuku, podawaniem drutu itp. Prześlij ten protokół do sterownika robota i załaduj go, aby umożliwić komunikację między robotem a spawarką.
 
-焊机开放协议示例
-************************
+Przykład otwartego protokołu spawarki
+*************************************
 
 .. code-block:: console
    :linenos:
 
-   local id = 1 --协议编号,需与WebApp配置的协议编号匹配
+   local id = 1 --Numer protokołu, musi być zgodny z numerem protokołu skonfigurowanym w WebApp
    local ctrlValues = {0, 0, 0, 0, 0, 0}
    local realTimeState = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
    ModbusTCPMasterClose(id)
@@ -3409,441 +3404,435 @@ PLC -> 机器人控制器
    sleep_ms(10)
    end
 
-焊机开放协议解析
-******************************
+Analiza otwartego protokołu spawarki
+************************************
 
-焊机开放协议主要包括三个部分：
+Otwarty protokół spawarki składa się głównie z trzech części:
 
-**①建立通讯连接**：主指定协议编号id(加载开放协议时设置的协议编号需要与协议文件中的编号一致)、焊机IP地址、端口号等参数，通过“ModbusTCPMasterCreate()”指令使实现机器人与焊机之间建立ModbusTCP连接。
+**① Nawiązanie połączenia komunikacyjnego**: Określ numer protokołu id (numer protokołu ustawiony podczas ładowania otwartego protokołu musi być zgodny z numerem w pliku protokołu), adres IP spawarki, numer portu i inne parametry. Za pomocą instrukcji „ModbusTCPMasterCreate()” robot nawiązuje połączenie Modbus TCP ze spawarką.
 
-**②循环向焊机写入控制数据**：焊机开放协议执行时先从机器人控制器内部读取当前的焊机控制数据，再将数据写入焊机控制焊机动作。协议中读取机器人控制焊接数据指令“WeldingGetCtrlState()”返回值定义如表2-1，可根据实际焊机控制寄存器定义对控制数据进行分解，再通过ModbusTCP将数据写入焊机。
+**② Cykliczny zapis danych sterujących do spawarki**: Podczas wykonywania otwartego protokołu spawarki, najpierw odczytywane są bieżące dane sterujące spawarką z wewnętrznego sterownika robota, a następnie dane są zapisywane do spawarki w celu sterowania jej działaniem. Definicje wartości zwracanych przez instrukcję odczytu danych sterujących spawaniem robota „WeldingGetCtrlState()” w protokole są podane w Tabeli 2-1. Na podstawie definicji rejestrów sterowania rzeczywistej spawarki, dane sterujące mogą zostać rozbite, a następnie zapisane do spawarki przez Modbus TCP.
 
-.. centered:: 表 8.19-1 WeldingGetCtrlState()返回值
+.. centered:: Tabela 8.19-1 Wartości zwracane przez WeldingGetCtrlState()
 
 .. list-table:: 
    :widths: 10 20 30 40
    :align: center
    :class: sheet-center
    
-   * - **序号**
-     - **类型**
-     - **名称**
-     - **描述**
+   * - **Nr**
+     - **Typ**
+     - **Nazwa**
+     - **Opis**
 
    * - 1
      - uint16_t
      - setArcStart
-     - 起弧信号；0-熄弧；1-起弧
+     - Sygnał rozpoczęcia łuku; 0-zgaś łuk; 1-rozpocznij łuk
 
    * - 2
      - uint16_t
      - setWireForward
-     - 正向送丝：0-停止送丝；1-正向送丝
+     - Podawanie drutu w przód: 0-zatrzymaj podawanie drutu; 1-podawaj drut w przód
 
    * - 3
      - uint16_t
      - setWireReverse
-     - 反向送丝：0-停止送丝；1-反向送丝
+     - Podawanie drutu w tył: 0-zatrzymaj podawanie drutu; 1-podawaj drut w tył
 
    * - 4
      - uint16_t
      - setShieldingGas
-     - 保护气控制：0-停气；1-送气
+     - Sterowanie gazem ochronnym: 0-zatrzymaj gaz; 1-podaj gaz
 
    * - 5
      - uint16_t
      - setTouchEnable
-     - 焊丝寻位使能：0-去使能；1-使能
+     - Włączenie lokalizacji drutu spawalniczego: 0-wyłącz; 1-włącz
 
    * - 6
      - uint16_t
      - setRobotError
-     - 机器人故障：0-无故障；1-故障
+     - Usterka robota: 0-brak usterki; 1-usterka
 
    * - 7
      - uint16_t
      - setRobotEnableState
-     - 机器人使能状态：0-未使能；1-使能
+     - Stan włączenia robota: 0-niewłączony; 1-włączony
 
    * - 8
      - uint16_t
      - default1
-     - 预留
+     - Zarezerwowane
 
    * - 9
      - uint16_t
      - default2
-     - 预留
+     - Zarezerwowane
 
    * - 10
      - uint16_t
      - default3
-     - 预留
+     - Zarezerwowane
 
    * - 11
      - uint16_t
      - default4
-     - 预留
+     - Zarezerwowane
 
    * - 12
      - uint16_t
      - setCurrent
-     - 设置焊接电流(0.1A)
+     - Ustawienie prądu spawania (0.1 A)
 
    * - 13
      - uint16_t
      - setVoltage
-     - 设置焊接电压(0.01V)
+     - Ustawienie napięcia spawania (0.01 V)
 
    * - 14
      - uint16_t
      - SetMode
-     - 设置焊接模式：0-直流一元、1-脉冲一元、2-JOB模式、3-近控模式、4-分别模式、5-CC/CV、6-TIG、7-CMT模式
+     - Ustawienie trybu spawania: 0-stały prąd/napięcie, 1-impulsowy, 2-tryb JOB, 3-tryb zdalnego sterowania, 4-tryb oddzielny, 5-CC/CV, 6-TIG, 7-tryb CMT
 
    * - 15
      - uint16_t
      - default6
-     - 预留
+     - Zarezerwowane
 
    * - 16
      - uint16_t
      - default7
-     - 预留
+     - Zarezerwowane
 
    * - 17
      - uint16_t
      - default8
-     - 预留
+     - Zarezerwowane
 
    * - 18
      - uint16_t
      - default9
-     - 预留
+     - Zarezerwowane
 
    * - 19
      - uint16_t
      - default10
-     - 预留
+     - Zarezerwowane
 
    * - 20
      - uint16_t
      - default11
-     - 预留
+     - Zarezerwowane
 
-**③循环从焊机读取状态数据**：焊机开放协议先通过ModbusTCP从焊机读取实时的状态数据，再将相关数据写入机器人控制器，使机器人能监控到焊机实时动作状态。协议向机器人设置焊机状态接口“WeldingSetRealtimeState()”参数为一个包含所有焊机状态的数组（注意：在开放协议LUA中，数组索引从1开始）如表2-2，可根据实际焊机状态寄存器定义通过ModbusTCP读取焊机状态数据，再组合成焊机状态数组并写入机器人控制器。
+**③ Cykliczny odczyt danych stanu ze spawarki**: Otwarty protokół spawarki najpierw odczytuje dane stanu w czasie rzeczywistym ze spawarki przez Modbus TCP, a następnie zapisuje odpowiednie dane do sterownika robota, umożliwiając robotowi monitorowanie rzeczywistego stanu działania spawarki. Parametrem interfejsu ustawiania stanu spawarki w robocie „WeldingSetRealtimeState()” w protokole jest tablica zawierająca wszystkie stany spawarki (uwaga: w otwartym protokole LUA, indeksowanie tablicy zaczyna się od 1), jak w Tabeli 2-2. Na podstawie definicji rejestrów stanu rzeczywistej spawarki, dane stanu spawarki są odczytywane przez Modbus TCP, a następnie łączone w tablicę stanu spawarki i zapisywane do sterownika robota.
 
-.. centered:: 表 8.19-2 WeldingSetRealtimeState()详细参数
+.. centered:: Tabela 8.19-2 Szczegółowe parametry WeldingSetRealtimeState()
 
 .. list-table:: 
    :widths: 10 20 30 40
    :align: center
    :class: sheet-center
    
-   * - **类型**
-     - **名称**
-     - **数组索引**
-     - **描述**
+   * - **Typ**
+     - **Nazwa**
+     - **Indeks tablicy**
+     - **Opis**
 
    * - uint16_t[20]
      - realTimeState
      - 1
-     - 焊机型号
+     - Model spawarki
 
    * - uint16_t[20]
      - realTimeState
      - 2
-     - 电弧状态：0-未起弧；1-已起弧
+     - Stan łuku: 0-nie rozpoczęto łuku; 1-rozpoczęto łuk
 
    * - uint16_t[20]
      - realTimeState
      - 3
-     - 焊丝接触状态：0-未接触；1-已接触
+     - Stan kontaktu drutu spawalniczego: 0-brak kontaktu; 1-jest kontakt
 
    * - uint16_t[20]
      - realTimeState
      - 4
-     - 焊机故障状态：0-无故障；1-焊机故障
+     - Stan usterki spawarki: 0-brak usterki; 1-usterka spawarki
 
    * - uint16_t[20]
      - realTimeState
      - 5
-     - 预留
+     - Zarezerwowane
 
    * - uint16_t[20]
      - realTimeState
      - 6
-     - 预留
+     - Zarezerwowane
 
    * - uint16_t[20]
      - realTimeState
      - 7
-     - 预留
+     - Zarezerwowane
 
    * - uint16_t[20]
      - realTimeState
      - 8
-     - 预留
+     - Zarezerwowane
 
    * - uint16_t[20]
      - realTimeState
      - 9
-     - 预留
+     - Zarezerwowane
 
    * - uint16_t[20]
      - realTimeState
      - 10
-     - 预留
+     - Zarezerwowane
 
    * - uint16_t[20]
      - realTimeState
      - 11
-     - 预留
+     - Zarezerwowane
 
    * - uint16_t[20]
      - realTimeState
      - 12
-     - 实时焊接电流(0.1A)
+     - Rzeczywisty prąd spawania (0.1 A)
 
    * - uint16_t[20]
      - realTimeState
      - 13
-     - 实时焊接电压(0.01V)
+     - Rzeczywiste napięcie spawania (0.01 V)
 
    * - uint16_t[20]
      - realTimeState
      - 14
-     - 焊机故障码
+     - Kod błędu spawarki
 
    * - uint16_t[20]
      - realTimeState
      - 15
-     - 焊机通讯心跳数据
+     - Dane heartbeat komunikacji ze spawarką
 
    * - uint16_t[20]
      - realTimeState
      - 16
-     - 预留
+     - Zarezerwowane
 
    * - uint16_t[20]
      - realTimeState
      - 17
-     - 预留
+     - Zarezerwowane
 
    * - uint16_t[20]
      - realTimeState
      - 18
-     - 预留
+     - Zarezerwowane
 
    * - uint16_t[20]
      - realTimeState
      - 19
-     - 预留
+     - Zarezerwowane
 
    * - uint16_t[20]
      - realTimeState
      - 20
-     - 预留
+     - Zarezerwowane
 
-焊机开放协议上传与加载
-***************************************
+Przesyłanie i ładowanie otwartego protokołu spawarki
+*****************************************************
 
-依次点击“初始设置”、“外设”、“控制箱”、“外设开放协议”，点击“上传”按钮，上传焊机开放协议“CtrlDev_WELDING.lua”(协议文件名称需以CtrlDev_开头，且后缀名为“.lua”)。
+Kolejno kliknij „Ustawienia początkowe”, „Urządzenia peryferyjne”, „Szafa sterownicza”, „Otwarty protokół urządzeń peryferyjnych”. Kliknij przycisk „Prześlij”, aby przesłać otwarty protokół spawarki „CtrlDev_WELDING.lua” (nazwa pliku protokołu musi zaczynać się od `CtrlDev_` i mieć rozszerzenie „.lua”).
 
 .. figure:: robot_peripherals/068.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.6‑39 焊机开放协议上传
+.. centered:: Schemat 8.6‑39 Przesyłanie otwartego protokołu spawarki
 
-在“协议配置”中选择一个“协议编号”(需要与开放协议文件中的协议编号匹配)，此处以编号1为例，并选择“协议名称”为焊机开放协议“CtrlDev_WELDING.lua”，点击“配置”按钮，此时在“设备操作及状态”中显示已配置的焊机开放协议。
+W „Konfiguracji protokołu” wybierz „Numer protokołu” (musi być zgodny z numerem protokołu w pliku otwartego protokołu). Tutaj jako przykład użyto numeru 1. Wybierz „Nazwę protokołu” jako otwarty protokół spawarki „CtrlDev_WELDING.lua” i kliknij przycisk „Konfiguruj”. Wtedy w sekcji „Operacje i stan urządzenia” wyświetli się skonfigurowany otwarty protokół spawarki.
 
 .. figure:: robot_peripherals/069.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.6‑40 焊机开放协议配置
+.. centered:: Schemat 8.6‑40 Konfiguracja otwartego protokołu spawarki
 
-点击“连接”按钮加载焊机开放协议，运行状态指示灯亮起表示机器人和焊机正在通讯。
+Kliknij przycisk „Połącz”, aby załadować otwarty protokół spawarki. Wskaźnik stanu działania zaświeci się, co oznacza, że robot i spawarka komunikują się.
 
 .. figure:: robot_peripherals/070.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.6‑41 焊机开放协议加载
+.. centered:: Schemat 8.6‑41 Ładowanie otwartego protokołu spawarki
 
-焊机调试
-**************************
-在进行焊机调试前，请先确保焊机开放协议已正常加载，相关寄存器地址配置正确。
+Debugowanie spawarki
+********************
 
-依次点击“初始设置”、“外设”、“焊机”，选择“数字通信协议(ModbusTcp)”。
+Przed debugowaniem spawarki upewnij się, że otwarty protokół spawarki został poprawnie załadowany, a odpowiednie adresy rejestrów są prawidłowo skonfigurowane.
+
+Kolejno kliknij „Ustawienia początkowe”, „Urządzenia peryferyjne”, „Spawarka”. Wybierz „Protokół komunikacji cyfrowej (Modbus TCP)”.
 
 .. figure:: robot_peripherals/036.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.6‑42 选择“数字通信协议(ModbusTcp)”
+.. centered:: Schemat 8.6‑42 Wybór „Protokołu komunikacji cyfrowej (Modbus TCP)”
 
-点击“起弧”、“收弧”、“送气”、“关气”等按钮，观察实际焊机动作是否与设置一致，若焊机未进行设置的动作，则检查焊机开放协议中寄存器配置是否有误，并做进一步调试。
+Kliknij przyciski „Rozpoczęcie łuku”, „Zakończenie łuku”, „Podaj gaz”, „Zamknij gaz” itp. i obserwuj, czy rzeczywiste działanie spawarki jest zgodne z ustawieniami. Jeśli spawarka nie wykonuje ustawionych czynności, sprawdź, czy konfiguracja rejestrów w otwartym protokole spawarki jest prawidłowa i przeprowadź dalsze debugowanie.
 
 .. figure:: robot_peripherals/049.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.6‑43 焊机调试
+.. centered:: Schemat 8.6‑43 Debugowanie spawarki
 
-焊接程序编写
-********************************
+Pisanie programu spawania
+*************************
 
-点击“初始设置”、“示教程序”、“程序编程”，新建一个程序“testWeld.lua”。
+Kliknij „Ustawienia początkowe”, „Program nauczania”, „Programowanie”, utwórz nowy program „testWeld.lua”.
 
 .. figure:: robot_peripherals/056.png
    :align: center
    :width: 6in
 
-.. centered:: 图表 8.6‑44 创建焊接LUA程序
+.. centered:: Schemat 8.6‑44 Tworzenie programu LUA spawania
 
-点击“焊接”按钮,在弹出焊接指令添加页面中选择“数字通信协议(Modbus Tcp)”，依次选择“起弧”、点击“添加”、点击“收弧”、点击“添加”按钮，最后点击“应用”按钮。
+Kliknij przycisk „Spawanie”. Na wyskakującej stronie dodawania instrukcji spawania wybierz „Protokół komunikacji cyfrowej (Modbus TCP)”. Kolejno wybierz „Rozpoczęcie łuku”, kliknij „Dodaj”, wybierz „Zakończenie łuku”, kliknij „Dodaj”, a na koniec kliknij „Zastosuj”.
 
 .. figure:: robot_peripherals/071.png
    :align: center
    :width: 6in
 
-.. centered:: 图表 8.6‑45 添加起弧、收弧指令
+.. centered:: Schemat 8.6‑45 Dodawanie instrukcji rozpoczęcia i zakończenia łuku
 
-此时“testWeld.lua”中即添加起弧、收弧指令完成。
+W tym momencie do „testWeld.lua” zostały dodane instrukcje rozpoczęcia i zakończenia łuku.
 
 .. figure:: robot_peripherals/058.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.6‑46 添加起弧、收弧指令
+.. centered:: Schemat 8.6‑46 Dodawanie instrukcji rozpoczęcia i zakończenia łuku
 
-依次添加完成焊接起始点和焊接终止点。将机器人切换至自动模式，在确保安全的条件下，启动程序，机器人即控制焊机进行一条焊缝的焊接作业。
+Kolejno dodaj punkt początkowy i końcowy spawania. Przełącz robota w tryb automatyczny i uruchom program, upewniając się, że jest bezpieczny. Robot steruje spawarką, aby wykonać operację spawania jednej spoiny.
 
 .. figure:: robot_peripherals/059.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.6‑47 焊接程序
+.. centered:: Schemat 8.6‑47 Program spawania
 
-焊机开放协议卸载
-****************************
+Zwolnienie otwartego protokołu spawarki
+***************************************
 
-依次点击“初始设置”、“外设”、“控制箱”、“外设开放协议”，在“设备操作及状态”中点击“卸载”按钮。
+Kolejno kliknij „Ustawienia początkowe”, „Urządzenia peryferyjne”, „Szafa sterownicza”, „Otwarty protokół urządzeń peryferyjnych”. W sekcji „Operacje i stan urządzenia” kliknij przycisk „Zwolnij”.
 
 .. figure:: robot_peripherals/067.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.6‑48 卸载开放协议
+.. centered:: Schemat 8.6‑48 Zwolnienie otwartego protokołu
 
-此时协议运行状态指示灯熄灭。
+W tym momencie wskaźnik stanu działania protokołu zgaśnie.
 
 .. figure:: robot_peripherals/072.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.6‑49 开放协议卸载
+.. centered:: Schemat 8.6‑49 Zwolnienie otwartego protokołu
 
-此时进行焊接调试或执行焊接程序，机器人在WebApp左下角报出“协议未加载错误”。
+W tym momencie, podczas debugowania spawania lub wykonywania programu spawania, robot zgłosi błąd „Protokół niezaładowany” w lewym dolnym rogu WebApp.
 
 .. figure:: robot_peripherals/073.png
    :align: center
    :width: 3in
 
-.. centered:: 图表 8.6‑50 协议未加载报错
+.. centered:: Schemat 8.6‑50 Błąd niezaładowanego protokołu
 
-扩展轴配置
------------------
+Konfiguracja osi rozszerzonej
+-----------------------------
 
-在“初始设置”->“外设”中，点击“扩展轴”进入扩展轴配置界面，包含扩展轴坐标系配置和扩展轴外设配置。扩展轴配置首次进入界面如下：
+W „Ustawienia początkowe” -> „Urządzenia peryferyjne” kliknij „Oś rozszerzona”, aby przejść do interfejsu konfiguracji osi rozszerzonej. Zawiera on konfigurację układu współrzędnych osi rozszerzonej i konfigurację urządzeń peryferyjnych osi rozszerzonej. Interfejs przy pierwszym wejściu do konfiguracji osi rozszerzonej wygląda następująco:
 
 .. figure:: robot_peripherals/074.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.7‑1 扩展轴配置首次进入界面
+.. centered:: Schemat 8.7‑1 Interfejs przy pierwszym wejściu do konfiguracji osi rozszerzonej
 
-目前扩展轴外设配置根据通讯方式分为以下两种：
+Obecnie konfiguracja urządzeń peryferyjnych osi rozszerzonej dzieli się na dwa typy w zależności od sposobu komunikacji:
 
-- 控制器+PLC（UDP通讯）。
-  
-- 控制器+伺服驱动器（485通讯）。
+- Sterownik + PLC (komunikacja UDP).
+- Sterownik + serwonapęd (komunikacja 485).
 
-扩展轴坐标系
-~~~~~~~~~~~~~
+Układ współrzędnych osi rozszerzonej
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-扩展轴坐标系设置界面中可实现扩展轴坐标的应用、清除和配置。
+W interfejsie ustawień układu współrzędnych osi rozszerzonej można zastosować, wyczyścić i skonfigurować układ współrzędnych osi rozszerzonej.
 
 .. note:: 
    .. image:: robot_peripherals/075.png
       :height: 0.75in
       :align: left
 
-   名称：**应用**
+   Nazwa: **Zastosuj**
    
-   作用：应用扩展轴坐标系
+   Działanie: Zastosowuje układ współrzędnych osi rozszerzonej
   
 .. note:: 
    .. image:: robot_peripherals/076.png
       :height: 0.75in
       :align: left
 
-   名称：**清除**
+   Nazwa: **Wyczyść**
    
-   作用：清除扩展轴坐标系数据
+   Działanie: Czyści dane układu współrzędnych osi rozszerzonej
 
-扩展轴坐标系的下拉列表中共有5个编号，从exaxis0~exaxis4，选择对应的坐标系后会在下方显示对应坐标值，选择某一坐标系后点击“应用”按钮，当前使用的扩展轴坐标系变为所选择的坐标，如下图所示。
+Na liście rozwijanej układów współrzędnych osi rozszerzonej znajduje się 5 numerów, od exaxis0 do exaxis4. Po wybraniu odpowiedniego układu współrzędnych, odpowiadające mu wartości współrzędnych zostaną wyświetlone poniżej. Po wybraniu układu współrzędnych i kliknięciu przycisku „Zastosuj”, bieżący używany układ współrzędnych osi rozszerzonej zmieni się na wybrany, jak pokazano na poniższym rysunku.
 
 .. image:: robot_peripherals/077.png
    :width: 4in
    :align: center
 
-.. centered:: 图表 8.7‑2 扩展轴坐标系
+.. centered:: Schemat 8.7‑2 Układ współrzędnych osi rozszerzonej
 
-选择非“exaxis0”的扩展轴坐标系，点击“配置”进入扩展轴坐标系配置界面，对该编号的扩展轴标系进行重新设置。如下图所示:
+Wybierz układ współrzędnych osi rozszerzonej inny niż „exaxis0” i kliknij „Konfiguruj”, aby przejść do interfejsu konfiguracji układu współrzędnych osi rozszerzonej i ponownie ustawić układ współrzędnych osi rozszerzonej dla tego numeru. Jak pokazano poniżej:
 
 .. important::
-  - 标定之前先清除需要标定的扩展轴坐标系，并应用此扩展轴坐标系。
+  - Przed kalibracją najpierw wyczyść układ współrzędnych osi rozszerzonej, który ma być kalibrowany, i zastosuj ten układ współrzędnych osi rozszerzonej.
 
-  - 选择扩展轴的编号，获取信息可以获取对应扩展轴的驱动器信息，我们可以根据该信息进行参数配置。
+  - Wybierz numer osi rozszerzonej. „Pobierz informacje” może pobrać informacje o sterowniku odpowiedniej osi rozszerzonej. Na podstawie tych informacji możemy skonfigurować parametry.
 
 .. image:: robot_peripherals/078.png
    :width: 4in
    :align: center
 
-.. centered:: 图表 8.7‑3 扩展轴坐标系标定
+.. centered:: Schemat 8.7‑3 Kalibracja układu współrzędnych osi rozszerzonej
 
-当前扩展轴方案如下:
+Obecne schematy osi rozszerzonych są następujące:
 
-- 0-单自由度直线滑轨
+- 0 - Prosta szyna szynowa z jednym stopniem swobody
+- 1 - Pozycjoner typu L z dwoma stopniami swobody
+- 2 - Trzy stopnie swobody (tymczasowo niedostępne)
+- 3 - Cztery stopnie swobody (tymczasowo niedostępne)
+- 4 - Pozycjoner z jednym stopniem swobody
+- 5 - Wózek z dwoma stopniami swobody
 
-- 1-两自由度L型变位机
-
-- 2-三自由度（暂未开放）
-
-- 3-四自由度（暂未开放）
-
-- 4-单自由度变位机
-
-- 5-两自由度小车
-
-
-**单自由度直线滑轨**: 先设置DH参数，然后设置机器人相对扩展轴位置，直线导轨为扩展轴上。若不标定，点击保存即可，此时扩展轴只能异步运动。
+**Prosta szyna szynowa z jednym stopniem swobody**: Najpierw ustaw parametry DH, a następnie ustaw pozycję robota względem osi rozszerzonej. Dla szyny prostej jest to na osi rozszerzonej. Bez kalibracji wystarczy kliknąć Zapisz. Wtedy oś rozszerzona może poruszać się tylko asynchronicznie.
 
 .. image:: robot_peripherals/079.png
    :width: 4in
    :align: center
 
-.. centered:: 图表 8.7-4 直线滑轨DH参数配置
+.. centered:: Schemat 8.7-4 Konfiguracja parametrów DH dla szyny prostej
 
 .. image:: robot_peripherals/080.png
    :width: 4in
    :align: center
 
-.. centered:: 图表 8.7-5 直线滑轨--机器人相对扩展轴位置配置
+.. centered:: Schemat 8.7-5 Szyna prosta -- konfiguracja pozycji robota względem osi rozszerzonej
 
-若需跟机器人同步运动，在扩展轴零点处，点击操作区Eaxis使能扩展轴，将机器人末端中心（应用工具坐标系下用工具末端点）以两个不同姿势对准扩展轴上固定一点，分别设定点1和点2。
+Jeśli potrzebny jest ruch synchroniczny z robotem, w punkcie zerowym osi rozszerzonej kliknij Eaxis w obszarze operacji, aby włączyć oś rozszerzoną. Skieruj środek końcówki robota (używając punktu końcowego narzędzia w zastosowanym układzie współrzędnych narzędzia) na stały punkt na osi rozszerzonej w dwóch różnych pozach i ustaw odpowiednio punkt 1 i punkt 2.
 
 .. image:: robot_peripherals/081.png
    :width: 3in
@@ -3853,9 +3842,9 @@ PLC -> 机器人控制器
    :width: 3in
    :align: center
 
-.. centered:: 图表 8.7‑6 直线滑轨标定点1和2
+.. centered:: Schemat 8.7‑6 Punkty kalibracyjne 1 i 2 dla szyny prostej
 
-去除使能，将扩展轴移动一段距离，使能后，同样将机器人末端中心点对准之前固定点，设定点3。去除使能，将扩展轴移至零点，使能扩展轴。将机器人末端中心点移至固定点垂直往上空间一点，设定点4，计算坐标系并保存。
+Wyłącz zasilanie, przesuń oś rozszerzoną o pewną odległość. Włącz zasilanie. Ponownie skieruj środek końcówki robota na poprzedni stały punkt i ustaw punkt 3. Wyłącz zasilanie, przesuń oś rozszerzoną do zera. Włącz zasilanie osi rozszerzonej. Przesuń środek końcówki robota do punktu w przestrzeni pionowo nad stałym punktem i ustaw punkt 4. Oblicz układ współrzędnych i zapisz.
 
 .. image:: robot_peripherals/083.png
    :width: 3in
@@ -3865,31 +3854,31 @@ PLC -> 机器人控制器
    :width: 3in
    :align: center
 
-.. centered:: 图表 8.7‑7 直线滑轨标定点3和4
+.. centered:: Schemat 8.7‑7 Punkty kalibracyjne 3 i 4 dla szyny prostej
 
-**两自由度L型变位机**：变位机由两个扩展轴组成。先设置DH参数，根据图示测量出变位机的DH参数，输入到输入框中。设置机器人相对扩展轴位置，变位机为扩展轴外。若不标定，点击保存即可，此时扩展轴只能异步运动。
+**Pozycjoner typu L z dwoma stopniami swobody**: Pozycjoner składa się z dwóch osi rozszerzonych. Najpierw ustaw parametry DH. Zmierz parametry DH pozycjonera zgodnie z rysunkiem i wprowadź je w pola wejściowe. Ustaw pozycję robota względem osi rozszerzonej. Dla pozycjonera jest to poza osią rozszerzoną. Bez kalibracji wystarczy kliknąć Zapisz. Wtedy oś rozszerzona może poruszać się tylko asynchronicznie.
 
 .. image:: robot_peripherals/085.png
    :width: 4in
    :align: center
 
-.. centered:: 图表 8.7‑8 两自由度L型变位机DH参数配置
+.. centered:: Schemat 8.7‑8 Konfiguracja parametrów DH dla pozycjonera typu L z dwoma stopniami swobody
 
 .. image:: robot_peripherals/086.png
    :width: 4in
    :align: center
 
-.. centered:: 图表 8.7‑9 两自由度L型变位机--机器人相对扩展轴位置
+.. centered:: Schemat 8.7‑9 Pozycjoner typu L z dwoma stopniami swobody -- pozycja robota względem osi rozszerzonej
 
-若需跟机器人同步运动，在扩展轴零点处，点击操作区Eaxis使能扩展轴，在变位机上建立坐标系，选择一点，输入该点在该坐标系下的笛卡尔位姿，比如选择Y正向一点，测出Y为100mm，则输入如图所示数值，点击参考点，即可设定参考点。后续四个标定点都需将机器人末端中心（应用工具坐标系下用工具末端点）对准该参考点。
+Jeśli potrzebny jest ruch synchroniczny z robotem, w punkcie zerowym osi rozszerzonej kliknij Eaxis w obszarze operacji, aby włączyć oś rozszerzoną. Utwórz układ współrzędnych na pozycjonerze. Wybierz punkt i wprowadź jego pozycję i orientację w kartezjańskim układzie współrzędnych w tym układzie. Na przykład wybierz punkt w kierunku +Y, zmierz Y = 100 mm, wprowadź wartości jak na rysunku. Kliknij „Punkt odniesienia”, aby ustawić punkt odniesienia. W przypadku kolejnych czterech punktów kalibracyjnych należy skierować środek końcówki robota (używając punktu końcowego narzędzia w zastosowanym układzie współrzędnych narzędzia) na ten punkt odniesienia.
 
 .. image:: robot_peripherals/087.png
    :width: 4in
    :align: center
 
-.. centered:: 图表 8.7‑10 两自由度L型变位机--参考点配置
+.. centered:: Schemat 8.7‑10 Pozycjoner typu L z dwoma stopniami swobody -- konfiguracja punktu odniesienia
 
-将机器人末端中心（应用工具坐标系下用工具末端点）对准该参考点，设定点1，点击操作区Eaxis点动两个轴一小段距离，将机器人末端中心对准参考点，设定点2，继续点动两个轴，机器人末端中心对准参考点，设定点3，最后继续点动两个轴，将机器人末端中心对准参考点，设定点4，点击计算，得到坐标系结果，点击保存，应用即可。
+Skieruj środek końcówki robota (używając punktu końcowego narzędzia w zastosowanym układzie współrzędnych narzędzia) na punkt odniesienia, ustaw punkt 1. Kliknij Eaxis w obszarze operacji, aby wykonać ruch jałowy o niewielką odległość na obu osiach. Skieruj środek końcówki robota na punkt odniesienia, ustaw punkt 2. Kontynuuj ruch jałowy na obu osiach. Skieruj środek końcówki robota na punkt odniesienia, ustaw punkt 3. Na koniec ponownie wykonaj ruch jałowy na obu osiach. Skieruj środek końcówki robota na punkt odniesienia, ustaw punkt 4. Kliknij Oblicz, aby otrzymać wynik układu współrzędnych. Kliknij Zapisz, a następnie Zastosuj.
 
 .. image:: robot_peripherals/088.png
    :width: 3in
@@ -3907,31 +3896,31 @@ PLC -> 机器人控制器
    :width: 3in
    :align: center
 
-.. centered:: 图表 8.7‑11 两自由度L型变位机标定
+.. centered:: Schemat 8.7‑11 Kalibracja pozycjonera typu L z dwoma stopniami swobody
 
-**单自由度变位机**：由一个旋转扩展轴组成，DH参数设置为0。设置机器人相对扩展轴位置为扩展轴外。若不标定，点击保存即可，此时扩展轴只能异步运动。
+**Pozycjoner z jednym stopniem swobody**: Składa się z jednej obrotowej osi rozszerzonej. Parametry DH ustaw na 0. Ustaw pozycję robota względem osi rozszerzonej jako poza osią rozszerzoną. Bez kalibracji wystarczy kliknąć Zapisz. Wtedy oś rozszerzona może poruszać się tylko asynchronicznie.
 
 .. image:: robot_peripherals/092.png
    :width: 4in
    :align: center
 
-.. centered:: 图表 8.7‑12 单自由度变位机DH参数配置
+.. centered:: Schemat 8.7‑12 Konfiguracja parametrów DH dla pozycjonera z jednym stopniem swobody
 
 .. image:: robot_peripherals/093.png
    :width: 4in
    :align: center
 
-.. centered:: 图表 8.7‑13 单自由度变位机--机器人相对扩展轴位置
+.. centered:: Schemat 8.7‑13 Pozycjoner z jednym stopniem swobody -- pozycja robota względem osi rozszerzonej
 
-若需跟机器人同步运动，在扩展轴零点处，点击操作区Eaxis使能扩展轴，在变位机上建立坐标系，选择一点，输入该点在该坐标系下的笛卡尔位姿，点击“参考点”，即可设定参考点。
+Jeśli potrzebny jest ruch synchroniczny z robotem, w punkcie zerowym osi rozszerzonej kliknij Eaxis w obszarze operacji, aby włączyć oś rozszerzoną. Utwórz układ współrzędnych na pozycjonerze. Wybierz punkt i wprowadź jego pozycję i orientację w kartezjańskim układzie współrzędnych w tym układzie. Kliknij „Punkt odniesienia”, aby ustawić punkt odniesienia.
 
 .. image:: robot_peripherals/094.png
    :width: 4in
    :align: center
 
-.. centered:: 图表 8.7‑14 单自由度变位机参考的配置
+.. centered:: Schemat 8.7‑14 Konfiguracja punktu odniesienia dla pozycjonera z jednym stopniem swobody
 
-后续四个标定点都需将机器人末端中心（应用工具坐标系下用工具末端点）对准该参考点。将机器人末端中心（应用工具坐标系下用工具末端点）对准该参考点，设定点1，点击操作区Eaxis点动旋转轴一小段距离，将机器人末端中心对准参考点，设定点2，继续点动旋转轴，机器人末端中心对准参考点，设定点3，最后继续点动旋转轴，将机器人末端中心对准参考点，设定点4，点击计算，得到坐标系结果，点击保存，应用即可。
+W przypadku kolejnych czterech punktów kalibracyjnych należy skierować środek końcówki robota (używając punktu końcowego narzędzia w zastosowanym układzie współrzędnych narzędzia) na ten punkt odniesienia. Skieruj środek końcówki robota (używając punktu końcowego narzędzia w zastosowanym układzie współrzędnych narzędzia) na punkt odniesienia, ustaw punkt 1. Kliknij Eaxis w obszarze operacji, aby wykonać ruch jałowy osi obrotu o niewielką odległość. Skieruj środek końcówki robota na punkt odniesienia, ustaw punkt 2. Kontynuuj ruch jałowy osi obrotu. Skieruj środek końcówki robota na punkt odniesienia, ustaw punkt 3. Na koniec ponownie wykonaj ruch jałowy osi obrotu. Skieruj środek końcówki robota na punkt odniesienia, ustaw punkt 4. Kliknij Oblicz, aby otrzymać wynik układu współrzędnych. Kliknij Zapisz, a następnie Zastosuj.
 
 .. image:: robot_peripherals/095.png
    :width: 3in
@@ -3949,377 +3938,351 @@ PLC -> 机器人控制器
    :width: 3in
    :align: center
 
-.. centered:: 图表 8.7‑15 单自由度变位机标定
+.. centered:: Schemat 8.7‑15 Kalibracja pozycjonera z jednym stopniem swobody
 
 .. important:: 
-   1. 扩展轴坐标系是基于工具基础上进行标定的，需要在已建立工具坐标系的基础上进行扩展轴坐标系的建立。
-   2. 扩展轴系一般使用exaxis1~ exaxis4，应用exaxis0代表无扩展轴坐标系，在进行扩展轴坐标系标定时，首先需将扩展轴坐标系应用至exaxis0，然后选择其他扩展轴坐标系进行标定及应用。
+   1. Układ współrzędnych osi rozszerzonej jest kalibrowany w oparciu o narzędzie. Należy go utworzyć na podstawie już utworzonego układu współrzędnych narzędzia.
+   2. Zazwyczaj używa się układów współrzędnych osi rozszerzonej exaxis1 ~ exaxis4. Zastosowanie exaxis0 oznacza brak układu współrzędnych osi rozszerzonej. Podczas kalibracji układu współrzędnych osi rozszerzonej należy najpierw zastosować układ współrzędnych osi rozszerzonej do exaxis0, a następnie wybrać inny układ współrzędnych osi rozszerzonej do kalibracji i zastosowania.
 
-控制器+PLC（UDP通讯）
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Sterownik + PLC (komunikacja UDP)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-使用扩展轴UDP通讯方式之前，需要先建立相应的扩展轴标系，在相应的扩展轴坐标系下配置相应的扩展轴方案，并在程序示教时应用建立好的工具坐标系。扩展轴功能主要与焊机功能和激光跟踪传感器功能配合使用。
+Przed użyciem komunikacji UDP osi rozszerzonej należy najpierw utworzyć odpowiedni układ współrzędnych osi rozszerzonej, skonfigurować odpowiedni schemat osi rozszerzonej w odpowiednim układzie współrzędnych osi rozszerzonej i zastosować utworzony układ współrzędnych narzędzia podczas programowania nauczania. Funkcja osi rozszerzonej jest używana głównie w połączeniu z funkcją spawarki i funkcją czujnika śledzenia laserowego.
 
 .. figure:: robot_peripherals/099.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.7‑16 扩展轴坐标系应用和当前扩展轴方案显示
+.. centered:: Schemat 8.7‑16 Zastosowanie układu współrzędnych osi rozszerzonej i wyświetlanie bieżącego schematu osi rozszerzonej
 
-当只需要修改当前扩展轴坐标系时，在外设扩展轴配置界面选择坐标系即可应用。当需要更改扩展轴方案时需要进入扩展轴坐标系配置界面修改。
+Gdy potrzebna jest tylko modyfikacja bieżącego układu współrzędnych osi rozszerzonej, wybierz układ współrzędnych w interfejsie konfiguracji urządzeń peryferyjnych osi rozszerzonej, aby go zastosować. Gdy trzeba zmienić schemat osi rozszerzonej, należy przejść do interfejsu konfiguracji układu współrzędnych osi rozszerzonej w celu modyfikacji.
 
-当扩展轴方案为“0-单自由度直线滑轨”、“1-两自由度L型变位机”、“2-三自由度”、“3-四自由度”和“4-单自由度变位机”时，UDP通讯配置成功后显示“UDP扩展轴”和“定位完成时间设置”内容，当扩展轴方案为“5-两自由度小车”时，界面显示“两自由度小车测试”内容。
+Gdy schemat osi rozszerzonej to „0 - Prosta szyna szynowa z jednym stopniem swobody”, „1 - Pozycjoner typu L z dwoma stopniami swobody”, „2 - Trzy stopnie swobody”, „3 - Cztery stopnie swobody” i „4 - Pozycjoner z jednym stopniem swobody”, po pomyślnej konfiguracji komunikacji UDP wyświetlane są treści „UDP rozszerzonej osi” i „Ustawienie czasu zakończenia pozycjonowania”. Gdy schemat osi rozszerzonej to „5 - Wózek z dwoma stopniami swobody”, interfejs wyświetla treść „Test wózka z dwoma stopniami swobody”.
 
-UDP通讯配置
-+++++++++++++++++
+Konfiguracja komunikacji UDP
+++++++++++++++++++++++++++++
 
 .. note:: 
    .. image:: robot_peripherals/100.png
       :height: 0.75in
       :align: left
 
-   名称：**编辑按钮**
+   Nazwa: **Przycisk edycji**
    
-   作用：UDP通讯参数配置
+   Działanie: Konfiguracja parametrów komunikacji UDP
 
 .. note:: 
    .. image:: robot_peripherals/101.png
       :height: 0.75in
       :align: left
 
-   名称：**加载按钮**
+   Nazwa: **Przycisk ładowania**
    
-   作用：UDP通讯加载
+   Działanie: Ładowanie komunikacji UDP
 
-**Step1**：配置扩展轴UDP通讯参数：设置IP地址、端口号、通信周期、丢包检测周期、丢包次数等参数，其中重连周期和重连次数需在通讯中断自动重连开关开启后才可配置。
+**Krok 1**: Skonfiguruj parametry komunikacji UDP osi rozszerzonej: ustaw adres IP, numer portu, okres komunikacji, okres wykrywania utraty pakietów, liczbę utraconych pakietów itp. Parametry okresu ponownego łączenia i liczby ponownych łączeń można skonfigurować dopiero po włączeniu przełącznika automatycznego ponownego łączenia po przerwaniu komunikacji.
 
-- IP地址：自定义ip地址；
-
-- 端口号：根据实际情况定义；
-
-- 通讯周期：根据实际情况定义，单位ms；
-
-- 丢包检测通讯周期：10 ~ 1000 ms；
-
-- 丢包次数：1 ~ 100；
-
-- 通讯中断确认时长：0 ~ 500 ms；
-
-- 断电重启自动重连：开/关；
-
-- 通讯中断自动重连：开/关；
-
-- 重连周期：1 ~ 1000 ms；
-
-- 重连次数：1 ~ 100；
+- Adres IP: niestandardowy adres IP;
+- Numer portu: zdefiniuj zgodnie z rzeczywistą sytuacją;
+- Okres komunikacji: zdefiniuj zgodnie z rzeczywistą sytuacją, jednostka ms;
+- Okres komunikacji wykrywania utraty pakietów: 10 ~ 1000 ms;
+- Liczba utraconych pakietów: 1 ~ 100;
+- Czas potwierdzenia przerwania komunikacji: 0 ~ 500 ms;
+- Automatyczne ponowne łączenie po ponownym uruchomieniu z odcięciem zasilania: Wł. / Wył.;
+- Automatyczne ponowne łączenie po przerwaniu komunikacji: Wł. / Wył.;
+- Okres ponownego łączenia: 1 ~ 1000 ms;
+- Liczba ponownych łączeń: 1 ~ 100;
 
 .. figure:: robot_peripherals/102.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.7‑17 扩展轴UDP通讯参数配置
+.. centered:: Schemat 8.7‑17 Konfiguracja parametrów komunikacji UDP osi rozszerzonej
 
 .. important:: 
-  1. 设置通讯断开确认时长后，当通讯异常超出该时长时才确认通讯断开并报错；
-  2. UDP通讯断开后，触发UDP断开报错(可复位)，可点击清除警告信息按钮，UDP通讯再次建立。
+  1. Po ustawieniu czasu potwierdzenia przerwania komunikacji, dopiero gdy nieprawidłowość komunikacji przekroczy ten czas, komunikacja zostanie uznana za przerwaną i zgłoszony zostanie błąd;
+  2. Po przerwaniu komunikacji UDP, wyzwalany jest błąd przerwania UDP (możliwy do zresetowania). Można kliknąć przycisk wyczyszczenia ostrzeżenia, a komunikacja UDP zostanie ponownie nawiązana.
 
-**Step2**：通讯参数配置成功后，点击“加载”按钮，建立UDP通讯，通讯成功后“UDP通讯配置”前方按钮变绿，机器人各类状态中的扩展轴状态查看扩展轴已经伺服到位。
+**Krok 2**: Po pomyślnej konfiguracji parametrów komunikacji kliknij przycisk „Załaduj”, aby nawiązać komunikację UDP. Po pomyślnej komunikacji przycisk przed „Konfiguracją komunikacji UDP” zmieni kolor na zielony. W różnych stanach robota, w stanie osi rozszerzonej, widać, że oś rozszerzona jest już serwo gotowa.
 
 .. figure:: robot_peripherals/103.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.7‑18 扩展轴UDP建立通讯
+.. centered:: Schemat 8.7‑18 Nawiązywanie komunikacji UDP osi rozszerzonej
 
 .. figure:: robot_peripherals/104.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.7‑19 扩展轴伺服到位
+.. centered:: Schemat 8.7‑19 Serwo gotowe osi rozszerzonej
 
 .. important:: 
-  1. UDP通讯未建立连接时，无法配置和查看UDP扩展轴编号信息；
-  2. 在进行扩展轴UDP通讯加载之前务必先进行除序号0以外扩展轴坐标系的配置和应用。
+  1. Gdy komunikacja UDP nie jest nawiązana, nie można skonfigurować ani wyświetlić informacji o numerze osi rozszerzonej UDP;
+  2. Przed załadowaniem komunikacji UDP osi rozszerzonej należy najpierw skonfigurować i zastosować układ współrzędnych osi rozszerzonej inny niż numer 0.
 
-UDP扩展轴
-+++++++++++++
+UDP rozszerzonej osi
+++++++++++++++++++++
 
 .. note:: 
    .. image:: robot_peripherals/100.png
       :height: 0.75in
       :align: left
 
-   名称：**编辑按钮**
+   Nazwa: **Przycisk edycji**
    
-   作用：扩展轴参数配置
+   Działanie: Konfiguracja parametrów osi rozszerzonej
 
 .. note:: 
    .. image:: robot_peripherals/105.png
       :height: 0.75in
       :align: left
 
-   名称：**使能按钮**
+   Nazwa: **Przycisk włączenia**
    
-   作用：扩展轴使能状态，点击按钮扩展轴去使能
+   Działanie: Stan włączenia osi rozszerzonej. Kliknięcie przycisku powoduje wyłączenie osi rozszerzonej.
 
 .. note:: 
    .. image:: robot_peripherals/106.png
       :height: 0.75in
       :align: left
 
-   名称：**去使能按钮**
+   Nazwa: **Przycisk wyłączenia**
    
-   作用：扩展轴去使能状态，点击按钮扩展轴使能
+   Działanie: Stan wyłączenia osi rozszerzonej. Kliknięcie przycisku powoduje włączenie osi rozszerzonej.
 
 .. note:: 
    .. image:: robot_peripherals/107.png
       :height: 0.75in
       :align: left
 
-   名称：**回零按钮**
+   Nazwa: **Przycisk powrotu do zera**
    
-   作用：扩展轴回零方式设置
+   Działanie: Ustawienie sposobu powrotu do zera osi rozszerzonej
 
 .. note:: 
    .. image:: robot_peripherals/108.png
       :height: 0.75in
       :align: left
 
-   名称：**测试按钮**
+   Nazwa: **Przycisk testu**
    
-   作用：扩展轴功能测试
+   Działanie: Test funkcji osi rozszerzonej
 
-**Step1**：选择任意扩展轴编号（目前只有编号1、2、3、4），点击扩展轴编号后方的“编辑”按钮进入详细配置界面。设置轴类型、轴方向、运行速度、加速度、正方向限位、反方向限位、导程、编码器分辨率、起点偏置、厂家、型号和模式，点击配置即可配置完成。
+**Krok 1**: Wybierz dowolny numer osi rozszerzonej (obecnie tylko numery 1, 2, 3, 4). Kliknij przycisk „Edycja” za numerem osi rozszerzonej, aby przejść do szczegółowego interfejsu konfiguracji. Ustaw typ osi, kierunek osi, prędkość roboczą, przyspieszenie, ograniczenie kierunku dodatniego, ograniczenie kierunku ujemnego, skok, rozdzielczość enkodera, przesunięcie punktu początkowego, producenta, model i tryb. Kliknij Konfiguruj, aby zakończyć konfigurację.
 
-- 轴类型：直线导轨、旋转轴和无限旋转轴；
-
-- 轴方向：正/负；
-
-- 运行速度：0~2000mm/s；
-
-- 加速度：0 ~ 2000 mm/s²；
-
-- 正方向限位：0 ~ 50000；
-
-- 反方向限位：-50000 ~ 0；
-
-- 导程：0~1000；
-
-- 编码器分辨率：0 ~ 10000000；
-
-- 起点偏置：0 ~ 10000mm；
-
-- 厂家：禾川、汇川和松下；
-
-- 型号：根据厂家自动匹配型号列表；
-
-- 模式：增量系统和绝对位置系统；
+- Typ osi: Szyna liniowa, oś obrotowa i oś obrotu nieograniczonego;
+- Kierunek osi: Dodatni / Ujemny;
+- Prędkość robocza: 0~2000 mm/s;
+- Przyspieszenie: 0 ~ 2000 mm/s²;
+- Ograniczenie kierunku dodatniego: 0 ~ 50000;
+- Ograniczenie kierunku ujemnego: -50000 ~ 0;
+- Skok: 0~1000;
+- Rozdzielczość enkodera: 0 ~ 10000000;
+- Przesunięcie punktu początkowego: 0 ~ 10000 mm;
+- Producent: Hechuan, Huichuan i Panasonic;
+- Model: Lista modeli automatycznie dopasowywana w zależności od producenta;
+- Tryb: System inkrementalny i system pozycji absolutnej;
 
 .. figure:: robot_peripherals/109.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.7‑20 扩展轴参数配置
+.. centered:: Schemat 8.7‑20 Konfiguracja parametrów osi rozszerzonej
 
-**Step2**：扩展轴参数配置完成后，点击“去使能”按钮，将对应扩展轴编号使能，使能成功后即可设置回零方式和扩展轴测试，当扩展轴未使能时无法进行回零方式设置和扩展轴测试。
+**Krok 2**: Po zakończeniu konfiguracji parametrów osi rozszerzonej kliknij przycisk „Wyłącz”, aby włączyć odpowiedni numer osi rozszerzonej. Po pomyślnym włączeniu można ustawić sposób powrotu do zera i test osi rozszerzonej. Gdy oś rozszerzona nie jest włączona, nie można ustawić sposobu powrotu do zera ani przeprowadzić testu osi rozszerzonej.
 
 .. figure:: robot_peripherals/110.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.7‑21 扩展轴使能/去使能
+.. centered:: Schemat 8.7‑21 Włączanie/wyłączanie osi rozszerzonej
 
-**Step3**：扩展轴未使能成功无法进入设置界面，按钮置灰；扩展轴使能成功后，点击“回零”按钮进入回零方式设置界面。设置回零方式、寻零速度和零点箍位速度，点击“设置”按钮，扩展轴开始回零，回零状态会显示在轴方向下方空白处，当出现“回零已完成”提示表明扩展轴零点设置成功。
+**Krok 3**: Jeśli oś rozszerzona nie została pomyślnie włączona, nie można wejść do interfejsu ustawień, a przycisk jest nieaktywny. Po pomyślnym włączeniu osi rozszerzonej kliknij przycisk „Powrót do zera”, aby przejść do interfejsu ustawień sposobu powrotu do zera. Ustaw sposób powrotu do zera, prędkość poszukiwania zera i prędkość zatrzaskiwania zera. Kliknij przycisk „Ustaw”. Oś rozszerzona rozpoczyna powrót do zera. Stan powrotu do zera zostanie wyświetlony w pustym miejscu poniżej kierunku osi. Gdy pojawi się komunikat „Powrót do zera zakończony”, oznacza to, że punkt zerowy osi rozszerzonej został pomyślnie ustawiony.
 
-- 回零方式：当前位置回零、负限位回零和正限位回零；
-
-- 寻零速度：0~2000mm/s；
-
-- 零点箍位速度：0~2000mm/s；
+- Sposób powrotu do zera: Powrót do bieżącej pozycji, powrót do ujemnego ogranicznika i powrót do dodatniego ogranicznika;
+- Prędkość poszukiwania zera: 0~2000 mm/s;
+- Prędkość zatrzaskiwania zera: 0~2000 mm/s;
 
 .. figure:: robot_peripherals/111.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.7‑22 回零方式设置
+.. centered:: Schemat 8.7‑22 Ustawienie sposobu powrotu do zera
 
-**Step4**：扩展轴未使能成功无法进入设置界面，按钮置灰；扩展轴使能成功且回零方式设置完成后，点击“测试”按钮进入扩展轴测试界面。设置运行速度、加速度和最大距离，进行正向转动和反向转动测试扩展轴，同时在转动过程中可以点击“停止”按钮测试扩展轴是否可以正常停止。
+**Krok 4**: Jeśli oś rozszerzona nie została pomyślnie włączona, nie można wejść do interfejsu ustawień, a przycisk jest nieaktywny. Po pomyślnym włączeniu osi rozszerzonej i ustawieniu sposobu powrotu do zera kliknij przycisk „Test”, aby przejść do interfejsu testu osi rozszerzonej. Ustaw prędkość roboczą, przyspieszenie i maksymalną odległość. Wykonaj test osi rozszerzonej, obracając w kierunku dodatnim i ujemnym. Podczas obracania można kliknąć przycisk „Stop”, aby przetestować, czy oś rozszerzona może normalnie się zatrzymać.
 
 .. figure:: robot_peripherals/112.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.7‑23 扩展轴测试
+.. centered:: Schemat 8.7‑23 Test osi rozszerzonej
 
-**Step5**：扩展轴通常于激光传感器配合使用，此时激光传感器通常采用外部安装方式，传感器参考点配置需要采用三点法标定，而不是之前使用的六点法标定。将工具中心对准右侧横截面底部中间点（靠近相机那一侧）设定点1，将工具中心点对准另一截面即左侧横截面底部中间点，设定点2，将工具中心点移至传感器右侧横截面上边缘中间点，设定点3，计算并保存，点击应用完成三点法标定。
+**Krok 5**: Oś rozszerzona jest zwykle używana razem z czujnikiem laserowym. W tym przypadku czujnik laserowy jest zwykle montowany zewnętrznie. Konfiguracja punktu odniesienia czujnika wymaga kalibracji metodą trzech punktów, a nie wcześniej używaną metodą sześciu punktów. Skieruj środek narzędzia na środkowy punkt na dole prawego przekroju poprzecznego (po stronie bliższej kamery) i ustaw punkt 1. Skieruj środek narzędzia na środkowy punkt na dole lewego przekroju poprzecznego i ustaw punkt 2. Przesuń środek narzędzia do środkowego punktu na górnej krawędzi prawego przekroju poprzecznego czujnika i ustaw punkt 3. Oblicz i zapisz. Kliknij Zastosuj, aby zakończyć kalibrację metodą trzech punktów.
 
 .. figure:: robot_peripherals/113.png
    :align: center
    :width: 6in
 
-.. centered:: 图表 8.7‑24 传感器三点法标定
+.. centered:: Schemat 8.7‑24 Kalibracja czujnika metodą trzech punktów
 
-**Step6**：在“示教程序”->“程序编程”界面选择外设指令的“扩展轴”命令。根据具体的程序示教需求，在相应的地方添加指令。
+**Krok 6**: W interfejsie „Program nauczania” -> „Programowanie” wybierz polecenie „Oś rozszerzona” w instrukcjach urządzeń peryferyjnych. Zgodnie z konkretnymi potrzebami programowania nauczania dodaj instrukcje w odpowiednich miejscach.
 
 .. figure:: robot_peripherals/114.png
    :align: center
    :width: 6in
 
-.. centered:: 图表 8.7‑25 扩展轴指令编辑
+.. centered:: Schemat 8.7‑25 Edycja instrukcji osi rozszerzonej
 
-扩展轴配合激光跟踪焊接示教程序
-+++++++++++++++++++++++++++++++
+Program nauczania spawania z osią rozszerzoną i śledzeniem laserowym
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. list-table::
    :widths: 50 80 80
    :header-rows: 0
    :align: center
 
-   * - **序号**
-     - **指令格式**
-     - **注释**
+   * - **Nr**
+     - **Format instrukcji**
+     - **Komentarz**
 
    * - 1
      - EXT_AXIS_PTP(1,1laserstart)
-     - #外部轴运动激光传感器起始点
+     - # Ruch osi zewnętrznej do punktu początkowego czujnika laserowego
 
    * - 2
      - PTP(laserstart,10,-1,0)
-     - #机器人运动激光传感器起始点
+     - # Ruch robota do punktu początkowego czujnika laserowego
 
    * - 3
      - LTSearchStart(3,20,10,10000)
-     - #开始寻位
+     - # Rozpoczęcie lokalizacji
 
    * - 4
      - LTSearchStop()
-     - #停止寻位
+     - # Zatrzymanie lokalizacji
 
    * - 5
      - EXT_AXIS_PTP(1,1,seamPos)
-     - #外部轴运动焊缝起点
+     - # Ruch osi zewnętrznej do punktu początkowego spoiny
 
    * - 6
      - Lin(seamPos,20,-1,00,0)
-     - #机器人运动焊缝起点
+     - # Ruch robota do punktu początkowego spoiny
 
    * - 7
      - LTTrackOn()
-     - #激光跟踪
+     - # Śledzenie laserowe
 
    * - 8
      - ARCStart(0,10000)
-     - #焊机起弧
+     - # Rozpoczęcie łuku spawarki
 
    * - 9
      - EXT_AXIS_PTP(1,1,laserend)
-     - #外部轴运动焊缝终点
+     - # Ruch osi zewnętrznej do punktu końcowego spoiny
 
    * - 10
      - Lin( laserend,10,-1,0,0)
-     - #机器人运动焊缝终点
+     - # Ruch robota do punktu końcowego spoiny
 
    * - 11
      - ARCEnd(0,10000)
-     - #焊机收弧
+     - # Zakończenie łuku spawarki
 
    * - 12
      - LTTrackOff
-     - #激光跟踪关闭
+     - # Wyłączenie śledzenia laserowego
 
-定位完成时间
-++++++++++++++++
+Czas zakończenia pozycjonowania
++++++++++++++++++++++++++++++++
 
-当扩展轴建立UDP通讯后，输入时间，点击“配置”按钮即可完成设置。该配置项用于监听扩展轴运动停止的时间。
+Po nawiązaniu komunikacji UDP przez oś rozszerzoną, wprowadź czas i kliknij przycisk „Konfiguruj”, aby zakończyć ustawienie. Ta pozycja konfiguracyjna służy do monitorowania czasu zatrzymania ruchu osi rozszerzonej.
 
 .. figure:: robot_peripherals/115.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.7‑26 定位完成时间配置
+.. centered:: Schemat 8.7‑26 Konfiguracja czasu zakończenia pozycjonowania
 
-两自由度小车测试
-~~~~~~~~~~~~~~~~~~~~~~
+Test wózka z dwoma stopniami swobody
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-在扩展轴坐标系配置扩展轴方案为“5-两自由度小车”时，进入UDP通讯界面后显示该内容，否则无法查看。
+Gdy schemat osi rozszerzonej w konfiguracji układu współrzędnych osi rozszerzonej to „5 - Wózek z dwoma stopniami swobody”, po wejściu do interfejsu komunikacji UDP wyświetlana jest ta treść. W przeciwnym razie nie można jej wyświetlić.
 
 .. figure:: robot_peripherals/116.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.7‑27 扩展轴方案为“5-两自由度小车”界面
+.. centered:: Schemat 8.7‑27 Interfejs dla schematu osi rozszerzonej „5 - Wózek z dwoma stopniami swobody”
 
-.. important:: 两自由度小车默认应用扩展轴编号1和2，UDP通讯成功后通过机器人	各类状态中的扩展轴状态查看扩展轴1和2伺服到位。
+.. important:: Wózek z dwoma stopniami swobody domyślnie używa numerów osi rozszerzonych 1 i 2. Po pomyślnej komunikacji UDP, w różnych stanach robota, w stanie osi rozszerzonej, widać, że osie rozszerzone 1 i 2 są serwo gotowe.
 
 .. figure:: robot_peripherals/117.png
    :align: center
    :width: 6in
 
-.. centered:: 图表 8.7‑28 两自由度小车扩展轴伺服到位
+.. centered:: Schemat 8.7‑28 Serwo gotowe osi rozszerzonych wózka z dwoma stopniami swobody
 
 .. note:: 
    .. image:: robot_peripherals/105.png
       :height: 0.75in
       :align: left
 
-   名称：**使能按钮**
+   Nazwa: **Przycisk włączenia**
    
-   作用：扩展轴使能状态，点击按钮扩展轴去使能
+   Działanie: Stan włączenia osi rozszerzonej. Kliknięcie przycisku powoduje wyłączenie osi rozszerzonej.
 
 .. note:: 
    .. image:: robot_peripherals/106.png
       :height: 0.75in
       :align: left
 
-   名称：**去使能按钮**
+   Nazwa: **Przycisk wyłączenia**
    
-   作用：扩展轴去使能状态，点击按钮扩展轴使能
+   Działanie: Stan wyłączenia osi rozszerzonej. Kliknięcie przycisku powoduje włączenie osi rozszerzonej.
 
 .. note:: 
    .. image:: robot_peripherals/107.png
       :height: 0.75in
       :align: left
 
-   名称：**回零按钮**
+   Nazwa: **Przycisk powrotu do zera**
    
-   作用：扩展轴当前位置回零
+   Działanie: Powrót osi rozszerzonej do bieżącej pozycji
 
 .. note:: 
    .. image:: robot_peripherals/108.png
       :height: 0.75in
       :align: left
 
-   名称：**测试按钮**
+   Nazwa: **Przycisk testu**
    
-   作用：两自由度小车功能测试
+   Działanie: Test funkcji wózka z dwoma stopniami swobody
 
-**Step1**：UDP通讯成功后，点击“去使能”按钮，将两自由度小车对应扩展轴使能，通过机器人各类状态中的扩展轴状态查看扩展轴1和2伺服使能。
+**Krok 1**: Po pomyślnej komunikacji UDP kliknij przycisk „Wyłącz”, aby włączyć odpowiednią oś rozszerzoną wózka z dwoma stopniami swobody. Sprawdź stan serwo włączenia osi rozszerzonych 1 i 2 w różnych stanach robota, w stanie osi rozszerzonej.
 
 .. figure:: robot_peripherals/118.png
    :align: center
    :width: 6in
 
-.. centered:: 图表 8.7‑29 两自由度小车扩展轴使能
+.. centered:: Schemat 8.7‑29 Włączenie osi rozszerzonych wózka z dwoma stopniami swobody
 
-**Step2**：扩展轴使能成功后，点击“回零”按钮，设置扩展轴当前位置回零，回零成功后测试按钮高亮，反之置灰。
+**Krok 2**: Po pomyślnym włączeniu osi rozszerzonej kliknij przycisk „Powrót do zera”, aby ustawić powrót osi rozszerzonej do bieżącej pozycji. Po pomyślnym powrocie do zera przycisk testu stanie się aktywny. W przeciwnym razie będzie nieaktywny.
 
 .. figure:: robot_peripherals/119.png
    :align: center
    :width: 6in
 
-.. centered:: 图表 8.7‑30 两自由度小车当前位置回零成功
+.. centered:: Schemat 8.7‑30 Pomyślny powrót do bieżącej pozycji wózka z dwoma stopniami swobody
 
-**Step3**：两自由度小车当前位置回零成功后，点击“测试”按钮进入界面，选择运动方式，输入参数进行运动测试，在运动过程中点击“停止”按钮测试停止功能。
+**Krok 3**: Po pomyślnym powrocie wózka z dwoma stopniami swobody do bieżącej pozycji kliknij przycisk „Test”, aby przejść do interfejsu. Wybierz sposób ruchu, wprowadź parametry, aby przeprowadzić test ruchu. Podczas ruchu kliknij przycisk „Stop”, aby przetestować funkcję zatrzymania.
 
-- 运动方式：直线/圆弧；
-
-- 距离：-5000~5000mm（直线运动方式）；
-
-- 半径：1~5000mm（直线运动方式）；
-
-- 角度：-360~360°（圆弧运动方式）；
-
-- 速度：1~100%
+- Sposób ruchu: Linia prosta / Łuk;
+- Odległość: -5000~5000 mm (dla ruchu liniowego);
+- Promień: 1~5000 mm (dla ruchu liniowego);
+- Kąt: -360~360° (dla ruchu łukowego);
+- Prędkość: 1~100%
 
 .. figure:: robot_peripherals/120.png
    :align: center
@@ -4329,664 +4292,662 @@ UDP扩展轴
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.7‑31 两自由度小车测试
+.. centered:: Schemat 8.7‑31 Test wózka z dwoma stopniami swobody
 
-控制器+伺服驱动器（485通讯）
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Sterownik + serwonapęd (komunikacja 485)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-硬件接线
-+++++++++++
+Podłączenie sprzętu
++++++++++++++++++++
 
-使用RS485通信控制伺服扩展轴前，请先将伺服驱动器的RS485通信接口与机器人控制箱上的RS485通信接口建立连接。法奥机器人易制造控制箱电气接口示意图如下：
+Przed użyciem komunikacji RS485 do sterowania serwo osią rozszerzoną, należy najpierw podłączyć interfejs komunikacji RS485 serwonapędu do interfejsu komunikacji RS485 na szafie sterowniczej robota. Schemat interfejsów elektrycznych szafy sterowniczej robota współpracującego FANUC Yizhizao jest następujący:
 
 .. figure:: robot_peripherals/122.png
    :align: center
    :width: 6in
 
-.. centered:: 图表 8.7‑32 法奥机器人mini控制箱电气接口示意图
+.. centered:: Schemat 8.7‑32 Schemat interfejsów elektrycznych mini szafy sterowniczej robota FANUC
 
-以戴纳泰克伺服驱动器FD100-750C型号为例，参考改驱动器面板端子示意图和FD100-750C的X3A-IN端子定义，当机器人配置与FD100-750C伺服扩展轴通信时，需要将控制箱上的485-A0端子、485-B0端子分别与驱动器X3A-IN端子的4号和5号引脚连接。（请注意：您可以在伺服驱动器面板上看到一个“485”标志的插线端子，该端子暂未开放用户使用，请勿将您的RS485通信线缆连接到此端子上）。同时，若连接多个伺服驱动器，且该驱动器为链路的最后一个，需要将面板上的RS485通信中断电阻拨码开关（2号拨码）打开。
+Na przykładzie serwonapędu Dynatect FD100-750C, odnosząc się do schematu zacisków panelu tego napędu i definicji zacisków X3A-IN w FD100-750C, podczas konfigurowania komunikacji robota z serwo osią rozszerzoną FD100-750C, należy podłączyć zacisk 485-A0 i zacisk 485-B0 na szafie sterowniczej odpowiednio do pinów 4 i 5 zacisku X3A-IN napędu. (Uwaga: Na panelu serwonapędu widać zacisk do podłączenia oznaczony „485”. Ten zacisk nie jest jeszcze udostępniony użytkownikowi. Nie podłączaj do niego kabla komunikacyjnego RS485). Ponadto, jeśli podłączasz wiele serwonapędów, a ten napęd jest ostatnim w łańcuchu, należy włączyć przełącznik DIP rezystora terminującego komunikację RS485 na panelu (przełącznik DIP nr 2).
 
 .. figure:: robot_peripherals/123.png
    :align: center
    :width: 6in
 
-.. centered:: 图表 8.7‑33 FD100-750C驱动器面板
+.. centered:: Schemat 8.7‑33 Panel napędu FD100-750C
 
 .. figure:: robot_peripherals/124.png
    :align: center
    :width: 6in
 
-.. centered:: 图表 8.7‑34 FD100-750C的X3A-IN端子定义
+.. centered:: Schemat 8.7‑34 Definicja zacisków X3A-IN w FD100-750C
 
-通信配置
-++++++++++++++
+Konfiguracja komunikacji
+++++++++++++++++++++++++
 
-确保您的RS485通信线缆正确连接且机器人和伺服扩展轴都正常上电后，打开机器人WebApp。
+Upewnij się, że kabel komunikacyjny RS485 jest prawidłowo podłączony, a zarówno robot, jak i serwo oś rozszerzona są normalnie zasilane. Następnie otwórz WebApp robota.
 
-点击组合方式为“控制器 + 伺服驱动器”的图片进入详细配置界面。在伺服驱动器配置中，选择编号为“1”（请注意：当连接多个伺服时，此编号用于区分不同的伺服，后面我们会多次提到该编号），厂商为“戴纳泰克”，选择相应的伺服驱动器型号，此处型号为“FD00-750C”，软件版本为V1.0，填写伺服驱动器对应的分辨率，此处为131072，根据您的机构模型填写机械传动比，此处为15.45，点击“配置”按钮。
+Kliknij obrazek dla kombinacji „Sterownik + serwonapęd”, aby przejść do szczegółowego interfejsu konfiguracji. W konfiguracji serwonapędu wybierz numer „1” (Uwaga: Gdy podłączonych jest wiele serwonapędów, ten numer służy do odróżniania poszczególnych serwonapędów. Będziemy go często używać później). Wybierz producenta „Dynatect”, wybierz odpowiedni model serwonapędu. Tutaj model to „FD00-750C”. Wersja oprogramowania to V1.0. Wprowadź odpowiednią rozdzielczość serwonapędu, tutaj 131072. Wprowadź mechaniczne przełożenie transmisyjne zgodnie z modelem swojej maszyny, tutaj 15.45. Kliknij przycisk „Konfiguruj”.
 
 .. figure:: robot_peripherals/125.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.7‑35 伺服驱动器配置
+.. centered:: Schemat 8.7‑35 Konfiguracja serwonapędu
 
-至此我们已经完成机器人与伺服驱动器的485通讯配置，您可以在WebApp中右侧的“伺服状态栏”中查看伺服的实时状态信息。如下图所示：
+W tym momencie zakończyliśmy konfigurację komunikacji 485 między robotem a serwonapędem. Możesz wyświetlić informacje o stanie serwonapędu w czasie rzeczywistym w „Pasku stanu serwonapędu” po prawej stronie w WebApp. Jak pokazano poniżej:
 
 .. figure:: robot_peripherals/126.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.7‑36 伺服状态栏
+.. centered:: Schemat 8.7‑36 Pasek stanu serwonapędu
 
-现在您需要按顺序对扩展轴设备进行使能和回零方式设置后，即可进行一定的运动测试，请在确保安全的前提下跟着本手册做如下测试操作。
+Teraz musisz po kolei włączyć zasilanie urządzenia osi rozszerzonej i ustawić sposób powrotu do zera. Następnie możesz przeprowadzić pewne testy ruchu. Wykonaj poniższe testy, upewniając się, że jest bezpieczne, zgodnie z niniejszą instrukcją.
 
-已配置伺服驱动器
-++++++++++++++++++++++
+Skonfigurowany serwonapęd
++++++++++++++++++++++++++
 
 .. note:: 
    .. image:: robot_peripherals/127.png
       :height: 0.75in
       :align: left
 
-   名称：**查看按钮**
+   Nazwa: **Przycisk podglądu**
    
-   作用：点击查看伺服驱动器配置信息
+   Działanie: Kliknij, aby wyświetlić informacje konfiguracyjne serwonapędu
 
 .. note:: 
    .. image:: robot_peripherals/105.png
       :height: 0.75in
       :align: left
 
-   名称：**使能按钮**
+   Nazwa: **Przycisk włączenia**
    
-   作用：伺服驱动器使能状态，点击按钮伺服驱动器去使能
+   Działanie: Stan włączenia serwonapędu. Kliknięcie przycisku powoduje wyłączenie serwonapędu.
 
 .. note:: 
    .. image:: robot_peripherals/106.png
       :height: 0.75in
       :align: left
 
-   名称：**去使能按钮**
+   Nazwa: **Przycisk wyłączenia**
    
-   作用：伺服驱动器去使能状态，点击按钮伺服驱动器使
+   Działanie: Stan wyłączenia serwonapędu. Kliknięcie przycisku powoduje włączenie serwonapędu.
 
 .. note:: 
    .. image:: robot_peripherals/107.png
       :height: 0.75in
       :align: left
 
-   名称：**回零按钮**
+   Nazwa: **Przycisk powrotu do zera**
    
-   作用：伺服驱动器回零方式设置
+   Działanie: Ustawienie sposobu powrotu do zera serwonapędu
 
 .. note:: 
    .. image:: robot_peripherals/108.png
       :height: 0.75in
       :align: left
 
-   名称：**测试按钮**
+   Nazwa: **Przycisk testu**
    
-   作用：伺服驱动器测试
+   Działanie: Test serwonapędu
 
 .. note:: 
    .. image:: robot_peripherals/128.png
       :height: 0.75in
       :align: left
 
-   名称：**伺服错误清除按钮**
+   Nazwa: **Przycisk czyszczenia błędu serwonapędu**
    
-   作用：伺服驱动器提示错误时，点击清除
+   Działanie: Gdy serwonapęd zgłasza błąd, kliknij, aby go wyczyścić
 
-伺服控制模式与使能
-********************
+Tryb sterowania serwonapędem i włączenie
+****************************************
 
-在“已配置伺服驱动器”中，选择控制模式为“位置模式”，选择对应的伺服编号，点击“去使能”按钮，此时会先设置伺服驱动器编号，设置成功后设置控制模式，控制模式设置成功后将伺服驱动器使能（请注意：切换控制模式后，需要先将伺服驱动器去除使能，再将伺服驱动器使能，伺服的控制模式切换才会生效，伺服使能成功后将切换控制模式将禁用）。
+W „Skonfigurowanym serwonapędzie” wybierz tryb sterowania jako „Tryb pozycyjny”. Wybierz odpowiedni numer serwonapędu. Kliknij przycisk „Wyłącz”. W tym momencie najpierw zostanie ustawiony numer serwonapędu. Po pomyślnym ustawieniu, ustawiany jest tryb sterowania. Po pomyślnym ustawieniu trybu sterowania, serwonapęd jest włączany (Uwaga: Po przełączeniu trybu sterowania należy najpierw wyłączyć serwonapęd, a następnie włączyć go ponownie, aby przełączenie trybu sterowania serwonapędu zostało zastosowane. Po pomyślnym włączeniu serwonapędu przełączenie trybu sterowania zostanie wyłączone).
 
 .. figure:: robot_peripherals/129.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.7‑37 伺服控制模式与使能 
+.. centered:: Schemat 8.7‑37 Tryb sterowania serwonapędem i włączenie
 
-伺服使能成功后查看机器人各类状态栏中的“Servo”中可观察到对“伺服使能”状态灯亮起，表示伺服驱动器已经使能。点击“使能”状态按钮，将伺服驱动器去使能，“伺服使能”状态灯熄灭。
+Po pomyślnym włączeniu serwonapędu, w pasku stanu „Serwo” w różnych stanach robota, można zaobserwować, że lampka stanu „Serwo włączone” świeci się, co oznacza, że serwonapęd jest włączony. Kliknij przycisk stanu „Włącz”, aby wyłączyć serwonapęd. Lampka stanu „Serwo włączone” zgaśnie.
 
 .. figure:: robot_peripherals/130.png
    :align: center
    :width: 6in
 
-.. centered:: 图表 8.7‑38 伺服驱动器状态栏 
+.. centered:: Schemat 8.7‑38 Pasek stanu serwonapędu
 
-伺服回零
-****************
+Powrót serwonapędu do zera
+**************************
 
-伺服驱动器使能成功后，“回零”按钮高亮，点击按钮进入设置界面。选择回零模式为“当前位置回零”，回零速度为5mm/s，零点箍位速度为1mm/s；点击“设置”按钮，即完成了伺服当前位置回零操作，在机器人各类状态栏中的“Servo”中，可观察到当前的“伺服位置”为0；（请您完全阅读本手册后，再将回零模式选择为“负限位回零”或“正限位回零”进行回零测试）。
+Po pomyślnym włączeniu serwonapędu przycisk „Powrót do zera” stanie się aktywny. Kliknij przycisk, aby przejść do interfejsu ustawień. Wybierz tryb powrotu do zera jako „Powrót do bieżącej pozycji”. Ustaw prędkość powrotu do zera na 5 mm/s, a prędkość zatrzaskiwania zera na 1 mm/s. Kliknij przycisk „Ustaw”. To kończy operację powrotu serwonapędu do bieżącej pozycji. W pasku stanu „Serwo” w różnych stanach robota można zaobserwować, że bieżąca „Pozycja serwa” wynosi 0. (Po dokładnym przeczytaniu niniejszej instrukcji, wybierz tryb powrotu do zera jako „Powrót do ujemnego ogranicznika” lub „Powrót do dodatniego ogranicznika”, aby przeprowadzić test powrotu do zera).
 
 .. figure:: robot_peripherals/131.png
    :align: center
    :width: 6in
 
-.. centered:: 图表 8.7‑39 伺服回零
+.. centered:: Schemat 8.7‑39 Powrót serwonapędu do zera
 
-伺服运动
-***************
+Ruch serwonapędu
+****************
 
-在实际控制伺服电机运动前，请先了解伺服电机的“位置模式”和“速度模式”，再次提醒您：
+Zanim rzeczywiście zaczniesz sterować ruchem serwosilnika, najpierw poznaj „tryb pozycyjny” i „tryb prędkościowy” serwosilnika. Jeszcze raz przypominamy:
 
-**位置模式**：您可以输入一定的运动速度和目标位置参数，伺服将以设置的速度运动到目标位置，运动到目标位置后，伺服将停止运动。
+**Tryb pozycyjny**: Możesz wprowadzić pewną prędkość ruchu i parametry pozycji docelowej. Serwo będzie poruszać się z ustawioną prędkością do pozycji docelowej. Po osiągnięciu pozycji docelowej serwo zatrzyma się.
 
-**速度模式**：您可以输入一定的目标速度，伺服将按照您设置的目标速度一直运动，直至您将目标速度设置为0或将伺服电机下使能；
+**Tryb prędkościowy**: Możesz wprowadzić pewną prędkość docelową. Serwo będzie poruszać się stale z ustawioną prędkością docelową, dopóki nie ustawisz prędkości docelowej na 0 lub nie wyłączysz serwosilnika.
 
-当切换控制模式时，“当前控制模式”显示会自动切换（请注意：切换控制模式后，需要先将伺服去除使能，再将伺服使能，伺服的控制模式切换才会生效）。若目前您的伺服未处于“位置模式”，请将您的伺服切换至位置模式。输入“目标位置”为50mm，运行速度为5mm/s，在确认安全的条件下，点击“设置”按钮，此时伺服电机将按照您设置的参数运动，您可以在机器人各类状态栏中的“Servo”中实时观察伺服的位置和速度等。
+Podczas przełączania trybu sterowania, wyświetlanie „Bieżącego trybu sterowania” zmieni się automatycznie (Uwaga: Po przełączeniu trybu sterowania należy najpierw wyłączyć serwonapęd, a następnie włączyć go ponownie, aby przełączenie trybu sterowania serwonapędu zostało zastosowane). Jeśli Twój serwonapęd nie jest obecnie w „trybie pozycyjnym”, przełącz go w tryb pozycyjny. Wprowadź „Pozycję docelową” 50 mm, prędkość roboczą 5 mm/s. Upewniając się, że jest bezpieczne, kliknij przycisk „Ustaw”. W tym momencie serwosilnik będzie poruszał się zgodnie z ustawionymi parametrami. Możesz obserwować w czasie rzeczywistym pozycję i prędkość serwa w pasku stanu „Serwo” w różnych stanach robota.
 
 .. figure:: robot_peripherals/132.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.7‑40 伺服运动调试（位置模式）
+.. centered:: Schemat 8.7‑40 Debugowanie ruchu serwonapędu (tryb pozycyjny)
 
-将伺服的控制模式改为“速度模式”，点击“使能”状态按钮将伺服驱动器去使能，再点击“去使能”状态按钮，此时伺服切换为速度模式（请注意：当伺服电机运动后，只能通过将目标速度设置为0使伺服电机停止）。输入目标速度为5mm/s，点击“设置”按钮，伺服电机将以5mm/s的速度保持运动，同样您可以在机器人各类状态栏中的“Servo”中实时观察伺服的位置和速度等。
+Zmień tryb sterowania serwonapędu na „tryb prędkościowy”. Kliknij przycisk stanu „Włącz”, aby wyłączyć serwonapęd. Następnie kliknij przycisk stanu „Wyłącz”. W tym momencie serwonapęd przełącza się w tryb prędkościowy (Uwaga: Gdy serwosilnik się porusza, można go zatrzymać tylko przez ustawienie prędkości docelowej na 0). Wprowadź prędkość docelową 5 mm/s i kliknij przycisk „Ustaw”. Serwosilnik będzie się poruszał stale z prędkością 5 mm/s. Podobnie możesz obserwować w czasie rzeczywistym pozycję i prędkość serwa w pasku stanu „Serwo” w różnych stanach robota.
 
 .. figure:: robot_peripherals/133.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.7‑41 伺服运动调试（速度模式）
+.. centered:: Schemat 8.7‑41 Debugowanie ruchu serwonapędu (tryb prędkościowy)
 
-高级设置
-++++++++++++++
+Ustawienia zaawansowane
++++++++++++++++++++++++
 
-若机器人发生碰撞、按下急停等紧急情况下扩展轴能触发急停，并按照设定的急停减速度停止运动，碰撞报警恢复后能继续下发指令使扩展轴恢复运行。需要在高级设置中，设置伺服加减速度和伺服急停加减速，如下图所示：
+W sytuacjach awaryjnych, takich jak kolizja robota lub naciśnięcie przycisku awaryjnego zatrzymania, oś rozszerzona może wyzwolić awaryjne zatrzymanie i zatrzymać się zgodnie z ustawionym opóźnieniem awaryjnego zatrzymania. Po przywróceniu alarmu kolizji, możliwe jest dalsze wysyłanie instrukcji, aby oś rozszerzona wznowiła działanie. W ustawieniach zaawansowanych należy ustawić prędkości i przyspieszenia serwa oraz awaryjne przyspieszenia i opóźnienia serwa, jak pokazano poniżej:
 
 .. figure:: robot_peripherals/134.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.7‑42 高级设置
+.. centered:: Schemat 8.7‑42 Ustawienia zaawansowane
 
-扩展轴编程
-++++++++++++++
+Programowanie osi rozszerzonej
+++++++++++++++++++++++++++++++
 
-在“示教程序”->“程序编程”中新建一个用户程序“testServo.lua”，选择“外设指令”。
+W „Program nauczania” -> „Programowanie” utwórz nowy program użytkownika „testServo.lua”. Wybierz „Instrukcje urządzeń peryferyjnych”.
 
 .. figure:: robot_peripherals/135.png
    :align: center
    :width: 6in
 
-.. centered:: 图表 8.7‑43 打开外设指令
+.. centered:: Schemat 8.7‑43 Otwarcie instrukcji urządzeń peryferyjnych
 
-点击“扩展轴”，打开添加扩展轴指令界面。选择组合方式为“控制器 + 伺服驱动器(485)”，将控制模式设为“位置模式”，点击右侧的“添加”按钮。将添加扩展轴指令界面翻到底部，点击“应用”按钮。
+Kliknij „Oś rozszerzona”, aby otworzyć interfejs dodawania instrukcji osi rozszerzonej. Wybierz typ kombinacji jako „Sterownik + serwonapęd (485)”. Ustaw tryb sterowania na „Tryb pozycyjny”. Kliknij przycisk „Dodaj” po prawej stronie. Przewiń interfejs dodawania instrukcji osi rozszerzonej na dół i kliknij przycisk „Zastosuj”.
 
 .. figure:: robot_peripherals/136.png
    :align: center
    :width: 6in
 
-.. centered:: 图表 8.7‑44 设置扩展轴的控制模式
+.. centered:: Schemat 8.7‑44 Ustawianie trybu sterowania osi rozszerzonej
 
-此时“testServo.lua”程序中即出现一组切换伺服控制模式的指令，您可以将机器人切换到自动模式，并执行该程序。
+W tym momencie w programie „testServo.lua” pojawi się zestaw instrukcji do przełączania trybu sterowania serwonapędu. Możesz przełączyć robota w tryb automatyczny i wykonać ten program.
 
 .. figure:: robot_peripherals/137.png
    :align: center
    :width: 6in
 
-.. centered:: 图表 8.7‑45 设置伺服控制模式程序
+.. centered:: Schemat 8.7‑45 Program ustawiania trybu sterowania serwonapędu
 
-如何通过用户程序控制伺服运动？同样打开添加扩展轴指令界面，如下图所示，找到参数配置栏，以位置模式为例，输入目标位置和运行速度，点击“添加”按钮；将添加扩展轴指令界面翻到底部，点击“应用”按钮，并关闭添加扩展轴指令界面。
+Jak sterować ruchem serwonapędu za pomocą programu użytkownika? Ponownie otwórz interfejs dodawania instrukcji osi rozszerzonej, jak pokazano poniżej. Znajdź sekcję konfiguracji parametrów. Na przykładzie trybu pozycyjnego, wprowadź pozycję docelową i prędkość roboczą. Kliknij przycisk „Dodaj”. Przewiń interfejs dodawania instrukcji osi rozszerzonej na dół i kliknij „Zastosuj”. Zamknij interfejs dodawania instrukcji osi rozszerzonej.
 
 .. figure:: robot_peripherals/138.png
    :align: center
    :width: 6in
 
-.. centered:: 图表 8.7‑46 增加位置模式运动指令
+.. centered:: Schemat 8.7‑46 Dodawanie instrukcji ruchu w trybie pozycyjnym
 
-“testServo.lua”程序中增加伺服运动指令：“AuxServoSetTargetPos(1,50,5)”。指令函数中的三个参数含义分别为：
+W programie „testServo.lua” dodawana jest instrukcja ruchu serwonapędu: „AuxServoSetTargetPos(1,50,5)”. Znaczenie trzech parametrów w funkcji instrukcji jest następujące:
 
-- 1：伺服编号为1。
-
-- 50：目标位置。
-
-- 5：目标速度。
+- 1: Numer serwonapędu to 1.
+- 50: Pozycja docelowa.
+- 5: Prędkość docelowa.
 
 .. figure:: robot_peripherals/139.png
    :align: center
    :width: 6in
 
-.. centered:: 图表 8.7‑47 位置模式伺服运动程序
+.. centered:: Schemat 8.7‑47 Program ruchu serwonapędu w trybie pozycyjnym
 
-将机器人切换到自动模式，运行该程序，此时您的伺服将以5mm/s的速度运动到50mm的位置。
+Przełącz robota w tryb automatyczny i uruchom ten program. Wtedy Twój serwonapęd będzie poruszał się z prędkością 5 mm/s do pozycji 50 mm.
 
-至此，我们已经完成RS485控制伺服扩展轴的初步配置和测试，您可以根据实际情况编写机器人运动与伺服运动组合的程序，如下图一个示例程序。
+W ten sposób zakończyliśmy wstępną konfigurację i test sterowania serwo osią rozszerzoną przez RS485. Możesz napisać program łączący ruch robota z ruchem serwonapędu zgodnie z rzeczywistą sytuacją. Poniżej przykładowy program.
 
-扩展轴与机械人协同运动程序示例
-*******************************
+Przykład programu współpracy osi rozszerzonej z robotem
+*******************************************************
 
 .. list-table::
    :widths: 50 80 80
    :header-rows: 0
    :align: center
 
-   * - **序号**
-     - **指令格式**
-     - **注释**
+   * - **Nr**
+     - **Format instrukcji**
+     - **Komentarz**
 
    * - 1
      - AuxServoSetTargetPos(1,50,5)
-     - #扩展轴运动到复位点
+     - # Ruch osi rozszerzonej do punktu resetu
 
    * - 2
      - if(GetDI(8,0) == 1) then
-     - #如果CI0输入有效
+     - # Jeśli wejście CI0 jest aktywne
 
    * - 3
      - AuxServoSetTargetPos(1,50,5)
-     - #扩展轴运动到50mm
+     - # Ruch osi rozszerzonej do 50 mm
 
    * - 4
      - PTP(testptp1,100,-1,0)
-     - #机器人运动到testptp1点
+     - # Ruch robota do punktu testptp1
 
    * - 5
      - elseif(GetDI(9,0) == 1) then
-     - #如果CI1输入有效
+     - # Jeśli wejście CI1 jest aktywne
 
    * - 6
      - AuxServoSetTargetPos(1,150,5)
-     - #扩展轴运动到150mm
+     - # Ruch osi rozszerzonej do 150 mm
 
    * - 7
      - PTP(testptp2,100,-1,0)
-     - #机器人运动到testptp2点
+     - # Ruch robota do punktu testptp2
 
    * - 8
      - else
-     - #若CI0和CI1输入均无效
+     - # Jeśli zarówno CI0, jak i CI1 są nieaktywne
 
    * - 9
      - AuxServoSetTargetPos(1,300,5)
-     - #扩展轴运动到300mm
+     - # Ruch osi rozszerzonej do 300 mm
 
    * - 10
      - PTP(testptp3,100,-1,0)
-     - #机器人运动到testptp3点
+     - # Ruch robota do punktu testptp3
 
    * - 11
      - end
-     - #结束
+     - # Koniec
 
-总结
-+++++++++
+Podsumowanie
+++++++++++++
 
-综上所述，配置协作机器人与伺服扩展轴RS485通讯有以下注意要点：
+Podsumowując, podczas konfiguracji komunikacji RS485 między robotem współpracującym a serwo osią rozszerzoną należy zwrócić uwagę na następujące punkty:
 
-1. 正确连接协作机器人与伺服驱动器的RS485通信线缆；
+1. Prawidłowo podłącz kabel komunikacyjny RS485 między robotem współpracującym a serwonapędem;
 
-2. 正确选择伺服扩展轴的控制模式；
+2. Wybierz prawidłowy tryb sterowania serwo osią rozszerzoną;
 
-3. 切换控制模式后，必须先去除使能，再伺服使能，控制模式切换才能生效。
+3. Po przełączeniu trybu sterowania, najpierw wyłącz serwonapęd, a następnie włącz go ponownie, aby przełączenie trybu sterowania zostało zastosowane.
 
-线激光传感器
----------------
+Czujnik lasera liniowego
+------------------------
 
-法奥协作机器人与激光传感器配合使用，通过传感器识别焊缝等特征位置以达到简化编程、提高生产效率的目的。协作机器人可适配睿牛、创想和全视三种厂商的激光传感器，使用不同传感器时只需要加载对应的通信协议即可。
+Robot współpracujący FANUC współpracuje z czujnikiem laserowym, aby identyfikować charakterystyczne pozycje, takie jak spoiny, w celu uproszczenia programowania i zwiększenia wydajności produkcji. Robot współpracujący może dostosować się do czujników laserowych trzech producentów: Rui Niu, Chuang Xiang i Quan Shi. Podczas korzystania z różnych czujników wystarczy załadować odpowiedni protokół komunikacji.
 
-硬件接线
-~~~~~~~~~~~~~
+Podłączenie sprzętu
+~~~~~~~~~~~~~~~~~~~
 
-使用激光传感器前需要将激光传感器安装于合适位置，将激光传感器的网线直接连接或通过交换机连接到机器人控制箱的任一RJ45接口。
+Przed użyciem czujnika laserowego należy zamontować go w odpowiednim miejscu. Podłącz kabel sieciowy czujnika laserowego bezpośrednio lub przez switch do dowolnego interfejsu RJ45 na szafie sterowniczej robota.
 
-传感器配置
-~~~~~~~~~~~~~
+Konfiguracja czujnika
+~~~~~~~~~~~~~~~~~~~~~
 
-请确保您的激光传感器和焊枪已经固定安装于机器人末端，激光传感器已经与机器人控制箱通过网线连接，并且激光传感器与机器人控制箱的IP地址处于同一网段，打开机器人和传感器电源，下图为睿牛激光传感器安装。
+Upewnij się, że czujnik laserowy i palnik spawalniczy są zamocowane na końcówce robota. Czujnik laserowy jest podłączony kablem sieciowym do szafy sterowniczej robota. Adresy IP czujnika laserowego i szafy sterowniczej robota znajdują się w tej samej podsieci. Włącz zasilanie robota i czujnika. Poniższy rysunek przedstawia instalację czujnika laserowego Rui Niu.
 
 .. figure:: robot_peripherals/140.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.8‑1 激光传感器安装
+.. centered:: Schemat 8.8‑1 Instalacja czujnika laserowego
 
-在通信配置栏中输入传感器的IP地址、端口号，点击“配置”按钮，采样周期默认为25，坐标系选择“激光平面坐标系”，根据您的传感器型号选择对应的通信协议，点击“加载”按钮。
+W sekcji konfiguracji komunikacji wprowadź adres IP i numer portu czujnika. Kliknij przycisk „Konfiguruj”. Domyślny okres próbkowania to 25. Wybierz układ współrzędnych jako „Układ współrzędnych płaszczyzny lasera”. Wybierz odpowiedni protokół komunikacji zgodnie z modelem czujnika. Kliknij przycisk „Załaduj”.
 
 .. figure:: robot_peripherals/141.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.8‑2 激光传感器配置
+.. centered:: Schemat 8.8‑2 Konfiguracja czujnika laserowego
 
-在“跟踪传感器测试”栏，依次点击“打开”和“关闭”传感器，观察传感器的激光是否打开或关闭，若激光正常打开或关闭则表示机器人与传感器已经正常建立通信，否则请检查IP地址和端口号等参数是否正确，以及传感器与机器人网络连接是否正确。
+W sekcji „Test czujnika śledzącego” kolejno kliknij „Włącz” i „Wyłącz” czujnik. Obserwuj, czy laser czujnika włącza się i wyłącza. Jeśli laser włącza się i wyłącza normalnie, oznacza to, że komunikacja między robotem a czujnikiem została prawidłowo nawiązana. W przeciwnym razie sprawdź, czy parametry, takie jak adres IP i numer portu, są prawidłowe, oraz czy połączenie sieciowe między czujnikiem a robotem jest prawidłowe.
 
 .. figure:: robot_peripherals/142.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.8‑3 激光传感器通讯测试
+.. centered:: Schemat 8.8‑3 Test komunikacji czujnika laserowego
 
-传感器标定
-~~~~~~~~~~~~
+Kalibracja czujnika
+~~~~~~~~~~~~~~~~~~~
 
-在使用激光传感器前需要先对激光传感器进行标定，标定精度直接影响激光传感器的跟踪精度。激光传感器的标定方法有五点法、六点法和八点法，以焊接应用场景下最常用的五点法为例，其标定原理为先通过工具（焊枪）指向一个固定标定点（如图4），再通过激光传感器从四个不同的姿态照射并识别到该点。
+Przed użyciem czujnika laserowego należy go skalibrować. Dokładność kalibracji bezpośrednio wpływa na dokładność śledzenia czujnika laserowego. Metody kalibracji czujnika laserowego to metoda pięciu punktów, metoda sześciu punktów i metoda ośmiu punktów. Na przykładzie najczęściej używanej w scenariuszach spawania metody pięciu punktów, jej zasada polega na najpierw skierowaniu narzędzia (palnika spawalniczego) na stały punkt kalibracyjny (jak na rysunku 4), a następnie naświetleniu i rozpoznaniu tego punktu przez czujnik laserowy z czterech różnych pozycji.
 
 .. note::
-  该标定点必须可以被激光传感器准确识别到，否则无法精确标定。 
+  Ten punkt kalibracyjny musi być dokładnie rozpoznawalny przez czujnik laserowy, w przeciwnym razie kalibracja nie będzie precyzyjna.
 
-进而计算出传感器坐标位姿，下面详细介绍其标定过程：
+Następnie obliczana jest pozycja i orientacja współrzędnych czujnika. Poniżej szczegółowo opisano proces kalibracji:
 
 .. figure:: robot_peripherals/143.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.8‑4 激光传感器标定点
+.. centered:: Schemat 8.8‑4 Punkt kalibracyjny czujnika laserowego
 
-**step1**：打开机器人WebApp，依次点击“初始设置”->“基础”->“工具坐标”进入工具坐标系界面。选择一个未使用的工具坐标系，点击修改其名称为“焊枪”，工具类型为“工具”，安装位置为“末端”。
+**Krok 1**: Otwórz WebApp robota, kolejno kliknij „Ustawienia początkowe” -> „Podstawowe” -> „Współrzędne narzędzia”, aby przejść do interfejsu układu współrzędnych narzędzia. Wybierz nieużywany układ współrzędnych narzędzia, kliknij, aby zmienić jego nazwę na „Palnik spawalniczy”. Ustaw typ narzędzia jako „Narzędzie”, a pozycję montażu jako „Końcówka”.
 
 .. figure:: robot_peripherals/144.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.8‑5 设置“焊枪”坐标系
+.. centered:: Schemat 8.8‑5 Ustawienie układu współrzędnych „Palnik spawalniczy”
 
-再次选择一个未使用的坐标系，将其名称修改为“激光传感器”，选择工具类型为“传感器”，安装位置为“末端”。
+Ponownie wybierz nieużywany układ współrzędnych, zmień jego nazwę na „Czujnik laserowy”. Wybierz typ narzędzia jako „Czujnik”, a pozycję montażu jako „Końcówka”.
 
 .. figure:: robot_peripherals/145.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.8‑6 设置“激光传感器”坐标系
+.. centered:: Schemat 8.8‑6 Ustawienie układu współrzędnych „Czujnik laserowy”
 
-**step2**：用六点法对焊枪的工具坐标系进行标定：选则“焊枪”坐标系，点击修改按钮，使用六点法进行焊枪工具坐标系的标定（具体标定方法参照法奥文档，本文不做赘述）。
+**Krok 2**: Skalibruj układ współrzędnych narzędzia palnika spawalniczego za pomocą metody sześciu punktów: Wybierz układ współrzędnych „Palnik spawalniczy”, kliknij przycisk modyfikacji i użyj metody sześciu punktów do kalibracji układu współrzędnych narzędzia palnika (szczegółowa metoda kalibracji znajduje się w dokumentacji FANUC, nie będzie tutaj powtarzana).
 
 .. figure:: robot_peripherals/146.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.8‑7 “焊枪”坐标系标定
+.. centered:: Schemat 8.8‑7 Kalibracja układu współrzędnych „Palnik spawalniczy”
 
-**step3**：在“工具坐标系设置”中选择0号坐标系(基座标系)，默认名称为“toolcoord0”，点击“应用”，将当前的坐标系切换为基座标系。
+**Krok 3**: W „Ustawieniach układu współrzędnych narzędzia” wybierz układ współrzędnych 0 (układ bazowy). Domyślna nazwa to „toolcoord0”. Kliknij „Zastosuj”, aby przełączyć bieżący układ współrzędnych na układ bazowy.
 
 .. figure:: robot_peripherals/147.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.8‑8 传感器标定步骤1
+.. centered:: Schemat 8.8‑8 Kalibracja czujnika krok 1
 
-**step4**：再次选择之前设置的“激光传感器”坐标系(不点击“应用”)，点击“编辑”按钮，选择工具类型为“传感器”，传感器固定在“机器人末端”，标定方法选择“五点法”。
+**Krok 4**: Ponownie wybierz wcześniej ustawiony układ współrzędnych „Czujnik laserowy” (nie klikaj „Zastosuj”). Kliknij przycisk „Edytuj”. Wybierz typ narzędzia jako „Czujnik”. Czujnik jest zamocowany na „Końcówce robota”. Wybierz metodę kalibracji jako „Metoda pięciu punktów”.
 
 .. figure:: robot_peripherals/148.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.8‑9 传感器标定步骤2
+.. centered:: Schemat 8.8‑9 Kalibracja czujnika krok 2
 
-**step5**：拖动机器人使焊枪尖端对准标定点，选择“焊枪”坐标系，点击“应用”，点击“设置点1”，如图13。
+**Krok 5**: Przeciągnij robota, aby skierować czubek palnika spawalniczego na punkt kalibracyjny. Wybierz układ współrzędnych „Palnik spawalniczy”. Kliknij „Zastosuj”. Kliknij „Ustaw punkt 1”, jak na rysunku 13.
 
 .. figure:: robot_peripherals/149.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.8‑10 传感器标定步骤3
+.. centered:: Schemat 8.8‑10 Kalibracja czujnika krok 3
 
 .. figure:: robot_peripherals/150.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.8‑11 传感器标定步骤4
+.. centered:: Schemat 8.8‑11 Kalibracja czujnika krok 4
 
-**step6**：再次选择0号坐标系（“toolcoord0”）；然后选择“传感器”坐标系（不点击“应用”），即可继续进行标定。
+**Krok 6**: Ponownie wybierz układ współrzędnych 0 („toolcoord0”). Następnie wybierz układ współrzędnych „Czujnik” (nie klikaj „Zastosuj”), aby kontynuować kalibrację.
 
 .. figure:: robot_peripherals/147.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.8‑12 传感器标定步骤5
+.. centered:: Schemat 8.8‑12 Kalibracja czujnika krok 5
 
 .. figure:: robot_peripherals/145.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.8‑13 传感器标定步骤6
+.. centered:: Schemat 8.8‑13 Kalibracja czujnika krok 6
 
-**step7**：移动激光传感器位置，使激光刚好扫描到标定点，点击“设置点2”；此时左侧的传感器输出值对应序号位置会显示当前的传感器数据，若数据正常则表示当前标定点成功，否则需要重新标定。
+**Krok 7**: Przesuń czujnik laserowy, aby laser właśnie skanował punkt kalibracyjny. Kliknij „Ustaw punkt 2”. W tym momencie wartości wyjściowe czujnika po lewej stronie, w odpowiedniej pozycji numeru sekwencji, wyświetlą bieżące dane czujnika. Jeśli dane są prawidłowe, oznacza to, że bieżący punkt kalibracyjny został pomyślnie ustawiony. W przeciwnym razie należy go ponownie skalibrować.
 
 .. figure:: robot_peripherals/151.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.8‑14 传感器标定步骤7
+.. centered:: Schemat 8.8‑14 Kalibracja czujnika krok 7
 
 .. figure:: robot_peripherals/152.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.8‑15 传感器标定步骤8
+.. centered:: Schemat 8.8‑15 Kalibracja czujnika krok 8
 
-**step8**：依次使激光再从三个不同的姿态照射标定点，并分别点击“设置点3”、“设置点4”和“设置点5”，最后在确保每个点的数据都正常的情况下，点击“计算”按钮。
+**Krok 8**: Kolejno spowoduj, aby laser naświetlił punkt kalibracyjny z trzech różnych pozycji. Kliknij odpowiednio „Ustaw punkt 3”, „Ustaw punkt 4” i „Ustaw punkt 5”. Na koniec, upewniając się, że dane dla każdego punktu są prawidłowe, kliknij przycisk „Oblicz”.
 
 .. figure:: robot_peripherals/153.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.8‑16 传感器标定步骤9
+.. centered:: Schemat 8.8‑16 Kalibracja czujnika krok 9
 
-**step9**：此时WebApp上显示传感器的标定结果和标定精度，点击“应用”按钮，即完成了激光传感器的标定。若标定精度过差，则可以选择点击“取消”按钮，并重新进行标定。
+**Krok 9**: W tym momencie WebApp wyświetla wyniki kalibracji czujnika i dokładność kalibracji. Kliknij przycisk „Zastosuj”, aby zakończyć kalibrację czujnika laserowego. Jeśli dokładność kalibracji jest zbyt niska, możesz kliknąć przycisk „Anuluj” i ponownie przeprowadzić kalibrację.
 
 .. figure:: robot_peripherals/154.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.8‑17 传感器标定精度
+.. centered:: Schemat 8.8‑17 Dokładność kalibracji czujnika
 
-激光传感器应用
-~~~~~~~~~~~~~~~~
+Zastosowanie czujnika laserowego
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-使用激光传感器前，先将“焊枪”工具坐标系应用到当前工具坐标系。
+Przed użyciem czujnika laserowego najpierw zastosuj układ współrzędnych narzędzia „Palnik spawalniczy” jako bieżący układ współrzędnych narzędzia.
 
 .. figure:: robot_peripherals/144.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.8‑18 应用焊枪坐标系
+.. centered:: Schemat 8.8‑18 Zastosowanie układu współrzędnych palnika spawalniczego
 
-激光传感器示教点
-++++++++++++++++++
+Punkty nauczania czujnika laserowego
+++++++++++++++++++++++++++++++++++++
 
-拖动机器人使激光传感器光线指向想要示教的焊缝点。在WebApp选择传感器为“激光传感器”，输入传感器点名称为“laserPt”，点击“添加”按钮。新建用户程序“testLaser.lua”，创建运动指令PTP，目标点选择“laserPt”，单步执行该指令，此时焊枪将运动到之前激光传感器的指向点。
+Przeciągnij robota, aby wiązka lasera czujnika laserowego wskazywała pożądany punkt spoiny do nauczania. W WebApp wybierz czujnik jako „Czujnik laserowy”. Wprowadź nazwę punktu czujnika jako „laserPt”. Kliknij przycisk „Dodaj”. Utwórz nowy program użytkownika „testLaser.lua”. Utwórz instrukcję ruchu PTP, wybierz punkt docelowy jako „laserPt”. Wykonaj tę instrukcję pojedynczo. W tym momencie palnik spawalniczy przesunie się do punktu wskazywanego wcześniej przez czujnik laserowy.
 
 .. figure:: robot_peripherals/155.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.8‑19 激光传感焊缝点
+.. centered:: Schemat 8.8‑19 Punkt spoiny czujnika laserowego
 
 .. figure:: robot_peripherals/156.png
    :align: center
    :width: 6in
 
-.. centered:: 图表 8.8‑20 示教传感器点
+.. centered:: Schemat 8.8‑20 Nauczanie punktu czujnika
 
 .. figure:: robot_peripherals/157.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.8‑21 焊枪指向焊缝点
+.. centered:: Schemat 8.8‑21 Palnik spawalniczy wskazujący punkt spoiny
 
-激光寻位 + 跟踪
-++++++++++++++++
+Lokalizacja laserowa + śledzenie
+++++++++++++++++++++++++++++++++
 
-协作机器人与激光传感器配合完成激光寻位 + 激光跟踪功能共需要一下几步：
+Wykonanie przez robota współpracującego funkcji lokalizacji laserowej + śledzenia laserowego wymaga następujących kroków:
 
-(1) 机器人运动到焊缝外部的某一点；
+(1) Robot przemieszcza się do pewnego punktu na zewnątrz spoiny;
 
-(2) 开始激光寻位，且机器人携带激光传感器向焊缝位置移动；
+(2) Rozpoczyna się lokalizacja laserowa, a robot z czujnikiem laserowym przemieszcza się w kierunku spoiny;
 
-(3) 激光传感器识别到焊缝，机器人带动焊枪运动到焊缝识别点；
+(3) Czujnik laserowy rozpoznaje spoinę, a robot przesuwa palnik spawalniczy do rozpoznanego punktu spoiny;
 
-(4) 激光跟踪开始，同时机器人向焊缝终点运动，激光传感器在运动过程中实时记录位置；
+(4) Rozpoczyna się śledzenie laserowe, jednocześnie robot przemieszcza się w kierunku końca spoiny, a czujnik laserowy rejestruje pozycję w czasie rzeczywistym podczas ruchu;
 
-(5) 焊枪沿激光传感器记录的位置进行运动，实现跟踪效果。
+(5) Palnik spawalniczy porusza się zgodnie z pozycjami zarejestrowanymi przez czujnik laserowy, realizując efekt śledzenia.
 
-在寻位跟踪调试前，请先确保传感器已经正确安装、“焊枪”工具坐标系已经正确标定，激光传感器也已经正确标定完成。假设图中绿色直线为待焊焊缝，使机器人实现自动寻找焊接起点A点，并自动焊接至B点，需要进行如下指令编写：
+Przed debugowaniem lokalizacji i śledzenia upewnij się, że czujnik jest prawidłowo zamocowany, układ współrzędnych narzędzia „Palnik spawalniczy” został prawidłowo skalibrowany, a czujnik laserowy również został prawidłowo skalibrowany. Zakładając, że zielona linia prosta na rysunku jest spoiną do zespawania, aby robot automatycznie znalazł punkt początkowy spawania A i automatycznie zespawał do punktu B, należy napisać następujące instrukcje:
 
 .. figure:: robot_peripherals/158.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.8‑22 传感器安装
+.. centered:: Schemat 8.8‑22 Instalacja czujnika
 
-编写寻位指令
-*************
+Pisanie instrukcji lokalizacji
+******************************
 
-新建用户程序“laserTrack.lua”，选择“焊接指令”。点击“激光跟踪”，弹出激光跟踪指令添加页面。
+Utwórz nowy program użytkownika „laserTrack.lua”. Wybierz „Instrukcje spawania”. Kliknij „Śledzenie laserowe”. Pojawi się strona dodawania instrukcji śledzenia laserowego.
 
 .. figure:: robot_peripherals/159.png
    :align: center
    :width: 6in
 
-.. centered:: 图表 8.8‑23 激光跟踪指令
+.. centered:: Schemat 8.8‑23 Instrukcja śledzenia laserowego
 
-找到“寻位命令”，选择坐标系名称为“激光传感器”，方向选择“+x”表示机器人携带激光传感器从当前位置沿“焊枪”坐标系的“+x”方向边运动边搜寻焊缝，“速度”为激光传感器寻位的移动速度，长度为激光传感器的最大寻位长度，当机器人寻位距离超出该长度仍未寻找到焊缝时机器人将报错，最大寻位时间与长度类似，超出该时间仍未找到焊缝时机器人报错。请您根据实际场景正确输入上述相关参数。依次点击“寻位开始”和“寻位结束”指令，并点击“应用”按钮。
+Znajdź „Polecenie lokalizacji”. Wybierz nazwę układu współrzędnych jako „Czujnik laserowy”. Wybór kierunku „+x” oznacza, że robot z czujnikiem laserowym będzie przemieszczał się z bieżącej pozycji w kierunku „+x” układu współrzędnych „Palnik spawalniczy”, jednocześnie szukając spoiny. „Prędkość” to prędkość ruchu czujnika laserowego podczas lokalizacji. „Długość” to maksymalna długość lokalizacji czujnika laserowego. Jeśli robot przekroczy tę długość podczas lokalizacji i nadal nie znajdzie spoiny, robot zgłosi błąd. Podobnie, „Maksymalny czas lokalizacji” – jeśli robot przekroczy ten czas i nadal nie znajdzie spoiny, zgłosi błąd. Wprowadź prawidłowo powyższe parametry zgodnie z rzeczywistym scenariuszem. Kolejno kliknij instrukcje „Rozpocznij lokalizację” i „Zakończ lokalizację”, a następnie kliknij przycisk „Zastosuj”.
 
 .. figure:: robot_peripherals/160.png
    :align: center
    :width: 6in
 
-.. centered:: 图表 8.8‑24 添加寻位指令
+.. centered:: Schemat 8.8‑24 Dodawanie instrukcji lokalizacji
 
-此时“laserTrack.lua”中将增加对应的激光寻位开始和结束的指令。
+W tym momencie do „laserTrack.lua” zostaną dodane odpowiednie instrukcje rozpoczęcia i zakończenia lokalizacji laserowej.
 
 .. figure:: robot_peripherals/161.png
    :align: center
    :width: 6in
 
-.. centered:: 图表 8.8‑25 寻位程序
+.. centered:: Schemat 8.8‑25 Program lokalizacji
 
-编写运动到寻位点指令
-*********************
+Pisanie instrukcji ruchu do punktu lokalizacji
+***********************************************
 
-添加点到点运动LIN指令，目标点为“seamPos”即激光传感器寻位点。
+Dodaj instrukcję ruchu liniowego LIN, wybierając punkt docelowy jako „seamPos”. Jest to punkt lokalizacji czujnika laserowego.
 
-.. note:: “seamPos点为机器人系统内部专用于激光传感器寻位的点位名称，不需要示教该点，激光传感器寻位后会自动将寻位点信息存入“seamPos点中”。
+.. note:: „Punkt seamPos” to nazwa punktu w systemie robota przeznaczona specjalnie do lokalizacji czujnika laserowego. Nie wymaga nauczania tego punktu. Czujnik laserowy po lokalizacji automatycznie zapisze informacje o punkcie lokalizacji w „punkcie seamPos”.
 
-寻位点可以设置偏移，偏移类型可选择“基座标系偏移”、“工具坐标系偏移”和“激光原始数据偏移”。
+Punkt lokalizacji może być przesunięty. Typy przesunięcia można wybrać jako „Przesunięcie względem układu bazowego”, „Przesunięcie względem układu narzędzia” i „Przesunięcie względem surowych danych lasera”.
 
 .. figure:: robot_peripherals/162.png
    :align: center
    :width: 6in
 
-.. centered:: 图表 8.8‑26 寻位偏移选项
+.. centered:: Schemat 8.8‑26 Opcje przesunięcia lokalizacji
 
-当启用寻位偏移功能时，可设置偏移参数，“dx”表示沿所选坐标系x方向的偏移距离，“drx”表示沿所选坐标系x轴旋转的角度。点击“添加”按钮，点击“应用”按钮。
+Gdy funkcja przesunięcia lokalizacji jest włączona, można ustawić parametry przesunięcia. „dx” oznacza odległość przesunięcia w kierunku x wybranego układu współrzędnych. „drx” oznacza kąt obrotu wokół osi x wybranego układu współrzędnych. Kliknij przycisk „Dodaj”, a następnie kliknij „Zastosuj”.
 
 .. figure:: robot_peripherals/163.png
    :align: center
    :width: 6in
 
-.. centered:: 图表 8.8‑27 寻位偏移参数设置
+.. centered:: Schemat 8.8‑27 Ustawienia parametrów przesunięcia lokalizacji
 
-此时“testTrack.lua”中将增加运动到寻位点的指令，如下图。
+W tym momencie do „testTrack.lua” zostanie dodana instrukcja ruchu do punktu lokalizacji, jak poniżej.
 
 .. figure:: robot_peripherals/164.png
    :align: center
    :width: 6in
 
-.. centered:: 图表 8.8‑28 寻位偏移程序
+.. centered:: Schemat 8.8‑28 Program przesunięcia lokalizacji
 
-编写激光跟踪指令
-******************
+Pisanie instrukcji śledzenia laserowego
+***************************************
 
-再次打开“激光跟踪”指令添加页面，依次点击“开始跟踪”和“停止跟踪”按钮，最后点击页面最下面的“应用”按钮。
+Ponownie otwórz stronę dodawania instrukcji „Śledzenie laserowe”. Kolejno kliknij przyciski „Rozpocznij śledzenie” i „Zatrzymaj śledzenie”. Na koniec kliknij przycisk „Zastosuj” na dole strony.
 
 .. figure:: robot_peripherals/165.png
    :align: center
    :width: 6in
 
-.. centered:: 图表 8.8‑29 激光跟踪开始与停止
+.. centered:: Schemat 8.8‑29 Rozpoczęcie i zatrzymanie śledzenia laserowego
 
-此时的用户程序“testTrack.lua”：
+Bieżący program użytkownika „testTrack.lua”:
 
 .. figure:: robot_peripherals/166.png
    :align: center
    :width: 6in
 
-.. centered:: 图表 8.8‑30 激光跟踪程序
+.. centered:: Schemat 8.8‑30 Program śledzenia laserowego
 
-编写寻位开始点和跟踪终点指令
-*****************************
+Pisanie instrukcji punktu początkowego lokalizacji i punktu końcowego śledzenia
+*******************************************************************************
 
-在激光寻位开始前，需要先指定一个寻位起始点，机器人先运动到寻位起始点，然后再沿一定的方向和速度进行寻位。在激光传感器光线靠近焊缝起点A点附近示教寻位开始点“seamStartPt”，注意匹配寻位起始点与寻位方向，保证机器人能在设定的距离和最大寻位时间内找到焊缝位置。
+Przed rozpoczęciem lokalizacji laserowej należy określić punkt początkowy lokalizacji. Robot najpierw przemieszcza się do punktu początkowego lokalizacji, a następnie szuka spoiny w określonym kierunku i z określoną prędkością. Naucz punkt początkowy lokalizacji „seamStartPt” w pobliżu punktu początkowego A spoiny, w miejscu, gdzie wiązka czujnika laserowego jest blisko. Upewnij się, że punkt początkowy lokalizacji i kierunek lokalizacji są zgodne, aby robot mógł znaleźć pozycję spoiny w ustawionej odległości i maksymalnym czasie lokalizacji.
 
 .. figure:: robot_peripherals/167.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.8‑31 寻位起点
+.. centered:: Schemat 8.8‑31 Punkt początkowy lokalizacji
 
-在焊缝末端示教跟踪终止点“trackEndPt”。
+Naucz punkt końcowy śledzenia „trackEndPt” na końcu spoiny.
 
 .. figure:: robot_peripherals/168.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.8‑32 寻位终点
+.. centered:: Schemat 8.8‑32 Punkt końcowy lokalizacji
 
-将上述两个点添加到“testTrack.lua”用户程序中，最终的用户程序如下：
+Dodaj powyższe dwa punkty do programu użytkownika „testTrack.lua”. Ostateczny program użytkownika jest następujący:
 
 .. figure:: robot_peripherals/169.png
    :align: center
    :width: 6in
 
-.. centered:: 图表 8.8‑33 寻位跟踪程序
+.. centered:: Schemat 8.8‑33 Program lokalizacji i śledzenia
 
-编写焊接相关指令
-*****************
+Pisanie instrukcji związanych ze spawaniem
+******************************************
 
-最后，在焊接寻位点“seampos”和“trackEndPt”之间加上焊接指令，最终的程序如下：
+Na koniec dodaj instrukcje spawania między punktem lokalizacji spawania „seampos” a punktem „trackEndPt”. Ostateczny program jest następujący:
 
 .. figure:: robot_peripherals/170.png
    :align: center
    :width: 6in
 
-.. centered:: 图表 8.8‑34 寻位跟踪焊接程序
+.. centered:: Schemat 8.8‑34 Program spawania z lokalizacją i śledzeniem
 
-执行上述程序，机器人将携带激光传感器从寻位起点开始寻位运动，寻找到焊缝后，机器人立即运动到焊缝起点，并执行起弧操作，起弧成功后，机器人向焊缝终点运动并在运动过程中跟踪焊缝轨迹，机器人运动到焊缝终点后即停止焊接。
+Wykonując powyższy program, robot z czujnikiem laserowym rozpocznie ruch lokalizacyjny od punktu początkowego lokalizacji. Po znalezieniu spoiny robot natychmiast przemieszcza się do punktu początkowego spoiny i wykonuje operację rozpoczęcia łuku. Po pomyślnym rozpoczęciu łuku, robot przemieszcza się w kierunku końca spoiny i śledzi trajektorię spoiny podczas ruchu. Po osiągnięciu końca spoiny robot zatrzymuje spawanie.
 
-激光轨迹记录 + 轨迹复现
-++++++++++++++++++++++++
+Rejestracja trajektorii laserowej + odtwarzanie trajektorii
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-激光轨迹记录+轨迹复现的工作流程为：
+Przepływ pracy rejestracji trajektorii laserowej + odtwarzania trajektorii jest następujący:
 
-(1) 机器人携带激光传感器沿焊缝运动一段轨迹，激光传感器在运动的过程中实时记录焊缝位置轨迹数据；
+(1) Robot z czujnikiem laserowym porusza się wzdłuż spoiny po określonej trajektorii. Czujnik laserowy rejestruje dane trajektorii pozycji spoiny w czasie rzeczywistym podczas ruchu;
 
-(2) 轨迹记录完成后，机器人运动至轨迹记录的起始点；
+(2) Po zakończeniu rejestracji trajektorii, robot przemieszcza się do punktu początkowego zarejestrowanej trajektorii;
 
-(3) 机器人沿激光传感记录的轨迹进行轨迹复现运动。
+(3) Robot porusza się po trajektorii zarejestrowanej przez czujnik laserowy, odtwarzając ją.
 
-机器人轨迹记录指令编写
-************************
+Pisanie instrukcji rejestracji trajektorii robota
+*************************************************
 
-新建用户程序“testRecord.lua”，点击“激光记录”打开激光记录指令添加页面，找到“焊缝数据记录”，选择“开始记录”，点击“添加”按钮，选择停止记录，再次点击“添加”按钮；最后点击“应用”按钮。
+Utwórz nowy program użytkownika „testRecord.lua”. Kliknij „Rejestracja laserowa”, aby otworzyć stronę dodawania instrukcji rejestracji laserowej. Znajdź „Rejestracja danych spoiny”. Wybierz „Rozpocznij rejestrację”, kliknij „Dodaj”. Wybierz „Zatrzymaj rejestrację”, ponownie kliknij „Dodaj”. Na koniec kliknij przycisk „Zastosuj”.
 
 .. figure:: robot_peripherals/171.png
    :align: center
    :width: 6in
 
-.. centered:: 图表 8.8‑35 激光记录
+.. centered:: Schemat 8.8‑35 Rejestracja laserowa
 
 .. figure:: robot_peripherals/172.png
    :align: center
    :width: 6in
 
-.. centered:: 图表 8.8‑36 开始记录与停止记录
+.. centered:: Schemat 8.8‑36 Rozpoczęcie i zatrzymanie rejestracji
 
-此时页面上出现轨迹记录开始和停止指令。
+Na stronie pojawią się instrukcje rozpoczęcia i zatrzymania rejestracji trajektorii.
 
 .. figure:: robot_peripherals/173.png
    :align: center
    :width: 6in
 
-.. centered:: 图表 8.8‑37 轨迹记录程序
+.. centered:: Schemat 8.8‑37 Program rejestracji trajektorii
 
-假设图中绿色线段AB为焊缝，分别使激光照射到焊缝起始点A和焊缝中断B，并示教轨迹记录的起点“recordStartPt”和终点“recordEndPt”。
+Zakładając, że zielony odcinek AB na rysunku jest spoiną, skieruj wiązkę lasera odpowiednio na punkt początkowy A spoiny i punkt przerwania B spoiny. Naucz punkt początkowy rejestracji trajektorii „recordStartPt” i punkt końcowy „recordEndPt”.
 
 .. figure:: robot_peripherals/174.png
    :align: center
@@ -4996,405 +4957,405 @@ UDP扩展轴
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.8‑38 轨迹记录起点和终点
+.. centered:: Schemat 8.8‑38 Punkt początkowy i końcowy rejestracji trajektorii
 
-在“testRecord.lua”中添加两条直线(LIN)运动指令，分别为运动到轨迹记录起点“recordStartPt”和终点“recordEndPt”，并调整指令位置，使机器人进行如下操作：先运动到“recordStartPt”点，开始轨迹记录，机器人运动到“recordEndPt”点，停止轨迹记录。
+Dodaj dwie instrukcje ruchu liniowego (LIN) do „testRecord.lua”: odpowiednio do punktu początkowego rejestracji trajektorii „recordStartPt” i punktu końcowego „recordEndPt”. Dostosuj pozycje instrukcji, aby robot wykonał następujące operacje: najpierw przemieszcza się do punktu „recordStartPt”, rozpoczyna rejestrację trajektorii, przemieszcza się do punktu „recordEndPt”, zatrzymuje rejestrację trajektorii.
 
 .. figure:: robot_peripherals/176.png
    :align: center
    :width: 6in
 
-.. centered:: 图表 8.8‑39 轨迹记录程序
+.. centered:: Schemat 8.8‑39 Program rejestracji trajektorii
 
-机器人运动到轨迹记录起点指令编写
-*********************************
+Pisanie instrukcji ruchu robota do punktu początkowego rejestracji trajektorii
+******************************************************************************
 
-点击“激光记录”打开激光记录指令添加页面，找到“运动至焊缝点”栏，选择运动方式为PTP，输入一定的运动速度，点击“运动至起点”，点击“应用”按钮。
+Kliknij „Rejestracja laserowa”, aby otworzyć stronę dodawania instrukcji rejestracji laserowej. Znajdź sekcję „Ruch do punktu spoiny”. Wybierz sposób ruchu jako PTP, wprowadź pewną prędkość ruchu. Kliknij „Ruch do punktu początkowego”, a następnie kliknij „Zastosuj”.
 
 .. figure:: robot_peripherals/177.png
    :align: center
    :width: 6in
 
-.. centered:: 图表 8.8‑40 运动至轨迹起点
+.. centered:: Schemat 8.8‑40 Ruch do punktu początkowego trajektorii
 
-此时“testRecord.lua”用户程序如下：
+W tym momencie program użytkownika „testRecord.lua” jest następujący:
 
 .. figure:: robot_peripherals/178.png
    :align: center
    :width: 6in
 
-.. centered:: 图表 8.8‑41 运动至轨迹起点程序
+.. centered:: Schemat 8.8‑41 Program ruchu do punktu początkowego trajektorii
 
-激光传感器轨迹复现指令编写
-****************************
+Pisanie instrukcji odtwarzania trajektorii czujnika laserowego
+**************************************************************
 
-点击“激光记录”打开激光记录指令添加页面，找到“焊缝数据记录”，选择“轨迹复现”，点击“添加”按钮，点击“激光跟踪复现”按钮，最后点击“应用”按钮。
+Kliknij „Rejestracja laserowa”, aby otworzyć stronę dodawania instrukcji rejestracji laserowej. Znajdź „Rejestracja danych spoiny”. Wybierz „Odtwarzanie trajektorii”, kliknij „Dodaj”. Kliknij przycisk „Odtwarzanie śledzenia laserowego”. Na koniec kliknij „Zastosuj”.
 
 .. figure:: robot_peripherals/179.png
    :align: center
    :width: 6in
 
-.. centered:: 图表 8.8‑42 轨迹复现
+.. centered:: Schemat 8.8‑42 Odtwarzanie trajektorii
 
-添加完成后的程序如下：
+Program po dodaniu jest następujący:
 
 .. figure:: robot_peripherals/180.png
    :align: center
    :width: 6in
 
-.. centered:: 图表 8.8‑43 轨迹复现程序
+.. centered:: Schemat 8.8‑43 Program odtwarzania trajektorii
 
-焊接相关指令编写
-********************
+Pisanie instrukcji związanych ze spawaniem
+******************************************
 
-最后在轨迹复现开始前和结束后加上焊接开始和焊接结束指令：
+Na koniec dodaj instrukcje rozpoczęcia i zakończenia spawania przed rozpoczęciem i po zakończeniu odtwarzania trajektorii:
 
 .. figure:: robot_peripherals/181.png
    :align: center
    :width: 6in
 
-.. centered:: 图表 8.8‑44 轨迹记录复现焊接程序
+.. centered:: Schemat 8.8‑44 Program spawania z rejestracją i odtwarzaniem trajektorii
 
-执行上述程序，机器人将携带激光传感器先沿焊缝轨迹运动，并记录整个轨迹，然后机器人运动到轨迹记录的起点，机器人起弧并沿激光传感器记录的轨迹开始焊接，当机器人轨迹复现完成后，焊接电弧熄灭，完成焊接。
+Wykonując powyższy program, robot z czujnikiem laserowym najpierw porusza się wzdłuż trajektorii spoiny, rejestrując całą trajektorię. Następnie robot przemieszcza się do punktu początkowego zarejestrowanej trajektorii. Robot rozpoczyna łuk i zaczyna spawać wzdłuż trajektorii zarejestrowanej przez czujnik laserowy. Po zakończeniu odtwarzania trajektorii, łuk spawania gaśnie, kończąc spawanie.
 
-激光传感器适配控制器外设开放协议
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Dostosowanie czujnika laserowego do otwartego protokołu urządzeń peryferyjnych sterownika
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-**Step1**：如果需要采用“开放协议连接”和“控制激光传感器”，则在传感器跟踪配置中，“协议类型”选项选择“外设开放协议”，如果采用原方案则选择“已适配设备”，在跟踪传感器界面配置加载激光外设。
+**Krok 1**: Jeśli potrzebujesz użyć „Połączenia przez otwarty protokół” i „Sterowania czujnikiem laserowym”, w konfiguracji śledzenia czujnika wybierz opcję „Typ protokołu” jako „Otwarty protokół urządzeń peryferyjnych”. Jeśli używasz oryginalnego rozwiązania, wybierz „Urządzenia dostosowane”. W interfejsie czujnika śledzącego skonfiguruj i załaduj urządzenie peryferyjne lasera.
 
 .. figure:: robot_peripherals/182.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.8‑45 “开放协议连接”和“控制激光传感器”配置界面
+.. centered:: Schemat 8.8‑45 Interfejs konfiguracji „Połączenia przez otwarty protokół” i „Sterowania czujnikiem laserowym”
 
-**Step2**：点击“外设开放协议”进入界面，在“开放协议设置”中，上传对应激光传感器的外设开放协议，上传成功后选择协议编号和上传的文件名，点击配置，并在设备操作及状态中，运行上传的激光传感器，即可和对应的激光传感器建立连接。
+**Krok 2**: Kliknij „Otwarty protokół urządzeń peryferyjnych”, aby przejść do interfejsu. W „Ustawieniach otwartego protokołu” prześlij otwarty protokół urządzeń peryferyjnych odpowiadający czujnikowi laserowemu. Po pomyślnym przesłaniu wybierz numer protokołu i nazwę przesłanego pliku. Kliknij Konfiguruj. W sekcji „Operacje i stan urządzenia” uruchom przesłany czujnik laserowy, aby nawiązać połączenie z odpowiednim czujnikiem laserowym.
 
 .. figure:: robot_peripherals/183.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.8‑46 激光传感器建立连接
+.. centered:: Schemat 8.8‑46 Nawiązywanie połączenia z czujnikiem laserowym
 
-打磨
----------------
+Szlifowanie
+------------
 
-在“初始设置”->“外设”->“打磨”界面中，当前可以通过已适配设备和外设开放协议使用打磨。
+W interfejsie „Ustawienia początkowe” -> „Urządzenia peryferyjne” -> „Szlifowanie” można obecnie używać szlifowania za pomocą „Urządzeń dostosowanych” i „Otwartego protokołu urządzeń peryferyjnych”.
 
 .. figure:: robot_peripherals/184.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.9-1 打磨状态配置页面
+.. centered:: Schemat 8.9-1 Strona konfiguracji stanu szlifowania
 
-已适配设备
-~~~~~~~~~~~~~~~~~
+Urządzenia dostosowane
+~~~~~~~~~~~~~~~~~~~~~~
 
-**通信配置与加载**: 配置通讯信息，需要配置IP地址、端口、采样周期和通信协议。通过加载/卸载按钮与打磨设备建立通信。
+**Konfiguracja i ładowanie komunikacji**: Skonfiguruj informacje komunikacyjne. Należy skonfigurować adres IP, port, okres próbkowania i protokół komunikacji. Za pomocą przycisków Załaduj / Zwolnij nawiąż komunikację z urządzeniem szlifującym.
 
 .. figure:: robot_peripherals/185.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.9-2 通信配置与加载
+.. centered:: Schemat 8.9-2 Konfiguracja i ładowanie komunikacji
 
-**设备功能**：可进行设备使能、错误清除和力传感器清零等操作。
+**Funkcje urządzenia**: Można wykonywać operacje takie jak włączanie urządzenia, czyszczenie błędów i zerowanie czujnika siły.
 
 .. figure:: robot_peripherals/186.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.9-3 设备功能
+.. centered:: Schemat 8.9-3 Funkcje urządzenia
 
-**参数配置**：可设置打磨设备的转速、接触力、伸出距离和控制模式。设置成功后，可在右侧"Polish"状态反馈栏显示相应数据和状态。
+**Konfiguracja parametrów**: Można ustawić prędkość obrotową urządzenia szlifującego, siłę kontaktu, wysunięcie i tryb sterowania. Po pomyślnym ustawieniu, odpowiednie dane i stan zostaną wyświetlone w pasku zwrotnym stanu „Polish” po prawej stronie.
 
 .. figure:: robot_peripherals/187.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.9-4 参数配置
+.. centered:: Schemat 8.9-4 Konfiguracja parametrów
 
 .. figure:: robot_peripherals/188.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.9-5 参数配置
+.. centered:: Schemat 8.9-5 Konfiguracja parametrów
 
-外设开放协议
-~~~~~~~~~~~~~~~~~
+Otwarty protokół urządzeń peryferyjnych
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-点击“外设开放协议”进入界面，在“开放协议设置”中，上传对应打磨的外设开放协议，上传成功后选择协议编号和上传的文件名，点击配置，并在设备操作及状态中，运行上传的打磨外设开放协议，即可和对应的打磨设备建立连接。
+Kliknij „Otwarty protokół urządzeń peryferyjnych”, aby przejść do interfejsu. W „Ustawieniach otwartego protokołu” prześlij otwarty protokół urządzeń peryferyjnych odpowiadający szlifowaniu. Po pomyślnym przesłaniu wybierz numer protokołu i nazwę przesłanego pliku. Kliknij Konfiguruj. W sekcji „Operacje i stan urządzenia” uruchom przesłany otwarty protokół urządzeń peryferyjnych szlifowania, aby nawiązać połączenie z odpowiednim urządzeniem szlifującym.
 
 .. figure:: robot_peripherals/189.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.9‑6 激光传感器建立连接
+.. centered:: Schemat 8.9‑6 Nawiązywanie połączenia z czujnikiem laserowym
 
-辅助传感器
--------------------
+Czujnik pomocniczy
+------------------
 
-在“初始设置”->“外设”->“辅助传感器”界面中，当前可以通过已适配设备使用，自定义协议功能暂未开放。
+W interfejsie „Ustawienia początkowe” -> „Urządzenia peryferyjne” -> „Czujnik pomocniczy” można obecnie używać go za pomocą „Urządzeń dostosowanych”. Funkcja niestandardowego protokołu nie jest jeszcze dostępna.
 
 .. figure:: robot_peripherals/190.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.10‑1 辅助传感器--已适配设备
+.. centered:: Schemat 8.10‑1 Czujnik pomocniczy -- Urządzenia dostosowane
 
-已适配设备
-~~~~~~~~~~~~~~~~~~~
+Urządzenia dostosowane
+~~~~~~~~~~~~~~~~~~~~~~
 
-点击“已适配设备”进入辅助传感器配置界面。
+Kliknij „Urządzenia dostosowane”, aby przejść do interfejsu konfiguracji czujnika pomocniczego.
 
-辅助传感器的配置信息分为厂商、类型、软件版本和挂载位置，用户可根据具体的生产需求来配置相应的辅助传感器信息。
+Informacje konfiguracyjne czujnika pomocniczego dzielą się na producenta, typ, wersję oprogramowania i lokalizację montażu. Użytkownik może skonfigurować odpowiednie informacje o czujniku pomocniczym zgodnie z konkretnymi potrzebami produkcyjnymi.
 
-若用户需要更改配置，可先选择相应的辅助传感器编号，点击“清除”按钮，来清除相应的按钮，并重新根据需求配置；
+Jeśli użytkownik chce zmienić konfigurację, może najpierw wybrać odpowiedni numer czujnika pomocniczego, kliknąć przycisk „Wyczyść”, aby wyczyścić odpowiedni przycisk, a następnie ponownie skonfigurować zgodnie z potrzebami;
 
 .. figure:: robot_peripherals/191.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.10‑2 辅助传感器--已适配设备
+.. centered:: Schemat 8.10‑2 Czujnik pomocniczy -- Urządzenia dostosowane
 
-组合设备（SmartTool+力传感器组合）
-----------------------------------------------------
+Urządzenie kombinowane (SmartTool + czujnik siły)
+-------------------------------------------------
 
-在“初始设置”->“外设”->“组合设备”界面中，当前可以通过已适配设备使用，自定义协议暂未开放。
+W interfejsie „Ustawienia początkowe” -> „Urządzenia peryferyjne” -> „Urządzenie kombinowane” można obecnie używać go za pomocą „Urządzeń dostosowanych”. Niestandardowy protokół nie jest jeszcze dostępny.
 
 .. figure:: robot_peripherals/192.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.11-1 组合设备
+.. centered:: Schemat 8.11-1 Urządzenie kombinowane
 
-已适配设备
-~~~~~~~~~~~~~~~~~~~
+Urządzenia dostosowane
+~~~~~~~~~~~~~~~~~~~~~~
 
-点击“已适配设备”进入配置界面。
+Kliknij „Urządzenia dostosowane”, aby przejść do interfejsu konfiguracji.
 
-配置信息分为厂商、类型、软件版本和挂载位置。不同厂商对应不同的类型，当前厂商为FR。
+Informacje konfiguracyjne dzielą się na producenta, typ, wersję oprogramowania i lokalizację montażu. Różni producenci odpowiadają różnym typom. Obecnym producentem jest FR.
 
-用户可根据具体的生产需求来配置相应的设备信息，配置成功后展示设备信息表格。若用户需要更改配置，可先选择相应的编号，点击“清除”按钮，来清除相应的信息，并重新根据需求配置设备信息。
+Użytkownik może skonfigurować odpowiednie informacje o urządzeniu zgodnie z konkretnymi potrzebami produkcyjnymi. Po pomyślnej konfiguracji wyświetlana jest tabela informacji o urządzeniu. Jeśli użytkownik chce zmienić konfigurację, może najpierw wybrać odpowiedni numer, kliknąć przycisk „Wyczyść”, aby wyczyścić odpowiednie informacje, a następnie ponownie skonfigurować informacje o urządzeniu zgodnie z potrzebami.
 
 .. important:: 
-  点击清除配置前，相应的设备应处于未激活状态。
+  Przed kliknięciem „Wyczyść konfigurację” odpowiednie urządzenie powinno być w stanie nieaktywnym.
 
 .. image:: robot_peripherals/193.png
    :width: 4in
    :align: center
 
-.. centered:: 图表 8.11‑2 已适配设备
+.. centered:: Schemat 8.11‑2 Urządzenia dostosowane
 
 FR
-++++++++++
+++
 
-FR对应的类型为“SmartTool ”与力传感器组合使用，协作机器人可适配鑫精诚、NSR和港智创信的三种力传感器，使用不同传感器时只需要加载对应的通信协议即可，具体如下：
+Typ odpowiadający FR to „SmartTool” używany razem z czujnikiem siły. Robot współpracujący może dostosować się do trzech typów czujników siły: Xinjingcheng, NSR i Gangzhichuangxin. Podczas korzystania z różnych czujników wystarczy załadować odpowiedni protokół komunikacji, konkretnie:
 
-- SmartTool + XJC-6F-D82（鑫精诚）。
-- SmartTool + NSR-FT Sensor A（NSR）。
-- SmartTool + GZCX-6F-75A（港智创信）。
+- SmartTool + XJC-6F-D82 (Xinjingcheng).
+- SmartTool + NSR-FT Sensor A (NSR).
+- SmartTool + GZCX-6F-75A (Gangzhichuangxin).
 
-1. 硬件安装
+1. Instalacja sprzętu
 
-1) 将SmartTool 手柄拆开，取出中间的工装，安装在机器人末端，工装安装完成后，将SmartTool手柄拼接好，拼接成功后将连接线与机器人末端连接。
+1) Rozłóż uchwyt SmartTool, wyjmij środkowe oprzyrządowanie i zamontuj je na końcówce robota. Po zamontowaniu oprzyrządowania złóż uchwyt SmartTool. Po pomyślnym złożeniu podłącz kabel łączący do końcówki robota.
 
 .. image:: robot_peripherals/194.png
    :width: 3in
    :align: center
 
-.. centered:: 图表 8.11‑3 安装SmartTool 手柄中间的工装
+.. centered:: Schemat 8.11‑3 Instalacja środkowego oprzyrządowania uchwytu SmartTool
 
 .. image:: robot_peripherals/195.png
    :width: 3in
    :align: center
 
-.. centered:: 图表 8.11‑4 SmartTool 手柄安装成功
+.. centered:: Schemat 8.11‑4 Pomyślna instalacja uchwytu SmartTool
 
-2) SmartTool手柄安装完毕后，将力传感器（以港智创信为例）安装于SmartTool手柄末端，并将连接线与SmartTool手柄连接。
+2) Po zainstalowaniu uchwytu SmartTool zamontuj czujnik siły (na przykładzie Gangzhichuangxin) na końcówce uchwytu SmartTool i podłącz kabel łączący do uchwytu SmartTool.
 
 .. image:: robot_peripherals/196.png
    :width: 3in
    :align: center
 
-.. centered:: 图表 8.11‑5 港智创信力传感器安装于SmartTool手柄末端
+.. centered:: Schemat 8.11‑5 Instalacja czujnika siły Gangzhichuangxin na końcówce uchwytu SmartTool
 
-2. 设备配置
+2. Konfiguracja urządzenia
 
-.. important:: 请确保您的SmartTool手柄已经固定安装于机器人末端并正确连接机器人末端以及力传感器已经固定安装于SmartTool手柄末端并正确连接SmartTool手柄。
+.. important:: Upewnij się, że uchwyt SmartTool jest zamocowany na końcówce robota i prawidłowo podłączony do końcówki robota, a czujnik siły jest zamocowany na końcówce uchwytu SmartTool i prawidłowo podłączony do uchwytu SmartTool.
 
-1) 配置SmartTool手柄（参考焊接手柄按键功能配置）。
+1) Skonfiguruj uchwyt SmartTool (patrz konfiguracja funkcji przycisków uchwytu spawalniczego).
 
-2) SmartTool手柄按键功能配置完成后，配置厂商为“FR”，选择“类型”、“软件版本”和“挂在位置”信息，点击“配置”按钮；
+2) Po zakończeniu konfiguracji funkcji przycisków uchwytu SmartTool skonfiguruj producenta jako „FR”. Wybierz „Typ”, „Wersję oprogramowania” i „Informacje o lokalizacji”. Kliknij przycisk „Konfiguruj”.
 
 .. image:: robot_peripherals/197.png
    :width: 4in
    :align: center
 
-.. centered:: 图表 8.11‑6 FR设备信息配置界面
+.. centered:: Schemat 8.11‑6 Interfejs konfiguracji informacji o urządzeniu FR
 
-3) 配置设备信息成功后，选择已配置的力传感器，点击“激活”按钮激活力传感器，激活成功后点击“零点矫正”按钮进行力传感器的清零，查看表格数据；
+3) Po pomyślnej konfiguracji informacji o urządzeniu wybierz skonfigurowany czujnik siły. Kliknij przycisk „Aktywuj”, aby aktywować czujnik siły. Po pomyślnej aktywacji kliknij przycisk „Korekcja zera”, aby wyzerować czujnik siły. Wyświetl dane w tabeli.
 
 .. image:: robot_peripherals/198.png
    :width: 4in
    :align: center
 
-.. centered:: 图表 8.11‑7 力传感器校零
+.. centered:: Schemat 8.11‑7 Zerowanie czujnika siły
 
-4) 根据当前末端安装，在“负载”界面配置负载数据，在“工具坐标”界面配置工具坐标的数据、工具类型和安装位置。
+4) Zgodnie z obecnym montażem końcówki, skonfiguruj dane obciążenia w interfejsie „Obciążenie”. W interfejsie „Współrzędne narzędzia” skonfiguruj dane współrzędnych narzędzia, typ narzędzia i pozycję montażu.
 
 .. image:: robot_peripherals/199.png
    :width: 4in
    :align: center
 
-.. centered:: 图表 8.11‑8 “末端负载”配置
+.. centered:: Schemat 8.11‑8 Konfiguracja „Obciążenia końcówki”
 
 .. image:: robot_peripherals/200.png
    :width: 4in
    :align: center
 
-.. centered:: 图表 8.11‑9 “工具坐标”配置
+.. centered:: Schemat 8.11‑9 Konfiguracja „Współrzędnych narzędzia”
 
-3. 应用
+3. Zastosowanie
 
-设备信息配置成功后，可以独立实现SmartTool按键功能和力传感器的功能，例如：测量力的大小及受力方向和基于力传感器的辅助拖动锁定。
+Po pomyślnej konfiguracji informacji o urządzeniu można niezależnie realizować funkcje przycisków SmartTool i funkcje czujnika siły, na przykład: pomiar wielkości siły i kierunku jej działania oraz blokowanie przeciągania wspomagane przez czujnik siły.
 
 .. image:: robot_peripherals/201.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 8.11‑10 测量力的大小及受力方向
+.. centered:: Schemat 8.11‑10 Pomiar wielkości siły i kierunku jej działania
 
-组合设备末端Lua协议
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Protokół Lua końcówki dla urządzenia kombinowanego
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-目前末端可支持两个设备的组合协议应用，可通过一分二的通信线或法奥的SmartTool485接口连接第二个设备。目前预设内嵌的组合设备协议包括：钧舵夹爪+鑫精诚力传感、钧舵夹爪+港智创新力传感器、SmartTool+钧舵夹爪、SmartTool +鑫精诚力传感器、SmartTool +港智创新力传感器。其中夹爪+力传感器的内嵌协议在“初始设置”、“外设”、“力传感器”中可选择，SmartTool+夹爪或力传感器的内嵌协议在“初始设置”、“外设”、“焊接手柄”中可选择。
+Obecnie końcówka może obsługiwać zastosowanie protokołu kombinowanego dla dwóch urządzeń. Drugie urządzenie można podłączyć za pomocą rozdzielacza komunikacyjnego 1 na 2 lub poprzez interfejs SmartTool 485 firmy FANUC. Obecnie wbudowane domyślnie protokoły urządzeń kombinowanych obejmują: Junduo chwytak + Xinjingcheng czujnik siły, Junduo chwytak + Gangzhichuangxin czujnik siły, SmartTool + Junduo chwytak, SmartTool + Xinjingcheng czujnik siły, SmartTool + Gangzhichuangxin czujnik siły. Wbudowany protokół dla chwytaka + czujnika siły można wybrać w „Ustawienia początkowe”, „Urządzenia peryferyjne”, „Czujnik siły”. Wbudowany protokół dla SmartTool + chwytak lub czujnik siły można wybrać w „Ustawienia początkowe”, „Urządzenia peryferyjne”, „Uchwyt spawalniczy”.
 
+Kroki operacyjne są następujące:
 
-操作步骤如下：
+Otwórz WebApp, kolejno kliknij „Ustawienia początkowe”, „Urządzenia peryferyjne”, wybierz jeden typ urządzenia do kombinacji (np. uchwyt spawalniczy). Wybierz „Niestandardowy protokół”. Kliknij „Zarządzanie protokołami”, aby przejść do konfiguracji protokołu końcówki.
 
-打开WebApp，依次点击“初始设置”、“外设”,选择需要组合的某一个设备类型（如焊接手柄），选择“自定义协议”。点击“协议管理”，则可以进行末端协议的配置。
-
-目前预设内嵌的组合设备协议包括：钧舵夹爪+鑫精诚力传感、SmartTool+钧舵夹爪、SmartTool +鑫精诚力传感器，组合设备预设协议属于用户自定义协议，以“Custom_End”开头，可以下载和删除，如下图所示。
+Obecnie wbudowane domyślnie protokoły urządzeń kombinowanych obejmują: Junduo chwytak + Xinjingcheng czujnik siły, SmartTool + Junduo chwytak, SmartTool + Xinjingcheng czujnik siły. Wbudowane protokoły urządzeń kombinowanych należą do niestandardowych protokołów użytkownika. Zaczynają się od „Custom_End” i można je pobierać i usuwać, jak pokazano na poniższym rysunku.
 
 .. image:: robot_peripherals/282.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 8.11‑11 焊接手柄预设内嵌协议
+.. centered:: Schemat 8.11‑11 Wbudowane domyślnie protokoły dla uchwytu spawalniczego
 
-阵列式吸盘
------------------
+Przyssawka macierzowa
+---------------------
 
-概述
-~~~~~~~~~~~~~~~~~~~~~~
-在机器人末端安装阵列式吸盘可帮助机器人快速部署不同场景的物料抓取工作站，可针对不同尺寸、形状的物料自定义吸盘数量和布局，提高工作效率和稳定性。
+Przegląd
+~~~~~~~~
 
-协作机器人支持最多20个吸盘组成的吸盘阵列，可以单独控制其中某个吸盘的抓取和释放，也可以控制当前连接的整个阵列所有吸盘同步动作。每个吸盘从站号支持1~20配置，配置基于DynamicLAB软件进行。 
+Zainstalowanie przyssawki macierzowej na końcówce robota może pomóc w szybkim wdrożeniu stanowisk do chwytania materiałów w różnych scenariuszach. Umożliwia dostosowanie liczby i rozmieszczenia przyssawek do różnych rozmiarów i kształtów materiałów, zwiększając wydajność i stabilność pracy.
 
-硬件描述
-+++++++++++++++++++++++++++++++++++++++++++
+Robot współpracujący obsługuje macierz przyssawek składającą się z maksymalnie 20 przyssawek. Można indywidualnie sterować chwytaniem i zwalnianiem każdej przyssawki, a także synchronizować działanie wszystkich przyssawek w całej podłączonej macierzy. Numer stacji podrzędnej każdej przyssawki można konfigurować w zakresie 1~20. Konfiguracja opiera się na oprogramowaniu DynamicLAB.
 
-协作机器人通过以太网转485模块与吸盘阵列进行通讯控制，在WebApp上生成阵列式吸盘通讯协议，协议将控制数据通过TCPIP发送至以太网转485模块，模块再将收到的控制数据通过485发送至各个吸盘，从而实现对阵列式吸盘的控制（上述控制数据格式为ModbusRTU协议格式）。
+Opis sprzętu
+++++++++++++
 
-其中以太网转485模块为以太网通讯的服务端、485通讯的主站，阵列中的每个吸盘均为485通讯从站，且每个吸盘应配置不同的从站号。
+Robot współpracujący komunikuje się z macierzą przyssawek poprzez moduł Ethernet na 485. Na WebApp generowany jest protokół komunikacji dla macierzy przyssawek. Protokół wysyła dane sterujące przez TCP IP do modułu Ethernet na 485, który z kolei wysyła odebrane dane sterujące przez 485 do poszczególnych przyssawek, umożliwiając w ten sposób sterowanie macierzą przyssawek (powyższy format danych sterujących to format protokołu Modbus RTU).
+
+Moduł Ethernet na 485 jest serwerem komunikacji Ethernet i masterem komunikacji 485. Każda przyssawka w macierzy jest slave'em komunikacji 485, a każda przyssawka powinna mieć skonfigurowany inny numer stacji podrzędnej.
 
 .. figure:: robot_peripherals/202.png
    :align: center
    :width: 6in
 
-.. centered:: 图表 8.12-1 协作机器人吸盘阵列夹爪应用
+.. centered:: Schemat 8.12-1 Zastosowanie przyssawki macierzowej robota współpracującego
 
-以太网转485模块通常有两个TCPServer端口对应多个485从站端口，以CH9121为例，其TCPServer端口1对应485从站端口1-10，TCPServer端口2对应485从站端口11-20。机器人与以太网转485模块建立两个TCP通信，最终分别控制20个吸盘。
+Moduł Ethernet na 485 ma zwykle dwa porty TCPServer odpowiadające wielu portom slave 485. Na przykład w CH9121, port TCPServer 1 odpowiada portom slave 485 1-10, a port TCPServer 2 odpowiada portom slave 485 11-20. Robot nawiązuje dwa połączenia TCP z modułem Ethernet na 485, aby ostatecznie sterować odpowiednio 20 przyssawkami.
 
-上述以太网转485模块需进行如下配置：
+Powyższy moduł Ethernet na 485 wymaga następującej konfiguracji:
 
-- ①以太网端配置为TCPServer，IP地址为：192.168.58.10，端口1的端口号为50001，端口2的端口号为50002；
-- ②485端配置波特率为115200，数据位8，停止位1，无校验。以太网转485模块通常会配备一个调试软件，可以在调试软件中进行上述配置，下图是CH9121型号以太网转485模块的配置工具页面：
+- ① Skonfiguruj stronę Ethernet jako TCPServer, adres IP: 192.168.58.10, numer portu dla portu 1: 50001, numer portu dla portu 2: 50002;
+- ② Skonfiguruj stronę 485 z prędkością transmisji 115200, 8 bitami danych, 1 bitem stopu, bez parzystości. Moduł Ethernet na 485 jest zwykle wyposażony w oprogramowanie debugujące, w którym można przeprowadzić powyższą konfigurację. Poniższy rysunek przedstawia stronę narzędzia konfiguracyjnego dla modułu Ethernet na 485 modelu CH9121:
 
 .. figure:: robot_peripherals/203.png
    :align: center
    :width: 6in
 
-.. centered:: 图表 8.12-2 以太网转485模块调试工具
+.. centered:: Schemat 8.12-2 Narzędzie debugowania modułu Ethernet na 485
 
-功能配置
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Konfiguracja funkcji
+~~~~~~~~~~~~~~~~~~~~
 
-打开WebApp，依次点击“初始设置”->“外设”->“阵列式吸盘”；阵列式吸盘的控制模式有单播模式和广播模式两种：
+Otwórz WebApp, kolejno kliknij „Ustawienia początkowe” -> „Urządzenia peryferyjne” -> „Przyssawka macierzowa”. Tryby sterowania przyssawką macierzową to tryb unicast i tryb broadcast:
 
-**单播模式**：通讯协议中包含对每个吸盘的通讯控制内容，可实现对阵列中的每个吸盘独立控制。
+**Tryb unicast**: Protokół komunikacji zawiera treść komunikacji sterującej dla każdej przyssawki, umożliwiając niezależne sterowanie każdą przyssawką w macierzy.
 
-**广播模式**：对阵列中的所有吸盘生成通讯协议，可同步控制阵列中所有吸盘的抓取和释放，但不能单独控制其中的某一个吸盘。
+**Tryb broadcast**: Generuje protokół komunikacji dla wszystkich przyssawek w macierzy, umożliwiając synchroniczne sterowanie chwytaniem i zwalnianiem wszystkich przyssawek w macierzy, ale nie pozwala na indywidualne sterowanie pojedynczą przyssawką.
 
-工作中可根据实际场景可仅配置单播模式，也可两种模式同时配置(既可以单独控制某个吸盘，也可以同步控制所有吸盘)。
+W zależności od rzeczywistego scenariusza można skonfigurować tylko tryb unicast lub oba tryby jednocześnie (umożliwiając zarówno indywidualne sterowanie wybraną przyssawką, jak i synchroniczne sterowanie wszystkimi przyssawkami).
 
 .. figure:: robot_peripherals/204.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.12-3 阵列吸盘控制模式
+.. centered:: Schemat 8.12-3 Tryby sterowania przyssawką macierzową
 
-单播模式配置
-++++++++++++++++++++++++++++++++++
+Konfiguracja trybu unicast
+++++++++++++++++++++++++++
 
-打开WebApp，依次点击“初始设置”->“外设”->“阵列式吸盘”->“单播模式”。单播模式协议配置方式有“自动配置”和“手动配置”两种：
+Otwórz WebApp, kolejno kliknij „Ustawienia początkowe” -> „Urządzenia peryferyjne” -> „Przyssawka macierzowa” -> „Tryb unicast”. Sposoby konfiguracji protokołu w trybie unicast to „Konfiguracja automatyczna” i „Konfiguracja ręczna”:
 
 .. figure:: robot_peripherals/205.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.12-4 单播配置模式
+.. centered:: Schemat 8.12-4 Tryb konfiguracji unicast
 
-**自动配置**：将已存在的协议文件直接上传至机器人控制器，已存在的协议文件可能来自：①其它已配置和调试完成阵列式吸盘的机器人中下载得到；②技术人员根据实际场景编写得到（用户编写协议文件可以实现更灵活、更高效的吸盘控制）。若多台设备使用相同的阵列式吸盘，通过自动配置直接上传协议的方式可以提高部署速度。
+**Konfiguracja automatyczna**: Przesłanie istniejącego pliku protokołu bezpośrednio do sterownika robota. Istniejący plik protokołu może pochodzić z: ① pobrania z innego robota z już skonfigurowaną i przetestowaną przyssawką macierzową; ② napisania przez technika zgodnie z rzeczywistym scenariuszem (pisząc plik protokołu, użytkownik może uzyskać bardziej elastyczne i wydajne sterowanie przyssawką). Jeśli wiele urządzeń używa tej samej przyssawki macierzowej, przesłanie protokołu przez konfigurację automatyczną może przyspieszyć wdrożenie.
 
-**手动配置**：根据阵列中吸盘的从站ID和真空度情况配置每个吸盘的通讯协议。手动配置操作步骤如下：
+**Konfiguracja ręczna**: Konfiguracja protokołu komunikacji dla każdej przyssawki na podstawie ID stacji podrzędnej i poziomu próżni w macierzy. Kroki konfiguracji ręcznej są następujące:
 
-选择从站号为1，输入最大真空度、最小真空度、抓取超时时间(超时时间暂未开放)，点击“配置”按钮。此时在“设备操作及状态”栏中出现协议编号为1的吸盘协议，同时在“手动配置”、“从站号”标签上会显示当前已经配置的所有从站号。
+Wybierz numer stacji podrzędnej 1. Wprowadź maksymalny poziom próżni, minimalny poziom próżni, czas timeoutu chwytania (czas timeoutu nie jest jeszcze dostępny). Kliknij przycisk „Konfiguruj”. W sekcji „Operacje i stan urządzenia” pojawi się protokół przyssawki o numerze protokołu 1. Jednocześnie na etykietach „Konfiguracja ręczna” i „Numer stacji podrzędnej” wyświetlą się wszystkie aktualnie skonfigurowane numery stacji podrzędnych.
 
 .. figure:: robot_peripherals/206.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.12-5 配置单播吸盘
+.. centered:: Schemat 8.12-5 Konfiguracja przyssawki w trybie unicast
 
-重复上述步骤，可根据需要配置多个从站号的吸盘，每配置一个吸盘，机器人系统都会自动更新“协议编号：1”对应的吸盘通讯协议内容，最多支持配置20个吸盘。所有吸盘都配置完成后，在“协议编号1”框中点击“连接”按钮，机器人与吸盘的通讯开始运行，“运行状态”指示灯亮起(注意：请先配置完成所有的从站号吸盘，再点击“连接”按钮，通讯建立后再配置吸盘从站无效)。
+Powtórz powyższe kroki, aby skonfigurować przyssawki z wieloma numerami stacji podrzędnych według potrzeb. Przy każdej konfiguracji przyssawki, system robota automatycznie aktualizuje treść protokołu komunikacji przyssawki odpowiadającego „Numerowi protokołu: 1”. Maksymalnie można skonfigurować 20 przyssawek. Po skonfigurowaniu wszystkich przyssawek kliknij przycisk „Połącz” w polu „Numer protokołu 1”. Komunikacja między robotem a przyssawkami rozpoczyna działanie, a wskaźnik „Stan działania” zaświeci się (uwaga: najpierw skonfiguruj wszystkie przyssawki z numerami stacji podrzędnych, a następnie kliknij przycisk „Połącz”. Po nawiązaniu komunikacji konfiguracja stacji podrzędnych przyssawek jest nieskuteczna).
 
-机器人与吸盘的通讯建立成功后，在“设备操作及状态”栏中出现所有配置的吸盘从站操作框列表；在每个从站号对应吸盘的操作框页面中可以进行吸盘的控制和状态监控（包括“吸取状态”、“当前真空度”、“吸盘压力”等），下图中配置的吸盘从站ID分别为2和11。
+Po pomyślnym nawiązaniu komunikacji między robotem a przyssawkami, w sekcji „Operacje i stan urządzenia” pojawi się lista pól operacyjnych dla wszystkich skonfigurowanych przyssawek. Na stronie pola operacyjnego dla przyssawki o każdym numerze stacji podrzędnej można przeprowadzać sterowanie przyssawką i monitorować jej stan (w tym „Stan chwytania”, „Bieżący poziom próżni”, „Ciśnienie przyssawki” itp.). Na poniższym rysunku skonfigurowane ID stacji podrzędnych przyssawek to odpowiednio 2 i 11.
 
 .. figure:: robot_peripherals/207.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.12-6 单播吸盘连接
+.. centered:: Schemat 8.12-6 Łączenie przyssawek w trybie unicast
 
-在从站号1吸盘的控制框右上角点击“吸取”按钮，吸盘即执行“设定真空度吸取”动作。此时“吸取”按钮变成“释放”按钮，再次点击该按钮，吸盘即执行释放动作。吸盘执行上述动作时，对应的“吸取状态”、“当前真空度”等状态项将实时显示吸盘的状态。
+W prawym górnym rogu pola sterowania przyssawką o numerze stacji podrzędnej 1 kliknij przycisk „Chwyć”. Przyssawka wykona czynność „Chwyć z ustawionym poziomem próżni”. W tym momencie przycisk „Chwyć” zmieni się na przycisk „Zwolnij”. Kliknij go ponownie, a przyssawka wykona czynność zwolnienia. Podczas wykonywania powyższych czynności przez przyssawkę, pozycje stanu, takie jak „Stan chwytania”, „Bieżący poziom próżni”, będą wyświetlać stan przyssawki w czasie rzeczywistym.
 
-.. note:: 注意：配置吸盘协议并连接完成后，需要点击一次“吸取”按钮激活该吸盘，同时也可以测试机器人与吸盘间的通讯是否正常。
-  
-若机器人与吸盘连接失败，则不会显示吸盘控制框，且“协议编号：1”中的运行状态指示灯熄灭。
+.. note:: Uwaga: Po skonfigurowaniu protokołu przyssawki i nawiązaniu połączenia, należy kliknąć przycisk „Chwyć”, aby aktywować tę przyssawkę. Jednocześnie można przetestować, czy komunikacja między robotem a przyssawką jest prawidłowa.
 
-.. note:: 注意：若使用过程中吸盘与以太网转485模块通讯物理连接断开再重新连接，可能出现协议无法建立连接的情况，此时可以拔插以太网转485模块的网线，再重新尝试连接。
+Jeśli połączenie między robotem a przyssawką nie powiedzie się, pole sterowania przyssawką nie zostanie wyświetlone, a wskaźnik stanu działania w „Numerze protokołu: 1” zgaśnie.
+
+.. note:: Uwaga: Jeśli podczas użytkowania fizyczne połączenie komunikacyjne między przyssawką a modułem Ethernet na 485 zostanie rozłączone, a następnie ponownie podłączone, może się zdarzyć, że protokół nie będzie mógł nawiązać połączenia. W takim przypadku można odłączyć i ponownie podłączyć kabel sieciowy modułu Ethernet na 485, a następnie spróbować ponownie połączyć.
 
 .. figure:: robot_peripherals/208.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.12-7 机器人与吸盘连接失败
+.. centered:: Schemat 8.12-7 Nieudane połączenie robota z przyssawką
 
-单播模式协议下载
-++++++++++++++++++++++++++++++++++++++++++
+Pobieranie protokołu w trybie unicast
++++++++++++++++++++++++++++++++++++++
 
-在“手动配置”中点击“下载”按钮，即可将吸盘协议下载到本地计算机。吸盘协议为一个循环执行的LUA程序，程序在每个循环执行如下步骤：
+Kliknij przycisk „Pobierz” w „Konfiguracji ręcznej”, aby pobrać protokół przyssawki na komputer lokalny. Protokół przyssawki to program LUA wykonywany cyklicznie. Program wykonuje następujące kroki w każdym cyklu:
 
-- ①从机器人中读取吸盘控制数据；
-- ②通过socket将控制数据写入到吸盘；
-- ③通过socket从吸盘读取状态数据；
-- ④向机器人中反馈吸盘状态数据；
+- ① Odczytuje dane sterujące przyssawką z robota;
+- ② Zapisuje dane sterujące do przyssawki przez socket;
+- ③ Odczytuje dane stanu z przyssawki przez socket;
+- ④ Przekazuje dane stanu przyssawki z powrotem do robota;
 
-吸盘通讯协议循环执行实现机器人与吸盘的通讯控制。在通讯协议中用户可自定义循环周期、控制数据寄存器地址和状态数据寄存器地址，可根据实际情况对该协议内容进行修改。以下为一个吸盘通讯协议代码示例：
+Cykliczne wykonywanie protokołu komunikacji umożliwia komunikację i sterowanie między robotem a przyssawką. W protokole komunikacji użytkownik może dostosować cykl pętli, adresy rejestrów danych sterujących i adresy rejestrów danych stanu. Może modyfikować treść tego protokołu zgodnie z rzeczywistą sytuacją. Poniżej przykładowy kod protokołu komunikacji przyssawki:
 
-吸盘协议程序示例：
+Przykładowy program protokołu przyssawki:
 
 .. code-block:: console
     :linenos:
@@ -5453,9 +5414,9 @@ FR对应的类型为“SmartTool ”与力传感器组合使用，协作机器�
       sleep_ms(100) 
     end 
 
-上述协议通过getSuckerCtrlState()指令获取吸盘控制数据，并通过ModbusRTUOverTCPWriteSingleReg()指令将控制数据通过通信写入到吸盘中，通过ModbusRTUOverTCPReadReg()指令读取吸盘的状态数据，再通过setSuckerRealtimeState()将吸盘状态数据反馈至机器人中。上述几个指令的详细定义如下：
+Powyższy protokół pobiera dane sterujące przyssawką za pomocą instrukcji getSuckerCtrlState(), zapisuje dane sterujące do przyssawki przez komunikację za pomocą instrukcji ModbusRTUOverTCPWriteSingleReg(), odczytuje dane stanu przyssawki za pomocą instrukcji ModbusRTUOverTCPReadReg(), a następnie przekazuje dane stanu przyssawki z powrotem do robota za pomocą setSuckerRealtimeState(). Szczegółowe definicje powyższych kilku instrukcji są następujące:
 
-.. centered:: 表格 8.12-1 getSuckerCtrlState()返回值
+.. centered:: Tabela 8.12-1 Wartości zwracane przez getSuckerCtrlState()
 
 .. list-table:: 
    :widths: 10 10 20 40
@@ -5463,22 +5424,22 @@ FR对应的类型为“SmartTool ”与力传感器组合使用，协作机器�
    :align: center
    :class: sheet-center
 
-   * - **序号**
-     - **类型**
-     - **变量名**
-     - **描述**
+   * - **Nr**
+     - **Typ**
+     - **Nazwa zmiennej**
+     - **Opis**
 
    * - 1
      - int
      - setAllCtrl
-     - 广播模式控制数据：1-按最大真空度吸取；2-按设置真空度吸取，即吸盘真空度保持在最大真空度和最小真空度之间；3-停止吸取
+     - Dane sterujące w trybie broadcast: 1 - chwyć z maksymalnym poziomem próżni; 2 - chwyć z ustawionym poziomem próżni, tj. poziom próżni przyssawki utrzymuje się między maksymalnym a minimalnym poziomem próżni; 3 - zatrzymaj chwytanie
 
    * - 2 ~ 21
      - int
      - ctrlValues[i]
-     - 从站号1 ~ 20对应的吸盘控制数据：1-按最大真空度吸取；2-按设置真空度吸取，即吸盘真空度保持在最大真空度和最小真空度之间；3-停止吸取
+     - Dane sterujące przyssawką odpowiadające numerom stacji podrzędnych 1 ~ 20: 1 - chwyć z maksymalnym poziomem próżni; 2 - chwyć z ustawionym poziomem próżni, tj. poziom próżni przyssawki utrzymuje się między maksymalnym a minimalnym poziomem próżni; 3 - zatrzymaj chwytanie
 
-.. centered:: 表格 8.12-2 ModbusRTUOverTCPWriteSingleReg()详细参数
+.. centered:: Tabela 8.12-2 Szczegółowe parametry ModbusRTUOverTCPWriteSingleReg()
 
 .. list-table:: 
    :widths: 10 10 20 40
@@ -5486,32 +5447,32 @@ FR对应的类型为“SmartTool ”与力传感器组合使用，协作机器�
    :align: center
    :class: sheet-center
 
-   * - **序号**
-     - **类型**
-     - **变量名**
-     - **描述**
+   * - **Nr**
+     - **Typ**
+     - **Nazwa zmiennej**
+     - **Opis**
 
    * - 1
      - int
      - socket
-     - socket句柄
+     - Uchwyt gniazda
 
    * - 2
      - int
      - slaveID
-     - 从站号 0-20；0-广播；1~20-从站号
+     - Numer stacji podrzędnej 0-20; 0 - broadcast; 1~20 - numer stacji podrzędnej
 
    * - 3
      - uint16_t
      - regAddr
-     - 写入寄存器地址
+     - Adres rejestru do zapisu
 
    * - 4
      - uint16_t
      - data
-     - 要写入的数据
+     - Dane do zapisu
 
-.. centered:: 表格 8.12-3 ModbusRTUOverTCPWriteMultiReg()详细参数
+.. centered:: Tabela 8.12-3 Szczegółowe parametry ModbusRTUOverTCPWriteMultiReg()
 
 .. list-table:: 
    :widths: 10 10 20 40
@@ -5519,37 +5480,37 @@ FR对应的类型为“SmartTool ”与力传感器组合使用，协作机器�
    :align: center
    :class: sheet-center
 
-   * - **序号**
-     - **类型**
-     - **变量名**
-     - **描述**
+   * - **Nr**
+     - **Typ**
+     - **Nazwa zmiennej**
+     - **Opis**
 
    * - 1
      - int
      - socket
-     - socket句柄
+     - Uchwyt gniazda
 
    * - 2
      - int
      - slaveID
-     - 从站号 0-20；0-广播；1~20-从站号
+     - Numer stacji podrzędnej 0-20; 0 - broadcast; 1~20 - numer stacji podrzędnej
 
    * - 3
      - uint16_t
      - regStartAddr
-     - 写入多个寄存器起始地址
+     - Początkowy adres zapisu wielu rejestrów
 
    * - 4
      - int
      - num
-     - 写入寄存器数量
+     - Liczba rejestrów do zapisu
 
    * - 5
      - uint16_t[]
      - data
-     - 要写入的数据内容数组
+     - Tablica danych do zapisu
 
-.. centered:: 表格 8.12-4 ModbusRTUOverTCPReadReg()详细参数
+.. centered:: Tabela 8.12-4 Szczegółowe parametry ModbusRTUOverTCPReadReg()
 
 .. list-table:: 
    :widths: 10 10 20 40
@@ -5557,32 +5518,32 @@ FR对应的类型为“SmartTool ”与力传感器组合使用，协作机器�
    :align: center
    :class: sheet-center
 
-   * - **序号**
-     - **类型**
-     - **变量名**
-     - **描述**
+   * - **Nr**
+     - **Typ**
+     - **Nazwa zmiennej**
+     - **Opis**
 
    * - 1
      - int
      - socket
-     - socket句柄
+     - Uchwyt gniazda
 
    * - 2
      - int
      - slaveID
-     - 从站号 0-20；0-广播；1~20-从站号
+     - Numer stacji podrzędnej 0-20; 0 - broadcast; 1~20 - numer stacji podrzędnej
 
    * - 3
      - uint16_t
      - regStartAddr
-     - 读多个寄存器起始地址
+     - Początkowy adres odczytu wielu rejestrów
 
    * - 4
      - int
      - num
-     - 读取寄存器数量
+     - Liczba rejestrów do odczytu
 
-.. centered:: 表格 8.12-5 ModbusRTUOverTCPReadReg()返回值
+.. centered:: Tabela 8.12-5 Wartości zwracane przez ModbusRTUOverTCPReadReg()
 
 .. list-table:: 
    :widths: 10 10 20 40
@@ -5590,27 +5551,27 @@ FR对应的类型为“SmartTool ”与力传感器组合使用，协作机器�
    :align: center
    :class: sheet-center
 
-   * - **序号**
-     - **类型**
-     - **变量名**
-     - **描述**
+   * - **Nr**
+     - **Typ**
+     - **Nazwa zmiennej**
+     - **Opis**
 
    * - 1
      - int
      - suckState
-     - 吸盘当前状态：0-释放物体或吸盘启动成功；1-检测到工件，吸附到物体；2-没有吸附到物体；3-物体脱离
+     - Bieżący stan przyssawki: 0 - zwolniony obiekt lub przyssawka uruchomiona pomyślnie; 1 - wykryto przedmiot, przyssawka przylega do przedmiotu; 2 - nie przylega do przedmiotu; 3 - przedmiot oderwał się
 
    * - 2
      - float
      - pressValue
-     - 当前真空度/压力
+     - Bieżący poziom próżni/ciśnienia
 
    * - 3
      - int
      - err
-     - 错误码：0-正常；其它：异常
+     - Kod błędu: 0 - normalny; inne - nieprawidłowy
 
-.. centered:: 表格 8.12-6 setSuckerRealtimeState()详细参数
+.. centered:: Tabela 8.12-6 Szczegółowe parametry setSuckerRealtimeState()
 
 .. list-table:: 
    :widths: 10 10 20 40
@@ -5618,181 +5579,181 @@ FR对应的类型为“SmartTool ”与力传感器组合使用，协作机器�
    :align: center
    :class: sheet-center
 
-   * - **序号**
-     - **类型**
-     - **变量名**
-     - **描述**
+   * - **Nr**
+     - **Typ**
+     - **Nazwa zmiennej**
+     - **Opis**
 
    * - 1
      - int
      - slaveID
-     - 从站ID
+     - ID stacji podrzędnej
 
    * - 2
      - int[]
      - states
-     - states[1]：当前状态0-释放物体或吸盘启动成功；1-检测到工件，吸附到物体；2-没有吸附到物体；3-物体脱离。
-        states[2]：当前真空度/压力；
-        states[3]：等待寄存器值；
-        states[4]：控制状态；
-        states[5]：最大真空度；
-        states[6]：最小真空度；
-        state[7]：超时时间；
-        states[8~10]：预留。
+     - states[1]: bieżący stan 0 - zwolniony obiekt lub przyssawka uruchomiona pomyślnie; 1 - wykryto przedmiot, przyssawka przylega do przedmiotu; 2 - nie przylega do przedmiotu; 3 - przedmiot oderwał się.
+        states[2]: bieżący poziom próżni/ciśnienia;
+        states[3]: oczekiwana wartość rejestru;
+        states[4]: stan sterowania;
+        states[5]: maksymalny poziom próżni;
+        states[6]: minimalny poziom próżni;
+        state[7]: czas timeoutu;
+        states[8~10]: zarezerwowane.
 
-广播模式
-++++++++++++++++++++++++++++++++++
+Tryb broadcast
+++++++++++++++
 
-协作机器人通过广播模式可以同时控制连接的所有吸盘动作。
+Robot współpracujący może jednocześnie sterować wszystkimi podłączonymi przyssawkami w trybie broadcast.
 
-.. note:: 注意：需要先配置完成单播模式，才能配置广播模式
+.. note:: Uwaga: Tryb broadcast można skonfigurować dopiero po wcześniejszym skonfigurowaniu trybu unicast.
 
-打开WebApp，依次点击“初始设置”->“外设”->“阵列式吸盘”，先在单播模式配置完成所有需要的吸盘从站(仅配置，不进行通信协议连接建立)。
+Otwórz WebApp, kolejno kliknij „Ustawienia początkowe” -> „Urządzenia peryferyjne” -> „Przyssawka macierzowa”. Najpierw skonfiguruj wszystkie potrzebne stacje podrzędne przyssawek w trybie unicast (tylko konfiguracja, bez nawiązywania połączenia protokołu komunikacyjnego).
 
-点击“广播模式”，在“参数配置”中输入吸盘的“最大真空度”、“最小真空度”、“抓取超时时间”(超时时间暂未开放)，点击“配置”按钮，此时在“设备操作及状态”框中出现广播模式通讯协议。在广播模式下，设置真空度参数对连接的每个吸盘均生效。
+Kliknij „Tryb broadcast”. W „Konfiguracji parametrów” wprowadź „Maksymalny poziom próżni”, „Minimalny poziom próżni”, „Czas timeoutu chwytania” (czas timeoutu nie jest jeszcze dostępny). Kliknij przycisk „Konfiguruj”. W tym momencie w polu „Operacje i stan urządzenia” pojawi się protokół komunikacji w trybie broadcast. W trybie broadcast, ustawione parametry poziomu próżni mają zastosowanie do każdej podłączonej przyssawki.
 
 .. figure:: robot_peripherals/209.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.12-8 广播模式参数配置
+.. centered:: Schemat 8.12-8 Konfiguracja parametrów w trybie broadcast
 
-在“协议编号1”操作框中点击“连接”按钮，“运行状态”指示灯亮起，表示机器人与阵列式吸盘已经建立通讯连接，连接成功后，所有连接的吸盘操作框列表显示在“设备操作及状态”栏中。
+W polu operacyjnym „Numer protokołu 1” kliknij przycisk „Połącz”. Wskaźnik „Stan działania” zaświeci się, co oznacza, że komunikacja między robotem a macierzą przyssawek została nawiązana. Po pomyślnym połączeniu lista pól operacyjnych wszystkich podłączonych przyssawek zostanie wyświetlona w sekcji „Operacje i stan urządzenia”.
 
-在“参数配置”->“一键吸取”中点击“开始”，阵列式吸盘中的每个吸盘即按照“设定真空度吸取”动作，点击“停止”，阵列式吸盘中的每个吸盘即停止吸取动作。
+W sekcji „Konfiguracja parametrów” -> „Chwyć jednym przyciskiem” kliknij „Rozpocznij”. Każda przyssawka w macierzy przyssawek wykona czynność „Chwyć z ustawionym poziomem próżni”. Kliknij „Zatrzymaj”, a każda przyssawka w macierzy przyssawek zatrzyma czynność chwytania.
 
 .. figure:: robot_peripherals/210.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.12-9 广播模式通信建立
+.. centered:: Schemat 8.12-9 Nawiązanie komunikacji w trybie broadcast
 
-广播模式下载协议文件与单播模式操作一致，两处下载的协议文件均可以通过单播模式页面中的“自动配置”处上传至机器人中。
+Pobieranie pliku protokołu w trybie broadcast jest takie samo jak w trybie unicast. Pliki protokołu pobrane w obu miejscach można przesłać do robota przez sekcję „Konfiguracja automatyczna” na stronie trybu unicast.
 
-阵列式吸盘LUA程序应用
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Zastosowanie programu LUA dla przyssawki macierzowej
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-在机器人LUA程序中增加阵列吸盘控制、状态获取等指令，配合机器人运动指令，可以灵活、便捷的实现物料抓取搬运应用。
+Dodając do programu LUA robota instrukcje sterowania macierzą przyssawek, pobierania stanu itp., w połączeniu z instrukcjami ruchu robota, można elastycznie i wygodnie zrealizować zastosowania chwytania i przenoszenia materiałów.
 
-打开WebApp，依次点击“示教程序”->“程序编程”，新建LUA程序“testSucker.lua”。
+Otwórz WebApp, kolejno kliknij „Program nauczania” -> „Programowanie”, utwórz nowy program LUA „testSucker.lua”.
 
 .. figure:: robot_peripherals/211.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.12-10 新建“testSucker.lua”程序
+.. centered:: Schemat 8.12-10 Tworzenie nowego programu „testSucker.lua”
 
-选择指令类型为“外设指令”，在外设指令中点击“吸盘”按钮。此时在WebApp右侧出现“Sucker”阵列式吸盘指令添加页面。
+Wybierz typ instrukcji jako „Instrukcje urządzeń peryferyjnych”. W instrukcjach urządzeń peryferyjnych kliknij przycisk „Przyssawka”. W tym momencie po prawej stronie WebApp pojawi się strona dodawania instrukcji dla macierzy przyssawek „Sucker”.
 
 .. figure:: robot_peripherals/212.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.12-11 阵列式吸盘指令添加
+.. centered:: Schemat 8.12-11 Dodawanie instrukcji dla macierzy przyssawek
 
-吸盘控制指令添加
-+++++++++++++++++++++++++++++++++++++++++++
+Dodawanie instrukcji sterowania przyssawką
+++++++++++++++++++++++++++++++++++++++++++
 
-在LUA程序中编写吸盘控制指令可以对吸盘进行吸取控制和释放控制。单播模式和广播模式的控制有不同的逻辑效果。
+Pisząc instrukcje sterowania przyssawką w programie LUA, można kontrolować chwytanie i zwalnianie przyssawki. Sterowanie w trybie unicast i trybie broadcast ma różne efekty logiczne.
 
-单播模式控制指令添加
-***********************************************************
+Dodawanie instrukcji sterowania w trybie unicast
+************************************************
 
-单播模式控制可以根据从站起始地址和数量进行单个或多个吸盘控制，可为每个吸盘设置不同的控制状态。
+Sterowanie w trybie unicast umożliwia sterowanie pojedynczą lub wieloma przyssawkami na podstawie początkowego numeru stacji podrzędnej i ich liczby. Każdej przyssawce można ustawić inny stan sterowania.
 
-在吸盘指令添加页面中点击“吸盘控制指令”，选择控制模式为“单播模式”，输入从站号为1，写入数量为2，吸取状态为“1,2”。点击“添加”按钮，即在“程序预览”中添加一条单播模式的吸盘控制指令。
+Na stronie dodawania instrukcji przyssawki kliknij „Instrukcja sterowania przyssawką”. Wybierz tryb sterowania jako „Tryb unicast”. Wprowadź numer stacji podrzędnej 1, liczbę do zapisu 2, stan chwytania „1,2”. Kliknij przycisk „Dodaj”. W „Podglądzie programu” zostanie dodana instrukcja sterowania przyssawką w trybie unicast.
 
 .. figure:: robot_peripherals/213.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.12-12 添加吸盘控制指令
+.. centered:: Schemat 8.12-12 Dodawanie instrukcji sterowania przyssawką
 
-吸盘控制指令中的各参数含义如下：
+Znaczenie poszczególnych parametrów w instrukcji sterowania przyssawką jest następujące:
 
-- **从站号**：单播模式控制吸盘起始从站号。
-- **写入数量**：单播模式控制从起始从站号开始要控制的吸盘数量。
-- **吸取状态**：单播模式从起始从站号开始，每个吸盘的控制状态标志（1-按最大真空度吸取；2-按设置真空度吸取，即吸盘真空度保持在最大真空度和最小真空度之间；3-停止吸取）；其中每个吸盘的控制状态标志通过“,”分割，且控制标志个数与要控制的吸盘个数要一致；若要控制两个吸盘，其控制操作分别按“最大真空度吸取”和“设置真空度吸取”，则该项输入内容为“1,2”。
+- **Numer stacji podrzędnej**: Początkowy numer stacji podrzędnej dla sterowania w trybie unicast.
+- **Liczba do zapisu**: Liczba przyssawek do sterowania od początkowego numeru stacji podrzędnej w trybie unicast.
+- **Stan chwytania**: Począwszy od początkowego numeru stacji podrzędnej w trybie unicast, flagi stanu sterowania dla każdej przyssawki (1 - chwyć z maksymalnym poziomem próżni; 2 - chwyć z ustawionym poziomem próżni, tj. poziom próżni przyssawki utrzymuje się między maksymalnym a minimalnym poziomem próżni; 3 - zatrzymaj chwytanie). Flagi stanu sterowania dla każdej przyssawki są oddzielone przecinkiem „,”, a liczba flag sterowania musi być zgodna z liczbą przyssawek do sterowania. Jeśli chcesz sterować dwiema przyssawkami, a ich operacje sterowania to odpowiednio „chwyć z maksymalnym poziomem próżni” i „chwyć z ustawionym poziomem próżni”, to w tej pozycji należy wprowadzić „1,2”.
 
-点击“应用”按钮，此时“testSucker.lua”程序中即添加一条吸盘控制指令，将机器人切换至自动模式，执行该LUA程序，机器人将控制从站号分别为1和2的两个吸盘分别按最大真空度和设定真空度进行吸取动作。
+Kliknij przycisk „Zastosuj”. W tym momencie do programu „testSucker.lua” zostanie dodana instrukcja sterowania przyssawką. Przełącz robota w tryb automatyczny i wykonaj program LUA. Robot będzie sterować dwiema przyssawkami o numerach stacji podrzędnych odpowiednio 1 i 2, aby chwytały odpowiednio z maksymalnym poziomem próżni i ustawionym poziomem próżni.
 
 .. figure:: robot_peripherals/214.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.12-13 LUA程序中添加吸盘指令
+.. centered:: Schemat 8.12-13 Dodawanie instrukcji przyssawki w programie LUA
 
-广播模式控制指令添加
-***********************************************************
+Dodawanie instrukcji sterowania w trybie broadcast
+**************************************************
 
-广播模式控制指令设置的吸取状态对当前连接的所有吸盘生效。
+Stan chwytania ustawiony w instrukcji sterowania w trybie broadcast ma zastosowanie do wszystkich aktualnie podłączonych przyssawek.
 
-点击“吸盘控制指令”，选择控制模式为“广播模式”，输入吸取状态为1（按最大真空度吸取）。点击“添加”按钮。
+Kliknij „Instrukcja sterowania przyssawką”. Wybierz tryb sterowania jako „Tryb broadcast”. Wprowadź stan chwytania 1 (chwyć z maksymalnym poziomem próżni). Kliknij przycisk „Dodaj”.
 
 .. figure:: robot_peripherals/215.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.12-14 添加一条广播控制指令
+.. centered:: Schemat 8.12-14 Dodawanie instrukcji sterowania w trybie broadcast
 
-点击“应用”按钮，此时“testSucker.lua”中即添加一条广播模式吸盘控制指令。将机器人切换到自动模式，执行该程序，则连接的所有吸盘均开始按最大真空度吸取动作。
+Kliknij przycisk „Zastosuj”. W tym momencie do „testSucker.lua” zostanie dodana instrukcja sterowania przyssawką w trybie broadcast. Przełącz robota w tryb automatyczny i wykonaj ten program. Wszystkie podłączone przyssawki rozpoczną chwytanie z maksymalnym poziomem próżni.
 
 .. figure:: robot_peripherals/216.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.12-15 在LUA程序中添加一条广播控制指令
+.. centered:: Schemat 8.12-15 Dodawanie instrukcji sterowania w trybie broadcast w programie LUA
 
-吸盘状态获取指令添加
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Dodawanie instrukcji pobierania stanu przyssawki
+++++++++++++++++++++++++++++++++++++++++++++++++
 
-点击“获取吸盘状态”，选择要获取状态吸盘的从站号，依次点击“添加”、“应用”按钮。即在“testSucker.lua”中添加一条获取吸盘状态的指令“GetSuckerState(1)”。
+Kliknij „Pobierz stan przyssawki”. Wybierz numer stacji podrzędnej przyssawki, z której chcesz pobrać stan. Kolejno kliknij „Dodaj”, „Zastosuj”. W „testSucker.lua” zostanie dodana instrukcja pobierania stanu przyssawki „GetSuckerState(1)”.
 
 .. figure:: robot_peripherals/217.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.12-16 添加获取吸盘状态指令
+.. centered:: Schemat 8.12-16 Dodawanie instrukcji pobierania stanu przyssawki
 
-GetSuckerState()指令返回3个数值，分别如下：
+Instrukcja GetSuckerState() zwraca 3 wartości, odpowiednio:
 
-- **state**：吸盘当前状态：0-释放物体或吸盘启动成功；1-检测到工件，吸附到物体；2-没有吸附到物体；3-物体脱离。
-- **pressValue**：当前真空度/压力；
-- **err**：错误码：0-正常；其它：异常。
+- **state**: Bieżący stan przyssawki: 0 - zwolniony obiekt lub przyssawka uruchomiona pomyślnie; 1 - wykryto przedmiot, przyssawka przylega do przedmiotu; 2 - nie przylega do przedmiotu; 3 - przedmiot oderwał się.
+- **pressValue**: Bieżący poziom próżni/ciśnienia;
+- **err**: Kod błędu: 0 - normalny; inne - nieprawidłowy.
 
-在“testSucker.lua”中用三个变量接收GetSuckerState()函数的返回值。并通过Lua变量查询将上述信息显示在WebApp变量查询显示区中。
+W „testSucker.lua” użyj trzech zmiennych do odbioru wartości zwracanych przez funkcję GetSuckerState(). Poprzez zapytanie o zmienną Lua wyświetl powyższe informacje w obszarze wyświetlania zapytań o zmienne w WebApp.
 
 .. figure:: robot_peripherals/218.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.12-17 获取吸盘状态程序
+.. centered:: Schemat 8.12-17 Program pobierania stanu przyssawki
 
-等待吸盘吸附状态指令添加
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Dodawanie instrukcji oczekiwania na stan chwytania przyssawki
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-阵列式吸盘实际场景应用中常需要等待吸盘吸取(释放)完成后再执行下一动作。协作机器人提供等待吸盘动作完成指令，当吸盘达到设定状态时指令执行结束，否则在设定超时时间内一直阻塞等待吸盘动作完成。
+W praktycznych zastosowaniach macierzy przyssawek często konieczne jest oczekiwanie na zakończenie chwytania (zwalniania) przez przyssawkę przed wykonaniem następnej czynności. Robot współpracujący udostępnia instrukcję oczekiwania na zakończenie działania przyssawki. Gdy przyssawka osiągnie ustawiony stan, instrukcja kończy się. W przeciwnym razie blokuje i czeka na zakończenie działania przyssawki przez ustawiony czas timeoutu.
 
-在阵列式吸盘指令添加页面中点击“等待吸盘吸附状态”，选择吸盘对应的从站号1，选择控制模式为“检测到工件，吸附到物体”，输入超时时间为10000ms。点击“添加”按钮。
+Na stronie dodawania instrukcji macierzy przyssawek kliknij „Oczekiwanie na stan chwytania przyssawki”. Wybierz numer stacji podrzędnej przyssawki 1. Wybierz tryb sterowania jako „Wykryto przedmiot, przyssawka przylega do przedmiotu”. Wprowadź czas timeoutu 10000 ms. Kliknij przycisk „Dodaj”.
 
 .. figure:: robot_peripherals/219.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.12-18 等待吸盘状态指令添加
+.. centered:: Schemat 8.12-18 Dodawanie instrukcji oczekiwania na stan przyssawki
 
-点击“应用”按钮，“testSucker.lua”中即添加一条等待吸盘吸取到物体的指令。
+Kliknij przycisk „Zastosuj”. Do „testSucker.lua” zostanie dodana instrukcja oczekiwania na przyssanie się przyssawki do przedmiotu.
 
 .. figure:: robot_peripherals/220.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.12-19 LUA程序中添加等待吸盘吸取到物体
+.. centered:: Schemat 8.12-19 Dodawanie instrukcji oczekiwania na przyssanie się przyssawki do przedmiotu w programie LUA
 
-应用示例
-++++++++++++++++++++++++++++++++++
+Przykład zastosowania
++++++++++++++++++++++
 
-吸盘搬运控制LUA程序示例：
+Przykład programu LUA do sterowania przenoszeniem za pomocą przyssawki:
 
 .. code-block:: console
   :linenos:
@@ -5866,25 +5827,25 @@ GetSuckerState()指令返回3个数值，分别如下：
   end
   end 
 
-基于FOCAS的CNC功能包（仅在Linux系统下使用）
--------------------------------------------------
+Pakiet funkcji CNC oparty na FOCAS (tylko do użytku w systemie Linux)
+---------------------------------------------------------------------
 
-概述
-~~~~~~~~~~~~~
+Przegląd
+~~~~~~~~
 
-为了在机床加工中，实现自动化上下料流程，开发了基于FOCAS通信的CNC功能包，可实现协作机器人与CNC机床的通信交互与协同运动。
+Aby zautomatyzować proces załadunku i rozładunku w obróbce skrawaniem, opracowano pakiet funkcji CNC oparty na komunikacji FOCAS, który umożliwia komunikację i współpracę robota współpracującego z obrabiarką CNC.
 
-如图所示，FOCAS通信是基于以太网的，通过网线连接机器人控制箱网口与机床内嵌网口，即可建立机器人与机床的FOCAS通信，实现在机器人端的CNC控制和机床状态监控。
+Jak pokazano na rysunku, komunikacja FOCAS opiera się na Ethernet. Podłączając kabel sieciowy do portu sieciowego szafy sterowniczej robota i wbudowanego portu sieciowego obrabiarki, można nawiązać komunikację FOCAS między robotem a obrabiarką, umożliwiając sterowanie CNC i monitorowanie stanu obrabiarki z poziomu robota.
 
 .. figure:: robot_peripherals/221.png
    :align: center
    :width: 6in
 
-.. centered:: 图表 8.13‑1 机器人与CNC的FOCAS通信拓扑图
+.. centered:: Schemat 8.13‑1 Topologia komunikacji FOCAS między robotem a CNC
 
-目前控制箱基于FOCAS通信的CNC功能包支持的机床控制、状态反馈的功能如表所示。
+Obecnie pakiet funkcji CNC oparty na komunikacji FOCAS w szafie sterowniczej obsługuje funkcje sterowania obrabiarką i sprzężenia zwrotnego stanu, jak pokazano w tabeli.
 
-.. centered:: 表格 8.13-1 基于FOCAS通信的CNC功能包支持的功能表
+.. centered:: Tabela 8.13-1 Tabela funkcji obsługiwanych przez pakiet funkcji CNC oparty na komunikacji FOCAS
 
 .. list-table:: 
    :widths: 15 40 100
@@ -5892,62 +5853,62 @@ GetSuckerState()指令返回3个数值，分别如下：
    :align: center
    :class: sheet-center
 
-   * - **序号**
-     - **功能名称**
-     - **说明**
+   * - **Nr**
+     - **Nazwa funkcji**
+     - **Opis**
    * - 1
-     - 机床类型
-     - 状态反馈
+     - Typ obrabiarki
+     - Sprzężenie zwrotne stanu
    * - 2
-     - FOCAS通信状态
-     - 状态反馈
+     - Stan komunikacji FOCAS
+     - Sprzężenie zwrotne stanu
    * - 3
-     - 自动模式运行
-     - 控制、状态反馈
+     - Działanie w trybie automatycznym
+     - Sterowanie, sprzężenie zwrotne stanu
    * - 4
-     - 报警状态
-     - 状态反馈
+     - Stan alarmu
+     - Sprzężenie zwrotne stanu
    * - 5
-     - 安全门
-     - 状态反馈
+     - Drzwi bezpieczeństwa
+     - Sprzężenie zwrotne stanu
    * - 6
-     - 卡盘
-     - 控制、状态反馈
+     - Uchwyt
+     - Sterowanie, sprzężenie zwrotne stanu
    * - 7
-     - 急停
-     - 控制、状态反馈
-  
-相关操作说明
-~~~~~~~~~~~~~~~~~~~~~~
+     - Awaryjne zatrzymanie
+     - Sterowanie, sprzężenie zwrotne stanu
 
-FOCAS通信建立
-+++++++++++++++++++
+Powiązane instrukcje obsługi
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-FOCAS通信是基于以太网，需要将机器人、CNC机床、PC端电脑组成局域网实现物理链路衔接，并通过机器人开放协议实现最终FOCAS的通信建立。
+Nawiązanie komunikacji FOCAS
+++++++++++++++++++++++++++++
 
-网络配置
-*************************
+Komunikacja FOCAS opiera się na Ethernet. Należy połączyć robota, obrabiarkę CNC i komputer PC w sieć LAN, aby zrealizować fizyczne połączenie, a następnie za pomocą otwartego protokołu robota ostatecznie nawiązać komunikację FOCAS.
 
-**Step1**：首先将PC端电脑IP地址改为和机器人控制箱同一网段，机器人控制箱的IP地址为"192.168.58.2"。
+Konfiguracja sieci
+******************
 
-如果没有交换机组网，可以用机器人控制箱上自带的两个网口进行组网，操作如下：登录机器人的WebAPP，在系统设置->通用设置->网络设置中，设置网口0的IP为：192.168.58.2；网口1的IP为192.168.57.2。同时设置WebAPP为网口0，WebRecovery为网口1，如图所示。完成全部设置后点击设置网络。
+**Krok 1**: Najpierw zmień adres IP komputera PC na tę samą podsieć, co szafa sterownicza robota. Adres IP szafy sterowniczej robota to „192.168.58.2”.
+
+Jeśli nie ma sieci z przełącznikiem, możesz użyć dwóch wbudowanych portów sieciowych na szafie sterowniczej robota do zbudowania sieci. Operacja jest następująca: Zaloguj się do WebAPP robota. W Ustawienia systemowe -> Ustawienia ogólne -> Ustawienia sieciowe, ustaw IP dla portu 0 na: 192.168.58.2; IP dla portu 1 na 192.168.57.2. Jednocześnie ustaw WebAPP na port 0, a WebRecovery na port 1, jak pokazano na rysunku. Po zakończeniu wszystkich ustawień kliknij Ustaw sieć.
 
 .. figure:: robot_peripherals/222.png
    :align: center
    :width: 6in
 
-.. centered:: 图表 8.13‑2 机器人网络配置图
+.. centered:: Schemat 8.13‑2 Rysunek konfiguracji sieci robota
 
-**Step2**：接着重启控制箱，并通过网卡0网口与PC端相连，登录机器人WebApp。同时配置需要通信的CNC机床的IP地址和PC端、机器人控制箱为同一个网段，即192.168.58.xx，同时机床的端口改为8193。即可完成所有网络配置。
+**Krok 2**: Następnie zrestartuj szafę sterowniczą. Połącz się z komputerem PC przez port sieciowy 0 i zaloguj się do WebApp robota. Jednocześnie skonfiguruj adres IP obrabiarki CNC, z którą ma być prowadzona komunikacja, oraz komputera PC i szafy sterowniczej robota, aby znajdowały się w tej samej podsieci, czyli 192.168.58.xx. Zmień także port obrabiarki na 8193. To kończy całą konfigurację sieci.
 
-开放协议文件配置
-*************************
+Konfiguracja pliku otwartego protokołu
+**************************************
 
-**Step1**：随后进行外设开放协议配置，首先需要新建一个以CtrlDev_CNC命名开头的lua文件作为建立FOCAS通信的开放协议文件，如CtrlDev_CNC_demo.lua。
+**Krok 1**: Następnie przystąp do konfiguracji otwartego protokołu urządzeń peryferyjnych. Najpierw utwórz nowy plik lua o nazwie zaczynającej się od CtrlDev_CNC, który będzie służyć jako plik otwartego protokołu do nawiązania komunikacji FOCAS, np. CtrlDev_CNC_demo.lua.
 
-该文件中需要设置开放协议ID，并通过CNCComSet函数与CNC建立或断开连接。其中CNCComSet函数参数说明见下表。实例代码如下。
+W tym pliku należy ustawić ID otwartego protokołu i użyć funkcji CNCComSet do nawiązania lub zerwania połączenia z CNC. Opis parametrów funkcji CNCComSet znajduje się w poniższej tabeli. Przykładowy kod znajduje się poniżej.
 
-.. centered:: 表格 8.13-2 CNCComSet函数参数说明表
+.. centered:: Tabela 8.13-2 Tabela opisu parametrów funkcji CNCComSet
 
 .. list-table:: 
    :widths: 15 40 100
@@ -5955,68 +5916,68 @@ FOCAS通信是基于以太网，需要将机器人、CNC机床、PC端电脑组�
    :align: center
    :class: sheet-center
 
-   * - **序号**
-     - **功能名称**
-     - **说明**
+   * - **Nr**
+     - **Nazwa funkcji**
+     - **Opis**
    * - 1
-     - 机床厂商
-     - 0-无效 1-机床（FOCAS）
+     - Producent obrabiarki
+     - 0-nieważne 1-obrabiarka (FOCAS)
    * - 2
-     - 通信指令
-     - 1-建立连接 1001-断开连接
+     - Instrukcja komunikacji
+     - 1-nawiąż połączenie 1001-zerwij połączenie
    * - 3
-     - 机床IP地址
+     - Adres IP obrabiarki
      - --
    * - 4
-     - 机床端口号
+     - Numer portu obrabiarki
      - --
 
-FOCAS通信建立连接开放协议实例代码：
+Przykładowy kod otwartego protokołu do nawiązywania komunikacji FOCAS:
 
 .. code-block:: console
     :linenos:
 
-    local id = 1      --开放LUA协议ID
-    --FOCAS断开连接
+    local id = 1      --ID otwartego protokołu LUA
+    --Zerwanie połączenia FOCAS
     CNCComSet(1, 1001, '192.168.57.100', 8193)
     sleep_ms(1000)
-    --FOCAS建立连接
+    --Nawiązanie połączenia FOCAS
     CNCComSet(1, 1, '192.168.57.100', 8193)
     sleep_ms(1000)
     while(1) do
     sleep_ms(5000)
     end
 
-**Step2**：完成开放协议lua文件的编写，选择刚刚的CtrlDev_CNC_fanuc.lua文件并上传，选择文件中设置的ID，下拉选择上传的开放协议文件并点击配置。
+**Krok 2**: Po zakończeniu pisania pliku lua otwartego protokołu wybierz właśnie przesłany plik CtrlDev_CNC_fanuc.lua i prześlij go. Wybierz ID ustawione w pliku, wybierz z listy rozwijanej przesłany plik otwartego protokołu i kliknij Konfiguruj.
 
 .. figure:: robot_peripherals/223.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.13‑3 开放协议文件上传与配置
+.. centered:: Schemat 8.13‑3 Przesyłanie i konfiguracja pliku otwartego protokołu
 
-**Step3**：随后检查所有通信链路正常，并确认CNC机床处于开机状态，点击开放协议中的连接按钮，通过右侧的状态反馈栏中的CNC->FOCAS通信状态可确认是否与机床建立连接（红灯：建立连接；灰色：断开连接），如图所示。
+**Krok 3**: Następnie sprawdź, czy wszystkie łącza komunikacyjne są prawidłowe i upewnij się, że obrabiarka CNC jest włączona. Kliknij przycisk połączenia w otwartym protokole. Poprzez stan komunikacji FOCAS w sekcji sprzężenia zwrotnego stanu po prawej stronie możesz potwierdzić, czy połączenie z obrabiarką zostało nawiązane (czerwone światło: połączenie nawiązane; szare: połączenie zerwane), jak pokazano na rysunku.
 
 .. figure:: robot_peripherals/224.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.13‑4 FOCAS通信连接建立 
+.. centered:: Schemat 8.13‑4 Nawiązanie połączenia komunikacji FOCAS
 
-CNC状态反馈说明
-++++++++++++++++++++++++++
+Opis sprzężenia zwrotnego stanu CNC
++++++++++++++++++++++++++++++++++++
 
-CNC机床的状态反馈显示在WebAPP最右侧的外设状态反馈的CNC外形图标，如图所示。点击则会显示当前机床全部的状态，包括设备厂商、机床类型、FOCAS通信状态、报警标志、机床运行加工状态、机床门开关状态、机床卡盘状态、机床急停状态。
+Stan obrabiarki CNC jest wyświetlany w ikonie CNC w sekcji sprzężenia zwrotnego stanu urządzeń peryferyjnych po prawej stronie WebApp, jak pokazano na rysunku. Kliknięcie jej spowoduje wyświetlenie wszystkich bieżących stanów obrabiarki, w tym producenta urządzenia, typu obrabiarki, stanu komunikacji FOCAS, flagi alarmu, stanu obróbki obrabiarki, stanu otwarcia drzwi obrabiarki, stanu uchwytu obrabiarki i stanu awaryjnego zatrzymania obrabiarki.
 
 .. figure:: robot_peripherals/225.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.13‑5 CNC状态反馈栏 
+.. centered:: Schemat 8.13‑5 Pasek sprzężenia zwrotnego stanu CNC
 
-CNC各状态反馈显示灯的含义如下表所示。
+Znaczenie lampek wskaźników stanu CNC jest następujące.
 
-.. centered:: 表格 8.13-3 CNC状态反馈图标灯含义表
+.. centered:: Tabela 8.13-3 Tabela znaczenia lampek wskaźników stanu CNC
 
 .. list-table:: 
    :widths: 15 40 100
@@ -6024,57 +5985,57 @@ CNC各状态反馈显示灯的含义如下表所示。
    :align: center
    :class: sheet-center
 
-   * - **序号**
-     - **功能名称**
-     - **说明**
+   * - **Nr**
+     - **Nazwa funkcji**
+     - **Opis**
    * - 1
-     - FOCAS通信状态
-     - 灰色-通信断开 红色-通信正常
+     - Stan komunikacji FOCAS
+     - Szary - komunikacja zerwana Czerwony - komunikacja prawidłowa
    * - 2
-     - 报警标志
-     - 灰色-无警告 红色-存在警告
+     - Flaga alarmu
+     - Szary - brak ostrzeżenia Czerwony - istnieje ostrzeżenie
    * - 3
-     - 机床运行加工状态
-     - 灰色-停机 绿色-运行中
+     - Stan obróbki obrabiarki
+     - Szary - zatrzymana Zielony - w trakcie pracy
    * - 4
-     - 机床门开关状态
-     - 灰色-关门 绿色-开门
+     - Stan otwarcia drzwi obrabiarki
+     - Szary - drzwi zamknięte Zielony - drzwi otwarte
    * - 5
-     - 机床卡盘状态
-     - 灰色-松开 绿色-夹紧
+     - Stan uchwytu obrabiarki
+     - Szary - zwolniony Zielony - zaciśnięty
    * - 6
-     - 机床急停状态
-     - 灰色-急停无效 绿色-急停生效
+     - Stan awaryjnego zatrzymania obrabiarki
+     - Szary - awaryjne zatrzymanie nieaktywne Zielony - awaryjne zatrzymanie aktywne
 
-CNC状态反馈说明
-++++++++++++++++++++++++++
+Opis sprzężenia zwrotnego stanu CNC
++++++++++++++++++++++++++++++++++++
 
-CNC机床的控制位于外设开放协议中，当完成FOCAS通信连接后，点击所配置的外设开放协议右上角，则可打开CNC的控制页面，如图所示。
+Sterowanie obrabiarką CNC znajduje się w otwartym protokole urządzeń peryferyjnych. Po zakończeniu nawiązywania komunikacji FOCAS, kliknięcie w prawym górnym rogu skonfigurowanego otwartego protokołu urządzeń peryferyjnych spowoduje otwarcie strony sterowania CNC, jak pokazano na rysunku.
 
-.. note:: 其中控制按钮包括门控制（开门、关门），卡盘控制（夹紧、松开），启停控制（运行、停止），急停控制（急停、无效）。所有的控制信号都是边沿信号触发控制。
+.. note:: Przyciski sterowania obejmują sterowanie drzwiami (otwieranie, zamykanie), sterowanie uchwytem (zaciskanie, zwalnianie), sterowanie uruchamianiem/zatrzymywaniem (działanie, zatrzymanie) oraz sterowanie awaryjnym zatrzymaniem (awaryjne zatrzymanie, dezaktywacja). Wszystkie sygnały sterujące są wyzwalane zboczem.
 
 .. figure:: robot_peripherals/226.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.13‑6 CNC控制页面 
+.. centered:: Schemat 8.13‑6 Strona sterowania CNC
 
-CNC示教程序说明
-++++++++++++++++++++++++++
+Opis programu nauczania CNC
++++++++++++++++++++++++++++
 
-CNC功能包支持在示教程序中调用控制指令，并实时获取机床状态，依次打开“示教程序”->“程序编程”->“外设指令”->“CNC”，可以看到全部支持的CNC示教指令，如图所示。
+Pakiet funkcji CNC obsługuje wywoływanie instrukcji sterujących w programie nauczania i pobieranie stanu obrabiarki w czasie rzeczywistym. Kolejno otwierając „Program nauczania” -> „Programowanie” -> „Instrukcje urządzeń peryferyjnych” -> „CNC”, można zobaczyć wszystkie obsługiwane instrukcje nauczania CNC, jak pokazano na rysunku.
 
 .. figure:: robot_peripherals/227.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.13‑7 CNC示教指令 
+.. centered:: Schemat 8.13‑7 Instrukcje nauczania CNC
 
-.. note:: 其中控制指令与CNC控制一一对应，均为边沿信号生效，即启动命令执行后一定要执行停机后，下一次启动命令才会生效。
+.. note:: Instrukcje sterujące odpowiadają jeden do jednego sterowaniu CNC i wszystkie są wyzwalane zboczem, co oznacza, że po wykonaniu polecenia uruchomienia, przed wykonaniem następnego polecenia uruchomienia należy wykonać zatrzymanie.
 
-“机床当前状态获取”为lua函数，该函数返回值为9个参数，含义如下表所示。
+„Pobierz bieżący stan obrabiarki” to funkcja lua. Funkcja ta zwraca 9 parametrów, których znaczenie opisano w poniższej tabeli.
 
-.. centered:: 表格 8.13-4 “机床当前状态获取”返回值说明表
+.. centered:: Tabela 8.13-4 Tabela opisu wartości zwracanych przez „Pobierz bieżący stan obrabiarki”
 
 .. list-table:: 
    :widths: 15 40 100
@@ -6082,40 +6043,40 @@ CNC功能包支持在示教程序中调用控制指令，并实时获取机床�
    :align: center
    :class: sheet-center
 
-   * - **序号**
-     - **名称**
-     - **含义**
+   * - **Nr**
+     - **Nazwa**
+     - **Znaczenie**
    * - 1
-     - 设备厂商
-     - 0-无效 1-其他-预留
+     - Producent urządzenia
+     - 0-nieważne 1-inne-zarezerwowane
    * - 2
-     - FOCAS通信状态
-     - 0-通信正常 其他-通信断开
+     - Stan komunikacji FOCAS
+     - 0-komunikacja prawidłowa inne-komunikacja zerwana
    * - 3
-     - 机床型号(string)
+     - Model obrabiarki (string)
      - '15' : Series 150/150i '16' : Series 160/160i '18' : Series 180/180i '21' : Series 210/210i '30' : Series 300i '31' : Series 310i '32' : Series 320i '0' : Series 0i 
    * - 4
-     - 机床型号(string)
+     - Model obrabiarki (string)
      - '15' : Series 150/150i '16' : Series 160/160i '18' : Series 180/180i '21' : Series 210/210i '30' : Series 300i '31' : Series 310i '32' : Series 320i '0' : Series 0i 
    * - 5
-     - 机床运行状态
-     - 0-停机 1-运行
+     - Stan pracy obrabiarki
+     - 0-zatrzymana 1-pracuje
    * - 6
-     - 机床急停状态
-     - 0-急停生效 其他-急停无效
+     - Stan awaryjnego zatrzymania obrabiarki
+     - 0-awaryjne zatrzymanie aktywne inne-awaryjne zatrzymanie nieaktywne
    * - 7
-     - 机床告警状态
-     - 0-无警告 其他-存在警告
+     - Stan alarmu obrabiarki
+     - 0-brak ostrzeżenia inne-istnieje ostrzeżenie
    * - 8
-     - 机床门状态
-     - 0-开门 1-关门
+     - Stan drzwi obrabiarki
+     - 0-drzwi otwarte 1-drzwi zamknięte
    * - 9
-     - 机床卡盘状态
-     - 0-松开 1-夹紧
+     - Stan uchwytu obrabiarki
+     - 0-zwolniony 1-zaciśnięty
 
-以机器人上下料流程为例编写了lua示教程序示例，该示例程序包括了控制CNC关门、开门、运行、停机、卡盘松开、卡盘夹紧，并通过获取CNC当前状态作为判断条件，设置机器人在安全点、取料点、放料点三个点运动，如代码所示。
+Na przykładzie procesu załadunku i rozładunku robota napisano przykładowy program nauczania lua. Ten przykładowy program obejmuje sterowanie CNC zamykaniem/otwieraniem drzwi, uruchamianiem/zatrzymywaniem pracy, zwalnianiem/zaciskaniem uchwytu oraz pobieranie bieżącego stanu CNC jako warunku decyzyjnego, ustawiając ruch robota między trzema punktami: bezpiecznym, pobrania i zwolnienia, jak pokazano w kodzie.
 
-机器人与CNC协同运动示教lua程序实例：
+Przykład programu nauczania lua współpracy robota z CNC:
 
 .. code-block:: console
     :linenos:
@@ -6149,15 +6110,15 @@ CNC功能包支持在示教程序中调用控制指令，并实时获取机床�
          end
     end
 
-基于力传感器的虚拟墙配置
--------------------------------------------------
+Konfiguracja wirtualnej ściany oparta na czujniku siły
+-------------------------------------------------------
 
-基于力传感器的虚拟墙功能，可以通过人为设置虚拟墙，用于限制机器人的工作空间，避免直接发生碰撞接触。
+Funkcja wirtualnej ściany oparta na czujniku siły umożliwia ręczne ustawienie wirtualnej ściany w celu ograniczenia przestrzeni roboczej robota, zapobiegając bezpośrednim kolizjom.
 
-力传感器的安装配置
-~~~~~~~~~~~~~~~~~~~~~~
+Instalacja i konfiguracja czujnika siły
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-**Step1**：以“坤维”传感器为例，安装时需要力传感器的坐标系方向与末端法兰坐标系保持一致，如图1所示（图1中，红色为末端法兰坐标系X+方向，绿色为末端法兰坐标系Y+方向，蓝色为末端法兰坐标系Z+方向）；
+**Krok 1**: Na przykładzie czujnika „Kunwei”. Podczas instalacji należy upewnić się, że kierunek układu współrzędnych czujnika siły jest zgodny z kierunkiem układu współrzędnych kołnierza końcowego, jak pokazano na rysunku 1 (na rysunku 1: czerwony to kierunek X+ układu współrzędnych kołnierza końcowego, zielony to kierunek Y+, niebieski to kierunek Z+).
 
 .. figure:: robot_peripherals/228.png
    :align: center
@@ -6167,36 +6128,36 @@ CNC功能包支持在示教程序中调用控制指令，并实时获取机床�
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.14‑1 力传感器安装
+.. centered:: Schemat 8.14‑1 Instalacja czujnika siły
 
-**Step2**：在“初始设置”->“外设”->“力传感器”的菜单栏下，点击“已适配设备”进入力传感器设备配置界面。
+**Krok 2**: W menu „Ustawienia początkowe” -> „Urządzenia peryferyjne” -> „Czujnik siły” kliknij „Urządzenia dostosowane”, aby przejść do interfejsu konfiguracji urządzenia czujnika siły.
 
-力传感器配置信息分为厂商、类型、软件版本和挂载位置，用户可根据具体的生产需求来配置相应的力传感器信息。若用户需要更改配置，可先选择相应的编号，点击“清除”按钮，来清除相应的信息，并重新根据需求配置；具体操作如图所示。
+Informacje konfiguracyjne czujnika siły dzielą się na producenta, typ, wersję oprogramowania i lokalizację montażu. Użytkownik może skonfigurować odpowiednie informacje o czujniku siły zgodnie z konkretnymi potrzebami produkcyjnymi. Jeśli użytkownik chce zmienić konfigurację, może najpierw wybrać odpowiedni numer, kliknąć przycisk „Wyczyść”, aby wyczyścić odpowiednie informacje, a następnie ponownie skonfigurować zgodnie z potrzebami. Konkretna operacja jest pokazana na rysunku.
 
-**Step3**：选择配置完成的力传感器编号，点击“复位”按钮，页面弹出命令发送成功后，再点击“激活”按钮，可查看力传感器信息表中的激活状态，来判断是否激活成功；此外，力传感器会有初始值，用户根据使用需求选择“零点矫正”和“去除零点”。力传感器零点矫正需要确保力传感器水平垂直向下，且机器人未配置负载。
+**Krok 3**: Wybierz w pełni skonfigurowany numer czujnika siły, kliknij przycisk „Resetuj”. Po wyświetleniu na stronie komunikatu o pomyślnym wysłaniu polecenia, kliknij przycisk „Aktywuj”. Sprawdź stan aktywacji w tabeli informacji o czujniku siły, aby określić, czy aktywacja się powiodła. Ponadto czujnik siły ma wartość początkową. Użytkownik może w razie potrzeby wybrać „Korekcja zera” i „Usuń punkt zerowy”. Korekcja zera czujnika siły wymaga upewnienia się, że czujnik siły jest skierowany poziomo i pionowo w dół, a robot nie ma skonfigurowanego obciążenia.
 
 .. figure:: robot_peripherals/016.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.14‑2 力传感器配置与激活
+.. centered:: Schemat 8.14‑2 Konfiguracja i aktywacja czujnika siły
 
 .. figure:: robot_peripherals/017.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.14‑3 力传感器激活
+.. centered:: Schemat 8.14‑3 Aktywacja czujnika siły
 
-虚拟墙配置
-~~~~~~~~~~~~~~~~~~~~~~
+Konfiguracja wirtualnej ściany
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-借助力传感器进行辅助拖动，需要在力传感器下安装拖动把手，并配置工具坐标系，具体操作如图4所示。此时，检测干涉区的方式以设置的工具坐标系位置为参考，不设置时以末端法兰为参考。
+Aby użyć czujnika siły do wspomagania przeciągania, należy zamontować uchwyt przeciągania pod czujnikiem siły i skonfigurować układ współrzędnych narzędzia. Konkretna operacja jest pokazana na rysunku 4. W tym momencie sposób wykrywania obszaru interferencji jest określany na podstawie pozycji ustawionego układu współrzędnych narzędzia. Jeśli nie jest ustawiony, podstawą jest kołnierz końcowy.
 
-**Step1**：在“初始设置”->“安全”->“干涉区”的菜单栏下，点击“单个”进入干涉区配置功能界面；
+**Krok 1**: W menu „Ustawienia początkowe” -> „Bezpieczeństwo” -> „Obszar interferencji” kliknij „Pojedynczy”, aby przejść do interfejsu funkcji konfiguracji obszaru interferencji.
 
-**Step2**：需要对干涉方式和进入干涉区操作进行配置；点击“立方体干涉”进入配置界面，进入干涉区拖动配置为“不限制拖动”，进入干涉区运动配置均可；
+**Krok 2**: Należy skonfigurować sposób interferencji i operację wejścia w obszar interferencji. Kliknij „Interferencja prostopadłościenna”, aby przejść do interfejsu konfiguracji. Skonfiguruj przeciąganie w obszarze interferencji jako „Nie ograniczaj przeciągania”. Konfiguracja ruchu w obszarze interferencji może być dowolna.
 
-**Step3**：根据需求，可以对参数配置进行修改。检测方法分为“指令位置”和“反馈位置”两种，干涉区模式分为“范围内干涉”和“范围外干涉”两种，参考坐标系选择为“基坐标”，根据实际使用选择设置。详细操作见图所示；
+**Krok 3**: Zgodnie z potrzebami można modyfikować parametry konfiguracji. Metoda wykrywania dzieli się na „Pozycję instrukcji” i „Pozycję sprzężenia zwrotnego”. Tryb obszaru interferencji dzieli się na „Interferencja wewnątrz zakresu” i „Interferencja na zewnątrz zakresu”. Wybierz układ odniesienia jako „Układ bazowy”. Wybierz zgodnie z rzeczywistym użyciem. Szczegółowa operacja jest pokazana na rysunku.
 
 .. figure:: robot_peripherals/230.png
    :align: center
@@ -6206,48 +6167,48 @@ CNC功能包支持在示教程序中调用控制指令，并实时获取机床�
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.14‑4 安装拖动把手并设置工具坐标系
+.. centered:: Schemat 8.14‑4 Instalacja uchwytu przeciągania i ustawienie układu współrzędnych narzędzia
 
 .. figure:: robot_peripherals/232.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.14‑5 虚拟墙参数配置
+.. centered:: Schemat 8.14‑5 Konfiguracja parametrów wirtualnej ściany
 
-**Step4**：参数配置下的干涉区模式分为“范围内干涉”和“范围外干涉”两种；
+**Krok 4**: Tryb obszaru interferencji w konfiguracji parametrów dzieli się na „Interferencja wewnątrz zakresu” i „Interferencja na zewnątrz zakresu”.
 
 .. figure:: robot_peripherals/233.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.14‑6 范围内干涉
+.. centered:: Schemat 8.14‑6 Interferencja wewnątrz zakresu
 
 .. figure:: robot_peripherals/234.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.14‑7 范围外干涉
+.. centered:: Schemat 8.14‑7 Interferencja na zewnątrz zakresu
 
-**Step5**：建立干涉区，具体操作如图7和图8所示；建议在选择“范围外干涉”时，将干涉区域设置尽可能大。
+**Krok 5**: Utwórz obszar interferencji. Konkretna operacja jest pokazana na rysunkach 7 i 8. Zaleca się, aby przy wyborze „Interferencji na zewnątrz zakresu” ustawić obszar interferencji tak duży, jak to możliwe.
 
 .. figure:: robot_peripherals/235.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.14‑8 两点法建立干涉区
+.. centered:: Schemat 8.14‑8 Tworzenie obszaru interferencji metodą dwóch punktów
 
 .. figure:: robot_peripherals/236.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.14‑9 中心点+边长法建立干涉区
+.. centered:: Schemat 8.14‑9 Tworzenie obszaru interferencji metodą punktu środkowego + długości boku
 
-力传感器辅助拖动
-~~~~~~~~~~~~~~~~~~~~~~
+Wspomaganie przeciągania przez czujnik siły
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-**Step1**：在“辅助应用”->“工具应用”的菜单栏下，点击“拖动锁定”进入力传感器辅助锁定功能界面；
+**Krok 1**: W menu „Aplikacje pomocnicze” -> „Aplikacje narzędziowe” kliknij „Blokowanie przeciągania”, aby przejść do interfejsu funkcji wspomagania blokowania przez czujnik siły.
 
-**Step2**：按照如图所示的参数进行设置，即可实现基于力传感器的虚拟墙功能。具体效果为：靠近虚拟墙，阻力变大；远离虚拟墙，基于力传感器辅助拖动功能正常。
+**Krok 2**: Ustaw parametry zgodnie z rysunkiem, aby zrealizować funkcję wirtualnej ściany opartą na czujniku siły. Konkretny efekt: w pobliżu wirtualnej ściany opór wzrasta; z dala od wirtualnej ściany funkcja wspomagania przeciągania przez czujnik siły działa normalnie.
 
 .. figure:: robot_peripherals/237.png
    :align: center
@@ -6257,521 +6218,519 @@ CNC功能包支持在示教程序中调用控制指令，并实时获取机床�
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.14‑10 力传感器辅助拖动的参数设置
+.. centered:: Schemat 8.14‑10 Ustawianie parametrów wspomagania przeciągania przez czujnik siły
 
-参数的具体作用：
+Szczegółowe działanie parametrów:
 
-**自适应选择**：在需要装配时开启，开启后拖动变重；
+**Wybór adaptacyjny**: Włącz podczas potrzeb montażu. Po włączeniu przeciąganie staje się cięższe.
 
-**惯性参数**：调节拖动过程中的手感，需在技术人员指导下谨慎操作。
+**Parametry bezwładności**: Regulują odczucia podczas przeciągania. Należy ostrożnie operować pod kierunkiem technika.
 
-**阻尼参数**：
+**Parametry tłumienia**:
 
--  平动方向：建议设置参数在[100-200]之间；
+-  Kierunki translacji: Zalecane ustawienie parametrów w zakresie [100-200];
+-  Kierunki rotacji: Zalecane ustawienie parametrów w zakresie [3-10], dla kierunku RZ zakres [0.1-5];
+-  Efekt: Podczas przeciągania z użyciem czujnika, zwiększenie tłumienia utrudnia przeciąganie, zmniejszenie tłumienia sprawia, że przeciąganie robota jest zbyt lekkie (zaleca się, aby nie było zbyt małe);
+-  Ogólny zakres parametrów tłumienia: Translacja XYZ: [100-1000]; Rotacja RX, RY: [3-50], RZ: [2-10];
+-  Maksymalna siła przeciągania wynosi 50, maksymalna prędkość przeciągania wynosi 180.
 
--  转动方向：建议设置参数在[3-10]之间，其中RZ方向设置范围在[0.1-5]；
+**Parametry sztywności**: Ustaw wszystkie na 0;
 
--  效果：借助传感器拖动时，增大阻尼会导致拖动困难，减小阻尼会导致拖动机器人过于轻松（建议不要太小）；
+**Próg siły przeciągania**: Translacja XYZ: [5-10]; Rotacja RX, RY, RZ: [0.5-5];
 
--  阻尼参数整体范围：平动XYZ：[100-1000]；转动RX、RY：[3-50],RZ:[2-10]；
+**Maksymalna siła przeciągania**: 50;
 
--  最大拖动力为50，最大拖动速度为180。
+**Maksymalna prędkość przeciągania**: 180;
 
-**刚度参数**：均设为0；
+Funkcja mieszanego przeciągania z wykorzystaniem siły sześcioosiowej i impedancji stawów
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-**拖动力阈值**：平动XYZ为[5-10]；转动RX、RY、RZ为[0.5-5]；
+Przegląd
+++++++++
 
-**最大拖动力**：50；
+Funkcja mieszanego przeciągania z wykorzystaniem siły sześcioosiowej i impedancji stawów polega na użyciu czujnika siły do wyczuwania siły zewnętrznej. W trybie przeciągania robot jest wspomagany podczas przeciągania. Poprzez regulację współczynnika wzmocnienia można uzyskać różne odczucia podczas przeciągania. Impedancja stawów ogranicza siłę przeciągania za pomocą sterowania impedancją.
 
-**最大拖动速度**：180；
+Instalacja i konfiguracja czujnika siły oraz zerowanie
+++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-六维力和关节阻抗混合拖动功能
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1. Instalacja i konfiguracja czujnika siły
 
-概述
-++++++
+Szczegółowy opis instalacji i konfiguracji czujnika siły znajduje się powyżej: Konfiguracja wirtualnej ściany oparta na czujniku siły.
 
-六维力和关节阻抗混合拖动功能，是借助力传感器感知外力，机器人在拖动模式下进行辅助拖动，可以通过调整增益系数获得不同的拖动体验。而关节阻抗是采用阻抗控制对拖动力进行限制。
+2. Zerowanie czujnika siły
 
-力传感器的安装配置及校零操作
-++++++++++++++++++++++++++++++++++
-
-1. 力传感器的安装配置
-
-力传感器的安装配置的详细操作见上文：基于力传感器的虚拟墙配置。
-
-2. 力传感器的校零
-
-为便于拖动机器人，需要在传感器下方安装拖动把手，如图1所示。
+Aby ułatwić przeciąganie robota, należy zamontować uchwyt przeciągania pod czujnikiem, jak pokazano na rysunku 1.
 
 .. figure:: robot_peripherals/239.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.14‑11 拖动把手
+.. centered:: Schemat 8.14‑11 Uchwyt przeciągania
 
-**Step1**：根据实际把手的长度，设置工具坐标系，如图2所示。
+**Krok 1**: Zgodnie z rzeczywistą długością uchwytu ustaw układ współrzędnych narzędzia, jak pokazano na rysunku 2.
 
-**Step2**：在“初始设置”->“基础”->“负载”菜单栏下，点击“传感器”，进入力/扭矩传感器负载界面。
+**Krok 2**: W menu „Ustawienia początkowe” -> „Podstawowe” -> „Obciążenie” kliknij „Czujnik”, aby przejść do interfejsu obciążenia czujnika siły/momentu.
 
-借助拖动按钮，调整机器人末端水平朝下，依次点击“负载”->“传感器辨识”进入界面，找到“传感器自动校零”一栏中的“记录初始位置”的按钮。然后，切换机器人模式为自动模式，点击“自动校零”的按钮。待程序运行结束，即完成传感器校零工作。详细操作见图所示。
+Za pomocą przycisku przeciągania dostosuj końcówkę robota tak, aby była skierowana poziomo w dół. Kolejno kliknij „Obciążenie” -> „Identyfikacja czujnika”, aby przejść do interfejsu. Znajdź przycisk „Zapisz pozycję początkową” w sekcji „Automatyczne zerowanie czujnika”. Następnie przełącz tryb robota na automatyczny i kliknij przycisk „Automatyczne zerowanie”. Po zakończeniu działania programu zerowanie czujnika jest zakończone. Szczegółowa operacja jest pokazana na rysunku.
 
 .. figure:: robot_peripherals/231.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.14‑12 工具坐标系设置
+.. centered:: Schemat 8.14‑12 Ustawienie układu współrzędnych narzędzia
 
 .. figure:: robot_peripherals/240.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.14‑13 力/扭矩传感器自动校零
+.. centered:: Schemat 8.14‑13 Automatyczne zerowanie czujnika siły/momentu
 
-六维力和关节阻抗混合拖动
-++++++++++++++++++++++++
+Mieszane przeciąganie z wykorzystaniem siły sześcioosiowej i impedancji stawów
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-1. 辅助拖动
+1. Wspomaganie przeciągania
 
-**Step1**：在“辅助应用”->“工具应用”的菜单栏下，点击“拖动锁定”进入拖动锁定功能界面。
+**Krok 1**: W menu „Aplikacje pomocnicze” -> „Aplikacje narzędziowe” kliknij „Blokowanie przeciągania”, aby przejść do interfejsu funkcji blokowania przeciągania.
 
-**Step2**：在“六维力和关节阻抗混合拖动”一栏中，设置控制状态为“开启”，阻抗开启状态为“关闭”，设置拖动增益为，末端线速度为1000mm/s，角速度限制为100°/s，再点击“应用”按钮，功能即启用。具体配置如图4所示。
+**Krok 2**: W sekcji „Mieszane przeciąganie z wykorzystaniem siły sześcioosiowej i impedancji stawów” ustaw stan sterowania na „Włączony”. Stan włączenia impedancji ustaw na „Wyłączony”. Ustaw wzmocnienie przeciągania, prędkość liniową końcówki na 1000 mm/s, ograniczenie prędkości kątowej na 100°/s, a następnie kliknij przycisk „Zastosuj”. Funkcja zostanie włączona. Konkretna konfiguracja jest pokazana na rysunku 4.
 
-**Step3**：切换机器人模式为拖动模式，即可拖动机器人。具体效果为：拖动机器人末端，拖动轻松，体验感好；拖动机器人关节，拖动重。
+**Krok 3**: Przełącz tryb robota na tryb przeciągania i przeciągnij robota. Konkretny efekt: Przeciąganie końcówki robota jest lekkie, z dobrym odczuciem. Przeciąganie stawów robota jest ciężkie.
 
 .. figure:: robot_peripherals/241.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.14‑14 六维力辅助拖动的配置参数
+.. centered:: Schemat 8.14‑14 Parametry konfiguracji wspomagania przeciągania siłą sześcioosiową
 
-2. 关节阻抗控制
+2. Sterowanie impedancją stawów
 
-阻抗控制的作用是对拖动力和拖动位置进行限制，其默认状态为“关闭”。
+Rolą sterowania impedancją jest ograniczenie siły przeciągania i pozycji przeciągania. Jego domyślny stan to „Wyłączony”.
 
-具体操作见图5所示，设置阻抗开启状态为“开启”，再按照图5所示设置阻尼系数和刚度系数。其中，刚度系数的功能暂未开放。
+Konkretna operacja jest pokazana na rysunku 5. Ustaw stan włączenia impedancji na „Włączony”, a następnie ustaw współczynniki tłumienia i sztywności zgodnie z rysunkiem 5. Funkcja współczynnika sztywności nie jest jeszcze dostępna.
 
 .. figure:: robot_peripherals/242.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.14‑15 关节阻抗的配置参数
+.. centered:: Schemat 8.14‑15 Parametry konfiguracji impedancji stawów
 
-参数的具体作用：
+Szczegółowe działanie parametrów:
 
-- **控制状态**：开启后，在拖动模式下可使用此功能。
+- **Stan sterowania**: Po włączeniu, funkcja ta może być używana w trybie przeciągania.
   
-- **阻抗开启**：开启后，需要配置刚度参数和阻尼参数。作用是对拖动力和拖动位置进行限制。
+- **Włączenie impedancji**: Po włączeniu, należy skonfigurować parametry sztywności i tłumienia. Ich rolą jest ograniczenie siły przeciągania i pozycji przeciągania.
   
-- **拖动增益**：参数建议设置在[0-5]之间。参数设置为0，机器人无法拖动。参数设置为1，拖动效果没有改善。参数大于1，拖动轻，拖动体验好。参数越大，拖动越轻松。
+- **Wzmocnienie przeciągania**: Zalecane ustawienie parametrów w zakresie [0-5]. Gdy parametr jest ustawiony na 0, robot nie może być przeciągany. Gdy parametr jest ustawiony na 1, efekt przeciągania nie ulega poprawie. Gdy parametr jest większy niż 1, przeciąganie jest lekkie, a odczucia są dobre. Im większy parametr, tym lżejsze przeciąganie.
   
-- **刚度增益**：设置为0，其作用是在拖动后恢复到拖动前的初始位置。
+- **Wzmocnienie sztywności**: Ustawione na 0. Jego rolą jest powrót do pozycji początkowej sprzed przeciągnięcia po przeciągnięciu.
   
-- **阻尼增益**：作用是限制拖动力。1-3轴参数范围为[0-0.5]，4-5轴参数范围为[0-0.1]；6轴参数范围为[0-0.05]。
+- **Wzmocnienie tłumienia**: Jego rolą jest ograniczenie siły przeciągania. Zakres parametrów dla osi 1-3: [0-0.5], dla osi 4-5: [0-0.1]; dla osi 6: [0-0.05].
   
-- **末端线速度**：1000mm/s，当超出末端线速度限制，机器人切换模式至手动模式，并提示TCP超速。
+- **Prędkość liniowa końcówki**: 1000 mm/s. Gdy ograniczenie prędkości liniowej końcówki zostanie przekroczone, robot przełączy się w tryb ręczny i wyświetli ostrzeżenie o przekroczeniu prędkości TCP.
   
-- **角速度限制**：100°/s，当超出角速度限制，机器人切换模式至手动模式，并提示TCP超速。
+- **Ograniczenie prędkości kątowej**: 100°/s. Gdy ograniczenie prędkości kątowej zostanie przekroczone, robot przełączy się w tryb ręczny i wyświetli ostrzeżenie o przekroczeniu prędkości TCP.
 
-扩展轴加激光定点跟踪功能
--------------------------------------------------
+Funkcja śledzenia punktowego laserem z osią rozszerzoną
+-------------------------------------------------------
 
-机器人扩展轴加激光定点跟踪系统构成
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Struktura systemu śledzenia punktowego laserem z osią rozszerzoną robota
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. figure:: robot_peripherals/243.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.15‑1 机器人扩展轴加激光定点跟踪系统构成
+.. centered:: Schemat 8.15‑1 Struktura systemu śledzenia punktowego laserem z osią rozszerzoną robota
 
-系统中，（a）为计算机，（b）为机器人及其控制箱，（c）为变位机及驱动设备，（d）焊缝跟踪激光传感器，（e）为焊机与配套设备。
+W systemie (a) to komputer, (b) to robot i jego szafa sterownicza, (c) to pozycjoner i urządzenie napędowe, (d) to czujnik laserowy do śledzenia spoiny, (e) to spawarka i urządzenia towarzyszące.
 
 .. figure:: robot_peripherals/244.png
    :align: center
    :width: 3in
 
-.. centered:: 图表 8.15‑2 外设安装示意图
+.. centered:: Schemat 8.15‑2 Schemat instalacji urządzeń peryferyjnych
 
-焊缝跟踪激光传感器及焊枪（b）安装于机器人（a）末端法兰上，变位机（c）固定安装于机器人外。
+Czujnik laserowy do śledzenia spoiny (b) i palnik spawalniczy są zamontowane na końcowym kołnierzu robota (a). Pozycjoner (c) jest zamocowany na zewnątrz robota.
 
-扩展轴通讯配置
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Konfiguracja komunikacji osi rozszerzonej
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-机器人与扩展轴的通讯方式包括使用UDP或RS485这两种形式。
+Sposoby komunikacji robota z osią rozszerzoną obejmują UDP lub RS485.
 
 .. figure:: robot_peripherals/074.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.15‑3 扩展轴配置页面
+.. centered:: Schemat 8.15‑3 Strona konfiguracji osi rozszerzonej
 
-在机器人操作界面点击“初始设置”->“外设”->“扩展轴”按钮，进入扩展轴配置页面。以使用PLC通过UDP通讯与机器人相连为例，点击“UDP通信”图标进入UDP通讯的扩展轴配置页面。
+W interfejsie operacyjnym robota kliknij przyciski „Ustawienia początkowe” -> „Urządzenia peryferyjne” -> „Oś rozszerzona”, aby przejść do strony konfiguracji osi rozszerzonej. Na przykładzie użycia PLC połączonego z robotem przez komunikację UDP, kliknij ikonę „Komunikacja UDP”, aby przejść do strony konfiguracji osi rozszerzonej dla komunikacji UDP.
 
 .. figure:: robot_peripherals/110.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.15‑4 UDP通信配置界面
+.. centered:: Schemat 8.15‑4 Interfejs konfiguracji komunikacji UDP
 
-在UDP通讯的扩展轴配置页面，能够选择对应的扩展轴号，连接与配置UDP通讯参数（地址、端口、周期、丢包检测等），以及扩展轴定位完成时间。
+Na stronie konfiguracji komunikacji UDP dla osi rozszerzonej można wybrać odpowiedni numer osi rozszerzonej, skonfigurować parametry komunikacji UDP (adres, port, okres, wykrywanie utraty pakietów itp.) oraz ustawić czas zakończenia pozycjonowania osi rozszerzonej.
 
-扩展轴配置内容非本功能介绍重点，详细配置见对应部分用户手册。
+Treść konfiguracji osi rozszerzonej nie jest głównym punktem opisu tej funkcji. Szczegółowa konfiguracja znajduje się w odpowiedniej części instrukcji użytkownika.
 
-焊缝跟踪激光传感器连接配置
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Konfiguracja połączenia czujnika laserowego do śledzenia spoiny
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-通过以下配置页面连接焊缝跟踪激光传感器:
+Podłącz czujnik laserowy do śledzenia spoiny za pomocą poniższej strony konfiguracji:
 
 .. figure:: robot_peripherals/245.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.15‑5 激光传感器连接与配置页面
+.. centered:: Schemat 8.15‑5 Strona łączenia i konfiguracji czujnika laserowego
 
-点击“初始设置”->“外设”->“线激光传感器”的“已适配设备”进入配置页面。配置页面包括“传感器配置”、“通信配置与加载”、“基准计算”，点击“传感器配置”可设置传感器输入量滤波参数，点击“通信配置与加载”可输入对应通信参数连接激光传感器。
+Kliknij „Ustawienia początkowe” -> „Urządzenia peryferyjne” -> „Czujnik lasera liniowego” w „Urządzenia dostosowane”, aby przejść do strony konfiguracji. Strona konfiguracji zawiera „Konfigurację czujnika”, „Konfigurację i ładowanie komunikacji”, „Obliczanie odniesienia”. Kliknij „Konfiguracja czujnika”, aby ustawić parametry filtracji wejściowej czujnika. Kliknij „Konfiguracja i ładowanie komunikacji”, aby wprowadzić odpowiednie parametry komunikacji i połączyć się z czujnikiem laserowym.
 
-激光传感器配置内容非本功能介绍重点，详细配置见对应部分用户手册。
+Treść konfiguracji czujnika laserowego nie jest głównym punktem opisu tej funkcji. Szczegółowa konfiguracja znajduje się w odpowiedniej części instrukcji użytkownika.
 
-焊机连接配置
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Konfiguracja połączenia spawarki
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-通过以下配置页面配置焊机：
+Skonfiguruj spawarkę za pomocą poniższej strony konfiguracji:
 
 .. figure:: robot_peripherals/246.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.15‑6 焊机配置页面
+.. centered:: Schemat 8.15‑6 Strona konfiguracji spawarki
 
-焊机通信可使用IO通信或RS485通信，点击“初始设置”、“外设”、“焊机”进入配置与连接界面，可配置“控制类型”、“信号对应IO”、“焊接工艺参数”、“焊机调试”等模块。
+Komunikacja ze spawarką może wykorzystywać komunikację IO lub RS485. Kliknij „Ustawienia początkowe”, „Urządzenia peryferyjne”, „Spawarka”, aby przejść do interfejsu konfiguracji i połączenia, gdzie można skonfigurować moduły takie jak „Typ sterowania”, „IO odpowiadające sygnałom”, „Parametry procesu spawania”, „Debugowanie spawarki”.
 
-焊机配置内容非本功能介绍重点，详细配置见对应部分用户手册。
+Treść konfiguracji spawarki nie jest głównym punktem opisu tej funkcji. Szczegółowa konfiguracja znajduje się w odpowiedniej części instrukcji użytkownika.
 
-工具坐标系与激光传感器坐标系标定
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Kalibracja układu współrzędnych narzędzia i układu współrzędnych czujnika laserowego
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-在机器人末端安装焊枪后，对焊枪与激光传感器外参进行标定：
+Po zamontowaniu palnika spawalniczego na końcówce robota, skalibruj parametry zewnętrzne palnika spawalniczego i czujnika laserowego:
 
 .. figure:: robot_peripherals/247.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.15‑7 工具坐标系配置页面
+.. centered:: Schemat 8.15‑7 Strona konfiguracji układu współrzędnych narzędzia
 
-点击“初始设置”、“基础”、“坐标系”、“工具”进入工件坐标系设置页面。
+Kliknij „Ustawienia początkowe”, „Podstawowe”, „Układy współrzędnych”, „Narzędzie”, aby przejść do strony ustawień układu współrzędnych obiektu.
 
 .. figure:: robot_peripherals/248.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.15‑8 选择6点法对焊枪进行标定
+.. centered:: Schemat 8.15‑8 Wybór metody 6 punktów do kalibracji palnika
 
-选择一个空坐标系，选择工具类型为“工具”，选择6点法进行焊枪工具标定。
+Wybierz pusty układ współrzędnych, wybierz typ narzędzia jako „Narzędzie”, wybierz metodę 6 punktów do kalibracji narzędzia palnika.
 
 .. figure:: robot_peripherals/148.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.15‑9 选择5点法对激光传感器进行标定
+.. centered:: Schemat 8.15‑9 Wybór metody 5 punktów do kalibracji czujnika laserowego
 
-选择一个空坐标系，选择工具类型为“传感器”，选择5点法进行激光传感器标定。
+Wybierz pusty układ współrzędnych, wybierz typ narzędzia jako „Czujnik”, wybierz metodę 5 punktów do kalibracji czujnika laserowego.
 
-工具坐标系与激光传感器坐标系标定内容非本功能介绍重点，详细标定方法见对应部分用户手册。
+Treść kalibracji układu współrzędnych narzędzia i układu współrzędnych czujnika laserowego nie jest głównym punktem opisu tej funkcji. Szczegółowa metoda kalibracji znajduje się w odpowiedniej części instrukcji użytkownika.
 
-扩展轴与激光定点跟踪功能
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Funkcja śledzenia punktowego laserem z osią rozszerzoną
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-扩展轴与激光定点跟踪分两种方法，激光数据有变换方式执行“先记录后复现”的跟踪策略，激光数据无变换方式执行“边记录边复现”的跟踪策略。
+Śledzenie punktowe laserem z osią rozszerzoną dzieli się na dwie metody. Metoda z transformacją danych laserowych realizuje strategię śledzenia „najpierw rejestruj, potem odtwarzaj”. Metoda bez transformacji danych laserowych realizuje strategię śledzenia „rejestruj i odtwarzaj jednocześnie”.
 
-扩展轴坐标系标定
-+++++++++++++++++++++++++++++
+Kalibracja układu współrzędnych osi rozszerzonej
+++++++++++++++++++++++++++++++++++++++++++++++++
 
-使用扩展轴坐标系实现扩展轴与机器人同步激光跟踪时需要标定扩展轴坐标系。
+Aby zrealizować synchronizację śledzenia laserowego między osią rozszerzoną a robotem, należy skalibrować układ współrzędnych osi rozszerzonej.
 
 .. figure:: robot_peripherals/077.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.15‑10 扩展轴坐标系设置页面
+.. centered:: Schemat 8.15‑10 Strona ustawień układu współrzędnych osi rozszerzonej
 
-点击“初始设置”->外设->“扩展轴”进入扩展轴坐标系设置界面，选择需要设置的扩展轴号，点击编辑按钮，选择“4-单自由度变位机”并保存。
+Kliknij „Ustawienia początkowe” -> Urządzenia peryferyjne -> „Oś rozszerzona”, aby przejść do interfejsu ustawień układu współrzędnych osi rozszerzonej. Wybierz numer osi rozszerzonej do ustawienia, kliknij przycisk edycji, wybierz „4 - Pozycjoner z jednym stopniem swobody” i zapisz.
 
 .. figure:: robot_peripherals/249.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.15‑11 扩展轴标定页面
+.. centered:: Schemat 8.15‑11 Strona kalibracji osi rozszerzonej
 
-在标定扩展轴时注意选择“机器人相对扩展轴位置”为“扩展轴外”。对于变位机的情况，选择4点法进行标定。
+Podczas kalibracji osi rozszerzonej należy zwrócić uwagę na wybór „Pozycja robota względem osi rozszerzonej” jako „Poza osią rozszerzoną”. W przypadku pozycjonera wybierz metodę 4 punktów do kalibracji.
 
-扩展轴标定内容非本功能介绍重点，详细标定方法见对应部分用户手册。
+Treść kalibracji osi rozszerzonej nie jest głównym punktem opisu tej funkcji. Szczegółowa metoda kalibracji znajduje się w odpowiedniej części instrukcji użytkownika.
 
-扩展轴与机器人同步激光跟踪
-+++++++++++++++++++++++++++++
+Synchroniczne śledzenie laserowe osi rozszerzonej z robotem
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-激光数据有变换方式
-**************************
+Metoda z transformacją danych laserowych
+****************************************
 
-基座标系下的扩展轴与机器人同步激光跟踪无需标定外部轴，其余功能设置和组成与扩展轴坐标系下的同步跟踪一致。
+Synchroniczne śledzenie laserowe osi rozszerzonej z robotem w układzie bazowym nie wymaga kalibracji osi zewnętrznej. Pozostałe ustawienia funkcji i składniki są takie same jak w przypadku śledzenia synchronicznego w układzie współrzędnych osi rozszerzonej.
 
-先进行激光跟踪数据配置，将激光跟踪器数据设置为有变换类型的数据。
+Najpierw skonfiguruj dane śledzenia laserowego, ustawiając dane czujnika śledzenia laserowego jako typ z transformacją.
 
 .. figure:: robot_peripherals/250.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.15‑12 设置激光数据有变换类型
+.. centered:: Schemat 8.15‑12 Ustawienie danych laserowych z transformacją
 
-点击“初始设置”、“外设”、“跟踪”、“传感器”，在页面下拉框点击“传感器配置”，将“数据处理”调整为有变换类型的数据。
+Kliknij „Ustawienia początkowe”, „Urządzenia peryferyjne”, „Śledzenie”, „Czujnik”. W rozwijanej liście strony kliknij „Konfiguracja czujnika”. Dostosuj „Przetwarzanie danych” do danych z transformacją.
 
 .. figure:: robot_peripherals/251.png
    :align: center
    :width: 6in
  
-.. centered:: 图表 8.15‑13 激光跟踪功能页面
+.. centered:: Schemat 8.15‑13 Strona funkcji śledzenia laserowego
 
-本功能通过多功能模块组合实现，主要功能模块在“激光跟踪”功能内包含。点击“示教程序”->“程序编程”->“激光跟踪”进入激光跟踪页面，也可点击“激光记录”直接进入记录页面。
+Ta funkcja jest realizowana poprzez kombinację modułów wielofunkcyjnych. Główne moduły funkcji znajdują się w funkcji „Śledzenie laserowe”. Kliknij „Program nauczania” -> „Programowanie” -> „Śledzenie laserowe”, aby przejść do strony śledzenia laserowego. Możesz też kliknąć „Rejestracja laserowa”, aby bezpośrednio przejść do strony rejestracji.
 
 .. figure:: robot_peripherals/252.png
    :align: center
    :width: 6in
 
-.. centered:: 图表 8.15‑14 添加开始记录激光数据指令
+.. centered:: Schemat 8.15‑14 Dodanie instrukcji rozpoczęcia rejestracji danych laserowych
 
-在扩展轴运动到焊接起始点后添加开始记录激光数据指令。
+Po wykonaniu ruchu osi rozszerzonej do punktu początkowego spawania dodaj instrukcję rozpoczęcia rejestracji danych laserowych.
 
 .. figure:: robot_peripherals/253.png
    :align: center
    :width: 6in
 
-.. centered:: 图表 8.15‑15 添加结束记录激光数据指令
+.. centered:: Schemat 8.15‑15 Dodanie instrukcji zakończenia rejestracji danych laserowych
 
-在扩展轴运动到焊接终止点后添加停止记录激光数据指令。   
+Po wykonaniu ruchu osi rozszerzonej do punktu końcowego spawania dodaj instrukcję zatrzymania rejestracji danych laserowych.
 
-机器人在原地记录完扩展轴运动时焊缝的运动轨迹后，就可使扩展轴回到焊接起始点，准备开始同步跟踪焊接。
+Po zarejestrowaniu trajektorii ruchu spoiny podczas ruchu osi rozszerzonej, możesz przywrócić oś rozszerzoną do punktu początkowego spawania, aby przygotować się do rozpoczęcia synchronicznego śledzenia i spawania.
 
-焊接开始时需将焊枪运动到激光传感器记录数据的起点位置，需添加运动到焊接点指令：
+Podczas rozpoczęcia spawania należy przesunąć palnik spawalniczy do punktu początkowego trajektorii zarejestrowanej przez czujnik laserowy. Należy dodać instrukcję ruchu do punktu spawania:
 
 .. figure:: robot_peripherals/254.png
    :align: center
    :width: 6in
 
-.. centered:: 图表 8.15‑16 添加运动到焊接点指令
+.. centered:: Schemat 8.15‑16 Dodanie instrukcji ruchu do punktu spawania
 
-点击“示教程序->“程序编程”->“激光记录”按钮，选择“运动到焊接点”，设置运动方式与运动速度，点击“起点”按钮并应用。
+Kliknij przycisk „Program nauczania -> „Programowanie” -> „Rejestracja laserowa”. Wybierz „Ruch do punktu spawania”. Ustaw sposób ruchu i prędkość ruchu. Kliknij przycisk „Punkt początkowy” i zastosuj.
 
 .. figure:: robot_peripherals/255.png
    :align: center
    :width: 6in
 
-.. centered:: 图表 8.15‑17 添加轨迹复现激光记录的数据指令
+.. centered:: Schemat 8.15‑17 Dodanie instrukcji odtwarzania trajektorii zarejestrowanych danych laserowych
 
-在“激光跟踪”页面选择“数据记录”->“轨迹复现”指令，点击“添加”并应用。指令中，等待时间默认为0ms，速度为复现速度相较记录速度的比值，建议大于50%。
+Na stronie „Śledzenie laserowe” wybierz „Rejestracja danych” -> „Odtwarzanie trajektorii”. Kliknij „Dodaj” i zastosuj. W instrukcji domyślny czas oczekiwania to 0 ms. Prędkość to stosunek prędkości odtwarzania do prędkości rejestracji. Zaleca się wartość powyżej 50%.
 
-在“轨迹复现”指令后添加扩展轴运动指令即可实现扩展轴与机器人激光跟踪同步运动。
+Po instrukcji „Odtwarzanie trajektorii” dodaj instrukcję ruchu osi rozszerzonej, aby zrealizować synchroniczny ruch osi rozszerzonej z robotem i śledzeniem laserowym.
 
-以下为一段典型的扩展轴加激光定点跟踪的LUA程序：
+Poniżej przedstawiono typowy program LUA dla śledzenia punktowego laserem z osią rozszerzoną:
 
 .. figure:: robot_peripherals/256.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.15‑18 扩展轴加激光数据有变换定点跟踪示例程序
+.. centered:: Schemat 8.15‑18 Przykładowy program śledzenia punktowego z transformacją danych laserowych i osią rozszerzoną
 
-机器人执行“先记录后复现”的流程，先记录扩展轴运动时工件焊缝的变化轨迹，之后在焊接时扩展轴与轨迹复现同步执行。
+Robot wykonuje proces „najpierw rejestruj, potem odtwarzaj”. Najpierw rejestruje trajektorię zmiany spoiny podczas ruchu osi rozszerzonej, a następnie podczas spawania oś rozszerzona i odtwarzanie trajektorii są wykonywane synchronicznie.
 
-激光数据无变换方式
-**************************
+Metoda bez transformacji danych laserowych
+******************************************
 
-使用激光数据无变换方式进行定点跟踪无需标定扩展轴坐标系。
+Użycie metody bez transformacji danych laserowych do śledzenia punktowego nie wymaga kalibracji układu współrzędnych osi rozszerzonej.
 
-将激光跟踪传感器数据设置为无变换类型。
+Ustaw dane czujnika śledzenia laserowego jako typ bez transformacji.
 
 .. figure:: robot_peripherals/257.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.15‑19 设置激光数据无变换类型
+.. centered:: Schemat 8.15‑19 Ustawienie danych laserowych bez transformacji
 
-点击“初始设置”->“外设”->“线激光传感器”，在页面下拉框点击“传感器配置”，将“数据处理”调整为无变换类型的数据。
+Kliknij „Ustawienia początkowe” -> „Urządzenia peryferyjne” -> „Czujnik lasera liniowego”. W rozwijanej liście strony kliknij „Konfiguracja czujnika”. Dostosuj „Przetwarzanie danych” do danych bez transformacji.
 
 .. figure:: robot_peripherals/251.png
    :align: center
    :width: 6in
 
-.. centered:: 图表 8.15‑20 激光跟踪功能页面
+.. centered:: Schemat 8.15‑20 Strona funkcji śledzenia laserowego
 
-点击“示教程序”->“程序编程”->“激光跟踪”进入激光跟踪页面，也可点击“激光记录”直接进入记录页面。
+Kliknij „Program nauczania” -> „Programowanie” -> „Śledzenie laserowe”, aby przejść do strony śledzenia laserowego. Możesz też kliknąć „Rejestracja laserowa”, aby bezpośrednio przejść do strony rejestracji.
 
 .. figure:: robot_peripherals/258.png
    :align: center
    :width: 6in
 
-.. centered:: 图表 8.15‑21 添加边记录边复现指令
+.. centered:: Schemat 8.15‑21 Dodanie instrukcji rejestracji i odtwarzania jednoczesnego
 
-在“激光记录”页面选择“边记录边复现”指令，点击“添加”并应用。指令中，可选择“延迟时间”或“延迟距离”（推荐选择距离），补偿灵敏度系数根据实际传感器激光数据进行调整，数值越低调整灵敏度越低抗干扰性越好，复现速度默认100%。
+Na stronie „Rejestracja laserowa” wybierz instrukcję „Rejestruj i odtwarzaj jednocześnie”. Kliknij „Dodaj” i zastosuj. W instrukcji możesz wybrać „Czas opóźnienia” lub „Odległość opóźnienia” (zaleca się odległość). Współczynnik czułości kompensacji dostosuj do rzeczywistych danych laserowych czujnika. Im niższa wartość, tym niższa czułość regulacji i lepsza odporność na zakłócenia. Domyślna prędkość odtwarzania to 100%.
 
-在“边记录边复现”指令后添加扩展轴运动指令即可实现扩展轴与机器人激光跟踪同步运动。
+Po instrukcji „Rejestruj i odtwarzaj jednocześnie” dodaj instrukcję ruchu osi rozszerzonej, aby zrealizować synchroniczny ruch osi rozszerzonej z robotem i śledzeniem laserowym.
 
-以下为一段典型的扩展轴加激光数据无变换定点跟踪的LUA程序：
+Poniżej przedstawiono typowy program LUA dla śledzenia punktowego laserem z osią rozszerzoną bez transformacji danych laserowych:
 
 .. figure:: robot_peripherals/259.png
    :align: center
    :width: 5in
 
-.. centered:: 图表 8.15‑22 扩展轴加激光数据无变换定点跟踪示例程序
+.. centered:: Schemat 8.15‑22 Przykładowy program śledzenia punktowego bez transformacji danych laserowych z osią rozszerzoną
 
-焊枪对齐前置激光处的偏移量后，机器人扩展轴运动并执行“边记录边复现”的流程，前置的激光跟踪器先记录扩展轴运动时工件焊缝的变化轨迹，经过设定延迟距离或时间后在焊枪处调整。
-  
-激光寻位点位置获取功能
------------------------------------------------------------
+Po dostosowaniu przesunięcia palnika spawalniczego względem przedniego lasera, oś rozszerzona robota porusza się i wykonuje proces „rejestracji i odtwarzania jednoczesnego”. Przedni czujnik śledzenia laserowego najpierw rejestruje trajektorię zmiany spoiny podczas ruchu osi rozszerzonej, a po ustawionej odległości lub czasie opóźnienia dokonuje korekty przy palniku spawalniczym.
 
-机器人激光寻位点位置获取系统构成
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Funkcja pobierania pozycji punktu lokalizacji laserowej
+-------------------------------------------------------
+
+Struktura systemu pobierania pozycji punktu lokalizacji laserowej robota
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. figure:: robot_peripherals/260.png
    :align: center
    :width: 6in
 
-.. centered:: 图表 8.16‑1 机器人激光寻位点位置获取系统构成拓扑图
-.. centered:: 系统中，（a）为计算机，（b）为机器人及其控制箱，（c）为激光传感器。
+.. centered:: Schemat 8.16‑1 Topologia struktury systemu pobierania pozycji punktu lokalizacji laserowej robota
+.. centered:: W systemie (a) to komputer, (b) to robot i jego szafa sterownicza, (c) to czujnik laserowy.
 
-激光传感器通信配置
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Konfiguracja komunikacji czujnika laserowego
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-打开WebApp，依次点击“初始设置”->“外设”->“线激光传感器”，对传感器通信进行配置。
+Otwórz WebApp, kolejno kliknij „Ustawienia początkowe” -> „Urządzenia peryferyjne” -> „Czujnik lasera liniowego”, aby skonfigurować komunikację czujnika.
 
 .. figure:: robot_peripherals/245.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.16‑2 传感器通信配置
+.. centered:: Schemat 8.16‑2 Konfiguracja komunikacji czujnika
 
-激光寻位点位置获取功能
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Funkcja pobierania pozycji punktu lokalizacji laserowej
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-获取激光寻位点位置的操作流程如下：
+Procedura operacyjna pobierania pozycji punktu lokalizacji laserowej jest następująca:
 
-**Step 1**:激光寻位之前首先指定寻位开始点“seamStartPt1”、“seamStartPt2”，然后点击“示教程序”、“程序编程”，选择“点到点”，让激光传感器的光线靠近焊缝1起点附近的寻位开始点1 “seamStartPt1”。
+**Krok 1**: Przed lokalizacją laserową najpierw określ punkty początkowe lokalizacji „seamStartPt1”, „seamStartPt2”. Następnie kliknij „Program nauczania”, „Programowanie”, wybierz „Punkt-punkt”, aby skierować wiązkę lasera czujnika laserowego w pobliże punktu początkowego lokalizacji 1 „seamStartPt1” w pobliżu punktu początkowego spoiny 1.
 
 .. figure:: robot_peripherals/261.png
    :align: center
    :width: 6in
 
-.. centered:: 图表 8.16‑3 添加移动到寻位开始点1指令
+.. centered:: Schemat 8.16‑3 Dodanie instrukcji ruchu do punktu początkowego lokalizacji 1
 
-**Step 2**:在指令类型中点击“寻位开始”后，选择标定的传感器坐标系，设置寻位方向、速度、长度以及最大寻位时间，点击“添加”按钮。然后点击“寻位结束”，点击“添加”按钮。
+**Krok 2**: W typie instrukcji kliknij „Rozpocznij lokalizację”. Następnie wybierz skalibrowany układ współrzędnych czujnika. Ustaw kierunek lokalizacji, prędkość, długość i maksymalny czas lokalizacji. Kliknij przycisk „Dodaj”. Następnie kliknij „Zakończ lokalizację” i kliknij „Dodaj”.
 
 .. figure:: robot_peripherals/262.png
    :align: center
    :width: 6in
 
-.. centered:: 图表 8.16‑4 添加寻位开始指令
+.. centered:: Schemat 8.16‑4 Dodanie instrukcji rozpoczęcia lokalizacji
 
-**Step 3**:选择“传感器取点运动”，坐标系名称选择标定的“激光传感器”，运动方式选择“PTP”或者“LIN”，设置调试速度以及选择“是否配置位姿”，点击“添加”按钮，点击“应用”按钮添加至LUA程序。
+**Krok 3**: Wybierz „Ruch do punktu pobranego przez czujnik”. Wybierz nazwę układu współrzędnych jako skalibrowany „Czujnik laserowy”. Wybierz sposób ruchu jako „PTP” lub „LIN”. Ustaw prędkość testową i wybierz „Czy konfigurować pozy i orientację”. Kliknij „Dodaj”, a następnie kliknij „Zastosuj”, aby dodać do programu LUA.
 
 .. figure:: robot_peripherals/263.png
    :align: center
    :width: 6in
 
-.. centered:: 图表 8.16‑5 添加传感器取点运动指令
+.. centered:: Schemat 8.16‑5 Dodanie instrukcji ruchu do punktu pobranego przez czujnik
 
-**Step 4**:在“程序编程”界面点击“切换模式”按钮，将变量“pos”改为“pos1”，并删除移动到寻位点指令。
+**Krok 4**: W interfejsie „Programowanie” kliknij przycisk „Przełącz tryb”, aby przełączyć w tryb edycji. Zmień zmienną „pos” na „pos1” i usuń instrukcję ruchu do punktu lokalizacji.
 
 .. figure:: robot_peripherals/264.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.16‑6 程序编程切换模式
+.. centered:: Schemat 8.16‑6 Przełączanie trybu programowania
 
 .. figure:: robot_peripherals/265.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.16‑7 修改获取激光寻位点程序
+.. centered:: Schemat 8.16‑7 Modyfikacja programu pobierania punktu lokalizacji laserowej
 
-**Step 5**:按照步骤Step1-Step4，进行第二条焊缝的寻位，获取激光寻位点位置。
+**Krok 5**: Zgodnie z krokami Krok 1-Krok 4, przeprowadź lokalizację drugiej spoiny, aby pobrać pozycję punktu lokalizacji laserowej.
 
 .. figure:: robot_peripherals/266.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.16‑8 第二条焊缝寻位点获取
+.. centered:: Schemat 8.16‑8 Pobieranie punktu lokalizacji drugiej spoiny
 
-大儒DFC力控打磨头应用
------------------------------------------------------------
+Zastosowanie głowicy szlifierskiej DARU DFC ze sterowaniem siłą
+---------------------------------------------------------------
 
-概述
-~~~~~~~~~~~~~~~~~~~~~~~
+Przegląd
+~~~~~~~~
 
-在机器人末端安装DFC打磨头可帮助机器人快速部署不同场景的打磨、抛光、去除毛刺等工作，可针对不同尺寸、形状的工件自定义打磨力控大小，提高打磨工作的精度和效果。
+Zainstalowanie głowicy szlifierskiej DFC na końcówce robota może pomóc w szybkim wdrożeniu stacji roboczych do szlifowania, polerowania, usuwania zadziorów itp. w różnych scenariuszach. Umożliwia dostosowanie wielkości sterowania siłą szlifowania do przedmiotów o różnych rozmiarach i kształtach, zwiększając dokładność i efekt pracy szlifierskiej.
 
-硬件描述
-+++++++++++++++++++++++++++++
-协作机器人通过以太网与大儒DFC打磨头进行通讯控制，在WebApp上生成大儒DFC打磨头通讯协议，协议将控制数据通过TCPIP发送至大儒力控控制器模块，模块再将收到的控制数据发送至DFC力控执行器，从而实现对打磨头的控制。其中力控控制器模块为以太网通讯的服务端，可连接两个通道的打磨头执行器。
+Opis sprzętu
+++++++++++++
+
+Robot współpracujący komunikuje się i steruje głowicą szlifierską DARU DFC przez Ethernet. Na WebApp generowany jest protokół komunikacji dla głowicy szlifierskiej DARU DFC. Protokół wysyła dane sterujące przez TCP IP do modułu sterownika DARU ze sterowaniem siłą, który z kolei wysyła odebrane dane sterujące do aktuatora DFC ze sterowaniem siłą, umożliwiając w ten sposób sterowanie głowicą szlifierską. Moduł sterownika ze sterowaniem siłą jest serwerem komunikacji Ethernet i może podłączyć dwa kanały aktuatorów głowicy szlifierskiej.
 
 .. figure:: robot_peripherals/267.png
    :align: center
    :width: 6in
 
-.. centered:: 图表 8.17‑1 协作机器人大儒DFC打磨头应用
+.. centered:: Schemat 8.17‑1 Zastosowanie głowicy szlifierskiej DARU DFC robota współpracującego
 
-力控控制器模块需进行如下配置：以太网端配置为IP地址为：192.168.58.88，端口号为2000。 
+Moduł sterownika ze sterowaniem siłą wymaga następującej konfiguracji: Skonfiguruj stronę Ethernet z adresem IP: 192.168.58.88, numerem portu: 2000.
 
-功能配置
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-打开WebApp，依次点击“初始设置”、“外设”、“打磨”；打磨头的控制类型有已适配设备和外设开放协议两种：
-已适配设备：对已适配的打磨头设备类型自动生成加载开放协议，不需要用户撰写。
-外设开放协议：用户通过lua撰写需要适配的打磨头开放协议实现通信控制。
+Konfiguracja funkcji
+~~~~~~~~~~~~~~~~~~~~
+
+Otwórz WebApp, kolejno kliknij „Ustawienia początkowe”, „Urządzenia peryferyjne”, „Szlifowanie”. Typy sterowania głowicą szlifierską to dwa: „Urządzenia dostosowane” i „Otwarty protokół urządzeń peryferyjnych”:
+Urządzenia dostosowane: Dla dostosowanych typów urządzeń głowicy szlifierskiej, otwarty protokół jest automatycznie generowany i ładowany, nie wymaga pisania przez użytkownika.
+Otwarty protokół urządzeń peryferyjnych: Użytkownik pisze w Lua otwarty protokół głowicy szlifierskiej, który ma być dostosowany, aby zaimplementować komunikację i sterowanie.
 
 .. figure:: robot_peripherals/268.png
    :align: center
    :width: 6in
 
-.. centered:: 图表 8.17‑2 打磨控制类型
+.. centered:: Schemat 8.17‑2 Typ sterowania szlifowaniem
 
-已适配设备配置
-+++++++++++++++++++++++++++++++++++++++
+Konfiguracja urządzeń dostosowanych
++++++++++++++++++++++++++++++++++++
 
-打开WebApp，依次点击“初始设置”、“外设”、“打磨头”、“已适配设备”。设备状态中的类型选择“大儒DFC打磨头”，点击“配置”，则会自动加载内嵌的外设开放协议“CtrlDev_DARUDFCPOLISH.lua”
+Otwórz WebApp, kolejno kliknij „Ustawienia początkowe”, „Urządzenia peryferyjne”, „Głowica szlifierska”, „Urządzenia dostosowane”. Wybierz typ w stanie urządzenia jako „Głowica szlifierska DARU DFC”. Kliknij „Konfiguruj”. Spowoduje to automatyczne załadowanie wbudowanego otwartego protokołu urządzeń peryferyjnych „CtrlDev_DARUDFCPOLISH.lua”.
 
 .. figure:: robot_peripherals/269.png
    :align: center
    :width: 6in
 
-.. centered:: 图表 8.17‑3 大儒DFC设备外设开放协议自动加载
- 
-在确保硬件链路连接正确的情况下，可启动开放协议，当运行状态为绿色并且右侧Polish状态反馈的通信状态为建立连接时说明机器人成功与打磨头控制器建立通信。此时可通过参数配置，配置需要设置力控的打磨头通道及设定力大小，开放协议会循环发送设定值、通道、机器人当前的rx、ry、rz至打磨头，如图2-3所示。此外Polish状态反馈也会实时显示当前打磨头反馈的力控值和力控超限警告，当产生警告时，页面右上角也会进行报警提醒，如图2-4所示。
+.. centered:: Schemat 8.17‑3 Automatyczne ładowanie otwartego protokołu urządzeń peryferyjnych dla urządzenia DARU DFC
+
+Po upewnieniu się, że połączenie sprzętowe jest prawidłowe, możesz uruchomić otwarty protokół. Gdy stan działania jest zielony, a stan komunikacji w pasku sprzężenia zwrotnego stanu Polish po prawej stronie wskazuje nawiązanie połączenia, oznacza to, że robot pomyślnie nawiązał komunikację ze sterownikiem głowicy szlifierskiej. W tym momencie, poprzez konfigurację parametrów, można skonfigurować kanał głowicy szlifierskiej ze sterowaniem siłą, który ma być ustawiony, oraz wielkość siły. Otwarty protokół będzie cyklicznie wysyłał ustawione wartości, kanał, bieżące rx, ry, rz robota do głowicy szlifierskiej, jak pokazano na rysunku 2-3. Ponadto pasek sprzężenia zwrotnego stanu Polish będzie również wyświetlał w czasie rzeczywistym bieżącą wartość siły zwrotnej z głowicy szlifierskiej i ostrzeżenia o przekroczeniu zakresu siły. Gdy pojawi się ostrzeżenie, w prawym górnym rogu strony pojawi się również alarm, jak pokazano na rysunku 2-4.
 
 .. figure:: robot_peripherals/270.png
    :align: center
    :width: 6in
 
-.. centered:: 图表 8.17‑4 DFC打磨头页面设置及状态反馈
+.. centered:: Schemat 8.17‑4 Ustawienia strony głowicy szlifierskiej DFC i sprzężenie zwrotne stanu
 
 .. figure:: robot_peripherals/271.png
    :align: center
    :width: 6in
 
-.. centered:: 图表 8.17‑5 DFC打磨头力控超限报警
+.. centered:: Schemat 8.17‑5 Alarm przekroczenia zakresu siły głowicy szlifierskiej DFC
 
-外设开放协议下载
-+++++++++++++++++++++++++++++++++++++++
+Pobieranie otwartego protokołu urządzeń peryferyjnych
++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-在“外设开放协议”中点击“下载”按钮，即可将协议下载到本地计算机。外设开放协议为一个循环执行的LUA程序，程序在每个循环执行如下步骤：
+Kliknij przycisk „Pobierz” w „Otwartym protokole urządzeń peryferyjnych”, aby pobrać protokół na komputer lokalny. Otwarty protokół urządzeń peryferyjnych to program LUA wykonywany cyklicznie. Program wykonuje następujące kroki w każdym cyklu:
 
-①从机器人中读取DFC打磨头的控制数据；
+① Odczytuje dane sterujące głowicą szlifierską DFC z robota;
 
-②通过socket将控制数据写入到DFC打磨头中；
+② Zapisuje dane sterujące do głowicy szlifierskiej DFC przez socket;
 
-③通过socket从DFC打磨头读取状态数据；
+③ Odczytuje dane stanu z głowicy szlifierskiej DFC przez socket;
 
-④向机器人中反馈DFC打磨头状态数据；
+④ Przekazuje dane stanu głowicy szlifierskiej DFC z powrotem do robota;
 
-通讯协议循环执行实现机器人与打磨头的通讯控制。在通讯协议中用户可自定义循环周期、需要连接的服务端端口及IP。
+Cykliczne wykonywanie protokołu komunikacji umożliwia komunikację i sterowanie między robotem a głowicą szlifierską. W protokole komunikacji użytkownik może dostosować cykl pętli, port serwera i IP, z którymi ma się połączyć.
 
-以下为大儒DFC打磨头通讯协议代码示例：
+Poniżej przykładowy kod protokołu komunikacji dla głowicy szlifierskiej DARU DFC:
 
 .. code-block:: 
     :linenos:
@@ -6820,68 +6779,68 @@ CNC功能包支持在示教程序中调用控制指令，并实时获取机床�
         end    
     end
 
-DFC打磨头LUA程序应用
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Zastosowanie programu LUA dla głowicy szlifierskiej DFC
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-在机器人LUA程序中增加DFC力控配置和通道切换、状态获取等指令，配合机器人运动指令，可以灵活、便捷的实现打磨应用。
-打开WebApp，依次点击“示教程序”、“程序编程”，新建LUA程序“testDFC.lua”。
+Dodając do programu LUA robota instrukcje konfiguracji sterowania siłą DFC, przełączania kanałów, pobierania stanu itp., w połączeniu z instrukcjami ruchu robota, można elastycznie i wygodnie zrealizować zastosowania szlifowania.
+Otwórz WebApp, kolejno kliknij „Program nauczania”, „Programowanie”, utwórz nowy program LUA „testDFC.lua”.
 
 .. figure:: robot_peripherals/272.png
    :align: center
    :width: 6in
 
-.. centered:: 图表 8.17‑6 新建“testDFC.lua”程序
+.. centered:: Schemat 8.17‑6 Tworzenie nowego programu „testDFC.lua”
 
-选择指令类型为“外设指令”，在外设指令中点击“打磨设备”按钮。此时在WebApp右侧出现“Polish”打磨指令添加页面，设备类型选择“大儒DFC打磨头”。
+Wybierz typ instrukcji jako „Instrukcje urządzeń peryferyjnych”. W instrukcjach urządzeń peryferyjnych kliknij przycisk „Urządzenie szlifujące”. W tym momencie po prawej stronie WebApp pojawi się strona dodawania instrukcji szlifowania „Polish”. Wybierz typ urządzenia jako „Głowica szlifierska DARU DFC”.
 
 .. figure:: robot_peripherals/273.png
    :align: center
    :width: 6in
 
-.. centered:: 图表 8.17‑7 打磨头指令添加
+.. centered:: Schemat 8.17‑7 Dodawanie instrukcji głowicy szlifierskiej
 
-打磨头控制指令添加
-++++++++++++++++++++++++++++++++++++++++++++
+Dodawanie instrukcji sterowania głowicą szlifierską
++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-在LUA程序中编写打磨头控制指令可以对DFC进行力控设置和通道选择。
+W programie LUA napisz instrukcje sterowania głowicą szlifierską, aby móc ustawić sterowanie siłą DFC i wybrać kanał.
 
-在打磨设备指令添加页面中点击“设置DFC”，选择打磨头通道模式为“2”，设定力为“10”。点击“添加”按钮，即在“程序预览”中添加打磨头设置指令。
+Na stronie dodawania instrukcji urządzenia szlifującego kliknij „Ustaw DFC”. Wybierz tryb kanału głowicy szlifierskiej jako „2”. Ustaw siłę na „10”. Kliknij przycisk „Dodaj”. W „Podglądzie programu” zostanie dodana instrukcja ustawiania głowicy szlifierskiej.
 
 .. figure:: robot_peripherals/274.png
    :align: center
    :width: 6in
 
-.. centered:: 图表 8.17‑8 添加打磨头控制指令
- 
-打磨头状态获取指令添加
-++++++++++++++++++++++++++++++++++++++++++++++++
+.. centered:: Schemat 8.17‑8 Dodawanie instrukcji sterowania głowicą szlifierską
 
-点击“获取DFC数据”，依次点击“添加”、“应用”按钮。即在“testDFC.lua”中添加一条获取打磨头数据的指令“GetDFCState()”。
+Dodawanie instrukcji pobierania stanu głowicy szlifierskiej
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Kliknij „Pobierz dane DFC”. Kolejno kliknij „Dodaj”, „Zastosuj”. W „testDFC.lua” zostanie dodana instrukcja pobierania danych głowicy szlifierskiej „GetDFCState()”.
 
 .. figure:: robot_peripherals/275.png
    :align: center
    :width: 6in
 
-.. centered:: 图表 8.17‑9 添加获取打磨头状态指令
+.. centered:: Schemat 8.17‑9 Dodawanie instrukcji pobierania stanu głowicy szlifierskiej
 
-GetDFCState ()指令返回2个数值，分别如下：
+Instrukcja GetDFCState() zwraca 2 wartości, odpowiednio:
 
-**DFCwarn**：力控超限警告 0-正常 1-报警；
+**DFCwarn**: Ostrzeżenie o przekroczeniu zakresu sterowania siłą 0-normalny 1-alarm;
 
-**force**：力控反馈值。
+**force**: Wartość zwrotna siły.
 
-在“testDFC.lua”中用三个变量接收GetDFCState ()函数的返回值。并通过Lua变量查询将上述信息显示在WebApp变量查询显示区中。
+W „testDFC.lua” użyj trzech zmiennych do odbioru wartości zwracanych przez funkcję GetDFCState(). Poprzez zapytanie o zmienną Lua wyświetl powyższe informacje w obszarze wyświetlania zapytań o zmienne w WebApp.
 
 .. figure:: robot_peripherals/276.png
    :align: center
    :width: 6in
 
-.. centered:: 图表 8.17‑10 获取打磨头状态程序
+.. centered:: Schemat 8.17‑10 Program pobierania stanu głowicy szlifierskiej
 
-应用示例
-+++++++++++++++++++++++++++++++++++++++
+Przykład zastosowania
++++++++++++++++++++++
 
-以下为DFC 打磨头控制及监控LUA程序示例：
+Poniżej przykład programu LUA do sterowania i monitorowania głowicy szlifierskiej DFC:
 
 .. code-block:: 
     :linenos:
@@ -6903,60 +6862,61 @@ GetDFCState ()指令返回2个数值，分别如下：
         SetDO(0,0,0,0)
     end
 
-末端透传功能
-----------------------------------------------------------
+Funkcja transmisji danych przez końcówkę
+----------------------------------------
 
-概述
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-用户可通过配置末端透传功能，基于末端外设开放协议+CNDE+SDK接口，实现任意末端外设的非周期数据收发及周期数据获取的功能。其中周期数据需要撰写末端lua开放协议并上传应用到末端，实现周期性与外设交互读取，并通过CNDE配置获取外设反馈周期数据，非周期数据通过SDK接口实现数据帧的收发。 
+Przegląd
+~~~~~~~~
 
-使用说明
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Użytkownik może skonfigurować funkcję transmisji danych przez końcówkę, aby zrealizować funkcję wysyłania i odbierania danych nieokresowych oraz pozyskiwania danych okresowych dla dowolnych urządzeń peryferyjnych końcówki, w oparciu o otwarty protokół urządzeń peryferyjnych końcówki + CNDE + interfejs SDK. Dane okresowe wymagają napisania otwartego protokołu Lua końcówki i przesłania go do zastosowania na końcówce, aby zrealizować cykliczną interakcję z urządzeniami peryferyjnymi i odczyt danych. Przez konfigurację CNDE można uzyskać dane okresowe sprzężenia zwrotnego z urządzeń peryferyjnych. Dane nieokresowe są wysyłane i odbierane przez interfejs SDK.
 
-**Step1**：打开机器人页面选择“初始设置”->“外设”->“末端透传”，上传并应用需要适配外设的末端lua开放协议。
+Instrukcja użycia
+~~~~~~~~~~~~~~~~~~~
+
+**Krok 1**: Otwórz stronę robota, wybierz „Ustawienia początkowe” -> „Urządzenia peryferyjne” -> „Transmisja danych przez końcówkę”. Prześlij i zastosuj otwarty protokół Lua końcówki dla urządzeń peryferyjnych, które mają być dostosowane.
 
 .. figure:: robot_peripherals/289.png
    :align: center
    :width: 6in
 
-.. centered:: 图表 8.18‑1 末端透传协议上传
- 
-**Step2**：重启机器人后，打开“末端协议启用”按钮，即可开启该功能。需要注意的是开启该功能后，其他已适配末端设备将不可同时使用。
+.. centered:: Schemat 8.18‑1 Przesyłanie protokołu transmisji danych przez końcówkę
+
+**Krok 2**: Po ponownym uruchomieniu robota otwórz przycisk „Włącz protokół końcówki”, aby włączyć tę funkcję. Należy pamiętać, że po włączeniu tej funkcji inne już dostosowane urządzenia końcowe nie będą mogły być używane jednocześnie.
 
 .. figure:: robot_peripherals/290.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 8.18‑2 末端透传协议开启
- 
-**Step3**：打开机器人页面选择“示教程序”->“外设指令”->“末端透传”，即可在末端透传开启后，通过lua接口进行末端非周期数据的收发及周期数据的获取的调试测试，实际使用需要配合机器人的CNDE功能及SDK进行使用。其中非周期指令发送与接受数据长度最长16byte，周期数据最大128byte。
+.. centered:: Schemat 8.18‑2 Włączanie protokołu transmisji danych przez końcówkę
+
+**Krok 3**: Otwórz stronę robota, wybierz „Program nauczania” -> „Instrukcje urządzeń peryferyjnych” -> „Transmisja danych przez końcówkę”. Po włączeniu transmisji danych przez końcówkę, można za pomocą interfejsu lua przeprowadzić testowanie wysyłania i odbierania danych nieokresowych oraz pozyskiwania danych okresowych na końcówce. Rzeczywiste użycie wymaga współpracy z funkcją CNDE robota i SDK. Długość wysyłanych i odbieranych danych nieokresowych wynosi maksymalnie 16 bajtów, a dane okresowe maksymalnie 128 bajtów.
 
 .. figure:: robot_peripherals/291.png
    :align: center
    :width: 6in
 
-.. centered:: 图表 8.18‑3 末端透传非周期数据lua接口
+.. centered:: Schemat 8.18‑3 Interfejs lua dla danych nieokresowych transmisji danych przez końcówkę
 
 .. figure:: robot_peripherals/292.png
    :align: center
    :width: 6in
 
-.. centered:: 图表 8.18‑4 末端透传周期数据lua接口
+.. centered:: Schemat 8.18‑4 Interfejs lua dla danych okresowych transmisji danych przez końcówkę
 
-末端透传功能Lua脚本
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Skrypt Lua funkcji transmisji danych przez końcówkę
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-概述
-++++++++++++++++++++++++
+Przegląd
+++++++++
 
-Lua开放协议功能新增通用数据透传接口，根据约定的Lua C接口编写Lua脚本，配合CNDE，实现对末端挂载设备的数据收发。
+Funkcja otwartego protokołu Lua zyskała nowy interfejs ogólnej transmisji danych. Zgodnie z ustalonym interfejsem C Lua, napisz skrypt Lua, który we współpracy z CNDE umożliwi wysyłanie i odbieranie danych do i z urządzeń zamontowanych na końcówce.
 
-末端Lua脚本编写说明
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Opis pisania skryptu Lua końcówki
++++++++++++++++++++++++++++++++++
 
-Rs485发送与接收Lua C注册函数
-*********************************************************************
-（1）Rs485发送Lua C注册函数：EndTxCustomData()。此函数将指令通过Rs485发送给挂载设备。
+Funkcje zarejestrowane w C Lua dla wysyłania i odbierania przez Rs485
+***************************************************************************
+（1）Funkcja zarejestrowana w C Lua dla wysyłania przez Rs485: EndTxCustomData(). Ta funkcja wysyła instrukcje przez Rs485 do zamontowanego urządzenia.
 
 .. code-block:: 
     :linenos:
@@ -6964,9 +6924,9 @@ Rs485发送与接收Lua C注册函数
     Tcmd={0}
     EndTxCustomData(Tcmd)
 
-.. centered:: 代码8.18-1 Lua脚本说明
+.. centered:: Kod 8.18-1 Opis skryptu Lua
 
-（2）Rs485接收Lua C注册函数：EndRxCustomData()。此函数接收挂载设备通过Rs485反馈的响应指令。
+（2）Funkcja zarejestrowana w C Lua dla odbierania przez Rs485: EndRxCustomData(). Ta funkcja odbiera instrukcje odpowiedzi od zamontowanego urządzenia przesłane przez Rs485.
 
 .. code-block:: 
     :linenos:
@@ -6974,12 +6934,12 @@ Rs485发送与接收Lua C注册函数
     Rcmd={0}
     EndRxCustomData(Rcmd)
 
-.. centered:: 代码8.18-2 Lua脚本说明
+.. centered:: Kod 8.18-2 Opis skryptu Lua
 
-非周期数据下发与反馈Lua C注册函数
-*********************************************************************
+Funkcje zarejestrowane w C Lua dla wysyłania i odbierania danych nieokresowych
+************************************************************************************
 
-（1）非周期数据下发Lua C注册函数：GetHostTransparentCmd()。通过此函数获取控制器是否下发非周期数据指令，有下发指令后获取非周期数据指令。非周期数据指令发送长度最大16Bytes。
+（1）Funkcja zarejestrowana w C Lua dla wysyłania danych nieokresowych: GetHostTransparentCmd(). Ta funkcja sprawdza, czy sterownik wysłał instrukcję danych nieokresowych. Jeśli tak, pobiera instrukcję danych nieokresowych. Maksymalna długość wysyłanej instrukcji danych nieokresowych wynosi 16 bajtów.
 
 .. code-block:: 
     :linenos:
@@ -6990,9 +6950,9 @@ Rs485发送与接收Lua C注册函数
     if(RxFlag == 1)then
     EndTxCustomData(Tcmd)
 
-.. centered:: 代码8.18-3 Lua脚本说明
+.. centered:: Kod 8.18-3 Opis skryptu Lua
 
-（2）非周期数据指令反馈Lua C注册函数：BackHostTransparentCmd()。通过此函数将挂载设备响应的非周期数据指令透传给控制器。非周期数据指令接收长度最大16Bytes。
+（2）Funkcja zarejestrowana w C Lua dla zwracania instrukcji danych nieokresowych: BackHostTransparentCmd(). Ta funkcja przekazuje instrukcję danych nieokresowych odpowiedzi od zamontowanego urządzenia z powrotem do sterownika. Maksymalna długość odbieranej instrukcji danych nieokresowych wynosi 16 bajtów.
 
 .. code-block:: 
     :linenos:
@@ -7001,12 +6961,12 @@ Rs485发送与接收Lua C注册函数
     EndRxCustomData(Rcmd)
     BackHostTransparentCmd(Rcmd)
 
-.. centered:: 代码8.18-4 Lua脚本说明
+.. centered:: Kod 8.18-4 Opis skryptu Lua
 
-周期数据反馈Lua C注册函数
-*********************************************************************
+Funkcje zarejestrowane w C Lua dla zwracania danych okresowych
+*******************************************************************
 
-（1）周期数据反馈Lua C注册函数：SetDWrodInputBack()。通过此函数将读取到的挂载设备周期数据透传给控制器。周期数据反馈最大128Bytes。
+（1）Funkcja zarejestrowana w C Lua dla zwracania danych okresowych: SetDWrodInputBack(). Ta funkcja przekazuje odczytane dane okresowe z zamontowanego urządzenia z powrotem do sterownika. Maksymalna ilość zwracanych danych okresowych to 128 bajtów.
 
 .. code-block:: 
     :linenos:
@@ -7016,16 +6976,16 @@ Rs485发送与接收Lua C注册函数
     PacketNum=0
     TotalNum,PacketNum=SetDWrodInputBack(R)
 
-.. centered:: 代码8.18-5 Lua脚本说明
+.. centered:: Kod 8.18-5 Opis skryptu Lua
 
-以倍益康艾灸头为例编写的Lua脚本
+Przykład skryptu Lua napisanego dla głowicy terapeutycznej Beiyikang
 *********************************************************************
 
 .. code-block:: 
     :linenos:
 
     --***
-    --维持末端其他功能正常运行
+    --Utrzymanie normalnego działania innych funkcji końcówki
     while(1)
     do
     IwdgTaskHandle()
@@ -7039,10 +6999,10 @@ Rs485发送与接收Lua C注册函数
     end
     --***
     --***
-    --非周期数据下发示例
-    Rcmd = {0}       --存储挂载设备响应的非周期数据
-    Tcmd = {0}       --存储控制器下发的非周期数据
-    RxFlag=0         --控制器是否下发指令标志位
+    --Przykład wysyłania danych nieokresowych
+    Rcmd = {0}       --Przechowuje dane nieokresowe odpowiedzi od zamontowanego urządzenia
+    Tcmd = {0}       --Przechowuje dane nieokresowe wysłane przez sterownik
+    RxFlag=0         --Flaga, czy sterownik wysłał instrukcję
     RxFlag = GetHostTransparentCmd(Tcmd)
     if(RxFlag == 1)then
     EndTxCustomData(Tcmd)
@@ -7054,16 +7014,16 @@ Rs485发送与接收Lua C注册函数
     end
     --***
     --***
-    --周期数据下发示例
-    R = {0}          --存储挂载设备响应的周期数据
-    T = {0xAB,0xBA,0x14,0x01,0xAA,0x24}     --查询挂载设备周期数据指令
+    --Przykład wysyłania danych okresowych
+    R = {0}          --Przechowuje dane okresowe odpowiedzi od zamontowanego urządzenia
+    T = {0xAB,0xBA,0x14,0x01,0xAA,0x24}     --Instrukcja zapytania o dane okresowe od zamontowanego urządzenia
     if TotalNum==0 then
     EndTxCustomData(T)
     DelayMs(35)
     EndRxCustomData(R)
     end
-    TotalNum =0      --周期数据如需分包，总分包数
-    PacketNum=0     --当前包序号
+    TotalNum =0      --Jeśli dane okresowe wymagają podziału na pakiety, całkowita liczba pakietów
+    PacketNum=0     --Numer bieżącego pakietu
     if((#R==19)and(R[1]==0xAB)and(R[2]==0xBA)and(R[3]==0x14)and(R[4]==0x0E))then
     TotalNum,PacketNum=SetDWrodInputBack(R)
     if PacketNum>TotalNum then
@@ -7074,4 +7034,3 @@ Rs485发送与接收Lua C注册函数
     --***
     LuaGc()
     end
-

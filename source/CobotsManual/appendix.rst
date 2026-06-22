@@ -1,472 +1,472 @@
-附录
+Dodatek
 ========
 
 .. toctree:: 
   :maxdepth: 5
 
-附录1：运动控制器错误及处理方式
---------------------------------
+Dodatek 1: Błędy kontrolera ruchu i sposoby ich rozwiązywania
+-------------------------------------------------------------------
 
 .. csv-table:: 
-   :header: "主故障码", "子故障码", "描述"
+   :header: "Główny kod błędu", "Podrzędny kod błędu", "Opis"
    :widths: 20, 10, 70
 
-   "0-无故障", "0", "无故障"
-   "1-指令点错误", "1", "关节指令点错误，可复位"
-   "1-指令点错误", "2", "直线目标点错误（包括工具不符），可复位"
-   "1-指令点错误", "3", "圆弧中间点错误（包括工具不符），可复位"
-   "1-指令点错误", "4", "圆弧目标点错误（包括工具不符），可复位"
-   "1-指令点错误", "5", "圆弧指令点间距过小，可复位"
-   "1-指令点错误", "6", "整圆/螺旋线中间点1错误（包括工具不符），可复位"
-   "1-指令点错误", "7", "整圆/螺旋线中间点2错误（包括工具不符），可复位"
-   "1-指令点错误", "8", "整圆/螺旋线中间点3错误（包括工具不符），可复位"
-   "1-指令点错误", "9", "整圆/螺旋线指令点间距过小，可复位"
-   "1-指令点错误", "10", "TPD指令点错误，可复位"
-   "1-指令点错误", "11", "TPD指令工具与当前工具不符，可复位"
-   "1-指令点错误", "12", "TPD当前指令与下一指令起始点偏差过大，可复位"
-   "1-指令点错误", "13", "内外部工具切换错误，可复位"
-   "1-指令点错误", "14", "新螺旋线起点错误，可复位"
-   "1-指令点错误", "15", "新样条曲线指令点错误，可复位"
-   "1-指令点错误", "17", "PTP关节指令超限，可复位"
-   "1-指令点错误", "18", "TPD关节指令超限，可复位"
-   "1-指令点错误", "19", "LIN/ARC下发关节指令超限，可复位"
-   "1-指令点错误", "20", "笛卡尔空间内指令超速，不可复位"
-   "1-指令点错误", "21", "关节空间内扭矩指令超限，可复位"
-   "1-指令点错误", "22", "JOG关节指令超限，可复位"
-   "1-指令点错误", "23", "轴1关节空间内指令速度超限，可复位"
-   "1-指令点错误", "24", "轴2关节空间内指令速度超限，可复位"
-   "1-指令点错误", "25", "轴3关节空间内指令速度超限，可复位"
-   "1-指令点错误", "26", "轴4关节空间内指令速度超限，可复位"
-   "1-指令点错误", "27", "轴5关节空间内指令速度超限，可复位"
-   "1-指令点错误", "28", "轴6关节空间内指令速度超限，可复位"
-   "1-指令点错误", "29", "关节反馈速度超限，不可复位"
-   "1-指令点错误", "30", "关节指令与反馈偏差过大，不可复位，需要重启"
-   "1-指令点错误", "31", "DMP目标点错误（包括工具不符），可复位"
-   "1-指令点错误", "33", "下一指令关节配置发生变化（下一指令存在奇异位姿，请使用PTP指令或更改下一指令点），可复位"
-   "1-指令点错误", "34", "当前指令关节配置发生变化（下一指令存在奇异位姿，请使用PTP指令或更改下一指令点），可复位"
-   "1-指令点错误", "35", "LIN指令中关节速度超限，可复位"
-   "1-指令点错误", "36", "LIN指令自适应速度超出阈值，可复位"
-   "1-指令点错误", "37", "轨迹中存在不可到达点，可复位"
-   "1-指令点错误", "38", "轨迹中存在不可到达点-奇异位姿，可复位"
-   "1-指令点错误", "49", "指令错误，ARCSTART和ARCEND之间只允许LIN和ARC指令，可复位"
-   "1-指令点错误", "50", "指令错误，WEAVESTART和WEAVEEND之间只允许LIN和ARC指令，可复位"
-   "1-指令点错误", "51", "摆焊参数错误，可复位"
-   "1-指令点错误", "52", "摆焊指令点间距过小，可复位"
-   "1-指令点错误", "53", "摆动轨迹中存在不可达到点位-奇异位姿，可复位"
-   "1-指令点错误", "54", "摆动轨迹中存在不可达到点位-关节指令超限，可复位"
-   "1-指令点错误", "55", "摆动轨迹中存在不可达到点位-规划异常（工具z与前进方向x夹角重合），可复位"
-   "1-指令点错误", "56", "摆动轨迹中存在不可达到点位-规划异常（圆弧路点错误），可复位"
-   "1-指令点错误", "65", "激光传感器指令偏差过大，可复位"
-   "1-指令点错误", "66", "激光传感器指令中断，焊缝跟踪提前结束，可复位"
-   "1-指令点错误", "81", "外部轴指令速度超限，可复位"
-   "1-指令点错误", "82", "外部轴指令与反馈偏差过大，不可复位，需要回零或重启"
-   "1-指令点错误", "83", "扩展外设（外部轴/IO）通信异常，可复位"
-   "1-指令点错误", "84", "扩展外设（外部轴/IO）通信丢包异常，可复位"
-   "1-指令点错误", "97", "传送带跟踪-起始点与参考点姿态变化过大，可复位"
-   "1-指令点错误", "113", "恒力控制-X方向超过最大调整距离，可复位"
-   "1-指令点错误", "114", "恒力控制-Y方向超过最大调整距离，可复位"
-   "1-指令点错误", "115", "恒力控制-Z方向超过最大调整距离，可复位"
-   "1-指令点错误", "116", "恒力控制-RX方向超过最大调整角度，可复位"
-   "1-指令点错误", "117", "恒力控制-RY方向超过最大调整角度，可复位"
-   "1-指令点错误", "118", "恒力控制-RZ方向超过最大调整角度，可复位"
-   "1-指令点错误", "119", "外部传感器数据错误，可复位"
-   "1-指令点错误", "120", "螺旋线探索运动失败，可复位"
-   "1-指令点错误", "121", "旋转插入运动失败，可复位"
-   "1-指令点错误", "122", "直线插入运动失败，可复位"
-   "1-指令点错误", "123", "表面定位运动失败，可复位"
-   "1-指令点错误", "129", "超过最大扭矩记录点数，可复位"
-   "1-指令点错误", "130", "速度切换错误，可复位"
-   "1-指令点错误", "147", "焦点跟随错误，可复位"
-   "1-指令点错误", "148", "姿态速度超限，可复位"
-   "1-指令点错误", "149", "关节状态字反馈异常，可复位"
-   "2-驱动器故障", "1", "1轴驱动器故障，不可复位"
-   "2-驱动器故障", "2", "2轴驱动器故障，不可复位"
-   "2-驱动器故障", "3", "3轴驱动器故障，不可复位"
-   "2-驱动器故障", "4", "4轴驱动器故障，不可复位"
-   "2-驱动器故障", "5", "5轴驱动器故障，不可复位"
-   "2-驱动器故障", "6", "6轴驱动器故障，不可复位"
-   "3-超出软限位故障", "1", "1轴超出软限位故障，可复位"
-   "3-超出软限位故障", "2", "2轴超出软限位故障，可复位"
-   "3-超出软限位故障", "3", "3轴超出软限位故障，可复位"
-   "3-超出软限位故障", "4", "4轴超出软限位故障，可复位"
-   "3-超出软限位故障", "5", "5轴超出软限位故障，可复位"
-   "3-超出软限位故障", "6", "6轴超出软限位故障，可复位"
-   "4-碰撞故障", "1", "1轴碰撞故障，可复位"
-   "4-碰撞故障", "2", "2轴碰撞故障，可复位"
-   "4-碰撞故障", "3", "3轴碰撞故障，可复位"
-   "4-碰撞故障", "4", "4轴碰撞故障，可复位"
-   "4-碰撞故障", "5", "5轴碰撞故障，可复位"
-   "4-碰撞故障", "6", "6轴碰撞故障，可复位"
-   "4-碰撞故障", "7", "末端碰撞故障，可复位"
-   "5-活动从站数量错误", "1", "活动从站数量错误，不可复位"
-   "6-从站错误", "1", "从站掉线，不可复位"
-   "6-从站错误", "2", "从站状态与设置值不一致，不可复位"
-   "6-从站错误", "3", "从站未配置，不可复位"
-   "6-从站错误", "4", "从站配置错误，不可复位"
-   "6-从站错误", "5", "从站初始化错误，不可复位"
-   "6-从站错误", "6", "从站邮箱通信初始化错误，不可复位"
-   "7-IO错误", "1", "通道错误，可复位"
-   "7-IO错误", "2", "数值错误，可复位"
-   "7-IO错误", "3", "WaitDI等待超时，可复位"
-   "7-IO错误", "4", "WaitAI等待超时，可复位"
-   "7-IO错误", "5", "WaitAxleDI等待超时，可复位"
-   "7-IO错误", "6", "WaitAxleAI等待超时，可复位"
-   "7-IO错误", "7", "通道已配置功能错误，可复位"
-   "7-IO错误", "8", "起弧超时，可复位"
-   "7-IO错误", "9", "收弧超时，可复位"
-   "7-IO错误", "10", "寻位超时，可复位"
-   "7-IO错误", "11", "传送带IO检测超时，可复位"
-   "7-IO错误", "12", "WaitAuxDI等待超时，可复位"
-   "7-IO错误", "13", "WaitAuxAI等待超时，可复位"
-   "7-IO错误", "14", "焊丝寻位超时，可复位"
-   "8-夹爪错误", "1", "夹爪运动超时错误，可复位"
-   "9-文件错误", "1", "zbt配置文件版本错误，初始化错误-不可复位"
-   "9-文件错误", "2", "zbt配置文件加载失败，初始化错误-不可复位"
-   "9-文件错误", "3", "user配置文件版本错误，初始化错误-不可复位"
-   "9-文件错误", "4", "user配置文件加载失败，初始化错误-不可复位"
-   "9-文件错误", "5", "exaxis配置文件版本错误，初始化错误-不可复位"
-   "9-文件错误", "6", "exaxis配置文件加载失败，初始化错误-不可复位"
-   "9-文件错误", "7", "机器人型号不一致，需要重新设置-不可复位"
-   "9-文件错误", "8", "dhpara配置文件版本错误，初始化错误-不可复位"
-   "9-文件错误", "9", "dhpara配置文件加载失败，初始化错误-不可复位"
-   "9-文件错误", "10", "机器人型号未设置-不可复位"
-   "9-文件错误", "11", "load配置文件版本错误，初始化错误-不可复位"
-   "9-文件错误", "12", "load配置文件加载失败，初始化错误-不可复位"
-   "9-文件错误", "13", "speed配置文件版本错误，初始化错误-不可复位"
-   "9-文件错误", "14", "speed配置文件加载失败，初始化错误-不可复位"
-   "10-奇异位姿", "1", "奇异位姿"
-   "11-驱动器通信错误", "1", "1轴驱动器通信错误，不可复位"
-   "11-驱动器通信错误", "2", "2轴驱动器通信错误，不可复位"
-   "11-驱动器通信错误", "3", "3轴驱动器通信错误，不可复位"
-   "11-驱动器通信错误", "4", "4轴驱动器通信错误，不可复位"
-   "11-驱动器通信错误", "5", "5轴驱动器通信错误，不可复位"
-   "11-驱动器通信错误", "6", "6轴驱动器通信错误，不可复位"
-   "12-外部轴软限位", "1", "1轴超出软限位，可复位"
-   "12-外部轴软限位", "2", "2轴超出软限位，可复位"
-   "12-外部轴软限位", "3", "3轴超出软限位，可复位"
-   "12-外部轴软限位", "4", "4轴超出软限位，可复位"
-   "13-设置参数错误", "1", "工具号超限，可复位"
-   "13-设置参数错误", "2", "定位完成阈值错误，可复位"
-   "13-设置参数错误", "3", "碰撞等级错误，可复位"
-   "13-设置参数错误", "4", "负载重量错误，可复位"
-   "13-设置参数错误", "5", "负载质心X错误，可复位"
-   "13-设置参数错误", "6", "负载质心Y错误，可复位"
-   "13-设置参数错误", "7", "负载质心Z错误，可复位"
-   "13-设置参数错误", "8", "DI滤波时间错误，可复位"
-   "13-设置参数错误", "9", "AxleDI滤波时间错误，可复位"
-   "13-设置参数错误", "10", "AI滤波时间错误，可复位"
-   "13-设置参数错误", "11", "AxleAI滤波时间错误，可复位"
-   "13-设置参数错误", "12", "DI高低电平范围错误，可复位"
-   "13-设置参数错误", "13", "DO高低电平范围错误，可复位"
-   "13-设置参数错误", "14", "工件号超限，可复位"
-   "13-设置参数错误", "15", "外部轴号超限，可复位"
-   "13-设置参数错误", "16", "传送带编码器通道错误，可复位"
-   "13-设置参数错误", "17", "传送带工件轴号错误，可复位"
+   "0-Brak błędu", "0", "Brak błędu"
+   "1-Błąd punktu docelowego", "1", "Błąd punktu docelowego stawu, możliwy do zresetowania"
+   "1-Błąd punktu docelowego", "2", "Błąd punktu docelowego linii (w tym niezgodność narzędzia), możliwy do zresetowania"
+   "1-Błąd punktu docelowego", "3", "Błąd punktu pośredniego łuku (w tym niezgodność narzędzia), możliwy do zresetowania"
+   "1-Błąd punktu docelowego", "4", "Błąd punktu docelowego łuku (w tym niezgodność narzędzia), możliwy do zresetowania"
+   "1-Błąd punktu docelowego", "5", "Odstęp między punktami łuku jest zbyt mały, możliwy do zresetowania"
+   "1-Błąd punktu docelowego", "6", "Błąd punktu pośredniego 1 okręgu/linii śrubowej (w tym niezgodność narzędzia), możliwy do zresetowania"
+   "1-Błąd punktu docelowego", "7", "Błąd punktu pośredniego 2 okręgu/linii śrubowej (w tym niezgodność narzędzia), możliwy do zresetowania"
+   "1-Błąd punktu docelowego", "8", "Błąd punktu pośredniego 3 okręgu/linii śrubowej (w tym niezgodność narzędzia), możliwy do zresetowania"
+   "1-Błąd punktu docelowego", "9", "Odstęp między punktami okręgu/linii śrubowej jest zbyt mały, możliwy do zresetowania"
+   "1-Błąd punktu docelowego", "10", "Błąd punktu docelowego TPD, możliwy do zresetowania"
+   "1-Błąd punktu docelowego", "11", "Narzędzie w instrukcji TPD jest niezgodne z bieżącym narzędziem, możliwy do zresetowania"
+   "1-Błąd punktu docelowego", "12", "Odchylenie między bieżącą instrukcją TPD a punktem początkowym następnej instrukcji jest zbyt duże, możliwy do zresetowania"
+   "1-Błąd punktu docelowego", "13", "Błąd przełączania narzędzia wewnętrznego/zewnętrznego, możliwy do zresetowania"
+   "1-Błąd punktu docelowego", "14", "Błąd punktu początkowego nowej linii śrubowej, możliwy do zresetowania"
+   "1-Błąd punktu docelowego", "15", "Błąd punktu docelowego nowej krzywej średniej, możliwy do zresetowania"
+   "1-Błąd punktu docelowego", "17", "Przekroczenie limitu instrukcji stawu PTP, możliwy do zresetowania"
+   "1-Błąd punktu docelowego", "18", "Przekroczenie limitu instrukcji stawu TPD, możliwy do zresetowania"
+   "1-Błąd punktu docelowego", "19", "Przekroczenie limitu instrukcji stawu LIN/ARC, możliwy do zresetowania"
+   "1-Błąd punktu docelowego", "20", "Przekroczenie prędkości w przestrzeni kartezjańskiej, niemożliwy do zresetowania"
+   "1-Błąd punktu docelowego", "21", "Przekroczenie limitu momentu obrotowego w przestrzeni stawów, możliwy do zresetowania"
+   "1-Błąd punktu docelowego", "22", "Przekroczenie limitu instrukcji stawu JOG, możliwy do zresetowania"
+   "1-Błąd punktu docelowego", "23", "Przekroczenie limitu prędkości instrukcji w przestrzeni stawu dla osi 1, możliwy do zresetowania"
+   "1-Błąd punktu docelowego", "24", "Przekroczenie limitu prędkości instrukcji w przestrzeni stawu dla osi 2, możliwy do zresetowania"
+   "1-Błąd punktu docelowego", "25", "Przekroczenie limitu prędkości instrukcji w przestrzeni stawu dla osi 3, możliwy do zresetowania"
+   "1-Błąd punktu docelowego", "26", "Przekroczenie limitu prędkości instrukcji w przestrzeni stawu dla osi 4, możliwy do zresetowania"
+   "1-Błąd punktu docelowego", "27", "Przekroczenie limitu prędkości instrukcji w przestrzeni stawu dla osi 5, możliwy do zresetowania"
+   "1-Błąd punktu docelowego", "28", "Przekroczenie limitu prędkości instrukcji w przestrzeni stawu dla osi 6, możliwy do zresetowania"
+   "1-Błąd punktu docelowego", "29", "Przekroczenie limitu prędkości sprzężenia zwrotnego stawu, niemożliwy do zresetowania"
+   "1-Błąd punktu docelowego", "30", "Zbyt duże odchylenie między instrukcją a sprzężeniem zwrotnym stawu, niemożliwy do zresetowania, wymagany restart"
+   "1-Błąd punktu docelowego", "31", "Błąd punktu docelowego DMP (w tym niezgodność narzędzia), możliwy do zresetowania"
+   "1-Błąd punktu docelowego", "33", "Zmiana konfiguracji stawu w następnej instrukcji (następna instrukcja ma osobliwą pozycję, użyj instrukcji PTP lub zmień następny punkt docelowy), możliwy do zresetowania"
+   "1-Błąd punktu docelowego", "34", "Zmiana konfiguracji stawu w bieżącej instrukcji (następna instrukcja ma osobliwą pozycję, użyj instrukcji PTP lub zmień następny punkt docelowy), możliwy do zresetowania"
+   "1-Błąd punktu docelowego", "35", "Przekroczenie limitu prędkości stawu w instrukcji LIN, możliwy do zresetowania"
+   "1-Błąd punktu docelowego", "36", "Przekroczenie progu prędkości adaptacyjnej w instrukcji LIN, możliwy do zresetowania"
+   "1-Błąd punktu docelowego", "37", "Nieosiągalny punkt w trajektorii, możliwy do zresetowania"
+   "1-Błąd punktu docelowego", "38", "Nieosiągalny punkt w trajektorii - osobliwa pozycja, możliwy do zresetowania"
+   "1-Błąd punktu docelowego", "49", "Błąd instrukcji, pomiędzy ARCSTART i ARCEND dozwolone są tylko instrukcje LIN i ARC, możliwy do zresetowania"
+   "1-Błąd punktu docelowego", "50", "Błąd instrukcji, pomiędzy WEAVESTART i WEAVEEND dozwolone są tylko instrukcje LIN i ARC, możliwy do zresetowania"
+   "1-Błąd punktu docelowego", "51", "Błąd parametrów spawania z oscylacją, możliwy do zresetowania"
+   "1-Błąd punktu docelowego", "52", "Odstęp między punktami spawania z oscylacją jest zbyt mały, możliwy do zresetowania"
+   "1-Błąd punktu docelowego", "53", "Nieosiągalny punkt w trajektorii oscylacji - osobliwa pozycja, możliwy do zresetowania"
+   "1-Błąd punktu docelowego", "54", "Nieosiągalny punkt w trajektorii oscylacji - przekroczenie limitu instrukcji stawu, możliwy do zresetowania"
+   "1-Błąd punktu docelowego", "55", "Nieosiągalny punkt w trajektorii oscylacji - błąd planowania (zgodność kierunku Z narzędzia z kierunkiem X ruchu do przodu), możliwy do zresetowania"
+   "1-Błąd punktu docelowego", "56", "Nieosiągalny punkt w trajektorii oscylacji - błąd punktu pośredniego łuku, możliwy do zresetowania"
+   "1-Błąd punktu docelowego", "65", "Zbyt duże odchylenie instrukcji czujnika laserowego, możliwy do zresetowania"
+   "1-Błąd punktu docelowego", "66", "Przerwanie instrukcji czujnika laserowego, przedwczesne zakończenie śledzenia spoiny, możliwy do zresetowania"
+   "1-Błąd punktu docelowego", "81", "Przekroczenie limitu prędkości instrukcji zewnętrznej osi, możliwy do zresetowania"
+   "1-Błąd punktu docelowego", "82", "Zbyt duże odchylenie między instrukcją a sprzężeniem zwrotnym zewnętrznej osi, niemożliwy do zresetowania, wymagany powrót do zera lub restart"
+   "1-Błąd punktu docelowego", "83", "Nieprawidłowa komunikacja z rozszerzonym urządzeniem peryferyjnym (zewnętrzna oś/IO), możliwy do zresetowania"
+   "1-Błąd punktu docelowego", "84", "Nieprawidłowa utrata pakietów w komunikacji z rozszerzonym urządzeniem peryferyjnym (zewnętrzna oś/IO), możliwy do zresetowania"
+   "1-Błąd punktu docelowego", "97", "Śledzenie taśmociągu - zbyt duża zmiana orientacji między punktem początkowym a punktem odniesienia, możliwy do zresetowania"
+   "1-Błąd punktu docelowego", "113", "Sterowanie stałą siłą - przekroczenie maksymalnej odległości regulacji w kierunku X, możliwy do zresetowania"
+   "1-Błąd punktu docelowego", "114", "Sterowanie stałą siłą - przekroczenie maksymalnej odległości regulacji w kierunku Y, możliwy do zresetowania"
+   "1-Błąd punktu docelowego", "115", "Sterowanie stałą siłą - przekroczenie maksymalnej odległości regulacji w kierunku Z, możliwy do zresetowania"
+   "1-Błąd punktu docelowego", "116", "Sterowanie stałą siłą - przekroczenie maksymalnego kąta regulacji w kierunku RX, możliwy do zresetowania"
+   "1-Błąd punktu docelowego", "117", "Sterowanie stałą siłą - przekroczenie maksymalnego kąta regulacji w kierunku RY, możliwy do zresetowania"
+   "1-Błąd punktu docelowego", "118", "Sterowanie stałą siłą - przekroczenie maksymalnego kąta regulacji w kierunku RZ, możliwy do zresetowania"
+   "1-Błąd punktu docelowego", "119", "Błąd danych zewnętrznego czujnika, możliwy do zresetowania"
+   "1-Błąd punktu docelowego", "120", "Nieudana próba ruchu eksploracyjnego po linii śrubowej, możliwy do zresetowania"
+   "1-Błąd punktu docelowego", "121", "Nieudany ruch obrotowy z wsuwaniem, możliwy do zresetowania"
+   "1-Błąd punktu docelowego", "122", "Nieudany ruch liniowy z wsuwaniem, możliwy do zresetowania"
+   "1-Błąd punktu docelowego", "123", "Nieudany ruch lokalizacji powierzchni, możliwy do zresetowania"
+   "1-Błąd punktu docelowego", "129", "Przekroczenie maksymalnej liczby punktów rejestracji momentu obrotowego, możliwy do zresetowania"
+   "1-Błąd punktu docelowego", "130", "Błąd przełączania prędkości, możliwy do zresetowania"
+   "1-Błąd punktu docelowego", "147", "Błąd śledzenia ogniska, możliwy do zresetowania"
+   "1-Błąd punktu docelowego", "148", "Przekroczenie limitu prędkości orientacji, możliwy do zresetowania"
+   "1-Błąd punktu docelowego", "149", "Nieprawidłowe sprzężenie zwrotne słowa stanu stawu, możliwy do zresetowania"
+   "2-Awaria napędu", "1", "Awaria napędu osi 1, niemożliwy do zresetowania"
+   "2-Awaria napędu", "2", "Awaria napędu osi 2, niemożliwy do zresetowania"
+   "2-Awaria napędu", "3", "Awaria napędu osi 3, niemożliwy do zresetowania"
+   "2-Awaria napędu", "4", "Awaria napędu osi 4, niemożliwy do zresetowania"
+   "2-Awaria napędu", "5", "Awaria napędu osi 5, niemożliwy do zresetowania"
+   "2-Awaria napędu", "6", "Awaria napędu osi 6, niemożliwy do zresetowania"
+   "3-Błąd przekroczenia miękkiego limitu", "1", "Błąd przekroczenia miękkiego limitu osi 1, możliwy do zresetowania"
+   "3-Błąd przekroczenia miękkiego limitu", "2", "Błąd przekroczenia miękkiego limitu osi 2, możliwy do zresetowania"
+   "3-Błąd przekroczenia miękkiego limitu", "3", "Błąd przekroczenia miękkiego limitu osi 3, możliwy do zresetowania"
+   "3-Błąd przekroczenia miękkiego limitu", "4", "Błąd przekroczenia miękkiego limitu osi 4, możliwy do zresetowania"
+   "3-Błąd przekroczenia miękkiego limitu", "5", "Błąd przekroczenia miękkiego limitu osi 5, możliwy do zresetowania"
+   "3-Błąd przekroczenia miękkiego limitu", "6", "Błąd przekroczenia miękkiego limitu osi 6, możliwy do zresetowania"
+   "4-Błąd kolizji", "1", "Błąd kolizji osi 1, możliwy do zresetowania"
+   "4-Błąd kolizji", "2", "Błąd kolizji osi 2, możliwy do zresetowania"
+   "4-Błąd kolizji", "3", "Błąd kolizji osi 3, możliwy do zresetowania"
+   "4-Błąd kolizji", "4", "Błąd kolizji osi 4, możliwy do zresetowania"
+   "4-Błąd kolizji", "5", "Błąd kolizji osi 5, możliwy do zresetowania"
+   "4-Błąd kolizji", "6", "Błąd kolizji osi 6, możliwy do zresetowania"
+   "4-Błąd kolizji", "7", "Błąd kolizji końcówki, możliwy do zresetowania"
+   "5-Błąd liczby aktywnych stacji podrzędnych", "1", "Błąd liczby aktywnych stacji podrzędnych, niemożliwy do zresetowania"
+   "6-Błąd stacji podrzędnej", "1", "Utrata połączenia ze stacją podrzędną, niemożliwy do zresetowania"
+   "6-Błąd stacji podrzędnej", "2", "Stan stacji podrzędnej niezgodny z ustawioną wartością, niemożliwy do zresetowania"
+   "6-Błąd stacji podrzędnej", "3", "Stacja podrzędna nie skonfigurowana, niemożliwy do zresetowania"
+   "6-Błąd stacji podrzędnej", "4", "Błąd konfiguracji stacji podrzędnej, niemożliwy do zresetowania"
+   "6-Błąd stacji podrzędnej", "5", "Błąd inicjalizacji stacji podrzędnej, niemożliwy do zresetowania"
+   "6-Błąd stacji podrzędnej", "6", "Błąd inicjalizacji komunikacji e-mail stacji podrzędnej, niemożliwy do zresetowania"
+   "7-Błąd IO", "1", "Błąd kanału, możliwy do zresetowania"
+   "7-Błąd IO", "2", "Błąd wartości, możliwy do zresetowania"
+   "7-Błąd IO", "3", "Przekroczenie czasu oczekiwania WaitDI, możliwy do zresetowania"
+   "7-Błąd IO", "4", "Przekroczenie czasu oczekiwania WaitAI, możliwy do zresetowania"
+   "7-Błąd IO", "5", "Przekroczenie czasu oczekiwania WaitAxleDI, możliwy do zresetowania"
+   "7-Błąd IO", "6", "Przekroczenie czasu oczekiwania WaitAxleAI, możliwy do zresetowania"
+   "7-Błąd IO", "7", "Błąd funkcji skonfigurowanej dla kanału, możliwy do zresetowania"
+   "7-Błąd IO", "8", "Przekroczenie czasu łuku początkowego, możliwy do zresetowania"
+   "7-Błąd IO", "9", "Przekroczenie czasu łuku końcowego, możliwy do zresetowania"
+   "7-Błąd IO", "10", "Przekroczenie czasu poszukiwania pozycji, możliwy do zresetowania"
+   "7-Błąd IO", "11", "Przekroczenie czasu wykrywania IO taśmociągu, możliwy do zresetowania"
+   "7-Błąd IO", "12", "Przekroczenie czasu oczekiwania WaitAuxDI, możliwy do zresetowania"
+   "7-Błąd IO", "13", "Przekroczenie czasu oczekiwania WaitAuxAI, możliwy do zresetowania"
+   "7-Błąd IO", "14", "Przekroczenie czasu poszukiwania pozycji drutu spawalniczego, możliwy do zresetowania"
+   "8-Błąd chwytaka", "1", "Błąd przekroczenia czasu ruchu chwytaka, możliwy do zresetowania"
+   "9-Błąd pliku", "1", "Błąd wersji pliku konfiguracyjnego zbt, błąd inicjalizacji - niemożliwy do zresetowania"
+   "9-Błąd pliku", "2", "Nieudane ładowanie pliku konfiguracyjnego zbt, błąd inicjalizacji - niemożliwy do zresetowania"
+   "9-Błąd pliku", "3", "Błąd wersji pliku konfiguracyjnego user, błąd inicjalizacji - niemożliwy do zresetowania"
+   "9-Błąd pliku", "4", "Nieudane ładowanie pliku konfiguracyjnego user, błąd inicjalizacji - niemożliwy do zresetowania"
+   "9-Błąd pliku", "5", "Błąd wersji pliku konfiguracyjnego exaxis, błąd inicjalizacji - niemożliwy do zresetowania"
+   "9-Błąd pliku", "6", "Nieudane ładowanie pliku konfiguracyjnego exaxis, błąd inicjalizacji - niemożliwy do zresetowania"
+   "9-Błąd pliku", "7", "Niezgodność modelu robota, wymagane ponowne ustawienie - niemożliwy do zresetowania"
+   "9-Błąd pliku", "8", "Błąd wersji pliku konfiguracyjnego dhpara, błąd inicjalizacji - niemożliwy do zresetowania"
+   "9-Błąd pliku", "9", "Nieudane ładowanie pliku konfiguracyjnego dhpara, błąd inicjalizacji - niemożliwy do zresetowania"
+   "9-Błąd pliku", "10", "Model robota nie ustawiony - niemożliwy do zresetowania"
+   "9-Błąd pliku", "11", "Błąd wersji pliku konfiguracyjnego load, błąd inicjalizacji - niemożliwy do zresetowania"
+   "9-Błąd pliku", "12", "Nieudane ładowanie pliku konfiguracyjnego load, błąd inicjalizacji - niemożliwy do zresetowania"
+   "9-Błąd pliku", "13", "Błąd wersji pliku konfiguracyjnego speed, błąd inicjalizacji - niemożliwy do zresetowania"
+   "9-Błąd pliku", "14", "Nieudane ładowanie pliku konfiguracyjnego speed, błąd inicjalizacji - niemożliwy do zresetowania"
+   "10-Osobliwa pozycja", "1", "Osobliwa pozycja"
+   "11-Błąd komunikacji z napędem", "1", "Błąd komunikacji z napędem osi 1, niemożliwy do zresetowania"
+   "11-Błąd komunikacji z napędem", "2", "Błąd komunikacji z napędem osi 2, niemożliwy do zresetowania"
+   "11-Błąd komunikacji z napędem", "3", "Błąd komunikacji z napędem osi 3, niemożliwy do zresetowania"
+   "11-Błąd komunikacji z napędem", "4", "Błąd komunikacji z napędem osi 4, niemożliwy do zresetowania"
+   "11-Błąd komunikacji z napędem", "5", "Błąd komunikacji z napędem osi 5, niemożliwy do zresetowania"
+   "11-Błąd komunikacji z napędem", "6", "Błąd komunikacji z napędem osi 6, niemożliwy do zresetowania"
+   "12-Miękki limit zewnętrznej osi", "1", "Przekroczenie miękkiego limitu osi 1, możliwy do zresetowania"
+   "12-Miękki limit zewnętrznej osi", "2", "Przekroczenie miękkiego limitu osi 2, możliwy do zresetowania"
+   "12-Miękki limit zewnętrznej osi", "3", "Przekroczenie miękkiego limitu osi 3, możliwy do zresetowania"
+   "12-Miękki limit zewnętrznej osi", "4", "Przekroczenie miękkiego limitu osi 4, możliwy do zresetowania"
+   "13-Błąd parametrów ustawienia", "1", "Przekroczenie limitu numeru narzędzia, możliwy do zresetowania"
+   "13-Błąd parametrów ustawienia", "2", "Błąd progu ukończenia pozycjonowania, możliwy do zresetowania"
+   "13-Błąd parametrów ustawienia", "3", "Błąd poziomu kolizji, możliwy do zresetowania"
+   "13-Błąd parametrów ustawienia", "4", "Błąd masy ładunku, możliwy do zresetowania"
+   "13-Błąd parametrów ustawienia", "5", "Błąd X środka ciężkości ładunku, możliwy do zresetowania"
+   "13-Błąd parametrów ustawienia", "6", "Błąd Y środka ciężkości ładunku, możliwy do zresetowania"
+   "13-Błąd parametrów ustawienia", "7", "Błąd Z środka ciężkości ładunku, możliwy do zresetowania"
+   "13-Błąd parametrów ustawienia", "8", "Błąd czasu filtrowania DI, możliwy do zresetowania"
+   "13-Błąd parametrów ustawienia", "9", "Błąd czasu filtrowania AxleDI, możliwy do zresetowania"
+   "13-Błąd parametrów ustawienia", "10", "Błąd czasu filtrowania AI, możliwy do zresetowania"
+   "13-Błąd parametrów ustawienia", "11", "Błąd czasu filtrowania AxleAI, możliwy do zresetowania"
+   "13-Błąd parametrów ustawienia", "12", "Błąd zakresu wysokiego/niskiego poziomu DI, możliwy do zresetowania"
+   "13-Błąd parametrów ustawienia", "13", "Błąd zakresu wysokiego/niskiego poziomu DO, możliwy do zresetowania"
+   "13-Błąd parametrów ustawienia", "14", "Przekroczenie limitu numeru przedmiotu, możliwy do zresetowania"
+   "13-Błąd parametrów ustawienia", "15", "Przekroczenie limitu numeru zewnętrznej osi, możliwy do zresetowania"
+   "13-Błąd parametrów ustawienia", "16", "Błąd kanału enkodera taśmociągu, możliwy do zresetowania"
+   "13-Błąd parametrów ustawienia", "17", "Błąd numeru osi przedmiotu taśmociągu, możliwy do zresetowania"
 
-附录2：伺服驱动器故障代码表
----------------------------
+Dodatek 2: Tabela kodów awarii serwonapędu
+------------------------------------------------
 
 .. list-table::
    :widths: 20 40 80
    :header-rows: 0
    :align: center
 
-   * - **故障码**
-     - **故障名称**
-     - **处理方法**
+   * - **Kod awarii**
+     - **Nazwa awarii**
+     - **Sposób rozwiązania**
 
    * - 1
-     - 软件过流故障
-     - | 1、检查关节负载或阻力是否变大或异常
-       | 2、若故障仍未排除，维修或更换驱动板
+     - Awaria przetężenia programowego
+     - | 1. Sprawdź, czy obciążenie lub opór stawu nie wzrosły lub nie są nieprawidłowe
+       | 2. Jeśli awaria nie zostanie usunięta, napraw lub wymień płytę sterującą napędu
 
    * - 2
-     - 过压故障
-     - 降低机器人运行速度或加速度
+     - Awaria przepięcia
+     - Zmniejsz prędkość lub przyspieszenie robota
 
    * - 3
-     - 欠压故障
-     - | 1、检查控制箱48V 电源电压输出是否异常
-       | 2、检查驱动板和关节外壳是否短路
-       | 3、若故障仍未排除，维修或更换驱动板
+     - Awaria napięcia
+     - | 1. Sprawdź, czy napięcie wyjściowe zasilacza 48V w skrzynce sterowniczej jest nieprawidłowe
+       | 2. Sprawdź, czy płyta sterująca napędu i obudowa stawu nie są zwarte
+       | 3. Jeśli awaria nie zostanie usunięta, napraw lub wymień płytę sterującą napędu
 
    * - 4
-     - 过热故障
-     - 减小机器人负载或降低机器人运行速度
+     - Awaria przegrzania
+     - Zmniejsz obciążenie robota lub zmniejsz prędkość robota
 
    * - 5
-     - 过载故障
-     - 减小机器人负载或降低机器人运行速度
+     - Awaria przeciążenia
+     - Zmniejsz obciążenie robota lub zmniejsz prędkość robota
 
    * - 6
-     - 超速故障
-     - | 1、检查磁编组件和电机轴固定顶丝是否松动
-       | 2、重新进行编码器校零
-       | 3、若故障仍未排除，维修或更换磁编组件
+     - Awaria nadmiernej prędkości
+     - | 1. Sprawdź, czy śruba ustalająca między zespołem enkodera magnetycznego a wałem silnika nie jest poluzowana
+       | 2. Wykonaj ponownie zerowanie enkodera
+       | 3. Jeśli awaria nie zostanie usunięta, napraw lub wymień zespół enkodera magnetycznego
 
    * - 7
-     - 参数异常故障
-     - 维修或更换驱动板
+     - Awaria nieprawidłowego parametru
+     - Napraw lub wymień płytę sterującą napędu
 
    * - 8
-     - 飞车故障
-     - | 1、检查磁编组件和电机轴固定顶丝是否松动
-       | 2、重新进行编码器校零
-       | 3、若故障仍未排除，维修或更换磁编组件
+     - Awaria "lotu" (niekontrolowany ruch)
+     - | 1. Sprawdź, czy śruba ustalająca między zespołem enkodera magnetycznego a wałem silnika nie jest poluzowana
+       | 2. Wykonaj ponownie zerowanie enkodera
+       | 3. Jeśli awaria nie zostanie usunięta, napraw lub wymień zespół enkodera magnetycznego
 
    * - 9
-     - 位置误差故障
-     - | 1、检查关节负载或阻力是否变大或异常
-       | 2、若故障仍未排除，维修或更换驱动板
+     - Awaria błędu pozycji
+     - | 1. Sprawdź, czy obciążenie lub opór stawu nie wzrosły lub nie są nieprawidłowe
+       | 2. Jeśli awaria nie zostanie usunięta, napraw lub wymień płytę sterującą napędu
 
    * - 10
-     - 位置溢出故障
-     - | 1、检查硬限位是否松动
-       | 2、重新进行机器人校零
+     - Awaria przepełnienia pozycji
+     - | 1. Sprawdź, czy twardy ogranicznik nie jest poluzowany
+       | 2. Wykonaj ponownie zerowanie robota
 
    * - 11
-     - 硬件过流故障
-     - 维修或更换驱动板
+     - Awaria przetężenia sprzętowego
+     - Napraw lub wymień płytę sterującą napędu
 
    * - 12
-     - 驱动禁止故障
-     - 未启用
+     - Awaria blokady napędu
+     - Nieaktywowane
 
    * - 13
-     - 电机堵转故障
-     - | 1、检查刹车电磁铁是否吸合
-       | 2、检查是否撞到硬限位
-       | 3、若故障仍未排除，维修或更换驱动板
+     - Awaria blokowania silnika
+     - | 1. Sprawdź, czy elektromagnes hamulca jest zaciągnięty
+       | 2. Sprawdź, czy nie uderzono w twardy ogranicznik
+       | 3. Jeśli awaria nie zostanie usunięta, napraw lub wymień płytę sterującą napędu
 
    * - 14
-     - 功率电源故障
-     - 未启用
+     - Awaria zasilania mocy
+     - Nieaktywowane
 
    * - 15
-     - STO 故障
-     - 未启用
+     - Awaria STO
+     - Nieaktywowane
 
    * - 16
-     - 相电流 AD 调零故障
-     - 维修或更换驱动板
+     - Awaria zerowania AD prądu fazowego
+     - Napraw lub wymień płytę sterującą napędu
 
    * - 17
-     - EEPROM 故障
-     - 维修或更换驱动板
+     - Awaria EEPROM
+     - Napraw lub wymień płytę sterującą napędu
 
    * - 18
-     - 霍尔故障
-     - | 1、检查霍尔线束是否插接牢固，有无短路、断路
-       | 2、若故障仍未排除，维修或更换关节
+     - Awaria Halla
+     - | 1. Sprawdź, czy wiązka Halla jest dobrze podłączona, czy nie ma zwarcia lub przerwy
+       | 2. Jeśli awaria nie zostanie usunięta, napraw lub wymień staw
 
    * - 19
-     - 编码器故障
-     - 维修或更换磁编组件
+     - Awaria enkodera
+     - Napraw lub wymień zespół enkodera magnetycznego
 
    * - 20
-     - 编码器调零故障
-     - | 1、重新进行编码器校零
-       | 2、若故障仍未排除，维修或更换磁编组件
+     - Awaria zerowania enkodera
+     - | 1. Wykonaj ponownie zerowanie enkodera
+       | 2. Jeśli awaria nie zostanie usunięta, napraw lub wymień zespół enkodera magnetycznego
    
    * - 21
-     - 编码器Z相信号丢失故障
-     - 未启用
+     - Awaria utraty sygnału Z enkodera
+     - Nieaktywowane
 
    * - 22
-     - 编码器计数故障
-     - 未启用
+     - Awaria zliczania enkodera
+     - Nieaktywowane
 
    * - 23
-     - 编码器多圈数据溢出故障
-     - 未启用
+     - Awaria przepełnienia danych wieloobrotowych enkodera
+     - Nieaktywowane
 
    * - 24
-     - 外部时钟故障
-     - 维修或更换驱动板
+     - Awaria zegara zewnętrznego
+     - Napraw lub wymień płytę sterującą napędu
 
    * - 25
-     - UVW 相序故障
-     - 未启用
+     - Awaria sekwencji faz UVW
+     - Nieaktywowane
 
    * - 26
-     - FPGA故障
-     - 未启用
+     - Awaria FPGA
+     - Nieaktywowane
 
    * - 27
-     - 回零故障
-     - 未启用
+     - Awaria powrotu do zera
+     - Nieaktywowane
 
    * - 28
-     - 磁编码器故障
-     - | 1、检查磁编组件和电机轴固定顶丝是否松动
-       | 2、若故障仍未排除，维修或更换磁编组件
+     - Awaria enkodera magnetycznego
+     - | 1. Sprawdź, czy śruba ustalająca między zespołem enkodera magnetycznego a wałem silnika nie jest poluzowana
+       | 2. Jeśli awaria nie zostanie usunięta, napraw lub wymień zespół enkodera magnetycznego
 
    * - 29
-     - 电机动力线断线故障
-     - | 1、检查电机动力线是否插接牢固，有无短路、断路
-       | 2、若故障仍未排除，维修或更换驱动板
+     - Awaria przerwy w przewodzie zasilania silnika
+     - | 1. Sprawdź, czy przewód zasilania silnika jest dobrze podłączony, czy nie ma zwarcia lub przerwy
+       | 2. Jeśli awaria nie zostanie usunięta, napraw lub wymień płytę sterującą napędu
 
    * - 30
-     - EtherCAT故障
-     - | 1、检查网线是否插接牢固，有无短路、断路
-       | 2、若故障仍未排除，维修或更换驱动板
+     - Awaria EtherCAT
+     - | 1. Sprawdź, czy kabel sieciowy jest dobrze podłączony, czy nie ma zwarcia lub przerwy
+       | 2. Jeśli awaria nie zostanie usunięta, napraw lub wymień płytę sterującą napędu
 
    * - 31
-     - EtherCAT_SM_DOG故障
-     - | 1、检查网线是否插接牢固，有无短路、断路
-       | 2、若故障仍未排除，维修或更换驱动板
+     - Awaria EtherCAT_SM_DOG
+     - | 1. Sprawdź, czy kabel sieciowy jest dobrze podłączony, czy nie ma zwarcia lub przerwy
+       | 2. Jeśli awaria nie zostanie usunięta, napraw lub wymień płytę sterującą napędu
 
    * - 32
-     - EtherCAT_FATALSYNC故障
-     - | 1、检查网线是否插接牢固，有无短路、断路
-       | 2、若故障仍未排除，维修或更换驱动板
+     - Awaria EtherCAT_FATALSYNC
+     - | 1. Sprawdź, czy kabel sieciowy jest dobrze podłączony, czy nie ma zwarcia lub przerwy
+       | 2. Jeśli awaria nie zostanie usunięta, napraw lub wymień płytę sterującą napędu
 
    * - 33
-     - EtherCAT_SYNC故障
-     - | 1、检查网线是否插接牢固，有无短路、断路
-       | 2、若故障仍未排除，维修或更换驱动板
+     - Awaria EtherCAT_SYNC
+     - | 1. Sprawdź, czy kabel sieciowy jest dobrze podłączony, czy nie ma zwarcia lub przerwy
+       | 2. Jeśli awaria nie zostanie usunięta, napraw lub wymień płytę sterującą napędu
 
    * - 34
-     - EtherCAT_RFT故障
-     - | 1、检查网线是否插接牢固，有无短路、断路
-       | 2、若故障仍未排除，维修或更换驱动板
+     - Awaria EtherCAT_RFT
+     - | 1. Sprawdź, czy kabel sieciowy jest dobrze podłączony, czy nie ma zwarcia lub przerwy
+       | 2. Jeśli awaria nie zostanie usunięta, napraw lub wymień płytę sterującą napędu
 
    * - 35
-     - 驱动器轴地址故障
-     - | 1、重新进行驱动器轴地址配置
-       | 2、若故障仍未排除，维修或更换驱动板
+     - Awaria adresu osi napędu
+     - | 1. Wykonaj ponownie konfigurację adresu osi napędu
+       | 2. Jeśli awaria nie zostanie usunięta, napraw lub wymień płytę sterującą napędu
 
    * - 36
-     - 机器人校零故障
-     - | 1、重新进行机器人校零
-       | 2、先使用JLINK 擦除 FLASH，再重新下载程序并校零
-       | 3、若故障仍未排除，维修或更换驱动板
+     - Awaria zerowania robota
+     - | 1. Wykonaj ponownie zerowanie robota
+       | 2. Najpierw użyj JLINK, aby wymazać FLASH, a następnie pobierz ponownie program i wykonaj zerowanie
+       | 3. Jeśli awaria nie zostanie usunięta, napraw lub wymień płytę sterującą napędu
 
    * - 37
-     - 编码器通讯故障
-     - | 1、检查编码器线束是否插接牢固，有无短路、断路 
-       | 2、若故障仍未排除，维修或更换磁编组件
+     - Awaria komunikacji enkodera
+     - | 1. Sprawdź, czy wiązka enkodera jest dobrze podłączona, czy nie ma zwarcia lub przerwy
+       | 2. Jeśli awaria nie zostanie usunięta, napraw lub wymień zespół enkodera magnetycznego
 
    * - 40
-     - 磁编模块故障-校零故障
-     - | 1、重新进行磁编组件校零
-       | 2、若故障仍未排除，维修或更换磁编组件
+     - Awaria modułu enkodera magnetycznego - błąd zerowania
+     - | 1. Wykonaj ponownie zerowanie zespołu enkodera magnetycznego
+       | 2. Jeśli awaria nie zostanie usunięta, napraw lub wymień zespół enkodera magnetycznego
 
    * - 41
-     - 磁编模块故障-多圈故障
-     - | 1、检查磁编组件和电机轴固定顶丝是否松动
-       | 2、若故障仍未排除，维修或更换磁编组件
+     - Awaria modułu enkodera magnetycznego - błąd wieloobrotowy
+     - | 1. Sprawdź, czy śruba ustalająca między zespołem enkodera magnetycznego a wałem silnika nie jest poluzowana
+       | 2. Jeśli awaria nie zostanie usunięta, napraw lub wymień zespół enkodera magnetycznego
 
    * - 42
-     - 磁编模块故障-多圈小磁编故障
-     - | 1、检查多圈小磁编芯片是否异常
-       | 2、若故障仍未排除，维修或更换磁编组件
+     - Awaria modułu enkodera magnetycznego - awaria małego enkodera wieloobrotowego
+     - | 1. Sprawdź, czy układ małego enkodera wieloobrotowego nie jest nieprawidłowy
+       | 2. Jeśli awaria nie zostanie usunięta, napraw lub wymień zespół enkodera magnetycznego
 
    * - 43
-     - 磁编模块故障-多圈大磁编故障
-     - | 1、检查多圈大磁编芯片是否异常
-       | 2、若故障仍未排除，维修或更换磁编组件
+     - Awaria modułu enkodera magnetycznego - awaria dużego enkodera wieloobrotowego
+     - | 1. Sprawdź, czy układ dużego enkodera wieloobrotowego nie jest nieprawidłowy
+       | 2. Jeśli awaria nie zostanie usunięta, napraw lub wymień zespół enkodera magnetycznego
 
    * - 44
-     - 磁编模块故障-单圈磁编故障
-     - | 1、检查单圈磁编芯片是否异常
-       | 2、若故障仍未排除，维修或更换磁编组件
+     - Awaria modułu enkodera magnetycznego - awaria enkodera pojedynczego obrotu
+     - | 1. Sprawdź, czy układ enkodera pojedynczego obrotu nie jest nieprawidłowy
+       | 2. Jeśli awaria nie zostanie usunięta, napraw lub wymień zespół enkodera magnetycznego
 
    * - 45
-     - 磁编模块故障-光编故障
-     - | 1、检查光编码盘是否被污染或未粘牢
-       | 2、若故障仍未排除，维修或更换磁编组件
+     - Awaria modułu enkodera magnetycznego - awaria enkodera optycznego
+     - | 1. Sprawdź, czy tarcza enkodera optycznego nie jest zabrudzona lub źle przyklejona
+       | 2. Jeśli awaria nie zostanie usunięta, napraw lub wymień zespół enkodera magnetycznego
 
-附录3：末端板485升级
----------------------------
+Dodatek 3: Aktualizacja 485 płyty końcowej
+------------------------------------------------
 
-现场使用时，有可能更新固件，满足新的要求，会提供新的升级文件（XX_XX_MAIN.bin），通过485接口对末端板进行升级（需要借助USB转485模块）。升级步骤如下：
+Podczas użytkowania w terenie może zaistnieć konieczność aktualizacji oprogramowania sprzętowego w celu spełnienia nowych wymagań. Dostarczony zostanie nowy plik aktualizacji (XX_XX_MAIN.bin). Aktualizacja płyty końcowej odbywa się przez interfejs 485 (wymagany jest moduł USB na 485). Kroki aktualizacji są następujące:
 
-**Step1：485接线**，在机器人末端处有5Pin通信航空接头，航空接头Pin脚分布及其pin脚说明如图表1所示。将机器人末端的485-A、485-B与USB转485工具的A、B使用双绞线连接。
+**Krok 1: Podłączenie 485**, Na końcu robota znajduje się 5-stykowe złącze komunikacyjne typu lotniczego. Rozmieszczenie pinów złącza lotniczego oraz opis pinów przedstawiono na Wykresie 1. Podłącz 485-A i 485-B na końcu robota odpowiednio do A i B narzędzia USB-485 za pomocą skrętki.
 
 .. figure:: appendix/001.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 18.3-1 航空接头Pin脚分布
+.. centered:: Wykres 18.3-1 Rozmieszczenie pinów złącza lotniczego
 
-**Step2，硬件连接**，将USB转485工具的USB端与PC连接，在PC设备管理器中，如果识别到USB&485工具，会出现如下界面。
+**Krok 2: Połączenie sprzętowe**, Podłącz końcówkę USB narzędzia USB-485 do komputera PC. W Menedżerze urządzeń komputera PC, jeśli narzędzie USB-485 zostanie rozpoznane, pojawi się następujący interfejs.
 
 .. figure:: appendix/002.png
    :align: center
    :width: 6in
 
-.. centered:: 图表 18.3-2 USB&485端口识别说明
+.. centered:: Wykres 18.3-2 Opis rozpoznawania portu USB-485
 
-**Step3：升级工具**，在完成接线后，打开“法奥串口调试助手”，点击“末端板”按钮，在“串口参数设置”功能中选择上述识别的串口，波特率115200，数据位8位，校验位无，停止位1，然后打开串口，成功之后会出现“串口打开成功”的提示。
+**Krok 3: Narzędzie do aktualizacji**, Po zakończeniu podłączania otwórz "Asystenta portu szeregowego FAIRINO", kliknij przycisk "Płyta końcowa", w funkcji "Ustawienia parametrów portu szeregowego" wybierz rozpoznany powyżej port szeregowy, prędkość 115200, 8 bitów danych, brak bitu parzystości, 1 bit stopu, a następnie otwórz port szeregowy. Po pomyślnym wykonaniu pojawi się komunikat "Port szeregowy otwarty pomyślnie".
 
 .. figure:: appendix/003.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 18.3-3 串口参数设置
+.. centered:: Wykres 18.3-3 Ustawienia parametrów portu szeregowego
 
-**Step4：固件升级**，选择“末端板”，点击“固件升级”，如图表所示：
+**Krok 4: Aktualizacja oprogramowania sprzętowego**, Wybierz "Płyta końcowa", kliknij "Aktualizacja oprogramowania sprzętowego", jak pokazano na wykresie:
 
 .. figure:: appendix/004.png
    :align: center
    :width: 6in
 
-.. centered:: 图表 18.3-4 末端板固件升级
+.. centered:: Wykres 18.3-4 Aktualizacja oprogramowania sprzętowego płyty końcowej
 
--  首先点击“Flash擦除”，擦除成功之后，会在接收数据区提示擦除成功。
+-  Najpierw kliknij "Flash擦除" (Kasowanie Flash). Po pomyślnym skasowaniu, w obszarze odbierania danych pojawi się komunikat o pomyślnym skasowaniu.
 
--  打开文件（待升级文件），选择存放的路径，如下所示，选择完成后，待升级文件名会出现在文件名显示框中。
+-  Otwórz plik (plik do aktualizacji), wybierz ścieżkę przechowywania, jak poniżej. Po wybraniu nazwa pliku do aktualizacji pojawi się w polu wyświetlania nazwy pliku.
 
 .. figure:: appendix/005.png
    :align: center
    :width: 6in
 
-.. centered:: 图表 18.3-5 选择升级文件
+.. centered:: Wykres 18.3-5 Wybór pliku aktualizacji
 
--  点击“发送文件”，当进度条显示100%时，表示已经完成发送升级文件。
+-  Kliknij "发送文件" (Wyślij plik). Gdy pasek postępu wskaże 100%, oznacza to, że wysyłanie pliku aktualizacji zostało zakończone.
 
-**Step5：升级验证**，系统重启上电，在“维护信息”栏，选择“查询末端板固件版本信息”，在“接收数据区”会显示固件版本信息，如果和升级的文件版本信息一致，说明升级成功，否则升级失败.
+**Krok 5: Weryfikacja aktualizacji**, Uruchom ponownie system. W zakładce "Informacje konserwacyjne" wybierz "Zapytaj o wersję oprogramowania sprzętowego płyty końcowej". W "Obszarze odbierania danych" wyświetli się informacja o wersji oprogramowania sprzętowego. Jeśli jest zgodna z wersją pliku aktualizacji, aktualizacja powiodła się. W przeciwnym razie aktualizacja nie powiodła się.
 
 .. figure:: appendix/006.png
    :align: center
    :width: 6in
 
-.. centered:: 图表 18.3-6 查询固件版本信息
+.. centered:: Wykres 18.3-6 Zapytanie o wersję oprogramowania sprzętowego
 
-附录4：控制箱485升级
-------------------------
+Dodatek 4: Aktualizacja 485 skrzynki sterowniczej
+-------------------------------------------------------
 
-在机器人控制箱板有“电源通信”接口，将USB&485工具A、B分别接入其接口的“485-A”、“485-B”。
+W skrzynce sterowniczej robota znajduje się interfejs "Zasilanie i komunikacja". Podłącz odpowiednio A i B narzędzia USB-485 do "485-A" i "485-B" tego interfejsu.
 
-其升级过程操作同末端板，软件对应选择即可，此处不在赘述。
+Proces aktualizacji jest taki sam jak w przypadku płyty końcowej, należy odpowiednio wybrać oprogramowanie. Nie będzie to tutaj powtarzane.
 
 .. figure:: appendix/007.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 18.4-1 电源通信接口
+.. centered:: Wykres 18.4-1 Interfejs zasilania i komunikacji
 
-附录5：备件、易损件清单
------------------------------
+Dodatek 5: Lista części zamiennych i części zużywających się
+-----------------------------------------------------------------
 
 .. list-table::
    :widths: 40 40 20
    :header-rows: 0
    :align: center
 
-   * - **零件**
-     - **编号**
-     - **数量**
+   * - **Część**
+     - **Numer**
+     - **Ilość**
 
-   * - M8*30 螺钉
+   * - Śruba M8*30
      - 4.0.08.2006185
      - 4
 
-   * - 圆柱销A型8*20
+   * - Sworzeń cylindryczny typ A 8*20
      - 4.5.00.2013076
      - 2
 
-   * - 保险丝5x206A
+   * - Bezpiecznik 5x20 6A
      - 
      - 1

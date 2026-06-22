@@ -1,35 +1,35 @@
-API说明
+Opis API
 =========================
 
 .. toctree:: 
    :maxdepth: 6
 
-act 指令
--------------
+Instrukcje act
+--------------
 
-以下所有act指令使用POST，URL为/action/act。
+Wszystkie poniższe instrukcje act używają metody POST, a URL to /action/act.
 
-保存示教点
-+++++++++++++
+Zapisz punkt uczenia
+++++++++++++++++++++
 
-指令名称：save_point。 
+Nazwa instrukcji: save_point.
 
-指令参数：
+Parametry instrukcji:
 
 .. code-block:: c++
     :linenos:
 
     /** 
-    * @param  string name记录的示教点名称
-    * @param  string speed 速度
-    * @param  string elbow_speed 肘速度
-    * @param  string acc加速度
-    * @param  string elbow_acc 肘加速度
-    * @param  string toolnum 工具号
-    * @param  string workpiecenum 工件号
+    * @param string name Nazwa zapisywanego punktu uczenia
+    * @param string speed Prędkość
+    * @param string elbow_speed Prędkość łokcia
+    * @param string acc Przyspieszenie
+    * @param string elbow_acc Przyspieszenie łokcia
+    * @param string toolnum Numer narzędzia
+    * @param string workpiecenum Numer przedmiotu
     */ 
 
-指令案例：
+Przykład instrukcji:
 
 .. code-block:: c++
     :linenos:
@@ -47,7 +47,7 @@ act 指令
         }
     }
 
-指令反馈：
+Informacja zwrotna instrukcji:
 
 .. code-block:: c++
     :linenos:
@@ -57,19 +57,19 @@ act 指令
     * @return status:404 "fail"
     */ 
 
-sta 指令
--------------
+Instrukcje sta
+--------------
 
-以下所有sta指令使用POST，URL为/action/sta。
+Wszystkie poniższe instrukcje sta używają metody POST, a URL to /action/sta.
 
-获取机器人状态数据
-++++++++++++++++++++
+Pobierz dane stanu robota
++++++++++++++++++++++++++
 
-指令名称：basic。 
+Nazwa instrukcji: basic.
 
-指令参数：无。
+Parametry instrukcji: brak.
 
-指令案例：
+Przykład instrukcji:
 
 .. code-block:: c++
     :linenos:
@@ -78,16 +78,16 @@ sta 指令
         cmd: "basic",
     }
 
-指令反馈：
+Informacja zwrotna instrukcji:
 
 .. code-block:: c++
     :linenos:
 
     /** 
     * @return status:200 
-    * @param  object joints 关节位置
-    * @param  object tcp 笛卡尔位姿
-    * @param  array exAxisPos 外部轴位置
+    * @param object joints Pozycje stawów
+    * @param object tcp Pozycja i orientacja kartezjańska
+    * @param array exAxisPos Pozycja zewnętrznej osi
     * @return status:404 "fail"
     */
     {
@@ -110,19 +110,19 @@ sta 指令
         exAxisPos: [0,0,0,0]
     }
 
-get 指令
--------------
+Instrukcje get
+--------------
 
-以下所有get指令使用POST，URL为/action/get。 
+Wszystkie poniższe instrukcje get używają metody POST, a URL to /action/get.
 
-获取示教点
-+++++++++++++
+Pobierz punkty uczenia
+++++++++++++++++++++++
 
-指令名称：get_points()。
+Nazwa instrukcji: get_points().
 
-指令参数：无。
+Parametry instrukcji: brak.
 
-指令案例：
+Przykład instrukcji:
 
 .. code-block:: c++
     :linenos:
@@ -131,18 +131,18 @@ get 指令
         cmd: "get_points"
     }
 
-指令反馈：
+Informacja zwrotna instrukcji:
 
 .. code-block:: c++
     :linenos:
 
     /** 
     * @return status:200 "success"
-    * @param  ${point_name}: object 示教点相关信息
+    * @param ${point_name}: object Informacje o punkcie uczenia
     * @return status:404 "fail"
     */ 
 
-指令反馈案例：
+Przykład informacji zwrotnej instrukcji:
 
 .. code-block:: c++
     :linenos:
@@ -175,15 +175,14 @@ get 指令
         }
     }
 
+Pobierz konfigurację systemu
+++++++++++++++++++++++++++++
 
-获取系统配置
-+++++++++++++
+Nazwa instrukcji: get_syscfg().
 
-指令名称：get_syscfg()。
+Parametry instrukcji: brak.
 
-指令参数：无。
-
-指令案例：
+Przykład instrukcji:
 
 .. code-block:: c++
     :linenos:
@@ -192,20 +191,20 @@ get 指令
         cmd: "get_syscfg"
     }
 
-指令反馈：
+Informacja zwrotna instrukcji:
 
 .. code-block:: c++
     :linenos:
 
     /** 
     * @return status:200 "success"
-    * @param  string log_count 记录最大日志天数
-    * @param  string language 当前使用语言包
-    * @param  string lifespan 超时时间
+    * @param string log_count Maksymalna liczba dni przechowywania logów
+    * @param string language Aktualnie używany pakiet językowy
+    * @param string lifespan Czas przekroczenia limitu
     * * @return status:404 "fail"
     */ 
 
-指令反馈案例：
+Przykład informacji zwrotnej instrukcji:
 
 .. code-block:: c++
     :linenos:
@@ -216,27 +215,27 @@ get 指令
         lifespan:"1800"
     }
 
-set 指令
--------------
+Instrukcje set
+--------------
 
-以下所有set指令使用POST，URL为/action/set。
+Wszystkie poniższe instrukcje set używają metody POST, a URL to /action/set.
 
-下发系统变量指令
-++++++++++++++++++
+Instrukcja ustawiania zmiennych systemowych
++++++++++++++++++++++++++++++++++++++++++++
 
-指令名称：511。
+Nazwa instrukcji: 511.
 
-指令参数：
+Parametry instrukcji:
 
 .. code-block:: c++
     :linenos:
 
     /** 
-    * @param int index系统变量序号:1-20 
-    * @param int value系统变量值 
+    * @param int index Numer zmiennej systemowej: 1-20 
+    * @param int value Wartość zmiennej systemowej 
     */ 
 
-指令案例：
+Przykład instrukcji:
 
 .. code-block:: c++
     :linenos:
@@ -248,38 +247,38 @@ set 指令
         }
     }
 
-指令反馈：
+Informacja zwrotna instrukcji:
 
 .. code-block:: c++
     :linenos:
 
     /** 
-    * @return status:200 1：代表成功，0：代表失败
+    * @return status:200 1: sukces, 0: porażka
     * @return status:404 "fail"
-    */
+    */ 
 
-指令反馈案例：
+Przykład informacji zwrotnej instrukcji:
 
 .. code-block:: c++
     :linenos:
 
     1
 
-获取系统变量指令
-+++++++++++++++++++
+Instrukcja pobierania zmiennych systemowych
++++++++++++++++++++++++++++++++++++++++++++
 
-指令名称：512。
+Nazwa instrukcji: 512.
 
-指令参数：
+Parametry instrukcji:
 
 .. code-block:: c++
     :linenos:
 
     /** 
-    * @param int index系统变量序号:1-20 
+    * @param int index Numer zmiennej systemowej: 1-20 
     * /
 
-指令案例：
+Przykład instrukcji:
 
 .. code-block:: c++
     :linenos:
@@ -291,108 +290,108 @@ set 指令
         }
     }
 
-指令反馈：
+Informacja zwrotna instrukcji:
 
 .. code-block:: c++
     :linenos:
 
     /** 
     * @return status:200
-    * @param int value系统变量值 
+    * @param int value Wartość zmiennej systemowej 
     * @return status:404 "fail"
     * /
 
-指令反馈案例：
+Przykład informacji zwrotnej instrukcji:
 
 .. code-block:: c++
     :linenos:
 
     1
 
-better-sqlite3指令
------------------------
+Instrukcje better-sqlite3
+--------------------------
 
-查询数据库中第一行记录
-++++++++++++++++++++++
+Zapytanie o pierwszy wiersz w bazie danych
+++++++++++++++++++++++++++++++++++++++++++
 
-指令参数：
+Parametry instrukcji:
 
 .. code-block:: c++
     :linenos:
 
     /**
-    * @param string db_name 数据库名称(包含绝对路径) 
-    * @param string sql sql语句
-    * @return string result 查询到的第一行记录
+    * @param string db_name Nazwa bazy danych (zawierająca ścieżkę bezwzględną) 
+    * @param string sql Instrukcja SQL
+    * @return string result Znaleziony pierwszy wiersz
     */
 
-指令内容：
+Treść instrukcji:
 
 .. code-block:: c++
     :linenos:
 
     queryget(string db_name, string sql);
 
-查询数据库中所有记录
-+++++++++++++++++++++
+Zapytanie o wszystkie rekordy w bazie danych
+++++++++++++++++++++++++++++++++++++++++++++
 
-指令参数：
+Parametry instrukcji:
 
 .. code-block:: c++
     :linenos:
 
     /**
-    * @param string db_name 数据库名称(包含绝对路径)
-    * @param string sql sql语句
-    * @return string result 查询到的所有记录
+    * @param string db_name Nazwa bazy danych (zawierająca ścieżkę bezwzględną)
+    * @param string sql Instrukcja SQL
+    * @return string result Wszystkie znalezione rekordy
     */
 
-指令内容：
+Treść instrukcji:
 
 .. code-block:: c++
     :linenos:
 
     queryall(string db_name, string sql);
 
-执行数据库语句
-+++++++++++++++++++++
+Wykonanie instrukcji bazy danych
+++++++++++++++++++++++++++++++++
 
 .. code-block:: c++
     :linenos:
 
     /**
-    * @param string db_name 数据库名称(包含绝对路径)
-    * @param string sql sql语句
-    * @param object obj sql 语句执行所需的参数
+    * @param string db_name Nazwa bazy danych (zawierająca ścieżkę bezwzględną)
+    * @param string sql Instrukcja SQL
+    * @param object obj Parametry wymagane do wykonania instrukcji SQL
     * @return \
     */
 
-指令参数：
+Parametry instrukcji:
 
 .. code-block:: c++
     :linenos:
 
     exec(string db_name, string sql, object obj);
 
-指令内容：
+Treść instrukcji:
 
-socket指令
------------------------
+Instrukcje socket
+-----------------
 
 socket send
 ++++++++++++++++++++++
 
-指令参数：
+Parametry instrukcji:
 
 .. code-block:: c++
     :linenos:
 
     /**
-    * @param string send_content socket 通信指令发送内容
+    * @param string send_content Treść wysyłana w komunikacji socket
     * @return \
     */
 
-指令内容：
+Treść instrukcji:
 
 .. code-block:: c++
     :linenos:
@@ -403,16 +402,16 @@ socket send
 socket recv
 +++++++++++++++++++++
 
-指令参数：
+Parametry instrukcji:
 
 .. code-block:: c++
     :linenos:
 
     /**
-    * @return string recv_content socket 通信指令回复内容
+    * @return string recv_content Treść odpowiedzi komunikacji socket
     */
 
-指令内容：
+Treść instrukcji:
 
 .. code-block:: c++
     :linenos:
@@ -420,78 +419,78 @@ socket recv
     socket_cmd.recv();//8065
     socket_file.recv();//8067
 
-文件操作指令
----------------------------
+Instrukcje operacji na plikach
+------------------------------
 
-写入文件内容
+Zapis treści do pliku
 ++++++++++++++++++++++++++++++++
 
 .. code-block:: c++
     :linenos:
 
     /**
-    * @param String filename文件路径
-    * @param string content要写入的内容
+    * @param String filename Ścieżka pliku
+    * @param string content Treść do zapisania
     * @return true/false
     */
 
     write(filename, content);
 
-读取文件内容
+Odczyt treści pliku
 ++++++++++++++++++++++++++++++++
 
 .. code-block:: c++
     :linenos:
 
     /**
-    * @param String filename文件路径
-    * @param string content要写入的内容
-    * @return String 文件内容
+    * @param String filename Ścieżka pliku
+    * @param string content Treść do zapisania
+    * @return String Treść pliku
     */
 
     read(filename);
 
-修改文件权限
+Modyfikacja uprawnień pliku
 ++++++++++++++++++++++++++++++++
 
 .. code-block:: c++
     :linenos:
     
     /**
-    * @param String filename文件路径
-    * @param Number mode权限模式（如0644）
+    * @param String filename Ścieżka pliku
+    * @param Number mode Tryb uprawnień (np. 0644)
     * @return true/false
     */
 
     chmod(filename, mode);
 
-读取目录内容，包括子目录
-++++++++++++++++++++++++++++++++++++++++++
+Odczyt zawartości katalogu, w tym podkatalogów
++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. code-block:: c++
     :linenos:
     
     /**
-    * @param String path文件路径
-    * @return Array 文件名数组
+    * @param String path Ścieżka pliku
+    * @return Array Tablica nazw plików
     */
 
     readdir(path);
 
-压缩解压指令
----------------------------
+Instrukcje kompresji i dekompresji
+----------------------------------
 
 .. note:: 
-    区分LA与QX版本：
+    Rozróżnienie między wersją LA a QX:
 
-    LA模块导入：var execSync = require('child_process').execSync;
+    Import modułu LA: var execSync = require('child_process').execSync;
 
-    QX模块导入：var tar_utils = require('/usr/local/etc/node/sys/tools/tar_utils');
+    Import modułu QX: var tar_utils = require('/usr/local/etc/node/sys/tools/tar_utils');
 
-创建tar.gz压缩文件
-+++++++++++++++++++++++++++++++++
+Utworzenie skompresowanego pliku tar.gz
+++++++++++++++++++++++++++++++++++++++++
 
-创建tar.gz压缩文件示例(LA)：
+Przykład utworzenia skompresowanego pliku tar.gz (LA):
 
 .. code-block:: javascript
     :linenos:
@@ -499,25 +498,25 @@ socket recv
     var cmd = 'cd / && tar -zcvf ' + FILENAME + '-C ' + DIR;
     execSync(cmd);
     
-创建tar.gz压缩文件指令描述(QX)：
+Opis instrukcji tworzenia skompresowanego pliku tar.gz (QX):
 
 .. code-block:: c++
     :linenos:
     
     /**
-    * @param {Array|String} sourcePaths 源文件/目录路径数组或单个路径
-    * @param String targetFile目标压缩文件路径
-    * @param Function callback 回调函数，参数为(error) 
-    * @param String basePath基础路径，默认为'/'
+    * @param {Array|String} sourcePaths Tablica ścieżek źródłowych plików/katalogów lub pojedyncza ścieżka
+    * @param String targetFile Ścieżka docelowego pliku kompresji
+    * @param Function callback Funkcja zwrotna, parametr (error) 
+    * @param String basePath Ścieżka podstawowa, domyślnie '/'
     * @return \
     */
 
     createTarGz(sourcePaths, targetFile, callback, basePath);
 
-解压tar.gz文件
-+++++++++++++++++++++++++++++++++
+Dekompresja pliku tar.gz
+++++++++++++++++++++++++++++++++
 
-解压tar.gz文件示例(LA)：
+Przykład dekompresji pliku tar.gz (LA):
 
 .. code-block:: javascript
     :linenos:
@@ -525,15 +524,15 @@ socket recv
     var cmd = 'cd / && tar -zxvf ' + FILENAME;
     execSync(cmd);
 
-解压tar.gz文件指令描述(QX)：
+Opis instrukcji dekompresji pliku tar.gz (QX):
 
 .. code-block:: c++
     :linenos:
     
     /**
-    * @param String sourceFile源压缩文件路径
-    * @param String targetDir目标解压目录
-    * @param Function callback 回调函数，参数为(error) 
+    * @param String sourceFile Ścieżka źródłowego pliku kompresji
+    * @param String targetDir Docelowy katalog dekompresji
+    * @param Function callback Funkcja zwrotna, parametr (error) 
     * @return \
     */
     extractTarGz(sourceFile, targetDir, callback);

@@ -1,78 +1,78 @@
-虚拟机-VMware
-===============================================
+Maszyna wirtualna - VMware
+===========================
 
-概述
-------------------
-本手册旨在介绍如何使用 FAIRINO SimMachine 虚拟机。
+Omówienie
+---------
+Niniejsza instrukcja ma na celu opisanie sposobu korzystania z maszyny wirtualnej FAIRINO SimMachine.
 
-操作说明
-------------------------------------
+Instrukcje operacyjne
+---------------------
 
-安装 VMware Workstation
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Instalacja VMware Workstation
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-VMware Workstation 演示版本：17.6.3（已安装则跳过此步）。
+Wersja demonstracyjna VMware Workstation: 17.6.3 (pominąć ten krok, jeśli już zainstalowano).
 
-在浏览器直接搜索VMware官网或直接点击网址 \ `<https://www.vmware.com>`__\ ，下载安装包后选择默认路径安装即可。
+W przeglądarce wyszukaj bezpośrednio oficjalną stronę VMware lub kliknij bezpośrednio adres URL \ `<https://www.vmware.com>`__\ . Pobierz pakiet instalacyjny i zainstaluj, wybierając domyślną ścieżkę.
 
 .. image:: controller_virtual_machine/001.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 6.2-1 VMWare 界面
+.. centered:: Wykres 6.2-1 Interfejs VMware
 
-打开镜像
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Otwieranie obrazu
+~~~~~~~~~~~~~~~~~
 
-1. 下载虚拟机镜像 FAIRINO_SimMachine.zip 并解压
-   
-2. 打开 VMware，点击 File->Open。如下图 2-2 所示：
+1. Pobierz obraz maszyny wirtualnej FAIRINO_SimMachine.zip i rozpakuj go.
+
+2. Otwórz VMware, kliknij File -> Open, jak pokazano na poniższym wykresie 2-2:
 
 .. image:: controller_virtual_machine/002.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 6.2-2 打开镜像
+.. centered:: Wykres 6.2-2 Otwieranie obrazu
 
-3. 找到解压后的文件夹，选择 vmx 后缀文件。如下图 2-3 所示：
-   
+3. Znajdź rozpakowany folder i wybierz plik z rozszerzeniem vmx, jak pokazano na poniższym wykresie 2-3:
+
 .. image:: controller_virtual_machine/003.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 6.2-3 选择文件
+.. centered:: Wykres 6.2-3 Wybór pliku
 
-4. 点击“Power on this virtul machine”打开虚拟机。如下图 2-4 所示：
-   
+4. Kliknij „Power on this virtual machine”, aby otworzyć maszynę wirtualną, jak pokazano na poniższym wykresie 2-4:
+
 .. image:: controller_virtual_machine/004.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 6.2-4 开启虚拟机
+.. centered:: Wykres 6.2-4 Uruchamianie maszyny wirtualnej
 
-5. 在解压文件夹中找到“fr_get_vm_net”双击打开，如下图 2-5 所示，输出内容为虚拟机 IP。如下图 2-6 所示。
+5. W rozpakowanym folderze znajdź plik „fr_get_vm_net” i kliknij go dwukrotnie, aby otworzyć, jak pokazano na poniższym wykresie 2-5. Wyjściowa zawartość to adres IP maszyny wirtualnej, jak pokazano na poniższym wykresie 2-6.
 
-.. note:: 如遇获取失败，请前往虚拟机中通过执行“ifconfig”命令获取。
+.. note:: W przypadku niepowodzenia pobrania, należy uzyskać adres IP w maszynie wirtualnej za pomocą polecenia „ifconfig”.
       
 .. image:: controller_virtual_machine/005.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 6.2-5 fr_get_vm_net.bat
+.. centered:: Wykres 6.2-5 fr_get_vm_net.bat
       
 .. image:: controller_virtual_machine/006.png
    :width: 4in
    :align: center
 
-.. centered:: 图表 6.2-6 虚拟机 IP
+.. centered:: Wykres 6.2-6 Adres IP maszyny wirtualnej
 
-Windows 访问 WebApp
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Dostęp do WebApp z systemu Windows
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-1. 在得到虚拟机 IP 后，在 Windows 浏览器中直接访问虚拟机 IP 即可进入WebApp，如输入：192.168.182.222，如图 2-7：
+1. Po uzyskaniu adresu IP maszyny wirtualnej, wpisz go bezpośrednio w przeglądarce systemu Windows, aby uzyskać dostęp do WebApp, na przykład: 192.168.182.222, jak pokazano na wykresie 2-7:
          
 .. image:: controller_virtual_machine/007.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 6.2-7 通过虚拟机 IP 访问 WebApp
+.. centered:: Wykres 6.2-7 Dostęp do WebApp przez adres IP maszyny wirtualnej

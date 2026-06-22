@@ -1,182 +1,177 @@
-机器人焊接
-=============
+Spawanie robotem
+================
 
 .. toctree:: 
     :maxdepth: 5
 
-设置焊接工艺曲线参数
-++++++++++++++++++++++++++++++++++
+Ustawienie parametrów krzywej procesu spawania
+++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief  设置焊接工艺曲线参数
-    * @param  [in] id 焊接工艺编号(1-99)
-    * @param  [in] startCurrent 起弧电流(A)
-    * @param  [in] startVoltage 起弧电压(V)
-    * @param  [in] startTime 起弧时间(ms)
-    * @param  [in] weldCurrent 焊接电流(A)
-    * @param  [in] weldVoltage 焊接电压(V)
-    * @param  [in] endCurrent 收弧电流(A)
-    * @param  [in] endVoltage 收弧电压(V)
-    * @param  [in] endTime 收弧时间(ms)
-    * @return  错误码
+    * @brief  Ustawia parametry krzywej procesu spawania
+    * @param  [in] id Numer procesu spawania (1-99)
+    * @param  [in] startCurrent Prąd zajarzenia łuku (A)
+    * @param  [in] startVoltage Napięcie zajarzenia łuku (V)
+    * @param  [in] startTime Czas zajarzenia łuku (ms)
+    * @param  [in] weldCurrent Prąd spawania (A)
+    * @param  [in] weldVoltage Napięcie spawania (V)
+    * @param  [in] endCurrent Prąd wygaszenia łuku (A)
+    * @param  [in] endVoltage Napięcie wygaszenia łuku (V)
+    * @param  [in] endTime Czas wygaszenia łuku (ms)
+    * @return  Kod błędu
     */
     int WeldingSetProcessParam(int id, double startCurrent, double startVoltage, double startTime, double weldCurrent, double weldVoltage, double endCurrent, double endVoltage, double endTime);
 
-获取焊接工艺曲线参数
-++++++++++++++++++++++++++++++++++
+Pobranie parametrów krzywej procesu spawania
+++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief  获取焊接工艺曲线参数
-    * @param  [in] id 焊接工艺编号(1-99)
-    * @param  [out] startCurrent 起弧电流(A)
-    * @param  [out] startVoltage 起弧电压(V)
-    * @param  [out] startTime 起弧时间(ms)
-    * @param  [out] weldCurrent 焊接电流(A)
-    * @param  [out] weldVoltage 焊接电压(V)
-    * @param  [out] endCurrent 收弧电流(A)
-    * @param  [out] endVoltage 收弧电压(V)
-    * @param  [out] endTime 收弧时间(ms)
-    * @return  错误码
+    * @brief  Pobiera parametry krzywej procesu spawania
+    * @param  [in] id Numer procesu spawania (1-99)
+    * @param  [out] startCurrent Prąd zajarzenia łuku (A)
+    * @param  [out] startVoltage Napięcie zajarzenia łuku (V)
+    * @param  [out] startTime Czas zajarzenia łuku (ms)
+    * @param  [out] weldCurrent Prąd spawania (A)
+    * @param  [out] weldVoltage Napięcie spawania (V)
+    * @param  [out] endCurrent Prąd wygaszenia łuku (A)
+    * @param  [out] endVoltage Napięcie wygaszenia łuku (V)
+    * @param  [out] endTime Czas wygaszenia łuku (ms)
+    * @return  Kod błędu
     */
     int WeldingGetProcessParam(int id, ref double startCurrent, ref double startVoltage, ref double startTime, ref double weldCurrent, ref double weldVoltage, ref double endCurrent, ref double endVoltage, ref double endTime);
 
-设置焊接电流与输出模拟量对应关系
-++++++++++++++++++++++++++++++++++
+Ustawienie zależności między prądem spawania a wyjściem analogowym
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C#SDK-v1.0.4
 
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief 设置焊接电流与输出模拟量对应关系
-    * @param [in] currentMin 焊接电流-模拟量输出线性关系左侧点电流值(A)
-    * @param [in] currentMax 焊接电流-模拟量输出线性关系右侧点电流值(A)
-    * @param [in] outputVoltageMin 焊接电流-模拟量输出线性关系左侧点模拟量输出电压值(V)
-    * @param [in] outputVoltageMax 焊接电流-模拟量输出线性关系右侧点模拟量输出电压值(V)
-    * @return 错误码
+    * @brief Ustawia zależność między prądem spawania a wyjściem analogowym
+    * @param [in] currentMin Wartość prądu w lewym punkcie zależności liniowej prąd spawania - wyjście analogowe (A)
+    * @param [in] currentMax Wartość prądu w prawym punkcie zależności liniowej prąd spawania - wyjście analogowe (A)
+    * @param [in] outputVoltageMin Wartość napięcia wyjściowego analogowego w lewym punkcie zależności liniowej prąd spawania - wyjście analogowe (V)
+    * @param [in] outputVoltageMax Wartość napięcia wyjściowego analogowego w prawym punkcie zależności liniowej prąd spawania - wyjście analogowe (V)
+    * @return Kod błędu
     */
     int WeldingSetCurrentRelation(double currentMin, double currentMax, double outputVoltageMin, double outputVoltageMax);
 
-设置焊接电压与输出模拟量对应关系
-++++++++++++++++++++++++++++++++++
-
+Ustawienie zależności między napięciem spawania a wyjściem analogowym
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C#SDK-v1.0.4
 
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief 设置焊接电压与输出模拟量对应关系
-    * @param [in] weldVoltageMin 焊接电压-模拟量输出线性关系左侧点焊接电压值(A)
-    * @param [in] weldVoltageMax 焊接电压-模拟量输出线性关系右侧点焊接电压值(A)
-    * @param [in] outputVoltageMin 焊接电压-模拟量输出线性关系左侧点模拟量输出电压值(V)
-    * @param [in] outputVoltageMax 焊接电压-模拟量输出线性关系右侧点模拟量输出电压值(V)
-    * @return 错误码
+    * @brief Ustawia zależność między napięciem spawania a wyjściem analogowym
+    * @param [in] weldVoltageMin Wartość napięcia spawania w lewym punkcie zależności liniowej napięcie spawania - wyjście analogowe (A)
+    * @param [in] weldVoltageMax Wartość napięcia spawania w prawym punkcie zależności liniowej napięcie spawania - wyjście analogowe (A)
+    * @param [in] outputVoltageMin Wartość napięcia wyjściowego analogowego w lewym punkcie zależności liniowej napięcie spawania - wyjście analogowe (V)
+    * @param [in] outputVoltageMax Wartość napięcia wyjściowego analogowego w prawym punkcie zależności liniowej napięcie spawania - wyjście analogowe (V)
+    * @return Kod błędu
     */
     int WeldingSetVoltageRelation(double weldVoltageMin, double weldVoltageMax, double outputVoltageMin, double outputVoltageMax);
 
-获取焊接电流与输出模拟量对应关系
-++++++++++++++++++++++++++++++++++
-
+Pobranie zależności między prądem spawania a wyjściem analogowym
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C#SDK-v1.0.4
 
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief 获取焊接电流与输出模拟量对应关系
-    * @param [out] currentMin 焊接电流-模拟量输出线性关系左侧点电流值(A)
-    * @param [out] currentMax 焊接电流-模拟量输出线性关系右侧点电流值(A)
-    * @param [out] outputVoltageMin 焊接电流-模拟量输出线性关系左侧点模拟量输出电压值(V)
-    * @param [out] outputVoltageMax 焊接电流-模拟量输出线性关系右侧点模拟量输出电压值(V)
-    * @return 错误码
+    * @brief Pobiera zależność między prądem spawania a wyjściem analogowym
+    * @param [out] currentMin Wartość prądu w lewym punkcie zależności liniowej prąd spawania - wyjście analogowe (A)
+    * @param [out] currentMax Wartość prądu w prawym punkcie zależności liniowej prąd spawania - wyjście analogowe (A)
+    * @param [out] outputVoltageMin Wartość napięcia wyjściowego analogowego w lewym punkcie zależności liniowej prąd spawania - wyjście analogowe (V)
+    * @param [out] outputVoltageMax Wartość napięcia wyjściowego analogowego w prawym punkcie zależności liniowej prąd spawania - wyjście analogowe (V)
+    * @return Kod błędu
     */
     int WeldingGetCurrentRelation(ref double currentMin, ref double currentMax, ref double outputVoltageMin, ref double outputVoltageMax);
 
-获取焊接电压与输出模拟量对应关系
-++++++++++++++++++++++++++++++++++
-
+Pobranie zależności między napięciem spawania a wyjściem analogowym
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C#SDK-v1.0.4
 
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief 获取焊接电压与输出模拟量对应关系
-    * @param [out] weldVoltageMin 焊接电压-模拟量输出线性关系左侧点焊接电压值(A)
-    * @param [out] weldVoltageMax 焊接电压-模拟量输出线性关系右侧点焊接电压值(A)
-    * @param [out] outputVoltageMin 焊接电压-模拟量输出线性关系左侧点模拟量输出电压值(V)
-    * @param [out] outputVoltageMax 焊接电压-模拟量输出线性关系右侧点模拟量输出电压值(V)
-    * @return 错误码
+    * @brief Pobiera zależność między napięciem spawania a wyjściem analogowym
+    * @param [out] weldVoltageMin Wartość napięcia spawania w lewym punkcie zależności liniowej napięcie spawania - wyjście analogowe (A)
+    * @param [out] weldVoltageMax Wartość napięcia spawania w prawym punkcie zależności liniowej napięcie spawania - wyjście analogowe (A)
+    * @param [out] outputVoltageMin Wartość napięcia wyjściowego analogowego w lewym punkcie zależności liniowej napięcie spawania - wyjście analogowe (V)
+    * @param [out] outputVoltageMax Wartość napięcia wyjściowego analogowego w prawym punkcie zależności liniowej napięcie spawania - wyjście analogowe (V)
+    * @return Kod błędu
     */
     int WeldingGetVoltageRelation(ref double weldVoltageMin, ref double weldVoltageMax, ref double outputVoltageMin, ref double outputVoltageMax);
 
-设置焊接电流
-++++++++++++++++++++++++++++++++++
-
+Ustawienie prądu spawania
++++++++++++++++++++++++++
 .. versionadded:: C#SDK-v1.0.4
 
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief 设置焊接电流
-    * @param [in] ioType 控制IO类型 0-控制箱IO；1-扩展IO
-    * @param [in] current 焊接电流值(A)
-    * @param [in] AOIndex 焊接电流控制箱模拟量输出端口(0-1)
-    * @return 错误码
+    * @brief Ustawia prąd spawania
+    * @param [in] ioType Typ I/O sterowania 0-I/O skrzynki sterowniczej; 1-rozszerzone I/O
+    * @param [in] current Wartość prądu spawania (A)
+    * @param [in] AOIndex Port wyjścia analogowego sterowania prądem spawania skrzynki sterowniczej (0-1)
+    * @return Kod błędu
     */
     int WeldingSetCurrent(int ioType, double current, int AOIndex);
 
-设置焊接电压
-++++++++++++++++++++++++++++++++++
-
+Ustawienie napięcia spawania
+++++++++++++++++++++++++++++
 .. versionadded:: C#SDK-v1.0.4
 
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief 设置焊接电压
-    * @param [in] ioType 控制IO类型 0-控制箱IO；1-扩展IO
-    * @param [in] voltage 焊接电压值(A)
-    * @param [in] AOIndex 焊接电压控制箱模拟量输出端口(0-1)
-    * @return 错误码
+    * @brief Ustawia napięcie spawania
+    * @param [in] ioType Typ I/O sterowania 0-I/O skrzynki sterowniczej; 1-rozszerzone I/O
+    * @param [in] voltage Wartość napięcia spawania (A)
+    * @param [in] AOIndex Port wyjścia analogowego sterowania napięciem spawania skrzynki sterowniczej (0-1)
+    * @return Kod błędu
     */
     int WeldingSetVoltage(int ioType, double voltage, int AOIndex);
 
-设置摆动参数
-++++++++++++++++++++++++++++++++++
+Ustawienie parametrów oscylacji
+++++++++++++++++++++++++++++++++
 .. versionadded:: C#SDK-V1.1.3  Web-3.8.2
     
 .. code-block:: c#
     :linenos:
 
     /** 
-    * @brief 设置摆动参数
-    * @param [in] weaveNum 摆焊参数配置编号
-    * @param [in] weaveType 摆动类型 0-平面三角波摆动；1-垂直L型三角波摆动；2-顺时针圆形摆动；3-逆时针圆形摆动；4-平面正弦波摆动；5-垂直L型正弦波摆动；6-垂直三角波摆动；7-垂直正弦波摆动
-    * @param [in] weaveFrequency 摆动频率(Hz)
-    * @param [in] weaveIncStayTime 等待模式 0-周期不包含等待时间；1-周期包含等待时间
-    * @param [in] weaveRange 摆动幅度(mm)
-    * @param [in] weaveLeftRange 垂直三角摆动左弦长度(mm)
-    * @param [in] weaveRightRange 垂直三角摆动右弦长度(mm)
-    * @param [in] additionalStayTime 垂直三角摆动垂三角点停留时间(mm)
-    * @param [in] weaveLeftStayTime 摆动左停留时间(ms)
-    * @param [in] weaveRightStayTime 摆动右停留时间(ms)
-    * @param [in] weaveCircleRadio 圆形摆动-回调比率(0-100%)
-    * @param [in] weaveStationary 摆动位置等待，0-等待时间内位置继续移动；1-等待时间内位置静止
-    * @param [in] weaveYawAngle 摆动方向方位角(绕摆动Z轴旋转)，单位°
-    * @return 错误码 
+    * @brief Ustawia parametry oscylacji
+    * @param [in] weaveNum Numer konfiguracji parametrów spawania z oscylacją
+    * @param [in] weaveType Typ oscylacji 0-płaszczyznowa oscylacja trójkątna; 1-pionowa oscylacja L-trójkątna; 2-okrężna zgodnie z ruchem wskazówek zegara; 3-okrężna przeciwnie do ruchu wskazówek zegara; 4-płaszczyznowa oscylacja sinusoidalna; 5-pionowa oscylacja L-sinusoidalna; 6-pionowa oscylacja trójkątna; 7-pionowa oscylacja sinusoidalna
+    * @param [in] weaveFrequency Częstotliwość oscylacji (Hz)
+    * @param [in] weaveIncStayTime Tryb oczekiwania 0-cykl nie zawiera czasu oczekiwania; 1-cykl zawiera czas oczekiwania
+    * @param [in] weaveRange Amplituda oscylacji (mm)
+    * @param [in] weaveLeftRange Długość lewego ramienia w pionowej oscylacji trójkątnej (mm)
+    * @param [in] weaveRightRange Długość prawego ramienia w pionowej oscylacji trójkątnej (mm)
+    * @param [in] additionalStayTime Czas zatrzymania w punkcie wierzchołkowym pionowej oscylacji trójkątnej (mm)
+    * @param [in] weaveLeftStayTime Czas zatrzymania po lewej stronie oscylacji (ms)
+    * @param [in] weaveRightStayTime Czas zatrzymania po prawej stronie oscylacji (ms)
+    * @param [in] weaveCircleRadio Współczynnik cofania dla oscylacji okrężnej (0-100%)
+    * @param [in] weaveStationary Oczekiwanie w pozycji oscylacji, 0-pozycja kontynuuje ruch w czasie oczekiwania; 1-pozycja jest nieruchoma w czasie oczekiwania
+    * @param [in] weaveYawAngle Azymut kierunku oscylacji (obrót wokół osi Z oscylacji), jednostka °
+    * @return Kod błędu 
     */
     int WeaveSetPara(int weaveNum, int weaveType, double weaveFrequency, int weaveIncStayTime, double weaveRange, double weaveLeftRange, double weaveRightRange, int additionalStayTime, int weaveLeftStayTime, int weaveRightStayTime, int weaveCircleRadio, int weaveStationary, double weaveYawAngle, double weaveRotAngle=0);
 
-设置焊接参数代码示例
-++++++++++++++++++++++++++++++++++
+Przykład kodu ustawiania parametrów spawania
+++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C#SDK-V1.1.3  Web-3.8.2
     
 .. code-block:: c#
@@ -262,243 +257,237 @@
 
     }
 
-即时设置摆动参数
-++++++++++++++++++++++++++++++++++
+Natychmiastowe ustawienie parametrów oscylacji
+++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C#SDK-v1.0.4
 
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief 即时设置摆动参数
-    * @param [in] weaveNum 摆焊参数配置编号
-    * @param [in] weaveType 摆动类型 0-平面三角波摆动；1-垂直L型三角波摆动；2-顺时针圆形摆动；3-逆时针圆形摆动；4-平面正弦波摆动；5-垂直L型正弦波摆动；6-垂直三角波摆动；7-垂直正弦波摆动
-    * @param [in] weaveFrequency 摆动频率(Hz)
-    * @param [in] weaveIncStayTime 等待模式 0-周期不包含等待时间；1-周期包含等待时间
-    * @param [in] weaveRange 摆动幅度(mm)
-    * @param [in] weaveLeftStayTime 摆动左停留时间(ms)
-    * @param [in] weaveRightStayTime 摆动右停留时间(ms)
-    * @param [in] weaveCircleRadio 圆形摆动-回调比率(0-100%)
-    * @param [in] weaveStationary 摆动位置等待，0-等待时间内位置继续移动；1-等待时间内位置静止
-    * @return 错误码
+    * @brief Natychmiastowe ustawienie parametrów oscylacji
+    * @param [in] weaveNum Numer konfiguracji parametrów spawania z oscylacją
+    * @param [in] weaveType Typ oscylacji 0-płaszczyznowa oscylacja trójkątna; 1-pionowa oscylacja L-trójkątna; 2-okrężna zgodnie z ruchem wskazówek zegara; 3-okrężna przeciwnie do ruchu wskazówek zegara; 4-płaszczyznowa oscylacja sinusoidalna; 5-pionowa oscylacja L-sinusoidalna; 6-pionowa oscylacja trójkątna; 7-pionowa oscylacja sinusoidalna
+    * @param [in] weaveFrequency Częstotliwość oscylacji (Hz)
+    * @param [in] weaveIncStayTime Tryb oczekiwania 0-cykl nie zawiera czasu oczekiwania; 1-cykl zawiera czas oczekiwania
+    * @param [in] weaveRange Amplituda oscylacji (mm)
+    * @param [in] weaveLeftStayTime Czas zatrzymania po lewej stronie oscylacji (ms)
+    * @param [in] weaveRightStayTime Czas zatrzymania po prawej stronie oscylacji (ms)
+    * @param [in] weaveCircleRadio Współczynnik cofania dla oscylacji okrężnej (0-100%)
+    * @param [in] weaveStationary Oczekiwanie w pozycji oscylacji, 0-pozycja kontynuuje ruch w czasie oczekiwania; 1-pozycja jest nieruchoma w czasie oczekiwania
+    * @return Kod błędu
     */
     int WeaveOnlineSetPara(int weaveNum, int weaveType, double weaveFrequency, int weaveIncStayTime, double weaveRange, int weaveLeftStayTime, int weaveRightStayTime, int weaveCircleRadio, int weaveStationary);
 
-设置机器人焊接电弧意外中断检测参数
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Ustawienie parametrów wykrywania nieoczekiwanego przerwania łuku spawalniczego robota
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief 设置机器人焊接电弧意外中断检测参数
-    * @param [in] checkEnable 是否使能检测；0-不使能；1-使能
-    * @param [in] arcInterruptTimeLength 电弧中断确认时长(ms)
-    * @return 错误码
+    * @brief Ustawia parametry wykrywania nieoczekiwanego przerwania łuku spawalniczego robota
+    * @param [in] checkEnable Czy włączyć wykrywanie; 0-nie włączaj; 1-włącz
+    * @param [in] arcInterruptTimeLength Czas potwierdzenia przerwania łuku (ms)
+    * @return Kod błędu
     */
     int WeldingSetCheckArcInterruptionParam(int checkEnable, int arcInterruptTimeLength)
 
-获取机器人焊接电弧意外中断检测参数
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Pobranie parametrów wykrywania nieoczekiwanego przerwania łuku spawalniczego robota
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief 获取机器人焊接电弧意外中断检测参数
-    * @param [out] checkEnable 是否使能检测；0-不使能；1-使能
-    * @param [out] arcInterruptTimeLength 电弧中断确认时长(ms)
-    * @return 错误码
+    * @brief Pobiera parametry wykrywania nieoczekiwanego przerwania łuku spawalniczego robota
+    * @param [out] checkEnable Czy włączyć wykrywanie; 0-nie włączaj; 1-włącz
+    * @param [out] arcInterruptTimeLength Czas potwierdzenia przerwania łuku (ms)
+    * @return Kod błędu
     */
     int WeldingGetCheckArcInterruptionParam(ref int checkEnable, ref int arcInterruptTimeLength)
 
-设置机器人焊接中断恢复参数
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Ustawienie parametrów wznowienia spawania po przerwaniu spawania robota
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief 设置机器人焊接中断恢复参数
-    * @param[in] enable 是否使能焊接中断恢复
-    * @param[in] length 焊缝重叠距离(mm)
-    * @param[in] velocity 机器人回到再起弧点速度百分比(0-100)
-    * @param[in] moveType 机器人运动到再起弧点方式；0-LIN；1-PTP
-    * @return 错误码
+    * @brief Ustawia parametry wznowienia spawania po przerwaniu spawania robota
+    * @param[in] enable Czy włączyć wznowienie spawania po przerwaniu
+    * @param[in] length Odległość nakładania się spoiny (mm)
+    * @param[in] velocity Procent prędkości powrotu robota do punktu ponownego zajarzenia łuku (0-100)
+    * @param[in] moveType Sposób ruchu robota do punktu ponownego zajarzenia łuku; 0-LIN; 1-PTP
+    * @return Kod błędu
     */
     int WeldingSetReWeldAfterBreakOffParam(int enable, double length, double velocity, int moveType)
 
-获取机器人焊接中断恢复参数
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Pobranie parametrów wznowienia spawania po przerwaniu spawania robota
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief 获取机器人焊接中断恢复参数
-    * @param [out] enable 是否使能焊接中断恢复
-    * @param [out] length 焊缝重叠距离(mm)
-    * @param [out] velocity 机器人回到再起弧点速度百分比(0-100)
-    * @param [out] moveType 机器人运动到再起弧点方式；0-LIN；1-PTP
-    * @return 错误码
+    * @brief Pobiera parametry wznowienia spawania po przerwaniu spawania robota
+    * @param [out] enable Czy włączyć wznowienie spawania po przerwaniu
+    * @param [out] length Odległość nakładania się spoiny (mm)
+    * @param [out] velocity Procent prędkości powrotu robota do punktu ponownego zajarzenia łuku (0-100)
+    * @param [out] moveType Sposób ruchu robota do punktu ponownego zajarzenia łuku; 0-LIN; 1-PTP
+    * @return Kod błędu
     */
     int WeldingGetReWeldAfterBreakOffParam(ref int enable, ref double length, ref double velocity, ref int moveType)
 
-设置焊机控制模式扩展DO端口
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Ustawienie rozszerzonego portu DO trybu sterowania spawarką
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief 设置焊机控制模式扩展DO端口
-    * @param DONum 焊机控制模式DO端口(0-127)
-    * @return 错误码
+    * @brief Ustawia rozszerzony port DO trybu sterowania spawarką
+    * @param DONum Port DO trybu sterowania spawarką (0-127)
+    * @return Kod błędu
     */
     int SetWeldMachineCtrlModeExtDoNum(int DONum);
 
-设置焊机控制模式
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Ustawienie trybu sterowania spawarką
+++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief 设置焊机控制模式
-    * @param [in] mode 焊机控制模式;0-直流一元模式；1-脉冲一元模式；2-JOB模式；3-近控模式；4-分别模式；5-CC/CV模式；6-TIG；7-CMT
-    * @param [in] ioType 控制类型；0-控制箱IO；1-数字通信协议(UDP);2-数字通信协议(ModbusTCP)
-    * @return 错误码
+    * @brief Ustawia tryb sterowania spawarką
+    * @param [in] mode Tryb sterowania spawarką; 0-tryb jednorodny DC; 1-tryb jednorodny pulsacyjny; 2-tryb JOB; 3-tryb sterowania lokalnego; 4-tryb oddzielny; 5-tryb CC/CV; 6-TIG; 7-CMT
+    * @param [in] ioType Typ sterowania; 0-I/O skrzynki sterowniczej; 1-protokół komunikacji cyfrowej (UDP); 2-protokół komunikacji cyfrowej (ModbusTCP)
+    * @return Kod błędu
     */
     public int SetWeldMachineCtrlMode(int mode,int ioType = 1)
 
-焊接开始
-++++++++++++++++++++++++++++++++++
+Rozpoczęcie spawania
+++++++++++++++++++++
 .. versionadded:: C#SDK-v1.0.4
 
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief 焊接开始
-    * @param [in] ioType io类型 0-控制器IO； 1-扩展IO
-    * @param [in] arcNum 焊机配置文件编号
-    * @param [in] timeout 起弧超时时间
-    * @return 错误码
+    * @brief Rozpoczęcie spawania
+    * @param [in] ioType Typ I/O 0-I/O kontrolera; 1-rozszerzone I/O
+    * @param [in] arcNum Numer pliku konfiguracyjnego spawarki
+    * @param [in] timeout Czas przekroczenia limitu zajarzenia łuku
+    * @return Kod błędu
     */
     int ARCStart(int ioType, int arcNum, int timeout);
 
-焊接结束
-++++++++++++++++++++++++++++++++++
-
+Zakończenie spawania
+++++++++++++++++++++
 .. versionadded:: C#SDK-v1.0.4
 
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief 焊接结束
-    * @param [in] ioType io类型 0-控制器IO； 1-扩展IO
-    * @param [in] arcNum 焊机配置文件编号
-    * @param [in] timeout 熄弧超时时间
-    * @return 错误码
+    * @brief Zakończenie spawania
+    * @param [in] ioType Typ I/O 0-I/O kontrolera; 1-rozszerzone I/O
+    * @param [in] arcNum Numer pliku konfiguracyjnego spawarki
+    * @param [in] timeout Czas przekroczenia limitu wygaszenia łuku
+    * @return Kod błędu
     */
     int ARCEnd(int ioType, int arcNum, int timeout);
 
-摆动开始
-++++++++++++++++++++++++++++++++++
-
+Rozpoczęcie oscylacji
++++++++++++++++++++++
 .. versionadded:: C#SDK-v1.0.4
 
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief 摆动开始
-    * @param [in] weaveNum 摆焊参数配置编号
-    * @return 错误码
+    * @brief Rozpoczęcie oscylacji
+    * @param [in] weaveNum Numer konfiguracji parametrów spawania z oscylacją
+    * @return Kod błędu
     */
     int WeaveStart(int weaveNum);
 
-摆动结束
-++++++++++++++++++++++++++++++++++
-
+Zakończenie oscylacji
++++++++++++++++++++++
 .. versionadded:: C#SDK-v1.0.4
 
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief 摆动结束
-    * @param [in] weaveNum 摆焊参数配置编号
-    * @return 错误码
+    * @brief Zakończenie oscylacji
+    * @param [in] weaveNum Numer konfiguracji parametrów spawania z oscylacją
+    * @return Kod błędu
     */
     int WeaveEnd(int weaveNum);
 
-正向送丝
-++++++++++++++++++++++++++++++++++
-
+Podawanie drutu do przodu
++++++++++++++++++++++++++
 .. versionadded:: C#SDK-v1.0.4
 
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief 正向送丝
-    * @param [in] ioType io类型  0-控制器IO；1-扩展IO
-    * @param [in] wireFeed 送丝控制  0-停止送丝；1-送丝
-    * @return 错误码
+    * @brief Podawanie drutu do przodu
+    * @param [in] ioType Typ I/O 0-I/O kontrolera; 1-rozszerzone I/O
+    * @param [in] wireFeed Sterowanie podawaniem drutu 0-zatrzymaj podawanie; 1-podawaj
+    * @return Kod błędu
     */
     int SetForwardWireFeed(int ioType, int wireFeed); 	
 
-反向送丝
-++++++++++++++++++++++++++++++++++
-
+Podawanie drutu do tyłu
++++++++++++++++++++++++
 .. versionadded:: C#SDK-v1.0.4
 
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief 反向送丝
-    * @param [in] ioType io类型  0-控制器IO；1-扩展IO
-    * @param [in] wireFeed 送丝控制  0-停止送丝；1-送丝
-    * @return 错误码
+    * @brief Podawanie drutu do tyłu
+    * @param [in] ioType Typ I/O 0-I/O kontrolera; 1-rozszerzone I/O
+    * @param [in] wireFeed Sterowanie podawaniem drutu 0-zatrzymaj podawanie; 1-podawaj
+    * @return Kod błędu
     */
     int SetReverseWireFeed(int ioType, int wireFeed);
 
-送气
-++++++++++++++++++++++++++++++++++
-
+Podawanie gazu
+++++++++++++++
 .. versionadded:: C#SDK-v1.0.4
 
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief 送气
-    * @param [in] ioType io类型  0-控制器IO；1-扩展IO
-    * @param [in] airControl 送气控制  0-停止送气；1-送气
-    * @return 错误码
+    * @brief Podawanie gazu
+    * @param [in] ioType Typ I/O 0-I/O kontrolera; 1-rozszerzone I/O
+    * @param [in] airControl Sterowanie podawaniem gazu 0-zatrzymaj podawanie; 1-podawaj
+    * @return Kod błędu
     */
     int SetAspirated(int ioType, int airControl);
 
-设置机器人焊接中断后恢复焊接
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Ustawienie wznowienia spawania po przerwaniu spawania robota
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief 设置机器人焊接中断后恢复焊接
-    * @return 错误码
+    * @brief Ustawienie wznowienia spawania po przerwaniu spawania robota
+    * @return Kod błędu
     */
     int WeldingStartReWeldAfterBreakOff()
 
-设置机器人焊接中断后退出焊接
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Ustawienie wyjścia ze spawania po przerwaniu spawania robota
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief 设置机器人焊接中断后退出焊接
-    * @return 错误码
+    * @brief Ustawienie wyjścia ze spawania po przerwaniu spawania robota
+    * @return Kod błędu
     */
     int WeldingAbortWeldAfterBreakOff()
 
-代码示例
+Przykład kodu
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
@@ -525,43 +514,42 @@
         robot.WeaveEnd(0);
     }
 
-段焊开始
-++++++++++++++++++++++++++++++++++
+Rozpoczęcie spawania odcinkowego
+++++++++++++++++++++++++++++++++
 .. versionadded:: C#SDK-v1.0.4
 
 .. code-block:: c#
     :linenos:
 
     /** 
-    * @brief 段焊开始
-    * @param [in] startDesePos 起始点笛卡尔位置
-    * @param [in] endDesePos 结束点笛卡尔位姿
-    * @param [in] startJPos 起始点关节位姿
-    * @param [in] endJPos 结束点关节位姿
-    * @param [in] weldLength 焊接段长度(mm)
-    * @param [in] noWeldLength 非焊接段长度(mm)
-    * @param [in] weldIOType 焊接IO类型(0-控制箱IO；1-扩展IO)
-    * @param [in] arcNum 焊机配置文件编号
-    * @param [in] weldTimeout 起/收弧超时时间
-    * @param [in] isWeave 是否摆动
-    * @param [in] weaveNum 摆焊参数配置编号
-    * @param [in] tool 工具号
-    * @param [in] user 工件号
-    * @param [in] vel  速度百分比，范围[0~100]
-    * @param [in] acc  加速度百分比，范围[0~100],暂不开放
-    * @param [in] ovl  速度缩放因子，范围[0~100]
-    * @param [in] blendR [-1.0]-运动到位(阻塞)，[0~1000.0]-平滑半径(非阻塞)，单位mm	 
-    * @param [in] epos  扩展轴位置，单位mm
-    * @param [in] search  0-不焊丝寻位，1-焊丝寻位
-    * @param [in] offset_flag  0-不偏移，1-基坐标系/工件坐标系下偏移，2-工具坐标系下偏移
-    * @param [in] offset_pos  位姿偏移量
-    * @return 错误码 
+    * @brief Rozpoczęcie spawania odcinkowego
+    * @param [in] startDesePos Pozycja kartezjańska punktu początkowego
+    * @param [in] endDesePos Pozycja i orientacja kartezjańska punktu końcowego
+    * @param [in] startJPos Pozycja stawów punktu początkowego
+    * @param [in] endJPos Pozycja stawów punktu końcowego
+    * @param [in] weldLength Długość odcinka spawanego (mm)
+    * @param [in] noWeldLength Długość odcinka niespawanego (mm)
+    * @param [in] weldIOType Typ I/O spawania (0-I/O skrzynki sterowniczej; 1-rozszerzone I/O)
+    * @param [in] arcNum Numer pliku konfiguracyjnego spawarki
+    * @param [in] weldTimeout Czas przekroczenia limitu zajarzenia/wygaszenia łuku
+    * @param [in] isWeave Czy stosować oscylację
+    * @param [in] weaveNum Numer konfiguracji parametrów spawania z oscylacją
+    * @param [in] tool Numer narzędzia
+    * @param [in] user Numer przedmiotu
+    * @param [in] vel Procent prędkości, zakres [0~100]
+    * @param [in] acc Procent przyspieszenia, zakres [0~100], tymczasowo nieudostępnione
+    * @param [in] ovl Współczynnik skalowania prędkości, zakres [0~100]
+    * @param [in] blendR [-1.0]-ruch do pozycji (blokujący), [0~1000.0]-promień wygładzenia (nieblokujący), jednostka mm	 
+    * @param [in] epos Pozycja osi rozszerzonej, jednostka mm
+    * @param [in] search 0-brak pozycjonowania drutem spawalniczym, 1-pozycjonowanie drutem spawalniczym
+    * @param [in] offset_flag 0-brak przesunięcia, 1-przesunięcie w podstawowym układzie współrzędnych / układzie współrzędnych przedmiotu, 2-przesunięcie w układzie współrzędnych narzędzia
+    * @param [in] offset_pos Wartość przesunięcia pozycji i orientacji
+    * @return Kod błędu 
     */
     int SegmentWeldStart(DescPose startDesePos, DescPose endDesePos, JointPos startJPos, JointPos endJPos, double weldLength, double noWeldLength, int weldIOType, int arcNum, int weldTimeout,bool isWeave, int weaveNum, int tool, int user, float vel, float acc, float ovl, float blendR, ExaxisPos epos, byte search, byte offset_flag, DescPose offset_pos);
 
-机器人段焊代码示例
-++++++++++++++++++++++++++++++++++
-
+Przykład kodu spawania odcinkowego robota
++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C#SDK-v1.0.4
 
 .. code-block:: c#
@@ -585,55 +573,55 @@
         Console.WriteLine("SegmentWeldStart rtn is {0}", rtn);
     }
 
-仿真摆动开始
-++++++++++++++++++++++++++++++++++
+Rozpoczęcie symulacji oscylacji
+++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief  仿真摆动开始
-    * @param  [in] weaveNum  摆动参数编号
-    * @return  错误码
+    * @brief  Rozpoczęcie symulacji oscylacji
+    * @param  [in] weaveNum  Numer parametrów oscylacji
+    * @return  Kod błędu
     */
     int WeaveStartSim(int weaveNum);
 
-仿真摆动结束
-++++++++++++++++++++++++++++++++++
+Zakończenie symulacji oscylacji
++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief  仿真摆动结束
-    * @param  [in] weaveNum  摆动参数编号
-    * @return  错误码
+    * @brief  Zakończenie symulacji oscylacji
+    * @param  [in] weaveNum  Numer parametrów oscylacji
+    * @return  Kod błędu
     */
     int WeaveEndSim(int weaveNum);
 
-开始轨迹检测预警(不运动)
-++++++++++++++++++++++++++++++++++
+Rozpoczęcie ostrzegania o wykrywaniu trajektorii (bez ruchu)
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief  开始轨迹检测预警(不运动)
-    * @param  [in] weaveNum   摆动参数编号
-    * @return  错误码
+    * @brief  Rozpoczęcie ostrzegania o wykrywaniu trajektorii (bez ruchu)
+    * @param  [in] weaveNum  Numer parametrów oscylacji
+    * @return  Kod błędu
     */
     int WeaveInspectStart(int weaveNum);
 
-结束轨迹检测预警(不运动)
-++++++++++++++++++++++++++++++++++
+Zakończenie ostrzegania o wykrywaniu trajektorii (bez ruchu)
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief 结束轨迹检测预警(不运动)
-    * @param  [in] weaveNum   摆动参数编号
-    * @return  错误码
+    * @brief Zakończenie ostrzegania o wykrywaniu trajektorii (bez ruchu)
+    * @param  [in] weaveNum  Numer parametrów oscylacji
+    * @return  Kod błędu
     */
     int WeaveInspectEnd(int weaveNum);
 
-摆动渐变开始
+Rozpoczęcie stopniowej zmiany oscylacji
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C#SDK-V1.1.3  Web-3.8.2
     
@@ -641,28 +629,28 @@
     :linenos:
 
     /**
-    * @brief  摆动渐变开始
-    * @param [in] weaveChangeFlag 1-变摆动参数；2-变摆动参数+焊接速度
-    * @param [in] weaveNum 摆动编号 
-    * @param [in] velStart 焊接开始速度，(cm/min)
-    * @param [in] velEnd 焊接结束速度，(cm/min)
-    * @return  错误码
+    * @brief  Rozpoczęcie stopniowej zmiany oscylacji
+    * @param [in] weaveChangeFlag 1-zmiana parametrów oscylacji; 2-zmiana parametrów oscylacji + prędkość spawania
+    * @param [in] weaveNum Numer oscylacji 
+    * @param [in] velStart Prędkość początkowa spawania (cm/min)
+    * @param [in] velEnd Prędkość końcowa spawania (cm/min)
+    * @return  Kod błędu
     */
     int WeaveChangeStart(int weaveChangeFlag, int weaveNum, double velStart, double velEnd);
 
-摆动渐变结束
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Zakończenie stopniowej zmiany oscylacji
+++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief  摆动渐变结束
-    * @return  错误码
+    * @brief  Zakończenie stopniowej zmiany oscylacji
+    * @return  Kod błędu
     */
     int WeaveChangeEnd()
 
-机器人摆动渐变焊接代码示例
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Przykład kodu spawania ze stopniową zmianą oscylacji robota
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C#SDK-V1.1.3  Web-3.8.2
     
 .. code-block:: c#
@@ -702,93 +690,93 @@
         robot.ARCEnd(1, 0, 10000);
     }
 
-扩展IO-配置焊机气体检测信号
-++++++++++++++++++++++++++++++++++
+Rozszerzone I/O - konfiguracja sygnału wykrywania gazu spawarki
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief 扩展IO-配置焊机气体检测信号
-    * @param  [in] DONum  气体检测信号扩展DO编号
-    * @return  错误码
+    * @brief Rozszerzone I/O - konfiguracja sygnału wykrywania gazu spawarki
+    * @param  [in] DONum  Rozszerzony numer DO sygnału wykrywania gazu
+    * @return  Kod błędu
     */
     int SetAirControlExtDoNum(int DONum);
 
-扩展IO-配置焊机起弧信号
-++++++++++++++++++++++++++++++++++
+Rozszerzone I/O - konfiguracja sygnału zajarzenia łuku spawarki
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief 扩展IO-配置焊机起弧信号
-    * @param  [in] DONum  焊机起弧信号扩展DO编号
-    * @return  错误码
+    * @brief Rozszerzone I/O - konfiguracja sygnału zajarzenia łuku spawarki
+    * @param  [in] DONum  Rozszerzony numer DO sygnału zajarzenia łuku spawarki
+    * @return  Kod błędu
     */
     int SetArcStartExtDoNum(int DONum);
 
-扩展IO-配置焊机反向送丝信号
-++++++++++++++++++++++++++++++++++
+Rozszerzone I/O - konfiguracja sygnału podawania drutu do tyłu spawarki
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief 扩展IO-配置焊机反向送丝信号
-    * @param  [in] DONum  反向送丝信号扩展DO编号
-    * @return  错误码
+    * @brief Rozszerzone I/O - konfiguracja sygnału podawania drutu do tyłu spawarki
+    * @param  [in] DONum  Rozszerzony numer DO sygnału podawania drutu do tyłu
+    * @return  Kod błędu
     */
     int SetWireReverseFeedExtDoNum(int DONum);
 
-扩展IO-配置焊机正向送丝信号
-++++++++++++++++++++++++++++++++++
+Rozszerzone I/O - konfiguracja sygnału podawania drutu do przodu spawarki
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief 扩展IO-配置焊机正向送丝信号
-    * @param  [in] DONum  正向送丝信号扩展DO编号
-    * @return  错误码
+    * @brief Rozszerzone I/O - konfiguracja sygnału podawania drutu do przodu spawarki
+    * @param  [in] DONum  Rozszerzony numer DO sygnału podawania drutu do przodu
+    * @return  Kod błędu
     */
     int SetWireForwardFeedExtDoNum(int DONum);
 
-扩展IO-配置焊机起弧成功信号
-++++++++++++++++++++++++++++++++++
+Rozszerzone I/O - konfiguracja sygnału pomyślnego zajarzenia łuku spawarki
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief 扩展IO-配置焊机起弧成功信号
-    * @param  [in] DINum  起弧成功信号扩展DI编号
-    * @return  错误码
+    * @brief Rozszerzone I/O - konfiguracja sygnału pomyślnego zajarzenia łuku spawarki
+    * @param  [in] DINum  Rozszerzony numer DI sygnału pomyślnego zajarzenia łuku
+    * @return  Kod błędu
     */
     int SetArcDoneExtDiNum(int DINum);
 
-扩展IO-配置焊机准备信号
-++++++++++++++++++++++++++++++++++
+Rozszerzone I/O - konfiguracja sygnału gotowości spawarki
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief 扩展IO-配置焊机准备信号
-    * @param  [in] DINum  焊机准备信号扩展DI编号
-    * @return  错误码
+    * @brief Rozszerzone I/O - konfiguracja sygnału gotowości spawarki
+    * @param  [in] DINum  Rozszerzony numer DI sygnału gotowości spawarki
+    * @return  Kod błędu
     */
     int SetWeldReadyExtDiNum(int DINum);
 
-扩展IO-配置焊接中断恢复信号
-++++++++++++++++++++++++++++++++++
+Rozszerzone I/O - konfiguracja sygnału wznowienia spawania po przerwaniu
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief 扩展IO-配置焊接中断恢复信号
-    * @param  [in] reWeldDINum  焊接中断后恢复焊接信号扩展DI编号
-    * @param  [in] abortWeldDINum  焊接中断后退出焊接信号扩展DI编号
-    * @return  错误码
+    * @brief Rozszerzone I/O - konfiguracja sygnału wznowienia spawania po przerwaniu
+    * @param  [in] reWeldDINum  Rozszerzony numer DI sygnału wznowienia spawania po przerwaniu
+    * @param  [in] abortWeldDINum  Rozszerzony numer DI sygnału wyjścia ze spawania po przerwaniu
+    * @return  Kod błędu
     */
     int SetExtDIWeldBreakOffRecover(int reWeldDINum, int abortWeldDINum);
 
-设置扩展IO焊接信号代码示例
-++++++++++++++++++++++++++++++++++
+Przykład kodu ustawiania rozszerzonych sygnałów I/O spawania
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
@@ -805,90 +793,90 @@
         robot.SetWireSearchExtDIONum(0, 1);
     }
 
-电弧跟踪控制
-++++++++++++++++++++++++++++++++++
+Sterowanie śledzeniem łuku
++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief  电弧跟踪控制
-    * @param  [in] flag 开关，0-关；1-开
-    * @param  [in] dalayTime 滞后时间，单位ms
-    * @param  [in] isLeftRight 左右偏差补偿
-    * @param  [in] klr 左右调节系数(灵敏度)
-    * @param  [in] tStartLr 左右开始补偿时间cyc
-    * @param  [in] stepMaxLr 左右每次最大补偿量 mm
-    * @param  [in] sumMaxLr 左右总计最大补偿量 mm
-    * @param  [in] isUpLow 上下偏差补偿
-    * @param  [in] kud 上下调节系数(灵敏度)
-    * @param  [in] tStartUd 上下开始补偿时间cyc
-    * @param  [in] stepMaxUd 上下每次最大补偿量 mm
-    * @param  [in] sumMaxUd 上下总计最大补偿量
-    * @param  [in] axisSelect 上下坐标系选择，0-摆动；1-工具；2-基座
-    * @param  [in] referenceType 上下基准电流设定方式，0-反馈；1-常数
-    * @param  [in] referSampleStartUd 上下基准电流采样开始计数(反馈)，cyc
-    * @param  [in] referSampleCountUd 上下基准电流采样循环计数(反馈)，cyc
-    * @param  [in] referenceCurrent 上下基准电流mA
-    *  @param  [in] offsetType 偏置跟踪类型，0-不偏置；1-采样；2-百分比  /version 3.7.9
-    * @param  [in] offsetParameter 偏置参数；采样(偏置采样开始时间，默认采一周期)；百分比(偏置百分比(-100 ~ 100)) /version 3.7.9
-    * @return  错误码
+    * @brief  Sterowanie śledzeniem łuku
+    * @param  [in] flag Przełącznik, 0-wył.; 1-wł.
+    * @param  [in] dalayTime Czas opóźnienia, jednostka ms
+    * @param  [in] isLeftRight Kompensacja odchylenia lewo-prawo
+    * @param  [in] klr Współczynnik regulacji lewo-prawo (czułość)
+    * @param  [in] tStartLr Czas rozpoczęcia kompensacji lewo-prawo cyc
+    * @param  [in] stepMaxLr Maksymalna wielkość kompensacji na raz lewo-prawo mm
+    * @param  [in] sumMaxLr Maksymalna całkowita wielkość kompensacji lewo-prawo mm
+    * @param  [in] isUpLow Kompensacja odchylenia góra-dół
+    * @param  [in] kud Współczynnik regulacji góra-dół (czułość)
+    * @param  [in] tStartUd Czas rozpoczęcia kompensacji góra-dół cyc
+    * @param  [in] stepMaxUd Maksymalna wielkość kompensacji na raz góra-dół mm
+    * @param  [in] sumMaxUd Maksymalna całkowita wielkość kompensacji góra-dół
+    * @param  [in] axisSelect Wybór układu współrzędnych góra-dół, 0-oscylacja; 1-narzędzie; 2-podstawa
+    * @param  [in] referenceType Sposób ustawiania prądu odniesienia góra-dół, 0-sprzężenie zwrotne; 1-stała
+    * @param  [in] referSampleStartUd Rozpoczęcie próbkowania prądu odniesienia góra-dół (sprzężenie zwrotne), cyc
+    * @param  [in] referSampleCountUd Liczba cykli próbkowania prądu odniesienia góra-dół (sprzężenie zwrotne), cyc
+    * @param  [in] referenceCurrent Prąd odniesienia góra-dół mA
+    *  @param  [in] offsetType Typ śledzenia z przesunięciem, 0-bez przesunięcia; 1-próbkowanie; 2-procent /version 3.7.9
+    * @param  [in] offsetParameter Parametr przesunięcia; próbkowanie (czas rozpoczęcia próbkowania przesunięcia, domyślnie jeden cykl); procent (procent przesunięcia (-100 ~ 100)) /version 3.7.9
+    * @return  Kod błędu
     */
     int ArcWeldTraceControl(int flag, double delaytime, int isLeftRight, double klr, double tStartLr, double stepMaxLr, double sumMaxLr, int isUpLow, double kud, double tStartUd, double stepMaxUd, double sumMaxUd, int axisSelect, int referenceType, double referSampleStartUd, double referSampleCountUd, double referenceCurrent, int offsetType, int offsetParameter);
 
-电弧跟踪AI通带选择
-++++++++++++++++++++++++++++++++++
+Wybór pasma AI śledzenia łuku
++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief  电弧跟踪AI通带选择
-    * @param  [in] channel 电弧跟踪AI通带选择,[0-3]
-    * @return  错误码
+    * @brief  Wybór pasma AI śledzenia łuku
+    * @param  [in] channel Wybór pasma AI śledzenia łuku, [0-3]
+    * @return  Kod błędu
     */
     int ArcWeldTraceExtAIChannelConfig(int channel);
 
-电弧追踪 + 多层多道补偿开启
-++++++++++++++++++++++++++++++++++
+Rozpoczęcie kompensacji śledzenia łuku + wielowarstwowe i wielościeżkowe
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief 电弧追踪 + 多层多道补偿开启
-    * @return 错误码
+    * @brief Rozpoczęcie kompensacji śledzenia łuku + wielowarstwowe i wielościeżkowe
+    * @return Kod błędu
     */
     int ArcWeldTraceReplayStart();
 
-电弧追踪 + 多层多道补偿关闭
-++++++++++++++++++++++++++++++++++
+Zakończenie kompensacji śledzenia łuku + wielowarstwowe i wielościeżkowe
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
         /**
-         * @brief 电弧追踪 + 多层多道补偿关闭
-         * @return 错误码
+         * @brief Zakończenie kompensacji śledzenia łuku + wielowarstwowe i wielościeżkowe
+         * @return Kod błędu
          */
     int ArcWeldTraceReplayEnd();
 
-偏移量坐标变化-多层多道焊
-++++++++++++++++++++++++++++++++++
+Zmiana współrzędnych przesunięcia - spawanie wielowarstwowe i wielościeżkowe
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
      /**
-     * @brief 偏移量坐标变化-多层多道焊
-     * @param [in] pointO 基准点笛卡尔位姿
-     * @param [in] pointX 基准点X向偏移方向点笛卡尔位姿
-     * @param [in] pointZ 基准点Z向偏移方向点笛卡尔位姿
-     * @param [in] dx x方向偏移量(mm)
-     * @param [in] z方向偏移量(mm)
-     * @param [in] 绕y轴偏移量(°)
-     * @param [out] 计算结果偏移量
-     * @return 错误码
+     * @brief Zmiana współrzędnych przesunięcia - spawanie wielowarstwowe i wielościeżkowe
+     * @param [in] pointO Pozycja i orientacja kartezjańska punktu odniesienia
+     * @param [in] pointX Pozycja i orientacja kartezjańska punktu w kierunku przesunięcia X punktu odniesienia
+     * @param [in] pointZ Pozycja i orientacja kartezjańska punktu w kierunku przesunięcia Z punktu odniesienia
+     * @param [in] dx Wielkość przesunięcia w kierunku X (mm)
+     * @param [in] dy Wielkość przesunięcia w kierunku Z (mm)
+     * @param [in] db Wielkość przesunięcia wokół osi Y (°)
+     * @param [out] offset Wynikowe przesunięcie
+     * @return Kod błędu
      */
     int MultilayerOffsetTrsfToBase(DescTran pointO, DescTran pointX, DescTran pointZ, double dx, double dy, double db, ref DescPose offset);
 
-多层多道焊电弧跟踪代码示例
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Przykład kodu śledzenia łuku dla spawania wielowarstwowego i wielościeżkowego
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     
 .. code-block:: c#
     :linenos:
@@ -1024,69 +1012,69 @@
         Console.WriteLine("MoveJ return: {0}", error);
     }
 
-电弧跟踪焊机电流反馈AI通道选择
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Wybór kanału AI sprzężenia zwrotnego prądu spawarki śledzenia łuku
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C#SDK-V1.1.3  Web-3.8.2
     
 .. code-block:: c#
     :linenos:
     
     /**
-    * @brief 电弧跟踪焊机电流反馈AI通道选择
-    * @param [in]  channel 通道；0-扩展AI0；1-扩展AI1；2-扩展AI2；3-扩展AI3；4-控制箱AI0；5-控制箱AI1
-    * @return 错误码
+    * @brief Wybór kanału AI sprzężenia zwrotnego prądu spawarki śledzenia łuku
+    * @param [in]  channel Kanał; 0-rozszerzone AI0; 1-rozszerzone AI1; 2-rozszerzone AI2; 3-rozszerzone AI3; 4-AI0 skrzynki sterowniczej; 5-AI1 skrzynki sterowniczej
+    * @return Kod błędu
     */
     int ArcWeldTraceAIChannelCurrent(int channel);
 
-电弧跟踪焊机电压反馈AI通道选择
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Wybór kanału AI sprzężenia zwrotnego napięcia spawarki śledzenia łuku
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C#SDK-V1.1.3  Web-3.8.2
     
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief 电弧跟踪焊机电压反馈AI通道选择
-    * @param [in]  channel 通道；0-扩展AI0；1-扩展AI1；2-扩展AI2；3-扩展AI3；4-控制箱AI0；5-控制箱AI1
-    * @return 错误码
+    * @brief Wybór kanału AI sprzężenia zwrotnego napięcia spawarki śledzenia łuku
+    * @param [in]  channel Kanał; 0-rozszerzone AI0; 1-rozszerzone AI1; 2-rozszerzone AI2; 3-rozszerzone AI3; 4-AI0 skrzynki sterowniczej; 5-AI1 skrzynki sterowniczej
+    * @return Kod błędu
     */
     int ArcWeldTraceAIChannelVoltage(int channel);
 
-电弧跟踪焊机电流反馈转换参数
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Parametry konwersji sprzężenia zwrotnego prądu spawarki śledzenia łuku
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C#SDK-V1.1.3  Web-3.8.2
     
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief 电弧跟踪焊机电流反馈转换参数
-    * @param [in] AILow AI通道下限，默认值0V，范围[0-10V]
-    * @param [in] AIHigh AI通道上限，默认值10V，范围[0-10V]
-    * @param [in] currentLow AI通道下限对应焊机电流值，默认值0V，范围[0-200V]
-    * @param [in] currentHigh AI通道上限对应焊机电流值，默认值100V，范围[0-200V]
-    * @return 错误码
+    * @brief Parametry konwersji sprzężenia zwrotnego prądu spawarki śledzenia łuku
+    * @param [in] AILow Dolna granica kanału AI, wartość domyślna 0V, zakres [0-10V]
+    * @param [in] AIHigh Górna granica kanału AI, wartość domyślna 10V, zakres [0-10V]
+    * @param [in] currentLow Wartość prądu spawarki odpowiadająca dolnej granicy kanału AI, wartość domyślna 0V, zakres [0-200V]
+    * @param [in] currentHigh Wartość prądu spawarki odpowiadająca górnej granicy kanału AI, wartość domyślna 100V, zakres [0-200V]
+    * @return Kod błędu
     */
     int ArcWeldTraceCurrentPara(float AILow, float AIHigh, float currentLow, float currentHigh);
 
-电弧跟踪焊机电压反馈转换参数
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Parametry konwersji sprzężenia zwrotnego napięcia spawarki śledzenia łuku
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C#SDK-V1.1.3  Web-3.8.2
     
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief 电弧跟踪焊机电压反馈转换参数
-    * @param [in] AILow AI通道下限，默认值0V，范围[0-10V]
-    * @param [in] AIHigh AI通道上限，默认值10V，范围[0-10V]
-    * @param [in] voltageLow AI通道下限对应焊机电压值，默认值0V，范围[0-200V]
-    * @param [in] voltageHigh AI通道上限对应焊机电压值，默认值100V，范围[0-200V]
-    * @return 错误码
+    * @brief Parametry konwersji sprzężenia zwrotnego napięcia spawarki śledzenia łuku
+    * @param [in] AILow Dolna granica kanału AI, wartość domyślna 0V, zakres [0-10V]
+    * @param [in] AIHigh Górna granica kanału AI, wartość domyślna 10V, zakres [0-10V]
+    * @param [in] voltageLow Wartość napięcia spawarki odpowiadająca dolnej granicy kanału AI, wartość domyślna 0V, zakres [0-200V]
+    * @param [in] voltageHigh Wartość napięcia spawarki odpowiadająca górnej granicy kanału AI, wartość domyślna 100V, zakres [0-200V]
+    * @return Kod błędu
     */
     int ArcWeldTraceVoltagePara(float AILow, float AIHigh, float voltageLow, float voltageHigh);
 
-电弧跟踪代码示例
+Przykład kodu śledzenia łuku
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C#SDK-V1.1.3  Web-3.8.2
     
@@ -1111,8 +1099,8 @@
 
         robot.WeldingSetCurrentRelation(0, 495, 1, 10, 0);
         robot.WeldingSetVoltageRelation(10, 45, 1, 10, 1);
-        robot.WeldingSetVoltage(0, 25, 1, 0);// ----设置电压
-        robot.WeldingSetCurrent(0, 260, 0, 0);// ----设置电流
+        robot.WeldingSetVoltage(0, 25, 1, 0);// ----ustawienie napięcia
+        robot.WeldingSetCurrent(0, 260, 0, 0);// ----ustawienie prądu
 
         int rtn = robot.ArcWeldTraceAIChannelCurrent(4);
         Console.WriteLine("ArcWeldTraceAIChannelCurrent rtn is " + rtn);
@@ -1134,98 +1122,98 @@
         robot.MoveJ(safetyjointPos, safetydescPose, 1, 0, 20, 100, 100, exaxisPos, -1, 0, offdese);
     }
 
-设置焊丝寻位扩展IO端口
-+++++++++++++++++++++++++++++
+Ustawienie rozszerzonych portów I/O pozycjonowania drutu spawalniczego
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief 设置焊丝寻位扩展IO端口
-    * @param searchDoneDINum 焊丝寻位成功DO端口(0-127)
-    * @param searchStartDONum 焊丝寻位启停控制DO端口(0-127)
-    * @return 错误码
+    * @brief Ustawia rozszerzone porty I/O pozycjonowania drutu spawalniczego
+    * @param searchDoneDINum Port DO pomyślnego pozycjonowania drutu spawalniczego (0-127)
+    * @param searchStartDONum Port DO sterowania uruchamianiem/zatrzymywaniem pozycjonowania drutu spawalniczego (0-127)
+    * @return Kod błędu
     */
     int SetWireSearchExtDIONum(int searchDoneDINum, int searchStartDONum);
 
-焊丝寻位开始
-++++++++++++++++++++++++++++++++++
+Rozpoczęcie pozycjonowania drutu spawalniczego
+++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief  焊丝寻位开始
-    * @param  [in] refPos  1-基准点 0-接触点
-    * @param  [in] searchVel   寻位速度 %
-    * @param  [in] searchDis  寻位距离 mm
-    * @param  [in] autoBackFlag 自动返回标志，0-不自动；-自动
-    * @param  [in] autoBackVel  自动返回速度 %
-    * @param  [in] autoBackDis  自动返回距离 mm
-    * @param  [in] offectFlag  1-带偏移量寻位；0-示教点寻位
-    * @return  错误码
+    * @brief  Rozpoczęcie pozycjonowania drutu spawalniczego
+    * @param  [in] refPos  1-punkt odniesienia 0-punkt kontaktu
+    * @param  [in] searchVel   Prędkość pozycjonowania %
+    * @param  [in] searchDis  Odległość pozycjonowania mm
+    * @param  [in] autoBackFlag Znacznik automatycznego powrotu, 0-nie automatyczny; 1-automatyczny
+    * @param  [in] autoBackVel  Prędkość automatycznego powrotu %
+    * @param  [in] autoBackDis  Odległość automatycznego powrotu mm
+    * @param  [in] offectFlag  1-pozycjonowanie z przesunięciem; 0-pozycjonowanie punktem nauczania
+    * @return  Kod błędu
     */
     int WireSearchStart(int refPos, double searchVel, int searchDis, int autoBackFlag, double autoBackVel, int autoBackDis, int offectFlag);
 
-焊丝寻位结束
-++++++++++++++++++++++++++++++++++
+Zakończenie pozycjonowania drutu spawalniczego
+++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief  焊丝寻位结束
-    * @param  [in] refPos  1-基准点 2-接触点
-    * @param  [in] searchVel   寻位速度 %
-    * @param  [in] searchDis  寻位距离 mm
-    * @param  [in] autoBackFlag 自动返回标志，0-不自动；-自动
-    * @param  [in] autoBackVel  自动返回速度 %
-    * @param  [in] autoBackDis  自动返回距离 mm
-    * @param  [in] offectFlag  1-带偏移量寻位；2-示教点寻位
-    * @return  错误码
+    * @brief  Zakończenie pozycjonowania drutu spawalniczego
+    * @param  [in] refPos  1-punkt odniesienia 2-punkt kontaktu
+    * @param  [in] searchVel   Prędkość pozycjonowania %
+    * @param  [in] searchDis  Odległość pozycjonowania mm
+    * @param  [in] autoBackFlag Znacznik automatycznego powrotu, 0-nie automatyczny; 1-automatyczny
+    * @param  [in] autoBackVel  Prędkość automatycznego powrotu %
+    * @param  [in] autoBackDis  Odległość automatycznego powrotu mm
+    * @param  [in] offectFlag  1-pozycjonowanie z przesunięciem; 2-pozycjonowanie punktem nauczania
+    * @return  Kod błędu
     */
     int WireSearchEnd(int refPos, double searchVel, int searchDis, int autoBackFlag, double autoBackVel, int autoBackDis, int offectFlag);
 
-计算焊丝寻位偏移量
-++++++++++++++++++++++++++++++++++
+Obliczenie przesunięcia pozycjonowania drutu spawalniczego
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief  计算焊丝寻位偏移量
-    * @param  [in] seamType  焊缝类型
-    * @param  [in] method   计算方法
-    * @param  [in] varNameRef 基准点1-6，“#”表示无点变量
-    * @param  [in] varNameRes 接触点1-6，“#”表示无点变量
-    * @param  [out] offectFlag 0-偏移量直接叠加到指令点；1-偏移量需要对指令点进行坐标变换
-    * @param  [out] offect 偏移位姿[x, y, z, a, b, c]
-    * @return  错误码
+    * @brief  Obliczenie przesunięcia pozycjonowania drutu spawalniczego
+    * @param  [in] seamType  Typ spoiny
+    * @param  [in] method   Metoda obliczeniowa
+    * @param  [in] varNameRef Punkty odniesienia 1-6, "#" oznacza brak zmiennej punktowej
+    * @param  [in] varNameRes Punkty kontaktu 1-6, "#" oznacza brak zmiennej punktowej
+    * @param  [out] offectFlag 0-przesunięcie jest bezpośrednio dodawane do punktu instrukcji; 1-przesunięcie wymaga transformacji współrzędnych punktu instrukcji
+    * @param  [out] offect Przesunięcie pozycji i orientacji [x, y, z, a, b, c]
+    * @return  Kod błędu
     */
     int GetWireSearchOffset(int seamType, int method, string[] varNameRef, string[] varNameRes, ref int offsetFlag, ref DescPose offset);
 
-等待焊丝寻位完成
-++++++++++++++++++++++++++++++++++
+Oczekiwanie na zakończenie pozycjonowania drutu spawalniczego
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief  等待焊丝寻位完成
-    * @return  错误码
+    * @brief  Oczekiwanie na zakończenie pozycjonowania drutu spawalniczego
+    * @return  Kod błędu
     */
     int WireSearchWait(string name);
 
-焊丝寻位接触点写入数据库
-++++++++++++++++++++++++++++++++++
+Zapis punktu kontaktu pozycjonowania drutu spawalniczego do bazy danych
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief  焊丝寻位接触点写入数据库
-    * @param  [in] varName  接触点名称 “RES0” ~ “RES99”
-    * @param  [in] pos  接触点数据[x, y, x, a, b, c]
-    * @return  错误码
+    * @brief  Zapis punktu kontaktu pozycjonowania drutu spawalniczego do bazy danych
+    * @param  [in] varName  Nazwa punktu kontaktu "RES0" ~ "RES99"
+    * @param  [in] pos  Dane punktu kontaktu [x, y, x, a, b, c]
+    * @return  Kod błędu
     */
     int SetPointToDatabase(string varName, DescPose pos);
 
-机器人焊丝寻位代码示例
-++++++++++++++++++++++++++++++++++
+Przykład kodu pozycjonowania drutu spawalniczego robota
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
@@ -1262,26 +1250,26 @@
         JointPos jointREF1B = new JointPos(-119.088, -69.676, 98.692, -121.761, -89.219, 74.303);
 
         rtn0 = robot.WireSearchStart(0, 10, 100, 0, 10, 100, 0);
-        robot.MoveL(jointREF0A, descREF0A, 1, 1, 100, 100, 100, -1, exaxisPos, 0, 0, offdese);  //起点
-        robot.MoveL(jointREF0B, descREF0B, 1, 1, 100, 100, 100, -1, exaxisPos, 1, 0, offdese);  //方向点
+        robot.MoveL(jointREF0A, descREF0A, 1, 1, 100, 100, 100, -1, exaxisPos, 0, 0, offdese);  //punkt początkowy
+        robot.MoveL(jointREF0B, descREF0B, 1, 1, 100, 100, 100, -1, exaxisPos, 1, 0, offdese);  //punkt kierunkowy
         rtn1 = robot.WireSearchWait("REF0");
         rtn2 = robot.WireSearchEnd(0, 10, 100, 0, 10, 100, 0);
 
         rtn0 = robot.WireSearchStart(0, 10, 100, 0, 10, 100, 0);
-        robot.MoveL(jointREF1A, descREF1A, 1, 1, 100, 100, 100, -1, exaxisPos, 0, 0, offdese);  //起点
-        robot.MoveL(jointREF1B, descREF1B, 1, 1, 100, 100, 100, -1, exaxisPos, 1, 0, offdese);  //方向点
+        robot.MoveL(jointREF1A, descREF1A, 1, 1, 100, 100, 100, -1, exaxisPos, 0, 0, offdese);  //punkt początkowy
+        robot.MoveL(jointREF1B, descREF1B, 1, 1, 100, 100, 100, -1, exaxisPos, 1, 0, offdese);  //punkt kierunkowy
         rtn1 = robot.WireSearchWait("REF1");
         rtn2 = robot.WireSearchEnd(0, 10, 100, 0, 10, 100, 0);
 
         rtn0 = robot.WireSearchStart(0, 10, 100, 0, 10, 100, 0);
-        robot.MoveL(jointREF0A, descREF0A, 1, 1, 100, 100, 100, -1, exaxisPos, 0, 0, offdese);  //起点
-        robot.MoveL(jointREF0B, descREF0B, 1, 1, 100, 100, 100, -1, exaxisPos, 1, 0, offdese);  //方向点
+        robot.MoveL(jointREF0A, descREF0A, 1, 1, 100, 100, 100, -1, exaxisPos, 0, 0, offdese);  //punkt początkowy
+        robot.MoveL(jointREF0B, descREF0B, 1, 1, 100, 100, 100, -1, exaxisPos, 1, 0, offdese);  //punkt kierunkowy
         rtn1 = robot.WireSearchWait("RES0");
         rtn2 = robot.WireSearchEnd(0, 10, 100, 0, 10, 100, 0);
 
         rtn0 = robot.WireSearchStart(0, 10, 100, 0, 10, 100, 0);
-        robot.MoveL(jointREF1A, descREF1A, 1, 1, 100, 100, 100, -1, exaxisPos, 0, 0, offdese);  //起点
-        robot.MoveL(jointREF1B, descREF1B, 1, 1, 100, 100, 100, -1, exaxisPos, 1, 0, offdese);  //方向点
+        robot.MoveL(jointREF1A, descREF1A, 1, 1, 100, 100, 100, -1, exaxisPos, 0, 0, offdese);  //punkt początkowy
+        robot.MoveL(jointREF1B, descREF1B, 1, 1, 100, 100, 100, -1, exaxisPos, 1, 0, offdese);  //punkt kierunkowy
         rtn1 = robot.WireSearchWait("RES1");
         rtn2 = robot.WireSearchEnd(0, 10, 100, 0, 10, 100, 0);
 
@@ -1296,7 +1284,7 @@
         robot.PointsOffsetDisable();
     }
 
-设置焊接电压渐变结束
+Ustawienie rozpoczęcia stopniowej zmiany napięcia spawania
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C#SDK-V1.1.3  Web-3.8.2
     
@@ -1304,18 +1292,18 @@
     :linenos:
 
     /**
-    * @brief 设置焊接电压渐变开始
-    * @param [in] IOType 控制类型；0-控制箱IO；1-数字通信协议(UDP);2-数字通信协议(ModbusTCP)
-    * @param [in] voltageStart 起始焊接电压(V)
-    * @param [in] voltageEnd 终止焊接电压(V)
-    * @param [in] AOIndex 控制箱AO端口号(0-1)
-    * @param [in] blend 是否平滑 0-不平滑；1-平滑
-    * @return 错误码
+    * @brief Ustawienie rozpoczęcia stopniowej zmiany napięcia spawania
+    * @param [in] IOType Typ sterowania; 0-I/O skrzynki sterowniczej; 1-protokół komunikacji cyfrowej (UDP); 2-protokół komunikacji cyfrowej (ModbusTCP)
+    * @param [in] voltageStart Początkowe napięcie spawania (V)
+    * @param [in] voltageEnd Końcowe napięcie spawania (V)
+    * @param [in] AOIndex Numer portu AO skrzynki sterowniczej (0-1)
+    * @param [in] blend Czy wygładzać 0-niewygładzone; 1-wygładzone
+    * @return Kod błędu
     */
     int WeldingSetVoltageGradualChangeStart(int IOType, double voltageStart, double voltageEnd, int AOIndex, int blend);
 
-设置焊接电压渐变结束
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Ustawienie zakończenia stopniowej zmiany napięcia spawania
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. versionadded:: C#SDK-V1.1.3  Web-3.8.2
     
@@ -1323,12 +1311,12 @@
     :linenos:
 
     /**
-    * @brief 设置焊接电压渐变结束
-    * @return 错误码
+    * @brief Ustawienie zakończenia stopniowej zmiany napięcia spawania
+    * @return Kod błędu
     */
     int WeldingSetVoltageGradualChangeEnd();
 
-设置焊接电流渐变开始
+Ustawienie rozpoczęcia stopniowej zmiany prądu spawania
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C#SDK-V1.1.3  Web-3.8.2
     
@@ -1336,30 +1324,30 @@
     :linenos:
 
     /**
-    * @brief 设置焊接电流渐变开始
-    * @param [in] IOType 控制类型；0-控制箱IO；1-数字通信协议(UDP);2-数字通信协议(ModbusTCP)
-    * @param [in] voltageStart 起始焊接电流(A)
-    * @param [in] voltageEnd 终止焊接电流(A)
-    * @param [in] AOIndex 控制箱AO端口号(0-1)
-    * @param [in] blend 是否平滑 0-不平滑；1-平滑
-    * @return 错误码
+    * @brief Ustawienie rozpoczęcia stopniowej zmiany prądu spawania
+    * @param [in] IOType Typ sterowania; 0-I/O skrzynki sterowniczej; 1-protokół komunikacji cyfrowej (UDP); 2-protokół komunikacji cyfrowej (ModbusTCP)
+    * @param [in] voltageStart Początkowy prąd spawania (A)
+    * @param [in] voltageEnd Końcowy prąd spawania (A)
+    * @param [in] AOIndex Numer portu AO skrzynki sterowniczej (0-1)
+    * @param [in] blend Czy wygładzać 0-niewygładzone; 1-wygładzone
+    * @return Kod błędu
     */
     int WeldingSetCurrentGradualChangeStart(int IOType, double currentStart, double currentEnd, int AOIndex, int blend);
 
-设置焊接电流渐变结束
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Ustawienie zakończenia stopniowej zmiany prądu spawania
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C#SDK-V1.1.3  Web-3.8.2
     
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief 设置焊接电流渐变结束
-    * @return 错误码
+    * @brief Ustawienie zakończenia stopniowej zmiany prądu spawania
+    * @return Kod błędu
     */
     int WeldingSetCurrentGradualChangeEnd();
 
-机器人焊接电流电压渐变代码示例
+Przykład kodu stopniowej zmiany prądu i napięcia spawania robota
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C#SDK-V1.1.3  Web-3.8.2
     
@@ -1411,7 +1399,7 @@
         robot.WeldingSetVoltageGradualChangeEnd();
     }
 
-设置自定义摆动参数
+Ustawienie niestandardowych parametrów oscylacji
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C#SDK-V1.1.8  Web-3.8.6
 
@@ -1419,19 +1407,19 @@
     :linenos:
 
     /**
-     * @brief 设置自定义摆动参数
-     * @param [in] id 自定义摆动编号：0-2
-     * @param [in] pointNum 摆动点位个数 0-10
-     * @param [in] point 移动端点数据x,y,z
-     * @param [in] stayTime 摆动停留时间ms
-     * @param [in] frequency 摆动频率 Hz
-     * @param [in] incStayType 等待模式：0-周期不包含等待时间；1-周期包含等待时间
-     * @param [in] stationary 摆动位置等待：0-等待时间内继续运动；1-等待时间内位置静止
-     * @return  错误码
+     * @brief Ustawienie niestandardowych parametrów oscylacji
+     * @param [in] id Niestandardowy numer oscylacji: 0-2
+     * @param [in] pointNum Liczba punktów oscylacji 0-10
+     * @param [in] point Dane punktów ruchu x,y,z
+     * @param [in] stayTime Czas zatrzymania oscylacji ms
+     * @param [in] frequency Częstotliwość oscylacji Hz
+     * @param [in] incStayType Tryb oczekiwania: 0-cykl nie zawiera czasu oczekiwania; 1-cykl zawiera czas oczekiwania
+     * @param [in] stationary Oczekiwanie w pozycji oscylacji: 0-kontynuuj ruch w czasie oczekiwania; 1-pozycja nieruchoma w czasie oczekiwania
+     * @return  Kod błędu
      */
     public int CustomWeaveSetPara(int id, int pointNum, DescTran[] points, double[] stayTimes, double frequency, int incStayType, int stationary)
 
-获取自定义摆动参数
+Pobranie niestandardowych parametrów oscylacji
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C#SDK-V1.1.8  Web-3.8.6
 
@@ -1439,19 +1427,19 @@
     :linenos:
 
     /**
-     * @brief 获取自定义摆动参数
-     * @param [in] id 自定义摆动编号：0-2
-     * @param [out] pointNum 摆动点位个数 0-10
-     * @param [out] point 移动端点数据x,y,z
-     * @param [out] stayTime 摆动停留时间ms
-     * @param [out] frequency 摆动频率 Hz
-     * @param [out] incStayType 等待模式：0-周期不包含等待时间；1-周期包含等待时间
-     * @param [out] stationary 摆动位置等待：0-等待时间内继续运动；1-等待时间内位置静止
-     * @return  错误码
+     * @brief Pobranie niestandardowych parametrów oscylacji
+     * @param [in] id Niestandardowy numer oscylacji: 0-2
+     * @param [out] pointNum Liczba punktów oscylacji 0-10
+     * @param [out] point Dane punktów ruchu x,y,z
+     * @param [out] stayTime Czas zatrzymania oscylacji ms
+     * @param [out] frequency Częstotliwość oscylacji Hz
+     * @param [out] incStayType Tryb oczekiwania: 0-cykl nie zawiera czasu oczekiwania; 1-cykl zawiera czas oczekiwania
+     * @param [out] stationary Oczekiwanie w pozycji oscylacji: 0-kontynuuj ruch w czasie oczekiwania; 1-pozycja nieruchoma w czasie oczekiwania
+     * @return  Kod błędu
      */
     public int CustomWeaveGetPara(int id, ref int pointNum, ref DescTran[] points, ref double[] stayTimes, ref double frequency, ref int incStayType, ref int stationary)
 
-自定义摆动参数代码示例
+Przykład kodu niestandardowych parametrów oscylacji
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C#SDK-V1.1.8  Web-3.8.6
 
@@ -1515,198 +1503,198 @@
         robot.WeaveEnd(0);
     }
 
-激光焊机参数配置
+Konfiguracja parametrów spawarki laserowej
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief 写入激光焊机10个工艺组中某一个的配置参数并配置给焊机
-    * @param[in] io_type 通信类型 0-IO 1-UDP
-    * @param[in] num 需要设置的组号（1~10）
-    * @param[in] scanSpeed 扫描速度
-    * @param[in] scanWidth 扫描宽度
-    * @param[in] peakPower 峰值功率
-    * @param[in] dutyCycle 占空比
-    * @param[in] freq 频率
-    * @return 错误码
+    * @brief Zapisanie parametrów konfiguracyjnych jednego z 10 grup procesowych spawarki laserowej i skonfigurowanie ich dla spawarki
+    * @param[in] io_type Typ komunikacji 0-IO 1-UDP
+    * @param[in] num Numer grupy do ustawienia (1~10)
+    * @param[in] scanSpeed Prędkość skanowania
+    * @param[in] scanWidth Szerokość skanowania
+    * @param[in] peakPower Moc szczytowa
+    * @param[in] dutyCycle Współczynnik wypełnienia
+    * @param[in] freq Częstotliwość
+    * @return Kod błędu
     */
     public int SetLaserWeldingParam(int io_type, int num, int scanSpeed, int scanWidth, int peakPower, int dutyCycle, int freq)
 
-设置激光焊接开始停止
+Ustawienie rozpoczęcia/zakończenia spawania laserowego
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief 设置激光焊机开启关闭
-    * @param[in] io_type 通信类型 0-IO 1-UDP
-    * @param[in] status 控制字 0-收光 1-出光
-    * @param[in] max_waittime 最大等待时间
-    * @return 错误码
+    * @brief Ustawienie włączenia/wyłączenia spawarki laserowej
+    * @param[in] io_type Typ komunikacji 0-IO 1-UDP
+    * @param[in] status Słowo sterujące 0-wyłącz emisję 1-włącz emisję
+    * @param[in] max_waittime Maksymalny czas oczekiwania
+    * @return Kod błędu
     */
     public int SetLaserWeldingStartEnd(int io_type, int status, int max_waittime)
 
-激光焊机使能去使能
+Włączenie/wyłączenie spawarki laserowej
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief 激光焊机使能去使能
-    * @param[in] io_type 通信类型 0-IO 1-UDP
-    * @param[in] status 0-去使能 1-使能
-    * @return 错误码
+    * @brief Włączenie/wyłączenie spawarki laserowej
+    * @param[in] io_type Typ komunikacji 0-IO 1-UDP
+    * @param[in] status 0-wyłącz 1-włącz
+    * @return Kod błędu
     */
     public int SetLaserWeldingEnable(int io_type, int status)
 
-激光焊机故障复位
+Resetowanie awarii spawarki laserowej
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief 激光焊机故障复位
-    * @param[in] io_type 通信类型 0-IO 1-UDP
-    * @param[in] status 控制字 0-无效 1-故障复位
-    * @return 错误码
+    * @brief Resetowanie awarii spawarki laserowej
+    * @param[in] io_type Typ komunikacji 0-IO 1-UDP
+    * @param[in] status Słowo sterujące 0-nieważne 1-reset awarii
+    * @return Kod błędu
     */
     public int ResetLaserWeldingErr(int io_type, int status)
 
-获取激光焊机运行状态
+Pobranie stanu pracy spawarki laserowej
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief 获取激光焊机运行状态
-    * @param[in] io_type 通信类型 0-IO 1-UDP
-    * @param[out] status 控制字 0-停机 1-运行
-    * @return 错误码
+    * @brief Pobranie stanu pracy spawarki laserowej
+    * @param[in] io_type Typ komunikacji 0-IO 1-UDP
+    * @param[out] status Słowo sterujące 0-zatrzymana 1-pracuje
+    * @return Kod błędu
     */
     public int GetLaserWeldingRunningState(int io_type, ref int status)
 
-获取激光焊机故障状态
+Pobranie stanu awarii spawarki laserowej
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief 获取激光焊机故障状态
-    * @param[in] io_type 通信类型 0-IO 1-UDP
-    * @param[out] status 0-无故障 1-存在故障
-    * @return 错误码
+    * @brief Pobranie stanu awarii spawarki laserowej
+    * @param[in] io_type Typ komunikacji 0-IO 1-UDP
+    * @param[out] status 0-brak awarii 1-występuje awaria
+    * @return Kod błędu
     */
     public int GetLaserWeldingErrState(int io_type, ref int status)
 
-获取激光焊机配置参数
+Pobranie parametrów konfiguracyjnych spawarki laserowej
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief 获取激光焊机10个工艺组中某一个的配置参数
-    * @param[in] num 需要设置的组号（1~10）
-    * @param[out] scanSpeed 扫描速度
-    * @param[out] scanWidth 扫描宽度
-    * @param[out] peakPower 峰值功率
-    * @param[out] dutyCycle 占空比
-    * @param[out] freq 频率
-    * @return 错误码
+    * @brief Pobranie parametrów konfiguracyjnych jednej z 10 grup procesowych spawarki laserowej
+    * @param[in] num Numer grupy do ustawienia (1~10)
+    * @param[out] scanSpeed Prędkość skanowania
+    * @param[out] scanWidth Szerokość skanowania
+    * @param[out] peakPower Moc szczytowa
+    * @param[out] dutyCycle Współczynnik wypełnienia
+    * @param[out] freq Częstotliwość
+    * @return Kod błędu
     */
     public int GetLaserWeldingParamTarget(int num, ref int scanSpeed, ref int scanWidth, ref int peakPower, ref int dutyCycle, ref int freq)
 
-获取当前激光焊机生效的配置参数
+Pobranie aktualnie obowiązujących parametrów konfiguracyjnych spawarki laserowej
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief 获取当前激光焊机生效的配置参数
-    * @param[in] io_type 通信类型 0-IO 1-UDP
-    * @param[out] scanSpeed 扫描速度
-    * @param[out] scanWidth 扫描宽度
-    * @param[out] peakPower 峰值功率
-    * @param[out] dutyCycle 占空比
-    * @param[out] freq 频率
-    * @return 错误码
+    * @brief Pobranie aktualnie obowiązujących parametrów konfiguracyjnych spawarki laserowej
+    * @param[in] io_type Typ komunikacji 0-IO 1-UDP
+    * @param[out] scanSpeed Prędkość skanowania
+    * @param[out] scanWidth Szerokość skanowania
+    * @param[out] peakPower Moc szczytowa
+    * @param[out] dutyCycle Współczynnik wypełnienia
+    * @param[out] freq Częstotliwość
+    * @return Kod błędu
     */
     public int GetLaserWeldingParamActual(int io_type, ref int scanSpeed, ref int scanWidth, ref int peakPower, ref int dutyCycle, ref int freq)
     
-配置激光焊机扩展IO使能DO端口
+Konfiguracja rozszerzonego portu DO włączania spawarki laserowej
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief 激光焊机设置扩展IO，使能的DO端口
-    * @param[in] ctrlModeDONum 激光焊机使能的扩展DO端口号
-    * @return 错误码
+    * @brief Ustawienie rozszerzonego I/O dla spawarki laserowej - portu DO włączania
+    * @param[in] ctrlModeDONum Numer rozszerzonego portu DO włączania spawarki laserowej
+    * @return Kod błędu
     */
     public int SetLaserWeldingEnableExtDoNum(int ctrlModeDONum)
 
-配置激光焊机扩展IO启动DO端口
+Konfiguracja rozszerzonego portu DO uruchamiania spawarki laserowej
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief 激光焊机设置扩展IO，启动的DO端口
-    * @param[in] ctrlModeDONum 激光焊机启动（出光收光）的扩展DO端口号
-    * @return 错误码
+    * @brief Ustawienie rozszerzonego I/O dla spawarki laserowej - portu DO uruchamiania
+    * @param[in] ctrlModeDONum Numer rozszerzonego portu DO uruchamiania spawarki laserowej (włączanie/wyłączanie emisji)
+    * @return Kod błędu
     */
     public int SetLaserWeldingStartExtDoNum(int ctrlModeDONum)
 
-激光焊机设置扩展IO故障复位的DO端口
+Konfiguracja rozszerzonego portu DO resetowania awarii spawarki laserowej
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief 激光焊机设置扩展IO，故障复位的DO端口
-    * @param[in] ctrlModeDONum 激光焊机故障复位的扩展DO端口号
-    * @return 错误码
+    * @brief Ustawienie rozszerzonego I/O dla spawarki laserowej - portu DO resetowania awarii
+    * @param[in] ctrlModeDONum Numer rozszerzonego portu DO resetowania awarii spawarki laserowej
+    * @return Kod błędu
     */
     public int SetLaserWeldingErrResetExtDoNum(int ctrlModeDONum)
 
-配置激光焊机运行状态（出光状态）扩展DI
+Konfiguracja rozszerzonego DI stanu pracy spawarki laserowej (stan emisji)
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief 配置激光焊机运行状态（出光状态）扩展DI
-    * @param[in] diNum 配置激光焊机运行状态（出光状态）扩展DI端口
-    * @return 错误码
+    * @brief Konfiguracja rozszerzonego DI stanu pracy spawarki laserowej (stan emisji)
+    * @param[in] diNum Numer rozszerzonego portu DI stanu pracy spawarki laserowej (stan emisji)
+    * @return Kod błędu
     */
     public int SetLaserWeldingRunningStateExtDiNum(int diNum)
     
-配置激光焊机扩展IO故障状态DI端口
+Konfiguracja rozszerzonego portu DI stanu awarii spawarki laserowej
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief 配置激光焊机故障状态扩展DI
-    * @param[in] diNum 配置激光焊机故障状态扩展DI端口
-    * @return 错误码
+    * @brief Konfiguracja rozszerzonego DI stanu awarii spawarki laserowej
+    * @param[in] diNum Numer rozszerzonego portu DI stanu awarii spawarki laserowej
+    * @return Kod błędu
     */
     public int SetLaserWeldingErrStateExtDiNum(int diNum)
         
-激光焊接代码示例
+Przykład kodu spawania laserowego
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. code-block:: c#
@@ -1716,7 +1704,7 @@
     {
 
         int rtn = -1;
-        // 加载UDP驱动
+        // Załadowanie sterownika UDP
         rtn = robot.ExtDevLoadUDPDriver();
         if (rtn != 0)
         {
@@ -1724,7 +1712,7 @@
         }
         Thread.Sleep(1000);
 
-        // 设置激光焊接参数: io_type=1, num=3, scanSpeed=2000, scanWidth=3, peakPower=1500, dutyCycle=100, freq=1000
+        // Ustawienie parametrów spawania laserowego: io_type=1, num=3, scanSpeed=2000, scanWidth=3, peakPower=1500, dutyCycle=100, freq=1000
         rtn = robot.SetLaserWeldingParam(1, 3, 2000, 3, 1500, 100, 1000);
         if (rtn != 0)
         {
@@ -1735,14 +1723,14 @@
             Console.WriteLine("SetLaserWeldingParam success");
         }
 
-        // 设置启动的DO端口号
+        // Ustawienie numeru portu DO uruchamiania
         rtn = robot.SetLaserWeldingStartExtDoNum(1);
         if (rtn != 0)
         {
             Console.WriteLine("SetLaserWeldingStartExtDoNum failed, error code: " + rtn);
         }
 
-        // 设置为模式0（示教模式）
+        // Ustawienie trybu 0 (tryb nauczania)
         rtn = robot.Mode(0);
         if (rtn != 0)
         {
@@ -1759,11 +1747,11 @@
         ExaxisPos exaxis = new ExaxisPos(0.0, 0.0, 0.0, 0.0);
         DescPose offset = new DescPose(0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
 
-        // 移动到第一个焊接点
+        // Przejście do pierwszego punktu spawania
         int error = robot.MoveL(desc_pos1, 0, 0, 100, 100, 100, -1, 0, exaxis, 0, 0, offset, -1, 0);
         Console.WriteLine("MoveL to pos1 return: " + error);
 
-        // 开启激光（出光）
+        // Włączenie lasera (emisja)
         rtn = robot.SetLaserWeldingStartEnd(1, 1, 10000);
         if (rtn != 0)
         {
@@ -1774,12 +1762,12 @@
             Console.WriteLine("Laser started");
         }
 
-        // 移动到第二个焊接点（焊接过程中）
+        // Przejście do drugiego punktu spawania (podczas spawania)
         rtn = robot.MoveL(desc_pos2, 0, 0, 30, 100, 100, -1, 0, exaxis, 0, 0, offset, -1, 0);
         Console.WriteLine("MoveL to pos2 return: " + rtn);
 
         Thread.Sleep(500);
-        // 关闭激光（收光）
+        // Wyłączenie lasera (zakończenie emisji)
         rtn = robot.SetLaserWeldingStartEnd(1, 0, 10000);
         if (rtn != 0)
         {
@@ -1790,11 +1778,11 @@
             Console.WriteLine("Laser stopped");
         }
 
-        // 移动到安全点
+        // Przejście do punktu bezpiecznego
         rtn = robot.MoveL(desc_safe, 0, 0, 100, 100, 100, -1, 0, exaxis, 0, 0, offset, -1, 0);
         Console.WriteLine("MoveL to safe_pos return: " + rtn);
 
-        // 设置为模式1（远程模式）
+        // Ustawienie trybu 1 (tryb zdalny)
         rtn = robot.Mode(1);
         if (rtn != 0)
         {
@@ -1802,7 +1790,7 @@
         }
         Thread.Sleep(1000);
 
-        // 关闭连接
+        // Zamknięcie połączenia
         robot.CloseRPC();
         Thread.Sleep(1000);
 

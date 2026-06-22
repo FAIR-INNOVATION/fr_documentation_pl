@@ -1,52 +1,52 @@
-机器人运动
-============
+Ruch robota
+===========
 
-.. toctree:: 
+.. toctree::
     :maxdepth: 5
 
 
-jog点动
+Ruch jałowy (JOG)
 +++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  jog点动
-    * @param  [in]  ref 0-关节点动，2-基坐标系下点动，4-工具坐标系下点动，8-工件坐标系下点动
-    * @param  [in]  nb 1-关节1(或x轴)，2-关节2(或y轴)，3-关节3(或z轴)，4-关节4(或绕x轴旋转)，5-关节5(或绕y轴旋转)，6-关节6(或绕z轴旋转)
-    * @param  [in]  dir 0-负方向，1-正方向
-    * @param  [in]  vel 速度百分比，[0~100]
-    * @param  [in]  acc 加速度百分比， [0~100]
-    * @param  [in]  max_dis 单次点动最大角度，单位[°]或距离，单位[mm]
-    * @return  错误码
+    * @brief  Ruch jałowy (JOG)
+    * @param  [in]  ref 0-ruch jałowy stawów, 2-ruch jałowy w układzie bazowym, 4-ruch jałowy w układzie narzędzia, 8-ruch jałowy w układzie obiektu
+    * @param  [in]  nb 1-staw 1 (lub oś x), 2-staw 2 (lub oś y), 3-staw 3 (lub oś z), 4-staw 4 (lub obrót wokół osi x), 5-staw 5 (lub obrót wokół osi y), 6-staw 6 (lub obrót wokół osi z)
+    * @param  [in]  dir 0-kierunek ujemny, 1-kierunek dodatni
+    * @param  [in]  vel Procent prędkości, [0~100]
+    * @param  [in]  acc Procent przyspieszenia, [0~100]
+    * @param  [in]  max_dis Maksymalny kąt pojedynczego ruchu jałowego, jednostka [°] lub odległość, jednostka [mm]
+    * @return  Kod błędu
     */
     errno_t  StartJOG(uint8_t ref, uint8_t nb, uint8_t dir, float vel, float acc, float max_dis);
 
-jog点动减速停止
-+++++++++++++++++++++++++++++
+Zatrzymanie ruchu jałowego z opóźnieniem
++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  jog点动减速停止
-    * @param  [in]  ref  1-关节点动停止，3-基坐标系下点动停止，5-工具坐标系下点动停止，9-工件坐标系下点动停止
-    * @return  错误码
+    * @brief  Zatrzymanie ruchu jałowego z opóźnieniem
+    * @param  [in]  ref  1-zatrzymanie ruchu jałowego stawów, 3-zatrzymanie ruchu jałowego w układzie bazowym, 5-zatrzymanie ruchu jałowego w układzie narzędzia, 9-zatrzymanie ruchu jałowego w układzie obiektu
+    * @return  Kod błędu
     */
     errno_t  StopJOG(uint8_t ref);
 
-jog点动立即停止
-+++++++++++++++++++++++++++++
+Natychmiastowe zatrzymanie ruchu jałowego
+++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief jog点动立即停止
-    * @return  错误码
+    * @brief Natychmiastowe zatrzymanie ruchu jałowego
+    * @return  Kod błędu
     */
-    errno_t  ImmStopJOG(); 
+    errno_t  ImmStopJOG();
 
-机器人点动控制代码示例
-+++++++++++++++++++++++++++++++++++++++++
+Przykład kodu sterowania ruchem jałowym robota
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
@@ -94,247 +94,247 @@ jog点动立即停止
          return 0;
      }
 
-关节空间运动
-+++++++++++++++++++++++++++++
+Ruch w przestrzeni stawów
++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  关节空间运动
-    * @param  [in] joint_pos  目标关节位置,单位deg
-    * @param  [in] desc_pos   目标笛卡尔位姿
-    * @param  [in] tool  工具坐标号，范围[0~14]
-    * @param  [in] user  工件坐标号，范围[0~14]
-    * @param  [in] vel  速度百分比，范围[0~100]
-    * @param  [in] acc  加速度百分比，范围[0~100],暂不开放
-    * @param  [in] ovl  速度缩放因子，范围[0~100]
-    * @param  [in] epos  扩展轴位置，单位mm
-    * @param  [in] blendT [-1.0]-运动到位(阻塞)，[0~500.0]-平滑时间(非阻塞)，单位ms
-    * @param  [in] offset_flag  0-不偏移，1-基坐标系/工件坐标系下偏移，2-工具坐标系下偏移
-    * @param  [in] offset_pos  位姿偏移量
-    * @return  错误码
+    * @brief  Ruch w przestrzeni stawów
+    * @param  [in] joint_pos  Docelowa pozycja stawów, jednostka deg
+    * @param  [in] desc_pos   Docelowa poza i orientacja w kartezjańskim układzie współrzędnych
+    * @param  [in] tool  Numer układu współrzędnych narzędzia, zakres [0~14]
+    * @param  [in] user  Numer układu współrzędnych obiektu, zakres [0~14]
+    * @param  [in] vel  Procent prędkości, zakres [0~100]
+    * @param  [in] acc  Procent przyspieszenia, zakres [0~100], tymczasowo niedostępne
+    * @param  [in] ovl  Współczynnik skalowania prędkości, zakres [0~100]
+    * @param  [in] epos  Pozycja osi rozszerzonej, jednostka mm
+    * @param  [in] blendT [-1.0]-ruch do pozycji (blokujący), [0~500.0]-czas wygładzania (nieblokujący), jednostka ms
+    * @param  [in] offset_flag 0-brak przesunięcia, 1-przesunięcie w układzie bazowym/układzie obiektu, 2-przesunięcie w układzie narzędzia
+    * @param  [in] offset_pos  Wartość przesunięcia pozy i orientacji
+    * @return  Kod błędu
     */
     errno_t  MoveJ(JointPos *joint_pos, DescPose *desc_pos, int tool, int user, float vel, float acc, float ovl, ExaxisPos *epos, float blendT, uint8_t offset_flag, DescPose *offset_pos);
 
-关节空间运动(自动正运动学计算)
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Ruch w przestrzeni stawów (automatyczne obliczanie prostej kinematyki)
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief 关节空间运动(自动正运动学计算)
-    * @param [in] joint_pos 目标关节位置,单位deg
-    * @param [in] tool 工具坐标号，范围[0~14]
-    * @param [in] user 工件坐标号，范围[0~14]
-    * @param [in] vel 速度百分比，范围[0~100]
-    * @param [in] acc 加速度百分比，范围[0~100],暂不开放
-    * @param [in] ovl 速度缩放因子，范围[0~100]
-    * @param [in] epos 扩展轴位置，单位mm
-    * @param [in] blendT [-1.0]-运动到位(阻塞)，[0~500.0]-平滑时间(非阻塞)，单位ms
-    * @param [in] offset_flag 0-不偏移，1-基坐标系/工件坐标系下偏移，2-工具坐标系下偏移
-    * @param [in] offset_pos 位姿偏移量
-    * @return 错误码
+    * @brief Ruch w przestrzeni stawów (automatyczne obliczanie prostej kinematyki)
+    * @param [in] joint_pos Docelowa pozycja stawów, jednostka deg
+    * @param [in] tool Numer układu współrzędnych narzędzia, zakres [0~14]
+    * @param [in] user Numer układu współrzędnych obiektu, zakres [0~14]
+    * @param [in] vel Procent prędkości, zakres [0~100]
+    * @param [in] acc Procent przyspieszenia, zakres [0~100], tymczasowo niedostępne
+    * @param [in] ovl Współczynnik skalowania prędkości, zakres [0~100]
+    * @param [in] epos Pozycja osi rozszerzonej, jednostka mm
+    * @param [in] blendT [-1.0]-ruch do pozycji (blokujący), [0~500.0]-czas wygładzania (nieblokujący), jednostka ms
+    * @param [in] offset_flag 0-brak przesunięcia, 1-przesunięcie w układzie bazowym/układzie obiektu, 2-przesunięcie w układzie narzędzia
+    * @param [in] offset_pos Wartość przesunięcia pozy i orientacji
+    * @return Kod błędu
     */
     errno_t MoveJ(JointPos* joint_pos, int tool, int user, float vel, float acc, float ovl, ExaxisPos* epos, float blendT, uint8_t offset_flag, DescPose* offset_pos);
-   
-笛卡尔空间直线运动
-+++++++++++++++++++++++++++++
+
+Ruch liniowy w przestrzeni kartezjańskiej
++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  笛卡尔空间直线运动
-    * @param [in] joint_pos 目标关节位置,单位deg
-    * @param [in] desc_pos 目标笛卡尔位姿
-    * @param [in] tool 工具坐标号，范围[0~14]
-    * @param [in] user 工件坐标号，范围[0~14]
-    * @param [in] vel 速度百分比，范围[0~100]
-    * @param [in] acc 加速度百分比，范围[0~100],暂不开放
-    * @param [in] ovl 速度缩放因子[0~100]/物理速度(mm/s)
-    * @param [in] blendR [-1.0]-运动到位(阻塞)，[0~1000.0]-平滑半径(非阻塞)，单位mm
-    * @param [in] blendMode 过渡方式；0-内切过渡；1-角点过渡
-    * @param [in] epos 扩展轴位置，单位mm
-    * @param [in] search 0-不焊丝寻位，1-焊丝寻位
-    * @param [in] offset_flag 0-不偏移，1-基坐标系/工件坐标系下偏移，2-工具坐标系下偏移
-    * @param [in] offset_pos 位姿偏移量
-    * @param [in] oacc 加速度缩放因子[0-100]/物理加速度(mm/s2)
-    * @param [in] velAccParamMode 速度加速度参数模式；0-百分比；1-物理速度(mm/s)加速度(mm/s2)
-    * @param [in] overSpeedStrategy 超速处理策略，1-标准；2-超速时报错停止；3-自适应降速，默认为0
-    * @param [in] speedPercent 允许降速阈值百分比[0-100]，默认10%
-    * @return 错误码
+    * @brief  Ruch liniowy w przestrzeni kartezjańskiej
+    * @param [in] joint_pos Docelowa pozycja stawów, jednostka deg
+    * @param [in] desc_pos Docelowa poza i orientacja w kartezjańskim układzie współrzędnych
+    * @param [in] tool Numer układu współrzędnych narzędzia, zakres [0~14]
+    * @param [in] user Numer układu współrzędnych obiektu, zakres [0~14]
+    * @param [in] vel Procent prędkości, zakres [0~100]
+    * @param [in] acc Procent przyspieszenia, zakres [0~100], tymczasowo niedostępne
+    * @param [in] ovl Współczynnik skalowania prędkości [0~100] / prędkość fizyczna (mm/s)
+    * @param [in] blendR [-1.0]-ruch do pozycji (blokujący), [0~1000.0]-promień wygładzania (nieblokujący), jednostka mm
+    * @param [in] blendMode Sposób przejścia; 0-przejście styczne wewnętrznie; 1-przejście narożne
+    * @param [in] epos Pozycja osi rozszerzonej, jednostka mm
+    * @param [in] search 0-brak lokalizacji drutu spawalniczego, 1-lokalizacja drutu spawalniczego
+    * @param [in] offset_flag 0-brak przesunięcia, 1-przesunięcie w układzie bazowym/układzie obiektu, 2-przesunięcie w układzie narzędzia
+    * @param [in] offset_pos Wartość przesunięcia pozy i orientacji
+    * @param [in] oacc Współczynnik skalowania przyspieszenia [0-100] / przyspieszenie fizyczne (mm/s2)
+    * @param [in] velAccParamMode Tryb parametrów prędkości i przyspieszenia; 0-procent; 1-prędkość fizyczna (mm/s) przyspieszenie fizyczne (mm/s2)
+    * @param [in] overSpeedStrategy Strategia obsługi przekroczenia prędkości, 1-standardowa; 2-zgłoś błąd i zatrzymaj przy przekroczeniu prędkości; 3-automatyczne zmniejszenie prędkości, domyślnie 0
+    * @param [in] speedPercent Procent progu dozwolonego zmniejszenia prędkości [0-100], domyślnie 10%
+    * @return Kod błędu
     */
     errno_t MoveL(JointPos *joint_pos, DescPose *desc_pos, int tool, int user, float vel, float acc, float ovl, float blendR, int blendMode, ExaxisPos *epos, uint8_t search, uint8_t offset_flag, DescPose *offset_pos, float oacc = 100.0, int velAccParamMode = 0, int overSpeedStrategy = 0, int speedPercent = 10);
 
-笛卡尔空间直线运动(自动逆运动学计算)
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Ruch liniowy w przestrzeni kartezjańskiej (automatyczne obliczanie odwrotnej kinematyki)
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief 笛卡尔空间直线运动(自动逆运动学计算)
-    * @param [in] desc_pos  目标笛卡尔位姿
-    * @param [in] tool 工具坐标号，范围[0~14]
-    * @param [in] user 工件坐标号，范围[0~14]
-    * @param [in] vel 速度百分比，范围[0~100]
-    * @param [in] acc 加速度百分比，范围[0~100],暂不开放
-    * @param [in] ovl 速度缩放因子，范围[0~100]
-    * @param [in] blendR [-1.0]-运动到位(阻塞)，[0~1000.0]-平滑半径(非阻塞)，单位mm
-    * @param [in] blendMode 过渡方式；0-内切过渡；1-角点过渡
-    * @param [in] epos 扩展轴位置，单位mm
-    * @param [in] search 0-不焊丝寻位，1-焊丝寻位
-    * @param [in] offset_flag 0-不偏移，1-基坐标系/工件坐标系下偏移，2-工具坐标系下偏移
-    * @param [in] offset_pos 位姿偏移量
-    * @param [in] config 逆解关节空间配置，[-1]-参考当前关节位置解算，[0~7]-依据特定关节空间配置求解
-    * @param [in] overSpeedStrategy 超速处理策略，1-标准；2-超速时报错停止；3-自适应降速，默认为0
-    * @param [in] speedPercent 允许降速阈值百分比[0-100]，默认10%
-    * @return 错误码
+    * @brief Ruch liniowy w przestrzeni kartezjańskiej (automatyczne obliczanie odwrotnej kinematyki)
+    * @param [in] desc_pos  Docelowa poza i orientacja w kartezjańskim układzie współrzędnych
+    * @param [in] tool Numer układu współrzędnych narzędzia, zakres [0~14]
+    * @param [in] user Numer układu współrzędnych obiektu, zakres [0~14]
+    * @param [in] vel Procent prędkości, zakres [0~100]
+    * @param [in] acc Procent przyspieszenia, zakres [0~100], tymczasowo niedostępne
+    * @param [in] ovl Współczynnik skalowania prędkości, zakres [0~100]
+    * @param [in] blendR [-1.0]-ruch do pozycji (blokujący), [0~1000.0]-promień wygładzania (nieblokujący), jednostka mm
+    * @param [in] blendMode Sposób przejścia; 0-przejście styczne wewnętrznie; 1-przejście narożne
+    * @param [in] epos Pozycja osi rozszerzonej, jednostka mm
+    * @param [in] search 0-brak lokalizacji drutu spawalniczego, 1-lokalizacja drutu spawalniczego
+    * @param [in] offset_flag 0-brak przesunięcia, 1-przesunięcie w układzie bazowym/układzie obiektu, 2-przesunięcie w układzie narzędzia
+    * @param [in] offset_pos Wartość przesunięcia pozy i orientacji
+    * @param [in] config Konfiguracja przestrzeni stawów dla odwrotnej kinematyki, [-1]-obliczenia w oparciu o bieżącą pozycję stawów, [0~7]-obliczenia zgodnie z określoną konfiguracją przestrzeni stawów
+    * @param [in] overSpeedStrategy Strategia obsługi przekroczenia prędkości, 1-standardowa; 2-zgłoś błąd i zatrzymaj przy przekroczeniu prędkości; 3-automatyczne zmniejszenie prędkości, domyślnie 0
+    * @param [in] speedPercent Procent progu dozwolonego zmniejszenia prędkości [0-100], domyślnie 10%
+    * @return Kod błędu
     */
     errno_t MoveL(DescPose* desc_pos, int tool, int user, float vel, float acc, float ovl, float blendR, int blendMode, ExaxisPos* epos, uint8_t search, uint8_t offset_flag, DescPose* offset_pos, int config = -1, int overSpeedStrategy = 0, int speedPercent = 10);
 
-笛卡尔空间圆弧运动
-+++++++++++++++++++++++++++++
+Ruch łukowy w przestrzeni kartezjańskiej
+++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  笛卡尔空间圆弧运动
-    * @param  [in] joint_pos_p  路径点关节位置,单位deg
-    * @param  [in] desc_pos_p   路径点笛卡尔位姿
-    * @param  [in] ptool  工具坐标号，范围[0~14]
-    * @param  [in] puser  工件坐标号，范围[0~14]
-    * @param  [in] pvel  速度百分比，范围[0~100]
-    * @param  [in] pacc  加速度百分比，范围[0~100],暂不开放
-    * @param  [in] epos_p  扩展轴位置，单位mm
-    * @param  [in] poffset_flag  0-不偏移，1-基坐标系/工件坐标系下偏移，2-工具坐标系下偏移
-    * @param  [in] offset_pos_p  位姿偏移量
-    * @param  [in] joint_pos_t  目标点关节位置,单位deg
-    * @param  [in] desc_pos_t   目标点笛卡尔位姿
-    * @param  [in] ttool  工具坐标号，范围[0~14]
-    * @param  [in] tuser  工件坐标号，范围[0~14]
-    * @param  [in] tvel  速度百分比，范围[0~100]
-    * @param  [in] tacc  加速度百分比，范围[0~100],暂不开放
-    * @param  [in] epos_t  扩展轴位置，单位mm
-    * @param  [in] toffset_flag  0-不偏移，1-基坐标系/工件坐标系下偏移，2-工具坐标系下偏移
-    * @param  [in] offset_pos_t  位姿偏移量
-    * @param  [in] ovl  速度缩放因子[0~100]/物理速度(mm/s)
-    * @param  [in] blendR [-1.0]-运动到位(阻塞)，[0~1000.0]-平滑半径(非阻塞)，单位mm
-    * @param  [in] oacc 加速度缩放因子[0-100]/物理加速度(mm/s2)
-    * @param  [in] velAccParamMode 速度加速度参数模式；0-百分比；1-物理速度(mm/s)加速度(mm/s2)
-    * @return  错误码
+    * @brief  Ruch łukowy w przestrzeni kartezjańskiej
+    * @param  [in] joint_pos_p  Pozycja stawów punktu pośredniego, jednostka deg
+    * @param  [in] desc_pos_p   Poza i orientacja punktu pośredniego w kartezjańskim układzie współrzędnych
+    * @param  [in] ptool  Numer układu współrzędnych narzędzia, zakres [0~14]
+    * @param  [in] puser  Numer układu współrzędnych obiektu, zakres [0~14]
+    * @param  [in] pvel  Procent prędkości, zakres [0~100]
+    * @param  [in] pacc  Procent przyspieszenia, zakres [0~100], tymczasowo niedostępne
+    * @param  [in] epos_p  Pozycja osi rozszerzonej, jednostka mm
+    * @param  [in] poffset_flag  0-brak przesunięcia, 1-przesunięcie w układzie bazowym/układzie obiektu, 2-przesunięcie w układzie narzędzia
+    * @param  [in] offset_pos_p  Wartość przesunięcia pozy i orientacji
+    * @param  [in] joint_pos_t  Pozycja stawów punktu docelowego, jednostka deg
+    * @param  [in] desc_pos_t   Poza i orientacja punktu docelowego w kartezjańskim układzie współrzędnych
+    * @param  [in] ttool  Numer układu współrzędnych narzędzia, zakres [0~14]
+    * @param  [in] tuser  Numer układu współrzędnych obiektu, zakres [0~14]
+    * @param  [in] tvel  Procent prędkości, zakres [0~100]
+    * @param  [in] tacc  Procent przyspieszenia, zakres [0~100], tymczasowo niedostępne
+    * @param  [in] epos_t  Pozycja osi rozszerzonej, jednostka mm
+    * @param  [in] toffset_flag  0-brak przesunięcia, 1-przesunięcie w układzie bazowym/układzie obiektu, 2-przesunięcie w układzie narzędzia
+    * @param  [in] offset_pos_t  Wartość przesunięcia pozy i orientacji
+    * @param  [in] ovl  Współczynnik skalowania prędkości [0~100] / prędkość fizyczna (mm/s)
+    * @param  [in] blendR [-1.0]-ruch do pozycji (blokujący), [0~1000.0]-promień wygładzania (nieblokujący), jednostka mm
+    * @param  [in] oacc Współczynnik skalowania przyspieszenia [0-100] / przyspieszenie fizyczne (mm/s2)
+    * @param  [in] velAccParamMode Tryb parametrów prędkości i przyspieszenia; 0-procent; 1-prędkość fizyczna (mm/s) przyspieszenie fizyczne (mm/s2)
+    * @return  Kod błędu
     */
     errno_t MoveC(JointPos *joint_pos_p, DescPose *desc_pos_p, int ptool, int puser, float pvel, float pacc, ExaxisPos *epos_p, uint8_t poffset_flag, DescPose *offset_pos_p, JointPos *joint_pos_t, DescPose *desc_pos_t, int ttool, int tuser, float tvel, float tacc, ExaxisPos *epos_t, uint8_t toffset_flag, DescPose *offset_pos_t, float ovl, float blendR, float oacc = 100.0, int velAccParamMode = 0);
 
-笛卡尔空间圆弧运动 (自动逆运动学计算)
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Ruch łukowy w przestrzeni kartezjańskiej (automatyczne obliczanie odwrotnej kinematyki)
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief 笛卡尔空间圆弧运动 (自动逆运动学计算)
-    * @param [in] desc_pos_p  路径点笛卡尔位姿
-    * @param [in] ptool 工具坐标号，范围[0~14]
-    * @param [in] puser 工件坐标号，范围[0~14]
-    * @param [in] pvel 速度百分比，范围[0~100]
-    * @param [in] pacc 加速度百分比，范围[0~100],暂不开放
-    * @param [in] epos_p 扩展轴位置，单位mm
-    * @param [in] poffset_flag 0-不偏移，1-基坐标系/工件坐标系下偏移，2-工具坐标系下偏移
-    * @param [in] offset_pos_p 位姿偏移量
-    * @param [in] desc_pos_t  目标点笛卡尔位姿
-    * @param [in] ttool 工具坐标号，范围[0~14]
-    * @param [in] tuser 工件坐标号，范围[0~14]
-    * @param [in] tvel 速度百分比，范围[0~100]
-    * @param [in] tacc 加速度百分比，范围[0~100],暂不开放
-    * @param [in] epos_t 扩展轴位置，单位mm
-    * @param [in] toffset_flag 0-不偏移，1-基坐标系/工件坐标系下偏移，2-工具坐标系下偏移
-    * @param [in] offset_pos_t 位姿偏移量
-    * @param [in] ovl 速度缩放因子，范围[0~100]
-    * @param [in] blendR [-1.0]-运动到位(阻塞)，[0~1000.0]-平滑半径(非阻塞)，单位mm
-    * @param [in] config 逆解关节空间配置，[-1]-参考当前关节位置解算，[0~7]-依据特定关节空间配置求解
-    * @return 错误码
+    * @brief Ruch łukowy w przestrzeni kartezjańskiej (automatyczne obliczanie odwrotnej kinematyki)
+    * @param [in] desc_pos_p  Poza i orientacja punktu pośredniego w kartezjańskim układzie współrzędnych
+    * @param [in] ptool Numer układu współrzędnych narzędzia, zakres [0~14]
+    * @param [in] puser Numer układu współrzędnych obiektu, zakres [0~14]
+    * @param [in] pvel Procent prędkości, zakres [0~100]
+    * @param [in] pacc Procent przyspieszenia, zakres [0~100], tymczasowo niedostępne
+    * @param [in] epos_p Pozycja osi rozszerzonej, jednostka mm
+    * @param [in] poffset_flag 0-brak przesunięcia, 1-przesunięcie w układzie bazowym/układzie obiektu, 2-przesunięcie w układzie narzędzia
+    * @param [in] offset_pos_p Wartość przesunięcia pozy i orientacji
+    * @param [in] desc_pos_t  Poza i orientacja punktu docelowego w kartezjańskim układzie współrzędnych
+    * @param [in] ttool Numer układu współrzędnych narzędzia, zakres [0~14]
+    * @param [in] tuser Numer układu współrzędnych obiektu, zakres [0~14]
+    * @param [in] tvel Procent prędkości, zakres [0~100]
+    * @param [in] tacc Procent przyspieszenia, zakres [0~100], tymczasowo niedostępne
+    * @param [in] epos_t Pozycja osi rozszerzonej, jednostka mm
+    * @param [in] toffset_flag 0-brak przesunięcia, 1-przesunięcie w układzie bazowym/układzie obiektu, 2-przesunięcie w układzie narzędzia
+    * @param [in] offset_pos_t Wartość przesunięcia pozy i orientacji
+    * @param [in] ovl Współczynnik skalowania prędkości, zakres [0~100]
+    * @param [in] blendR [-1.0]-ruch do pozycji (blokujący), [0~1000.0]-promień wygładzania (nieblokujący), jednostka mm
+    * @param [in] config Konfiguracja przestrzeni stawów dla odwrotnej kinematyki, [-1]-obliczenia w oparciu o bieżącą pozycję stawów, [0~7]-obliczenia zgodnie z określoną konfiguracją przestrzeni stawów
+    * @return Kod błędu
     */
     errno_t MoveC(DescPose* desc_pos_p, int ptool, int puser, float pvel, float pacc, ExaxisPos* epos_p, uint8_t poffset_flag, DescPose* offset_pos_p, DescPose* desc_pos_t, int ttool, int tuser, float tvel, float tacc, ExaxisPos* epos_t, uint8_t toffset_flag, DescPose* offset_pos_t, float ovl, float blendR, int config = -1);
 
-笛卡尔空间整圆运动
-+++++++++++++++++++++++++++++
+Ruch pełnego okręgu w przestrzeni kartezjańskiej
+++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  笛卡尔空间整圆运动
-    * @param  [in] joint_pos_p  路径点1关节位置,单位deg
-    * @param  [in] desc_pos_p   路径点1笛卡尔位姿
-    * @param  [in] ptool  工具坐标号，范围[0~14]
-    * @param  [in] puser  工件坐标号，范围[0~14]
-    * @param  [in] pvel  速度百分比，范围[0~100]
-    * @param  [in] pacc  加速度百分比，范围[0~100],暂不开放
-    * @param  [in] epos_p  扩展轴位置，单位mm
-    * @param  [in] joint_pos_t  路径点2关节位置,单位deg
-    * @param  [in] desc_pos_t   路径点2笛卡尔位姿
-    * @param  [in] ttool  工具坐标号，范围[0~14]
-    * @param  [in] tuser  工件坐标号，范围[0~14]
-    * @param  [in] tvel  速度百分比，范围[0~100]
-    * @param  [in] tacc  加速度百分比，范围[0~100],暂不开放
-    * @param  [in] epos_t  扩展轴位置，单位mm
-    * @param  [in] ovl  速度缩放因子[0~100]/物理速度(mm/s)
-    * @param  [in] offset_flag  0-不偏移，1-基坐标系/工件坐标系下偏移，2-工具坐标系下偏移
-    * @param  [in] offset_pos  位姿偏移量
-    * @param  [in] oacc 加速度缩放因子[0-100]/物理加速度(mm/s2)
-    * @param  [in] blendR -1：阻塞；0~1000：平滑半径
-    * @param  [in] velAccParamMode 速度加速度参数模式；0-百分比；1-物理速度(mm/s)加速度(mm/s2)
-    * @return  错误码
+    * @brief  Ruch pełnego okręgu w przestrzeni kartezjańskiej
+    * @param  [in] joint_pos_p  Pozycja stawów punktu pośredniego 1, jednostka deg
+    * @param  [in] desc_pos_p   Poza i orientacja punktu pośredniego 1 w kartezjańskim układzie współrzędnych
+    * @param  [in] ptool  Numer układu współrzędnych narzędzia, zakres [0~14]
+    * @param  [in] puser  Numer układu współrzędnych obiektu, zakres [0~14]
+    * @param  [in] pvel  Procent prędkości, zakres [0~100]
+    * @param  [in] pacc  Procent przyspieszenia, zakres [0~100], tymczasowo niedostępne
+    * @param  [in] epos_p  Pozycja osi rozszerzonej, jednostka mm
+    * @param  [in] joint_pos_t  Pozycja stawów punktu pośredniego 2, jednostka deg
+    * @param  [in] desc_pos_t   Poza i orientacja punktu pośredniego 2 w kartezjańskim układzie współrzędnych
+    * @param  [in] ttool  Numer układu współrzędnych narzędzia, zakres [0~14]
+    * @param  [in] tuser  Numer układu współrzędnych obiektu, zakres [0~14]
+    * @param  [in] tvel  Procent prędkości, zakres [0~100]
+    * @param  [in] tacc  Procent przyspieszenia, zakres [0~100], tymczasowo niedostępne
+    * @param  [in] epos_t  Pozycja osi rozszerzonej, jednostka mm
+    * @param  [in] ovl  Współczynnik skalowania prędkości [0~100] / prędkość fizyczna (mm/s)
+    * @param  [in] offset_flag  0-brak przesunięcia, 1-przesunięcie w układzie bazowym/układzie obiektu, 2-przesunięcie w układzie narzędzia
+    * @param  [in] offset_pos  Wartość przesunięcia pozy i orientacji
+    * @param  [in] oacc Współczynnik skalowania przyspieszenia [0-100] / przyspieszenie fizyczne (mm/s2)
+    * @param  [in] blendR -1: blokujący; 0~1000: promień wygładzania
+    * @param  [in] velAccParamMode Tryb parametrów prędkości i przyspieszenia; 0-procent; 1-prędkość fizyczna (mm/s) przyspieszenie fizyczne (mm/s2)
+    * @return  Kod błędu
     */
     errno_t Circle(JointPos* joint_pos_p, DescPose* desc_pos_p, int ptool, int puser, float pvel, float pacc, ExaxisPos* epos_p, JointPos* joint_pos_t, DescPose* desc_pos_t, int ttool, int tuser, float tvel, float tacc, ExaxisPos* epos_t, float ovl, uint8_t offset_flag, DescPose* offset_pos, double oacc = 100.0, double blendR = -1, int velAccParamMode = 0);
 
-笛卡尔空间整圆运动(自动逆运动学计算)
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Ruch pełnego okręgu w przestrzeni kartezjańskiej (automatyczne obliczanie odwrotnej kinematyki)
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief 笛卡尔空间整圆运动(自动逆运动学计算)
-    * @param [in] desc_pos_p  路径点1笛卡尔位姿
-    * @param [in] ptool 工具坐标号，范围[0~14]
-    * @param [in] puser 工件坐标号，范围[0~14]
-    * @param [in] pvel 速度百分比，范围[0~100]
-    * @param [in] pacc 加速度百分比，范围[0~100],暂不开放
-    * @param [in] epos_p 扩展轴位置，单位mm
-    * @param [in] desc_pos_t  路径点2笛卡尔位姿
-    * @param [in] ttool 工具坐标号，范围[0~14]
-    * @param [in] tuser 工件坐标号，范围[0~14]
-    * @param [in] tvel 速度百分比，范围[0~100]
-    * @param [in] tacc 加速度百分比，范围[0~100],暂不开放
-    * @param [in] epos_t 扩展轴位置，单位mm
-    * @param [in] ovl 速度缩放因子，范围[0~100]
-    * @param [in] offset_flag 0-不偏移，1-基坐标系/工件坐标系下偏移，2-工具坐标系下偏移
-    * @param [in] offset_pos 位姿偏移量
-    * @param [in] oacc 加速度百分比
-    * @param [in] blendR -1：阻塞；0~1000：平滑半径
-    * @param [in] config 逆解关节空间配置，[-1]-参考当前关节位置解算，[0~7]-依据特定关节空间配置求解
-    * @return 错误码
+    * @brief Ruch pełnego okręgu w przestrzeni kartezjańskiej (automatyczne obliczanie odwrotnej kinematyki)
+    * @param [in] desc_pos_p  Poza i orientacja punktu pośredniego 1 w kartezjańskim układzie współrzędnych
+    * @param [in] ptool Numer układu współrzędnych narzędzia, zakres [0~14]
+    * @param [in] puser Numer układu współrzędnych obiektu, zakres [0~14]
+    * @param [in] pvel Procent prędkości, zakres [0~100]
+    * @param [in] pacc Procent przyspieszenia, zakres [0~100], tymczasowo niedostępne
+    * @param [in] epos_p Pozycja osi rozszerzonej, jednostka mm
+    * @param [in] desc_pos_t  Poza i orientacja punktu pośredniego 2 w kartezjańskim układzie współrzędnych
+    * @param [in] ttool Numer układu współrzędnych narzędzia, zakres [0~14]
+    * @param [in] tuser Numer układu współrzędnych obiektu, zakres [0~14]
+    * @param [in] tvel Procent prędkości, zakres [0~100]
+    * @param [in] tacc Procent przyspieszenia, zakres [0~100], tymczasowo niedostępne
+    * @param [in] epos_t Pozycja osi rozszerzonej, jednostka mm
+    * @param [in] ovl Współczynnik skalowania prędkości, zakres [0~100]
+    * @param [in] offset_flag 0-brak przesunięcia, 1-przesunięcie w układzie bazowym/układzie obiektu, 2-przesunięcie w układzie narzędzia
+    * @param [in] offset_pos Wartość przesunięcia pozy i orientacji
+    * @param [in] oacc Procent przyspieszenia
+    * @param [in] blendR -1: blokujący; 0~1000: promień wygładzania
+    * @param [in] config Konfiguracja przestrzeni stawów dla odwrotnej kinematyki, [-1]-obliczenia w oparciu o bieżącą pozycję stawów, [0~7]-obliczenia zgodnie z określoną konfiguracją przestrzeni stawów
+    * @return Kod błędu
     */
     errno_t Circle(DescPose* desc_pos_p, int ptool, int puser, float pvel, float pacc, ExaxisPos* epos_p, DescPose* desc_pos_t, int ttool, int tuser, float tvel, float tacc, ExaxisPos* epos_t, float ovl, uint8_t offset_flag, DescPose* offset_pos, double oacc = 100.0, double blendR = -1, int config = -1);
-    
-笛卡尔空间点到点运动
-++++++++++++++++++++++++++++++++++
+
+Ruch punkt-punkt w przestrzeni kartezjańskiej
++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  笛卡尔空间点到点运动
-    * @param  [in]  desc_pos  目标笛卡尔位姿或位姿增量
-    * @param  [in] tool  工具坐标号，范围[0~14]
-    * @param  [in] user  工件坐标号，范围[0~14]
-    * @param  [in] vel  速度百分比，范围[0~100]
-    * @param  [in] acc  加速度百分比，范围[0~100],暂不开放
-    * @param  [in] ovl  速度缩放因子，范围[0~100]
-    * @param  [in] blendT [-1.0]-运动到位(阻塞)，[0~500.0]-平滑时间(非阻塞)，单位ms 
-    * @param  [in] config  关节空间配置，[-1]-参考当前关节位置解算，[0~7]-参考特定关节空间配置解算，默认为-1   
-    * @return  错误码
+    * @brief  Ruch punkt-punkt w przestrzeni kartezjańskiej
+    * @param  [in]  desc_pos  Docelowa poza i orientacja w kartezjańskim układzie współrzędnych lub przyrost pozy i orientacji
+    * @param  [in] tool  Numer układu współrzędnych narzędzia, zakres [0~14]
+    * @param  [in] user  Numer układu współrzędnych obiektu, zakres [0~14]
+    * @param  [in] vel  Procent prędkości, zakres [0~100]
+    * @param  [in] acc  Procent przyspieszenia, zakres [0~100], tymczasowo niedostępne
+    * @param  [in] ovl  Współczynnik skalowania prędkości, zakres [0~100]
+    * @param  [in] blendT [-1.0]-ruch do pozycji (blokujący), [0~500.0]-czas wygładzania (nieblokujący), jednostka ms
+    * @param  [in] config  Konfiguracja przestrzeni stawów, [-1]-obliczenia w oparciu o bieżącą pozycję stawów, [0~7]-obliczenia w oparciu o określoną konfigurację przestrzeni stawów, domyślnie -1
+    * @return  Kod błędu
     */
     errno_t  MoveCart(DescPose *desc_pos, int tool, int user, float vel, float acc, float ovl, float blendT, int config);
 
-机器人基本运动指令代码示例
-+++++++++++++++++++++++++++++++++++++++++
+Przykład kodu podstawowych instrukcji ruchu robota
+++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
@@ -401,51 +401,51 @@ jog点动立即停止
         return 0;
     }
 
-笛卡尔空间螺旋线运动
-+++++++++++++++++++++++++++++
+Ruch spiralny w przestrzeni kartezjańskiej
+++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  笛卡尔空间螺旋线运动
-    * @param  [in] joint_pos  目标关节位置,单位deg
-    * @param  [in] desc_pos   目标笛卡尔位姿
-    * @param  [in] tool  工具坐标号，范围[0~14]
-    * @param  [in] user  工件坐标号，范围[0~14]
-    * @param  [in] vel  速度百分比，范围[0~100]
-    * @param  [in] acc  加速度百分比，范围[0~100],暂不开放
-    * @param  [in] epos  扩展轴位置，单位mm
-    * @param  [in] ovl  速度缩放因子，范围[0~100]    
-    * @param  [in] offset_flag  0-不偏移，1-基坐标系/工件坐标系下偏移，2-工具坐标系下偏移
-    * @param  [in] offset_pos  位姿偏移量
-    * @param  [in] spiral_param  螺旋参数
-    * @return  错误码
+    * @brief  Ruch spiralny w przestrzeni kartezjańskiej
+    * @param  [in] joint_pos  Docelowa pozycja stawów, jednostka deg
+    * @param  [in] desc_pos   Docelowa poza i orientacja w kartezjańskim układzie współrzędnych
+    * @param  [in] tool  Numer układu współrzędnych narzędzia, zakres [0~14]
+    * @param  [in] user  Numer układu współrzędnych obiektu, zakres [0~14]
+    * @param  [in] vel  Procent prędkości, zakres [0~100]
+    * @param  [in] acc  Procent przyspieszenia, zakres [0~100], tymczasowo niedostępne
+    * @param  [in] epos  Pozycja osi rozszerzonej, jednostka mm
+    * @param  [in] ovl  Współczynnik skalowania prędkości, zakres [0~100]
+    * @param  [in] offset_flag  0-brak przesunięcia, 1-przesunięcie w układzie bazowym/układzie obiektu, 2-przesunięcie w układzie narzędzia
+    * @param  [in] offset_pos  Wartość przesunięcia pozy i orientacji
+    * @param  [in] spiral_param  Parametry spirali
+    * @return  Kod błędu
     */
-    errno_t  NewSpiral(JointPos *joint_pos, DescPose *desc_pos, int tool, int user, float vel, float acc, ExaxisPos *epos, float ovl, uint8_t offset_flag, DescPose *offset_pos, SpiralParam spiral_param);  
+    errno_t  NewSpiral(JointPos *joint_pos, DescPose *desc_pos, int tool, int user, float vel, float acc, ExaxisPos *epos, float ovl, uint8_t offset_flag, DescPose *offset_pos, SpiralParam spiral_param);
 
-笛卡尔空间螺旋线运动 (自动逆运动学计算)
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Ruch spiralny w przestrzeni kartezjańskiej (automatyczne obliczanie odwrotnej kinematyki)
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief 笛卡尔空间螺旋线运动 (自动逆运动学计算)
-    * @param [in] desc_pos  目标笛卡尔位姿
-    * @param [in] tool 工具坐标号，范围[0~14]
-    * @param [in] user 工件坐标号，范围[0~14]
-    * @param [in] vel 速度百分比，范围[0~100]
-    * @param [in] acc 加速度百分比，范围[0~100],暂不开放
-    * @param [in] epos 扩展轴位置，单位mm
-    * @param [in] ovl 速度缩放因子，范围[0~100]
-    * @param [in] offset_flag 0-不偏移，1-基坐标系/工件坐标系下偏移，2-工具坐标系下偏移
-    * @param [in] offset_pos 位姿偏移量
-    * @param [in] spiral_param 螺旋参数
-    * @param [in] config 逆解关节空间配置，[-1]-参考当前关节位置解算，[0~7]-依据特定关节空间配置求解
-    * @return 错误码
+    * @brief Ruch spiralny w przestrzeni kartezjańskiej (automatyczne obliczanie odwrotnej kinematyki)
+    * @param [in] desc_pos  Docelowa poza i orientacja w kartezjańskim układzie współrzędnych
+    * @param [in] tool Numer układu współrzędnych narzędzia, zakres [0~14]
+    * @param [in] user Numer układu współrzędnych obiektu, zakres [0~14]
+    * @param [in] vel Procent prędkości, zakres [0~100]
+    * @param [in] acc Procent przyspieszenia, zakres [0~100], tymczasowo niedostępne
+    * @param [in] epos Pozycja osi rozszerzonej, jednostka mm
+    * @param [in] ovl Współczynnik skalowania prędkości, zakres [0~100]
+    * @param [in] offset_flag 0-brak przesunięcia, 1-przesunięcie w układzie bazowym/układzie obiektu, 2-przesunięcie w układzie narzędzia
+    * @param [in] offset_pos Wartość przesunięcia pozy i orientacji
+    * @param [in] spiral_param Parametry spirali
+    * @param [in] config Konfiguracja przestrzeni stawów dla odwrotnej kinematyki, [-1]-obliczenia w oparciu o bieżącą pozycję stawów, [0~7]-obliczenia zgodnie z określoną konfiguracją przestrzeni stawów
+    * @return Kod błędu
     */
     errno_t NewSpiral(DescPose* desc_pos, int tool, int user, float vel, float acc, ExaxisPos* epos, float ovl, uint8_t offset_flag, DescPose* offset_pos, SpiralParam spiral_param, int config = -1);
 
-螺旋线运动代码示例
+Przykład kodu ruchu spiralnego
 +++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
@@ -490,52 +490,52 @@ jog点动立即停止
       return 0;
     }
 
-伺服运动开始
-+++++++++++++++++++++++++++++
+Rozpoczęcie ruchu serwo
++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief 伺服运动开始，配合ServoJ、ServoCart指令使用
-    * @param [in] comType 指令下发类型；0-xmlrpc；1-UDP(对应机器人20007端口)
-    * @return 错误码
+    * @brief Rozpoczęcie ruchu serwo, używane razem z instrukcjami ServoJ, ServoCart
+    * @param [in] comType Typ wysyłania instrukcji; 0-xmlrpc; 1-UDP (odpowiadający portowi 20007 robota)
+    * @return Kod błędu
     */
     errno_t ServoMoveStart(int comType = 0);
 
-伺服运动结束
-+++++++++++++++++++++++++++++
+Zakończenie ruchu serwo
++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief 伺服运动结束，配合ServoJ、ServoCart指令使用
-    * @param [in] comType 指令下发类型；0-xmlrpc；1-UDP(对应机器人20007端口)
-    * @return 错误码
+    * @brief Zakończenie ruchu serwo, używane razem z instrukcjami ServoJ, ServoCart
+    * @param [in] comType Typ wysyłania instrukcji; 0-xmlrpc; 1-UDP (odpowiadający portowi 20007 robota)
+    * @return Kod błędu
     */
     errno_t ServoMoveEnd(int comType = 0);
 
-关节空间伺服模式运动
-+++++++++++++++++++++++++++++
+Ruch w trybie serwo w przestrzeni stawów
+++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief 关节空间伺服模式运动
-    * @param [in] joint_pos 目标关节位置,单位deg
-    * @param [in] axisPos 外部轴位置,单位mm
-    * @param [in] acc 加速度百分比，范围[0~100],暂不开放，默认为0
-    * @param [in] vel 速度百分比，范围[0~100]，暂不开放，默认为0
-    * @param [in] cmdT 指令下发周期，单位s，建议范围[0.001~0.0016]
-    * @param [in] filterT 滤波时间，单位s，暂不开放，默认为0
-    * @param [in] gain 目标位置的比例放大器，暂不开放，默认为0
-    * @param [in] id servoJ指令ID,默认为0
-    * @param [in] comType 指令下发类型；0-xmlrpc；1-UDP(对应机器人20007端口)
-    * @return 错误码
+    * @brief Ruch w trybie serwo w przestrzeni stawów
+    * @param [in] joint_pos Docelowa pozycja stawów, jednostka deg
+    * @param [in] axisPos Pozycja osi zewnętrznej, jednostka mm
+    * @param [in] acc Procent przyspieszenia, zakres [0~100], tymczasowo niedostępne, domyślnie 0
+    * @param [in] vel Procent prędkości, zakres [0~100], tymczasowo niedostępne, domyślnie 0
+    * @param [in] cmdT Okres wysyłania instrukcji, jednostka s, zalecany zakres [0.001~0.0016]
+    * @param [in] filterT Czas filtracji, jednostka s, tymczasowo niedostępny, domyślnie 0
+    * @param [in] gain Wzmacniacz proporcjonalności pozycji docelowej, tymczasowo niedostępny, domyślnie 0
+    * @param [in] id ID instrukcji servoJ, domyślnie 0
+    * @param [in] comType Typ wysyłania instrukcji; 0-xmlrpc; 1-UDP (odpowiadający portowi 20007 robota)
+    * @return Kod błędu
     */
     errno_t ServoJ(JointPos *joint_pos, ExaxisPos* axisPos, float acc, float vel, float cmdT, float filterT, float gain, int id = 0, int comType = 0);
 
-关节空间伺服模式运动示例程序
-++++++++++++++++++++++++++++++++++++++++++
+Przykład programu ruchu w trybie serwo w przestrzeni stawów
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
@@ -583,8 +583,8 @@ jog点动立即停止
         return 0;
     }
 
-基于UDP通信的机器人关节空间伺服模式运动代码示例
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Przykład kodu ruchu w trybie serwo w przestrzeni stawów robota opartego na komunikacji UDP
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
@@ -673,57 +673,57 @@ jog点动立即停止
         return 0;
     }
 
-关节扭矩控制开始
-++++++++++++++++++++++++++++++++++++++++++
+Rozpoczęcie sterowania momentem stawów
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C++SDK-v2.1.5.0
-    
+
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief 关节扭矩控制开始
-    * @param [in] comType 指令下发类型；0-xmlrpc；1-UDP(对应机器人20007端口)
-    * @return 错误码
+    * @brief Rozpoczęcie sterowania momentem stawów
+    * @param [in] comType Typ wysyłania instrukcji; 0-xmlrpc; 1-UDP (odpowiadający portowi 20007 robota)
+    * @return Kod błędu
     */
     errno_t ServoJTStart(int comType = 0);
 
-关节扭矩控制
-++++++++++++++++++++++++++++++++++++++++++
+Sterowanie momentem stawów
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C++SDK-v2.1.5.0
-    
+
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief 关节扭矩控制
-    * @param [in] torque j1~j6关节扭矩，单位Nm
-    * @param [in] interval 指令周期，单位s，范围[0.001~0.008]
-    * @param [in] checkFlag 检测策略 0-不限制；1-限制功率；2-限制速度；3-功率和速度同时限制
-    * @param [in] jPowerLimit 关节最大功率限制(W)
-    * @param [in] jVelLimit 关节最大速度(°/s)
-    * @param [in] comType 指令下发类型；0-xmlrpc；1-UDP(对应机器人20007端口)
-    * @return 错误码
+    * @brief Sterowanie momentem stawów
+    * @param [in] torque Moment stawów j1~j6, jednostka Nm
+    * @param [in] interval Okres instrukcji, jednostka s, zakres [0.001~0.008]
+    * @param [in] checkFlag Strategia wykrywania 0-brak ograniczenia; 1-ograniczenie mocy; 2-ograniczenie prędkości; 3-jednoczesne ograniczenie mocy i prędkości
+    * @param [in] jPowerLimit Maksymalne ograniczenie mocy stawu (W)
+    * @param [in] jVelLimit Maksymalna prędkość stawu (°/s)
+    * @param [in] comType Typ wysyłania instrukcji; 0-xmlrpc; 1-UDP (odpowiadający portowi 20007 robota)
+    * @return Kod błędu
     */
     errno_t ServoJT(float torque[], double interval, int checkFlag, double jPowerLimit[6], double jVelLimit[6], int comType = 0);
 
-关节扭矩控制结束
-++++++++++++++++++++++++++++++++++++++++++
+Zakończenie sterowania momentem stawów
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C++SDK-v2.1.5.0
-    
+
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief 关节扭矩控制结束
-    * @param [in] comType 指令下发类型；0-xmlrpc；1-UDP(对应机器人20007端口)
-    * @return 错误码
+    * @brief Zakończenie sterowania momentem stawów
+    * @param [in] comType Typ wysyłania instrukcji; 0-xmlrpc; 1-UDP (odpowiadający portowi 20007 robota)
+    * @return Kod błędu
     */
     errno_t ServoJTEnd(int comType = 0);
 
-关节扭矩控制代码示例
-+++++++++++++++++++++++++++++++++++++++
+Przykład kodu sterowania momentem stawów
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C++SDK-v2.1.5.0
-    
+
 .. code-block:: c++
     :linenos:
 
@@ -743,7 +743,7 @@ jog点动立即停止
          float torques[] = { 0, 0, 0, 0, 0, 0 };
          robot.GetJointTorques(1, torques);
          int count = 100;
-         robot.ServoJTStart(); 
+         robot.ServoJTStart();
          int error = 0;
          while (count > 0)
          {
@@ -757,9 +757,9 @@ jog点动立即停止
          return 0;
      }
 
-具有超速保护的关节扭矩控制代码示例
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-    
+Przykład kodu sterowania momentem stawów z ochroną przed przekroczeniem prędkości
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: c++
     :linenos:
 
@@ -769,11 +769,11 @@ jog点动立即停止
         robot->Sleep(500);
         float torques[] = { 0, 0, 0, 0, 0, 0 };
         robot->GetJointTorques(1, torques);
-        robot->ServoJTStart(); 
+        robot->ServoJTStart();
         ROBOT_STATE_PKG pkg = {};
         robot->DragTeachSwitch(1);
         int checkFlag = 3;
-        //double jPowerLimit[6] = {1, 1, 1, 1, 1, 1}; 
+        //double jPowerLimit[6] = {1, 1, 1, 1, 1, 1};
         double jPowerLimit[6] = { 10.0, 10.0, 10.0, 10.0, 10.0, 10.0 };
         double jVelLimit[6] = { 181, 80, 80, 80, 80, 80 };
         int count = 800000;
@@ -781,7 +781,7 @@ jog点动立即停止
         while (count > 0)
         {
             torques[2] = torques[2] + 0.01;
-            error = robot->ServoJT(torques, 0.008, checkFlag, jPowerLimit, jVelLimit); 
+            error = robot->ServoJT(torques, 0.008, checkFlag, jPowerLimit, jVelLimit);
             if (error != 0)
             {
                 robot->ServoJTEnd();
@@ -793,20 +793,20 @@ jog点动立即停止
             printf("maincode %d, subcode %d\n", pkg.main_code, pkg.sub_code);
         }
         robot->DragTeachSwitch(0);
-        error = robot->ServoJTEnd();  
+        error = robot->ServoJTEnd();
         return 0;
     }
 
-基于UDP通信的机器人关节扭矩控制代码示例
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-    
+Przykład kodu sterowania momentem stawów robota opartego na komunikacji UDP
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: c++
     :linenos:
 
     void UDPFrameCallBack(int srcType, int count, int cmdID, int len, std::string content)
     {
         cout << "recv cmd: cmdID:  " << to_string(cmdID) << "  content is " << content << "  count is " << count << endl;
-        
+
         return;
     }
     int TestServoJTUDP(void)
@@ -869,28 +869,28 @@ jog点动立即停止
         return 0;
     }
 
-笛卡尔空间伺服模式运动
-++++++++++++++++++++++++++++++++++
+Ruch w trybie serwo w przestrzeni kartezjańskiej
+++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief 笛卡尔空间伺服模式运动
-    * @param [in] mode 0-绝对运动(基坐标系)，1-增量运动(基坐标系)，2-增量运动(工具坐标系)
-    * @param [in] desc_pos 目标笛卡尔位姿或位姿增量
-    * @param [in] exaxis 扩展轴位置
-    * @param [in] pos_gain 位姿增量比例系数，仅在增量运动下生效，范围[0~1]
-    * @param [in] acc 加速度百分比，范围[0~100],暂不开放，默认为0
-    * @param [in] vel 速度百分比，范围[0~100]，暂不开放，默认为0
-    * @param [in] cmdT 指令下发周期，单位s，建议范围[0.001~0.016]
-    * @param [in] filterT 滤波时间，单位s，暂不开放，默认为0
-    * @param [in] gain 目标位置的比例放大器，暂不开放，默认为0
-    * @return 错误码
+    * @brief Ruch w trybie serwo w przestrzeni kartezjańskiej
+    * @param [in] mode 0-ruch absolutny (układ bazowy), 1-ruch przyrostowy (układ bazowy), 2-ruch przyrostowy (układ narzędzia)
+    * @param [in] desc_pos Docelowa poza i orientacja w kartezjańskim układzie współrzędnych lub przyrost pozy i orientacji
+    * @param [in] exaxis Pozycja osi rozszerzonej
+    * @param [in] pos_gain Współczynnik proporcjonalności przyrostu pozy i orientacji, działa tylko w ruchu przyrostowym, zakres [0~1]
+    * @param [in] acc Procent przyspieszenia, zakres [0~100], tymczasowo niedostępne, domyślnie 0
+    * @param [in] vel Procent prędkości, zakres [0~100], tymczasowo niedostępne, domyślnie 0
+    * @param [in] cmdT Okres wysyłania instrukcji, jednostka s, zalecany zakres [0.001~0.016]
+    * @param [in] filterT Czas filtracji, jednostka s, tymczasowo niedostępny, domyślnie 0
+    * @param [in] gain Wzmacniacz proporcjonalności pozycji docelowej, tymczasowo niedostępny, domyślnie 0
+    * @return Kod błędu
     */
     errno_t ServoCart(int mode, DescPose *desc_pose, ExaxisPos exaxis, float pos_gain[6], float acc, float vel, float cmdT, float filterT, float gain);
 
-笛卡尔空间伺服模式运动代码示例
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Przykład kodu ruchu w trybie serwo w przestrzeni kartezjańskiej
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
@@ -930,65 +930,65 @@ jog点动立即停止
         return 0;
     }
 
-样条运动开始
-++++++++++++++++++++++++++++++++++
+Rozpoczęcie ruchu funkcją sklejaną (Spline)
++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  样条运动开始
-    * @return  错误码
+    * @brief  Rozpoczęcie ruchu funkcją sklejaną
+    * @return  Kod błędu
     */
     errno_t  SplineStart();
 
-关节空间样条运动(自动正运动学计算)
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Ruch funkcją sklejaną w przestrzeni stawów (automatyczne obliczanie prostej kinematyki)
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief 关节空间样条运动(自动正运动学计算)
-    * @param [in] joint_pos 目标关节位置,单位deg
-    * @param [in] tool 工具坐标号，范围[0~14]
-    * @param [in] user 工件坐标号，范围[0~14]
-    * @param [in] vel 速度百分比，范围[0~100]
-    * @param [in] acc 加速度百分比，范围[0~100],暂不开放
-    * @param [in] ovl 速度缩放因子，范围[0~100]
-    * @return 错误码
+    * @brief Ruch funkcją sklejaną w przestrzeni stawów (automatyczne obliczanie prostej kinematyki)
+    * @param [in] joint_pos Docelowa pozycja stawów, jednostka deg
+    * @param [in] tool Numer układu współrzędnych narzędzia, zakres [0~14]
+    * @param [in] user Numer układu współrzędnych obiektu, zakres [0~14]
+    * @param [in] vel Procent prędkości, zakres [0~100]
+    * @param [in] acc Procent przyspieszenia, zakres [0~100], tymczasowo niedostępne
+    * @param [in] ovl Współczynnik skalowania prędkości, zakres [0~100]
+    * @return Kod błędu
     */
     errno_t SplinePTP(JointPos* joint_pos, int tool, int user, float vel, float acc, float ovl);
 
-样条运动PTP
-++++++++++++++++++++++++++++++++++
+Ruch funkcją sklejaną PTP
++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  关节空间样条运动
-    * @param  [in] joint_pos  目标关节位置,单位deg
-    * @param  [in] desc_pos   目标笛卡尔位姿
-    * @param  [in] tool  工具坐标号，范围[0~14]
-    * @param  [in] user  工件坐标号，范围[0~14]
-    * @param  [in] vel  速度百分比，范围[0~100]
-    * @param  [in] acc  加速度百分比，范围[0~100],暂不开放
-    * @param  [in] ovl  速度缩放因子，范围[0~100]   
-    * @return  错误码
+    * @brief  Ruch funkcją sklejaną w przestrzeni stawów
+    * @param  [in] joint_pos  Docelowa pozycja stawów, jednostka deg
+    * @param  [in] desc_pos   Docelowa poza i orientacja w kartezjańskim układzie współrzędnych
+    * @param  [in] tool  Numer układu współrzędnych narzędzia, zakres [0~14]
+    * @param  [in] user  Numer układu współrzędnych obiektu, zakres [0~14]
+    * @param  [in] vel  Procent prędkości, zakres [0~100]
+    * @param  [in] acc  Procent przyspieszenia, zakres [0~100], tymczasowo niedostępne
+    * @param  [in] ovl  Współczynnik skalowania prędkości, zakres [0~100]
+    * @return  Kod błędu
     */
     errno_t  SplinePTP(JointPos *joint_pos, DescPose *desc_pos, int tool, int user, float vel, float acc, float ovl);
 
-样条运动结束
-++++++++++++++++++++++++++++++++++
+Zakończenie ruchu funkcją sklejaną
++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  样条运动结束
-    * @return  错误码
+    * @brief  Zakończenie ruchu funkcją sklejaną
+    * @return  Kod błędu
     */
     errno_t  SplineEnd();
 
-样条运动代码示例
-++++++++++++++++++++++++++++++++++
+Przykład kodu ruchu funkcją sklejaną
++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
@@ -1042,74 +1042,74 @@ jog点动立即停止
       return 0;
     }
 
-新样条运动开始
-++++++++++++++++++++++++++++++++++
+Rozpoczęcie nowego ruchu funkcją sklejaną
++++++++++++++++++++++++++++++++++++++++++
 .. versionchanged:: C++SDK-v2.1.3.0
 
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief 新样条运动开始
-    * @param [in] type  0-圆弧过渡，1-给定点位为路径点
-    * @param [in] averageTime 全局平均衔接时间(ms)(10 ~ )，默认2000
-    * @return 错误码
+    * @brief Rozpoczęcie nowego ruchu funkcją sklejaną
+    * @param [in] type  0-przejście łukowe, 1-punkty zadane są punktami ścieżki
+    * @param [in] averageTime Globalny średni czas połączenia (ms) (10 ~ ), domyślnie 2000
+    * @return Kod błędu
     */
     errno_t NewSplineStart(int type, int averageTime=2000);
 
-新样条指令点
-++++++++++++++++++++++++++++++++++
+Punkt nowej funkcji sklejanej
++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief 新样条指令点
-    * @param [in] joint_pos 目标关节位置,单位deg
-    * @param [in] desc_pos  目标笛卡尔位姿
-    * @param [in] tool 工具坐标号，范围[0~14]
-    * @param [in] user 工件坐标号，范围[0~14]
-    * @param [in] vel 速度百分比，范围[0~100]
-    * @param [in] acc 加速度百分比，范围[0~100],暂不开放
-    * @param [in] ovl 速度缩放因子，范围[0~100]
-    * @param [in] blendR [-1.0]-运动到位(阻塞)，[0~1000.0]-平滑半径(非阻塞)，单位mm 
-    * @param  [in] lastFlag 是否为最后一个点，0-否，1-是
-    * @return 错误码
-    */ 
+    * @brief Punkt nowej funkcji sklejanej
+    * @param [in] joint_pos Docelowa pozycja stawów, jednostka deg
+    * @param [in] desc_pos  Docelowa poza i orientacja w kartezjańskim układzie współrzędnych
+    * @param [in] tool Numer układu współrzędnych narzędzia, zakres [0~14]
+    * @param [in] user Numer układu współrzędnych obiektu, zakres [0~14]
+    * @param [in] vel Procent prędkości, zakres [0~100]
+    * @param [in] acc Procent przyspieszenia, zakres [0~100], tymczasowo niedostępne
+    * @param [in] ovl Współczynnik skalowania prędkości, zakres [0~100]
+    * @param [in] blendR [-1.0]-ruch do pozycji (blokujący), [0~1000.0]-promień wygładzania (nieblokujący), jednostka mm
+    * @param  [in] lastFlag Czy to ostatni punkt, 0-nie, 1-tak
+    * @return Kod błędu
+    */
     errno_t NewSplinePoint(JointPos *joint_pos, DescPose *desc_pos, int tool, int user, float vel, float acc, float ovl, float blendR, int lastFlag);
 
-新样条指令点(自动逆运动学计算)
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Punkt nowej funkcji sklejanej (automatyczne obliczanie odwrotnej kinematyki)
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief 新样条指令点(自动逆运动学计算)
-    * @param [in] desc_pos  目标笛卡尔位姿
-    * @param [in] tool 工具坐标号，范围[0~14]
-    * @param [in] user 工件坐标号，范围[0~14]
-    * @param [in] vel 速度百分比，范围[0~100]
-    * @param [in] acc 加速度百分比，范围[0~100],暂不开放
-    * @param [in] ovl 速度缩放因子，范围[0~100]
-    * @param [in] blendR [-1.0]-运动到位(阻塞)，[0~1000.0]-平滑半径(非阻塞)，单位mm
-    * @param [in] lastFlag 是否为最后一个点，0-否，1-是
-    * @param [in] config 逆解关节空间配置，[-1]-参考当前关节位置解算，[0~7]-依据特定关节空间配置求解
-    * @return 错误码
+    * @brief Punkt nowej funkcji sklejanej (automatyczne obliczanie odwrotnej kinematyki)
+    * @param [in] desc_pos  Docelowa poza i orientacja w kartezjańskim układzie współrzędnych
+    * @param [in] tool Numer układu współrzędnych narzędzia, zakres [0~14]
+    * @param [in] user Numer układu współrzędnych obiektu, zakres [0~14]
+    * @param [in] vel Procent prędkości, zakres [0~100]
+    * @param [in] acc Procent przyspieszenia, zakres [0~100], tymczasowo niedostępne
+    * @param [in] ovl Współczynnik skalowania prędkości, zakres [0~100]
+    * @param [in] blendR [-1.0]-ruch do pozycji (blokujący), [0~1000.0]-promień wygładzania (nieblokujący), jednostka mm
+    * @param [in] lastFlag Czy to ostatni punkt, 0-nie, 1-tak
+    * @param [in] config Konfiguracja przestrzeni stawów dla odwrotnej kinematyki, [-1]-obliczenia w oparciu o bieżącą pozycję stawów, [0~7]-obliczenia zgodnie z określoną konfiguracją przestrzeni stawów
+    * @return Kod błędu
     */
     errno_t NewSplinePoint(DescPose* desc_pos, int tool, int user, float vel, float acc, float ovl, float blendR, int lastFlag, int config = -1);
 
-新样条运动结束
-++++++++++++++++++++++++++++++++++
+Zakończenie nowego ruchu funkcją sklejaną
++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief 新样条运动结束
-    * @return 错误码
+    * @brief Zakończenie nowego ruchu funkcją sklejaną
+    * @return Kod błędu
     */
     errno_t NewSplineEnd();
 
-新样条运动代码示例
-++++++++++++++++++++++++++++++++++
+Przykład kodu nowego ruchu funkcją sklejaną
++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
@@ -1167,41 +1167,41 @@ jog点动立即停止
       return 0;
     }
 
-终止运动
-++++++++++++++++++++++++++++++++++
+Zatrzymanie ruchu
++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief 终止运动
-    * @return  错误码
+    * @brief Zatrzymanie ruchu
+    * @return  Kod błędu
     */
     errno_t  StopMotion();
 
-暂停运动
-++++++++++++++++++++++++++++++++++
+Wstrzymanie ruchu
++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief 暂停运动
-    * @return 错误码
+    * @brief Wstrzymanie ruchu
+    * @return Kod błędu
     */
-    errno_t PauseMotion(); 
+    errno_t PauseMotion();
 
-恢复运动
-++++++++++++++++++++++++++++++++++
+Wznowienie ruchu
++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
-    
+
     /**
-    * @brief 恢复运动
-    * @return 错误码
+    * @brief Wznowienie ruchu
+    * @return Kod błędu
     */
     errno_t ResumeMotion();
 
-运动暂停、恢复、停止代码示例
-++++++++++++++++++++++++++++++++++
+Przykład kodu wstrzymywania, wznawiania i zatrzymywania ruchu
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
@@ -1244,32 +1244,32 @@ jog点动立即停止
          return 0;
      }
 
-点位整体偏移开始
-++++++++++++++++++++++++++++++++++
+Rozpoczęcie globalnego przesunięcia punktów
+++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  点位整体偏移开始
-    * @param  [in]  flag  0-基坐标系下/工件坐标系下偏移，2-工具坐标系下偏移
-    * @param  [in] offset_pos  位姿偏移量
-    * @return  错误码
+    * @brief  Rozpoczęcie globalnego przesunięcia punktów
+    * @param  [in]  flag  0-przesunięcie w układzie bazowym/układzie obiektu, 2-przesunięcie w układzie narzędzia
+    * @param  [in] offset_pos  Wartość przesunięcia pozy i orientacji
+    * @return  Kod błędu
     */
     errno_t  PointsOffsetEnable(int flag, DescPose *offset_pos);
 
-点位整体偏移结束
-++++++++++++++++++++++++++++++++++
+Zakończenie globalnego przesunięcia punktów
+++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  点位整体偏移结束
-    * @return  错误码
+    * @brief  Zakończenie globalnego przesunięcia punktów
+    * @return  Kod błędu
     */
     errno_t  PointsOffsetDisable();
 
-点位偏移代码示例
-+++++++++++++++++++++++++++++++++
+Przykład kodu przesunięcia punktów
++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
@@ -1311,68 +1311,68 @@ jog点动立即停止
          return 0;
      }
 
-控制箱AO飞拍开始
-++++++++++++++++++++++++++++++++++
+Rozpoczęcie pomiaru przelotowego AO szafy sterowniczej
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C++SDK-v2.1.4.0
 
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief 控制箱AO飞拍开始
-    * @param [in] AONum 控制箱AO编号
-    * @param [in] maxTCPSpeed 最大TCP速度值[1-5000mm/s]，默认1000
-    * @param [in] maxAOPercent 最大TCP速度值对应的AO百分比，默认100%
-    * @param [in] zeroZoneCmp 死区补偿值AO百分比，整形，默认为20%，范围[0-100]
-    * @return 错误码
+    * @brief Rozpoczęcie pomiaru przelotowego AO szafy sterowniczej
+    * @param [in] AONum Numer AO szafy sterowniczej
+    * @param [in] maxTCPSpeed Maksymalna wartość prędkości TCP [1-5000mm/s], domyślnie 1000
+    * @param [in] maxAOPercent Procent AO odpowiadający maksymalnej wartości prędkości TCP, domyślnie 100%
+    * @param [in] zeroZoneCmp Procent AO dla kompensacji martwego pola, liczba całkowita, domyślnie 20%, zakres [0-100]
+    * @return Kod błędu
     */
     errno_t MoveAOStart(int AONum, int maxTCPSpeed, int maxAOPercent, int zeroZoneCmp);
 
-控制箱AO飞拍停止
-++++++++++++++++++++++++++++++++++
+Zatrzymanie pomiaru przelotowego AO szafy sterowniczej
+++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C++SDK-v2.1.4.0
-   
+
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief 控制箱AO飞拍停止
-    * @return 错误码
+    * @brief Zatrzymanie pomiaru przelotowego AO szafy sterowniczej
+    * @return Kod błędu
     */
     errno_t MoveAOStop();
-    
-末端AO飞拍开始
-++++++++++++++++++++++++++++++++++
+
+Rozpoczęcie pomiaru przelotowego AO końcówki
+++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C++SDK-v2.1.4.0
-   
+
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief 末端AO飞拍开始
-    * @param [in] AONum 末端AO编号
-    * @param [in] maxTCPSpeed 最大TCP速度值[1-5000mm/s]，默认1000
-    * @param [in] maxAOPercent 最大TCP速度值对应的AO百分比，默认100%
-    * @param [in] zeroZoneCmp 死区补偿值AO百分比，整形，默认为20%，范围[0-100]
-    * @return 错误码
+    * @brief Rozpoczęcie pomiaru przelotowego AO końcówki
+    * @param [in] AONum Numer AO końcówki
+    * @param [in] maxTCPSpeed Maksymalna wartość prędkości TCP [1-5000mm/s], domyślnie 1000
+    * @param [in] maxAOPercent Procent AO odpowiadający maksymalnej wartości prędkości TCP, domyślnie 100%
+    * @param [in] zeroZoneCmp Procent AO dla kompensacji martwego pola, liczba całkowita, domyślnie 20%, zakres [0-100]
+    * @return Kod błędu
     */
     errno_t MoveToolAOStart(int AONum, int maxTCPSpeed, int maxAOPercent, int zeroZoneCmp);
-    
-末端AO飞拍停止
-++++++++++++++++++++++++++++++++++
+
+Zatrzymanie pomiaru przelotowego AO końcówki
+++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C++SDK-v2.1.4.0
-   
+
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief 末端AO飞拍停止
-    * @return 错误码
+    * @brief Zatrzymanie pomiaru przelotowego AO końcówki
+    * @return Kod błędu
     */
     errno_t MoveToolAOStop();
 
-AO飞拍代码示例
-++++++++++++++++++++++++++++++++++
+Przykład kodu pomiaru przelotowego AO
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
@@ -1416,66 +1416,66 @@ AO飞拍代码示例
          return 0;
      }
 
-开始Ptp运动FIR滤波
-+++++++++++++++++++++++++++++
+Rozpoczęcie filtracji FIR ruchu PTP
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: V3.7.7
-    
+
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief 开始Ptp运动FIR滤波
-    * @param [in] maxAcc 最大加速度极值(deg/s2)
-    * @param [in] maxJek 统一关节急动度极值(deg/s3)
-    * @return 错误码
+    * @brief Rozpoczęcie filtracji FIR ruchu PTP
+    * @param [in] maxAcc Maksymalna wartość przyspieszenia (deg/s2)
+    * @param [in] maxJek Maksymalna wartość zrywu dla wszystkich stawów (deg/s3)
+    * @return Kod błędu
     */
     errno_t PtpFIRPlanningStart(double maxAcc, double maxJek = 1000);
 
-关闭Ptp运动FIR滤波
-+++++++++++++++++++++++++++++
+Zakończenie filtracji FIR ruchu PTP
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: V3.7.7
 
 .. code-block:: c++
     :linenos:
 
     /**
-	* @brief 关闭Ptp运动FIR滤波
-	* @return 错误码
+	* @brief Zakończenie filtracji FIR ruchu PTP
+	* @return Kod błędu
 	*/
 	errno_t PtpFIRPlanningEnd();
 
-开始LIN、ARC运动FIR滤波
-+++++++++++++++++++++++++++++
+Rozpoczęcie filtracji FIR ruchu LIN i ARC
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: V3.7.7
 
 .. code-block:: c++
     :linenos:
 
     /**
-	* @brief 开始LIN、ARC运动FIR滤波
-	* @param [in] maxAccLin 线加速度极值(mm/s2)
-	* @param [in] maxAccDeg 角加速度极值(deg/s2)
-	* @param [in] maxJerkLin 线加加速度极值(mm/s3)
-	* @param [in] maxJerkDeg 角加加速度极值(deg/s3)
-	* @return 错误码
+	* @brief Rozpoczęcie filtracji FIR ruchu LIN i ARC
+	* @param [in] maxAccLin Maksymalna wartość liniowego przyspieszenia (mm/s2)
+	* @param [in] maxAccDeg Maksymalna wartość kątowego przyspieszenia (deg/s2)
+	* @param [in] maxJerkLin Maksymalna wartość liniowego zrywu (mm/s3)
+	* @param [in] maxJerkDeg Maksymalna wartość kątowego zrywu (deg/s3)
+	* @return Kod błędu
 	*/
 	errno_t LinArcFIRPlanningStart(double maxAccLin, double maxAccDeg, double maxJerkLin, double maxJerkDeg);
 
-关闭LIN、ARC运动FIR滤波
-+++++++++++++++++++++++++++++
+Zakończenie filtracji FIR ruchu LIN i ARC
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: V3.7.7
 
 .. code-block:: c++
     :linenos:
 
     /**
-	* @brief 关闭LIN、ARC运动FIR滤波
-	* @return 错误码
+	* @brief Zakończenie filtracji FIR ruchu LIN i ARC
+	* @return Kod błędu
 	*/
 	errno_t LinArcFIRPlanningEnd();
 
-FIR滤波代码示例
-+++++++++++++++++++++++++++++
+Przykład kodu filtracji FIR
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. code-block:: c++
     :linenos:
@@ -1516,36 +1516,36 @@ FIR滤波代码示例
          return 0;
      }
 
-加速度平滑开启
-+++++++++++++++++++++++++++++++++++++++++
+Włączenie wygładzania przyspieszenia
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C++SDK-v2.2.1-3.8.1
 
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief 加速度平滑开启
-    * @param [in] saveFlag 是否断电保存
-    * @return 错误码
+    * @brief Włączenie wygładzania przyspieszenia
+    * @param [in] saveFlag Czy zapisać po odcięciu zasilania
+    * @return Kod błędu
     */
     errno_t AccSmoothStart(bool saveFlag);
 
-加速度平滑关闭
-+++++++++++++++++++++++++++++++++++++++++
+Wyłączenie wygładzania przyspieszenia
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C++SDK-v2.2.1-3.8.1
 
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief 加速度平滑关闭
-    * @param [in] saveFlag 是否断电保存
-    * @return 错误码
+    * @brief Wyłączenie wygładzania przyspieszenia
+    * @param [in] saveFlag Czy zapisać po odcięciu zasilania
+    * @return Kod błędu
     */
     errno_t AccSmoothEnd(bool saveFlag);
 
-加速度平滑代码示例
-+++++++++++++++++++++++++++++++++++++++++++
+Przykład kodu wygładzania przyspieszenia
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. code-block:: c++
     :linenos:
@@ -1579,36 +1579,36 @@ FIR滤波代码示例
      }
 
 
-指定姿态速度开启
-++++++++++++++++++++++++++++++++++++++++++
+Włączenie określonej prędkości postawy
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C++SDK-v2.1.5.0
-    
+
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief 指定姿态速度开启
-    * @param [in] ratio 姿态速度百分比[0-300]
-    * @return 错误码
+    * @brief Włączenie określonej prędkości postawy
+    * @param [in] ratio Procent prędkości postawy [0-300]
+    * @return Kod błędu
     */
     errno_t AngularSpeedStart(int ratio);
 
-指定姿态速度关闭
-++++++++++++++++++++++++++++++++++++++++++
+Wyłączenie określonej prędkości postawy
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C++SDK-v2.1.5.0
-    
+
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief 指定姿态速度关闭
-    * @return 错误码
+    * @brief Wyłączenie określonej prędkości postawy
+    * @return Kod błędu
     */
     errno_t AngularSpeedEnd();
 
-机器人指定姿态速度代码示例
-++++++++++++++++++++++++++++++++++++++++++
-    
+Przykład kodu określonej prędkości postawy robota
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: c++
     :linenos:
 
@@ -1640,38 +1640,38 @@ FIR滤波代码示例
          return 0;
      }
 
-开始奇异位姿保护
-++++++++++++++++++++++++++++++++++++++++++
+Rozpoczęcie ochrony przed osobliwą pozą i orientacją
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C++SDK-v2.1.5.0
-    
+
 .. code-block:: c++
     :linenos:
 
 	/**
-	* @brief 开始奇异位姿保护
-	* @param [in] protectMode 奇异保护模式，0：关节模式；1-笛卡尔模式
-	* @param [in] minShoulderPos 肩奇异调整范围(mm), 默认100
-	* @param [in] minElbowPos 肘奇异调整范围(mm), 默认50
-	* @param [in] minWristPos 腕奇异调整范围(°), 默认10
-	* @return 错误码
+	* @brief Rozpoczęcie ochrony przed osobliwą pozą i orientacją
+	* @param [in] protectMode Tryb ochrony przed osobliwością, 0: tryb stawów; 1: tryb kartezjański
+	* @param [in] minShoulderPos Zakres regulacji osobliwości ramienia (mm), domyślnie 100
+	* @param [in] minElbowPos Zakres regulacji osobliwości łokcia (mm), domyślnie 50
+	* @param [in] minWristPos Zakres regulacji osobliwości nadgarstka (°), domyślnie 10
+	* @return Kod błędu
 	*/
 	errno_t SingularAvoidStart(int protectMode, double minShoulderPos, double minElbowPos, double minWristPos);
 
-停止奇异位姿保护
-++++++++++++++++++++++++++++++++++++++++++
+Zatrzymanie ochrony przed osobliwą pozą i orientacją
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C++SDK-v2.1.5.0
-    
+
 .. code-block:: c++
     :linenos:
 
 	/**
-	* @brief 停止奇异位姿保护
-	* @return 错误码
+	* @brief Zatrzymanie ochrony przed osobliwą pozą i orientacją
+	* @return Kod błędu
 	*/
 	errno_t SingularAvoidEnd();
 
-机器人奇异位姿保护代码示例
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Przykład kodu ochrony przed osobliwą pozą i orientacją robota
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
@@ -1702,71 +1702,71 @@ FIR滤波代码示例
          robot.CloseRPC();
          return 0;
      }
-    
-清空运动指令队列
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Wyczyszczenie kolejki instrukcji ruchu
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief 清空运动指令队列
-    * @return 错误码
+    * @brief Wyczyszczenie kolejki instrukcji ruchu
+    * @return Kod błędu
     */
     errno_t MotionQueueClear();
-        
-移动到相贯线起始点
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Przejazd do punktu początkowego linii przecięcia rur
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief 移动到相贯线起始点
-    * @param [in] mainPoint 主管6个示教点的笛卡尔位姿
-    * @param [in] mainExaxisPos 主管6个示教点扩展轴位置
-    * @param [in] piecePoint 辅管6个示教点的笛卡尔位姿
-    * @param [in] pieceExaxisPos 拼接管6个示教点扩展轴位置
-    * @param [in] extAxisFlag 是否启用扩展轴；0-不启用；1-启用
-    * @param [in] exaxisPos 起点扩展轴位置
-    * @param [in] tool 工具坐标系编号
-    * @param [in] wobj 工件坐标系编号
-    * @param [in] vel 速度百分比
-    * @param [in] acc 加速度百分比
-    * @param [in] ovl 速度缩放因子
-    * @param [in] oacc 加速度缩放因子
-    * @param [in] moveType 运动类型; 0-PTP；1-LIN
-    * @param [in] moveDirection 运动方向；0-顺时针；1-逆时针
-    * @param [in] offset 偏移量
-    * @return 错误码
+    * @brief Przejazd do punktu początkowego linii przecięcia rur
+    * @param [in] mainPoint Pozy i orientacje kartezjańskie 6 punktów nauczania rury głównej
+    * @param [in] mainExaxisPos Pozycje osi rozszerzonej dla 6 punktów nauczania rury głównej
+    * @param [in] piecePoint Pozy i orientacje kartezjańskie 6 punktów nauczania rury pomocniczej
+    * @param [in] pieceExaxisPos Pozycje osi rozszerzonej dla 6 punktów nauczania rury łączącej
+    * @param [in] extAxisFlag Czy włączyć oś rozszerzoną; 0-nie włączaj; 1-włącz
+    * @param [in] exaxisPos Pozycja osi rozszerzonej punktu początkowego
+    * @param [in] tool Numer układu współrzędnych narzędzia
+    * @param [in] wobj Numer układu współrzędnych obiektu
+    * @param [in] vel Procent prędkości
+    * @param [in] acc Procent przyspieszenia
+    * @param [in] ovl Współczynnik skalowania prędkości
+    * @param [in] oacc Współczynnik skalowania przyspieszenia
+    * @param [in] moveType Typ ruchu; 0-PTP; 1-LIN
+    * @param [in] moveDirection Kierunek ruchu; 0-zgodnie z ruchem wskazówek zegara; 1-przeciwnie do ruchu wskazówek zegara
+    * @param [in] offset Wartość przesunięcia
+    * @return Kod błędu
     */
     errno_t MoveToIntersectLineStart(DescPose mainPoint[6], ExaxisPos mainExaxisPos[6], DescPose piecePoint[6], ExaxisPos pieceExaxisPos[6], int extAxisFlag, ExaxisPos exaxisPos, int tool, int wobj, double vel, double acc, double ovl, double oacc, int moveType, int moveDirection, DescPose offset);
-            
-相贯线运动
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Ruch po linii przecięcia rur
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief 相贯线运动
-    * @param [in] mainPoint 主管6个示教点的笛卡尔位姿
-    * @param [in] mainExaxisPos 主管6个示教点扩展轴位置
-    * @param [in] piecePoint 辅管6个示教点的笛卡尔位姿
-    * @param [in] pieceExaxisPos 拼接管6个示教点扩展轴位置
-    * @param [in] extAxisFlag 是否启用扩展轴；0-不启用；1-启用
-    * @param [in] exaxisPos 起点扩展轴位置
-    * @param [in] tool 工具坐标系编号
-    * @param [in] wobj 工件坐标系编号
-    * @param [in] vel 速度百分比
-    * @param [in] acc 加速度百分比
-    * @param [in] ovl 速度缩放因子
-    * @param [in] oacc 加速度缩放因子
-    * @param [in] moveDirection 运动方向; 0-顺时针；1-逆时针
-    * @param [in] offset 偏移量
-    * @return 错误码
+    * @brief Ruch po linii przecięcia rur
+    * @param [in] mainPoint Pozy i orientacje kartezjańskie 6 punktów nauczania rury głównej
+    * @param [in] mainExaxisPos Pozycje osi rozszerzonej dla 6 punktów nauczania rury głównej
+    * @param [in] piecePoint Pozy i orientacje kartezjańskie 6 punktów nauczania rury pomocniczej
+    * @param [in] pieceExaxisPos Pozycje osi rozszerzonej dla 6 punktów nauczania rury łączącej
+    * @param [in] extAxisFlag Czy włączyć oś rozszerzoną; 0-nie włączaj; 1-włącz
+    * @param [in] exaxisPos Pozycja osi rozszerzonej punktu początkowego
+    * @param [in] tool Numer układu współrzędnych narzędzia
+    * @param [in] wobj Numer układu współrzędnych obiektu
+    * @param [in] vel Procent prędkości
+    * @param [in] acc Procent przyspieszenia
+    * @param [in] ovl Współczynnik skalowania prędkości
+    * @param [in] oacc Współczynnik skalowania przyspieszenia
+    * @param [in] moveDirection Kierunek ruchu; 0-zgodnie z ruchem wskazówek zegara; 1-przeciwnie do ruchu wskazówek zegara
+    * @param [in] offset Wartość przesunięcia
+    * @return Kod błędu
     */
     errno_t MoveIntersectLine(DescPose mainPoint[6], ExaxisPos mainExaxisPos[6], DescPose piecePoint[6], ExaxisPos pieceExaxisPos[6], int extAxisFlag, ExaxisPos exaxisPos[4], int tool, int wobj, double vel, double acc, double ovl, double oacc, int moveDirection, DescPose offset);
-                
-机器人相贯线运动代码示例
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Przykład kodu ruchu po linii przecięcia rur robota
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
@@ -1822,7 +1822,7 @@ FIR滤波代码示例
         double vel = 100.0;
         double acc = 100.0;
         double ovl = 12.0;
-        double oacc = 12.0; 
+        double oacc = 12.0;
         int moveType = 1;
         int moveDirection = 1;
         rtn = robot.MoveToIntersectLineStart(mainPoint, mainExaxisPos, piecePoint, pieceExaxisPos, extAxisFlag, exaxisPos[0], tool, wobj, vel, acc, ovl, oacc, moveType, moveDirection, offset);
@@ -1833,19 +1833,19 @@ FIR滤波代码示例
         return ;
     }
 
-原地空运动
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Ruch w miejscu (bez przemieszczania)
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief 原地空运动
-    * @return 错误码
+    * @brief Ruch w miejscu (bez przemieszczania)
+    * @return Kod błędu
     */
     errno_t MoveStationary();
 
-原地空运动代码示例
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Przykład kodu ruchu w miejscu
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
@@ -1872,34 +1872,34 @@ FIR滤波代码示例
         return 0;
     }
 
-定点摆动开始
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Rozpoczęcie wahadła punktowego
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief 定点摆动开始
-    * @param [in] weaveNum 摆动编号[0-7]
-    * @param [in] mode 0-工具坐标系；1-参考点
-    * @param [in] refPoint 参考点笛卡尔坐标[x,y,z,a,b,c]
-    * @param [in] weaveTime 摆动时间[s]
-    * @return 错误码
+    * @brief Rozpoczęcie wahadła punktowego
+    * @param [in] weaveNum Numer wahadła [0-7]
+    * @param [in] mode 0-układ współrzędnych narzędzia; 1-punkt odniesienia
+    * @param [in] refPoint Współrzędne kartezjańskie punktu odniesienia [x, y, z, a, b, c]
+    * @param [in] weaveTime Czas wahadła [s]
+    * @return Kod błędu
     */
     errno_t OriginPointWeaveStart(int weaveNum, int mode, DescPose refPoint, double weaveTime);
-    
-定点摆动结束
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Zakończenie wahadła punktowego
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief 定点摆动结束
-    * @return 错误码
+    * @brief Zakończenie wahadła punktowego
+    * @return Kod błędu
     */
     errno_t OriginPointWeaveEnd();
-        
-定点摆动的SDK代码示例
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Przykład kodu SDK dla wahadła punktowego
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
@@ -1933,8 +1933,8 @@ FIR滤波代码示例
         return 0;
     }
 
-定点摆动(包含激光传感器及扩展轴)代码示例
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Przykład kodu wahadła punktowego (z czujnikiem laserowym i osią rozszerzoną)
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
@@ -1972,12 +1972,12 @@ FIR滤波代码示例
         robot.LaserTrackingTrackOnOff(1, 4);
         robot.Sleep(200);
         robot.OriginPointWeaveStart(0, 0, refPoint, 10);
-        robot.MoveStationary();  
+        robot.MoveStationary();
         robot.OriginPointWeaveEnd();
         robot.LaserTrackingTrackOnOff(0, 4);
 
         robot.Sleep(2000);      
-    
+
         robot.ExtAxisMove(epos1, 100, -1);
         robot.LaserTrackingTrackOnOff(1, 4);
         robot.OriginPointWeaveStart(0, 0, refPoint, 20);
@@ -1989,28 +1989,28 @@ FIR滤波代码示例
         return 0;
     }
 
-关节空间速度伺服模式运动
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Ruch w trybie serwo prędkościowym w przestrzeni stawów
++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief 关节空间速度伺服模式运动
-    * @param [in] joint_pos 6个目标关节速度,单位deg/s
-    * @param [in] axisPos 4个外部轴速度,单位deg/s
-    * @param [in] acc 加速度百分比，范围[0~100],暂不开放，默认为0
-    * @param [in] vel 速度百分比，范围[0~100]，暂不开放，默认为0
-    * @param [in] cmdT 指令下发周期，单位s，建议范围[0.001~0.0016]
-    * @param [in] filterT 滤波时间，单位s，暂不开放，默认为0
-    * @param [in] gain 目标位置的比例放大器，暂不开放，默认为0
-    * @param [in] id servoJ指令ID,默认为0
-    * @param[in] comType 指令下发类型；0-xmlrpc；1-UDP(对应机器人20007端口)
-    * @return 错误码
+    * @brief Ruch w trybie serwo prędkościowym w przestrzeni stawów
+    * @param [in] jointVel 6 docelowych prędkości stawów, jednostka deg/s
+    * @param [in] axisVel 4 prędkości osi zewnętrznych, jednostka deg/s
+    * @param [in] acc Procent przyspieszenia, zakres [0~100], tymczasowo niedostępne, domyślnie 0
+    * @param [in] vel Procent prędkości, zakres [0~100], tymczasowo niedostępne, domyślnie 0
+    * @param [in] cmdT Okres wysyłania instrukcji, jednostka s, zalecany zakres [0.001~0.0016]
+    * @param [in] filterT Czas filtracji, jednostka s, tymczasowo niedostępny, domyślnie 0
+    * @param [in] gain Wzmacniacz proporcjonalności pozycji docelowej, tymczasowo niedostępny, domyślnie 0
+    * @param [in] id ID instrukcji servoJ, domyślnie 0
+    * @param[in] comType Typ wysyłania instrukcji; 0-xmlrpc; 1-UDP (odpowiadający portowi 20007 robota)
+    * @return Kod błędu
     */
     errno_t ServoJV(double jointVel[6], double exisVel[4], float acc, float vel, float cmdT, float filterT, float gain, int id = 0, int comType = 0);
 
-关节空间速度伺服模式运动代码示例
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Przykład kodu ruchu w trybie serwo prędkościowym w przestrzeni stawów
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
@@ -2045,50 +2045,50 @@ FIR滤波代码示例
         return 0;
     }
 
-关节MIT控制开始
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Rozpoczęcie sterowania MIT stawów
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief 关节MIT控制开始
-    * @param [in] comType 指令下发类型；0-xmlrpc；1-UDP(对应机器人20007端口)
-    * @return 错误码
+    * @brief Rozpoczęcie sterowania MIT stawów
+    * @param [in] comType Typ wysyłania instrukcji; 0-xmlrpc; 1-UDP (odpowiadający portowi 20007 robota)
+    * @return Kod błędu
     */
     errno_t ServoMITStart(int comType = 0);
 
-关节MIT控制结束
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Zakończenie sterowania MIT stawów
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief 关节MIT控制结束
-    * @param [in] comType 指令下发类型；0-xmlrpc；1-UDP(对应机器人20007端口)
-    * @return 错误码
+    * @brief Zakończenie sterowania MIT stawów
+    * @param [in] comType Typ wysyłania instrukcji; 0-xmlrpc; 1-UDP (odpowiadający portowi 20007 robota)
+    * @return Kod błędu
     */
     errno_t ServoMITEnd(int comType = 0);
 
-关节MIT控制
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Sterowanie MIT stawów
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief 关节MIT控制
-    * @param [in] posGain j1~j6关节位置增益
-    * @param [in] desPos j1~j6关节期望位置 单位:deg
-    * @param [in] velGain j1~j6关节速度增益
-    * @param [in] desVel j1~j6关节期望速度 单位:deg/s
-    * @param [in] torque_ff j1~j6前馈力矩 单位:Nm
-    * @param [in] interval 指令周期，单位s，范围[0.001~0.008]
-    * @param [in] comType 指令下发类型；0-xmlrpc；1-UDP(对应机器人20007端口)
-    * @return 错误码
+    * @brief Sterowanie MIT stawów
+    * @param [in] posGain Wzmocnienie pozycji stawów j1~j6
+    * @param [in] desPos Oczekiwana pozycja stawów j1~j6, jednostka: deg
+    * @param [in] velGain Wzmocnienie prędkości stawów j1~j6
+    * @param [in] desVel Oczekiwana prędkość stawów j1~j6, jednostka: deg/s
+    * @param [in] torque_ff Moment wyprzedzający j1~j6, jednostka: Nm
+    * @param [in] interval Okres instrukcji, jednostka s, zakres [0.001~0.008]
+    * @param [in] comType Typ wysyłania instrukcji; 0-xmlrpc; 1-UDP (odpowiadający portowi 20007 robota)
+    * @return Kod błędu
     */
     errno_t ServoMIT(double posGain[6], double desPos[6], double velGain[6], double desVel[6], double torque_ff[6], double interval, int comType = 0);
 
-机器人关节MIT控制代码示例
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Przykład kodu sterowania MIT stawów robota
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 

@@ -1,6 +1,6 @@
-FRLUA编程脚本
-=======================
+Skrypt programowania FRLUA
+===========================
 
-PDF下载
+Pobieranie PDF
 ------------------
-    :download:`FRLua编程脚本用户手册 <../_static/_doc/FRLua programming script user manual.pdf>`
+    :download:`Instrukcja użytkownika skryptu programowania FRLua <../_static/_doc/FRLua programming script user manual.pdf>`

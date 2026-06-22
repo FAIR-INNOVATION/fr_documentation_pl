@@ -1,50 +1,50 @@
-术语
-========
+Terminologia
+============
 
 .. toctree:: 
 	:maxdepth: 5
 
 
-**停止类别**：
+**Kategoria zatrzymania**:
 
-- **0类停机**：当机器人的电源被切断后，机器人立刻停止工作。这是不可控的停止，由于每个关节会以最快的速度制动，因此机器人可能偏离程序设定的路径。当超过安全评定极限，或当控制系统的安全评定部分出现错误的情况下方可使用这种保护性停止。要了解更多信息，请参阅ENISO13850:2008或IEC60204-1:2006。
-- **1类停机**：当为机器人供电使其停止时，机器人就停止，当机器人实现停止后切断电源。这是可控性停止，机器人会遵循程序编制的路径。一秒钟之后或一旦机器人停稳后就将电源切断。要了解更多信息，请参阅ENISO13850:2008或IEC60204-1:2006。
-- **2类停机**：机器人通电时的可控性停止。机器人在一秒钟时间内停止所有动作。安全评定控制系统的操控可使机器人停留在停止的位置。要了解更多信息，请参阅IEC60204-1:2006。
+- **Zatrzymanie kategorii 0**: Po odcięciu zasilania robota, robot natychmiast zatrzymuje działanie. Jest to zatrzymanie niekontrolowane. Ponieważ każdy staw jest hamowany z maksymalną prędkością, robot może odbiegać od zaprogramowanej ścieżki. Tego typu zatrzymania ochronnego można używać tylko po przekroczeniu granic oceny bezpieczeństwa lub gdy wystąpi błąd w części systemu sterowania odpowiedzialnej za ocenę bezpieczeństwa. Aby uzyskać więcej informacji, patrz EN ISO 13850:2008 lub IEC 60204-1:2006.
+- **Zatrzymanie kategorii 1**: Robot zatrzymuje się, gdy zasilanie jest nadal dostarczane, a po osiągnięciu zatrzymania zasilanie jest odcinane. Jest to zatrzymanie kontrolowane, robot podąża zaprogramowaną ścieżką. Zasilanie jest odcinane po jednej sekundzie lub gdy robot całkowicie się zatrzyma. Aby uzyskać więcej informacji, patrz EN ISO 13850:2008 lub IEC 60204-1:2006.
+- **Zatrzymanie kategorii 2**: Kontrolowane zatrzymanie przy zasilonym robocie. Robot zatrzymuje wszystkie ruchy w ciągu jednej sekundy. Sterowanie systemem oceny bezpieczeństwa umożliwia utrzymanie robota w pozycji zatrzymania. Aby uzyskać więcej informacji, patrz IEC 60204-1:2006.
 
-**诊断覆盖率（DC）**：用于衡量为了达到评定的性能等级而实施的诊断的有效性。要了解更多信息，请参阅ENISO13849-1:2008。
+**Pokrycie diagnostyczne (DC)**: Służy do pomiaru skuteczności diagnostyki wdrożonej w celu osiągnięcia ocenianego poziomu wydajności. Aby uzyskać więcej informacji, patrz EN ISO 13849-1:2008.
 
-**集成商**：集成商即设计机器人最终安装的机构。集成商负责进行最终风险评估，必须确保最终安装遵循当地的法律法规。
+**Integrator**: Integrator to podmiot projektujący ostateczną instalację robota. Integrator jest odpowiedzialny za przeprowadzenie końcowej oceny ryzyka i musi zapewnić, że końcowa instalacja jest zgodna z lokalnymi przepisami i normami.
 
-**平均危险失效时间（MTTFd）**：平均危险失效时间（MTTFd）指的是为了达到评定的性能等级而进行计算和检测所得的值。要了解更多信息，请参阅ENISO13849-1:2008。
+**Średni czas do uszkodzenia niebezpiecznego (MTTFd)**: Średni czas do uszkodzenia niebezpiecznego (MTTFd) to wartość obliczona i zmierzona w celu osiągnięcia ocenianego poziomu wydajności. Aby uzyskać więcej informacji, patrz EN ISO 13849-1:2008.
 
-**风险评估**：风险评估即识别所有风险并将风险降低到适当程度的整个过程。风险评估应进行记录存档。详情请参考ISO12100。
+**Ocena ryzyka**: Ocena ryzyka to cały proces identyfikacji wszystkich zagrożeń i redukcji ryzyka do odpowiedniego poziomu. Ocena ryzyka powinna być udokumentowana. Więcej informacji można znaleźć w normie ISO 12100.
 
-**性能等级**：性能等级（Performance Level,PL）是一个分离的等级，它用于说明控制系统中各个与安全相关的部分在可预测的条件下执行安全功能的能力。PLd是第二高的可信度分类，它意味着安全功能相当值得信赖。要了解更多信息，请参阅EN ISO13849-1:2008。
+**Poziom wydajności**: Poziom wydajności (Performance Level, PL) to odrębny poziom, który opisuje zdolność poszczególnych części systemu sterowania związanych z bezpieczeństwem do wykonywania funkcji bezpieczeństwa w przewidywalnych warunkach. PLd to drugi najwyższy poziom wiarygodności, oznaczający, że funkcja bezpieczeństwa jest dość wiarygodna. Aby uzyskać więcej informacji, patrz EN ISO 13849-1:2008.
 
-**连接法兰**：用于连接外部工具的结构，一般称为法兰盘。
+**Kołnierz przyłączeniowy**: Struktura służąca do podłączenia zewnętrznego narzędzia, powszechnie nazywana kołnierzem.
 
-**机器人末端**：机器人最后一个轴或连接法兰的中心点。
+**Końcówka robota**: Ostatnia oś robota lub punkt środkowy kołnierza przyłączeniowego.
 
-**工具中心点（TCP）**：工具中心点即机器人工具的特征点，是机器人系统的控点，出厂时默认于最后一个运动轴或连接法兰的中心。每个工具的工具中心点都包含相对于工具输出法兰中心而设定的转换和旋转。位置坐标X、Y、Z决定了工具中心点的位置，RX、RY、RZ决定了工具中心的方向。当其值均为零时，工具中心与连接法兰中心点重合。
+**Środkowy punkt narzędzia (TCP)**: Środkowy punkt narzędzia to charakterystyczny punkt narzędzia robota, punkt sterujący systemu robotycznego. Domyślnie znajduje się on w środku ostatniej osi ruchu lub kołnierza przyłączeniowego. Dla każdego narzędzia, jego środkowy punkt narzędzia zawiera przesunięcie i obrót określone względem środka wyjściowego kołnierza narzędzia. Współrzędne położenia X, Y, Z określają położenie środkowego punktu narzędzia, a RX, RY, RZ określają jego kierunek. Gdy wszystkie ich wartości wynoszą zero, środkowy punkt narzędzia pokrywa się ze środkiem kołnierza przyłączeniowego.
 
-**工具位姿点（TCF）**：在工具中心点TCP的基础上，反应工具坐标系相对于末端连杆坐标系的姿态。
+**Punkt położenia i orientacji narzędzia (TCF)**: W oparciu o środkowy punkt narzędzia TCP, odzwierciedla orientację układu współrzędnych narzędzia względem układu współrzędnych końcowego ogniwa.
 
-**基坐标系**：基坐标系的原点一般定义在机器人第一轴与安装面的中心点，x轴向前，在轴向上，y轴按右手规则确定。
+**Podstawowy układ współrzędnych**: Początek podstawowego układu współrzędnych jest zwykle definiowany w punkcie środkowym między pierwszą osią robota a powierzchnią montażową. Oś X jest skierowana do przodu, w kierunku osiowym, a oś Y jest określana zgodnie z regułą prawej ręki.
 
-**世界坐标系**：建立在工作单元或工作站中的固定坐标系。当只有一个机器人时，该坐标系可认为与基坐标系重合；当有多个机器人或外部设备时，世界坐标系可为这些设备提供一个唯一的参考系，在满足方便标定其他设备的坐标系前提下，其具体位置可以任意指定。
+**Światowy układ współrzędnych**: Stały układ współrzędnych zbudowany w komórce roboczej lub na stanowisku roboczym. Gdy jest tylko jeden robot, układ ten można uznać za pokrywający się z podstawowym układem współrzędnych. Gdy jest wiele robotów lub urządzeń zewnętrznych, światowy układ współrzędnych może stanowić unikalny układ odniesienia dla tych urządzeń. Pod warunkiem, że spełnia on wygodę kalibracji układów współrzędnych innych urządzeń, jego konkretne położenie może być określone dowolnie.
 
-**关节坐标系**：关节坐标系是机器人关节中的坐标系，在关节坐标系下，机器人各轴均可实现在限位范围内的单独的正向或反向运动。适用于需要对机器人进行大范围的运动且不要求机器人TCP姿态。机器人手动模式下的单轴点动就是在关节坐标系下进行的。
+**Stawowy układ współrzędnych**: Stawowy układ współrzędnych to układ współrzędnych w stawach robota. W stawowym układzie współrzędnych każda oś robota może poruszać się niezależnie w kierunku dodatnim lub ujemnym w zakresie ograniczeń. Nadaje się do sytuacji, gdy wymagany jest ruch robota na dużą skalę bez konieczności zachowania orientacji TCP robota. Jednoosiowe punktowanie w trybie ręcznym robota jest wykonywane właśnie w stawowym układzie współrzędnych.
 
-**工具坐标系**：用于定义工具中心点的位置和工具姿态的坐标系，未定义时，工具坐标系默认在连接法兰的中心处。安装工具后，TCP将发生变化，变为工具末端的中心。
+**Układ współrzędnych narzędzia**: Układ współrzędnych używany do określenia położenia środkowego punktu narzędzia i orientacji narzędzia. Gdy nie jest zdefiniowany, domyślny układ współrzędnych narzędzia znajduje się w środku kołnierza przyłączeniowego. Po zamontowaniu narzędzia TCP zmienia się, przesuwając się do środka końcówki narzędzia.
 
-**外部工具坐标系**：用于定义固定在机器人外部的工具位姿的坐标系。
+**Zewnętrzny układ współrzędnych narzędzia**: Układ współrzędnych używany do określenia położenia i orientacji narzędzia zamocowanego na zewnątrz robota.
 
-**扩展轴**：除去机器人本体上的轴，为了工作需要额外增加的轴，扩展轴主要包含滑轨，翻转台和外加伺服设备等类型。
+**Oś rozszerzona**: Oprócz osi na samym korpusie robota, dodatkowe osie dodawane w celu spełnienia wymagań pracy. Oś rozszerzona obejmuje głównie takie typy, jak szyny przesuwne, stoły obrotowe i dodatkowe urządzenia serwonapędowe.
 
-**手动模式**：在该模式下，机器人的所有运动均由用户手动控制，并且安全光栅、安全门等外部安全设施不起作用，以便近距离调试。
+**Tryb ręczny**: W tym trybie wszystkie ruchy robota są ręcznie sterowane przez użytkownika, a zewnętrzne urządzenia zabezpieczające, takie jak kurtyny świetlne i drzwi bezpieczeństwa, nie działają, aby umożliwić bliskie debugowanie.
 
-**自动模式**：该模式一般用于机器人运行示教程序，此时外部安全设施启用。
+**Tryb automatyczny**: Ten tryb jest zwykle używany do uruchamiania programów nauczania robota, a zewnętrzne urządzenia zabezpieczające są włączone.
 
-**重复定位精度**：机器人在同一条件下，用同一方法操作时，重复n次所测得的位置与姿态的一致程度。
+**Powtarzalność pozycjonowania**: Stopień zgodności pozycji i orientacji mierzonych w n powtórzeniach, gdy robot jest obsługiwany w tych samych warunkach i tą samą metodą.
 
-**示教器**：对机器人进行编程或使机器人运动，并与控制系统相连接的手持式单元。
+**Panel operatorski**: Ręczna jednostka używana do programowania robota lub poruszania nim, połączona z systemem sterowania.

@@ -1,208 +1,208 @@
-示教器
-===============
+Panel operatorski
+=================
 
 .. toctree:: 
    :maxdepth: 6
 
-示教器启用
--------------------
+Włączanie panelu operatorskiego
+-------------------------------
 
-1. 控制箱连接示教器，并启动。
+1. Podłącz panel operatorski do skrzynki sterowniczej i uruchom.
 
-2. 登录账号admin，密码123。进入页面，点击系统设置-通用设置，确认示教器为启用状态。
+2. Zaloguj się przy użyciu nazwy użytkownika admin i hasła 123. Po wejściu na stronę kliknij Ustawienia systemowe - Ustawienia ogólne i upewnij się, że panel operatorski jest włączony.
 
 .. image:: teach_pendant/001.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 16.1‑1 示教器启用状态
+.. centered:: Wykres 16.1‑1 Stan włączenia panelu operatorskiego
 
-示教器多语言设置
---------------------
+Ustawienia wielojęzyczne panelu operatorskiego
+----------------------------------------------
 
-1. 在登录界面（或首次激活界面均可设置），在右上角进行语言选择。
+1. Na ekranie logowania (lub na ekranie pierwszej aktywacji) wybierz język w prawym górnym rogu.
 
 .. image:: teaching_pendant_software/062.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 16.2‑1 激活界面设置语言
+.. centered:: Wykres 16.2‑1 Ustawianie języka na ekranie aktywacji
 
 .. image:: teaching_pendant_software/063.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 16.2‑2 登录界面设置语言
+.. centered:: Wykres 16.2‑2 Ustawianie języka na ekranie logowania
 
-2. 以登录界面设置多语言为例，选择语言。出现以下提示（对应不同语言）即为设置成功，重启控制箱完成语言设置。
+2. Na przykładzie ustawiania języka na ekranie logowania, wybierz język. Pojawienie się następującego komunikatu (w odpowiednim języku) oznacza pomyślne ustawienie. Uruchom ponownie skrzynkę sterowniczą, aby zakończyć ustawianie języka.
 
 .. image:: teach_pendant/004.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 16.2‑3 设置中文
+.. centered:: Wykres 16.2‑3 Ustawianie języka chińskiego
 
 .. image:: teach_pendant/005.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 16.2‑4 设置英文
+.. centered:: Wykres 16.2‑4 Ustawianie języka angielskiego
 
-输入法切换
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Przełączanie metody wprowadzania
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-默认输入法为英文输入法。
+Domyślną metodą wprowadzania jest angielska metoda wprowadzania.
 
-1. 打开右下角软键盘，点击输入框，例如点击用户名输入框。
+1. Otwórz klawiaturę ekranową w prawym dolnym rogu i kliknij pole wprowadzania, na przykład kliknij pole wprowadzania nazwy użytkownika.
 
-2. 切换中文拼音输入法。
+2. Przełącz na chińską metodę wprowadzania pinyin.
 
-点击两次CTRL键，按键状态变红色，点击空格进行选择输入法，以下为中文输入法。
+Kliknij dwukrotnie klawisz CTRL. Kolor klawisza zmieni się na czerwony. Kliknij spację, aby wybrać metodę wprowadzania. Poniżej przedstawiono chińską metodę wprowadzania.
 
 .. image:: teach_pendant/006.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 16.2‑5 中文拼音输入法
+.. centered:: Wykres 16.2‑5 Chińska metoda wprowadzania pinyin
 
-3. 切换英文输入法
+3. Przełącz na angielską metodę wprowadzania.
 
-点击两次CTRL键，按键状态变红色，点击空格进行选择输入法，以下为英文输入法。
+Kliknij dwukrotnie klawisz CTRL. Kolor klawisza zmieni się na czerwony. Kliknij spację, aby wybrać metodę wprowadzania. Poniżej przedstawiono angielską metodę wprowadzania.
 
 .. image:: teach_pendant/007.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 16.2‑6 英文输入法
+.. centered:: Wykres 16.2‑6 Angielska metoda wprowadzania
 
-登录成功后，系统会加载模型等数据，加载完毕后进入初始页面。
+Po pomyślnym zalogowaniu system załaduje model i inne dane. Po zakończeniu ładowania przejdzie do strony początkowej.
 
-示教器与webApp语言不一致
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Niezgodność języka między panelem operatorskim a aplikacją webową
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-启用示教器后，在登录界面会触发示教器与webApp语言校验，当示教器语言与webApp语言不一致时，出现以下提示。
+Po włączeniu panelu operatorskiego na ekranie logowania zostanie wyzwolona weryfikacja języka między panelem operatorskim a aplikacją webową. Gdy język panelu operatorskiego jest niezgodny z językiem aplikacji webowej, pojawi się następujący komunikat.
 
 .. image:: teach_pendant/008.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 16.2‑7 示教器与webApp语言不一致提示
+.. centered:: Wykres 16.2‑7 Komunikat o niezgodności języka między panelem operatorskim a aplikacją webową
 
-控制器及实体示教器IP重置功能
-----------------------------------------------------------------------------------
+Funkcja resetowania adresu IP kontrolera i fizycznego panelu operatorskiego
+----------------------------------------------------------------------------
 
-功能概述
+Omówienie funkcji
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-此次优化增加不同途径的控制器及实体示教器IP复位操作功能，主要通过以下操作可实现以下功能：
+Ta optymalizacja dodaje funkcje operacji resetowania adresu IP kontrolera i fizycznego panelu operatorskiego za pomocą różnych metod. Głównie poprzez następujące operacje można zrealizować następujące funkcje:
 
-- 1. 使用webrecovery界面可进行控制箱网卡0和网卡1的IP重置；
-- 2. 使用实体示教器F1自定义按键功能配置IP复位（长按10秒）可进行控制箱网卡0、网卡1以及实体示教器的IP重置；
-- 3. 使用实体示教器F2和F4组合按键，同时长按10秒，可以在实体示教器未登录时进行实体示教器设备的IP重置。
+- 1. Za pomocą interfejsu webrecovery można zresetować adres IP karty sieciowej 0 i karty sieciowej 1 skrzynki sterowniczej.
+- 2. Za pomocą funkcji konfigurowalnego przycisku F1 na fizycznym panelu operatorskim (przytrzymanie przez 10 sekund) można zresetować adres IP karty sieciowej 0, karty sieciowej 1 skrzynki sterowniczej oraz fizycznego panelu operatorskiego.
+- 3. Używając kombinacji przycisków F2 i F4 na fizycznym panelu operatorskim, przytrzymując je jednocześnie przez 10 sekund, można zresetować adres IP urządzenia fizycznego panelu operatorskiego, gdy nie jest on zalogowany.
 
 .. image:: teach_pendant/010.png
    :width: 5in
    :align: center
 
-.. centered:: 图表 16.3‑1 mini控制箱网口示意图
+.. centered:: Wykres 16.3‑1 Schemat portów sieciowych mini skrzynki sterowniczej
 
-Webrecovery界面IP重置
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Resetowanie adresu IP za pomocą interfejsu Webrecovery
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-使用8050端口登录webrecovery界面，如默认ip：192.168.57.2：8050登录，点击重置控制器IP‘重置’按钮，页面会进行二次弹窗确认，点击确定后再次点击重置控制器IP按钮以确认重置。
+Zaloguj się do interfejsu webrecovery przy użyciu portu 8050, na przykład pod domyślnym adresem IP: 192.168.57.2:8050. Kliknij przycisk „Resetuj” przy „Resetowaniu IP kontrolera”. Strona wyświetli okno dialogowe z prośbą o ponowne potwierdzenie. Po kliknięciu „OK” kliknij ponownie przycisk resetowania IP kontrolera, aby potwierdzić reset.
 
 .. image:: teach_pendant/011.png
    :width: 5in
    :align: center
 
-.. centered:: 图表 16.3‑2 Webrecovery界面IP重置功能
+.. centered:: Wykres 16.3‑2 Funkcja resetowania IP w interfejsie Webrecovery
 
-二次确认后会提示重启生效。重启后控制器网卡0 IP恢复为默认192.168.57.2，网卡1 IP恢复为默认192.168.58.2。
+Po ponownym potwierdzeniu pojawi się komunikat o konieczności ponownego uruchomienia, aby zmiany zaczęły obowiązywać. Po ponownym uruchomieniu IP karty sieciowej 0 kontrolera powróci do domyślnego 192.168.57.2, a IP karty sieciowej 1 powróci do domyślnego 192.168.58.2.
 
-实体示教器F1按键自定义IP重置
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Niestandardowe resetowanie IP za pomocą przycisku F1 na fizycznym panelu operatorskim
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-使用实体示教器F1按键自定义功能需先登录示教器界面进行F按键自定义功能进行配置，点击“系统设置”，点击“通用设置”，选择示教器模块，打开启用示教器开关，配置F1按键为重置IP（长按10秒），点击配置。
+Aby użyć funkcji niestandardowej przycisku F1 na fizycznym panelu operatorskim, należy najpierw zalogować się do interfejsu panelu operatorskiego i skonfigurować niestandardową funkcję przycisków F. Kliknij „Ustawienia systemowe”, kliknij „Ustawienia ogólne”, wybierz moduł panelu operatorskiego, włącz przełącznik włączania panelu operatorskiego, skonfiguruj przycisk F1 jako resetowanie IP (przytrzymanie przez 10 sekund), a następnie kliknij „Konfiguruj”.
 
 .. image:: teach_pendant/013.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 16.3‑3 实体示教器F1按键自定义IP重置
+.. centered:: Wykres 16.3‑3 Niestandardowe resetowanie IP za pomocą przycisku F1 na fizycznym panelu operatorskim
 
-此功能仅在实体示教器登录webapp时生效，长按F1按键10秒后会提示重启生效。重启后控制器网卡0 IP恢复为默认192.168.57.2，网卡1 IP恢复为默认192.168.58.2，实体示教器IP恢复为默认192.168.58.77。
+Ta funkcja działa tylko wtedy, gdy fizyczny panel operatorski jest zalogowany do aplikacji webowej. Po przytrzymaniu przycisku F1 przez 10 sekund pojawi się komunikat o konieczności ponownego uruchomienia, aby zmiany zaczęły obowiązywać. Po ponownym uruchomieniu IP karty sieciowej 0 kontrolera powróci do domyślnego 192.168.57.2, IP karty sieciowej 1 powróci do domyślnego 192.168.58.2, a IP fizycznego panelu operatorskiego powróci do domyślnego 192.168.58.77.
 
-实体示教器F2和F4组合按键IP重置
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Resetowanie adresu IP za pomocą kombinacji przycisków F2 i F4 na fizycznym panelu operatorskim
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-实体示教器设备提供IP重置功能，在未连接webapp情况下也可进行实体示教器IP复位。同时长按F2和F4组合按键10秒钟，可重置实体示教器IP，IP默认恢复为192.168.58.77。恢复后需要重新登录webapp，在系统设置-通用设置中，设置实体示教器IP为192.168.58.77，重启后重新建立示教器连接。
+Urządzenie fizycznego panelu operatorskiego zapewnia funkcję resetowania adresu IP. Resetowanie IP fizycznego panelu operatorskiego można przeprowadzić nawet bez połączenia z aplikacją webową. Jednoczesne przytrzymanie kombinacji przycisków F2 i F4 przez 10 sekund resetuje adres IP fizycznego panelu operatorskiego do domyślnego 192.168.58.77. Po przywróceniu należy ponownie zalogować się do aplikacji webowej, w Ustawienia systemowe - Ustawienia ogólne, ustawić adres IP fizycznego panelu operatorskiego na 192.168.58.77, a po ponownym uruchomieniu ponownie nawiązać połączenie z panelem operatorskim.
 
 .. image:: installation/060.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 16.3‑4 实体示教器F2和F4组合按键IP重置
+.. centered:: Wykres 16.3‑4 Resetowanie adresu IP za pomocą kombinacji przycisków F2 i F4 na fizycznym panelu operatorskim
 
-示教器按键自定义功能
-----------------------------------------------------------------------------------
+Funkcja niestandardowych przycisków panelu operatorskiego
+----------------------------------------------------------
 
-功能概述
+Omówienie funkcji
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-本文档旨在介绍如何使用示教器按键自定义功能。
+Niniejszy dokument ma na celu opisanie sposobu korzystania z funkcji niestandardowych przycisków panelu operatorskiego.
 
-操作说明
+Instrukcje użytkowania
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-功能配置
+Konfiguracja funkcji
 ++++++++++++++++++++++++++++++++++++++
 
-1. 打开访问并等陆webApp;
-   
-2. 点击左侧菜单栏“系统设置”-“通用设置”菜单进入示教器配置模块界面；
+1. Otwórz przeglądarkę, uzyskaj dostęp i zaloguj się do aplikacji webowej.
+
+2. Kliknij menu „Ustawienia systemowe” - „Ustawienia ogólne” na lewym pasku menu, aby przejść do interfejsu modułu konfiguracji panelu operatorskiego.
 
 .. image:: teach_pendant/013.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 16.4‑1 示教器按键功能配置界面
+.. centered:: Wykres 16.4‑1 Interfejs konfiguracji funkcji przycisków panelu operatorskiego
 
-3. 示教器启用后，包含钥匙自定义功能，F1-F4按键的功能配置。其中钥匙自定义功能可设置为拖动模式，F1-F4按键可配置重置IP(长按10秒)，一键清除报错，输出DO，使能切换及启动指定Lua程序。
+3. Po włączeniu panelu operatorskiego dostępna jest funkcja niestandardowa przełącznika kluczykowego oraz konfiguracja funkcji przycisków F1-F4. Funkcja niestandardowa przełącznika kluczykowego może być ustawiona jako tryb przeciągania. Przyciski F1-F4 można skonfigurować do resetowania IP (przytrzymanie przez 10 sekund), jednym kliknięciem usuwania błędów, wyjścia DO, przełączania załączania oraz uruchamiania określonego programu Lua.
 
-钥匙自定义设置为拖动
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Ustawienie niestandardowe przełącznika kluczykowego jako przeciąganie
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-1. 当钥匙自定义配置为拖动模式，且在登录WebApp时，示教器钥匙旋至自定义时，界面弹窗需确认当前负载，以防负载错误导致坠落；
+1. Gdy funkcja niestandardowa przełącznika kluczykowego jest ustawiona na tryb przeciągania, a użytkownik jest zalogowany do aplikacji webowej, gdy przełącznik kluczykowy panelu operatorskiego zostanie przekręcony do pozycji niestandardowej, pojawi się okno dialogowe z prośbą o potwierdzenie bieżącego obciążenia, aby zapobiec opadnięciu spowodowanemu błędem obciążenia.
 
 .. image:: installation/061.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 16.4‑2 示教器模式示例
+.. centered:: Wykres 16.4‑2 Przykład trybu panelu operatorskiego
 
-2. 确认负载设置正确后，点击确认，机器人进入拖动模式。
+2. Po potwierdzeniu, że ustawienie obciążenia jest prawidłowe, kliknij „Potwierdź”, a robot przejdzie w tryb przeciągania.
 
 .. image:: teach_pendant/014.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 16.4‑3 拖动模式设置前确认负载
+.. centered:: Wykres 16.4‑3 Potwierdzenie obciążenia przed przejściem do trybu przeciągania
 
-F1-F4按键功能自定义
+Niestandardowa funkcja przycisków F1-F4
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. image:: installation/060.png
    :width: 6in
    :align: center
    
-.. centered:: 图表 16.4‑4 示教器按键示例
+.. centered:: Wykres 16.4‑4 Przykład przycisków panelu operatorskiego
 
-1. **重置IP（长按10秒）功能**：配置后长按10秒后会提示重启生效。重启后控制器网卡0的IP恢复为默认192.168.57.2，网卡1的IP恢复为默认192.168.58.2，实体示教器IP恢复为默认192.168.58.77。
-   
-2. **一键清除报错功能**：在当界面出现报错提示时，按压对应功能F键，可清除报错。
-   
-3. **输出DO功能**：配置该功能且设置DO编号后，按压对应功能F键，可将当前DO编号对应状态切换。
-   
-4. **使能切换功能**：配置该功能后，按压对应功能F键，可当前使能状态。
-   
-5. **启动Lua程序**：配置该功能且设置Lua程序后，按压对应功能F键，机器人在自动模式下，即可自动运行所设置的Lua程序。 
+1. **Funkcja resetowania IP (przytrzymanie przez 10 sekund)**: Po skonfigurowaniu, przytrzymanie przez 10 sekund spowoduje wyświetlenie komunikatu o konieczności ponownego uruchomienia, aby zmiany zaczęły obowiązywać. Po ponownym uruchomieniu IP karty sieciowej 0 kontrolera powróci do domyślnego 192.168.57.2, IP karty sieciowej 1 powróci do domyślnego 192.168.58.2, a IP fizycznego panelu operatorskiego powróci do domyślnego 192.168.58.77.
+
+2. **Funkcja jednym kliknięciem usuwania błędów**: Gdy na ekranie pojawi się komunikat o błędzie, naciśnij odpowiedni przycisk F, aby usunąć błąd.
+
+3. **Funkcja wyjścia DO**: Po skonfigurowaniu tej funkcji i ustawieniu numeru DO, naciśnięcie odpowiedniego przycisku F spowoduje przełączenie stanu odpowiadającego numeru DO.
+
+4. **Funkcja przełączania załączania**: Po skonfigurowaniu tej funkcji naciśnięcie odpowiedniego przycisku F spowoduje przełączenie bieżącego stanu załączania.
+
+5. **Uruchomienie programu Lua**: Po skonfigurowaniu tej funkcji i ustawieniu programu Lua, naciśnięcie odpowiedniego przycisku F spowoduje, że robot w trybie automatycznym automatycznie uruchomi ustawiony program Lua.

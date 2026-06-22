@@ -1,10 +1,10 @@
-版本更新说明
-=================
+Notatki do wydania
+==================
 
-Frcapsys-v1.0.0更新内容：
+Zawartość aktualizacji Frcapsys-v1.0.0:
 
-- 首次发布；
+- Pierwsze wydanie;
 
-- Frcapsys后台环境及相关接口；
+- Środowisko backendu Frcapsys i powiązane interfejsy;
 
-- FrcapTools管理工具。
+- Narzędzie zarządzania FrcapTools.

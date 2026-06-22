@@ -1,52 +1,51 @@
-机器人运动
-============
+Ruch robota
+===========
 
 .. toctree:: 
     :maxdepth: 5
 
-
-jog点动
+Punktowanie JOG
 +++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /** 
-    * @brief jog 点动 
-    * @param [in] refType 点动类型：0-关节点动，2-基坐标系下点动，4-工具坐标系下点动，8-工件坐标系下点动 
-    * @param [in] nb 1-关节 1(或 x 轴)，2-关节 2(或 y 轴)，3-关节 3(或 z 轴)，4-关节4(或绕x轴旋转)，5-关节5(或绕y轴旋转)，6-关节6(或绕z轴旋转)
-    * @param [in] dir 0-负方向，1-正方向 
-    * @param [in] vel 速度百分比，[0~100] 
-    * @param [in] acc 加速度百分比， [0~100] 
-    * @param [in] max_dis 单次点动最大角度，单位[°]或距离，单位[mm] 
-    * @return 错误码 
+    * @brief Punktowanie JOG 
+    * @param [in] refType Typ punktowania: 0-punktowanie stawów, 2-punktowanie w podstawowym układzie współrzędnych, 4-punktowanie w układzie współrzędnych narzędzia, 8-punktowanie w układzie współrzędnych przedmiotu 
+    * @param [in] nb 1-staw 1 (lub oś x), 2-staw 2 (lub oś y), 3-staw 3 (lub oś z), 4-staw 4 (lub obrót wokół osi x), 5-staw 5 (lub obrót wokół osi y), 6-staw 6 (lub obrót wokół osi z)
+    * @param [in] dir 0-kierunek ujemny, 1-kierunek dodatni 
+    * @param [in] vel Procent prędkości, [0~100] 
+    * @param [in] acc Procent przyspieszenia, [0~100] 
+    * @param [in] max_dis Maksymalny kąt pojedynczego punktowania, jednostka [°] lub odległość, jednostka [mm] 
+    * @return Kod błędu 
     */ 
     int StartJOG(byte refType, byte nb, byte dir, float vel, float acc, float max_dis);
 
-jog点动减速停止
-+++++++++++++++++++++++++++++
+Zatrzymanie punktowania JOG z redukcją prędkości
+++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief  jog点动减速停止
-    * @param  [in]  ref  1-关节点动停止，3-基坐标系下点动停止，5-工具坐标系下点动停止，9-工件坐标系下点动停止
-    * @return  错误码
+    * @brief Zatrzymanie punktowania JOG z redukcją prędkości
+    * @param [in] stopType 1-zatrzymanie punktowania stawów, 3-zatrzymanie punktowania w podstawowym układzie współrzędnych, 5-zatrzymanie punktowania w układzie współrzędnych narzędzia, 9-zatrzymanie punktowania w układzie współrzędnych przedmiotu
+    * @return Kod błędu
     */
     int StopJOG(byte stopType);
 
-jog点动立即停止
-+++++++++++++++++++++++++++++
+Natychmiastowe zatrzymanie punktowania JOG
+++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief jog点动立即停止
-    * @return  错误码
+    * @brief Natychmiastowe zatrzymanie punktowania JOG
+    * @return Kod błędu
     */
     int ImmStopJOG(); 
 
-机器人点动控制代码示例
-++++++++++++++++++++++++++++
+Przykład kodu sterowania punktowaniem robota
+++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
@@ -56,10 +55,10 @@ jog点动立即停止
         robot.RPC("192.168.58.2"); 
 
         robot.SetSpeed(35);
-        robot.StartJOG(0, 1, 0, 15, 20.0f, 30.0f);   //单关节运动，StartJOG为非阻塞指令，运动状态下接收其他运动指令（包含StartJOG）会被丢弃
+        robot.StartJOG(0, 1, 0, 15, 20.0f, 30.0f);   // Ruch pojedynczego stawu, StartJOG jest instrukcją nieblokującą, inne instrukcje ruchu (w tym StartJOG) są odrzucane w stanie ruchu
         Thread.Sleep(1000);
-        robot.StopJOG(1);  //机器人单轴点动减速停止
-        //robot.ImmStopJOG();  //机器人单轴点动立即停止
+        robot.StopJOG(1);  // Zatrzymanie punktowania jednoosiowego robota z redukcją prędkości
+        //robot.ImmStopJOG();  // Natychmiastowe zatrzymanie punktowania jednoosiowego robota
         robot.StartJOG(0, 2, 1, 15, 20.0f, 30.0f);
         Thread.Sleep(1000);
         robot.ImmStopJOG();
@@ -76,10 +75,10 @@ jog点动立即停止
         Thread.Sleep(1000);
         robot.ImmStopJOG();
 
-        robot.StartJOG(2, 1, 0, 15, 20.0f, 30.0f);   //基坐标系下点动
+        robot.StartJOG(2, 1, 0, 15, 20.0f, 30.0f);   // Punktowanie w podstawowym układzie współrzędnych
         Thread.Sleep(1000);
-        robot.StopJOG(3);  //机器人单轴点动减速停止
-        //robot.ImmStopJOG();  //机器人单轴点动立即停止
+        robot.StopJOG(3);  // Zatrzymanie punktowania jednoosiowego robota z redukcją prędkości
+        //robot.ImmStopJOG();  // Natychmiastowe zatrzymanie punktowania jednoosiowego robota
         robot.StartJOG(2, 2, 1, 15, 20.0f, 30.0f);
         Thread.Sleep(1000);
         robot.ImmStopJOG();
@@ -96,10 +95,10 @@ jog点动立即停止
         Thread.Sleep(1000);
         robot.ImmStopJOG();
 
-        robot.StartJOG(4, 1, 0, 15, 20.0f, 30.0f);   //工具坐标系下点动
+        robot.StartJOG(4, 1, 0, 15, 20.0f, 30.0f);   // Punktowanie w układzie współrzędnych narzędzia
         Thread.Sleep(1000);
-        robot.StopJOG(5);  //机器人单轴点动减速停止
-        //robot.ImmStopJOG();  //机器人单轴点动立即停止
+        robot.StopJOG(5);  // Zatrzymanie punktowania jednoosiowego robota z redukcją prędkości
+        //robot.ImmStopJOG();  // Natychmiastowe zatrzymanie punktowania jednoosiowego robota
         robot.StartJOG(4, 2, 1, 15, 20.0f, 30.0f);
         Thread.Sleep(1000);
         robot.ImmStopJOG();
@@ -116,10 +115,10 @@ jog点动立即停止
         Thread.Sleep(1000);
         robot.ImmStopJOG();
 
-        robot.StartJOG(8, 1, 0, 15, 20.0f, 30.0f);   //工件坐标系下点动
+        robot.StartJOG(8, 1, 0, 15, 20.0f, 30.0f);   // Punktowanie w układzie współrzędnych przedmiotu
         Thread.Sleep(1000);
-        robot.StopJOG(9);  //机器人单轴点动减速停止
-        //robot.ImmStopJOG();  //机器人单轴点动立即停止
+        robot.StopJOG(9);  // Zatrzymanie punktowania jednoosiowego robota z redukcją prędkości
+        //robot.ImmStopJOG();  // Natychmiastowe zatrzymanie punktowania jednoosiowego robota
         robot.StartJOG(8, 2, 1, 15, 20.0f, 30.0f);
         Thread.Sleep(1000);
         robot.ImmStopJOG();
@@ -137,476 +136,475 @@ jog点动立即停止
         robot.ImmStopJOG();
     }
 
-关节空间运动
-+++++++++++++++++++++++++++++
-.. code-block:: c#
-    :linenos:
-
-    /**
-    * @brief  关节空间运动
-    * @param  [in] joint_pos  目标关节位置,单位deg
-    * @param  [in] desc_pos   目标笛卡尔位姿
-    * @param  [in] tool  工具坐标号，范围[0~14]
-    * @param  [in] user  工件坐标号，范围[0~14]
-    * @param  [in] vel  速度百分比，范围[0~100]
-    * @param  [in] acc  加速度百分比，范围[0~100],暂不开放
-    * @param  [in] ovl  速度缩放因子，范围[0~100]
-    * @param  [in] epos  扩展轴位置，单位mm
-    * @param  [in] blendT [-1.0]-运动到位(阻塞)，[0~500.0]-平滑时间(非阻塞)，单位ms
-    * @param  [in] offset_flag  0-不偏移，1-基坐标系/工件坐标系下偏移，2-工具坐标系下偏移
-    * @param  [in] offset_pos  位姿偏移量
-    * @return  错误码
-    */
-    int MoveJ(JointPos joint_pos, DescPose desc_pos, int tool, int user, float vel, float acc, float ovl, ExaxisPos epos, float blendT, byte offset_flag, DescPose offset_pos); 
-
-关节空间运动(自动正运动学计算)
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: C#SDK-V1.1.7  Web-3.8.5
-
-.. code-block:: c#
-    :linenos:
-
-    /** 
-    * @brief  关节空间运动(自动正运动学计算)
-    * @param  [in] joint_pos  目标关节位置,单位deg
-    * @param  [in] tool  工具坐标号，范围[0~14]
-    * @param  [in] user  工件坐标号，范围[0~14]
-    * @param  [in] vel  速度百分比，范围[0~100]
-    * @param  [in] acc  加速度百分比，范围[0~100],暂不开放
-    * @param  [in] ovl  速度缩放因子，范围[0~100]
-    * @param  [in] epos  扩展轴位置，单位mm
-    * @param  [in] blendT [-1.0]-运动到位(阻塞)，[0~500.0]-平滑时间(非阻塞)，单位ms
-    * @param  [in] offset_flag  0-不偏移，1-基坐标系/工件坐标系下偏移，2-工具坐标系下偏移
-    * @param  [in] offset_pos  位姿偏移量
-    * @return 错误码 
-    */ 
-    int MoveJ(JointPos joint_pos, int tool, int user, double vel, double acc, double ovl, ExaxisPos epos, double blendT, int offset_flag, DescPose offset_pos)
-
-
-笛卡尔空间直线运动
-+++++++++++++++++++++++++++++
-.. code-block:: c#
-    :linenos:
-
-    /**
-    * @brief 笛卡尔空间直线运动
-    * @param [in] joint_pos 目标关节位置,单位deg
-    * @param [in] desc_pos 目标笛卡尔位姿
-    * @param [in] tool 工具坐标号，范围[0~14]
-    * @param [in] user 工件坐标号，范围[0~14]
-    * @param [in] vel 速度百分比，范围[0~100]
-    * @param [in] acc 加速度百分比，范围[0~100],暂不开放
-    * @param [in] ovl 速度缩放因子[0~100]/物理速度(mm/s)
-    * @param [in] blendR [-1.0]-运动到位(阻塞)，[0~1000.0]-平滑半径(非阻塞)，单位mm
-    * @param [in] blendMode 过渡方式；0-内切过渡；1-角点过渡
-    * @param [in] epos 扩展轴位置，单位mm
-    * @param [in] search 0-不焊丝寻位，1-焊丝寻位
-    * @param [in] offset_flag 0-不偏移，1-基坐标系/工件坐标系下偏移，2-工具坐标系下偏移
-    * @param [in] offset_pos 位姿偏移量
-    * @param [in] oacc 加速度缩放因子[0-100]/物理加速度(mm/s2)
-    * @param [in] velAccParamMode 速度加速度参数模式；0-百分比；1-物理速度(mm/s)加速度(mm/s2)
-    * @param [in] overSpeedStrategy 超速处理策略，1-标准；2-超速时报错停止；3-自适应降速，默认为0
-    * @param [in] speedPercent 允许降速阈值百分比[0-100]，默认10%
-    * @return 错误码
-    */
-    public int MoveL(JointPos joint_pos, DescPose desc_pos, int tool, int user, float vel, float acc, float ovl, float blendR, int blendMode, ExaxisPos epos, int search, int offset_flag, DescPose offset_pos, float oacc, int velAccParamMode, int overSpeedStrategy = 0, int speedPercent = 10)
-
-笛卡尔空间直线运动(自动逆运动学计算)
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: C#SDK-V1.1.7  Web-3.8.5
-
-.. code-block:: c#
-    :linenos:
-
-    /**
-    * @brief  笛卡尔空间直线运动(自动逆运动学计算)
-    * @param [in] desc_pos   目标笛卡尔位姿
-    * @param [in] tool  工具坐标号，范围[1~15]
-    * @param [in] user  工件坐标号，范围[1~15]
-    * @param [in] vel  速度百分比，范围[0~100]
-    * @param [in] acc  加速度百分比，范围[0~100],暂不开放
-    * @param [in] ovl  速度缩放因子，范围[0~100]
-    * @param [in] blendR [-1.0]-运动到位(阻塞)，[0~1000.0]-平滑半径(非阻塞)，单位mm
-    * @param [in] blendMode 过渡方式；0-内切过渡；1-角点过渡
-    * @param [in] epos  扩展轴位置，单位mm
-    * @param [in] search  0-不焊丝寻位，1-焊丝寻位
-    * @param [in] offset_flag  0-不偏移，1-基坐标系/工件坐标系下偏移，2-工具坐标系下偏移
-    * @param [in] offset_pos  位姿偏移量
-    * @param [in] config 逆解关节空间配置，[-1]-参考当前关节位置解算，[0~7]-依据特定关节空间配置求解
-    * @param [in] overSpeedStrategy  超速处理策略，1-标准；2-超速时报错停止；3-自适应降速，默认为0
-    * @param [in] speedPercent  允许降速阈值百分比[0-100]，默认10%
-    * @return  错误码
-    */
-    int MoveL(DescPose desc_pos, int tool, int user, double vel, double acc, double ovl, double blendR, int blendMode, ExaxisPos epos, int search, int offset_flag, DescPose offset_pos, int config, int overSpeedStrategy, int speedPercent)
-
-笛卡尔空间直线运动（增加速度加速度参数模式velAccParamMode参数）
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: C#SDK-V1.1.7  Web-3.8.5
-
-.. code-block:: c#
-    :linenos:
-
-    /**
-    * @brief  笛卡尔空间直线运动（增加速度加速度参数模式velAccParamMode参数）
-    * @param  [in] joint_pos  目标关节位置,单位deg
-    * @param  [in] desc_pos   目标笛卡尔位姿
-    * @param  [in] tool  工具坐标号，范围[1~15]
-    * @param  [in] user  工件坐标号，范围[1~15]
-    * @param  [in] vel  速度百分比，范围[0~100]
-    * @param  [in] acc  加速度百分比，范围[0~100],暂不开放
-    * @param  [in] ovl  速度缩放因子，范围[0~100]
-    * @param  [in] blendR [-1.0]-运动到位(阻塞)，[0~1000.0]-平滑半径(非阻塞)，单位mm
-    * @param  [in] epos  扩展轴位置，单位mm
-    * @param  [in] search  0-不焊丝寻位，1-焊丝寻位
-    * @param  [in] offset_flag  0-不偏移，1-基坐标系/工件坐标系下偏移，2-工具坐标系下偏移
-    * @param  [in] offset_pos  位姿偏移量
-    * @param  [in] velAccParamMode 速度加速度参数模式；0-百分比；1-物理速度(mm/s)加速度(mm/s2)
-    * @param  [in] overSpeedStrategy  超速处理策略，1-标准；2-超速时报错停止；3-自适应降速，默认为0
-    * @param  [in] speedPercent  允许降速阈值百分比[0-100]，默认10%
-    * @return  错误码
-    */
-    public int MoveL(JointPos joint_pos, DescPose desc_pos, int tool, int user, double vel, double acc, double ovl, double blendR, ExaxisPos epos, int search, int offset_flag, DescPose offset_pos, int velAccParamMode, int overSpeedStrategy, int speedPercent)
-
-笛卡尔空间直线运动(重载函数1 增加blendMode)
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: C#SDK-V1.1.7  Web-3.8.5
-
-.. code-block:: c#
-    :linenos:
-
-    /**
-    * @brief  笛卡尔空间直线运动(重载函数1 增加blendMode)
-    * @param  [in] joint_pos  目标关节位置,单位deg
-    * @param  [in] desc_pos   目标笛卡尔位姿
-    * @param  [in] tool  工具坐标号，范围[1~15]
-    * @param  [in] user  工件坐标号，范围[1~15]
-    * @param  [in] vel  速度百分比，范围[0~100]
-    * @param  [in] acc  加速度百分比，范围[0~100],暂不开放
-    * @param  [in] ovl  速度缩放因子，范围[0~100]
-    * @param  [in] blendR [-1.0]-运动到位(阻塞)，[0~1000.0]-平滑半径(非阻塞)，单位mm
-    * @param  [in] blendMode 过渡方式；0-内切过渡；1-角点过渡
-    * @param  [in] epos  扩展轴位置，单位mm
-    * @param  [in] search  0-不焊丝寻位，1-焊丝寻位
-    * @param  [in] offset_flag  0-不偏移，1-基坐标系/工件坐标系下偏移，2-工具坐标系下偏移
-    * @param  [in] offset_pos  位姿偏移量
-    * @param  [in] velAccParamMode 速度加速度参数模式；0-百分比；1-物理速度(mm/s)加速度(mm/s2)
-    * @param  [in] overSpeedStrategy  超速处理策略，1-标准；2-超速时报错停止；3-自适应降速，默认为0
-    * @param  [in] speedPercent  允许降速阈值百分比[0-100]，默认10%
-    * @return  错误码
-    */
-    public int MoveL(JointPos joint_pos, DescPose desc_pos, int tool, int user, double vel, double acc, double ovl, double blendR, int blendMode, ExaxisPos epos, int search, int offset_flag, DescPose offset_pos, int velAccParamMode, int overSpeedStrategy, int speedPercent)
-
-笛卡尔空间直线运动(重载函数2 不需要输入关节位置)
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: C#SDK-V1.1.7  Web-3.8.5
-
-.. code-block:: c#
-    :linenos:
-
-    /**
-    * @brief  笛卡尔空间直线运动(重载函数2 不需要输入关节位置)
-    * @param  [in] desc_pos   目标笛卡尔位姿
-    * @param  [in] tool  工具坐标号，范围[1~15]
-    * @param  [in] user  工件坐标号，范围[1~15]
-    * @param  [in] vel  速度百分比，范围[0~100]
-    * @param  [in] acc  加速度百分比，范围[0~100],暂不开放
-    * @param  [in] ovl  速度缩放因子，范围[0~100]
-    * @param  [in] blendR [-1.0]-运动到位(阻塞)，[0~1000.0]-平滑半径(非阻塞)，单位mm
-    * @param  [in] blendMode 过渡方式；0-内切过渡；1-角点过渡
-    * @param  [in] epos  扩展轴位置，单位mm
-    * @param  [in] search  0-不焊丝寻位，1-焊丝寻位
-    * @param  [in] offset_flag  0-不偏移，1-基坐标系/工件坐标系下偏移，2-工具坐标系下偏移
-    * @param  [in] offset_pos  位姿偏移量
-    * @param  [in] config 逆解关节空间配置，[-1]-参考当前关节位置解算，[0~7]-依据特定关节空间配置求解
-    * @param  [in] velAccParamMode 速度加速度参数模式；0-百分比；1-物理速度(mm/s)加速度(mm/s2)
-    * @param  [in] overSpeedStrategy  超速处理策略，1-标准；2-超速时报错停止；3-自适应降速，默认为0
-    * @param  [in] speedPercent  允许降速阈值百分比[0-100]，默认10%
-    * @return  错误码
-    */
-    public int MoveL(DescPose desc_pos, int tool, int user, double vel, double acc, double ovl, double blendR, int blendMode, ExaxisPos epos, int search, int offset_flag, DescPose offset_pos, int config, int velAccParamMode, int overSpeedStrategy, int speedPercent)
-
-笛卡尔空间圆弧运动
-+++++++++++++++++++++++++++++
-.. code-block:: c#
-    :linenos:
-
-    /**
-    * @brief  笛卡尔空间圆弧运动
-    * @param  [in] joint_pos_p  路径点关节位置,单位deg
-    * @param  [in] desc_pos_p   路径点笛卡尔位姿
-    * @param  [in] ptool  工具坐标号，范围[0~14]
-    * @param  [in] puser  工件坐标号，范围[0~14]
-    * @param  [in] pvel  速度百分比，范围[0~100]
-    * @param  [in] pacc  加速度百分比，范围[0~100],暂不开放
-    * @param  [in] epos_p  扩展轴位置，单位mm
-    * @param  [in] poffset_flag  0-不偏移，1-基坐标系/工件坐标系下偏移，2-工具坐标系下偏移
-    * @param  [in] offset_pos_p  位姿偏移量
-    * @param  [in] joint_pos_t  目标点关节位置,单位deg
-    * @param  [in] desc_pos_t   目标点笛卡尔位姿
-    * @param  [in] ttool  工具坐标号，范围[0~14]
-    * @param  [in] tuser  工件坐标号，范围[0~14]
-    * @param  [in] tvel  速度百分比，范围[0~100]
-    * @param  [in] tacc  加速度百分比，范围[0~100],暂不开放
-    * @param  [in] epos_t  扩展轴位置，单位mm
-    * @param  [in] toffset_flag  0-不偏移，1-基坐标系/工件坐标系下偏移，2-工具坐标系下偏移
-    * @param  [in] offset_pos_t  位姿偏移量
-    * @param  [in] ovl  速度缩放因子[0~100]/物理速度(mm/s)
-    * @param  [in] blendR [-1.0]-运动到位(阻塞)，[0~1000.0]-平滑半径(非阻塞)，单位mm
-    * @param  [in] oacc 加速度缩放因子[0-100]/物理加速度(mm/s2)
-    * @param  [in] velAccParamMode 速度加速度参数模式；0-百分比；1-物理速度(mm/s)加速度(mm/s2)
-    * @return  错误码
-    */
-    public int MoveC(JointPos joint_pos_p, DescPose desc_pos_p, int ptool, int puser, float pvel, float pacc,ExaxisPos epos_p, int poffset_flag, DescPose offset_pos_p,JointPos joint_pos_t, DescPose desc_pos_t, int ttool, int tuser, float tvel, float tacc,ExaxisPos epos_t, int toffset_flag, DescPose offset_pos_t,float ovl, float blendR, float oacc, int velAccParamMode)
-
-笛卡尔空间圆弧运动(自动逆运动学计算)
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: C#SDK-V1.1.7  Web-3.8.5
-
-.. code-block:: c#
-    :linenos:
-
-    /**
-    * @brief  笛卡尔空间圆弧运动(自动逆运动学计算)
-    * @param [in] desc_pos_p   路径点笛卡尔位姿
-    * @param [in] ptool  工具坐标号，范围[1~15]
-    * @param [in] puser  工件坐标号，范围[1~15]
-    * @param [in] pvel  速度百分比，范围[0~100]
-    * @param [in] pacc  加速度百分比，范围[0~100],暂不开放
-    * @param [in] epos_p  扩展轴位置，单位mm
-    * @param [in] poffset_flag  0-不偏移，1-基坐标系/工件坐标系下偏移，2-工具坐标系下偏移
-    * @param [in] offset_pos_p  位姿偏移量
-    * @param [in] desc_pos_t   目标点笛卡尔位姿
-    * @param [in] ttool  工具坐标号，范围[1~15]
-    * @param [in] tuser  工件坐标号，范围[1~15]
-    * @param [in] tvel  速度百分比，范围[0~100]
-    * @param [in] tacc  加速度百分比，范围[0~100],暂不开放
-    * @param [in] epos_t  扩展轴位置，单位mm
-    * @param [in] toffset_flag  0-不偏移，1-基坐标系/工件坐标系下偏移，2-工具坐标系下偏移
-    * @param [in] offset_pos_t  位姿偏移量
-    * @param [in] ovl  速度缩放因子，范围[0~100]
-    * @param [in] blendR [-1.0]-运动到位(阻塞)，[0~1000.0]-平滑半径(非阻塞)，单位mm
-    * @param [in] config 逆解关节空间配置，[-1]-参考当前关节位置解算，[0~7]-依据特定关节空间配置求解
-    * @return  错误码
-    */
-    int MoveC(DescPose desc_pos_p, int ptool, int puser, double pvel, double pacc, ExaxisPos epos_p, int poffset_flag, DescPose offset_pos_p, DescPose desc_pos_t, int ttool, int tuser, double tvel, double tacc, ExaxisPos epos_t, int toffset_flag, DescPose offset_pos_t, double ovl, double blendR, int config)
-
-笛卡尔空间圆弧运动(增加速度加速度参数模式velAccParamMode参数)
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: C#SDK-V1.1.7  Web-3.8.5
-
-.. code-block:: c#
-    :linenos:
-
-    /**
-    * @brief  笛卡尔空间圆弧运动(增加速度加速度参数模式velAccParamMode参数)
-    * @param  [in] joint_pos_p  路径点关节位置,单位deg
-    * @param  [in] desc_pos_p   路径点笛卡尔位姿
-    * @param  [in] ptool  工具坐标号，范围[1~15]
-    * @param  [in] puser  工件坐标号，范围[1~15]
-    * @param  [in] pvel  速度百分比，范围[0~100]
-    * @param  [in] pacc  加速度百分比，范围[0~100],暂不开放
-    * @param  [in] epos_p  扩展轴位置，单位mm
-    * @param  [in] poffset_flag  0-不偏移，1-基坐标系/工件坐标系下偏移，2-工具坐标系下偏移
-    * @param  [in] offset_pos_p  位姿偏移量
-    * @param  [in] joint_pos_t  目标点关节位置,单位deg
-    * @param  [in] desc_pos_t   目标点笛卡尔位姿
-    * @param  [in] ttool  工具坐标号，范围[1~15]
-    * @param  [in] tuser  工件坐标号，范围[1~15]
-    * @param  [in] tvel  速度百分比，范围[0~100]
-    * @param  [in] tacc  加速度百分比，范围[0~100],暂不开放
-    * @param  [in] epos_t  扩展轴位置，单位mm
-    * @param  [in] toffset_flag  0-不偏移，1-基坐标系/工件坐标系下偏移，2-工具坐标系下偏移
-    * @param  [in] offset_pos_t  位姿偏移量
-    * @param  [in] ovl  速度缩放因子，范围[0~100]
-    * @param  [in] blendR [-1.0]-运动到位(阻塞)，[0~1000.0]-平滑半径(非阻塞)，单位mm
-    * @param  [in] velAccParamMode 速度加速度参数模式；0-百分比；1-物理速度(mm/s)加速度(mm/s2)
-    * @return  错误码
-    */
-    public int MoveC(JointPos joint_pos_p, DescPose desc_pos_p, int ptool, int puser, double pvel, double pacc, ExaxisPos epos_p, int poffset_flag, DescPose offset_pos_p, JointPos joint_pos_t, DescPose desc_pos_t, int ttool, int tuser, double tvel, double tacc, ExaxisPos epos_t, int toffset_flag, DescPose offset_pos_t, double ovl, double blendR, int velAccParamMode)
-
-笛卡尔空间圆弧运动(重载函数1 不需要输入关节位置)
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: C#SDK-V1.1.7  Web-3.8.5
-
-.. code-block:: c#
-    :linenos:
-
-    /**
-    * @brief  笛卡尔空间圆弧运动 (重载函数1 不需要输入关节位置)
-    * @param  [in] desc_pos_p   路径点笛卡尔位姿
-    * @param  [in] ptool  工具坐标号，范围[1~15]
-    * @param  [in] puser  工件坐标号，范围[1~15]
-    * @param  [in] pvel  速度百分比，范围[0~100]
-    * @param  [in] pacc  加速度百分比，范围[0~100],暂不开放
-    * @param  [in] epos_p  扩展轴位置，单位mm
-    * @param  [in] poffset_flag  0-不偏移，1-基坐标系/工件坐标系下偏移，2-工具坐标系下偏移
-    * @param  [in] offset_pos_p  位姿偏移量
-    * @param  [in] desc_pos_t   目标点笛卡尔位姿
-    * @param  [in] ttool  工具坐标号，范围[1~15]
-    * @param  [in] tuser  工件坐标号，范围[1~15]
-    * @param  [in] tvel  速度百分比，范围[0~100]
-    * @param  [in] tacc  加速度百分比，范围[0~100],暂不开放
-    * @param  [in] epos_t  扩展轴位置，单位mm
-    * @param  [in] toffset_flag  0-不偏移，1-基坐标系/工件坐标系下偏移，2-工具坐标系下偏移
-    * @param  [in] offset_pos_t  位姿偏移量
-    * @param  [in] ovl  速度缩放因子，范围[0~100]
-    * @param  [in] blendR [-1.0]-运动到位(阻塞)，[0~1000.0]-平滑半径(非阻塞)，单位mm
-    * @param  [in] config 逆解关节空间配置，[-1]-参考当前关节位置解算，[0~7]-依据特定关节空间配置求解
-    * @param  [in] velAccParamMode 速度加速度参数模式；0-百分比；1-物理速度(mm/s)加速度(mm/s2)
-    * @return  错误码
-    */
-    public int MoveC(DescPose desc_pos_p, int ptool, int puser, double pvel, double pacc, ExaxisPos epos_p, int poffset_flag, DescPose offset_pos_p, DescPose desc_pos_t, int ttool, int tuser, double tvel, double tacc, ExaxisPos epos_t, int toffset_flag, DescPose offset_pos_t, double ovl, double blendR, int config, int velAccParamMode)
-
-笛卡尔空间点到点运动
+Ruch w przestrzeni stawów
 ++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
+    /**
+    * @brief  Ruch w przestrzeni stawów
+    * @param  [in] joint_pos  Docelowa pozycja stawów, jednostka deg
+    * @param  [in] desc_pos   Docelowa pozycja i orientacja kartezjańska
+    * @param  [in] tool  Numer układu współrzędnych narzędzia, zakres [0~14]
+    * @param  [in] user  Numer układu współrzędnych przedmiotu, zakres [0~14]
+    * @param  [in] vel  Procent prędkości, zakres [0~100]
+    * @param  [in] acc  Procent przyspieszenia, zakres [0~100], tymczasowo nieudostępnione
+    * @param  [in] ovl  Współczynnik skalowania prędkości, zakres [0~100]
+    * @param  [in] epos  Pozycja osi rozszerzonej, jednostka mm
+    * @param  [in] blendT [-1.0]-ruch do pozycji (blokujący), [0~500.0]-czas wygładzenia (nieblokujący), jednostka ms
+    * @param  [in] offset_flag  0-brak przesunięcia, 1-przesunięcie w podstawowym układzie współrzędnych / układzie współrzędnych przedmiotu, 2-przesunięcie w układzie współrzędnych narzędzia
+    * @param  [in] offset_pos  Wartość przesunięcia pozycji i orientacji
+    * @return  Kod błędu
+    */
+    int MoveJ(JointPos joint_pos, DescPose desc_pos, int tool, int user, float vel, float acc, float ovl, ExaxisPos epos, float blendT, byte offset_flag, DescPose offset_pos); 
+
+Ruch w przestrzeni stawów (automatyczne obliczenie kinematyki prostej)
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C#SDK-V1.1.7  Web-3.8.5
+
+.. code-block:: c#
+    :linenos:
+
     /** 
-    * @brief 笛卡尔空间点到点运动 
-    * @param [in] desc_pos 基坐标系下目标笛卡尔位姿 
-    * @param [in] tool 工具坐标号，范围[0~14] 
-    * @param [in] user 工件坐标号，范围[0~14] 
-    * @param [in] vel 速度百分比，范围[0~100] 
-    * @param [in] acc 加速度百分比，范围[0~100],暂不开放 
-    * @param [in] ovl 速度缩放因子，范围[0~100] 
-    * @param [in] blendT [-1.0]-运动到位(阻塞)，[0~500.0]-平滑时间(非阻塞)，单位 ms 
-    * @param [in] config 关节空间配置，[-1]-参考当前关节位置解算，[0~7]-参考特定关节空间配置解算，默认为-1 
-    * @return 错误码 
+    * @brief  Ruch w przestrzeni stawów (automatyczne obliczenie kinematyki prostej)
+    * @param  [in] joint_pos  Docelowa pozycja stawów, jednostka deg
+    * @param  [in] tool  Numer układu współrzędnych narzędzia, zakres [0~14]
+    * @param  [in] user  Numer układu współrzędnych przedmiotu, zakres [0~14]
+    * @param  [in] vel  Procent prędkości, zakres [0~100]
+    * @param  [in] acc  Procent przyspieszenia, zakres [0~100], tymczasowo nieudostępnione
+    * @param  [in] ovl  Współczynnik skalowania prędkości, zakres [0~100]
+    * @param  [in] epos  Pozycja osi rozszerzonej, jednostka mm
+    * @param  [in] blendT [-1.0]-ruch do pozycji (blokujący), [0~500.0]-czas wygładzenia (nieblokujący), jednostka ms
+    * @param  [in] offset_flag  0-brak przesunięcia, 1-przesunięcie w podstawowym układzie współrzędnych / układzie współrzędnych przedmiotu, 2-przesunięcie w układzie współrzędnych narzędzia
+    * @param  [in] offset_pos  Wartość przesunięcia pozycji i orientacji
+    * @return Kod błędu 
+    */ 
+    int MoveJ(JointPos joint_pos, int tool, int user, double vel, double acc, double ovl, ExaxisPos epos, double blendT, int offset_flag, DescPose offset_pos)
+
+Ruch liniowy w przestrzeni kartezjańskiej
++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Ruch liniowy w przestrzeni kartezjańskiej
+    * @param [in] joint_pos Docelowa pozycja stawów, jednostka deg
+    * @param [in] desc_pos Docelowa pozycja i orientacja kartezjańska
+    * @param [in] tool Numer układu współrzędnych narzędzia, zakres [0~14]
+    * @param [in] user Numer układu współrzędnych przedmiotu, zakres [0~14]
+    * @param [in] vel Procent prędkości, zakres [0~100]
+    * @param [in] acc Procent przyspieszenia, zakres [0~100], tymczasowo nieudostępnione
+    * @param [in] ovl Współczynnik skalowania prędkości [0~100] / prędkość fizyczna (mm/s)
+    * @param [in] blendR [-1.0]-ruch do pozycji (blokujący), [0~1000.0]-promień wygładzenia (nieblokujący), jednostka mm
+    * @param [in] blendMode Sposób przejścia; 0-przejście styczne; 1-przejście narożne
+    * @param [in] epos Pozycja osi rozszerzonej, jednostka mm
+    * @param [in] search 0-brak pozycjonowania drutem spawalniczym, 1-pozycjonowanie drutem spawalniczym
+    * @param [in] offset_flag 0-brak przesunięcia, 1-przesunięcie w podstawowym układzie współrzędnych / układzie współrzędnych przedmiotu, 2-przesunięcie w układzie współrzędnych narzędzia
+    * @param [in] offset_pos Wartość przesunięcia pozycji i orientacji
+    * @param [in] oacc Współczynnik skalowania przyspieszenia [0-100] / przyspieszenie fizyczne (mm/s²)
+    * @param [in] velAccParamMode Tryb parametrów prędkości i przyspieszenia; 0-procent; 1-prędkość fizyczna (mm/s) przyspieszenie (mm/s²)
+    * @param [in] overSpeedStrategy Strategia obsługi przekroczenia prędkości, 1-standard; 2-zatrzymaj z błędem po przekroczeniu prędkości; 3-adaptacyjne zmniejszenie prędkości, domyślnie 0
+    * @param [in] speedPercent Dopuszczalny próg procentowy zmniejszenia prędkości [0-100], domyślnie 10%
+    * @return Kod błędu
+    */
+    public int MoveL(JointPos joint_pos, DescPose desc_pos, int tool, int user, float vel, float acc, float ovl, float blendR, int blendMode, ExaxisPos epos, int search, int offset_flag, DescPose offset_pos, float oacc, int velAccParamMode, int overSpeedStrategy = 0, int speedPercent = 10)
+
+Ruch liniowy w przestrzeni kartezjańskiej (automatyczne obliczenie kinematyki odwrotnej)
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C#SDK-V1.1.7  Web-3.8.5
+
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief  Ruch liniowy w przestrzeni kartezjańskiej (automatyczne obliczenie kinematyki odwrotnej)
+    * @param [in] desc_pos   Docelowa pozycja i orientacja kartezjańska
+    * @param [in] tool  Numer układu współrzędnych narzędzia, zakres [1~15]
+    * @param [in] user  Numer układu współrzędnych przedmiotu, zakres [1~15]
+    * @param [in] vel  Procent prędkości, zakres [0~100]
+    * @param [in] acc  Procent przyspieszenia, zakres [0~100], tymczasowo nieudostępnione
+    * @param [in] ovl  Współczynnik skalowania prędkości, zakres [0~100]
+    * @param [in] blendR [-1.0]-ruch do pozycji (blokujący), [0~1000.0]-promień wygładzenia (nieblokujący), jednostka mm
+    * @param [in] blendMode Sposób przejścia; 0-przejście styczne; 1-przejście narożne
+    * @param [in] epos  Pozycja osi rozszerzonej, jednostka mm
+    * @param [in] search  0-brak pozycjonowania drutem spawalniczym, 1-pozycjonowanie drutem spawalniczym
+    * @param [in] offset_flag  0-brak przesunięcia, 1-przesunięcie w podstawowym układzie współrzędnych / układzie współrzędnych przedmiotu, 2-przesunięcie w układzie współrzędnych narzędzia
+    * @param [in] offset_pos  Wartość przesunięcia pozycji i orientacji
+    * @param [in] config Konfiguracja przestrzeni stawów dla rozwiązania odwrotnego, [-1]-obliczenie z odniesieniem do bieżącej pozycji stawów, [0~7]-rozwiązanie zgodnie z określoną konfiguracją przestrzeni stawów
+    * @param [in] overSpeedStrategy  Strategia obsługi przekroczenia prędkości, 1-standard; 2-zatrzymaj z błędem po przekroczeniu prędkości; 3-adaptacyjne zmniejszenie prędkości, domyślnie 0
+    * @param [in] speedPercent  Dopuszczalny próg procentowy zmniejszenia prędkości [0-100], domyślnie 10%
+    * @return  Kod błędu
+    */
+    int MoveL(DescPose desc_pos, int tool, int user, double vel, double acc, double ovl, double blendR, int blendMode, ExaxisPos epos, int search, int offset_flag, DescPose offset_pos, int config, int overSpeedStrategy, int speedPercent)
+
+Ruch liniowy w przestrzeni kartezjańskiej (z dodanym parametrem trybu parametrów velAccParamMode)
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C#SDK-V1.1.7  Web-3.8.5
+
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief  Ruch liniowy w przestrzeni kartezjańskiej (z dodanym parametrem trybu parametrów velAccParamMode)
+    * @param  [in] joint_pos  Docelowa pozycja stawów, jednostka deg
+    * @param  [in] desc_pos   Docelowa pozycja i orientacja kartezjańska
+    * @param  [in] tool  Numer układu współrzędnych narzędzia, zakres [1~15]
+    * @param  [in] user  Numer układu współrzędnych przedmiotu, zakres [1~15]
+    * @param  [in] vel  Procent prędkości, zakres [0~100]
+    * @param  [in] acc  Procent przyspieszenia, zakres [0~100], tymczasowo nieudostępnione
+    * @param  [in] ovl  Współczynnik skalowania prędkości, zakres [0~100]
+    * @param  [in] blendR [-1.0]-ruch do pozycji (blokujący), [0~1000.0]-promień wygładzenia (nieblokujący), jednostka mm
+    * @param  [in] epos  Pozycja osi rozszerzonej, jednostka mm
+    * @param  [in] search  0-brak pozycjonowania drutem spawalniczym, 1-pozycjonowanie drutem spawalniczym
+    * @param  [in] offset_flag  0-brak przesunięcia, 1-przesunięcie w podstawowym układzie współrzędnych / układzie współrzędnych przedmiotu, 2-przesunięcie w układzie współrzędnych narzędzia
+    * @param  [in] offset_pos  Wartość przesunięcia pozycji i orientacji
+    * @param  [in] velAccParamMode Tryb parametrów prędkości i przyspieszenia; 0-procent; 1-prędkość fizyczna (mm/s) przyspieszenie (mm/s²)
+    * @param  [in] overSpeedStrategy  Strategia obsługi przekroczenia prędkości, 1-standard; 2-zatrzymaj z błędem po przekroczeniu prędkości; 3-adaptacyjne zmniejszenie prędkości, domyślnie 0
+    * @param  [in] speedPercent  Dopuszczalny próg procentowy zmniejszenia prędkości [0-100], domyślnie 10%
+    * @return  Kod błędu
+    */
+    public int MoveL(JointPos joint_pos, DescPose desc_pos, int tool, int user, double vel, double acc, double ovl, double blendR, ExaxisPos epos, int search, int offset_flag, DescPose offset_pos, int velAccParamMode, int overSpeedStrategy, int speedPercent)
+
+Ruch liniowy w przestrzeni kartezjańskiej (przeciążona funkcja 1 z dodanym blendMode)
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C#SDK-V1.1.7  Web-3.8.5
+
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief  Ruch liniowy w przestrzeni kartezjańskiej (przeciążona funkcja 1 z dodanym blendMode)
+    * @param  [in] joint_pos  Docelowa pozycja stawów, jednostka deg
+    * @param  [in] desc_pos   Docelowa pozycja i orientacja kartezjańska
+    * @param  [in] tool  Numer układu współrzędnych narzędzia, zakres [1~15]
+    * @param  [in] user  Numer układu współrzędnych przedmiotu, zakres [1~15]
+    * @param  [in] vel  Procent prędkości, zakres [0~100]
+    * @param  [in] acc  Procent przyspieszenia, zakres [0~100], tymczasowo nieudostępnione
+    * @param  [in] ovl  Współczynnik skalowania prędkości, zakres [0~100]
+    * @param  [in] blendR [-1.0]-ruch do pozycji (blokujący), [0~1000.0]-promień wygładzenia (nieblokujący), jednostka mm
+    * @param  [in] blendMode Sposób przejścia; 0-przejście styczne; 1-przejście narożne
+    * @param  [in] epos  Pozycja osi rozszerzonej, jednostka mm
+    * @param  [in] search  0-brak pozycjonowania drutem spawalniczym, 1-pozycjonowanie drutem spawalniczym
+    * @param  [in] offset_flag  0-brak przesunięcia, 1-przesunięcie w podstawowym układzie współrzędnych / układzie współrzędnych przedmiotu, 2-przesunięcie w układzie współrzędnych narzędzia
+    * @param  [in] offset_pos  Wartość przesunięcia pozycji i orientacji
+    * @param  [in] velAccParamMode Tryb parametrów prędkości i przyspieszenia; 0-procent; 1-prędkość fizyczna (mm/s) przyspieszenie (mm/s²)
+    * @param  [in] overSpeedStrategy  Strategia obsługi przekroczenia prędkości, 1-standard; 2-zatrzymaj z błędem po przekroczeniu prędkości; 3-adaptacyjne zmniejszenie prędkości, domyślnie 0
+    * @param  [in] speedPercent  Dopuszczalny próg procentowy zmniejszenia prędkości [0-100], domyślnie 10%
+    * @return  Kod błędu
+    */
+    public int MoveL(JointPos joint_pos, DescPose desc_pos, int tool, int user, double vel, double acc, double ovl, double blendR, int blendMode, ExaxisPos epos, int search, int offset_flag, DescPose offset_pos, int velAccParamMode, int overSpeedStrategy, int speedPercent)
+
+Ruch liniowy w przestrzeni kartezjańskiej (przeciążona funkcja 2 - nie wymaga wprowadzania pozycji stawów)
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C#SDK-V1.1.7  Web-3.8.5
+
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief  Ruch liniowy w przestrzeni kartezjańskiej (przeciążona funkcja 2 - nie wymaga wprowadzania pozycji stawów)
+    * @param  [in] desc_pos   Docelowa pozycja i orientacja kartezjańska
+    * @param  [in] tool  Numer układu współrzędnych narzędzia, zakres [1~15]
+    * @param  [in] user  Numer układu współrzędnych przedmiotu, zakres [1~15]
+    * @param  [in] vel  Procent prędkości, zakres [0~100]
+    * @param  [in] acc  Procent przyspieszenia, zakres [0~100], tymczasowo nieudostępnione
+    * @param  [in] ovl  Współczynnik skalowania prędkości, zakres [0~100]
+    * @param  [in] blendR [-1.0]-ruch do pozycji (blokujący), [0~1000.0]-promień wygładzenia (nieblokujący), jednostka mm
+    * @param  [in] blendMode Sposób przejścia; 0-przejście styczne; 1-przejście narożne
+    * @param  [in] epos  Pozycja osi rozszerzonej, jednostka mm
+    * @param  [in] search  0-brak pozycjonowania drutem spawalniczym, 1-pozycjonowanie drutem spawalniczym
+    * @param  [in] offset_flag  0-brak przesunięcia, 1-przesunięcie w podstawowym układzie współrzędnych / układzie współrzędnych przedmiotu, 2-przesunięcie w układzie współrzędnych narzędzia
+    * @param  [in] offset_pos  Wartość przesunięcia pozycji i orientacji
+    * @param  [in] config Konfiguracja przestrzeni stawów dla rozwiązania odwrotnego, [-1]-obliczenie z odniesieniem do bieżącej pozycji stawów, [0~7]-rozwiązanie zgodnie z określoną konfiguracją przestrzeni stawów
+    * @param  [in] velAccParamMode Tryb parametrów prędkości i przyspieszenia; 0-procent; 1-prędkość fizyczna (mm/s) przyspieszenie (mm/s²)
+    * @param  [in] overSpeedStrategy  Strategia obsługi przekroczenia prędkości, 1-standard; 2-zatrzymaj z błędem po przekroczeniu prędkości; 3-adaptacyjne zmniejszenie prędkości, domyślnie 0
+    * @param  [in] speedPercent  Dopuszczalny próg procentowy zmniejszenia prędkości [0-100], domyślnie 10%
+    * @return  Kod błędu
+    */
+    public int MoveL(DescPose desc_pos, int tool, int user, double vel, double acc, double ovl, double blendR, int blendMode, ExaxisPos epos, int search, int offset_flag, DescPose offset_pos, int config, int velAccParamMode, int overSpeedStrategy, int speedPercent)
+
+Ruch łukowy w przestrzeni kartezjańskiej
+++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief  Ruch łukowy w przestrzeni kartezjańskiej
+    * @param  [in] joint_pos_p  Pozycja stawów punktu pośredniego, jednostka deg
+    * @param  [in] desc_pos_p   Pozycja i orientacja kartezjańska punktu pośredniego
+    * @param  [in] ptool  Numer układu współrzędnych narzędzia, zakres [0~14]
+    * @param  [in] puser  Numer układu współrzędnych przedmiotu, zakres [0~14]
+    * @param  [in] pvel  Procent prędkości, zakres [0~100]
+    * @param  [in] pacc  Procent przyspieszenia, zakres [0~100], tymczasowo nieudostępnione
+    * @param  [in] epos_p  Pozycja osi rozszerzonej punktu pośredniego, jednostka mm
+    * @param  [in] poffset_flag  0-brak przesunięcia, 1-przesunięcie w podstawowym układzie współrzędnych / układzie współrzędnych przedmiotu, 2-przesunięcie w układzie współrzędnych narzędzia
+    * @param  [in] offset_pos_p  Wartość przesunięcia pozycji i orientacji
+    * @param  [in] joint_pos_t  Pozycja stawów punktu docelowego, jednostka deg
+    * @param  [in] desc_pos_t   Pozycja i orientacja kartezjańska punktu docelowego
+    * @param  [in] ttool  Numer układu współrzędnych narzędzia, zakres [0~14]
+    * @param  [in] tuser  Numer układu współrzędnych przedmiotu, zakres [0~14]
+    * @param  [in] tvel  Procent prędkości, zakres [0~100]
+    * @param  [in] tacc  Procent przyspieszenia, zakres [0~100], tymczasowo nieudostępnione
+    * @param  [in] epos_t  Pozycja osi rozszerzonej punktu docelowego, jednostka mm
+    * @param  [in] toffset_flag  0-brak przesunięcia, 1-przesunięcie w podstawowym układzie współrzędnych / układzie współrzędnych przedmiotu, 2-przesunięcie w układzie współrzędnych narzędzia
+    * @param  [in] offset_pos_t  Wartość przesunięcia pozycji i orientacji
+    * @param  [in] ovl  Współczynnik skalowania prędkości [0~100] / prędkość fizyczna (mm/s)
+    * @param  [in] blendR [-1.0]-ruch do pozycji (blokujący), [0~1000.0]-promień wygładzenia (nieblokujący), jednostka mm
+    * @param  [in] oacc Współczynnik skalowania przyspieszenia [0-100] / przyspieszenie fizyczne (mm/s²)
+    * @param  [in] velAccParamMode Tryb parametrów prędkości i przyspieszenia; 0-procent; 1-prędkość fizyczna (mm/s) przyspieszenie (mm/s²)
+    * @return  Kod błędu
+    */
+    public int MoveC(JointPos joint_pos_p, DescPose desc_pos_p, int ptool, int puser, float pvel, float pacc,ExaxisPos epos_p, int poffset_flag, DescPose offset_pos_p,JointPos joint_pos_t, DescPose desc_pos_t, int ttool, int tuser, float tvel, float tacc,ExaxisPos epos_t, int toffset_flag, DescPose offset_pos_t,float ovl, float blendR, float oacc, int velAccParamMode)
+
+Ruch łukowy w przestrzeni kartezjańskiej (automatyczne obliczenie kinematyki odwrotnej)
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C#SDK-V1.1.7  Web-3.8.5
+
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief  Ruch łukowy w przestrzeni kartezjańskiej (automatyczne obliczenie kinematyki odwrotnej)
+    * @param [in] desc_pos_p   Pozycja i orientacja kartezjańska punktu pośredniego
+    * @param [in] ptool  Numer układu współrzędnych narzędzia, zakres [1~15]
+    * @param [in] puser  Numer układu współrzędnych przedmiotu, zakres [1~15]
+    * @param [in] pvel  Procent prędkości, zakres [0~100]
+    * @param [in] pacc  Procent przyspieszenia, zakres [0~100], tymczasowo nieudostępnione
+    * @param [in] epos_p  Pozycja osi rozszerzonej punktu pośredniego, jednostka mm
+    * @param [in] poffset_flag  0-brak przesunięcia, 1-przesunięcie w podstawowym układzie współrzędnych / układzie współrzędnych przedmiotu, 2-przesunięcie w układzie współrzędnych narzędzia
+    * @param [in] offset_pos_p  Wartość przesunięcia pozycji i orientacji
+    * @param [in] desc_pos_t   Pozycja i orientacja kartezjańska punktu docelowego
+    * @param [in] ttool  Numer układu współrzędnych narzędzia, zakres [1~15]
+    * @param [in] tuser  Numer układu współrzędnych przedmiotu, zakres [1~15]
+    * @param [in] tvel  Procent prędkości, zakres [0~100]
+    * @param [in] tacc  Procent przyspieszenia, zakres [0~100], tymczasowo nieudostępnione
+    * @param [in] epos_t  Pozycja osi rozszerzonej punktu docelowego, jednostka mm
+    * @param [in] toffset_flag  0-brak przesunięcia, 1-przesunięcie w podstawowym układzie współrzędnych / układzie współrzędnych przedmiotu, 2-przesunięcie w układzie współrzędnych narzędzia
+    * @param [in] offset_pos_t  Wartość przesunięcia pozycji i orientacji
+    * @param [in] ovl  Współczynnik skalowania prędkości, zakres [0~100]
+    * @param [in] blendR [-1.0]-ruch do pozycji (blokujący), [0~1000.0]-promień wygładzenia (nieblokujący), jednostka mm
+    * @param [in] config Konfiguracja przestrzeni stawów dla rozwiązania odwrotnego, [-1]-obliczenie z odniesieniem do bieżącej pozycji stawów, [0~7]-rozwiązanie zgodnie z określoną konfiguracją przestrzeni stawów
+    * @return  Kod błędu
+    */
+    int MoveC(DescPose desc_pos_p, int ptool, int puser, double pvel, double pacc, ExaxisPos epos_p, int poffset_flag, DescPose offset_pos_p, DescPose desc_pos_t, int ttool, int tuser, double tvel, double tacc, ExaxisPos epos_t, int toffset_flag, DescPose offset_pos_t, double ovl, double blendR, int config)
+
+Ruch łukowy w przestrzeni kartezjańskiej (z dodanym parametrem trybu parametrów velAccParamMode)
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C#SDK-V1.1.7  Web-3.8.5
+
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief  Ruch łukowy w przestrzeni kartezjańskiej (z dodanym parametrem trybu parametrów velAccParamMode)
+    * @param  [in] joint_pos_p  Pozycja stawów punktu pośredniego, jednostka deg
+    * @param  [in] desc_pos_p   Pozycja i orientacja kartezjańska punktu pośredniego
+    * @param  [in] ptool  Numer układu współrzędnych narzędzia, zakres [1~15]
+    * @param  [in] puser  Numer układu współrzędnych przedmiotu, zakres [1~15]
+    * @param  [in] pvel  Procent prędkości, zakres [0~100]
+    * @param  [in] pacc  Procent przyspieszenia, zakres [0~100], tymczasowo nieudostępnione
+    * @param  [in] epos_p  Pozycja osi rozszerzonej punktu pośredniego, jednostka mm
+    * @param  [in] poffset_flag  0-brak przesunięcia, 1-przesunięcie w podstawowym układzie współrzędnych / układzie współrzędnych przedmiotu, 2-przesunięcie w układzie współrzędnych narzędzia
+    * @param  [in] offset_pos_p  Wartość przesunięcia pozycji i orientacji
+    * @param  [in] joint_pos_t  Pozycja stawów punktu docelowego, jednostka deg
+    * @param  [in] desc_pos_t   Pozycja i orientacja kartezjańska punktu docelowego
+    * @param  [in] ttool  Numer układu współrzędnych narzędzia, zakres [1~15]
+    * @param  [in] tuser  Numer układu współrzędnych przedmiotu, zakres [1~15]
+    * @param  [in] tvel  Procent prędkości, zakres [0~100]
+    * @param  [in] tacc  Procent przyspieszenia, zakres [0~100], tymczasowo nieudostępnione
+    * @param  [in] epos_t  Pozycja osi rozszerzonej punktu docelowego, jednostka mm
+    * @param  [in] toffset_flag  0-brak przesunięcia, 1-przesunięcie w podstawowym układzie współrzędnych / układzie współrzędnych przedmiotu, 2-przesunięcie w układzie współrzędnych narzędzia
+    * @param  [in] offset_pos_t  Wartość przesunięcia pozycji i orientacji
+    * @param  [in] ovl  Współczynnik skalowania prędkości, zakres [0~100]
+    * @param  [in] blendR [-1.0]-ruch do pozycji (blokujący), [0~1000.0]-promień wygładzenia (nieblokujący), jednostka mm
+    * @param  [in] velAccParamMode Tryb parametrów prędkości i przyspieszenia; 0-procent; 1-prędkość fizyczna (mm/s) przyspieszenie (mm/s²)
+    * @return  Kod błędu
+    */
+    public int MoveC(JointPos joint_pos_p, DescPose desc_pos_p, int ptool, int puser, double pvel, double pacc, ExaxisPos epos_p, int poffset_flag, DescPose offset_pos_p, JointPos joint_pos_t, DescPose desc_pos_t, int ttool, int tuser, double tvel, double tacc, ExaxisPos epos_t, int toffset_flag, DescPose offset_pos_t, double ovl, double blendR, int velAccParamMode)
+
+Ruch łukowy w przestrzeni kartezjańskiej (przeciążona funkcja 1 - nie wymaga wprowadzania pozycji stawów)
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C#SDK-V1.1.7  Web-3.8.5
+
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief  Ruch łukowy w przestrzeni kartezjańskiej (przeciążona funkcja 1 - nie wymaga wprowadzania pozycji stawów)
+    * @param  [in] desc_pos_p   Pozycja i orientacja kartezjańska punktu pośredniego
+    * @param  [in] ptool  Numer układu współrzędnych narzędzia, zakres [1~15]
+    * @param  [in] puser  Numer układu współrzędnych przedmiotu, zakres [1~15]
+    * @param  [in] pvel  Procent prędkości, zakres [0~100]
+    * @param  [in] pacc  Procent przyspieszenia, zakres [0~100], tymczasowo nieudostępnione
+    * @param  [in] epos_p  Pozycja osi rozszerzonej punktu pośredniego, jednostka mm
+    * @param  [in] poffset_flag  0-brak przesunięcia, 1-przesunięcie w podstawowym układzie współrzędnych / układzie współrzędnych przedmiotu, 2-przesunięcie w układzie współrzędnych narzędzia
+    * @param  [in] offset_pos_p  Wartość przesunięcia pozycji i orientacji
+    * @param  [in] desc_pos_t   Pozycja i orientacja kartezjańska punktu docelowego
+    * @param  [in] ttool  Numer układu współrzędnych narzędzia, zakres [1~15]
+    * @param  [in] tuser  Numer układu współrzędnych przedmiotu, zakres [1~15]
+    * @param  [in] tvel  Procent prędkości, zakres [0~100]
+    * @param  [in] tacc  Procent przyspieszenia, zakres [0~100], tymczasowo nieudostępnione
+    * @param  [in] epos_t  Pozycja osi rozszerzonej punktu docelowego, jednostka mm
+    * @param  [in] toffset_flag  0-brak przesunięcia, 1-przesunięcie w podstawowym układzie współrzędnych / układzie współrzędnych przedmiotu, 2-przesunięcie w układzie współrzędnych narzędzia
+    * @param  [in] offset_pos_t  Wartość przesunięcia pozycji i orientacji
+    * @param  [in] ovl  Współczynnik skalowania prędkości, zakres [0~100]
+    * @param  [in] blendR [-1.0]-ruch do pozycji (blokujący), [0~1000.0]-promień wygładzenia (nieblokujący), jednostka mm
+    * @param  [in] config Konfiguracja przestrzeni stawów dla rozwiązania odwrotnego, [-1]-obliczenie z odniesieniem do bieżącej pozycji stawów, [0~7]-rozwiązanie zgodnie z określoną konfiguracją przestrzeni stawów
+    * @param  [in] velAccParamMode Tryb parametrów prędkości i przyspieszenia; 0-procent; 1-prędkość fizyczna (mm/s) przyspieszenie (mm/s²)
+    * @return  Kod błędu
+    */
+    public int MoveC(DescPose desc_pos_p, int ptool, int puser, double pvel, double pacc, ExaxisPos epos_p, int poffset_flag, DescPose offset_pos_p, DescPose desc_pos_t, int ttool, int tuser, double tvel, double tacc, ExaxisPos epos_t, int toffset_flag, DescPose offset_pos_t, double ovl, double blendR, int config, int velAccParamMode)
+
+Ruch punkt-punkt w przestrzeni kartezjańskiej
++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    /** 
+    * @brief Ruch punkt-punkt w przestrzeni kartezjańskiej 
+    * @param [in] desc_pos Docelowa pozycja i orientacja kartezjańska w podstawowym układzie współrzędnych 
+    * @param [in] tool Numer układu współrzędnych narzędzia, zakres [0~14] 
+    * @param [in] user Numer układu współrzędnych przedmiotu, zakres [0~14] 
+    * @param [in] vel Procent prędkości, zakres [0~100] 
+    * @param [in] acc Procent przyspieszenia, zakres [0~100], tymczasowo nieudostępnione 
+    * @param [in] ovl Współczynnik skalowania prędkości, zakres [0~100] 
+    * @param [in] blendT [-1.0]-ruch do pozycji (blokujący), [0~500.0]-czas wygładzenia (nieblokujący), jednostka ms 
+    * @param [in] config Konfiguracja przestrzeni stawów, [-1]-obliczenie z odniesieniem do bieżącej pozycji stawów, [0~7]-obliczenie z odniesieniem do określonej konfiguracji przestrzeni stawów, domyślnie -1 
+    * @return Kod błędu 
     */ 
     int MoveCart(DescPose desc_pos, int tool, int user, float vel, float acc, float ovl, float blendT, int config);
 
-笛卡尔空间整圆运动
-+++++++++++++++++++++++++++++
+Ruch pełnego okręgu w przestrzeni kartezjańskiej
+++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C#SDK-V1.1.4  Web-3.8.3
     
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief  笛卡尔空间整圆运动
-    * @param  [in] joint_pos_p  路径点1关节位置,单位deg
-    * @param  [in] desc_pos_p   路径点1笛卡尔位姿
-    * @param  [in] ptool  工具坐标号，范围[0~14]
-    * @param  [in] puser  工件坐标号，范围[0~14]
-    * @param  [in] pvel  速度百分比，范围[0~100]
-    * @param  [in] pacc  加速度百分比，范围[0~100],暂不开放
-    * @param  [in] epos_p  扩展轴位置，单位mm
-    * @param  [in] joint_pos_t  路径点2关节位置,单位deg
-    * @param  [in] desc_pos_t   路径点2笛卡尔位姿
-    * @param  [in] ttool  工具坐标号，范围[0~14]
-    * @param  [in] tuser  工件坐标号，范围[0~14]
-    * @param  [in] tvel  速度百分比，范围[0~100]
-    * @param  [in] tacc  加速度百分比，范围[0~100],暂不开放
-    * @param  [in] epos_t  扩展轴位置，单位mm
-    * @param  [in] ovl  速度缩放因子[0~100]/物理速度(mm/s)
-    * @param  [in] offset_flag  0-不偏移，1-基坐标系/工件坐标系下偏移，2-工具坐标系下偏移
-    * @param  [in] offset_pos  位姿偏移量
-    * @param  [in] oacc 加速度缩放因子[0-100]/物理加速度(mm/s2)
-    * @param  [in] blendR -1：阻塞；0~1000：平滑半径
-    * @param  [in] velAccParamMode 速度加速度参数模式；0-百分比；1-物理速度(mm/s)加速度(mm/s2)
-    * @return  错误码
+    * @brief  Ruch pełnego okręgu w przestrzeni kartezjańskiej
+    * @param  [in] joint_pos_p  Pozycja stawów punktu pośredniego 1, jednostka deg
+    * @param  [in] desc_pos_p   Pozycja i orientacja kartezjańska punktu pośredniego 1
+    * @param  [in] ptool  Numer układu współrzędnych narzędzia, zakres [0~14]
+    * @param  [in] puser  Numer układu współrzędnych przedmiotu, zakres [0~14]
+    * @param  [in] pvel  Procent prędkości, zakres [0~100]
+    * @param  [in] pacc  Procent przyspieszenia, zakres [0~100], tymczasowo nieudostępnione
+    * @param  [in] epos_p  Pozycja osi rozszerzonej punktu pośredniego 1, jednostka mm
+    * @param  [in] joint_pos_t  Pozycja stawów punktu pośredniego 2, jednostka deg
+    * @param  [in] desc_pos_t   Pozycja i orientacja kartezjańska punktu pośredniego 2
+    * @param  [in] ttool  Numer układu współrzędnych narzędzia, zakres [0~14]
+    * @param  [in] tuser  Numer układu współrzędnych przedmiotu, zakres [0~14]
+    * @param  [in] tvel  Procent prędkości, zakres [0~100]
+    * @param  [in] tacc  Procent przyspieszenia, zakres [0~100], tymczasowo nieudostępnione
+    * @param  [in] epos_t  Pozycja osi rozszerzonej punktu pośredniego 2, jednostka mm
+    * @param  [in] ovl  Współczynnik skalowania prędkości [0~100] / prędkość fizyczna (mm/s)
+    * @param  [in] offset_flag  0-brak przesunięcia, 1-przesunięcie w podstawowym układzie współrzędnych / układzie współrzędnych przedmiotu, 2-przesunięcie w układzie współrzędnych narzędzia
+    * @param  [in] offset_pos  Wartość przesunięcia pozycji i orientacji
+    * @param  [in] oacc Współczynnik skalowania przyspieszenia [0-100] / przyspieszenie fizyczne (mm/s²)
+    * @param  [in] blendR -1: blokujący; 0~1000: promień wygładzenia
+    * @param  [in] velAccParamMode Tryb parametrów prędkości i przyspieszenia; 0-procent; 1-prędkość fizyczna (mm/s) przyspieszenie (mm/s²)
+    * @return  Kod błędu
     */
     public int Circle(JointPos joint_pos_p, DescPose desc_pos_p, int ptool, int puser, float pvel, float pacc,ExaxisPos epos_p, JointPos joint_pos_t, DescPose desc_pos_t, int ttool, int tuser,float tvel, float tacc, ExaxisPos epos_t, float ovl, int offset_flag,DescPose offset_pos, double oacc, double blendR, int velAccParamMode)
 
-笛卡尔空间整圆运动(自动逆运动学计算)
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Ruch pełnego okręgu w przestrzeni kartezjańskiej (automatyczne obliczenie kinematyki odwrotnej)
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C#SDK-V1.1.7  Web-3.8.5
 
 .. code-block:: c#
     :linenos:
 
     /**
-     * @brief  笛卡尔空间整圆运动(自动逆运动学计算)
-     * @param  [in] desc_pos_p   路径点1笛卡尔位姿
-     * @param  [in] ptool  工具坐标号，范围[0~14]
-     * @param  [in] puser  工件坐标号，范围[0~14]
-     * @param  [in] pvel  速度百分比，范围[0~100]
-     * @param  [in] pacc  加速度百分比，范围[0~100],暂不开放
-     * @param  [in] epos_p  扩展轴位置，单位mm
-     * @param  [in] desc_pos_t   路径点2笛卡尔位姿
-     * @param  [in] ttool  工具坐标号，范围[0~14]
-     * @param  [in] tuser  工件坐标号，范围[0~14]
-     * @param  [in] tvel  速度百分比，范围[0~100]
-     * @param  [in] tacc  加速度百分比，范围[0~100],暂不开放
-     * @param  [in] epos_t  扩展轴位置，单位mm
-     * @param  [in] ovl  速度缩放因子，范围[0~100]
-     * @param  [in] offset_flag  0-不偏移，1-基坐标系/工件坐标系下偏移，2-工具坐标系下偏移
-     * @param  [in] offset_pos  位姿偏移量
-     * @param  [in] oacc 加速度百分比
-     * @param  [in] blendR -1：阻塞；0~1000：平滑半径
-     * @param  [in] config 逆解关节空间配置，[-1]-参考当前关节位置解算，[0~7]-依据特定关节空间配置求解
-     * @return  错误码
+     * @brief  Ruch pełnego okręgu w przestrzeni kartezjańskiej (automatyczne obliczenie kinematyki odwrotnej)
+     * @param  [in] desc_pos_p   Pozycja i orientacja kartezjańska punktu pośredniego 1
+     * @param  [in] ptool  Numer układu współrzędnych narzędzia, zakres [0~14]
+     * @param  [in] puser  Numer układu współrzędnych przedmiotu, zakres [0~14]
+     * @param  [in] pvel  Procent prędkości, zakres [0~100]
+     * @param  [in] pacc  Procent przyspieszenia, zakres [0~100], tymczasowo nieudostępnione
+     * @param  [in] epos_p  Pozycja osi rozszerzonej punktu pośredniego 1, jednostka mm
+     * @param  [in] desc_pos_t   Pozycja i orientacja kartezjańska punktu pośredniego 2
+     * @param  [in] ttool  Numer układu współrzędnych narzędzia, zakres [0~14]
+     * @param  [in] tuser  Numer układu współrzędnych przedmiotu, zakres [0~14]
+     * @param  [in] tvel  Procent prędkości, zakres [0~100]
+     * @param  [in] tacc  Procent przyspieszenia, zakres [0~100], tymczasowo nieudostępnione
+     * @param  [in] epos_t  Pozycja osi rozszerzonej punktu pośredniego 2, jednostka mm
+     * @param  [in] ovl  Współczynnik skalowania prędkości, zakres [0~100]
+     * @param  [in] offset_flag  0-brak przesunięcia, 1-przesunięcie w podstawowym układzie współrzędnych / układzie współrzędnych przedmiotu, 2-przesunięcie w układzie współrzędnych narzędzia
+     * @param  [in] offset_pos  Wartość przesunięcia pozycji i orientacji
+     * @param  [in] oacc Procent przyspieszenia
+     * @param  [in] blendR -1: blokujący; 0~1000: promień wygładzenia
+     * @param  [in] config Konfiguracja przestrzeni stawów dla rozwiązania odwrotnego, [-1]-obliczenie z odniesieniem do bieżącej pozycji stawów, [0~7]-rozwiązanie zgodnie z określoną konfiguracją przestrzeni stawów
+     * @return  Kod błędu
      */
     int Circle(DescPose desc_pos_p, int ptool, int puser, double pvel, double pacc, ExaxisPos epos_p, DescPose desc_pos_t, int ttool, int tuser, double tvel, double tacc, ExaxisPos epos_t, double ovl, int offset_flag, DescPose offset_pos, double oacc, double blendR,int config)
 
-笛卡尔空间整圆运动（增加速度加速度参数模式velAccParamMode参数）
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Ruch pełnego okręgu w przestrzeni kartezjańskiej (z dodanym parametrem trybu parametrów velAccParamMode)
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C#SDK-V1.1.7  Web-3.8.5
 
 .. code-block:: c#
     :linenos:
 
     /**
-    *@brief  笛卡尔空间整圆运动（增加速度加速度参数模式velAccParamMode参数）
-    *@param  [in] joint_pos_p  路径点1关节位置,单位deg
-    *@param  [in] desc_pos_p   路径点1笛卡尔位姿
-    *@param  [in] ptool  工具坐标号，范围[1~15]
-    *@param  [in] puser  工件坐标号，范围[1~15]
-    *@param  [in] pvel  速度百分比，范围[0~100]
-    *@param  [in] pacc  加速度百分比，范围[0~100],暂不开放
-    *@param  [in] epos_p  扩展轴位置，单位mm
-    *@param  [in] joint_pos_t  路径点2关节位置,单位deg
-    *@param  [in] desc_pos_t   路径点2笛卡尔位姿
-    *@param  [in] ttool  工具坐标号，范围[1~15]
-    *@param  [in] tuser  工件坐标号，范围[1~15]
-    *@param  [in] tvel  速度百分比，范围[0~100]
-    *@param  [in] tacc  加速度百分比，范围[0~100],暂不开放
-    *@param  [in] epos_t  扩展轴位置，单位mm
-    *@param  [in] ovl  速度缩放因子，范围[0~100]
-    *@param  [in] offset_flag  0-不偏移，1-基坐标系/工件坐标系下偏移，2-工具坐标系下偏移
-    *@param  [in] offset_pos  位姿偏移量
-    *@param  [in] oacc 加速度百分比
-    *@param  [in] blendR -1：阻塞；0~1000：平滑半径
-    *@param  [in] velAccParamMode 速度加速度参数模式；0-百分比；1-物理速度(mm/s)加速度(mm/s2)
-    *@return  错误码
+    *@brief  Ruch pełnego okręgu w przestrzeni kartezjańskiej (z dodanym parametrem trybu parametrów velAccParamMode)
+    *@param  [in] joint_pos_p  Pozycja stawów punktu pośredniego 1, jednostka deg
+    *@param  [in] desc_pos_p   Pozycja i orientacja kartezjańska punktu pośredniego 1
+    *@param  [in] ptool  Numer układu współrzędnych narzędzia, zakres [1~15]
+    *@param  [in] puser  Numer układu współrzędnych przedmiotu, zakres [1~15]
+    *@param  [in] pvel  Procent prędkości, zakres [0~100]
+    *@param  [in] pacc  Procent przyspieszenia, zakres [0~100], tymczasowo nieudostępnione
+    *@param  [in] epos_p  Pozycja osi rozszerzonej punktu pośredniego 1, jednostka mm
+    *@param  [in] joint_pos_t  Pozycja stawów punktu pośredniego 2, jednostka deg
+    *@param  [in] desc_pos_t   Pozycja i orientacja kartezjańska punktu pośredniego 2
+    *@param  [in] ttool  Numer układu współrzędnych narzędzia, zakres [1~15]
+    *@param  [in] tuser  Numer układu współrzędnych przedmiotu, zakres [1~15]
+    *@param  [in] tvel  Procent prędkości, zakres [0~100]
+    *@param  [in] tacc  Procent przyspieszenia, zakres [0~100], tymczasowo nieudostępnione
+    *@param  [in] epos_t  Pozycja osi rozszerzonej punktu pośredniego 2, jednostka mm
+    *@param  [in] ovl  Współczynnik skalowania prędkości, zakres [0~100]
+    *@param  [in] offset_flag  0-brak przesunięcia, 1-przesunięcie w podstawowym układzie współrzędnych / układzie współrzędnych przedmiotu, 2-przesunięcie w układzie współrzędnych narzędzia
+    *@param  [in] offset_pos  Wartość przesunięcia pozycji i orientacji
+    *@param  [in] oacc Procent przyspieszenia
+    *@param  [in] blendR -1: blokujący; 0~1000: promień wygładzenia
+    *@param  [in] velAccParamMode Tryb parametrów prędkości i przyspieszenia; 0-procent; 1-prędkość fizyczna (mm/s) przyspieszenie (mm/s²)
+    *@return  Kod błędu
     */
     public int Circle(JointPos joint_pos_p, DescPose desc_pos_p, int ptool, int puser, double pvel, double pacc, ExaxisPos epos_p, JointPos joint_pos_t, DescPose desc_pos_t, int ttool, int tuser, double tvel, double tacc, ExaxisPos epos_t, double ovl, int offset_flag, DescPose offset_pos, double oacc, double blendR, int velAccParamMode)
 
-笛卡尔空间整圆运动 (重载函数1 不需要输入关节位置)
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Ruch pełnego okręgu w przestrzeni kartezjańskiej (przeciążona funkcja 1 - nie wymaga wprowadzania pozycji stawów)
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C#SDK-V1.1.7  Web-3.8.5
 
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief  笛卡尔空间整圆运动 (重载函数1 不需要输入关节位置)
-    * @param  [in] desc_pos_p   路径点1笛卡尔位姿
-    * @param  [in] ptool  工具坐标号，范围[0~14]
-    * @param  [in] puser  工件坐标号，范围[0~14]
-    * @param  [in] pvel  速度百分比，范围[0~100]
-    * @param  [in] pacc  加速度百分比，范围[0~100],暂不开放
-    * @param  [in] epos_p  扩展轴位置，单位mm
-    * @param  [in] desc_pos_t   路径点2笛卡尔位姿
-    * @param  [in] ttool  工具坐标号，范围[0~14]
-    * @param  [in] tuser  工件坐标号，范围[0~14]
-    * @param  [in] tvel  速度百分比，范围[0~100]
-    * @param  [in] tacc  加速度百分比，范围[0~100],暂不开放
-    * @param  [in] epos_t  扩展轴位置，单位mm
-    * @param  [in] ovl  速度缩放因子，范围[0~100]
-    * @param  [in] offset_flag  0-不偏移，1-基坐标系/工件坐标系下偏移，2-工具坐标系下偏移
-    * @param  [in] offset_pos  位姿偏移量
-    * @param  [in] oacc 加速度百分比
-    * @param  [in] blendR -1：阻塞；0~1000：平滑半径
-    * @param  [in] config 逆解关节空间配置，[-1]-参考当前关节位置解算，[0~7]-依据特定关节空间配置求解
-    * @param  [in] velAccParamMode 速度加速度参数模式；0-百分比；1-物理速度(mm/s)加速度(mm/s2)
-    * @return  错误码
+    * @brief  Ruch pełnego okręgu w przestrzeni kartezjańskiej (przeciążona funkcja 1 - nie wymaga wprowadzania pozycji stawów)
+    * @param  [in] desc_pos_p   Pozycja i orientacja kartezjańska punktu pośredniego 1
+    * @param  [in] ptool  Numer układu współrzędnych narzędzia, zakres [0~14]
+    * @param  [in] puser  Numer układu współrzędnych przedmiotu, zakres [0~14]
+    * @param  [in] pvel  Procent prędkości, zakres [0~100]
+    * @param  [in] pacc  Procent przyspieszenia, zakres [0~100], tymczasowo nieudostępnione
+    * @param  [in] epos_p  Pozycja osi rozszerzonej punktu pośredniego 1, jednostka mm
+    * @param  [in] desc_pos_t   Pozycja i orientacja kartezjańska punktu pośredniego 2
+    * @param  [in] ttool  Numer układu współrzędnych narzędzia, zakres [0~14]
+    * @param  [in] tuser  Numer układu współrzędnych przedmiotu, zakres [0~14]
+    * @param  [in] tvel  Procent prędkości, zakres [0~100]
+    * @param  [in] tacc  Procent przyspieszenia, zakres [0~100], tymczasowo nieudostępnione
+    * @param  [in] epos_t  Pozycja osi rozszerzonej punktu pośredniego 2, jednostka mm
+    * @param  [in] ovl  Współczynnik skalowania prędkości, zakres [0~100]
+    * @param  [in] offset_flag  0-brak przesunięcia, 1-przesunięcie w podstawowym układzie współrzędnych / układzie współrzędnych przedmiotu, 2-przesunięcie w układzie współrzędnych narzędzia
+    * @param  [in] offset_pos  Wartość przesunięcia pozycji i orientacji
+    * @param  [in] oacc Procent przyspieszenia
+    * @param  [in] blendR -1: blokujący; 0~1000: promień wygładzenia
+    * @param  [in] config Konfiguracja przestrzeni stawów dla rozwiązania odwrotnego, [-1]-obliczenie z odniesieniem do bieżącej pozycji stawów, [0~7]-rozwiązanie zgodnie z określoną konfiguracją przestrzeni stawów
+    * @param  [in] velAccParamMode Tryb parametrów prędkości i przyspieszenia; 0-procent; 1-prędkość fizyczna (mm/s) przyspieszenie (mm/s²)
+    * @return  Kod błędu
     */
     public int Circle(DescPose desc_pos_p, int ptool, int puser, double pvel, double pacc, ExaxisPos epos_p, DescPose desc_pos_t, int ttool, int tuser, double tvel, double tacc, ExaxisPos epos_t, double ovl, int offset_flag, DescPose offset_pos, double oacc, double blendR, int config, int velAccParamMode)
 
-笛卡尔空间整圆运动代码示例
-++++++++++++++++++++++++++++++++++++++
+Przykład kodu ruchu pełnego okręgu w przestrzeni kartezjańskiej
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C#SDK-V1.1.4  Web-3.8.3
     
 .. code-block:: c#
@@ -666,7 +664,7 @@ jog点动立即停止
         Console.WriteLine("Circle4" + rtn);
     }
 
-机器人基本运动指令代码示例
+Przykład kodu podstawowych instrukcji ruchu robota
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C#SDK-V1.1.7  Web-3.8.5
 
@@ -722,54 +720,54 @@ jog点动立即停止
         Console.WriteLine($"circle errcode:{rtn}");
     }
 
-笛卡尔空间螺旋线运动
-+++++++++++++++++++++++++++++
+Ruch po linii śrubowej w przestrzeni kartezjańskiej
++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief 笛卡尔空间螺旋线运动 
-    * @param [in] joint_pos 目标关节位置,单位 deg 
-    * @param [in] desc_pos 目标笛卡尔位姿 
-    * @param [in] tool 工具坐标号，范围[0~14] 
-    * @param [in] user 工件坐标号，范围[0~14] 
-    * @param [in] vel 速度百分比，范围[0~100] 
-    * @param [in] acc 加速度百分比，范围[0~100],暂不开放 
-    * @param [in] epos 扩展轴位置，单位 mm 
-    * @param [in] ovl 速度缩放因子，范围[0~100] 
-    * @param [in] offset_flag 0-不偏移，1-基坐标系/工件坐标系下偏移，2-工具坐标系下偏移 
-    * @param [in] offset_pos 位姿偏移量 
-    * @param [in] spiral_param 螺旋参数 
-    * @return 错误码 
+    * @brief Ruch po linii śrubowej w przestrzeni kartezjańskiej 
+    * @param [in] joint_pos Docelowa pozycja stawów, jednostka deg 
+    * @param [in] desc_pos Docelowa pozycja i orientacja kartezjańska 
+    * @param [in] tool Numer układu współrzędnych narzędzia, zakres [0~14] 
+    * @param [in] user Numer układu współrzędnych przedmiotu, zakres [0~14] 
+    * @param [in] vel Procent prędkości, zakres [0~100] 
+    * @param [in] acc Procent przyspieszenia, zakres [0~100], tymczasowo nieudostępnione 
+    * @param [in] epos Pozycja osi rozszerzonej, jednostka mm 
+    * @param [in] ovl Współczynnik skalowania prędkości, zakres [0~100] 
+    * @param [in] offset_flag 0-brak przesunięcia, 1-przesunięcie w podstawowym układzie współrzędnych / układzie współrzędnych przedmiotu, 2-przesunięcie w układzie współrzędnych narzędzia 
+    * @param [in] offset_pos Wartość przesunięcia pozycji i orientacji 
+    * @param [in] spiral_param Parametry spirali 
+    * @return Kod błędu 
     */
     int NewSpiral(JointPos joint_pos, DescPose desc_pos, int tool, int user, float vel, float acc, ExaxisPos epos, float ovl, byte offset_flag, DescPose offset_pos, SpiralParam spiral_param); 
 
-笛卡尔空间螺旋线运动(自动逆运动学计算)
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Ruch po linii śrubowej w przestrzeni kartezjańskiej (automatyczne obliczenie kinematyki odwrotnej)
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C#SDK-V1.1.7  Web-3.8.5
 
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief 笛卡尔空间螺旋线运动 (自动逆运动学计算)
-    * @param [in] desc_pos   目标笛卡尔位姿
-    * @param [in] tool  工具坐标号，范围[0~14]
-    * @param [in] user  工件坐标号，范围[0~14]
-    * @param [in] vel  速度百分比，范围[0~100]
-    * @param [in] acc  加速度百分比，范围[0~100],暂不开放
-    * @param [in] epos  扩展轴位置，单位mm
-    * @param [in] ovl  速度缩放因子，范围[0~100]
-    * @param [in] offset_flag  0-不偏移，1-基坐标系/工件坐标系下偏移，2-工具坐标系下偏移
-    * @param [in] offset_pos  位姿偏移量
-    * @param [in] spiral_param  螺旋参数
-    * @param [in] config  逆解关节空间配置，[-1]-参考当前关节位置解算，[0~7]-依据特定关节空间配置求解
-    * @return 错误码 
+    * @brief Ruch po linii śrubowej w przestrzeni kartezjańskiej (automatyczne obliczenie kinematyki odwrotnej)
+    * @param [in] desc_pos   Docelowa pozycja i orientacja kartezjańska
+    * @param [in] tool  Numer układu współrzędnych narzędzia, zakres [0~14]
+    * @param [in] user  Numer układu współrzędnych przedmiotu, zakres [0~14]
+    * @param [in] vel  Procent prędkości, zakres [0~100]
+    * @param [in] acc  Procent przyspieszenia, zakres [0~100], tymczasowo nieudostępnione
+    * @param [in] epos  Pozycja osi rozszerzonej, jednostka mm
+    * @param [in] ovl  Współczynnik skalowania prędkości, zakres [0~100]
+    * @param [in] offset_flag  0-brak przesunięcia, 1-przesunięcie w podstawowym układzie współrzędnych / układzie współrzędnych przedmiotu, 2-przesunięcie w układzie współrzędnych narzędzia
+    * @param [in] offset_pos  Wartość przesunięcia pozycji i orientacji
+    * @param [in] spiral_param  Parametry spirali
+    * @param [in] config  Konfiguracja przestrzeni stawów dla rozwiązania odwrotnego, [-1]-obliczenie z odniesieniem do bieżącej pozycji stawów, [0~7]-rozwiązanie zgodnie z określoną konfiguracją przestrzeni stawów
+    * @return Kod błędu 
     */
     int NewSpiral(DescPose desc_pos, int tool, int user, double vel, double acc, ExaxisPos epos, double ovl, int offset_flag, DescPose offset_pos, SpiralParam spiral_param,int config)
 
-螺旋线运动代码示例
-+++++++++++++++++++++++++++++
+Przykład kodu ruchu po linii śrubowej
++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
@@ -800,53 +798,53 @@ jog点动立即停止
         return 0;
     }
 
-伺服运动开始
-+++++++++++++++++++++++++++++
+Rozpoczęcie ruchu serwo
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief 伺服运动开始，配合ServoJ、ServoCart指令使用
-    * @param[in] comType 指令下发类型；0-xmlrpc；1-UDP(对应机器人20007端口)
-    * @return 错误码
+    * @brief Rozpoczęcie ruchu serwo, używane razem z instrukcjami ServoJ, ServoCart
+    * @param[in] comType Typ wysyłania instrukcji; 0-xmlrpc; 1-UDP (odpowiadający portowi 20007 robota)
+    * @return Kod błędu
     */
     public int ServoMoveStart (int comType = 0)
 
-伺服运动结束
-+++++++++++++++++++++++++++++
+Zakończenie ruchu serwo
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief 伺服运动开始，配合ServoJ、ServoCart指令使用
-    * @param[in] comType 指令下发类型；0-xmlrpc；1-UDP(对应机器人20007端口)
-    * @return  错误码
+    * @brief Zakończenie ruchu serwo, używane razem z instrukcjami ServoJ, ServoCart
+    * @param[in] comType Typ wysyłania instrukcji; 0-xmlrpc; 1-UDP (odpowiadający portowi 20007 robota)
+    * @return  Kod błędu
     */
     public int ServoMoveEnd (int comType = 0)
 
-关节空间伺服模式运动
-+++++++++++++++++++++++++++++
+Ruch w trybie serwo w przestrzeni stawów
+++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C#SDK-V1.1.4  Web-3.8.3
     
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief  关节空间伺服模式运动
-    * @param  [in] joint_pos  目标关节位置,单位deg
-    * @param  [in] axisPos  外部轴位置,单位mm
-    * @param  [in] acc  加速度百分比，范围[0~100],暂不开放，默认为0
-    * @param  [in] vel  速度百分比，范围[0~100]，暂不开放，默认为0
-    * @param  [in] cmdT  指令下发周期，单位s，建议范围[0.001~0.0016]
-    * @param  [in] filterT 滤波时间，单位s，暂不开放，默认为0
-    * @param  [in] gain  目标位置的比例放大器，暂不开放，默认为0
-    * @param  [in] id servoJ指令ID,默认为0
-    * @param  [in] comType 指令下发类型；0-xmlrpc；1-UDP(对应机器人20007端口)
-    * @return  错误码
+    * @brief  Ruch w trybie serwo w przestrzeni stawów
+    * @param  [in] joint_pos  Docelowa pozycja stawów, jednostka deg
+    * @param  [in] axisPos  Pozycja zewnętrznej osi, jednostka mm
+    * @param  [in] acc  Procent przyspieszenia, zakres [0~100], tymczasowo nieudostępnione, domyślnie 0
+    * @param  [in] vel  Procent prędkości, zakres [0~100], tymczasowo nieudostępnione, domyślnie 0
+    * @param  [in] cmdT  Okres wysyłania instrukcji, jednostka s, zalecany zakres [0.001~0.0016]
+    * @param  [in] filterT Czas filtrowania, jednostka s, tymczasowo nieudostępnione, domyślnie 0
+    * @param  [in] gain  Wzmacniacz proporcjonalny pozycji docelowej, tymczasowo nieudostępnione, domyślnie 0
+    * @param  [in] id ID instrukcji servoJ, domyślnie 0
+    * @param  [in] comType Typ wysyłania instrukcji; 0-xmlrpc; 1-UDP (odpowiadający portowi 20007 robota)
+    * @return  Kod błędu
     */
     public int ServoJ(JointPos joint_pos, ExaxisPos axisPos, float acc, float vel, float cmdT, float filterT, float gain, int id = 0, int comType = 0)
 
-基于UDP通信的ServoJ、ServoMoveStart、ServoMoveEnd SDK代码示例
+Przykład kodu SDK ServoJ, ServoMoveStart, ServoMoveEnd w oparciu o komunikację UDP
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C#SDK-V1.1.4  Web-3.8.3
     
@@ -855,7 +853,7 @@ jog点动立即停止
 
     public void TestServoJUDP()
     {
-        // 订阅回调
+        // Subskrypcja zwrotna
         robot.OnUdpFrameReceived += (comType, frameCount, frameCmdID, contentLen, content) =>
         {
             Console.WriteLine($"[] comType={comType}, count={frameCount}, cmdID={frameCmdID}, content={content}");
@@ -926,7 +924,7 @@ jog点动立即停止
         }
     }
 
-关节空间伺服模式运动代码示例
+Przykład kodu ruchu w trybie serwo w przestrzeni stawów
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C#SDK-V1.1.4  Web-3.8.3
     
@@ -980,58 +978,58 @@ jog点动立即停止
         }
     }
 
-关节扭矩控制开始
-++++++++++++++++++++++++++++++++++
+Rozpoczęcie sterowania momentem obrotowym stawu
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief 关节扭矩控制开始
-    * @param [in] comType 指令下发类型；0-xmlrpc；1-UDP(对应机器人20007端口)
-    * @return 错误码
+    * @brief Rozpoczęcie sterowania momentem obrotowym stawu
+    * @param [in] comType Typ wysyłania instrukcji; 0-xmlrpc; 1-UDP (odpowiadający portowi 20007 robota)
+    * @return Kod błędu
     */
     public int ServoJTStart (int comType = 0)
 
-关节扭矩控制
-++++++++++++++++++++++++++++++++++
+Sterowanie momentem obrotowym stawu
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief 关节扭矩控制
-    * @param [in] torque j1~j6关节扭矩，单位Nm
-    * @param [in] interval 指令周期，单位s，范围[0.001~0.008]
-    * @param [in] checkFlag 检测策略 0-不限制；1-限制功率；2-限制速度；3-功率和速度同时限制
-    * @param [in] jPowerLimit 关节最大功率限制(W)
-    * @param [in] jVelLimit 关节最大速度(°/s)
-    * @param [in]  comType 指令下发类型；0-xmlrpc；1-UDP(对应机器人20007端口)
-    * @return 错误码
+    * @brief Sterowanie momentem obrotowym stawu
+    * @param [in] torque Momenty obrotowe stawów j1~j6, jednostka Nm
+    * @param [in] interval Okres instrukcji, jednostka s, zakres [0.001~0.008]
+    * @param [in] checkFlag Strategia wykrywania 0-brak ograniczenia; 1-ograniczenie mocy; 2-ograniczenie prędkości; 3-jednoczesne ograniczenie mocy i prędkości
+    * @param [in] jPowerLimit Maksymalne ograniczenie mocy stawu (W)
+    * @param [in] jVelLimit Maksymalna prędkość stawu (°/s)
+    * @param [in]  comType Typ wysyłania instrukcji; 0-xmlrpc; 1-UDP (odpowiadający portowi 20007 robota)
+    * @return Kod błędu
     */
     public int ServoJT(double[] torque, double interval, int checkFlag, double[] jPowerLimit, double[] jVelLimit, int comType = 0)
 
-关节扭矩控制结束
-++++++++++++++++++++++++++++++++++
+Zakończenie sterowania momentem obrotowym stawu
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief 关节扭矩控制结束
-    * @param[in] comType 指令下发类型；0-xmlrpc；1-UDP(对应机器人20007端口)
-    * @return  错误码
+    * @brief Zakończenie sterowania momentem obrotowym stawu
+    * @param[in] comType Typ wysyłania instrukcji; 0-xmlrpc; 1-UDP (odpowiadający portowi 20007 robota)
+    * @return  Kod błędu
     */
     public int ServoJTEnd (int comType = 0)
 
-基于UDP通信的ServoJT、ServoJTStart、ServoJTEnd SDK代码示例
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Przykład kodu SDK ServoJT, ServoJTStart, ServoJTEnd w oparciu o komunikację UDP
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     public int ServoJTWithSafetyUDP()
     {
-        // 订阅回调
+        // Subskrypcja zwrotna
         robot.OnUdpFrameReceived += (comType, frameCount, frameCmdID, contentLen, content) =>
         {
-            Console.WriteLine($"[UDP响应] comType={comType}, count={frameCount}, cmdID={frameCmdID}, content={content}");
+            Console.WriteLine($"[UDP odpowiedź] comType={comType}, count={frameCount}, cmdID={frameCmdID}, content={content}");
         };
         while (true)
         {
@@ -1094,8 +1092,8 @@ jog点动立即停止
         return 0;
     }
 
-关节扭矩控制代码示例
-++++++++++++++++++++++++++++++++++
+Przykład kodu sterowania momentem obrotowym stawu
++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
@@ -1119,8 +1117,8 @@ jog点动立即停止
         robot.DragTeachSwitch(0);
     }
 
-具有超速保护的关节扭矩控制代码示例
-++++++++++++++++++++++++++++++++++++++++++++++++++
+Przykład kodu sterowania momentem obrotowym stawu z ochroną przed przekroczeniem prędkości
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
@@ -1172,29 +1170,28 @@ jog点动立即停止
         return 0;
     }
 
-笛卡尔空间伺服模式运动
-++++++++++++++++++++++++++++++++++
+Ruch w trybie serwo w przestrzeni kartezjańskiej
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief 笛卡尔空间伺服模式运动
-    * @param [in] mode 0-绝对运动(基坐标系)，1-增量运动(基坐标系)，2-增量运动(工具坐标系)
-    * @param [in] desc_pos 目标笛卡尔位姿或位姿增量
-    * @param [in] exaxis 扩展轴位置
-    * @param [in] pos_gain 位姿增量比例系数，仅在增量运动下生效，范围[0~1]
-    * @param [in] acc 加速度百分比，范围[0~100],暂不开放，默认为0
-    * @param [in] vel 速度百分比，范围[0~100]，暂不开放，默认为0
-    * @param [in] cmdT 指令下发周期，单位s，建议范围[0.001~0.016]
-    * @param [in] filterT 滤波时间，单位s，暂不开放，默认为0
-    * @param [in] gain 目标位置的比例放大器，暂不开放，默认为0
-    * @return 错误码
+    * @brief Ruch w trybie serwo w przestrzeni kartezjańskiej
+    * @param [in] mode 0-ruch absolutny (układ podstawowy), 1-ruch przyrostowy (układ podstawowy), 2-ruch przyrostowy (układ narzędzia)
+    * @param [in] desc_pos Docelowa pozycja i orientacja kartezjańska lub przyrost pozycji i orientacji
+    * @param [in] exaxis Pozycja osi rozszerzonej
+    * @param [in] pos_gain Współczynnik proporcjonalności przyrostu pozycji, działa tylko w ruchu przyrostowym, zakres [0~1]
+    * @param [in] acc Procent przyspieszenia, zakres [0~100], tymczasowo nieudostępnione, domyślnie 0
+    * @param [in] vel Procent prędkości, zakres [0~100], tymczasowo nieudostępnione, domyślnie 0
+    * @param [in] cmdT Okres wysyłania instrukcji, jednostka s, zalecany zakres [0.001~0.016]
+    * @param [in] filterT Czas filtrowania, jednostka s, tymczasowo nieudostępnione, domyślnie 0
+    * @param [in] gain Wzmacniacz proporcjonalny pozycji docelowej, tymczasowo nieudostępnione, domyślnie 0
+    * @return Kod błędu
     */
     public int ServoCart(int mode, DescPose desc_pose, ExaxisPos exaxis, double[] pos_gain, double acc, double vel, double cmdT, double filterT, double gain);
 
-笛卡尔空间伺服模式运动代码示例
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
+Przykład kodu ruchu w trybie serwo w przestrzeni kartezjańskiej
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
@@ -1227,67 +1224,67 @@ jog点动立即停止
         }
     }
 
-样条运动开始
-++++++++++++++++++++++++++++++++++
+Rozpoczęcie ruchu po krzywej średniej
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief  样条运动开始
-    * @return  错误码
+    * @brief  Rozpoczęcie ruchu po krzywej średniej
+    * @return  Kod błędu
     */
     int SplineStart();
 
-样条运动PTP
-++++++++++++++++++++++++++++++++++
+Ruch PTP po krzywej średniej
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief  关节空间样条运动
-    * @param  [in] joint_pos  目标关节位置,单位deg
-    * @param  [in] desc_pos   目标笛卡尔位姿
-    * @param  [in] tool  工具坐标号，范围[0~14]
-    * @param  [in] user  工件坐标号，范围[0~14]
-    * @param  [in] vel  速度百分比，范围[0~100]
-    * @param  [in] acc  加速度百分比，范围[0~100],暂不开放
-    * @param  [in] ovl  速度缩放因子，范围[0~100]   
-    * @return  错误码
+    * @brief  Ruch po krzywej średniej w przestrzeni stawów
+    * @param  [in] joint_pos  Docelowa pozycja stawów, jednostka deg
+    * @param  [in] desc_pos   Docelowa pozycja i orientacja kartezjańska
+    * @param  [in] tool  Numer układu współrzędnych narzędzia, zakres [0~14]
+    * @param  [in] user  Numer układu współrzędnych przedmiotu, zakres [0~14]
+    * @param  [in] vel  Procent prędkości, zakres [0~100]
+    * @param  [in] acc  Procent przyspieszenia, zakres [0~100], tymczasowo nieudostępnione
+    * @param  [in] ovl  Współczynnik skalowania prędkości, zakres [0~100]   
+    * @return  Kod błędu
     */
     int SplinePTP(JointPos joint_pos, DescPose desc_pos, int tool, int user, float vel, float acc, float ovl);
 
-关节空间样条运动 (自动正运动学计算)
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Ruch po krzywej średniej w przestrzeni stawów (automatyczne obliczenie kinematyki prostej)
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C#SDK-V1.1.7  Web-3.8.5
 
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief  关节空间样条运动 (自动正运动学计算)
-    * @param  [in] joint_pos  目标关节位置,单位deg
-    * @param  [in] tool  工具坐标号，范围[0~14]
-    * @param  [in] user  工件坐标号，范围[0~14]
-    * @param  [in] vel  速度百分比，范围[0~100]
-    * @param  [in] acc  加速度百分比，范围[0~100],暂不开放
-    * @param  [in] ovl  速度缩放因子，范围[0~100]
-    * @return  错误码
+    * @brief  Ruch po krzywej średniej w przestrzeni stawów (automatyczne obliczenie kinematyki prostej)
+    * @param  [in] joint_pos  Docelowa pozycja stawów, jednostka deg
+    * @param  [in] tool  Numer układu współrzędnych narzędzia, zakres [0~14]
+    * @param  [in] user  Numer układu współrzędnych przedmiotu, zakres [0~14]
+    * @param  [in] vel  Procent prędkości, zakres [0~100]
+    * @param  [in] acc  Procent przyspieszenia, zakres [0~100], tymczasowo nieudostępnione
+    * @param  [in] ovl  Współczynnik skalowania prędkości, zakres [0~100]
+    * @return  Kod błędu
     */
     int SplinePTP(JointPos joint_pos, int tool, int user, double vel, double acc, double ovl)
 
-样条运动结束
-++++++++++++++++++++++++++++++++++
+Zakończenie ruchu po krzywej średniej
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief  样条运动结束
-    * @return  错误码
+    * @brief  Zakończenie ruchu po krzywej średniej
+    * @return  Kod błędu
     */
     int SplineEnd(); 
 
-样条运动代码示例
-++++++++++++++++++++++
+Przykład kodu ruchu po krzywej średniej
++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
@@ -1326,76 +1323,76 @@ jog点动立即停止
         robot.SplineEnd();
     }
 
-新样条运动开始
-++++++++++++++++++++++++++++++++++
+Rozpoczęcie nowego ruchu po krzywej średniej
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionchanged:: C#SDK-v1.0.6
 
 .. code-block:: c#
     :linenos:
 
     /** 
-    * @brief 新样条运动开始 
-    * @param [in] type  0-圆弧过渡，1-给定点位为路径点
-    * @param [in] averageTime  全局平均衔接时间(ms)(10 ~  )，默认2000
-    * @return 错误码 
+    * @brief Rozpoczęcie nowego ruchu po krzywej średniej 
+    * @param [in] type  0-przejście łukowe, 1-punkty podane są punktami ścieżki
+    * @param [in] averageTime  Globalny średni czas połączenia (ms) (10 ~  ), domyślnie 2000
+    * @return Kod błędu 
     */ 
     int NewSplineStart(int type, int averageTime=2000);
     
-新样条指令点
-++++++++++++++++++++++++++++++++++
+Nowy punkt instrukcji krzywej średniej
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /** 
-    * @brief 增加样条运动指令点 
-    * @param [in] joint_pos 目标关节位置,单位 deg 
-    * @param [in] desc_pos 目标笛卡尔位姿 
-    * @param [in] tool 工具坐标号，范围[0~14] 
-    * @param [in] user 工件坐标号，范围[0~14] 
-    * @param [in] vel 速度百分比，范围[0~100] 
-    * @param [in] acc 加速度百分比，范围[0~100],暂不开放 
-    * @param [in] ovl 速度缩放因子，范围[0~100] 
-    * @param [in] blendR [-1.0]-运动到位(阻塞)，[0~1000.0]-平滑半径(非阻塞)，单位mm
-    * @param [in] lastFlag  是否为最后一个点，0-否，1-是
-    * @return 错误码 
+    * @brief Dodaje punkt instrukcji ruchu po krzywej średniej 
+    * @param [in] joint_pos Docelowa pozycja stawów, jednostka deg 
+    * @param [in] desc_pos Docelowa pozycja i orientacja kartezjańska 
+    * @param [in] tool Numer układu współrzędnych narzędzia, zakres [0~14] 
+    * @param [in] user Numer układu współrzędnych przedmiotu, zakres [0~14] 
+    * @param [in] vel Procent prędkości, zakres [0~100] 
+    * @param [in] acc Procent przyspieszenia, zakres [0~100], tymczasowo nieudostępnione 
+    * @param [in] ovl Współczynnik skalowania prędkości, zakres [0~100] 
+    * @param [in] blendR [-1.0]-ruch do pozycji (blokujący), [0~1000.0]-promień wygładzenia (nieblokujący), jednostka mm
+    * @param [in] lastFlag  Czy jest ostatnim punktem, 0-nie, 1-tak
+    * @return Kod błędu 
     */ 
     int NewSplinePoint(JointPos joint_pos, DescPose desc_pos, int tool, int user, float vel, float acc, float ovl, float blendR, int lastFlag);
 
-新样条指令点(自动逆运动学计算)
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Nowy punkt instrukcji krzywej średniej (automatyczne obliczenie kinematyki odwrotnej)
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C#SDK-V1.1.7  Web-3.8.5
 
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief 新样条指令点(自动逆运动学计算)
-    * @param  [in] desc_pos   目标笛卡尔位姿
-    * @param  [in] tool  工具坐标号，范围[0~14]
-    * @param  [in] user  工件坐标号，范围[0~14]
-    * @param  [in] vel  速度百分比，范围[0~100]
-    * @param  [in] acc  加速度百分比，范围[0~100],暂不开放
-    * @param  [in] ovl  速度缩放因子，范围[0~100]
-    * @param  [in] blendR [-1.0]-运动到位(阻塞)，[0~1000.0]-平滑半径(非阻塞)，单位mm
-    * @param  [in] lastFlag 是否为最后一个点，0-否，1-是
-    * @param  [in] config 逆解关节空间配置，[-1]-参考当前关节位置解算，[0~7]-依据特定关节空间配置求解
-    * @return  错误码
+    * @brief Nowy punkt instrukcji krzywej średniej (automatyczne obliczenie kinematyki odwrotnej)
+    * @param  [in] desc_pos   Docelowa pozycja i orientacja kartezjańska
+    * @param  [in] tool  Numer układu współrzędnych narzędzia, zakres [0~14]
+    * @param  [in] user  Numer układu współrzędnych przedmiotu, zakres [0~14]
+    * @param  [in] vel  Procent prędkości, zakres [0~100]
+    * @param  [in] acc  Procent przyspieszenia, zakres [0~100], tymczasowo nieudostępnione
+    * @param  [in] ovl  Współczynnik skalowania prędkości, zakres [0~100]
+    * @param  [in] blendR [-1.0]-ruch do pozycji (blokujący), [0~1000.0]-promień wygładzenia (nieblokujący), jednostka mm
+    * @param  [in] lastFlag Czy jest ostatnim punktem, 0-nie, 1-tak
+    * @param  [in] config Konfiguracja przestrzeni stawów dla rozwiązania odwrotnego, [-1]-obliczenie z odniesieniem do bieżącej pozycji stawów, [0~7]-rozwiązanie zgodnie z określoną konfiguracją przestrzeni stawów
+    * @return  Kod błędu
     */
     int NewSplinePoint(DescPose desc_pos, int tool, int user, double vel, double acc, double ovl, double blendR, int lastFlag,int config)
 
-新样条运动结束
-++++++++++++++++++++++++++++++++++
+Zakończenie nowego ruchu po krzywej średniej
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /** 
-    * @brief 新样条运动开始 
-    * @return 错误码 
+    * @brief Zakończenie nowego ruchu po krzywej średniej 
+    * @return Kod błędu 
     */ 
     int NewSplineEnd();
     
-新样条运动代码示例
-++++++++++++++++++++++++++++++++++
+Przykład kodu nowego ruchu po krzywej średniej
++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
@@ -1437,41 +1434,41 @@ jog点动立即停止
         robot.NewSplineEnd();
     }
 
-终止运动
-++++++++++++++++++++++++++++++++++
+Zatrzymanie ruchu
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief 终止运动
-    * @return  错误码
+    * @brief Zatrzymanie ruchu
+    * @return  Kod błędu
     */
     int StopMotion();
 
-暂停运动
-++++++++++++++++++++++++++++++++++
+Wstrzymanie ruchu
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
     
     /** 
-      * @brief 暂停运动 
-      * @return 错误码 
+      * @brief Wstrzymanie ruchu 
+      * @return Kod błędu 
     */  
     int PauseMotion();
 
-恢复运动
-++++++++++++++++++++++++++++++++++
+Wznowienie ruchu
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /** 
-    * @brief 恢复运动 
-    * @return 错误码 
+    * @brief Wznowienie ruchu 
+    * @return Kod błędu 
     */ 
     int ResumeMotion();
 
-运动暂停、恢复、停止代码示例
-++++++++++++++++++++++++++++++++++
+Przykład kodu wstrzymania, wznowienia, zatrzymania ruchu
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
@@ -1510,33 +1507,32 @@ jog点动立即停止
 
     }
 
-点位整体偏移开始
-++++++++++++++++++++++++++++++++++
+Rozpoczęcie globalnego przesunięcia punktów
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief  点位整体偏移开始
-    * @param  [in]  flag  0-基坐标系下/工件坐标系下偏移，2-工具坐标系下偏移
-    * @param  [in] offset_pos  位姿偏移量
-    * @return  错误码
+    * @brief  Rozpoczęcie globalnego przesunięcia punktów
+    * @param  [in]  flag  0-przesunięcie w podstawowym układzie współrzędnych / układzie współrzędnych przedmiotu, 2-przesunięcie w układzie współrzędnych narzędzia
+    * @param  [in] offset_pos  Wartość przesunięcia pozycji i orientacji
+    * @return  Kod błędu
     */
     int PointsOffsetEnable(int flag, DescPose offset_pos); 
 
-
-点位整体偏移结束
-++++++++++++++++++++++++++++++++++
+Zakończenie globalnego przesunięcia punktów
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief  点位整体偏移结束
-    * @return  错误码
+    * @brief  Zakończenie globalnego przesunięcia punktów
+    * @return  Kod błędu
     */
     int PointsOffsetDisable(); 
 
-点位偏移代码示例
-++++++++++++++++++++++
+Przykład kodu przesunięcia punktów
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
@@ -1578,68 +1574,68 @@ jog点动立即停止
         robot.PointsOffsetDisable();
     }
 
-控制箱AO飞拍开始
-++++++++++++++++++++++++++++++++++
+Rozpoczęcie chwytania AO skrzynki sterowniczej w locie
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C#SDK-v1.0.7
 
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief 控制箱AO飞拍开始
-    * @param [in] AONum 控制箱AO编号
-    * @param [in] maxTCPSpeed 最大TCP速度值[1-5000mm/s]，默认1000
-    * @param [in] maxAOPercent 最大TCP速度值对应的AO百分比，默认100%
-    * @param [in] zeroZoneCmp 死区补偿值AO百分比，整形，默认为20%，范围[0-100]
-    * @return 错误码
+    * @brief Rozpoczęcie chwytania AO skrzynki sterowniczej w locie
+    * @param [in] AONum Numer AO skrzynki sterowniczej
+    * @param [in] maxTCPSpeed Maksymalna wartość prędkości TCP [1-5000mm/s], domyślnie 1000
+    * @param [in] maxAOPercent Procent AO odpowiadający maksymalnej prędkości TCP, domyślnie 100%
+    * @param [in] zeroZoneCmp Wartość kompensacji martwego pola, procent AO, liczba całkowita, domyślnie 20%, zakres [0-100]
+    * @return Kod błędu
     */
     int MoveAOStart(int AONum, int maxTCPSpeed, int maxAOPercent, int zeroZoneCmp);
 
-控制箱AO飞拍停止
-++++++++++++++++++++++++++++++++++
+Zatrzymanie chwytania AO skrzynki sterowniczej w locie
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C#SDK-v1.0.7
    
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief 控制箱AO飞拍停止
-    * @return 错误码
+    * @brief Zatrzymanie chwytania AO skrzynki sterowniczej w locie
+    * @return Kod błędu
     */
     int MoveAOStop();
     
-末端AO飞拍开始
-++++++++++++++++++++++++++++++++++
+Rozpoczęcie chwytania AO końcowego w locie
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C#SDK-v1.0.7
    
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief 末端AO飞拍开始
-    * @param [in] AONum 末端AO编号
-    * @param [in] maxTCPSpeed 最大TCP速度值[1-5000mm/s]，默认1000
-    * @param [in] maxAOPercent 最大TCP速度值对应的AO百分比，默认100%
-    * @param [in] zeroZoneCmp 死区补偿值AO百分比，整形，默认为20%，范围[0-100]
-    * @return 错误码
+    * @brief Rozpoczęcie chwytania AO końcowego w locie
+    * @param [in] AONum Numer AO końcowego
+    * @param [in] maxTCPSpeed Maksymalna wartość prędkości TCP [1-5000mm/s], domyślnie 1000
+    * @param [in] maxAOPercent Procent AO odpowiadający maksymalnej prędkości TCP, domyślnie 100%
+    * @param [in] zeroZoneCmp Wartość kompensacji martwego pola, procent AO, liczba całkowita, domyślnie 20%, zakres [0-100]
+    * @return Kod błędu
     */
     int MoveToolAOStart(int AONum, int maxTCPSpeed, int maxAOPercent, int zeroZoneCmp);
     
-末端AO飞拍停止
-++++++++++++++++++++++++++++++++++
+Zatrzymanie chwytania AO końcowego w locie
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C#SDK-v1.0.7
    
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief 末端AO飞拍停止
-    * @return 错误码
+    * @brief Zatrzymanie chwytania AO końcowego w locie
+    * @return Kod błędu
     */
     int MoveToolAOStop();
 
-AO飞拍代码示例
-++++++++++++++++++++++++++++++++++
+Przykład kodu chwytania AO w locie
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
@@ -1675,8 +1671,8 @@ AO飞拍代码示例
         robot.MoveToolAOStop();
     }
 
-开始Ptp运动FIR滤波
-++++++++++++++++++++++++++++++
+Rozpoczęcie filtrowania FIR ruchu PTP
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C#SDK-V1.1.3  Web-3.8.2
     
 .. code-block:: c#
@@ -1684,52 +1680,52 @@ AO飞拍代码示例
 
 
     /**
-    * @brief 开始Ptp运动FIR滤波
-    * @param [in] maxAcc 最大加速度极值(deg/s2)
-    * @param [in] maxJek 统一关节急动度极值(deg/s3)
-    * @return 错误码
+    * @brief Rozpoczęcie filtrowania FIR ruchu PTP
+    * @param [in] maxAcc Maksymalna wartość ekstremalna przyspieszenia (deg/s²)
+    * @param [in] maxJek Ujednolicona wartość ekstremalna gwałtowności stawu (deg/s³)
+    * @return Kod błędu
     */
     int PtpFIRPlanningStart(double maxAcc, double maxJek=1000);
 
-关闭Ptp运动FIR滤波
-++++++++++++++++++++++++++++++
+Zakończenie filtrowania FIR ruchu PTP
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief 关闭Ptp运动FIR滤波
-    * @return 错误码
+    * @brief Zakończenie filtrowania FIR ruchu PTP
+    * @return Kod błędu
     */
     int PtpFIRPlanningEnd();
 
-开始LIN、ARC运动FIR滤波
-++++++++++++++++++++++++++++++
+Rozpoczęcie filtrowania FIR ruchu LIN, ARC
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief 开始LIN、ARC运动FIR滤波
-    * @param [in] maxAccLin 线加速度极值(mm/s2)
-    * @param [in] maxAccDeg 角加速度极值(deg/s2)
-    * @param [in] maxJerkLin 线加加速度极值(mm/s3)
-    * @param [in] maxJerkDeg 角加加速度极值(deg/s3)
-    * @return 错误码
+    * @brief Rozpoczęcie filtrowania FIR ruchu LIN, ARC
+    * @param [in] maxAccLin Wartość ekstremalna przyspieszenia liniowego (mm/s²)
+    * @param [in] maxAccDeg Wartość ekstremalna przyspieszenia kątowego (deg/s²)
+    * @param [in] maxJerkLin Wartość ekstremalna gwałtowności liniowej (mm/s³)
+    * @param [in] maxJerkDeg Wartość ekstremalna gwałtowności kątowej (deg/s³)
+    * @return Kod błędu
     */
     int LinArcFIRPlanningStart(double maxAccLin, double maxAccDeg, double maxJerkLin, double maxJerkDeg);
 
-关闭LIN、ARC运动FIR滤波
-++++++++++++++++++++++++++++++
+Zakończenie filtrowania FIR ruchu LIN, ARC
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief 关闭LIN、ARC运动FIR滤波
-    * @return 错误码
+    * @brief Zakończenie filtrowania FIR ruchu LIN, ARC
+    * @return Kod błędu
     */
     int LinArcFIRPlanningEnd();
 
-FIR滤波代码示例
-+++++++++++++++++++++++++++++
+Przykład kodu filtrowania FIR
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C#SDK-V1.1.3  Web-3.8.2
     
 .. code-block:: c#
@@ -1765,32 +1761,32 @@ FIR滤波代码示例
         Console.WriteLine("LinArcFIRPlanningEnd rtn is " + rtn);
     }
 
-加速度平滑开启
-++++++++++++++++++++++++++++++
+Włączenie wygładzania przyspieszenia
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief 加速度平滑开启
-    * @param  [in] saveFlag 是否断电保存
-    * @return  错误码
+    * @brief Włączenie wygładzania przyspieszenia
+    * @param  [in] saveFlag Czy zapisać po odłączeniu zasilania
+    * @return  Kod błędu
     */
     int AccSmoothStart(bool saveFlag);
 
-加速度平滑关闭
-++++++++++++++++++++++++++++++
+Wyłączenie wygładzania przyspieszenia
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief 加速度平滑关闭
-    * @param  [in] saveFlag 是否断电保存
-    * @return  错误码
+    * @brief Wyłączenie wygładzania przyspieszenia
+    * @param  [in] saveFlag Czy zapisać po odłączeniu zasilania
+    * @return  Kod błędu
     */
     int AccSmoothEnd(bool saveFlag);
 
-代码示例
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Przykład kodu
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
@@ -1814,31 +1810,31 @@ FIR滤波代码示例
         Console.WriteLine("AccSmoothEnd rtn is " + rtn);
     }
 
-指定姿态速度开启
-+++++++++++++++++++++++++++++
+Włączenie określonej prędkości orientacji
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief 指定姿态速度开启
-    * @param [in] ratio 姿态速度百分比[0-300]
-    * @return  错误码
+    * @brief Włączenie określonej prędkości orientacji
+    * @param [in] ratio Procent prędkości orientacji [0-300]
+    * @return  Kod błędu
     */
     int AngularSpeedStart(int ratio);
 
-指定姿态速度关闭
-+++++++++++++++++++++++++++++
+Wyłączenie określonej prędkości orientacji
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
    
     /**
-    * @brief 指定姿态速度关闭
-    * @return  错误码
+    * @brief Wyłączenie określonej prędkości orientacji
+    * @return  Kod błędu
     */
     int AngularSpeedEnd();
 
-机器人指定姿态速度代码示例
-+++++++++++++++++++++++++++++
+Przykład kodu określonej prędkości orientacji robota
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
@@ -1861,38 +1857,38 @@ FIR滤波代码示例
         Console.WriteLine("AngularSpeedEnd rtn is " + rtn);
     }
 
-开始奇异位姿保护
-+++++++++++++++++++++++++++++
+Rozpoczęcie ochrony przed osobliwą pozycją
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C#SDK-v1.0.9
 
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief 开始奇异位姿保护
-    * @param [in] protectMode 奇异保护模式，0：关节模式；1-笛卡尔模式
-    * @param [in] minShoulderPos 肩奇异调整范围(mm), 默认100
-    * @param [in] minElbowPos 肘奇异调整范围(mm), 默认50
-    * @param [in] minWristPos 腕奇异调整范围(°), 默认10
-    * @return 错误码
+    * @brief Rozpoczęcie ochrony przed osobliwą pozycją
+    * @param [in] protectMode Tryb ochrony przed osobliwością, 0: tryb stawów; 1-tryb kartezjański
+    * @param [in] minShoulderPos Zakres regulacji osobliwości barku (mm), domyślnie 100
+    * @param [in] minElbowPos Zakres regulacji osobliwości łokcia (mm), domyślnie 50
+    * @param [in] minWristPos Zakres regulacji osobliwości nadgarstka (°), domyślnie 10
+    * @return Kod błędu
     */
     int SingularAvoidStart(int protectMode, double minShoulderPos, double minElbowPos, double minWristPos);
 
-停止奇异位姿保护
-+++++++++++++++++++++++++++++
+Zatrzymanie ochrony przed osobliwą pozycją
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C#SDK-v1.0.9
 
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief 停止奇异位姿保护
-    * @return 错误码
+    * @brief Zatrzymanie ochrony przed osobliwą pozycją
+    * @return Kod błędu
     */
     int SingularAvoidEnd();
 
-代码示例
-+++++++++++++++++++++++++++++
+Przykład kodu
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C#SDK-v1.0.9
     
 .. code-block:: c#
@@ -1918,83 +1914,83 @@ FIR滤波代码示例
         Console.WriteLine("SingularAvoidEnd rtn is " + rtn);
     }
 
-安全停止触发
-++++++++++++++++++++++++++++++
+Wyzwolenie sygnału bezpiecznego zatrzymania
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief 安全停止触发信号
-    * @return 错误码
+    * @brief Sygnał wyzwolenia bezpiecznego zatrzymania
+    * @return Kod błędu
     */
     int GetSafetyCode();
 
-清空运动指令队列
-++++++++++++++++++++++++++++++++++++++++++++++++++
+Opróżnienie kolejki instrukcji ruchu
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C#SDK-V1.1.9  Web-3.8.7
     
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief 清空运动指令队列
-    * @return 错误码
+    * @brief Opróżnienie kolejki instrukcji ruchu
+    * @return Kod błędu
     */
     public int MotionQueueClear();
 
-移动到相贯线起始点
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Przejście do punktu początkowego linii przecięcia rur
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief 移动到相贯线起始点
-    * @param [in] mainPoint 主管6个示教点的笛卡尔位姿
-    * @param [in] mainExaxisPos 主管6个示教点扩展轴位置
-    * @param [in] piecePoint 辅管6个示教点的笛卡尔位姿
-    * @param [in] pieceExaxisPos 拼接管6个示教点扩展轴位置
-    * @param [in] extAxisFlag 是否启用扩展轴；0-不启用；1-启用
-    * @param [in] exaxisPos 起点扩展轴位置
-    * @param [in] tool 工具坐标系编号
-    * @param [in] wobj 工件坐标系编号
-    * @param [in] vel 速度百分比
-    * @param [in] acc 加速度百分比
-    * @param [in] ovl 速度缩放因子
-    * @param [in] oacc 加速度缩放因子
-    * @param [in] moveType 运动类型; 0-PTP；1-LIN
-    * @param [in] moveDirection 运动方向；0-顺时针；1-逆时针
-    * @param [in] offset 偏移量
-    * @return 错误码
+    * @brief Przejście do punktu początkowego linii przecięcia rur
+    * @param [in] mainPoint Pozycje i orientacje kartezjańskie 6 punktów nauczania rury głównej
+    * @param [in] mainExaxisPos Pozycje osi rozszerzonej dla 6 punktów nauczania rury głównej
+    * @param [in] piecePoint Pozycje i orientacje kartezjańskie 6 punktów nauczania rury pomocniczej
+    * @param [in] pieceExaxisPos Pozycje osi rozszerzonej dla 6 punktów nauczania rury łączącej
+    * @param [in] extAxisFlag Czy włączyć oś rozszerzoną; 0-nie włączaj; 1-włącz
+    * @param [in] exaxisPos Pozycja osi rozszerzonej punktu początkowego
+    * @param [in] tool Numer układu współrzędnych narzędzia
+    * @param [in] wobj Numer układu współrzędnych przedmiotu
+    * @param [in] vel Procent prędkości
+    * @param [in] acc Procent przyspieszenia
+    * @param [in] ovl Współczynnik skalowania prędkości
+    * @param [in] oacc Współczynnik skalowania przyspieszenia
+    * @param [in] moveType Typ ruchu; 0-PTP; 1-LIN
+    * @param [in] moveDirection Kierunek ruchu; 0-zgodnie z ruchem wskazówek zegara; 1-przeciwnie do ruchu wskazówek zegara
+    * @param [in] offset Przesunięcie
+    * @return Kod błędu
     */
     public int MoveToIntersectLineStart(DescPose[] mainPoint, ExaxisPos[] mainExaxisPos, DescPose[] piecePoint, ExaxisPos[] pieceExaxisPos, int extAxisFlag, ExaxisPos exaxisPos, int tool, int wobj, double vel, double acc, double ovl, double oacc, int moveType, int moveDirection, DescPose offset);
             
-相贯线运动
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Ruch po linii przecięcia rur
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief 相贯线运动
-    * @param [in] mainPoint 主管6个示教点的笛卡尔位姿
-    * @param [in] mainExaxisPos 主管6个示教点扩展轴位置
-    * @param [in] piecePoint 辅管6个示教点的笛卡尔位姿
-    * @param [in] pieceExaxisPos 拼接管6个示教点扩展轴位置
-    * @param [in] extAxisFlag 是否启用扩展轴；0-不启用；1-启用
-    * @param [in] exaxisPos 起点扩展轴位置
-    * @param [in] tool 工具坐标系编号
-    * @param [in] wobj 工件坐标系编号
-    * @param [in] vel 速度百分比
-    * @param [in] acc 加速度百分比
-    * @param [in] ovl 速度缩放因子
-    * @param [in] oacc 加速度缩放因子
-    * @param [in] moveDirection 运动方向; 0-顺时针；1-逆时针
-    * @param [in] offset 偏移量
-    * @return 错误码
+    * @brief Ruch po linii przecięcia rur
+    * @param [in] mainPoint Pozycje i orientacje kartezjańskie 6 punktów nauczania rury głównej
+    * @param [in] mainExaxisPos Pozycje osi rozszerzonej dla 6 punktów nauczania rury głównej
+    * @param [in] piecePoint Pozycje i orientacje kartezjańskie 6 punktów nauczania rury pomocniczej
+    * @param [in] pieceExaxisPos Pozycje osi rozszerzonej dla 6 punktów nauczania rury łączącej
+    * @param [in] extAxisFlag Czy włączyć oś rozszerzoną; 0-nie włączaj; 1-włącz
+    * @param [in] exaxisPos Pozycja osi rozszerzonej punktu początkowego
+    * @param [in] tool Numer układu współrzędnych narzędzia
+    * @param [in] wobj Numer układu współrzędnych przedmiotu
+    * @param [in] vel Procent prędkości
+    * @param [in] acc Procent przyspieszenia
+    * @param [in] ovl Współczynnik skalowania prędkości
+    * @param [in] oacc Współczynnik skalowania przyspieszenia
+    * @param [in] moveDirection Kierunek ruchu; 0-zgodnie z ruchem wskazówek zegara; 1-przeciwnie do ruchu wskazówek zegara
+    * @param [in] offset Przesunięcie
+    * @return Kod błędu
     */
     public int MoveIntersectLine(DescPose[] mainPoint, ExaxisPos[] mainExaxisPos, DescPose[] piecePoint, ExaxisPos[] pieceExaxisPos, int extAxisFlag, ExaxisPos[] exaxisPos, int tool, int wobj, double vel, double acc, double ovl, double oacc, int moveDirection, DescPose offset);
                 
-机器人相贯线运动代码示例
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Przykład kodu ruchu po linii przecięcia rur robota
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
@@ -2061,19 +2057,19 @@ FIR滤波代码示例
         return ;
     }
 
-原地空运动
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Ruch w miejscu pusty
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief 原地空运动
-    * @return 错误码
+    * @brief Ruch w miejscu pusty
+    * @return Kod błędu
     */
     public int MoveStationary()
 
-原地空运动代码示例
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Przykład kodu ruchu w miejscu pustego
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
@@ -2087,80 +2083,80 @@ FIR滤波代码示例
         Console.WriteLine($"LaserSensorRecord1 rtn is {rtn}"); 
     }
 
-定点摆动开始
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Rozpoczęcie oscylacji punktowej
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief 定点摆动开始
-    * @param [in] weaveNum 摆动编号[0-7]
-    * @param [in] mode 0-工具坐标系；1-参考点
-    * @param [in] refPoint 参考点笛卡尔坐标[x,y,z,a,b,c]
-    * @param [in] weaveTime 摆动时间[s]
-    * @return 错误码
+    * @brief Rozpoczęcie oscylacji punktowej
+    * @param [in] weaveNum Numer oscylacji [0-7]
+    * @param [in] mode 0-układ współrzędnych narzędzia; 1-punkt odniesienia
+    * @param [in] refPoint Współrzędne kartezjańskie punktu odniesienia [x,y,z,a,b,c]
+    * @param [in] weaveTime Czas oscylacji [s]
+    * @return Kod błędu
     */
     public int OriginPointWeaveStart(int weaveNum, int mode, DescPose refPoint, double weaveTime);
     
-定点摆动结束
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Zakończenie oscylacji punktowej
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief 定点摆动结束
-    * @return 错误码
+    * @brief Zakończenie oscylacji punktowej
+    * @return Kod błędu
     */
     public int OriginPointWeaveEnd();
         
-定点摆动的SDK代码示例
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Przykład kodu SDK oscylacji punktowej
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     void TestOriginPointWeave()
     {
-        // 创建关节位置对象
+        // Utwórz obiekt pozycji stawów
         JointPos j = new JointPos(39.886, -98.580, -124.032, -47.393, 90.000, 40.842);
         ExaxisPos epos = new ExaxisPos(0, 0, 0, 0);
         DescPose offset_pos = new DescPose(0, 0, 0, 0, 0, 0);
 
-        // 参考点坐标
+        // Współrzędne punktu odniesienia
         DescPose refPoint = new DescPose(400.021, 300.022, 299.996, 179.997, -0.003, -90.956);
 
-        //// 第一次运动
+        //// Pierwszy ruch
         robot.MoveJ(j, 1, 0, 100, 100, 100, epos, -1, 0, offset_pos);
 
-        // 启动定点摆动（模式0）
+        // Uruchom oscylację punktową (tryb 0)
         robot.OriginPointWeaveStart(0, 0, refPoint, 3);
-        robot.MoveStationary();   // 执行固定运动（假设该方法存在）
+        robot.MoveStationary();   // Wykonaj ruch stały (zakładając, że metoda istnieje)
         robot.OriginPointWeaveEnd();
 
-        Thread.Sleep(2000);         // 等待2秒
+        Thread.Sleep(2000);         // Odczekaj 2 sekundy
 
-        // 第二次运动
+        // Drugi ruch
         robot.MoveJ(j, 1, 0, 100, 100, 100, epos, -1, 0, offset_pos);
 
-        // 启动定点摆动（模式1）
+        // Uruchom oscylację punktową (tryb 1)
         robot.OriginPointWeaveStart(0, 1, refPoint, 3);
         robot.MoveStationary();
         robot.OriginPointWeaveEnd();
     }
         
-定点摆动（包含激光及扩展轴）的SDK代码示例
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Przykład kodu SDK oscylacji punktowej (zawierającej laser i oś rozszerzoną)
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     void TestOriginPointWeave2()
     {
-        // 创建关节位置对象
+        // Utwórz obiekt pozycji stawów
         JointPos j = new JointPos(39.886, -98.580, -124.032, -47.393, 90.000, 40.842);
         ExaxisPos epos1 = new ExaxisPos(0, 0, 0, 0);
         DescPose offset_pos = new DescPose(0, 0, 0, 0, 0, 0);
         ExaxisPos epos2 = new ExaxisPos(5, 0.000, 0.000, 0.000);
 
-        // 参考点坐标
+        // Współrzędne punktu odniesienia
         DescPose refPoint = new DescPose(400.021, 300.022, 299.996, 179.997, -0.003, -90.956);
 
         int rtn = 0;
@@ -2168,68 +2164,68 @@ FIR滤波代码示例
         robot.LaserTrackingSensorSamplePeriod(20);
         robot.LoadPosSensorDriver(101);
 
-        // 加载 UDP 驱动
+        // Załaduj sterownik UDP
         robot.ExtDevLoadUDPDriver();
 
-        // 设置外部轴命令完成时间
+        // Ustaw czas zakończenia polecenia zewnętrznej osi
         rtn = robot.SetExAxisCmdDoneTime(5000.0);
         Console.WriteLine("SetExAxisCmdDoneTime rtn is " + rtn);
 
-        // 使能外部轴 1 和 2
+        // Załącz zewnętrzne osie 1 i 2
         rtn = robot.ExtAxisServoOn(1, 1);
         Console.WriteLine("ExtAxisServoOn axis id 1 rtn is " + rtn);
         rtn = robot.ExtAxisServoOn(2, 1);
         Console.WriteLine("ExtAxisServoOn axis id 2 rtn is " + rtn);
         Thread.Sleep(2000);
 
-        // 设置外部轴回零
+        // Ustaw powrót do zera zewnętrznej osi
         robot.ExtAxisSetHoming(1, 0, 10, 2);
         robot.LaserTrackingLaserOnOff(1);
 
 
-        //// 1---不带扩展轴
+        //// 1---bez osi rozszerzonej
         robot.LaserTrackingTrackOnOff(1, 4);
         robot.Sleep(200);
-        // 启动定点摆动
+        // Uruchom oscylację punktową
         robot.OriginPointWeaveStart(0, 0, refPoint, 10);
-        robot.MoveStationary();   // 执行固定运动
+        robot.MoveStationary();   // Wykonaj ruch stały
         robot.OriginPointWeaveEnd();
         robot.LaserTrackingTrackOnOff(0, 4);
 
-        Thread.Sleep(2000);         // 等待2秒
+        Thread.Sleep(2000);         // Odczekaj 2 sekundy
 
-        //// 2----带扩展轴
+        //// 2----z osią rozszerzoną
         robot.ExtAxisMove(epos1, 100, -1);
         robot.LaserTrackingTrackOnOff(1, 4);
-        // 启动定点摆动
+        // Uruchom oscylację punktową
         robot.OriginPointWeaveStart(0, 0, refPoint, 20);
         robot.ExtAxisMove(epos2, 100, -1);
         robot.OriginPointWeaveEnd();
         robot.LaserTrackingTrackOnOff(0, 4);
     }
         
-关节空间速度伺服模式运动
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Ruch w trybie serwo prędkości w przestrzeni stawów
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief  关节空间速度伺服模式运动
-    * @param  [in] joint_pos  6个目标关节速度,单位deg/s
-    * @param  [in] axisPos  4个外部轴速度,单位deg/s
-    * @param  [in] acc  加速度百分比，范围[0~100],暂不开放，默认为0
-    * @param  [in] vel  速度百分比，范围[0~100]，暂不开放，默认为0
-    * @param  [in] cmdT  指令下发周期，单位s，建议范围[0.001~0.0016]
-    * @param  [in] filterT 滤波时间，单位s，暂不开放，默认为0
-    * @param  [in] gain  目标位置的比例放大器，暂不开放，默认为0
-    * @param  [in] id servoJ指令ID,默认为0
-    * @param[in] comType 指令下发类型；0-xmlrpc；1-UDP(对应机器人20007端口)
-    * @return  错误码
+    * @brief  Ruch w trybie serwo prędkości w przestrzeni stawów
+    * @param  [in] joint_pos  6 docelowych prędkości stawów, jednostka deg/s
+    * @param  [in] axisPos  4 prędkości zewnętrznych osi, jednostka deg/s
+    * @param  [in] acc   Procent przyspieszenia, zakres [0~100], tymczasowo nieudostępnione, domyślnie 0
+    * @param  [in] vel   Procent prędkości, zakres [0~100], tymczasowo nieudostępnione, domyślnie 0
+    * @param  [in] cmdT   Okres wysyłania instrukcji, jednostka s, zalecany zakres [0.001~0.0016]
+    * @param  [in] filterT Czas filtrowania, jednostka s, tymczasowo nieudostępnione, domyślnie 0
+    * @param  [in] gain   Wzmacniacz proporcjonalny pozycji docelowej, tymczasowo nieudostępnione, domyślnie 0
+    * @param  [in] id ID instrukcji servoJ, domyślnie 0
+    * @param[in] comType Typ wysyłania instrukcji; 0-xmlrpc; 1-UDP (odpowiadający portowi 20007 robota)
+    * @return   Kod błędu
     */
     public int ServoJV(double[] joint_vel, double[] exis_vel, float acc, float vel, float cmdT, float filterT, float gain, int id = 0, int comType = 0)
 
-关节空间速度伺服模式运动代码示例
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Przykład kodu ruchu w trybie serwo prędkości w przestrzeni stawów
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
@@ -2252,59 +2248,59 @@ FIR滤波代码示例
         return 0;
     }
 
-关节MIT控制开始
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Rozpoczęcie sterowania MIT stawów
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief 关节MIT控制开始
-    * @param [in]  comType 指令下发类型；0-xmlrpc；1-UDP(对应机器人20007端口)
-    * @return  错误码
+    * @brief Rozpoczęcie sterowania MIT stawów
+    * @param [in]  comType Typ wysyłania instrukcji; 0-xmlrpc; 1-UDP (odpowiadający portowi 20007 robota)
+    * @return   Kod błędu
     */
     public int ServoMITStart(int comType = 0)
 
-关节MIT控制结束
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Zakończenie sterowania MIT stawów
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief 关节MIT控制结束
-    * @param [in]  comType 指令下发类型；0-xmlrpc；1-UDP(对应机器人20007端口)
-    * @return  错误码
+    * @brief Zakończenie sterowania MIT stawów
+    * @param [in]  comType Typ wysyłania instrukcji; 0-xmlrpc; 1-UDP (odpowiadający portowi 20007 robota)
+    * @return   Kod błędu
     */
     public int ServoMITEnd(int comType = 0)
 
-关节MIT控制
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Sterowanie MIT stawów
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief 关节MIT控制
-    * @param [in] posGain j1~j6关节位置增益
-    * @param [in] desPos j1~j6关节期望位置 单位:deg
-    * @param [in] velGain j1~j6关节速度增益
-    * @param [in] desVel j1~j6关节期望速度 单位:deg/s
-    * @param [in] torque_ff j1~j6前馈力矩 单位:Nm
-    * @param [in] interval 指令周期，单位s，范围[0.001~0.008]
-    * @param [in]  comType 指令下发类型；0-xmlrpc；1-UDP(对应机器人20007端口)
-    * @return 错误码
+    * @brief Sterowanie MIT stawów
+    * @param [in] posGain Wzmocnienie pozycji stawów j1~j6
+    * @param [in] desPos Oczekiwana pozycja stawów j1~j6, jednostka: deg
+    * @param [in] velGain Wzmocnienie prędkości stawów j1~j6
+    * @param [in] desVel Oczekiwana prędkość stawów j1~j6, jednostka: deg/s
+    * @param [in] torque_ff Moment przedni stawów j1~j6, jednostka: Nm
+    * @param [in] interval Okres instrukcji, jednostka s, zakres [0.001~0.008]
+    * @param [in]  comType Typ wysyłania instrukcji; 0-xmlrpc; 1-UDP (odpowiadający portowi 20007 robota)
+    * @return Kod błędu
     */
     public int ServoMIT(double[] posGain, double[] desPos, double[] velGain, double[] desVel, double[] torque_ff, double interval, int comType = 0)
 
-关节MIT控制运动代码示例
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Przykład kodu sterowania MIT stawów
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     public int ServoMITtest()
     {
-        // 订阅回调
+        // Subskrypcja zwrotna
         robot.OnUdpFrameReceived += (comType, frameCount, frameCmdID, contentLen, content) =>
         {
-            Console.WriteLine($"[UDP响应] comType={comType}, count={frameCount}, cmdID={frameCmdID}, content={content}");
+            Console.WriteLine($"[UDP odpowiedź] comType={comType}, count={frameCount}, cmdID={frameCmdID}, content={content}");
         };
         while (true)
         {

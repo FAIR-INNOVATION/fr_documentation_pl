@@ -1,150 +1,152 @@
-机器人基础
-=============
+Podstawy robota
+===============
 
 .. toctree:: 
     :maxdepth: 5
 
-实例化机器人
-++++++++++++
-
-.. csv-table:: 
-    :stub-columns: 1
-    :widths: 10 30
-
-    "原型", "``RPC(ip)``"
-    "描述", "实例化一个机器人对象"
-    "必选参数", "- ``ip``：机器人的IP地址，默认出厂IP为“192.168.58.2”"
-    "默认参数", "无"
-    "返回值", "- 成功：返回一个机器人对象
-    - 失败：创建的对象会被销毁"
-
-关闭RPC连接
-++++++++++++
-
-.. csv-table:: 
-    :stub-columns: 1
-    :widths: 10 30
-
-    "原型", "``CloseRPC()``"
-    "描述", "关闭RPC连接"
-    "必选参数", "无"
-    "默认参数", "无"
-    "返回值", "无"
-
-查询SDK版本号
-++++++++++++++
-
-.. csv-table:: 
-    :stub-columns: 1
-    :widths: 10 30
-
-    "原型", "``GetSDKVersion()``"
-    "描述", "查询SDK版本号"
-    "必选参数", "无"
-    "默认参数", "无"
-    "返回值", "- 错误码 成功-0  失败-errcode
-    - ``sdk``：SDK版本号、控制器版本号"
-
-获取控制器IP
-+++++++++++++
-
-.. csv-table:: 
-    :stub-columns: 1
-    :widths: 10 30
-
-    "原型", "``GetControllerIP()``"
-    "描述", "查询控制器IP"
-    "必选参数", "无"
-    "默认参数", "无"
-    "返回值", "- 错误码 成功-0  失败- errcode
-    - ``ip``：控制器IP"
-
-控制机器人进入或退出拖动示教模式
-++++++++++++++++++++++++++++++++++
-
-.. csv-table:: 
-    :stub-columns: 1
-    :widths: 10 30
-
-    "原型", "``DragTeachSwitch(state)``"
-    "描述", "控制机器人进入或退出拖动示教模式"
-    "必选参数", "- ``state``：1-进入拖动示教模式，0-退出拖动示教模式"
-    "默认参数", "无"
-    "返回值", "错误码 成功-0  失败- errcode"
-
-查询机器人是否处于拖动模式
-++++++++++++++++++++++++++++++++++
-
-.. csv-table:: 
-    :stub-columns: 1
-    :widths: 10 30
-
-    "原型", "``IsInDragTeach()``"
-    "描述", "查询机器人是否处于拖动示教模式"
-    "必选参数", "无"
-    "默认参数", "无"
-    "返回值", "- 错误码 成功-0  失败- errcode
-    - ``state``：0-非拖动示教模式，1-拖动示教模式"
-
-控制机器人上使能或下使能
-++++++++++++++++++++++++++++
-
-.. csv-table:: 
-    :stub-columns: 1
-    :widths: 10 30
-
-    "原型", "``RobotEnable(state)``"
-    "描述", "控制机器人上使能或下使能"
-    "必选参数", "- ``state``：1-上使能，0-下使能"
-    "默认参数", "无"
-    "返回值", "错误码 成功-0  失败- errcode "
-
-
-控制机器人手自动模式切换
+Tworzenie instancji robota
 ++++++++++++++++++++++++++
 
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "原型", "``Mode(state)``"
-    "描述", "控制机器人手自动模式切换"
-    "必选参数", "- ``state``：0-自动模式，1-手动模式"
-    "默认参数", "无"
-    "返回值", "错误码  成功-0  失败- errcode"
+    "Prototyp", "``RPC(ip)``"
+    "Opis", "Tworzy instancję obiektu robota"
+    "Parametry wymagane", "- ``ip``: Adres IP robota, domyślny adres fabryczny to „192.168.58.2”"
+    "Parametry domyślne", "Brak"
+    "Wartość zwracana", "- Sukces: Zwraca obiekt robota
+    - Błąd: Utworzony obiekt zostanie zniszczony"
 
-关闭机器人操作系统
-+++++++++++++++++++++++++++++++++++++++++++++
+Zamykanie połączenia RPC
+++++++++++++++++++++++++
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototyp", "``CloseRPC()``"
+    "Opis", "Zamyka połączenie RPC"
+    "Parametry wymagane", "Brak"
+    "Parametry domyślne", "Brak"
+    "Wartość zwracana", "Brak"
+
+Sprawdzanie numeru wersji SDK
++++++++++++++++++++++++++++++
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototyp", "``GetSDKVersion()``"
+    "Opis", "Sprawdza numer wersji SDK"
+    "Parametry wymagane", "Brak"
+    "Parametry domyślne", "Brak"
+    "Wartość zwracana", "- Kod błędu sukces-0 błąd-errcode
+    - ``sdk``: Numer wersji SDK, numer wersji kontrolera"
+
+Pobieranie IP kontrolera
+++++++++++++++++++++++++
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototyp", "``GetControllerIP()``"
+    "Opis", "Sprawdza IP kontrolera"
+    "Parametry wymagane", "Brak"
+    "Parametry domyślne", "Brak"
+    "Wartość zwracana", "- Kod błędu sukces-0 błąd- errcode
+    - ``ip``: IP kontrolera"
+
+Sterowanie wejściem lub wyjściem robota z trybu przeciągania i uczenia
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototyp", "``DragTeachSwitch(state)``"
+    "Opis", "Sterowanie wejściem lub wyjściem robota z trybu przeciągania i uczenia"
+    "Parametry wymagane", "- ``state``: 1- Wejście w tryb przeciągania i uczenia, 0- Wyjście z trybu przeciągania i uczenia"
+    "Parametry domyślne", "Brak"
+    "Wartość zwracana", "Kod błędu sukces-0 błąd- errcode"
+
+Sprawdzanie, czy robot jest w trybie przeciągania
++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototyp", "``IsInDragTeach()``"
+    "Opis", "Sprawdza, czy robot jest w trybie przeciągania i uczenia"
+    "Parametry wymagane", "Brak"
+    "Parametry domyślne", "Brak"
+    "Wartość zwracana", "- Kod błędu sukces-0 błąd- errcode
+    - ``state``: 0- Tryb przeciągania i uczenia nieaktywny, 1- Tryb przeciągania i uczenia aktywny"
+
+Sterowanie włączeniem lub wyłączeniem zasilania robota
+++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototyp", "``RobotEnable(state)``"
+    "Opis", "Sterowanie włączeniem lub wyłączeniem zasilania robota"
+    "Parametry wymagane", "- ``state``: 1- Włączenie zasilania, 0- Wyłączenie zasilania"
+    "Parametry domyślne", "Brak"
+    "Wartość zwracana", "Kod błędu sukces-0 błąd- errcode "
+
+
+Sterowanie przełączaniem trybu ręcznego/automatycznego robota
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototyp", "``Mode(state)``"
+    "Opis", "Sterowanie przełączaniem trybu ręcznego/automatycznego robota"
+    "Parametry wymagane", "- ``state``: 0- Tryb automatyczny, 1- Tryb ręczny"
+    "Parametry domyślne", "Brak"
+    "Wartość zwracana", "Kod błędu sukces-0 błąd- errcode"
+
+Zamykanie systemu operacyjnego robota
++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. versionadded:: python SDK-v2.1.1
 
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "原型", "``ShutDownRobotOS()``"
-    "描述", "关闭机器人操作系统"
-    "必选参数", "无"
-    "默认参数", "无"
-    "返回值", "错误码 成功-0  失败- errcode"
+    "Prototyp", "``ShutDownRobotOS()``"
+    "Opis", "Zamykanie systemu operacyjnego robota"
+    "Parametry wymagane", "Brak"
+    "Parametry domyślne", "Brak"
+    "Wartość zwracana", "Kod błędu sukces-0 błąd- errcode"
 
-初始化日志参数
-+++++++++++++++++++++++++++++++++++++++++++++
+Inicjalizacja parametrów logowania
++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. versionadded:: python SDK-v2.1.1
 
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "原型", "``LoggerInit(output_model=1, file_path="", file_num=5)``"
-    "描述", "初始化日志参数"
-    "必选参数", "无"
-    "默认参数", "- ``output_model``：输出模式，0-直接输出；1-缓冲输出；2-异步输出，默认1
-    - ``file_path``：文件保存路径+名称，名称必须是xxx.log的形式，比如/home/fr/linux/fairino.log。默认执行程序所在路径，默认名称为：fairino_year+month+data.log(如:fairino_2024_03_13.log);
-    - ``file_num``：滚动存储的文件数量，1~20个，默认值为5。单个文件上限50M;"
-    "返回值", "错误码 成功-0  失败- errcode"
+    "Prototyp", "``LoggerInit(output_model=1, file_path="", file_num=5)``"
+    "Opis", "Inicjalizacja parametrów logowania"
+    "Parametry wymagane", "Brak"
+    "Parametry domyślne", "- ``output_model``: Tryb wyjścia, 0-wyjście bezpośrednie; 1-wyjście buforowane; 2-wyjście asynchroniczne, domyślnie 1
+    - ``file_path``: Ścieżka zapisu pliku + nazwa, nazwa musi być w formacie xxx.log, np. /home/fr/linux/fairino.log. Domyślnie ścieżka lokalizacji programu wykonywalnego, domyślna nazwa to: fairino_year+month+data.log (np. fairino_2024_03_13.log);
+    - ``file_num``: Liczba plików do przechowywania w rolce, od 1 do 20, wartość domyślna to 5. Maksymalny rozmiar pojedynczego pliku to 50 MB;"
+    "Wartość zwracana", "Kod błędu sukces-0 błąd- errcode"
 
-设置日志过滤等级
-+++++++++++++++++++++++++++++++++
+Ustawianie poziomu filtrowania logów
+++++++++++++++++++++++++++++++++++++
 
 .. versionadded:: python SDK-v2.0.2
 
@@ -152,19 +154,20 @@
     :stub-columns: 1
     :widths: 10 30
 
-    "原型", "``SetLoggerLevel(lvl=1)``"
-    "描述", "设置日志过滤等级"
-    "必选参数", "无"
-    "默认参数", "- ``lvl``：过滤等级值，值越小输出日志越少, 1-error, 2-warnning, 3-inform, 4-debug,默认值是1"
-    "返回值", "错误码 成功-0  失败- errcode"
+    "Prototyp", "``SetLoggerLevel(lvl=1)``"
+    "Opis", "Ustawianie poziomu filtrowania logów"
+    "Parametry wymagane", "Brak"
+    "Parametry domyślne", "- ``lvl``: Wartość poziomu filtrowania, im mniejsza wartość, tym mniej logów jest wypisywanych, 1-error, 2-warning, 3-inform, 4-debug, wartość domyślna to 1"
+    "Wartość zwracana", "Kod błędu sukces-0 błąd- errcode"
 
-机器人基础控制代码示例
-+++++++++++++++++++++++++++++++++
+Przykład kodu podstawowego sterowania robotem
++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: python
     :linenos: 
 
     from fairino import Robot
-    # 与机器人控制器建立连接，连接成功返回一个机器人对象
+    # Połączenie z kontrolerem robota, po pomyślnym połączeniu zwraca obiekt robota
     robot = Robot.RPC('192.168.58.2')
     error,version = robot.GetSDKVersion()
     print(f"SDK version: {version}")
@@ -190,37 +193,39 @@
     robot.Mode(1)
     robot.CloseRPC()
 
-获取机器人软件版本
-++++++++++++++++++++++++++
+Pobieranie wersji oprogramowania robota
++++++++++++++++++++++++++++++++++++++++
+
 .. versionadded:: python SDK-v2.0.1
 
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "原型", "``GetSoftwareVersion()``"
-    "描述", "获取机器人软件版本"
-    "必选参数", "无"
-    "默认参数", "无"
-    "返回值", "- 错误码 成功-0  失败- errcode
-    - ``robotModel``：机器人模型
-    - ``webVersion``：web版本
-    - ``controllerVersion``：控制器版本"
+    "Prototyp", "``GetSoftwareVersion()``"
+    "Opis", "Pobiera wersję oprogramowania robota"
+    "Parametry wymagane", "Brak"
+    "Parametry domyślne", "Brak"
+    "Wartość zwracana", "- Kod błędu sukces-0 błąd- errcode
+    - ``robotModel``: Model robota
+    - ``webVersion``: Wersja web
+    - ``controllerVersion``: Wersja kontrolera"
 
-获取机器人硬件版本信息
-++++++++++++++++++++++++++
+Pobieranie informacji o wersji sprzętowej robota
++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. versionadded:: python SDK-v2.0.1
 
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "原型", "``GetSlaveHardVersion()``"
-    "描述", "获取机器人硬件版本信息"
-    "必选参数", "无"
-    "默认参数", "无"
-    "返回值", "- 错误码 成功-0  失败- errcode
-    - ``ctrlBoxBoardVersion``：控制箱版本
+    "Prototyp", "``GetSlaveHardVersion()``"
+    "Opis", "Pobiera informacje o wersji sprzętowej robota"
+    "Parametry wymagane", "Brak"
+    "Parametry domyślne", "Brak"
+    "Wartość zwracana", "- Kod błędu sukces-0 błąd- errcode
+    - ``ctrlBoxBoardVersion``: Wersja skrzynki kontrolnej
     - ``driver1Version``
     - ``driver2Version``
     - ``driver3Version``
@@ -229,20 +234,21 @@
     - ``driver6Version``
     - ``endBoardVersion``"
 
-获取机器人固件版本信息
-++++++++++++++++++++++++++
+Pobieranie informacji o wersji firmware robota
++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. versionadded:: python SDK-v2.0.1
 
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "原型", "``GetSlaveFirmVersion()``"
-    "描述", "获取机器人固件版本信息"
-    "必选参数", "无"
-    "默认参数", "无"
-    "返回值", "- 错误码 成功-0  失败- errcode
-    - ``ctrlBoxBoardVersion``：控制箱版本
+    "Prototyp", "``GetSlaveFirmVersion()``"
+    "Opis", "Pobiera informacje o wersji firmware robota"
+    "Parametry wymagane", "Brak"
+    "Parametry domyślne", "Brak"
+    "Wartość zwracana", "- Kod błędu sukces-0 błąd- errcode
+    - ``ctrlBoxBoardVersion``: Wersja skrzynki kontrolnej
     - ``driver1Version``
     - ``driver2Version``
     - ``driver3Version``
@@ -251,13 +257,14 @@
     - ``driver6Version``
     - ``endBoardVersion``"
 
-获取机器人软固件版本代码示例
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Przykład kodu pobierania wersji oprogramowania i firmware robota
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: python
     :linenos:
 
     from fairino import Robot
-    # 与机器人控制器建立连接，连接成功返回一个机器人对象
+    # Połączenie z kontrolerem robota, po pomyślnym połączeniu zwraca obiekt robota
     robot = Robot.RPC('192.168.58.2')
     rtn,robotModel, webversion, controllerVersion = robot.GetSoftwareVersion()
     print(f"Getsoftwareversion rtn is: {rtn}")

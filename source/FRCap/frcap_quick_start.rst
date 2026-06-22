@@ -1,105 +1,105 @@
-快速开始
-=========================
+Szybki start
+============
 
 .. toctree:: 
    :maxdepth: 6
 
-我没有FRCap
+Nie mam FRCap
 -------------
 
-如果您目前还没有FRCap，那么可以在本小节快速创建一个FRCap。
+Jeśli obecnie nie posiadasz FRCap, możesz szybko utworzyć FRCap w tej sekcji.
 
-首先，我们需要连接机器人并访问WebApp，在本地计算机中打开浏览器并输入机器人默认IP地址（http://192.168.58.2）并登录进入WebApp。
+Najpierw musimy połączyć się z robotem i uzyskać dostęp do WebApp. Otwórz przeglądarkę na komputerze lokalnym, wprowadź domyślny adres IP robota (http://192.168.58.2) i zaloguj się do WebApp.
 
 .. image:: frcap_pictures/002.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 2-1  WebApp的“FRCap管理”页面
+.. centered:: Wykres 2-1 Strona „Zarządzanie FRCap” w WebApp
 
-在WebApp中依次点击“系统设置”->“FRCap管理”->“管理工具”后会在浏览器打开一个新的标签页并访问“FRCap管理工具”。
+W WebApp kolejno kliknij „Ustawienia systemowe” -> „Zarządzanie FRCap” -> „Narzędzia zarządzania”. W przeglądarce otworzy się nowa karta i zostanie wyświetlone „Narzędzie zarządzania FRCap”.
 
 .. image:: frcap_pictures/003.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 2-2  FRCap管理工具
+.. centered:: Wykres 2-2 Narzędzie zarządzania FRCap
 
-在FRCap管理工具中选择“创建向导”，依次输入或选择以下插件内容：
+W narzędziu zarządzania FRCap wybierz „Kreator tworzenia”, a następnie kolejno wprowadź lub wybierz następujące treści wtyczki:
 
-- 插件名称：Hello_FRCap。
-- 插件作者：admin。
-- 插件描述：Hello FRCap。
-- 插件类型：配置。
+- Nazwa wtyczki: Hello_FRCap.
+- Autor wtyczki: admin.
+- Opis wtyczki: Hello FRCap.
+- Typ wtyczki: Konfiguracja.
 
-其中插件图标无需上传，参数输入或选择完毕后，点击“创建”即可完成创建FRCap。
+Ikona wtyczki nie wymaga przesyłania. Po wprowadzeniu lub wybraniu parametrów kliknij „Utwórz”, aby zakończyć tworzenie FRCap.
 
 .. image:: frcap_pictures/004.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 2-3  FRCap创建向导
+.. centered:: Wykres 2-3 Kreator tworzenia FRCap
 
-创建成功后，跳转至创建成功页面并显示当前创建成功的FRCap名称，点击“下载”即可将创建好的FRCap下载到本地计算机。
+Po pomyślnym utworzeniu, nastąpi przekierowanie do strony sukcesu z wyświetleniem nazwy pomyślnie utworzonego FRCap. Kliknij „Pobierz”, aby pobrać utworzony FRCap na komputer lokalny.
 
 .. image:: frcap_pictures/005.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 2-4  下载Hello FRCap插件包
+.. centered:: Wykres 2-4 Pobieranie pakietu wtyczki Hello FRCap
 
-我已有FRCap
+Mam już FRCap
 -------------
-如果您已有FRCap项目文件夹，且符合FRCap项目结构，请直接阅读\ `构建FRCap <frcap_quick_start.html#id3>`__\。
+Jeśli posiadasz już folder projektu FRCap, który spełnia strukturę projektu FRCap, przejdź bezpośrednio do sekcji \ `Budowanie FRCap <frcap_quick_start.html#budowanie-frcap>`__.
 
-如果您已有文件后缀名称为“.plugin”的完整插件包，请直接阅读\ `Hello FRCap <frcap_quick_start.html#hello-frcap>`__\。
+Jeśli posiadasz już kompletny pakiet wtyczki z rozszerzeniem pliku „.plugin”, przejdź bezpośrednio do sekcji \ `Hello FRCap <frcap_quick_start.html#hello-frcap>`__.
 
-构建FRCap
--------------
-打开2.1章节下载的FRCap项目，或者是您已有的FRCap项目。
+Budowanie FRCap
+---------------
+Otwórz projekt FRCap pobrany w rozdziale 2.1 lub istniejący projekt FRCap.
 
-根据当前使用的系统不同，先打开build脚本，修改buildName参数,为你想要的名称，然后保存关闭，在终端执行对应的脚本。
+W zależności od używanego systemu, najpierw otwórz skrypt budowania, zmodyfikuj parametr `buildName` na żądaną nazwę, następnie zapisz i zamknij. W terminalu wykonaj odpowiedni skrypt.
 
-- Window中启动终端，运行以下指令：
+- W systemie Windows otwórz terminal i uruchom następujące polecenie:
 
 .. code-block:: c++
    :linenos:
 
    ./build.bat
 
-- Linux中启动终端，运行以下指令：
+- W systemie Linux otwórz terminal i uruchom następujące polecenie:
   
 .. code-block:: c++
    :linenos:
 
    ./build.sh
 
-构建完成后，在FRCap项目目录下生成文件名称为FRCap名称的，文件后缀为“.plugin”的包文件。
+Po zakończeniu budowania, w katalogu projektu FRCap zostanie wygenerowany plik pakietu o nazwie zgodnej z nazwą FRCap i rozszerzeniu pliku „.plugin”.
 
 .. image:: frcap_pictures/006.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 2-5  构建完成的FRCap包文件
+.. centered:: Wykres 2-5 Zbudowany plik pakietu FRCap
 
 Hello FRCap
--------------
-FRCap项目构建完成后，在本地计算机中打开浏览器并输入机器人默认IP地址（http://192.168.58.2）并登录进入WebApp，依次点击“系统设置”->“FRCap管理”->“导入”。选择构建完成的“.plugin”后缀的FRCap包文件，打开即可上传。上传成功后在下方的插件信息列表中展示导入的FRCap信息。
+-----------
+Po zakończeniu budowania projektu FRCap, otwórz przeglądarkę na komputerze lokalnym, wprowadź domyślny adres IP robota (http://192.168.58.2) i zaloguj się do WebApp. Kolejno kliknij „Ustawienia systemowe” -> „Zarządzanie FRCap” -> „Importuj”. Wybierz zbudowany plik pakietu FRCap z rozszerzeniem „.plugin” i otwórz go, aby przesłać. Po pomyślnym przesłaniu, zaimportowane informacje o FRCap zostaną wyświetlone na liście informacji o wtyczkach poniżej.
 
-通过列表中的操作栏控制FRCap启用与否和删除，在启停状态栏查看FRCap的启用状态。
+Za pomocą kolumny operacji na liście można włączać, wyłączać i usuwać FRCap. W kolumnie stanu uruchomienia/wyłączenia można sprawdzić stan włączenia FRCap.
 
-Hello FRCap启用后可以在“辅助应用”->“FRCap”->“Hello FRCap”使用。该页面承载配置类FRCap，可以全幅，也可以半幅，默认按照半幅展示。
+Po włączeniu Hello FRCap można go używać w „Aplikacje pomocnicze” -> „FRCap” -> „Hello FRCap”. Strona ta obsługuje FRCap typu konfiguracyjnego i może być wyświetlana w pełnym lub połowie rozmiaru, domyślnie w połowie.
 
-至此，您已经完成了整个插件快速创建和使用流程。
+W tym momencie ukończyłeś cały proces szybkiego tworzenia i używania wtyczki.
 
 .. image:: frcap_pictures/007.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 2-6  Hello FRCap内容
+.. centered:: Wykres 2-6 Treść Hello FRCap
 
-想要了解详细的创建向导指导可以继续查看\ `创建向导 <frcap_create.html#id1>`__\。
+Aby poznać szczegółowe wskazówki dotyczące kreatora tworzenia, możesz przejść do \ `Kreator tworzenia <frcap_create.html#id1>`__.
 
-想要了解开发FRCap所需的工具环境和指导，请查看\ `开发指导 <frcap_development_guidance.html#id1>`__\。
+Aby poznać narzędzia i wskazówki dotyczące środowiska wymaganego do tworzenia FRCap, przejdź do \ `Przewodnik programisty <frcap_development_guidance.html#id1>`__.
 
-想要了解FRCap在WebApp中具体的使用指导，请查看\ `WebApp中使用FRCap <frcap_use.html#webappfrcap>`__\。
+Aby poznać szczegółowe wskazówki dotyczące używania FRCap w WebApp, przejdź do \ `Używanie FRCap w WebApp <frcap_use.html#webappfrcap>`__.

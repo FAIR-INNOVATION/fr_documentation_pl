@@ -1,131 +1,142 @@
-机器人WebAPP程序使用
-======================
+Użytkowanie programu WebAPP robota
+==================================
 
 .. toctree:: 
     :maxdepth: 5
 
-设置开机自动加载默认的作业程序
-++++++++++++++++++++++++++++++++
+Ustawianie automatycznego ładowania domyślnego programu roboczego przy starcie
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "原型", "``LoadDefaultProgConfig(flag,program_name)``"
-    "描述", "设置开机自动加载默认的作业程序"
-    "必选参数", "- ``flag``：1-开机自动加载默认程序，0-不自动加载默认程序
-    - ``program_name``：作业程序名及路径，如“/fruser/movej.lua”，其中/fruser/为QX固定路径，/usr/local/etc/controller/lua/为LA固定路径"
-    "默认参数", "无"
-    "返回值", "错误码 成功-0  失败- errcode"
+    "Prototyp", "``LoadDefaultProgConfig(flag,program_name)``"
+    "Opis", "Ustawianie automatycznego ładowania domyślnego programu roboczego przy starcie"
+    "Parametry wymagane", "
+    - ``flag``: 1-ładuj automatycznie domyślny program przy starcie, 0-nie ładuj automatycznie domyślnego programu
+    - ``program_name``: Nazwa i ścieżka programu roboczego, np. movej.lua"
+    "Parametry domyślne", "Brak"
+    "Wartość zwracana", "Kod błędu sukces-0 błąd- errcode"
 
-加载指定的作业程序
-++++++++++++++++++++++++++++++++
+Ładowanie określonego programu roboczego
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "原型", "``ProgramLoad(program_name)``"
-    "描述", "加载指定的作业程序"
-    "必选参数", "- ``program_name``：作业程序名及路径，如“/fruser/movej.lua”，其中/fruser/为QX固定路径，/usr/local/etc/controller/lua/为LA固定路径"
-    "默认参数", "无"
-    "返回值", "错误码 成功-0  失败- errcode"
+    "Prototyp", "``ProgramLoad(program_name)``"
+    "Opis", "Ładowanie określonego programu roboczego"
+    "Parametry wymagane", "- ``program_name``: Nazwa i ścieżka programu roboczego, np. movej.lua"
+    "Parametry domyślne", "Brak"
+    "Wartość zwracana", "Kod błędu sukces-0 błąd- errcode"
 
-获取已加载的作业程序名
-++++++++++++++++++++++++++++++++
+Pobieranie nazwy załadowanego programu roboczego
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "原型", "``GetLoadedProgram()``"
-    "描述", "获取已加载的作业程序名"
-    "必选参数", "无"
-    "默认参数", "无"
-    "返回值", "- 错误码 成功-0  失败- errcode
-    - ``program_name``：已加载的作业程序名"
+    "Prototyp", "``GetLoadedProgram()``"
+    "Opis", "Pobieranie nazwy załadowanego programu roboczego"
+    "Parametry wymagane", "Brak"
+    "Parametry domyślne", "Brak"
+    "Wartość zwracana", "- Kod błędu sukces-0 błąd- errcode
+    - ``program_name``: Nazwa załadowanego programu roboczego"
 
-获取当前机器人作业程序的执行行号
-++++++++++++++++++++++++++++++++
+Pobieranie bieżącego numeru linii wykonania programu roboczego robota
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "原型", "``GetCurrentLine()``"
-    "描述", "获取当前机器人作业程序的执行行号"
-    "必选参数", "无"
-    "默认参数", "无"
-    "返回值", "- 错误码 成功-0  失败- errcode
-    - ``line_num``：当前机器人作业程序的执行行号"
+    "Prototyp", "``GetCurrentLine()``"
+    "Opis", "Pobieranie bieżącego numeru linii wykonania programu roboczego robota"
+    "Parametry wymagane", "Brak"
+    "Parametry domyślne", "Brak"
+    "Wartość zwracana", "- Kod błędu sukces-0 błąd- errcode
+    - ``line_num``: Bieżący numer linii wykonania programu roboczego robota"
 
-运行当前加载的作业程序
-++++++++++++++++++++++++++++++++
+Uruchamianie bieżącego załadowanego programu roboczego
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "原型", "``ProgramRun()``"
-    "描述", "运行当前加载的作业程序"
-    "必选参数", "无"
-    "默认参数", "无"
-    "返回值", "错误码 成功-0  失败- errcode"
+    "Prototyp", "``ProgramRun()``"
+    "Opis", "Uruchamianie bieżącego załadowanego programu roboczego"
+    "Parametry wymagane", "Brak"
+    "Parametry domyślne", "Brak"
+    "Wartość zwracana", "Kod błędu sukces-0 błąd- errcode"
 
-暂停当前运行的作业程序
-++++++++++++++++++++++++++++++++
+Wstrzymywanie bieżącego uruchomionego programu roboczego
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "原型", "``ProgramPause()``"
-    "描述", "暂停当前运行的作业程序"
-    "必选参数", "无"
-    "默认参数", "无"
-    "返回值", "错误码 成功-0  失败- errcode"
+    "Prototyp", "``ProgramPause()``"
+    "Opis", "Wstrzymywanie bieżącego uruchomionego programu roboczego"
+    "Parametry wymagane", "Brak"
+    "Parametry domyślne", "Brak"
+    "Wartość zwracana", "Kod błędu sukces-0 błąd- errcode"
 
-恢复当前暂停的作业程序
-++++++++++++++++++++++++++++++++
+Wznawianie bieżącego wstrzymanego programu roboczego
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "原型", "``ProgramResume()``"
-    "描述", "恢复当前暂停的作业程序"
-    "必选参数", "无"
-    "默认参数", "无"
-    "返回值", "错误码 成功-0  失败- errcode"
+    "Prototyp", "``ProgramResume()``"
+    "Opis", "Wznawianie bieżącego wstrzymanego programu roboczego"
+    "Parametry wymagane", "Brak"
+    "Parametry domyślne", "Brak"
+    "Wartość zwracana", "Kod błędu sukces-0 błąd- errcode"
 
-终止当前运行的作业程序
-++++++++++++++++++++++++++++++++
+Zatrzymywanie bieżącego uruchomionego programu roboczego
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "原型", "``ProgramStop()``"
-    "描述", "终止当前运行的作业程序"
-    "必选参数", "无"
-    "默认参数", "无"
-    "返回值", "错误码 成功-0  失败- errcode"
+    "Prototyp", "``ProgramStop()``"
+    "Opis", "Zatrzymywanie bieżącego uruchomionego programu roboczego"
+    "Parametry wymagane", "Brak"
+    "Parametry domyślne", "Brak"
+    "Wartość zwracana", "Kod błędu sukces-0 błąd- errcode"
 
-获取机器人作业程序执行状态
-++++++++++++++++++++++++++++++++
+Pobieranie stanu wykonania programu roboczego robota
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "原型", "``GetProgramState()``"
-    "描述", "获取机器人作业程序执行状态"
-    "必选参数", "无"
-    "默认参数", "无"
-    "返回值", "- 错误码 成功-0  失败- errcode
-    - ``state``:机器人作业程序执行状态，1-程序停止或无程序运行，2-程序运行中，3-程序暂停"
+    "Prototyp", "``GetProgramState()``"
+    "Opis", "Pobieranie stanu wykonania programu roboczego robota"
+    "Parametry wymagane", "Brak"
+    "Parametry domyślne", "Brak"
+    "Wartość zwracana", "- Kod błędu sukces-0 błąd- errcode
+    - ``state``: Stan wykonania programu roboczego robota, 1-program zatrzymany lub brak uruchomionego programu, 2-program działa, 3-program wstrzymany"
 
-机器人LUA程序操作代码示例
-++++++++++++++++++++++++++++++++
+Przykład kodu operacji na programie LUA robota
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: python
     :linenos:
 
     from fairino import Robot
     import time
-    # 与机器人控制器建立连接，连接成功返回一个机器人对象
+    # Połączenie z kontrolerem robota, po pomyślnym połączeniu zwraca obiekt robota
     robot = Robot.RPC('192.168.58.2')
-    program_name = "/fruser/test0610.lua"
+    program_name = "test0610.lua"
     loaded_name = ""
     state = 0
     line = 0
@@ -148,73 +159,78 @@
     time.sleep(1)
     robot.CloseRPC()
 
-下载Lua文件
-+++++++++++++++++++++++++++++++++
+Pobieranie pliku LUA
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. versionadded:: python SDK-v2.0.2
 
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
     
-    "原型", "``LuaDownLoad(fileName, savePath)``"
-    "描述", "下载Lua文件"
-    "必选参数", "- ``fileName``：要下载的lua文件名 如“test.lua”
-    - ``savePath``：保存文件本地路径 如“D://Down/”"
-    "默认参数", "无"
-    "返回值", "错误码 成功-0  失败- errcode"
+    "Prototyp", "``LuaDownLoad(fileName, savePath)``"
+    "Opis", "Pobieranie pliku LUA"
+    "Parametry wymagane", "- ``fileName``: Nazwa pliku lua do pobrania, np. „test.lua”
+    - ``savePath``: Lokalna ścieżka zapisu pliku, np. „D://Down/”"
+    "Parametry domyślne", "Brak"
+    "Wartość zwracana", "Kod błędu sukces-0 błąd- errcode"
 
-删除Lua文件
-+++++++++++++++++++++++++++++++++
+Usuwanie pliku LUA
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. versionadded:: python SDK-v2.0.2
 
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "原型", "``LuaDelete(fileName)``"
-    "描述", "删除Lua文件"
-    "必选参数", "- ``fileName``：要删除的lua文件名“test.lua”"
-    "默认参数", "无"
-    "返回值", "错误码 成功-0  失败- errcode"
+    "Prototyp", "``LuaDelete(fileName)``"
+    "Opis", "Usuwanie pliku LUA"
+    "Parametry wymagane", "- ``fileName``: Nazwa pliku lua do usunięcia „test.lua”"
+    "Parametry domyślne", "Brak"
+    "Wartość zwracana", "Kod błędu sukces-0 błąd- errcode"
 
-获取当前所有lua文件名称
-+++++++++++++++++++++++++++++++++
+Pobieranie nazw wszystkich bieżących plików lua
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. versionadded:: python SDK-v2.0.2
 
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "原型", "``GetLuaList()``"
-    "描述", "获取当前所有lua文件名称"
-    "必选参数", "无"
-    "默认参数", "无"
-    "返回值", "- 错误码 成功-0  失败- errcode
-    - ``lua_num``：lua文件数量
-    - ``luaNames``：lua文件名列表"
+    "Prototyp", "``GetLuaList()``"
+    "Opis", "Pobieranie nazw wszystkich bieżących plików lua"
+    "Parametry wymagane", "Brak"
+    "Parametry domyślne", "Brak"
+    "Wartość zwracana", "- Kod błędu sukces-0 błąd- errcode
+    - ``lua_num``: Liczba plików lua
+    - ``luaNames``: Lista nazw plików lua"
 
-上传Lua文件
-+++++++++++++++++++++++++++++++++
+Przesyłanie pliku LUA
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. versionadded:: python SDK-v2.0.2
 
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "原型", "``LuaUpload(filePath)``"
-    "描述", "上传Lua文件"
-    "必选参数", "- ``filePath``：上传文件的全路径名  如D://test/test.lua"
-    "默认参数", "无"
-    "返回值", "- 错误码 成功-0  失败- errcode
-    - errorStr(lua文件存在错误返回)"
+    "Prototyp", "``LuaUpload(filePath)``"
+    "Opis", "Przesyłanie pliku LUA"
+    "Parametry wymagane", "- ``filePath``: Pełna ścieżka przesyłanego pliku, np. D://test/test.lua"
+    "Parametry domyślne", "Brak"
+    "Wartość zwracana", "- Kod błędu sukces-0 błąd- errcode
+    - errorStr (zwracane, jeśli plik lua zawiera błąd)"
 
-机器人LUA文件上传下载代码示例
-+++++++++++++++++++++++++++++++++
+Przykład kodu przesyłania i pobierania pliku LUA robota
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: python
     :linenos: 
 
     from fairino import Robot
-    # 与机器人控制器建立连接，连接成功返回一个机器人对象
+    # Połączenie z kontrolerem robota, po pomyślnym połączeniu zwraca obiekt robota
     robot = Robot.RPC('192.168.58.2')
     rtn,lua_num,luaNames = robot.GetLuaList()
     print(f"res is:{rtn}")
@@ -228,4 +244,3 @@
     rtn = robot.LuaDelete("test0610.lua")
     print(f"LuaDelete rtn is:{rtn}")
     robot.CloseRPC()
-    

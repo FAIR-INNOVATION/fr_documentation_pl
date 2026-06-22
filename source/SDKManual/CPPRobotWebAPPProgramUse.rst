@@ -1,116 +1,117 @@
-机器人WebAPP程序使用
-======================
+Użycie programu WebAPP robota
+=============================
 
-.. toctree:: 
+.. toctree::
     :maxdepth: 5
 
-设置开机自动加载默认的作业程序
-+++++++++++++++++++++++++++++++++++
+Ustawianie automatycznego ładowania domyślnego programu roboczego przy uruchomieniu
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  设置开机自动加载默认的作业程序
-    * @param  [in] flag  0-开机不自动加载默认程序，1-开机自动加载默认程序
-    * @param  [in] program_name 作业程序名及路径，如"/fruser/movej.lua"，其中"/fruser/"为QX固定路径，"/usr/local/etc/controller/lua/"为LA固定路径
-    * @return  错误码
+    * @brief  Ustawia automatyczne ładowanie domyślnego programu roboczego przy uruchomieniu
+    * @param  [in] flag  0-nie ładuj automatycznie domyślnego programu przy uruchomieniu, 1-ładuj automatycznie domyślny program przy uruchomieniu
+    * @param  [in] program_name Nazwa i ścieżka programu roboczego, np. "/fruser/movej.lua", gdzie "/fruser/" to stała ścieżka dla QX, "/usr/local/etc/controller/lua/" to stała ścieżka dla LA
+    * @return  Kod błędu
     */
     errno_t  LoadDefaultProgConfig(uint8_t flag, char program_name[64]);
 
-加载指定的作业程序
-+++++++++++++++++++++++++++++++++++
+Ładowanie określonego programu roboczego
++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  加载指定的作业程序
-    * @param  [in] program_name 作业程序名及路径，如"/fruser/movej.lua"，其中"/fruser/"为QX固定路径，"/usr/local/etc/controller/lua/"为LA固定路径
-    * @return  错误码
+    * @brief  Ładuje określony program roboczy
+    * @param  [in] program_name Nazwa i ścieżka programu roboczego, np. "/fruser/movej.lua", gdzie "/fruser/" to stała ścieżka dla QX, "/usr/local/etc/controller/lua/" to stała ścieżka dla LA
+    * @return  Kod błędu
     */
     errno_t  ProgramLoad(char program_name[64]);
 
-获取已加载的作业程序名
-+++++++++++++++++++++++++++++++++++
+Pobieranie nazwy załadowanego programu roboczego
+++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  获取已加载的作业程序名
-    * @param  [out] program_name 作业程序名及路径，如"/fruser/movej.lua"，其中"/fruser/"为QX固定路径，"/usr/local/etc/controller/lua/"为LA固定路径
-    * @return  错误码
+    * @brief  Pobiera nazwę załadowanego programu roboczego
+    * @param  [out] program_name Nazwa i ścieżka programu roboczego, np. "/fruser/movej.lua", gdzie "/fruser/" to stała ścieżka dla QX, "/usr/local/etc/controller/lua/" to stała ścieżka dla LA
+    * @return  Kod błędu
     */
-    errno_t  GetLoadedProgram(char program_name[64]);  
+    errno_t  GetLoadedProgram(char program_name[64]);
 
-获取当前机器人作业程序的执行行号
-+++++++++++++++++++++++++++++++++++
+Pobieranie numeru linii wykonywanego programu roboczego robota
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  获取当前机器人作业程序执行的行号
-    * @param  [out] line  行号
-    * @return  错误码
-    */   
+    * @brief  Pobiera numer linii wykonywanego programu roboczego robota
+    * @param  [out] line  Numer linii
+    * @return  Kod błędu
+    */
     errno_t  GetCurrentLine(int *line);
 
-运行当前加载的作业程序
-+++++++++++++++++++++++++++++++++++
+Uruchamianie aktualnie załadowanego programu roboczego
++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  运行当前加载的作业程序
-    * @return  错误码
+    * @brief  Uruchamia aktualnie załadowany program roboczy
+    * @return  Kod błędu
     */
     errno_t  ProgramRun();
 
-暂停当前运行的作业程序
-+++++++++++++++++++++++++++++++++++
+Wstrzymywanie aktualnie uruchomionego programu roboczego
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  暂停当前运行的作业程序
-    * @return  错误码
-    */ 
+    * @brief  Wstrzymuje aktualnie uruchomiony program roboczy
+    * @return  Kod błędu
+    */
     errno_t  ProgramPause();
 
-恢复当前暂停的作业程序
-+++++++++++++++++++++++++++++++++++
+Wznawianie aktualnie wstrzymanego programu roboczego
++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  恢复当前暂停的作业程序
-    * @return  错误码
-    */ 
-    errno_t  ProgramResume();  
+    * @brief  Wznawia aktualnie wstrzymany program roboczy
+    * @return  Kod błędu
+    */
+    errno_t  ProgramResume();
 
-终止当前运行的作业程序
-+++++++++++++++++++++++++++++++++++
+Zatrzymywanie aktualnie uruchomionego programu roboczego
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  终止当前运行的作业程序
-    * @return  错误码
-    */ 
-    errno_t  ProgramStop();    
+    * @brief  Zatrzymuje aktualnie uruchomiony program roboczy
+    * @return  Kod błędu
+    */
+    errno_t  ProgramStop();
 
-获取机器人作业程序执行状态
-+++++++++++++++++++++++++++++++++++
+Pobieranie stanu wykonania programu roboczego robota
+++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  获取机器人作业程序执行状态
-    * @param  [out]  state 1-程序停止或无程序运行，2-程序运行中，3-程序暂停
-    * @return  错误码
+    * @brief  Pobiera stan wykonania programu roboczego robota
+    * @param  [out]  state 1-program zatrzymany lub brak uruchomionego programu, 2-program w trakcie wykonywania, 3-program wstrzymany
+    * @return  Kod błędu
     */
     errno_t  GetProgramState(uint8_t *state);
 
-机器人LUA程序操作代码示例
-++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Przykład kodu operacji na programie LUA robota
+++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: c++
     :linenos:
 
@@ -151,69 +152,65 @@
       return 0;
     }
 
-下载Lua文件
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
+Pobieranie pliku Lua
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C++SDK-v2.1.2.0
 
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief 下载Lua文件
-    * @param [in] fileName 要下载的lua文件名，例如：“test.lua”
-    * @param [in] savePath 保存文件本地路径，例如：“D://Down/”
-    * @return 错误码
+    * @brief Pobiera plik Lua
+    * @param [in] fileName Nazwa pliku lua do pobrania, np.: "test.lua"
+    * @param [in] savePath Lokalna ścieżka zapisu pliku, np.: "D://Down/"
+    * @return Kod błędu
     */
     errno_t LuaDownLoad(std::string fileName, std::string savePath);
 
-删除Lua文件
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
+Usuwanie pliku Lua
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C++SDK-v2.1.2.0
 
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief 删除Lua文件
-    * @param [in] fileName 要删除的lua文件名，例如：“test.lua”
-    * @return 错误码
+    * @brief Usuwa plik Lua
+    * @param [in] fileName Nazwa pliku lua do usunięcia, np.: "test.lua"
+    * @return Kod błędu
     */
     errno_t LuaDelete(std::string fileName);
 
-获取当前所有lua文件名称
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
+Pobieranie listy wszystkich bieżących nazw plików Lua
++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C++SDK-v2.1.2.0
 
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief 获取当前所有lua文件名称
-    * @param [out] luaNames lua文件名列表
-    * @return 错误码
+    * @brief Pobiera listę wszystkich bieżących nazw plików Lua
+    * @param [out] luaNames Lista nazw plików lua
+    * @return Kod błędu
     */
     errno_t GetLuaList(std::list<std::string>* luaNames);
 
-上传Lua文件
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
+Przesyłanie pliku Lua
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C++SDK-v2.1.2.0
 
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief 上传Lua文件
-    * @param [in] filePath 本地lua文件路径名
-    * @return 错误码
+    * @brief Przesyła plik Lua
+    * @param [in] filePath Ścieżka lokalnego pliku lua
+    * @return Kod błędu
     */
     errno_t LuaUpload(std::string filePath);
 
-机器人LUA文件上传下载代码示例
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Przykład kodu przesyłania i pobierania pliku LUA robota
++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. code-block:: c++
     :linenos:

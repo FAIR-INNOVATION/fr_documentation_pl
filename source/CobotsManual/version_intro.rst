@@ -1,944 +1,943 @@
-版本 V3.9.6
------------------
-
-日期：2026-05-26
-
-- **优化矩阵移动功能**： 
-    路径：辅助应用 -> 工艺包 -> 矩阵移动。
-  
-    说明：优化矩阵移动指令集功能。
-
-- **优化DI减速功能**： 
-    路径：初始设置 -> 基础 -> I/O设置。
-  
-    说明：1.DI信号触发时，调速过程速度平滑无冲击、无卡顿；2.调速前后机器人末端路径不发生变化；3.DI触发调速时无报错、无停顿 4.DI触发停止时立即执行、不报错。
-
-- **增加机器人激光焊机通信适配功能**： 
-    路径：初始设置 -> 外设 -> 焊机。
-  
-    说明：1.WebAPP新增激光焊机相关设置、调试、lua程序生成指令；2.新增激光焊机相关参数；3.PLC开发适配程序。
-    
-- **增加FRJ-PCIeN-EIP/CC/PN-RJ-V10板卡EIP/CClink-IE协议适配**： 
-    路径：初始设置 -> 外设 -> 板卡通讯。
-  
-    说明：1.支持通讯周期可配置；2.支持获取总线连接状态；3.兼容EIP、CC协议。
-
-版本 V3.9.5
------------------
-
-日期：2026-04-24
-
-- **优化控制器功能**： 
-    路径：通用设置 -> 网络设置；示教程序 -> 程序编程。
-  
-    说明：1.ETH0与ETH1配置相同IP地址校验报错；2.优化程序当前运行行号颜色显示。
-
-- **优化FR30速度**： 
-  
-    说明：提升运行速度。
-
-- **优化圆弧摆动功能**： 
-    路径：示教程序 -> 程序编程 -> 圆弧指令。
-  
-    说明：能够进行摆动运行。
-
-- **优化SetTrajectoryJSpeed调试不卡顿功能**： 
-  
-    说明：指令调速过程，机器人速度切换时不降至0速。
-
-- **优化程序编程模块中Lua程序指令编辑模式操作**： 
-    路径：示教程序 -> 程序编程。
-  
-    说明：优化为指令内容可精准匹配显示。
-
-- **增加FRJ-PCIeN-EC-RJ-V20板卡PN/Ecat/EIP/cclink协议适配**： 
-    路径：初始设置 -> 外设 -> 板卡通讯。
-  
-    说明：1.支持固件在线升级/获取 2.支持通讯周期可配置 3.支持获取总线连接状态。
-
-- **增加控制器指令**： 
-    路径：示教程序 -> 程序编程; 初始设置 -> 安全 -> 安全停止。
-  
-    说明：1.运动指令增加工件坐标系偏移类型选项；2.增加安全停止功能；3.控制箱、末端、扩展IO增加读取DO、AO指令。
-
-- **增加控制箱-急停后DO信号配置功能**： 
-    路径：初始设置 -> 基础 -> DO。
-  
-    说明：新增控制箱急停后DO信号配置功能。
-
-- **增加葡萄牙语软件版本语言包适配**： 
-  
-    说明：增加葡萄牙语言切换。
-
-版本 V3.9.4
------------------
-
-日期：2026-04-08
-
-- **优化机器人轨迹示教复现TPD功能**： 
-    路径：示教程序 -> 程序编程 -> TPD指令。
-  
-    说明：1.自动生成初始点lua指令 2.开始按钮防呆设计。
-
-- **优化Webapp数据备份功能**： 
-  
-    说明：对数据备份功能进行完善优化。
-
-- **FR3WML软限位及打包姿态优化**： 
-  
-    说明：3关节软限位设置范围±163°。
-
-- **DH全参数补偿功能优化及快速验证**： 
-  
-    说明：补偿全参数模型。
- 
-- **增加PTP运动阻抗控制功能**： 
-  
-    说明：提高机器人与人交互过程中的安全性。
-
-- **增加艾灸头末端设备通信协议功能**： 
-    路径：初始设置 -> 外设 -> 末端透传。
-  
-    说明：新增末端设备通信协议适配。
-
-- **增加德语软件版本语言包适配**： 
-  
-    说明：增加德语语言切换。
-
-- **增加安全速度设置对servo运动指令生效功能**： 
-    路径：初始设置 -> 安全 -> 安全速度。
-  
-    说明：增加安全策略超速后停止报错去使能选项
-
-- **增加LA适配TP-LINK AX3000 无线路由器**： 
-  
-    说明：解决在断电重启后无法直接通过无线访问webApp问题。
-    
-- **增加定点摆动功能**： 
-    路径：示教程序 -> 程序编程 -> Weave指令。
-  
-    说明：配合外部激光传感器，进行定点摆动功能。
-
-版本 V3.9.3
------------------
-
-日期：2026-02-11
-
-- **优化SmartTool运动指令速度设置**： 
-    路径：初始设置 -> 外设 -> 焊接手柄。
-  
-    说明：PTP,LIN,ARC指令速度设置范围调整为0-100%（原先速度设置上限为30%）。
-
-- **优化无力传感器外力观测及拖动体验提升**： 
-    路径：辅助应用 -> 工具应用 -> 拖动锁定。
-  
-    说明：提高外力观测精度至±0.5N。
-
-- **优化Modbus TCP主站重连机制**： 
-    路径：示教程序 -> 程序编程 -> Modbus TCP。
-  
-    说明：增加暂停逻辑。
-
-- **增加扩展轴调试指令功能**： 
-    路径：初始设置 -> 外设 -> 扩展轴。
-  
-    说明：实现扩展轴坐标系下的机器人逆解以及带扩展轴的ServoCart伺服运动。
-
-- **增加暂停恢复DO复位状态可配置功能**： 
-    路径：初始设置 -> 外设 -> 焊接手柄。
-  
-    说明：可选恢复运动后DO输出状态是否与暂停前一致。
-
-版本 V3.9.2
------------------
-
-日期：2026-01-26
-
-- **优化关节扭矩传感器位置环拖动示教**： 
-    路径：辅助应用 -> 工具应用 -> 拖动锁定。
-  
-    说明：解决关节间拖动2s内对点精度不足问题。
-
-- **优化扩展板卡**： 
-  
-    说明：优化扩展DO数据同步机制。
-
-- **优化电弧跟踪功能**： 
-    路径：初始设置 -> 外设 -> 焊机。
-  
-    说明：增加通过外设开放协议ModbusTCP进行实时焊接电流采集。
-
-- **优化控制器及实体示教器IP重置功能**： 
-    路径：系统设置 -> 网络。
-  
-    说明：①在webrecovery中新增重置控制器IP功能，需要二次确认；②实体示教器新增IP重置功能；③实体示教器增加在未连接时，可通过物理按键重置实体示教器IP，示教器IP为192.168.58.77。
-
-- **新增FR3C新型机器人配置**： 
-  
-    说明：关节运行范围与FR3系列一致，大小臂与WMS一致，额定负载3kg。
-
-- **新增立方体干涉功能**： 
-    路径：初始设置 -> 安全 -> 干涉区 -> 立方体干涉。
-  
-    说明：实现至少4个立方体同时干涉检查，并可配置CO输出对应干涉信号。
-
-- **新增slave_interpret模块功能扩展（PROFINET协议）及Web量IO显示功能**： 
-    路径：初始设置 -> 外设 -> 板卡通讯-> 板卡升级。
-  
-    说明：增加骥远板卡EtherCAT固件升级、PLC通讯检测、周期可配置及Web全量IO显示功能（PROFINET协议）。
-
-- **新增smarttool开放协议功能**： 
-    路径：初始设置 -> 外设 -> 焊接手柄。
-  
-    说明：①新增基于开放协议的smarttool程序创建解析及检测信号处理，增加“撤销、删除”按键防呆功能。②smarttool开放协议按键配置新增自动生成功能。
-
-- **新增QX与LA软件版本的备份包相互兼容**： 
-    路径：辅助应用 -> 工具应用 -> 数据备份。
-  
-    说明：①QX支持且可完整导入LA备份包，LA支持且可完整导入QX备份包；②兼容v3.8.7版本及以后备份包。
-
-- **新增末端CI与控制器CI可配置参数**： 
-    路径：初始设置 -> 基础 -> I/O设置 -> DI。
-  
-    说明：实现末端CI可配置运动中断，实现末端CI同步部分控制器CI可配置功能。
-
-- **新增机器人激光数据伺服跟踪功能**： 
-    路径：初始设置 -> 外设 -> 线激光传感器。
-  
-    说明：实现机器人直接通过激光传感器数据进行跟踪。
-
-- **新增示教器配置功能**： 
-  
-    说明：①示教器上F1-F4按键支持在WEB界面配置自定义的功能；②钥匙切换自定义模式可配置为拖动模式。
-
-版本 V3.9.1
------------------
-
-日期：2025-12-30
-
-- **机器人后台记录故障和报警事件功能**： 
-  
-    说明：在用户界面登出期间，能够记录故障和报警信息，并在重新登陆后可查看。
-
-- **PTP、LIN指令增加当前位置相对运动功能、WebApp增加ServoJ指令添加功能**： 
-    路径：示教程序 -> 程序编程 -> PTP/LIN指令。
-  
-    说明：解决机械臂没有示教点位，但是需要基于当前位置偏移时，指令操作复杂问题，输入一条指令即可实现。
-
-- **末端lua开放协议调试开关及语法校验功能**： 
-    路径：初始设置 -> 外设 -> 夹爪、力传感器、焊接手柄。
-  
-    说明：目前控制器整合集成已适配末端协议（夹爪、力传感器、焊接手柄），本次同步优化在webAPP中可直接选择应用到末端；webServer新增协议lua语法校验，校验失败直接报错；webAPP新增lua开放协议调试开关，调试状态下运行末端lua屏蔽传感器通信超时报错。
-
-- **FRCap码垛场景功能优化**： 
-    路径：辅助应用 -> 工艺包 -> 码垛。
-  
-    说明：码垛支持两个取料点--两条流水线来料后，机器人根据顺序分别从两个流水线上的取料点抓取物料后放到两个对应码垛盘上。
-
-- **实体示教器功能优化**： 
-    路径：系统设置 -> 通用设置 -> 网络
-  
-    说明：当前客户在使用示教器时必须先切换到webapp再进入自己的上位机界面，较为繁琐，优化后可以在未登录示教界面时，旋转物理钥匙开关，机器人可切换手动/自动模式。
-
-- **碰撞功能优化**： 
-    路径：初始设置 -> 基础 -> 关节 -> 碰撞等级 -> 误报检测。
-  
-    说明：碰撞等级为1时也可以任意速度运行且不会因为速度快而误报错，当有碰撞或挤压时会报错停止；
-
-- **光电传感器TCP标定功能**： 
-    路径：初始设置 -> 基础 -> 工具坐标 -> 光电自动标定。
-  
-    说明：支持直柄焊枪和弯柄焊枪的自动标定；
-
-版本 V3.9.0
------------------
-
-日期：2025-11-27
-
-- **大儒DFC力控打磨头应用**： 
-    路径：初始设置 -> 外设 -> 打磨 -> 大儒DFC力控打磨头。
-  
-    说明：DFC智能柔性打磨力控外设软件部分适配并测试，满足DFC打磨系统的适配需求。
-
-- **关节扭矩传感器在整机上的参数标定**： 
-    路径：辅助应用 -> 工具应用 -> 拖动锁定 -> 关节扭矩传感器整机拖动。
-  
-    说明：运行既定轨迹完成关节扭矩传感器的灵敏度、线性度、迟滞误差、重复精度的参数标定。
-
-- **新增基于关节扭矩传感器引导拖动示教避免过冲功能**： 
-    路径：辅助应用 -> 工具应用 -> 拖动锁定 -> 关节扭矩传感器整机拖动。
-  
-    说明：缓解在电流环上的拖动过冲现象，该功能开启后，能便捷地实现拖动对点操作。
-
-- **相贯线焊接功能**： 
-    路径：示教程序 -> 程序编程 -> 相贯线指令。
-  
-    说明：在主管和拼接管的横截面上分别记录6个示教点，输入运动方向、速度、加速度、偏移值等参数，机器人能够得到两圆管相交形成的相贯线轨迹，并进行焊接。
-
-- **Modbus等待模拟输入设置增加等于判断功能**： 
-    路径：示教程序 -> 程序编程 -> Modbus指令。
-  
-    说明：从站等待模拟输入等待状态新增等于判断。
-
-- **示教点一键更新&Lin单点执行功能**： 
-    路径：示教程序 -> 示教点 -> 示教管理。
-  
-    说明：示教点界面通过机器人本体操作条更新当前机器人位姿到对应的点位且可以选择是否同步示教程序，新增Lin单点执行的方式。
-
-- **优化点位表模式下记点功能**： 
-    路径：示教程序 -> 示教点 -> 示教管理。
-  
-    说明：点位表模式下重新记点可同步更新lua程序,优化解决PTP缩减模式偶发超速、LIN调速模式偶发达位后运动停止问题。
-
-- **user配置文件**： 
-    说明：优化机器人出现user配置文件加载失败问题，增加自动重启备份配置文件、回滚备份配置文件功能。
-
-- **web界面版本**： 
-    说明：web界面版本更新为2.0，更新优化软件操作界面。
-
-- **新增V6.5机器人型号**： 
-    说明：通过减速器等硬件及算法优化，降低机器人的抖动量并提升轨迹精度，新增FR3、FR5、FR10、FR16、FR20机器人型号。
-
-- **新增FR5C机器人型号配置**： 
-    说明：LA版本软件新增FR5C机器人型号配置功能。
-
-版本 V3.8.7
------------------
-
-日期：2025-10-21
-
-- **直线齿条导轨的机器人碰撞检测功能**： 
-    路径：初始设置 -> 基础 -> 关节 -> 碰撞等级 -> 直线齿条导轨的机器人碰撞检测。
-  
-    说明：使得导轨在运动中发生碰撞可紧急停机，从而提高操作安全性。
-
-- **新增新螺旋线实际物理速度设置功能**： 
-    路径：示教程序 -> 程序编程 -> 新螺旋N-Spiral指令。
-  
-    说明：使机器人末端工具线速度的匀速段与设定值一致；
-
-- **安全停止恢复可选自动使能功能**： 
-    路径：初始设置 -> 安全 -> 急停停机。
-  
-    说明：新增1b类下急停复位后使能策略配置。
-
-- **力传感器带载校零及开放姿态顺应的导纳参数**： 
-    路径：初始设置 -> 基础 -> 负载，示教程序 -> 程序编程 -> F/T Control指令。
-  
-    说明：新增开放姿态顺应的导纳参数。
-
-- **新增圆弧和整圆的激光跟踪功能**： 
-  
-    说明：能够实现圆弧和整圆的激光实时跟踪功能，运动过程中姿态跟随变化，能够实现圆弧和整圆的激光扫描复现功能。
-    
-- **按钮盒功能**： 
-  
-    说明：优化1.0版本按钮盒复位IP功能。
-
-版本 V3.8.6
------------------
-
-日期：2025-09-19
-
-- **新增机器人阻抗控制功能**： 
-    路径：示教程序 -> 程序编程 -> F/T指令。
-  
-    说明：通过外力的实时检测，当达到设定阈值后主动顺应外力，偏离运动轨迹，当外力降至阈值后回归运动轨迹，从而更好地实现人机交互。
-
-- **新增拖动前的力矩检测功能**： 
-    路径：初始设置 -> 基础 -> 碰撞等级。
-  
-    说明：在进入拖动模式前，会进行各关节转矩指令与反馈的差值计算。当错误配置负载或安装方式时，会导致差值超过阈值，无法进入拖动模式，避免机器人进入拖动模式后失控。
-
-- **新增自定义摆动焊接功能**： 
-    路径：示教程序 -> 程序编程 -> Weave指令。
-  
-    说明：用户可自己设计摆焊模式去执行摆焊。
-
-- **ModbusTCP**： 
-    路径：示教程序 -> 程序编程 -> ModbusTCP。
-  
-    说明：优化ModbusTCP主站超时时间检测功能。
-
-- **气动式吸盘**： 
-    路径：初始设置 -> 外设 -> 阵列式吸盘。
-  
-    说明：优化气动式吸盘web页面适配功能。
-
-- **焊丝寻位故障报错**： 
-  
-    说明：优化WebAPP焊丝寻位故障报错，可复位。
-
-- **可配置IO功能**： 
-  
-    说明：新增FR3C-FR3MT可配置IO功能,可配置输入为CI0-CI4,可配置输出为CO0-CO4。
-
-版本 V3.8.5
------------------
-
-日期：2025-08-19
-
-- **Socket网络调试**： 
-    路径：示教程序 -> 程序编程 -> Socket网络调试。
-  
-    说明：可新增、配置、删除socket连接配置，最多支持配置4个socket连接。可通过指令模块生成打开连接、关闭连接、发送数据、接收数据示教编程。
-
-- **CAD生成G代码转机器人轨迹规划功能**： 
-    路径：辅助应用 -> 工具应用 -> G代码转化。
-  
-    说明：在Solidworks、FUSION360等具有CAM功能的软件中把直线、圆弧、圆、样条线等加工轨迹生成G代码文件，然后将G代码文件导入到Web端。
-
-- **直线、圆弧、整圆运动指令增加实际物理速度功能**： 
-    路径：示教程序 -> 程序编程，初始设置 -> 外设 -> 焊接手柄。
-  
-    说明：可直接定义当前运动指令实际运行物理速度。
-    
-- **优化PTP调速功能**： 
-  
-    说明：确保调速过程流畅，减少调速衔接处指令速度波动。
-    
-- **机器人模型配置**： 
-  
-    说明：新增FR30L机器人模型配置选项。
-    
-- **控制箱适配**： 
-  
-    说明：新增控制箱适配ETMP03E板卡（EtherCAT协议）。
-
-版本 V3.8.4.1
------------------
-
-日期：2025-07-30
-
-- **控制箱适配以太网透传模块及吸盘夹爪控制功能**： 
-    路径：初始设置 -> 外设 -> 阵列式吸盘。
-  
-    说明：可基于页面和外设开放协议，通过以太网转485透传模块控制阵列式吸盘（最多20个）。
-
-- **机器人前瞻轨迹规划（匀速前瞻）**： 
-    路径：示教程序 -> 程序编程、图形化编程、节点图编程。
-  
-    说明：增加匀速开关选项，开启时机器人以匀速进行前瞻运动。
-
-- **控制箱从站模式功能优化功能**： 
-    路径：初始设置 -> 外设 -> 板卡通讯、远程模式。
-  
-    说明：新增控制箱适配骥远ETMP03E板卡（EtherCAT协议）。
-
-- **激光寻位点位置获取功能**： 
-    路径：初始设置 -> 外设 -> 线激光传感器。
-  
-    说明：在激光寻位焊缝成功后，能够使用SDK或TCP协议指令获取到存放在“seamPos”中的位置数据。
-
-- **FR5和FR10速度开放功能**： 
-  
-    说明：将FR5线速度由1.0m/s提升至1.7m/s；FR10线速度由1.5m/s提升至2.0m/s。
-
-- **机器人模型配置**： 
-  
-    说明：新增FR5-WML长臂展机器人模型配置选项。
-
-- **优化软件升级**： 
-  
-    说明：缩短升级时间，兼容高版本降级任一低版本（3.7.6-3.8.4）。
-
-- **优化恢复出厂设置**： 
-  
-    说明：恢复出厂设置保留机器人型号、刚度、动力学设置、按钮盒版本等。
-
-版本 V3.8.4
------------------
-
-日期：2025-07-18
-    
-- **扩展轴blending平滑功能实现**： 
-    路径：示教程序 -> 程序编程、图形化编程、节点图编程。
-  
-    说明：实现扩展轴指令间的平滑运动，提高工作效率。
-    
-- **控制箱从站模式功能优化功能**： 
-    路径：初始设置 -> 外设 -> 板卡通讯、远程模式。
-  
-    说明：增加板卡IP配置、界面LUA指令下发， 增加远程模式下，控制器从站协议自启动功能。
-    
-- **控制箱N2L板卡QX适配(EtherCAT)**： 
-    说明：法奥工业实时总线通信板卡，miniPCIe板卡，支持EtherCAT协议通信。
-    
-- **机器人JOG运动**： 
-    说明：增加机器人JOG运动CO状态输出功能。
-
-版本 V3.8.3
------------------
-
-日期：2025-06-27
-    
-- **控制箱从站模式功能**： 
-    路径：初始设置 -> 外设 -> 板卡通讯。
-  
-    说明：机器人外设界面新增板卡通讯模块配置，可基于国内扩展板卡，实现EIP、CClink、PN协议与机器人从站交互功能。
-        
-- **增加手动模式下力传感器辅助拖动的碰撞检测功能**： 
-    路径：辅助应用 -> 工具应用 -> 拖动锁定 -> 力传感器辅助锁定。
-  
-    说明：开启力传感器辅助拖动功能时，机器人处于手动模式时，也会触发碰撞检测功能，避免末端设备损坏。
-
-- **增加T形速度特性轨迹规划+blending平滑功能**： 
-    路径：示教程序 -> 程序编程、图形化编程、节点图编程。
-  
-    说明：实现各运动指令间的平滑运动，提高工作效率能。
-        
-- **WebApp状态查询界面功能优化**： 
-    路径：状态信息 -> 状态查询。
-  
-    说明：优化状态查询参数设置为6个，波形时间最长为30s，增加数据视图显示并可复制数据，增加重命名图标名称。
-
-- **FR全系列机器人拖动力优化**： 
-    路径：初始设置 -> 基础 -> 关节 -> 摩擦力补偿 -> 拖动力补偿。
-  
-    说明：通过在拖动过程中给予补偿力矩来使拖动更加省力。
-    
-- **Web系统日志存储功能优化**： 
-    说明：修复系统日志文件异常问题，设置日志保留天数默认为7天。
-
-版本 V3.8.2
------------------
-
-日期：2025-05-29 
-    
-- **末端Lua开放协议适配焊接手柄功能**： 
-    路径：初始设置 -> 外设 -> 焊接手柄。
-  
-    说明：可使用开放协议适配smarttool焊接手柄，同时支持所有参数可配置。
-    
-- **控制器外设开放协议增加焊机开放协议**： 
-    路径：初始设置 -> 外设 -> 焊机。
-  
-    说明：可通过控制器外设开放协议(ModbusTCP)与焊机通讯进行焊机控制。
-
-- **增加LUA程序暂停功能**： 
-    路径：示教程序 -> 程序编程。
-  
-    说明：示教程序运行时，可在任意行点击暂停，包括等待类指令、通讯类指令，并且暂停时不占用超时时间。    
-
-- **增加T型速度修形+Blending功能**： 
-    路径：示教程序 -> 程序编程、图形化编程、节点图编程。
-
-    说明：开启T型速度修形开关后，速度曲线平滑，当前支持blending类型为（PTP-PTP，LIN-LIN，ARC-ARC，LIN-ARC，ARC-LIN）。
-    
-- **FIR自适应参数功能+FIR暂停恢复功能**： 
-    路径：示教程序 -> 程序编程、图形化编程、节点图编程，初始设置 -> 安全 -> 运动配置。
-
-    说明：FIR功能添加全局开启FIR及自适应参数开关，开启后运行普通PTP/LIN/ARC指令自动转化为FIR规划（不可带blend半径）。
-    
-- **Modbus RTU功能优化**： 
-    路径：示教程序 -> 程序编程、图形化编程、节点图编程，示教程序 -> 程序编程 -> Modbus RTU设置。
-
-    说明：可在WebApp配置ModbusRTU主站、配置波特率、检验方式、站号等。可监控ModbusRTU寄存器实时数值。
-    
-- **关节软限位保护功能**： 
-    路径：初始设置 -> 关节 -> 软限位。
-
-    说明：拖动模式下，当关节接近界面所设软限位时，存在阻尼力，同时在撤销外力矩后，关节能够回到软限位内。
-    
-- **机器人摆动侧倾角功能**： 
-    路径：示教程序 -> 程序编程、图形化编程、节点图编程。
-
-    说明：支持机器人末端工具在摆动运动过程中绕摆动坐标系Rx方向自定义摆动角度。
-    
-- **工艺参数渐变焊接功能**： 
-    路径：示教程序 -> 程序编程、图形化编程、节点图编程。
-
-    说明：能够实现焊接过程中前进速度渐变、电流电压渐变。
-    
-- **模拟量电弧跟踪功能**： 
-    路径：初始设置 -> 基础 -> I/O设置 -> AI。
-
-    说明：直接使用控制箱DI、DO及AI、AO与焊机IO口相连，实现基于模拟量电流反馈的电弧跟踪。
-    
-- **FRCap插件系统+码垛插件包功能**： 
-  
-    说明：适配了QX x86版本的FRCap插件系统及码垛插件包，FRCap可以通过提供的官方接口与机器人控制器交互，或者客户依据实际需求编写自定义接口指令和处理逻辑进行个性化开发。
-    
-- **机器人型号及模型**： 
-  
-    说明：增加FR3-C机器人型号及模型配置。
-    
-版本 V3.8.1
------------------
-
-日期：2025-04-14 
-    
-- **T形速度功能优化**： 
-    路径：示教程序 -> 程序编程、图形化编程、节点图编程，初始设置 -> 基础模块。
-  
-    说明：运动配置新增梯形速度优化模式，优化启停阶段急动度，增加加速阶段加速度。主要应用于启停阶段容易报碰撞的工况，以及启停阶段残余震动明显的工况。
-    
-- **传送带跟踪功能优化**： 
-    路径：辅助应用 -> 工艺包 -> 传送带跟踪。
-  
-    说明：在传送带跟踪运动模式下新增追检运动功能，无需在工件坐标系下进行运动示教，可自定义触发延迟距离。
-
-- **增加轴干涉区的阻抗回调功能**：
-    路径：初始设置 -> 安全 -> 干涉区。
-  
-    说明：在力传感器辅助拖动下，进入干涉区可以起到阻抗回调作用。
-
-- **焊接手柄适配功能**：
-    说明：新增焊接手柄适配：机器人末端安装焊接手柄可进行焊接程序编写及控制机器人启动、停止程序、手自动切换、拖动等功能。
-
-- **WEB端页面增加关节限位环显示**：
-    说明：开启限位环显示功能，能实时显示关节所处位置。
-    
-- **SDK新增功能**：
-    说明：SDK增加下载控制器日志、所有数据源、数据备份包功能。
-    
-- **碰撞前后关节信息记录功能**：
-    说明：记录碰撞前后的关节位置、速度、加速度及力矩信息，便于直接分析客户现场出现碰撞时的原因。
-
-版本 V3.8.0
------------------
-
-日期：2025-03-03 
-  
-- **偏置及摆幅单调渐变电弧跟踪功能**：
-    路径：示教程序 -> 程序编程、图形化编程、节点图编程。
-  
-    说明：摆动参数之摆动宽度可以实现在一段焊接运动中逐渐变化，段首摆幅参数逐渐向段末摆幅参数过渡，焊接中心可以主动偏移出焊缝中心。
-  
-- **自定义碰撞检测力矩阈值功能**：
-    路径：示教程序 -> 程序编程、图形化编程、节点图编程。
-  
-    说明：可在运行中，设置碰撞检测力矩阈值。可以根据需要选择关节力矩阈值或TCP侧力矩阈值，碰撞后打印关节速度、加速度、力矩等信息到日志文件。
-  
-- **实时前瞻轨迹规划方法功能**：
-    路径：示教程序 -> 程序编程、图形化编程、节点图编程。
-  
-    说明：实现多轨迹点拟合平滑衔接，运行速度随路径曲率自适应调整。
-
-- **FR全系列机型负载曲线绘制**：
-    说明：更新FR全系列机型负载曲线图表。
-
-- **缩减模式速度切换逻辑优化**：
-    说明：缩减模式触发时，偶尔会出现速度远低于缩减模式速度的运动，对该问题进行优化和解决。
-
-- **示教点位优化**：
-    说明：示教点位添加提示信息优化。
-
-- **基于FOCAS的CNC功能包功能**：
-    说明：增加FOCAS的CNC功能。
-
-- **从站指令适配板卡**：
-    说明：从站指令适配EnTalk miniPCIe板卡（Profinet协议、Ethernet/IP协议、CC-Link IEF Basic协议），适配CIFX 9OE-RE/F/PNS miniPCIe板卡（Profinet协议、Ethernet/IP协议、Ethercat协议、CC-Link IEF Basic协议）。
-
-- **checkpoint时间戳反馈功能**：
-    说明：servo J运动可以收到时间戳结果，包含指令号及下发、入队、出队、执行时间戳。
-
-- **激光传感器适配控制器外设开放协议**：
-    说明：增加激光外设开放协议通信功能。
-   
-版本 V3.7.8
------------------
-
-日期：2025-01-20 
-  
-- **扩展轴加激光数据无变换定点跟踪功能**：
-    路径：示教程序 -> 程序编程、图形化编程、节点图编程，初始设置 -> 外设 -> 线激光传感器。
-  
-    说明：主要针对变位机的实时定点跟踪，使扩展轴在运动时激光记录的工件偏差补偿在机器人工具末端。
-  
-- **机器人CI配置新增及优化功能**：
-    路径：初始设置 -> 基础 -> I/O设置 -> DI，示教程序 -> 程序编程、图形化编程、节点图编程。
-  
-    说明：1.CI可配置输入增加高低电平切换机器人手自动模式功能。配置CI端口为“手自动切换(高低电平)”，当该端口输入信号有效时，机器人自动切换至自动模式，当该端口输入信号无效时，机器人自动切换至手动模式。2.WebApp打开LUA程序后，通过可配置CI启动LUA程序时自动运行当前打开的LUA程序，而不是上次保存的程序。
-  
-- **WebApp状态查询功能优化**： 
-    路径：状态信息 -> 状态查询。
-  
-    说明：前后端数据交互方式将前端轮询请求方式改为websocket主动发送数据的方式实现，降低CPU占用。
-  
-- **控制箱固件DO开机高低有效可配置功能**：
-    路径：初始设置 -> 基础 -> I/O设置 -> DO。
-  
-    说明：新增“上电期间控制箱DO输出”配置,机器人使能前，控制箱DO可根据具体使用场景配置为所需的高低电平状态。
-  
-- **实时前瞻轨迹规划方法功能**：
-    路径：示教程序 -> 程序编程、图形化编程、节点图编程。
-  
-    说明：新增“TrajectoryLA”指令。
-  
-- **基于力传感器碰撞后的策略功能**：
-    路径：初始设置 -> 关节 -> 碰撞等级。
-  
-    说明：碰撞回弹模式新增“安全速度”参数。
-
-- **力传感器碰撞后自动抬升功能**：
-    说明：实现基于力传感器的碰撞检测后，机器人自动抬升功能，并能限制抬升过程的速度。
-
-- **FR全系列机型负载曲线绘制**：
-    说明：更新FR全系列机型负载曲线图表。
-
-版本 V3.7.7
------------------
-
-日期：2024-12-30
-  
-- **夹爪状态数据实时监控功能**：
-    路径：初始设置 -> 外设 -> 夹爪 -> 状态监控。
-  
-    说明：实时显示夹爪运行速度、力矩、位置等状态信息。
-  
-- **控制器故障数据采集功能**：
-    路径：系统设置 -> 通用设置 -> 故障数据。
-
-    说明：机器人运行过程中发生碰撞、指令点错误等故障时，控制器自动记录故障发生前后各15s的机器人位置、速度等状态信息。WebApp可导出.csv格式故障信息，帮助排查分析故障原因。
-  
-- **基于力传感器辅助拖动的奇异点规避及穿越功能**：
-    路径：辅助应用 -> 工具应用 -> 拖动锁定 -> 力传感器辅助锁定。
-
-    说明：1、在力传感器辅助拖动界面，选择策略为规避，当拖动机器人靠近奇异点时，会产生虚拟力。2、选择策略为穿越时，在靠近奇异点时，会切换至拖动模式，当远离奇异点时，会切换至力传感器辅助拖动。
-
-- **旧动力学适配360°自由安装及备份包导入适应动力学功能**：
-    路径：初始设置 -> 基础 -> 安装，辅助应用 -> 工具应用 -> 数据备份。
-
-    说明：备份包导入时，增加校验机器人类型、安装方式、安装角度和动力学配置类型，上述参数不一致时，提示禁止导入。
-  
-- **自动模式下奇异点穿越功能**：
-    路径：示教程序 -> 外设 -> LIN/ARC指令。 
-
-    说明：新增“奇异点穿越”运动保护配置。
-
-- **末端按钮记录点位后自动更新对应点位Lua程序功能**：
-    路径：示教程序 -> 程序编程 -> 示教点。
-
-    说明：新增末端按钮记录点位后可自动更新对应点位Lua程序功能。
-
-- **状态查询界面优化**：
-    路径：状态信息 -> 状态查询。
-
-    说明：状态查询界面UI和交互优化。
-
-- **WebApp、示教器界面优化**：
-    说明：WebApp、示教器新增俄语、繁体中文显示界面。
-
-- **WebApp展示界面优化功能**：
-    说明：WebApp界面左下角新增软件版本和机器人型号展示。
-
-- **扩展轴加激光跟踪功能**：
-    说明：1.机器人与外部轴同步运动，激光器实现外部轴坐标系下的同步跟踪。2.机器人与外部轴异步运动，激光能够在机器人基坐标系下或外部轴坐标系下跟踪。
-
-- **基于力传感器的工具点拖动功能**：
-    说明：在web界面，设置FT参考坐标系为自定义坐标系，开启力传感器辅助拖动后，机器人沿着设置的工具坐标系运动。
-
-- **机器人CNDE功能**：
-    说明：客户端可通过CNDE获取机器人状态反馈和向机器人发送控制数据(UDP通讯)，其中状态反馈周期可配置(1-200ms),机器人状态反馈数据内容和客户端输入控制机器人数据内容可自由配置。
-
-版本 V3.7.6
------------------
-
-日期：2024-11-18
-
-- **初始设置页面布局优化**：
-    路径：初始设置。
-  
-    说明：优化工具设定界面、负载配置界面以及部分功能图标显示。
-
-- **WebApp外设扩展轴配置功能交互优化**：
-    路径：初始设置 -> 外设 -> 扩展轴。
-  
-    说明：扩展轴界面布局和交互优化。
-
-- **系统日志功能优化**：
-    路径：状态信息 -> 系统日志。
-  
-    说明：新增日志分页展示与日志详细操作类别区分。
-  
-- **XY方向横向恒力打磨功能**：
-    路径：示教程序 -> 程序编程 -> 力控集 -> F/T_Control指令。
-  
-    说明：增加“打磨盘半径”参数，可贴着工件表面进行反复直线/曲线运动。
-  
-- **激光取点运动功能**：
-    路径：辅助应用 -> 工具应用 -> 交点生成。
-  
-    说明：三点与四点寻位求交点坐标功能增加lua脚本指令使用。
-    
-- **外部轴构型-两自由度小车功能**：
-    路径：初始设置 -> 外设 -> 扩展轴。
-  
-    说明：增加“两自由度小车”扩展轴方案，机器人与PLC间进行UDP通讯，再由PLC通过EtherCat控制两自由度小车。
-   
-- **基于平板工具的TCP标定方法功能**：
-    路径：初始设置 -> 坐标系 -> 工具坐标。
-  
-    说明：新增“平板工具标定”坐标系标定方法。
-         
-- **机器人后台程序功能**：
-    路径：示教程序 -> 程序编程。
-  
-    说明：后台程序能够正常获取I/O接口数据，包括系统I/O、modbus、扩展I/O。
-   
-- **机器人轨迹自动规避奇异点功能**：
-    路径：示教程序 -> 程序编程 -> 直线Lin/圆弧Arc指令。
-  
-    说明：新增“奇异点规避”运动保护配置。
-   
-- **旋转夹爪末端适配功能**：
-    路径：初始设置 -> 外设 -> 夹爪。
-  
-    说明：增加旋转夹爪相关功能码配置。
-       
-- **自定义协议从站指令**：
-    路径：远程模式。
-  
-    说明：新增“控制器从站协议”配置。
-    
-- **UDP通讯焊丝寻位功能**：
-  
-    说明：机器人可以通过UDP扩展IO进行焊丝寻位启停控制及获取焊丝寻位成功信号。
-    
-- **备份包功能优化**：
-
-    说明：支持旧版本数据包导入使用（QX 3.6.1及之后版本数据包）。
-
-- **恢复出厂设置功能优化**：新增文件校验，增加系统恢复出厂稳定性。
-
-    说明：新增文件校验，增加系统恢复出厂稳定性。
-
-- **升级功能优化**：
-
-    说明：QX3.6.9及之后版本可直接升级到QX3.7.6，升级后保留当前版本用户数据。
-
-- **页面降级功能**：
-  
-    说明：WebApp页面支持降级，可降到QX3.6.9及之后任意版本，降级后保留当前版本用户数据。
-
-版本 V3.7.5
------------------
-
-日期：2024-09-30
-
-- **包角姿态过渡角速度可调功能**：
-    路径：示教程序 -> 程序编程 -> 直线Lin指令。
-  
-    说明：新增“过渡点角速度可调”运动保护配置。
-       
-- **电弧跟踪多层多道焊接功能**：
-    路径：辅助应用 -> 工艺包 -> 焊接专家库 -> 多层多道焊。
-  
-    说明：新增“首层焊接摆动功能”和“电弧跟踪功能”配置。
-  
-- **485扩展轴配置功能**：
-    路径：初始设置 -> 外设 -> 扩展轴。
-  
-    说明：增加“加速度及急停”配置。
-  
-- **机器人工具TCP自动标定功能（自制光纤传感器工装）**：
-    路径：初始设置 -> 基础 -> 工具坐标。
-  
-    说明：新增“光电自动标定”坐标系标定。
-  
-- **示教器多语言设置功能**：
-    路径：登录页面。
-  
-    说明：新增“语言切换”配置。
-    
-版本 V3.7.4
------------------
-
-日期：2024-08-09
-
-- **基于lua末端开放协议软件功能（夹爪部分）**：
-    路径：初始设置 -> 外设 -> 夹爪。
-  
-    说明：新增“末端协议启用”配置。
-       
-- **斜锯齿摆动功能**：
-    路径：示教程序 -> 程序编程 -> 摆动Weave指令。
-  
-    说明：增加“摆动方向方位角”参数配置。
-       
-- **机器人焊接工艺包优化功能**：
-    路径：初始设置 -> 外设 -> 焊机 -> 焊机配置。
-  
-    说明：新增“焊接工艺参数”配置。
-       
-- **Lin指令关节超速处理功能**：
-    路径：示教程序 -> 程序编程 -> 直线Lin指令。
-  
-    说明：新增“关节超速保护”运动保护配置。
-       
-版本 V3.7.3
------------------
-
-日期：2024-06-28
-
-- **Modbus从站控制机器人功能**：
-    路径：示教程序 -> 程序编程 -> ModbusTCP。
-  
-    说明：新增“从站控制器”配置。
-       
-- **急停停机类型功能**： 
-    路径：初始设置 -> 安全 -> 急停停机。
-  
-    说明：停机类型新增“1a类、2a类、2类”停机类型。
-       
-版本 V3.7.2
------------------
-
-日期：2024-06-07
-
-- **基于Lua末端开放协议配置功能**：
-    路径：初始设置 -> 外设 -> 末端工具 -> 开放协议。
-  
-    说明：新增“开放协议”配置。
-     
-- **运动AO控制指令功能**：
-    路径：示教程序 -> 程序编程。
-  
-    说明：新增“运动AO指令”。
-     
-- **六维力和关节阻抗混合拖动功能**： 
-    路径：辅助应用 -> 工具应用 -> 拖动锁定。
-  
-    说明：新增“六维力和关节阻抗混合拖动”。
-     
-- **碰撞后响应策略功能**： 
-    路径：初始设置 -> 基础 -> 关节 -> 碰撞等级。
-  
-    说明：新增“碰撞策略”配置。
-     
-- **机器人首次激活功能**： 
-    路径：登录设置。
-  
-    说明：新增机器人首次激活验证功能。
-     
-版本 V3.7.1
------------------
-
-日期：2024-05-10
-
-- **web界面上锁功能**： 
-    路径：系统设置 -> 自定义信息。
-  
-    说明：新增“web界面锁屏”配置。 
-     
-- **寻位三点与四点求交点坐标功能**： 
-    路径：辅助应用 -> 工具应用 -> 交点生成。
-  
-    说明：新增“寻位三点与四点求交点坐标功能”。
-     
-- **段焊运动姿态优化功能**：
-    路径：示教程序 -> 程序编程 -> 段焊Segment指令。
-  
-    说明：增加“段焊模式”配置。
-  
-- **基于力传感器的虚拟墙功能**：
-    路径：初始设置 -> 外设 -> 力传感器，辅助应用 -> 工具应用 -> 拖动锁定。
-  
-    说明：末端外设配置增加“力传感器”相关配置参数，力传感器辅助锁定增加“惯性系数”配置。
-  
-- **SmartTool+力传感器组合新增功能**：
-    路径：初始设置 -> 外设 -> 焊接手柄。
-  
-    说明：新增键位功能配置。
-  
+Wersja V3.9.6
+-------------
+
+Data: 2026-05-26
+
+- **Optymalizacja funkcji ruchu matrycowego**:
+    Ścieżka: Aplikacje pomocnicze -> Pakiety procesowe -> Ruch matrycowy.
+
+    Opis: Optymalizacja funkcji zestawu instrukcji ruchu matrycowego.
+
+- **Optymalizacja funkcji redukcji prędkości DI**:
+    Ścieżka: Ustawienia początkowe -> Podstawowe -> Ustawienia I/O.
+
+    Opis: 1. Po wyzwoleniu sygnału DI, proces regulacji prędkości jest płynny, bez wstrząsów i zacięć; 2. Ścieżka końcówki robota nie zmienia się przed i po regulacji prędkości; 3. Brak błędów i przerw podczas regulacji prędkości wyzwalanej przez DI; 4. Natychmiastowe zatrzymanie po wyzwoleniu zatrzymania przez DI, bez błędów.
+
+- **Dodanie funkcji adaptacji komunikacji lasera spawalniczego robota**:
+    Ścieżka: Ustawienia początkowe -> Urządzenia peryferyjne -> Spawarka.
+
+    Opis: 1. Dodanie w WebAPP ustawień związanych z laserem spawalniczym, debugowania, instrukcji generowania programu lua; 2. Dodanie parametrów związanych z laserem spawalniczym; 3. Opracowanie programu adaptacyjnego PLC.
+
+- **Dodanie adaptacji protokołu EIP/CClink-IE dla karty FRJ-PCIeN-EIP/CC/PN-RJ-V10**:
+    Ścieżka: Ustawienia początkowe -> Urządzenia peryferyjne -> Komunikacja kartą.
+
+    Opis: 1. Obsługa konfigurowalnego cyklu komunikacyjnego; 2. Obsługa pobierania stanu połączenia magistrali; 3. Zgodność z protokołami EIP i CC.
+
+Wersja V3.9.5
+-------------
+
+Data: 2026-04-24
+
+- **Optymalizacja funkcji kontrolera**:
+    Ścieżka: Ustawienia ogólne -> Ustawienia sieci; Program nauczania -> Programowanie.
+
+    Opis: 1. Błąd walidacji podczas konfiguracji tego samego adresu IP dla ETH0 i ETH1; 2. Optymalizacja wyświetlania koloru numeru bieżącej linii programu.
+
+- **Optymalizacja prędkości FR30**:
+
+    Opis: Zwiększenie prędkości roboczej.
+
+- **Optymalizacja funkcji oscylacji łuku**:
+    Ścieżka: Program nauczania -> Programowanie -> Instrukcja łuku.
+
+    Opis: Umożliwienie ruchu z oscylacją.
+
+- **Optymalizacja funkcji SetTrajectoryJSpeed – brak zacięć podczas debugowania**:
+
+    Opis: Podczas procesu regulacji prędkości instrukcji, prędkość robota nie spada do zera podczas przełączania prędkości.
+
+- **Optymalizacja obsługi trybu edycji instrukcji programu Lua w module programowania**:
+    Ścieżka: Program nauczania -> Programowanie.
+
+    Opis: Optymalizacja umożliwiająca precyzyjne dopasowanie i wyświetlanie treści instrukcji.
+
+- **Dodanie adaptacji protokołów PN/Ecat/EIP/cclink dla karty FRJ-PCIeN-EC-RJ-V20**:
+    Ścieżka: Ustawienia początkowe -> Urządzenia peryferyjne -> Komunikacja kartą.
+
+    Opis: 1. Obsługa aktualizacji/pobierania oprogramowania sprzętowego online; 2. Obsługa konfigurowalnego cyklu komunikacyjnego; 3. Obsługa pobierania stanu połączenia magistrali.
+
+- **Dodanie instrukcji kontrolera**:
+    Ścieżka: Program nauczania -> Programowanie; Ustawienia początkowe -> Bezpieczeństwo -> Bezpieczne zatrzymanie.
+
+    Opis: 1. Dodanie opcji typu przesunięcia układu współrzędnych przedmiotu w instrukcjach ruchu; 2. Dodanie funkcji bezpiecznego zatrzymania; 3. Dodanie instrukcji odczytu DO, AO dla wejść/wyjść skrzynki sterowniczej, końcowych i rozszerzonych.
+
+- **Dodanie funkcji konfiguracji sygnału DO po awaryjnym zatrzymaniu skrzynki sterowniczej**:
+    Ścieżka: Ustawienia początkowe -> Podstawowe -> DO.
+
+    Opis: Nowa funkcja konfiguracji sygnału DO po awaryjnym zatrzymaniu skrzynki sterowniczej.
+
+- **Dodanie adaptacji pakietu językowego dla wersji oprogramowania w języku portugalskim**:
+
+    Opis: Dodanie przełączania języka portugalskiego.
+
+Wersja V3.9.4
+-------------
+
+Data: 2026-04-08
+
+- **Optymalizacja funkcji odtwarzania trajektorii nauczania TPD**:
+    Ścieżka: Program nauczania -> Programowanie -> Instrukcja TPD.
+
+    Opis: 1. Automatyczne generowanie instrukcji lua punktu początkowego; 2. Zabezpieczenie przed błędami przycisku start.
+
+- **Optymalizacja funkcji kopii zapasowej danych Webapp**:
+
+    Opis: Udoskonalenie i optymalizacja funkcji kopii zapasowej danych.
+
+- **Optymalizacja miękkiego limitu i pozycji pakowania dla FR3WML**:
+
+    Opis: Ustawienie zakresu miękkiego limitu dla stawu 3 na ±163°.
+
+- **Optymalizacja funkcji kompensacji pełnych parametrów DH i szybka walidacja**:
+
+    Opis: Kompensacja pełnego modelu parametrów.
+
+- **Dodanie funkcji sterowania impedancją ruchu PTP**:
+
+    Opis: Zwiększenie bezpieczeństwa podczas interakcji robota z człowiekiem.
+
+- **Dodanie funkcji protokołu komunikacyjnego dla urządzenia końcowego głowicy do moksybustii**:
+    Ścieżka: Ustawienia początkowe -> Urządzenia peryferyjne -> Transparentna transmisja końcowa.
+
+    Opis: Dodanie adaptacji protokołu komunikacyjnego dla nowego urządzenia końcowego.
+
+- **Dodanie adaptacji pakietu językowego dla wersji oprogramowania w języku niemieckim**:
+
+    Opis: Dodanie przełączania języka niemieckiego.
+
+- **Dodanie funkcji działania instrukcji ruchu servo dla ustawień bezpiecznej prędkości**:
+    Ścieżka: Ustawienia początkowe -> Bezpieczeństwo -> Bezpieczna prędkość.
+
+    Opis: Dodanie opcji zatrzymania z błędem i odłączenia po przekroczeniu prędkości w strategii bezpieczeństwa.
+
+- **Dodanie adaptera do routera bezprzewodowego TP-LINK AX3000 dla LA**:
+
+    Opis: Rozwiązanie problemu z brakiem bezprzewodowego dostępu do webApp po ponownym uruchomieniu z wyłączeniem zasilania.
+
+- **Dodanie funkcji oscylacji punktowej**:
+    Ścieżka: Program nauczania -> Programowanie -> Instrukcja Weave.
+
+    Opis: Współpraca z zewnętrznym czujnikiem laserowym w celu realizacji funkcji oscylacji punktowej.
+
+Wersja V3.9.3
+-------------
+
+Data: 2026-02-11
+
+- **Optymalizacja ustawień prędkości instrukcji ruchu SmartTool**:
+    Ścieżka: Ustawienia początkowe -> Urządzenia peryferyjne -> Uchwyt spawalniczy.
+
+    Opis: Zakres ustawiania prędkości dla instrukcji PTP, LIN, ARC został dostosowany do 0-100% (wcześniej górna granica wynosiła 30%).
+
+- **Optymalizacja obserwacji siły zewnętrznej bez czujnika siły i poprawa komfortu przeciągania**:
+    Ścieżka: Aplikacje pomocnicze -> Narzędzia aplikacyjne -> Blokada przeciągania.
+
+    Opis: Zwiększenie dokładności obserwacji siły zewnętrznej do ±0,5 N.
+
+- **Optymalizacja mechanizmu ponownego łączenia mastera Modbus TCP**:
+    Ścieżka: Program nauczania -> Programowanie -> Modbus TCP.
+
+    Opis: Dodanie logiki wstrzymania.
+
+- **Dodanie funkcji instrukcji debugowania osi rozszerzonej**:
+    Ścieżka: Ustawienia początkowe -> Urządzenia peryferyjne -> Oś rozszerzona.
+
+    Opis: Implementacja odwrotnej transformacji robota w układzie współrzędnych osi rozszerzonej oraz ruchu ServoCart z osią rozszerzoną.
+
+- **Dodanie funkcji konfigurowalnego stanu resetowania DO po wstrzymaniu/wznowieniu**:
+    Ścieżka: Ustawienia początkowe -> Urządzenia peryferyjne -> Uchwyt spawalniczy.
+
+    Opis: Opcjonalne ustawienie, czy stan wyjścia DO po wznowieniu ruchu ma być zgodny ze stanem sprzed wstrzymania.
+
+Wersja V3.9.2
+-------------
+
+Data: 2026-01-26
+
+- **Optymalizacja przeciągania nauczania w pętli pozycyjnej czujnika momentu obrotowego stawu**:
+    Ścieżka: Aplikacje pomocnicze -> Narzędzia aplikacyjne -> Blokada przeciągania.
+
+    Opis: Rozwiązanie problemu niewystarczającej dokładności pozycjonowania podczas przeciągania między stawami w ciągu 2 sekund.
+
+- **Optymalizacja karty rozszerzającej**:
+
+    Opis: Optymalizacja mechanizmu synchronizacji danych dla rozszerzonego DO.
+
+- **Optymalizacja funkcji śledzenia łuku**:
+    Ścieżka: Ustawienia początkowe -> Urządzenia peryferyjne -> Spawarka.
+
+    Opis: Dodanie możliwości zbierania prądu spawania w czasie rzeczywistym poprzez protokół otwarty urządzeń peryferyjnych Modbus TCP.
+
+- **Optymalizacja funkcji resetowania adresu IP kontrolera i fizycznego panelu operatorskiego**:
+    Ścieżka: Ustawienia systemowe -> Sieć.
+
+    Opis: ① Dodanie funkcji resetowania IP kontrolera w webrecovery, wymagającej podwójnego potwierdzenia; ② Dodanie funkcji resetowania IP w fizycznym panelu operatorskim; ③ Dodanie możliwości resetowania IP fizycznego panelu operatorskiego za pomocą przycisków fizycznych przy braku połączenia, adres IP panelu operatorskiego to 192.168.58.77.
+
+- **Dodanie konfiguracji nowego modelu robota FR3C**:
+
+    Opis: Zakres ruchu stawów jest zgodny z serią FR3, ramiona górne i dolne są zgodne z WMS, ładowność znamionowa 3 kg.
+
+- **Dodanie funkcji interferencji sześcianu**:
+    Ścieżka: Ustawienia początkowe -> Bezpieczeństwo -> Strefa interferencji -> Interferencja sześcianu.
+
+    Opis: Implementacja jednoczesnej kontroli interferencji dla co najmniej 4 sześcianów, z możliwością konfiguracji wyjścia CO odpowiadającego sygnałowi interferencji.
+
+- **Dodanie rozszerzenia funkcji modułu slave_interpret (protokół PROFINET) oraz funkcji wyświetlania I/O w ilości Web**:
+    Ścieżka: Ustawienia początkowe -> Urządzenia peryferyjne -> Komunikacja kartą -> Aktualizacja karty.
+
+    Opis: Dodanie aktualizacji oprogramowania sprzętowego EtherCAT dla karty Jiyuan, detekcji komunikacji PLC, konfigurowalnego cyklu oraz funkcji wyświetlania pełnych I/O w Web (protokół PROFINET).
+
+- **Dodanie funkcji protokołu otwartego smarttool**:
+    Ścieżka: Ustawienia początkowe -> Urządzenia peryferyjne -> Uchwyt spawalniczy.
+
+    Opis: ① Dodanie tworzenia, analizy i przetwarzania sygnałów detekcyjnych programu smarttool opartego na protokole otwartym, dodanie funkcji zabezpieczającej przycisków „Cofnij, Usuń”. ② Dodanie funkcji automatycznego generowania dla konfiguracji przycisków protokołu otwartego smarttool.
+
+- **Dodanie wzajemnej zgodności pakietów kopii zapasowych wersji oprogramowania QX i LA**:
+    Ścieżka: Aplikacje pomocnicze -> Narzędzia aplikacyjne -> Kopia zapasowa danych.
+
+    Opis: ① QX obsługuje i może w pełni zaimportować pakiety kopii zapasowych LA, LA obsługuje i może w pełni zaimportować pakiety kopii zapasowych QX; ② Zgodność z pakietami kopii zapasowych od wersji v3.8.7 wzwyż.
+
+- **Dodanie konfigurowalnych parametrów dla końcowego CI i CI kontrolera**:
+    Ścieżka: Ustawienia początkowe -> Podstawowe -> Ustawienia I/O -> DI.
+
+    Opis: Implementacja możliwości konfiguracji przerwania ruchu dla końcowego CI, synchronizacja części konfigurowalnych funkcji CI kontrolera.
+
+- **Dodanie funkcji śledzenia serwo z danymi laserowymi robota**:
+    Ścieżka: Ustawienia początkowe -> Urządzenia peryferyjne -> Liniowy czujnik laserowy.
+
+    Opis: Implementacja bezpośredniego śledzenia przez robota na podstawie danych z czujnika laserowego.
+
+- **Dodanie funkcji konfiguracji panelu operatorskiego**:
+
+    Opis: ① Przyciski F1-F4 na panelu operatorskim obsługują konfigurację niestandardowych funkcji w interfejsie WEB; ② Tryb niestandardowy przełącznika kluczykowego może być skonfigurowany jako tryb przeciągania.
+
+Wersja V3.9.1
+-------------
+
+Data: 2025-12-30
+
+- **Funkcja rejestrowania przez robota w tle zdarzeń awarii i alarmów**:
+
+    Opis: Możliwość rejestrowania informacji o awariach i alarmach podczas wylogowania z interfejsu użytkownika, z możliwością przeglądania po ponownym zalogowaniu.
+
+- **Dodanie funkcji ruchu względnego z bieżącej pozycji dla instrukcji PTP, LIN oraz dodanie funkcji dodawania instrukcji ServoJ w WebApp**:
+    Ścieżka: Program nauczania -> Programowanie -> Instrukcje PTP/LIN.
+
+    Opis: Rozwiązanie problemu złożoności operacji instrukcjami, gdy ramię mechaniczne nie ma punktu nauczania, ale wymagane jest przesunięcie względem bieżącej pozycji – można to zrealizować za pomocą jednej instrukcji.
+
+- **Przełącznik debugowania protokołu otwartego lua końcowego i funkcja walidacji składni**:
+    Ścieżka: Ustawienia początkowe -> Urządzenia peryferyjne -> Chwytak, czujnik siły, uchwyt spawalniczy.
+
+    Opis: Obecnie kontroler integruje i dostosowuje protokoły końcowe (chwytak, czujnik siły, uchwyt spawalniczy). Niniejsza optymalizacja umożliwia bezpośrednie zastosowanie w WebAPP do końcówki; webServer dodaje walidację składni lua protokołu, błąd walidacji powoduje bezpośredni komunikat o błędzie; WebAPP dodaje przełącznik debugowania protokołu otwartego lua, w stanie debugowania uruchomienie końcowego lua pomija błędy przekroczenia limitu czasu komunikacji czujnika.
+
+- **Optymalizacja funkcji scenariusza paletyzacji FRCap**:
+    Ścieżka: Aplikacje pomocnicze -> Pakiety procesowe -> Paletyzacja.
+
+    Opis: Paletyzacja obsługuje dwa punkty pobierania – po dostarczeniu materiałów z dwóch linii produkcyjnych, robot chwyta materiały kolejno z punktów pobierania na obu liniach i umieszcza je na dwóch odpowiadających im paletach.
+
+- **Optymalizacja funkcji fizycznego panelu operatorskiego**:
+    Ścieżka: Ustawienia systemowe -> Ustawienia ogólne -> Sieć.
+
+    Opis: Obecnie klient musi najpierw przełączyć się na webapp, a następnie wejść do własnego interfejsu nadrzędnego, co jest uciążliwe. Po optymalizacji, bez logowania do interfejsu nauczania, obracając fizycznym przełącznikiem kluczykowym, robot może przełączać tryb ręczny/automatyczny.
+
+- **Optymalizacja funkcji kolizji**:
+    Ścieżka: Ustawienia początkowe -> Podstawowe -> Stawy -> Poziom kolizji -> Wykrywanie fałszywych alarmów.
+
+    Opis: Nawet przy poziomie kolizji 1 robot może działać z dowolną prędkością i nie zgłasza fałszywych alarmów z powodu dużej prędkości. W przypadku kolizji lub ścisnięcia zgłaszany jest błąd i następuje zatrzymanie.
+
+- **Funkcja kalibracji TCP czujnika fotoelektrycznego**:
+    Ścieżka: Ustawienia początkowe -> Podstawowe -> Współrzędne narzędzia -> Automatyczna kalibracja fotoelektryczna.
+
+    Opis: Obsługa automatycznej kalibracji prostego i zakrzywionego uchwytu spawalniczego.
+
+Wersja V3.9.0
+-------------
+
+Data: 2025-11-27
+
+- **Zastosowanie głowicy szlifierskiej z kontrolą siły DFC Daru**:
+    Ścieżka: Ustawienia początkowe -> Urządzenia peryferyjne -> Szlifowanie -> Głowica szlifierska z kontrolą siły DFC Daru.
+
+    Opis: Adaptacja i testowanie części oprogramowania peryferyjnego inteligentnej elastycznej głowicy szlifierskiej z kontrolą siły DFC, spełniające wymagania adaptacji systemu szlifierskiego DFC.
+
+- **Kalibracja parametrów czujnika momentu obrotowego stawu w całym urządzeniu**:
+    Ścieżka: Aplikacje pomocnicze -> Narzędzia aplikacyjne -> Blokada przeciągania -> Przeciąganie całego urządzenia z czujnikiem momentu obrotowego stawu.
+
+    Opis: Uruchomienie ustalonej trajektorii w celu kalibracji parametrów czułości, liniowości, błędu histerezy i powtarzalności czujnika momentu obrotowego stawu.
+
+- **Dodanie funkcji unikania przeregulowania podczas przeciągania nauczania z użyciem czujnika momentu obrotowego stawu**:
+    Ścieżka: Aplikacje pomocnicze -> Narzędzia aplikacyjne -> Blokada przeciągania -> Przeciąganie całego urządzenia z czujnikiem momentu obrotowego stawu.
+
+    Opis: Zmniejszenie zjawiska przeregulowania podczas przeciągania w pętli prądowej. Po włączeniu tej funkcji możliwe jest wygodne pozycjonowanie punktowe podczas przeciągania.
+
+- **Funkcja spawania linii przecięcia rur**:
+    Ścieżka: Program nauczania -> Programowanie -> Instrukcja linii przecięcia rur.
+
+    Opis: Zapisanie 6 punktów nauczania odpowiednio na przekrojach poprzecznych rury głównej i łączonej, wprowadzenie parametrów takich jak kierunek ruchu, prędkość, przyspieszenie, wartość przesunięcia. Robot może uzyskać trajektorię linii przecięcia powstałej z przecięcia dwóch rur i przeprowadzić spawanie.
+
+- **Dodanie funkcji porównania dla ustawień oczekiwania na wejście analogowe Modbus**:
+    Ścieżka: Program nauczania -> Programowanie -> Instrukcje Modbus.
+
+    Opis: Dodanie możliwości porównania dla stanu oczekiwania na wejście analogowe urządzenia podrzędnego.
+
+- **Funkcja jednoklikowej aktualizacji punktu nauczania i wykonania pojedynczego punktu Lin**:
+    Ścieżka: Program nauczania -> Punkty nauczania -> Zarządzanie punktami.
+
+    Opis: W interfejsie punktów nauczania, za pomocą paska operacji na samym robocie, aktualizacja bieżącej pozycji robota do odpowiadającego punktu, z możliwością wyboru synchronizacji programu nauczania. Dodano nowy sposób wykonania pojedynczego punktu Lin.
+
+- **Optymalizacja funkcji zapisu punktów w trybie tabeli punktów**:
+    Ścieżka: Program nauczania -> Punkty nauczania -> Zarządzanie punktami.
+
+    Opis: Ponowny zapis punktu w trybie tabeli punktów może synchronizować aktualizację programu lua. Optymalizacja rozwiązująca sporadyczne przekroczenie prędkości w trybie redukcji PTP oraz problem z zatrzymaniem ruchu po osiągnięciu pozycji w trybie regulacji prędkości LIN.
+
+- **Plik konfiguracyjny użytkownika**:
+    Opis: Optymalizacja problemu z nieudanym ładowaniem pliku konfiguracyjnego użytkownika robota, dodanie funkcji automatycznego ponownego uruchamiania i przywracania kopii zapasowej pliku konfiguracyjnego.
+
+- **Wersja interfejsu web**:
+    Opis: Wersja interfejsu web zaktualizowana do 2.0, aktualizacja i optymalizacja interfejsu oprogramowania.
+
+- **Dodanie modelu robota V6.5**:
+    Opis: Dzięki optymalizacji sprzętu (reduktory itp.) i algorytmów, zmniejszenie drgań robota i poprawa dokładności trajektorii. Dodano modele robotów FR3, FR5, FR10, FR16, FR20.
+
+- **Dodanie konfiguracji modelu robota FR5C**:
+    Opis: Dodanie funkcji konfiguracji modelu robota FR5C w wersji oprogramowania LA.
+
+Wersja V3.8.7
+-------------
+
+Data: 2025-10-21
+
+- **Funkcja wykrywania kolizji robota na prostej szynie zębatej**:
+    Ścieżka: Ustawienia początkowe -> Podstawowe -> Stawy -> Poziom kolizji -> Wykrywanie kolizji robota na prostej szynie zębatej.
+
+    Opis: Umożliwia awaryjne zatrzymanie szyny w przypadku kolizji podczas ruchu, zwiększając tym samym bezpieczeństwo operacji.
+
+- **Dodanie funkcji ustawiania rzeczywistej prędkości fizycznej dla nowej spirali**:
+    Ścieżka: Program nauczania -> Programowanie -> Instrukcja N-Spiral (Nowa spirala).
+
+    Opis: Umożliwia zgodność odcinka jednostajnego prędkości liniowej narzędzia końcowego robota z wartością ustawioną.
+
+- **Funkcja automatycznego załączania po przywróceniu bezpiecznego zatrzymania**:
+    Ścieżka: Ustawienia początkowe -> Bezpieczeństwo -> Awaryjne zatrzymanie.
+
+    Opis: Dodanie konfiguracji strategii załączania po resecie awaryjnego zatrzymania w kategorii 1b.
+
+- **Zerowanie z obciążeniem czujnika siły i parametry admitancji dla otwartej zgodności orientacji**:
+    Ścieżka: Ustawienia początkowe -> Podstawowe -> Obciążenie, Program nauczania -> Programowanie -> Instrukcja F/T Control.
+
+    Opis: Dodanie parametrów admitancji dla otwartej zgodności orientacji.
+
+- **Dodanie funkcji śledzenia laserowego dla łuku i pełnego okręgu**:
+
+    Opis: Implementacja funkcji śledzenia laserowego w czasie rzeczywistym dla łuku i pełnego okręgu, zmiana orientacji podczas ruchu, możliwość odtwarzania skanowania laserowego dla łuku i pełnego okręgu.
+
+- **Funkcja panelu przyciskowego**:
+
+    Opis: Optymalizacja funkcji resetowania IP panelu przyciskowego w wersji 1.0.
+
+Wersja V3.8.6
+-------------
+
+Data: 2025-09-19
+
+- **Dodanie funkcji sterowania impedancją robota**:
+    Ścieżka: Program nauczania -> Programowanie -> Instrukcje F/T.
+
+    Opis: Poprzez wykrywanie siły zewnętrznej w czasie rzeczywistym, po osiągnięciu ustawionego progu, robot aktywnie dostosowuje się do siły zewnętrznej, odchylając się od trajektorii ruchu. Gdy siła spadnie poniżej progu, robot wraca na trajektorię, co lepiej realizuje interakcję człowiek-robot.
+
+- **Dodanie funkcji wykrywania momentu obrotowego przed przeciąganiem**:
+    Ścieżka: Ustawienia początkowe -> Podstawowe -> Poziom kolizji.
+
+    Opis: Przed wejściem w tryb przeciągania, przeprowadzane jest obliczenie różnicy między instrukcją momentu obrotowego a sprzężeniem zwrotnym dla każdego stawu. W przypadku nieprawidłowej konfiguracji obciążenia lub sposobu instalacji, różnica może przekroczyć próg, uniemożliwiając wejście w tryb przeciągania, co zapobiega utracie kontroli nad robotem po wejściu w tryb przeciągania.
+
+- **Dodanie funkcji spawania z oscylacją niestandardową**:
+    Ścieżka: Program nauczania -> Programowanie -> Instrukcja Weave.
+
+    Opis: Użytkownik może samodzielnie zaprojektować wzór oscylacji do spawania z oscylacją.
+
+- **ModbusTCP**:
+    Ścieżka: Program nauczania -> Programowanie -> ModbusTCP.
+
+    Opis: Optymalizacja funkcji wykrywania limitu czasu mastera ModbusTCP.
+
+- **Przyssawka pneumatyczna**:
+    Ścieżka: Ustawienia początkowe -> Urządzenia peryferyjne -> Przyssawka macierzowa.
+
+    Opis: Optymalizacja funkcji adaptacji strony internetowej dla przyssawki pneumatycznej.
+
+- **Błąd pozycjonowania drutu spawalniczego**:
+
+    Opis: Optymalizacja błędu pozycjonowania drutu spawalniczego w WebAPP – możliwość resetowania.
+
+- **Funkcja konfigurowalnych wejść/wyjść**:
+
+    Opis: Dodanie funkcji konfigurowalnych wejść/wyjść dla FR3C-FR3MT, konfigurowalne wejścia to CI0-CI4, konfigurowalne wyjścia to CO0-CO4.
+
+Wersja V3.8.5
+-------------
+
+Data: 2025-08-19
+
+- **Debugowanie sieci Socket**:
+    Ścieżka: Program nauczania -> Programowanie -> Debugowanie sieci Socket.
+
+    Opis: Możliwość dodawania, konfigurowania i usuwania konfiguracji połączeń socket. Maksymalna obsługa 4 połączeń socket. Poprzez moduł instrukcji można generować programowanie nauczania: otwieranie połączenia, zamykanie połączenia, wysyłanie danych, odbieranie danych.
+
+- **Funkcja konwersji kodu G wygenerowanego przez CAD na planowanie trajektorii robota**:
+    Ścieżka: Aplikacje pomocnicze -> Narzędzia aplikacyjne -> Konwersja kodu G.
+
+    Opis: W oprogramowaniu z funkcjami CAM, takim jak Solidworks, FUSION360, ścieżki obróbki liniowej, łukowej, okręgów, krzywych są konwertowane na plik kodu G, a następnie plik kodu G jest importowany do Web.
+
+- **Dodanie funkcji rzeczywistej prędkości fizycznej dla instrukcji ruchu linii prostej, łuku, pełnego okręgu**:
+    Ścieżka: Program nauczania -> Programowanie, Ustawienia początkowe -> Urządzenia peryferyjne -> Uchwyt spawalniczy.
+
+    Opis: Możliwość bezpośredniego zdefiniowania rzeczywistej prędkości fizycznej dla bieżącej instrukcji ruchu.
+
+- **Optymalizacja funkcji regulacji prędkości PTP**:
+
+    Opis: Zapewnienie płynności procesu regulacji prędkości, zmniejszenie wahań prędkości instrukcji w punktach łączenia regulacji.
+
+- **Konfiguracja modelu robota**:
+
+    Opis: Dodanie opcji konfiguracji modelu robota FR30L.
+
+- **Adaptacja skrzynki sterowniczej**:
+
+    Opis: Dodanie adaptacji skrzynki sterowniczej do karty ETMP03E (protokół EtherCAT).
+
+Wersja V3.8.4.1
+---------------
+
+Data: 2025-07-30
+
+- **Adaptacja skrzynki sterowniczej do modułu transparentnej transmisji Ethernet oraz funkcja sterowania przyssawką macierzową/chwytakiem**:
+    Ścieżka: Ustawienia początkowe -> Urządzenia peryferyjne -> Przyssawka macierzowa.
+
+    Opis: Możliwość sterowania przyssawką macierzową (maksymalnie 20) za pomocą modułu transparentnej transmisji Ethernet na 485, w oparciu o stronę internetową i protokół otwarty urządzeń peryferyjnych.
+
+- **Planowanie trajektorii z wyprzedzeniem robota (wyprzedzenie ze stałą prędkością)**:
+    Ścieżka: Program nauczania -> Programowanie, Programowanie graficzne, Programowanie grafem węzłów.
+
+    Opis: Dodanie opcji przełącznika stałej prędkości – po włączeniu robot porusza się ze stałą prędkością z wyprzedzeniem.
+
+- **Optymalizacja funkcji trybu urządzenia podrzędnego skrzynki sterowniczej**:
+    Ścieżka: Ustawienia początkowe -> Urządzenia peryferyjne -> Komunikacja kartą, Tryb zdalny.
+
+    Opis: Dodanie adaptacji skrzynki sterowniczej do karty Jiyuan ETMP03E (protokół EtherCAT).
+
+- **Funkcja pobierania pozycji punktu pozycjonowania laserowego**:
+    Ścieżka: Ustawienia początkowe -> Urządzenia peryferyjne -> Liniowy czujnik laserowy.
+
+    Opis: Po pomyślnym pozycjonowaniu spoiny laserem, możliwość pobrania danych pozycji przechowywanych w „seamPos” za pomocą instrukcji SDK lub protokołu TCP.
+
+- **Funkcja otwierania prędkości dla FR5 i FR10**:
+
+    Opis: Zwiększenie prędkości liniowej FR5 z 1,0 m/s do 1,7 m/s; prędkości liniowej FR10 z 1,5 m/s do 2,0 m/s.
+
+- **Konfiguracja modelu robota**:
+
+    Opis: Dodanie opcji konfiguracji modelu robota o długim zasięgu ramienia FR5-WML.
+
+- **Optymalizacja aktualizacji oprogramowania**:
+
+    Opis: Skrócenie czasu aktualizacji, zgodność z obniżaniem wersji z wyższej do dowolnej niższej (3.7.6-3.8.4).
+
+- **Optymalizacja przywracania ustawień fabrycznych**:
+
+    Opis: Przywracanie ustawień fabrycznych zachowuje model robota, sztywność, ustawienia dynamiki, wersję panelu przyciskowego itp.
+
+Wersja V3.8.4
+-------------
+
+Data: 2025-07-18
+
+- **Implementacja funkcji wygładzania blending dla osi rozszerzonej**:
+    Ścieżka: Program nauczania -> Programowanie, Programowanie graficzne, Programowanie grafem węzłów.
+
+    Opis: Implementacja płynnego ruchu między instrukcjami osi rozszerzonej, zwiększenie wydajności pracy.
+
+- **Optymalizacja funkcji trybu urządzenia podrzędnego skrzynki sterowniczej**:
+    Ścieżka: Ustawienia początkowe -> Urządzenia peryferyjne -> Komunikacja kartą, Tryb zdalny.
+
+    Opis: Dodanie konfiguracji adresu IP karty, wysyłanie instrukcji LUA z interfejsu, dodanie funkcji automatycznego uruchamiania protokołu urządzenia podrzędnego kontrolera w trybie zdalnym.
+
+- **Adaptacja karty N2L skrzynki sterowniczej dla QX (EtherCAT)**:
+    Opis: Karta komunikacyjna magistrali czasu rzeczywistego FAIRINO, karta miniPCIe, obsługuje komunikację protokołem EtherCAT.
+
+- **Ruch JOG robota**:
+    Opis: Dodanie funkcji wyjścia stanu CO podczas ruchu JOG robota.
+
+Wersja V3.8.3
+-------------
+
+Data: 2025-06-27
+
+- **Funkcja trybu urządzenia podrzędnego skrzynki sterowniczej**:
+    Ścieżka: Ustawienia początkowe -> Urządzenia peryferyjne -> Komunikacja kartą.
+
+    Opis: W interfejsie urządzeń peryferyjnych robota dodano moduł konfiguracji komunikacji kartą, umożliwiający interakcję z urządzeniem podrzędnym robota poprzez protokoły EIP, CClink, PN w oparciu o lokalne karty rozszerzające.
+
+- **Dodanie funkcji wykrywania kolizji dla przeciągania wspomaganego czujnikiem siły w trybie ręcznym**:
+    Ścieżka: Aplikacje pomocnicze -> Narzędzia aplikacyjne -> Blokada przeciągania -> Blokada wspomagana czujnikiem siły.
+
+    Opis: Po włączeniu funkcji przeciągania wspomaganego czujnikiem siły, gdy robot jest w trybie ręcznym, również uruchamiana jest funkcja wykrywania kolizji, aby uniknąć uszkodzenia urządzenia końcowego.
+
+- **Dodanie funkcji planowania trajektorii z charakterystyką prędkości w kształcie litery T + wygładzanie blending**:
+    Ścieżka: Program nauczania -> Programowanie, Programowanie graficzne, Programowanie grafem węzłów.
+
+    Opis: Implementacja płynnego ruchu między instrukcjami ruchu, zwiększenie wydajności pracy.
+
+- **Optymalizacja funkcji interfejsu zapytania o stan w WebApp**:
+    Ścieżka: Informacje o stanie -> Zapytanie o stan.
+
+    Opis: Optymalizacja ustawień parametrów zapytania do 6, maksymalny czas przebiegu do 30 sekund, dodanie widoku danych z możliwością kopiowania, dodanie możliwości zmiany nazwy ikony.
+
+- **Optymalizacja siły przeciągania dla wszystkich modeli robotów FR**:
+    Ścieżka: Ustawienia początkowe -> Podstawowe -> Stawy -> Kompensacja tarcia -> Kompensacja siły przeciągania.
+
+    Opis: Poprzez dostarczanie momentu kompensacyjnego podczas przeciągania, przeciąganie staje się mniej wymagające siłowo.
+
+- **Optymalizacja funkcji przechowywania dziennika systemowego Web**:
+    Opis: Naprawa problemu z nieprawidłowym plikiem dziennika systemowego, ustawienie domyślnego okresu przechowywania dziennika na 7 dni.
+
+Wersja V3.8.2
+-------------
+
+Data: 2025-05-29
+
+- **Funkcja adaptacji protokołu otwartego lua końcowego do uchwytu spawalniczego**:
+    Ścieżka: Ustawienia początkowe -> Urządzenia peryferyjne -> Uchwyt spawalniczy.
+
+    Opis: Możliwość użycia protokołu otwartego do adaptacji uchwytu spawalniczego smarttool, z obsługą konfiguracji wszystkich parametrów.
+
+- **Dodanie protokołu otwartego dla urządzeń peryferyjnych kontrolera – protokół otwarty spawarki**:
+    Ścieżka: Ustawienia początkowe -> Urządzenia peryferyjne -> Spawarka.
+
+    Opis: Możliwość komunikacji i sterowania spawarką za pośrednictwem protokołu otwartego urządzeń peryferyjnych kontrolera (ModbusTCP).
+
+- **Dodanie funkcji wstrzymywania programu LUA**:
+    Ścieżka: Program nauczania -> Programowanie.
+
+    Opis: Podczas działania programu nauczania, możliwość wstrzymania w dowolnym wierszu, w tym instrukcji oczekiwania i komunikacyjnych, przy czym czas wstrzymania nie wlicza się do limitu czasu.
+
+- **Dodanie funkcji kształtowania prędkości typu T + Blending**:
+    Ścieżka: Program nauczania -> Programowanie, Programowanie graficzne, Programowanie grafem węzłów.
+
+    Opis: Po włączeniu przełącznika kształtowania prędkości typu T, krzywa prędkości staje się płynna. Obecnie obsługiwane typy blending to (PTP-PTP, LIN-LIN, ARC-ARC, LIN-ARC, ARC-LIN).
+
+- **Funkcja adaptacyjnych parametrów FIR + funkcja wstrzymywania i wznawiania FIR**:
+    Ścieżka: Program nauczania -> Programowanie, Programowanie graficzne, Programowanie grafem węzłów; Ustawienia początkowe -> Bezpieczeństwo -> Konfiguracja ruchu.
+
+    Opis: Dodanie w funkcji FIR globalnego włączania FIR oraz przełącznika parametrów adaptacyjnych. Po włączeniu, uruchomienie zwykłych instrukcji PTP/LIN/ARC automatycznie przekształca się w planowanie FIR (bez promienia blend).
+
+- **Optymalizacja funkcji Modbus RTU**:
+    Ścieżka: Program nauczania -> Programowanie, Programowanie graficzne, Programowanie grafem węzłów; Program nauczania -> Programowanie -> Ustawienia Modbus RTU.
+
+    Opis: Możliwość konfiguracji mastera Modbus RTU w WebApp, konfiguracji prędkości transmisji, trybu parzystości, numeru stacji itp. Możliwość monitorowania wartości w czasie rzeczywistym rejestrów Modbus RTU.
+
+- **Funkcja ochrony miękkim limitem stawu**:
+    Ścieżka: Ustawienia początkowe -> Stawy -> Miękki limit.
+
+    Opis: W trybie przeciągania, gdy staw zbliża się do ustawionego miękkiego limitu w interfejsie, pojawia się siła tłumienia, a po usunięciu zewnętrznego momentu obrotowego staw może powrócić do zakresu miękkiego limitu.
+
+- **Funkcja kąta przechyłu bocznego robota podczas oscylacji**:
+    Ścieżka: Program nauczania -> Programowanie, Programowanie graficzne, Programowanie grafem węzłów.
+
+    Opis: Obsługa definiowania niestandardowego kąta oscylacji narzędzia końcowego robota wokół kierunku Rx oscylacyjnego układu współrzędnych podczas ruchu oscylacyjnego.
+
+- **Funkcja stopniowego spawania parametrów procesowych**:
+    Ścieżka: Program nauczania -> Programowanie, Programowanie graficzne, Programowanie grafem węzłów.
+
+    Opis: Możliwość stopniowej zmiany prędkości posuwu, prądu i napięcia podczas procesu spawania.
+
+- **Funkcja śledzenia łuku z sygnałem analogowym**:
+    Ścieżka: Ustawienia początkowe -> Podstawowe -> Ustawienia I/O -> AI.
+
+    Opis: Bezpośrednie połączenie DI, DO, AI, AO skrzynki sterowniczej z portami I/O spawarki w celu realizacji śledzenia łuku opartego na sprzężeniu zwrotnym prądu analogowego.
+
+- **System wtyczek FRCap + funkcja pakietu wtyczek do paletyzacji**:
+
+    Opis: Adaptacja systemu wtyczek FRCap i pakietu wtyczek do paletyzacji dla wersji QX x86. FRCap może współpracować z kontrolerem robota za pośrednictwem dostarczonych oficjalnych interfejsów, lub klient może pisać niestandardowe instrukcje interfejsu i logikę przetwarzania zgodnie z rzeczywistymi potrzebami w celu indywidualnego rozwoju.
+
+- **Model robota i model 3D**:
+
+    Opis: Dodanie konfiguracji modelu robota FR3-C i modelu 3D.
+
+Wersja V3.8.1
+-------------
+
+Data: 2025-04-14
+
+- **Optymalizacja funkcji prędkości typu T**:
+    Ścieżka: Program nauczania -> Programowanie, Programowanie graficzne, Programowanie grafem węzłów; Ustawienia początkowe -> Moduł podstawowy.
+
+    Opis: Dodanie trybu optymalizacji prędkości trapezowej w konfiguracji ruchu, optymalizacja gwałtowności w fazie uruchamiania i zatrzymywania, zwiększenie przyspieszenia w fazie przyspieszania. Stosowane głównie w warunkach, w których łatwo o kolizję podczas uruchamiania i zatrzymywania oraz w przypadku wyraźnych drgań resztkowych w tych fazach.
+
+- **Optymalizacja funkcji śledzenia taśmociągu**:
+    Ścieżka: Aplikacje pomocnicze -> Pakiety procesowe -> Śledzenie taśmociągu.
+
+    Opis: Dodanie funkcji ruchu doganiającego w trybie śledzenia taśmociągu, umożliwiającej definiowanie opóźnienia odległości wyzwalania bez konieczności uczenia ruchu w układzie współrzędnych przedmiotu.
+
+- **Dodanie funkcji sprzężenia zwrotnego impedancji dla strefy interferencji osi**:
+    Ścieżka: Ustawienia początkowe -> Bezpieczeństwo -> Strefa interferencji.
+
+    Opis: Podczas przeciągania wspomaganego czujnikiem siły, wejście w strefę interferencji może wywołać efekt sprzężenia zwrotnego impedancji.
+
+- **Funkcja adaptacji uchwytu spawalniczego**:
+    Opis: Dodanie adaptacji uchwytu spawalniczego: instalacja uchwytu spawalniczego na końcówce robota umożliwia pisanie programów spawania oraz sterowanie robotem – uruchamianie i zatrzymywanie programu, przełączanie ręczny/automatyczny, przeciąganie itp.
+
+- **Dodanie wyświetlania pierścienia ograniczenia stawu na stronie WEB**:
+    Opis: Włączenie funkcji wyświetlania pierścienia ograniczenia umożliwia wyświetlanie pozycji stawu w czasie rzeczywistym.
+
+- **Nowe funkcje SDK**:
+    Opis: Dodanie w SDK funkcji pobierania dziennika kontrolera, wszystkich źródeł danych oraz pakietu kopii zapasowej danych.
+
+- **Funkcja rejestrowania informacji o stawach przed i po kolizji**:
+    Opis: Rejestrowanie informacji o pozycji, prędkości, przyspieszeniu i momencie obrotowym stawów przed i po kolizji, ułatwiające bezpośrednią analizę przyczyn kolizji na miejscu u klienta.
+
+Wersja V3.8.0
+-------------
+
+Data: 2025-03-03
+
+- **Funkcja śledzenia łuku z monotoniczną zmianą przesunięcia i amplitudy oscylacji**:
+    Ścieżka: Program nauczania -> Programowanie, Programowanie graficzne, Programowanie grafem węzłów.
+
+    Opis: Szerokość oscylacji w parametrach oscylacji może stopniowo zmieniać się podczas jednego ruchu spawania. Parametr amplitudy na początku segmentu stopniowo przechodzi w amplitudę na końcu segmentu. Środek spawania może aktywnie odchylać się od środka spoiny.
+
+- **Funkcja niestandardowego progu momentu obrotowego wykrywania kolizji**:
+    Ścieżka: Program nauczania -> Programowanie, Programowanie graficzne, Programowanie grafem węzłów.
+
+    Opis: Możliwość ustawienia progu momentu obrotowego wykrywania kolizji podczas pracy. Możliwość wyboru progu momentu obrotowego stawu lub progu momentu obrotowego po stronie TCP. Po kolizji informacje takie jak prędkość stawu, przyspieszenie i moment obrotowy są zapisywane w pliku dziennika.
+
+- **Funkcja metody planowania trajektorii z wyprzedzeniem w czasie rzeczywistym**:
+    Ścieżka: Program nauczania -> Programowanie, Programowanie graficzne, Programowanie grafem węzłów.
+
+    Opis: Implementacja płynnego łączenia i dopasowywania wielu punktów trajektorii, z prędkością ruchu dostosowującą się adaptacyjnie do krzywizny ścieżki.
+
+- **Opracowanie krzywych obciążenia dla wszystkich modeli serii FR**:
+    Opis: Aktualizacja wykresów krzywych obciążenia dla wszystkich modeli serii FR.
+
+- **Optymalizacja logiki przełączania prędkości w trybie redukcji**:
+    Opis: W przypadku wystąpienia trybu redukcji, sporadycznie pojawiała się prędkość ruchu znacznie niższa niż prędkość w trybie redukcji – problem został zoptymalizowany i rozwiązany.
+
+- **Optymalizacja punktów nauczania**:
+    Opis: Optymalizacja dodawania komunikatów informacyjnych dla punktów nauczania.
+
+- **Funkcja pakietu CNC opartego na FOCAS**:
+    Opis: Dodanie funkcji CNC FOCAS.
+
+- **Adaptacja kart do instrukcji urządzenia podrzędnego**:
+    Opis: Instrukcje urządzenia podrzędnego dostosowane do kart miniPCIe EnTalk (protokół Profinet, protokół Ethernet/IP, protokół CC-Link IEF Basic) oraz do kart miniPCIe CIFX 9OE-RE/F/PNS (protokół Profinet, protokół Ethernet/IP, protokół Ethercat, protokół CC-Link IEF Basic).
+
+- **Funkcja zwrotna znacznika czasu checkpoint**:
+    Opis: Ruch servo J może otrzymać wyniki znacznika czasu, zawierające numer instrukcji oraz znaczniki czasu wysłania, wejścia do kolejki, wyjścia z kolejki i wykonania.
+
+- **Adaptacja czujnika laserowego do protokołu otwartego urządzeń peryferyjnych kontrolera**:
+    Opis: Dodanie funkcji komunikacji protokołu otwartego dla urządzenia peryferyjnego lasera.
+
+Wersja V3.7.8
+-------------
+
+Data: 2025-01-20
+
+- **Funkcja stałego śledzenia punktowego dla osi rozszerzonej z danymi laserowymi**:
+    Ścieżka: Program nauczania -> Programowanie, Programowanie graficzne, Programowanie grafem węzłów; Ustawienia początkowe -> Urządzenia peryferyjne -> Liniowy czujnik laserowy.
+
+    Opis: Głównie do śledzenia punktowego w czasie rzeczywistym dla pozycjonera, umożliwiając kompensację odchylenia przedmiotu rejestrowanego przez laser podczas ruchu osi rozszerzonej na końcówce narzędzia robota.
+
+- **Dodanie i optymalizacja funkcji konfiguracji CI robota**:
+    Ścieżka: Ustawienia początkowe -> Podstawowe -> Ustawienia I/O -> DI; Program nauczania -> Programowanie, Programowanie graficzne, Programowanie grafem węzłów.
+
+    Opis: 1. Dodanie funkcji przełączania robota między trybem ręcznym a automatycznym za pomocą poziomu wysokiego/niskiego w konfigurowalnych wejściach CI. Po skonfigurowaniu portu CI jako „Przełączanie ręczny/automatyczny (poziom wysoki/niski)”, gdy sygnał wejściowy na tym porcie jest aktywny, robot automatycznie przełącza się w tryb automatyczny; gdy sygnał wejściowy jest nieaktywny, robot automatycznie przełącza się w tryb ręczny. 2. Po otwarciu programu LUA w WebApp, uruchomienie LUA za pomocą konfigurowalnego CI powoduje automatyczne uruchomienie aktualnie otwartego programu LUA, a nie ostatnio zapisanego programu.
+
+- **Optymalizacja funkcji zapytania o stan w WebApp**:
+    Ścieżka: Informacje o stanie -> Zapytanie o stan.
+
+    Opis: Sposób interakcji danych między frontendem a backendem został zmieniony z metody żądań pollingowych frontendu na metodę aktywnego wysyłania danych przez websocket, co zmniejsza wykorzystanie CPU.
+
+- **Funkcja konfigurowalnego wysokiego/niskiego aktywnego poziomu wyjścia DO przy uruchomieniu oprogramowania sprzętowego skrzynki sterowniczej**:
+    Ścieżka: Ustawienia początkowe -> Podstawowe -> Ustawienia I/O -> DO.
+
+    Opis: Dodanie konfiguracji „Wyjście DO skrzynki sterowniczej podczas zasilania”. Przed załączeniem robota, wyjścia DO skrzynki sterowniczej mogą być skonfigurowane do wymaganego stanu wysokiego/niskiego poziomu w zależności od konkretnego scenariusza użycia.
+
+- **Funkcja metody planowania trajektorii z wyprzedzeniem w czasie rzeczywistym**:
+    Ścieżka: Program nauczania -> Programowanie, Programowanie graficzne, Programowanie grafem węzłów.
+
+    Opis: Dodanie instrukcji „TrajectoryLA”.
+
+- **Funkcja strategii po kolizji oparta na czujniku siły**:
+    Ścieżka: Ustawienia początkowe -> Stawy -> Poziom kolizji.
+
+    Opis: Dodanie parametru „Prędkość bezpieczeństwa” w trybie odbicia kolizyjnego.
+
+- **Funkcja automatycznego unoszenia robota po kolizji wykrytej przez czujnik siły**:
+    Opis: Implementacja funkcji automatycznego unoszenia robota po wykryciu kolizji przez czujnik siły, z możliwością ograniczenia prędkości podczas unoszenia.
+
+- **Opracowanie krzywych obciążenia dla wszystkich modeli serii FR**:
+    Opis: Aktualizacja wykresów krzywych obciążenia dla wszystkich modeli serii FR.
+
+Wersja V3.7.7
+-------------
+
+Data: 2024-12-30
+
+- **Funkcja monitorowania w czasie rzeczywistym danych stanu chwytaka**:
+    Ścieżka: Ustawienia początkowe -> Urządzenia peryferyjne -> Chwytak -> Monitorowanie stanu.
+
+    Opis: Wyświetlanie w czasie rzeczywistym informacji o stanie chwytaka, takich jak prędkość robocza, moment obrotowy, pozycja.
+
+- **Funkcja zbierania danych awaryjnych kontrolera**:
+    Ścieżka: Ustawienia systemowe -> Ustawienia ogólne -> Dane awaryjne.
+
+    Opis: W przypadku wystąpienia awarii robota, takich jak kolizja, błąd punktu instrukcji, kontroler automatycznie rejestruje informacje o stanie robota (pozycja, prędkość itp.) z 15 sekund przed i po awarii. WebApp umożliwia eksport informacji o awarii w formacie .csv, co pomaga w analizie i diagnozowaniu przyczyn awarii.
+
+- **Funkcja unikania i przechodzenia przez punkty osobliwe podczas przeciągania wspomaganego czujnikiem siły**:
+    Ścieżka: Aplikacje pomocnicze -> Narzędzia aplikacyjne -> Blokada przeciągania -> Blokada wspomagana czujnikiem siły.
+
+    Opis: 1. W interfejsie przeciągania wspomaganego czujnikiem siły, wybór strategii „unikaj” powoduje generowanie wirtualnej siły podczas zbliżania się robota do punktu osobliwego. 2. Wybór strategii „przechodź” powoduje przełączenie w tryb przeciągania przy zbliżaniu się do punktu osobliwego, a po oddaleniu się od punktu osobliwego powrót do przeciągania wspomaganego czujnikiem siły.
+
+- **Funkcja adaptacji starej dynamiki do instalacji pod dowolnym kątem 360° oraz funkcja importu pakietu kopii zapasowej dostosowująca się do dynamiki**:
+    Ścieżka: Ustawienia początkowe -> Podstawowe -> Instalacja; Aplikacje pomocnicze -> Narzędzia aplikacyjne -> Kopia zapasowa danych.
+
+    Opis: Podczas importu pakietu kopii zapasowej dodano walidację typu robota, sposobu instalacji, kąta instalacji i typu konfiguracji dynamiki. W przypadku niezgodności powyższych parametrów wyświetlany jest komunikat zabraniający importu.
+
+- **Funkcja przechodzenia przez punkty osobliwe w trybie automatycznym**:
+    Ścieżka: Program nauczania -> Urządzenia peryferyjne -> Instrukcje LIN/ARC.
+
+    Opis: Dodano konfigurację zabezpieczenia ruchu „Przechodzenie przez punkt osobliwy”.
+
+- **Funkcja automatycznej aktualizacji programu LUA odpowiadającego punktowi po zapisie punktu przyciskiem końcowym**:
+    Ścieżka: Program nauczania -> Programowanie -> Punkty nauczania.
+
+    Opis: Dodano funkcję automatycznej aktualizacji programu LUA odpowiadającego punktowi po zapisie punktu przyciskiem końcowym.
+
+- **Optymalizacja interfejsu zapytania o stan**:
+    Ścieżka: Informacje o stanie -> Zapytanie o stan.
+
+    Opis: Optymalizacja interfejsu użytkownika i interakcji w interfejsie zapytania o stan.
+
+- **Optymalizacja interfejsu WebApp i panelu operatorskiego**:
+    Opis: Dodanie interfejsów wyświetlania w języku rosyjskim i chińskim tradycyjnym dla WebApp i panelu operatorskiego.
+
+- **Funkcja optymalizacji wyświetlania interfejsu WebApp**:
+    Opis: Dodanie wyświetlania wersji oprogramowania i modelu robota w lewym dolnym rogu interfejsu WebApp.
+
+- **Funkcja śledzenia laserowego dla osi rozszerzonej**:
+    Opis: 1. Robot porusza się synchronicznie z zewnętrzną osią, a laser realizuje synchroniczne śledzenie w układzie współrzędnych zewnętrznej osi. 2. Robot porusza się asynchronicznie z zewnętrzną osią, a laser może śledzić w podstawowym układzie współrzędnych robota lub w układzie współrzędnych zewnętrznej osi.
+
+- **Funkcja przeciągania punktu narzędzia oparta na czujniku siły**:
+    Opis: W interfejsie web, po ustawieniu układu odniesienia FT jako niestandardowego układu współrzędnych i włączeniu przeciągania wspomaganego czujnikiem siły, robot porusza się wzdłuż ustawionego układu współrzędnych narzędzia.
+
+- **Funkcja CNDE robota**:
+    Opis: Klient może za pośrednictwem CNDE pobierać informacje zwrotne o stanie robota i wysyłać dane sterujące do robota (komunikacja UDP). Cykl informacji zwrotnej o stanie można konfigurować (1-200 ms). Treść danych zwrotnych o stanie robota i treść danych wejściowych klienta sterujących robotem można swobodnie konfigurować.
+
+Wersja V3.7.6
+-------------
+
+Data: 2024-11-18
+
+- **Optymalizacja układu strony Ustawienia początkowe**:
+    Ścieżka: Ustawienia początkowe.
+
+    Opis: Optymalizacja interfejsu ustawiania narzędzi, interfejsu konfiguracji obciążenia oraz wyświetlania ikon niektórych funkcji.
+
+- **Optymalizacja interakcji funkcji konfiguracji osi rozszerzonej urządzeń peryferyjnych WebApp**:
+    Ścieżka: Ustawienia początkowe -> Urządzenia peryferyjne -> Oś rozszerzona.
+
+    Opis: Optymalizacja układu i interakcji interfejsu osi rozszerzonej.
+
+- **Optymalizacja funkcji dziennika systemowego**:
+    Ścieżka: Informacje o stanie -> Dziennik systemowy.
+
+    Opis: Dodanie podziału dziennika na strony oraz rozróżnienia kategorii szczegółowych operacji dziennika.
+
+- **Funkcja stałej siły szlifowania w kierunkach X i Y**:
+    Ścieżka: Program nauczania -> Programowanie -> Zestaw sterowania siłą -> Instrukcja F/T_Control.
+
+    Opis: Dodanie parametru „Promień tarczy szlifierskiej”, umożliwiającego wykonywanie powtarzalnych ruchów liniowych/krzywoliniowych po powierzchni przedmiotu.
+
+- **Funkcja ruchu pobierania punktów laserem**:
+    Ścieżka: Aplikacje pomocnicze -> Narzędzia aplikacyjne -> Generowanie punktu przecięcia.
+
+    Opis: Dodanie możliwości użycia instrukcji skryptu lua dla funkcji obliczania współrzędnych punktu przecięcia z trzech i czterech punktów pozycjonujących.
+
+- **Funkcja konfiguracji zewnętrznej osi – wózek o dwóch stopniach swobody**:
+    Ścieżka: Ustawienia początkowe -> Urządzenia peryferyjne -> Oś rozszerzona.
+
+    Opis: Dodanie schematu osi rozszerzonej „wózek o dwóch stopniach swobody”. Komunikacja między robotem a PLC odbywa się przez UDP, a PLC steruje wózkiem o dwóch stopniach swobody przez EtherCat.
+
+- **Funkcja metody kalibracji TCP za pomocą narzędzia płytkowego**:
+    Ścieżka: Ustawienia początkowe -> Układy współrzędnych -> Współrzędne narzędzia.
+
+    Opis: Dodanie metody kalibracji układu współrzędnych „Kalibracja narzędziem płytkowym”.
+
+- **Funkcja programu robota działającego w tle**:
+    Ścieżka: Program nauczania -> Programowanie.
+
+    Opis: Program działający w tle może normalnie pobierać dane z interfejsów I/O, w tym systemowych I/O, modbus, rozszerzonych I/O.
+
+- **Funkcja automatycznego omijania punktów osobliwych trajektorii robota**:
+    Ścieżka: Program nauczania -> Programowanie -> Instrukcje linii prostej Lin / łuku Arc.
+
+    Opis: Dodanie konfiguracji zabezpieczenia ruchu „Omijanie punktu osobliwego”.
+
+- **Funkcja adaptacji końcowej chwytaka obrotowego**:
+    Ścieżka: Ustawienia początkowe -> Urządzenia peryferyjne -> Chwytak.
+
+    Opis: Dodanie konfiguracji kodów funkcji związanych z chwytakiem obrotowym.
+
+- **Niestandardowe instrukcje urządzenia podrzędnego protokołu**:
+    Ścieżka: Tryb zdalny.
+
+    Opis: Dodanie konfiguracji „Protokół urządzenia podrzędnego kontrolera”.
+
+- **Funkcja pozycjonowania drutu spawalniczego przez komunikację UDP**:
+
+    Opis: Robot może sterować uruchamianiem/zatrzymywaniem pozycjonowania drutu spawalniczego oraz pobierać sygnał pomyślnego pozycjonowania drutu spawalniczego za pośrednictwem rozszerzonych wejść/wyjść UDP.
+
+- **Optymalizacja funkcji pakietu kopii zapasowej**:
+
+    Opis: Obsługa importu i używania pakietów danych ze starszych wersji (pakiety danych z QX 3.6.1 i nowszych).
+
+- **Optymalizacja funkcji przywracania ustawień fabrycznych**: Dodanie walidacji plików, zwiększenie stabilności przywracania ustawień fabrycznych systemu.
+
+    Opis: Dodanie walidacji plików, zwiększenie stabilności przywracania ustawień fabrycznych systemu.
+
+- **Optymalizacja funkcji aktualizacji**:
+
+    Opis: Wersje QX 3.6.9 i nowsze można bezpośrednio aktualizować do QX 3.7.6, a po aktualizacji dane użytkownika z bieżącej wersji są zachowywane.
+
+- **Funkcja obniżania wersji strony**:
+
+    Opis: Strona WebApp obsługuje obniżanie wersji do dowolnej wersji od QX 3.6.9 wzwyż, a po obniżeniu wersji dane użytkownika z bieżącej wersji są zachowywane.
+
+Wersja V3.7.5
+-------------
+
+Data: 2024-09-30
+
+- **Funkcja regulowanej prędkości kątowej przejścia w pakiecie kątowym**:
+    Ścieżka: Program nauczania -> Programowanie -> Instrukcja linii prostej Lin.
+
+    Opis: Dodanie konfiguracji zabezpieczenia ruchu „Regulowana prędkość kątowa punktu przejściowego”.
+
+- **Funkcja spawania wielowarstwowego i wielościeżkowego ze śledzeniem łuku**:
+    Ścieżka: Aplikacje pomocnicze -> Pakiety procesowe -> Baza wiedzy spawalniczej -> Spawanie wielowarstwowe i wielościeżkowe.
+
+    Opis: Dodanie konfiguracji „Funkcji oscylacji w pierwszej warstwie” i „Funkcji śledzenia łuku”.
+
+- **Funkcja konfiguracji osi rozszerzonej 485**:
+    Ścieżka: Ustawienia początkowe -> Urządzenia peryferyjne -> Oś rozszerzona.
+
+    Opis: Dodanie konfiguracji „Przyspieszenie i zatrzymanie awaryjne”.
+
+- **Funkcja automatycznej kalibracji TCP narzędzia robota (własny sprzęt światłowodowy)**:
+    Ścieżka: Ustawienia początkowe -> Podstawowe -> Współrzędne narzędzia.
+
+    Opis: Dodanie kalibracji układu współrzędnych „Automatyczna kalibracja fotoelektryczna”.
+
+- **Funkcja ustawień wielojęzycznych panelu operatorskiego**:
+    Ścieżka: Strona logowania.
+
+    Opis: Dodanie konfiguracji „Przełączanie języka”.
+
+Wersja V3.7.4
+-------------
+
+Data: 2024-08-09
+
+- **Funkcja oprogramowania protokołu otwartego lua końcowego (część chwytaka)**:
+    Ścieżka: Ustawienia początkowe -> Urządzenia peryferyjne -> Chwytak.
+
+    Opis: Dodanie konfiguracji „Włączenie protokołu końcowego”.
+
+- **Funkcja oscylacji skośnej piłokształtnej**:
+    Ścieżka: Program nauczania -> Programowanie -> Instrukcja oscylacji Weave.
+
+    Opis: Dodanie konfiguracji parametru „Azymut kierunku oscylacji”.
+
+- **Optymalizacja funkcji pakietu spawalniczego robota**:
+    Ścieżka: Ustawienia początkowe -> Urządzenia peryferyjne -> Spawarka -> Konfiguracja spawarki.
+
+    Opis: Dodanie konfiguracji „Parametry procesu spawania”.
+
+- **Funkcja obsługi przekroczenia prędkości stawu w instrukcji Lin**:
+    Ścieżka: Program nauczania -> Programowanie -> Instrukcja linii prostej Lin.
+
+    Opis: Dodanie konfiguracji zabezpieczenia ruchu „Ochrona przed przekroczeniem prędkości stawu”.
+
+Wersja V3.7.3
+-------------
+
+Data: 2024-06-28
+
+- **Funkcja sterowania robotem z poziomu urządzenia podrzędnego Modbus**:
+    Ścieżka: Program nauczania -> Programowanie -> ModbusTCP.
+
+    Opis: Dodanie konfiguracji „Kontroler podrzędny”.
+
+- **Funkcja typu awaryjnego zatrzymania**:
+    Ścieżka: Ustawienia początkowe -> Bezpieczeństwo -> Awaryjne zatrzymanie.
+
+    Opis: Dodanie typów zatrzymania „typ 1a, typ 2a, typ 2”.
+
+Wersja V3.7.2
+-------------
+
+Data: 2024-06-07
+
+- **Funkcja konfiguracji protokołu otwartego Lua końcowego**:
+    Ścieżka: Ustawienia początkowe -> Urządzenia peryferyjne -> Narzędzie końcowe -> Protokół otwarty.
+
+    Opis: Dodanie konfiguracji „Protokół otwarty”.
+
+- **Funkcja instrukcji sterowania ruchem AO**:
+    Ścieżka: Program nauczania -> Programowanie.
+
+    Opis: Dodanie „Instrukcji ruchomego AO”.
+
+- **Funkcja mieszanego przeciągania z użyciem 6-osiowej siły i impedancji stawu**:
+    Ścieżka: Aplikacje pomocnicze -> Narzędzia aplikacyjne -> Blokada przeciągania.
+
+    Opis: Dodanie „Mieszanego przeciągania z użyciem 6-osiowej siły i impedancji stawu”.
+
+- **Funkcja strategii reakcji po kolizji**:
+    Ścieżka: Ustawienia początkowe -> Podstawowe -> Stawy -> Poziom kolizji.
+
+    Opis: Dodanie konfiguracji „Strategia kolizji”.
+
+- **Funkcja pierwszej aktywacji robota**:
+    Ścieżka: Ustawienia logowania.
+
+    Opis: Dodanie funkcji weryfikacji pierwszej aktywacji robota.
+
+Wersja V3.7.1
+-------------
+
+Data: 2024-05-10
+
+- **Funkcja blokowania interfejsu web**:
+    Ścieżka: Ustawienia systemowe -> Informacje niestandardowe.
+
+    Opis: Dodanie konfiguracji „Blokada ekranu interfejsu web”.
+
+- **Funkcja obliczania współrzędnych punktu przecięcia z trzech i czterech punktów do pozycjonowania**:
+    Ścieżka: Aplikacje pomocnicze -> Narzędzia aplikacyjne -> Generowanie punktu przecięcia.
+
+    Opis: Dodanie „Funkcji obliczania współrzędnych punktu przecięcia z trzech i czterech punktów do pozycjonowania”.
+
+- **Optymalizacja orientacji ruchu spawania odcinkowego**:
+    Ścieżka: Program nauczania -> Programowanie -> Instrukcja Segment.
+
+    Opis: Dodanie konfiguracji „Tryb spawania odcinkowego”.
+
+- **Funkcja wirtualnej ściany oparta na czujniku siły**:
+    Ścieżka: Ustawienia początkowe -> Urządzenia peryferyjne -> Czujnik siły; Aplikacje pomocnicze -> Narzędzia aplikacyjne -> Blokada przeciągania.
+
+    Opis: Dodanie parametrów konfiguracyjnych związanych z „czujnikiem siły” w konfiguracji urządzeń peryferyjnych końcowych. Dodanie konfiguracji „Współczynnik bezwładności” w blokadzie wspomaganej czujnikiem siły.
+
+- **Nowa funkcja łącząca SmartTool i czujnik siły**:
+    Ścieżka: Ustawienia początkowe -> Urządzenia peryferyjne -> Uchwyt spawalniczy.
+
+    Opis: Dodanie konfiguracji funkcji przycisków.

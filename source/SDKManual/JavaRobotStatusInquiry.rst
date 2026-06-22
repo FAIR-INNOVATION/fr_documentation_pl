@@ -1,272 +1,294 @@
-机器人状态查询
-===============
+Zapytanie o stan robota
+=======================
 
 .. toctree:: 
     :maxdepth: 5
 
-获取当前关节位置(角度)
-+++++++++++++++++++++++++++++++++++++++++
+Pobieranie bieżącej pozycji przegubów (kąt)
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief  获取当前关节位置(角度)
-    * @param  [out] jPos 获取的六个关节位置，单位deg
-    * @return  错误码
+    * @brief  Pobieranie bieżącej pozycji przegubów (kąt)
+    * @param  [out] jPos Pobrane pozycje sześciu przegubów, jednostka deg
+    * @return  Kod błędu
     */
     int GetActualJointPosDegree(JointPos jPos); 
 
-获取关节反馈速度-deg/s
-+++++++++++++++++++++++++++++++++++++++++
+Pobieranie prędkości sprzężenia zwrotnego przegubów - deg/s
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /** 
-    * @brief 获取关节反馈速度-deg/s 
-    * @param [out] speed 六个关节速度
-    * @return 错误码 
+    * @brief Pobieranie prędkości sprzężenia zwrotnego przegubów - deg/s 
+    * @param [out] speed Prędkości sześciu przegubów
+    * @return Kod błędu 
     */
     int GetActualJointSpeedsDegree(Object[] speed);
 
-获取关节反馈加速度
-+++++++++++++++++++++++++++++++++++++++++
+Pobieranie przyspieszenia sprzężenia zwrotnego przegubów
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief  获取关节反馈加速度-deg/s^2
-    * @param  [in] flag 0-阻塞，1-非阻塞
-    * @param  [out] acc 六个关节加速度
-    * @return  错误码
+    * @brief  Pobieranie przyspieszenia sprzężenia zwrotnego przegubów - deg/s^2
+    * @param  [in] flag 0-blokujący, 1-nieblokujący
+    * @param  [out] acc Przyspieszenia sześciu przegubów
+    * @return  Kod błędu
     */
     public int GetActualJointAccDegree(int flag, Object[] acc)
 
-获取TCP指令合速度
-+++++++++++++++++++++++++++++++++++++++++
+Pobieranie prędkości wypadkowej zadanej TCP
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief  获取TCP指令速度
-    * @param  [in] flag 0-阻塞，1-非阻塞
-    * @param  [out] tcp_speed 线性速度
-    * @param  [out] ori_speed 姿态速度
-    * @return  错误码
+    * @brief  Pobieranie prędkości zadanej TCP
+    * @param  [in] flag 0-blokujący, 1-nieblokujący
+    * @param  [out] tcp_speed Prędkość liniowa
+    * @param  [out] ori_speed Prędkość pozy
+    * @return  Kod błędu
     */
     public int GetTargetTCPCompositeSpeed(int flag, double tcp_speed, double ori_speed)
 
-获取TCP反馈合速度
-+++++++++++++++++++++++++++++++++++++++++
+Pobieranie prędkości wypadkowej sprzężenia zwrotnego TCP
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief  获取TCP反馈合速度
-    * @param  [in] flag 0-阻塞，1-非阻塞
-    * @param  [out] tcp_speed 线性速度
-    * @param  [out] ori_speed 姿态速度
-    * @return  错误码
+    * @brief  Pobieranie prędkości wypadkowej sprzężenia zwrotnego TCP
+    * @param  [in] flag 0-blokujący, 1-nieblokujący
+    * @param  [out] tcp_speed Prędkość liniowa
+    * @param  [out] ori_speed Prędkość pozy
+    * @return  Kod błędu
     */
     public int GetActualTCPCompositeSpeed(int flag, double tcp_speed, double ori_speed)
 
-获取TCP指令速度
-+++++++++++++++++++++++++++++++++++++++++
+Pobieranie prędkości zadanej TCP
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief  获取TCP指令速度
-    * @param  [in] flag 0-阻塞，1-非阻塞
-    * @param  [out] speed [x,y,z,rx,ry,rz]速度
-    * @return  错误码
+    * @brief  Pobieranie prędkości zadanej TCP
+    * @param  [in] flag 0-blokujący, 1-nieblokujący
+    * @param  [out] speed Prędkości [x,y,z,rx,ry,rz]
+    * @return  Kod błędu
     */
     public int GetTargetTCPSpeed(int flag, Object[] speed)
 
-获取TCP反馈速度
-+++++++++++++++++++++++++++++++++++++++++
+Pobieranie prędkości sprzężenia zwrotnego TCP
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief  获取TCP反馈速度
-    * @param  [in] flag 0-阻塞，1-非阻塞
-    * @param  [out] speed [x,y,z,rx,ry,rz]速度
-    * @return  错误码
+    * @brief  Pobieranie prędkości sprzężenia zwrotnego TCP
+    * @param  [in] flag 0-blokujący, 1-nieblokujący
+    * @param  [out] speed Prędkości [x,y,z,rx,ry,rz]
+    * @return  Kod błędu
     */
     public int GetActualTCPSpeed(int flag, Object[] speed)
 
-获取当前工具位姿
-+++++++++++++++++++++++++++++++++++++++++
+Pobieranie bieżącej pozy narzędzia
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief  获取当前工具位姿
-    * @param  [out] desc_pos  工具位姿
-    * @return  错误码
+    * @brief  Pobieranie bieżącej pozy narzędzia
+    * @param  [out] desc_pos  Pozycja narzędzia
+    * @return  Kod błędu
     */
     int GetActualTCPPose(DescPose desc_pos); 
 
-获取当前工具坐标系编号
-+++++++++++++++++++++++++++++++++
+Pobieranie bieżącego numeru układu narzędzia
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief  获取当前工具坐标系编号
-    * @param  [in] flag  0-阻塞，1-非阻塞
-    * @param  [out] id  工具坐标系编号
-    * @return  错误码
+    * @brief  Pobieranie bieżącego numeru układu narzędzia
+    * @param  [in] flag  0-blokujący, 1-nieblokujący
+    * @param  [out] id  Numer układu narzędzia
+    * @return  Kod błędu
     */
     int GetActualTCPNum(int flag, int[] id)
 
-获取当前工件坐标系编号
-+++++++++++++++++++++++++++++++++
+Pobieranie bieżącego numeru układu przedmiotu
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief  获取当前工件坐标系编号
-    * @param  [in] flag  0-阻塞，1-非阻塞
-    * @param  [out] id  工件坐标系编号
-    * @return  错误码
+    * @brief  Pobieranie bieżącego numeru układu przedmiotu
+    * @param  [in] flag  0-blokujący, 1-nieblokujący
+    * @param  [out] id  Numer układu przedmiotu
+    * @return  Kod błędu
     */
     public int GetActualWObjNum(int flag, int[] id)
 
-获取当前末端法兰位姿
-+++++++++++++++++++++++++++++++++
+Pobieranie bieżącej pozy kołnierza końcowego
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief  获取当前末端法兰位姿
-    * @param  [in] flag  0-阻塞，1-非阻塞
-    * @param  [out] desc_pos  法兰位姿
-    * @return  错误码
+    * @brief  Pobieranie bieżącej pozy kołnierza końcowego
+    * @param  [in] flag  0-blokujący, 1-nieblokujący
+    * @param  [out] desc_pos  Pozycja kołnierza
+    * @return  Kod błędu
     */
     public int GetActualToolFlangePose(int flag, DescPose desc_pos)
 
-获取当前关节转矩
-+++++++++++++++++++++++++++++++++++++++++
+Pobieranie bieżącego momentu obrotowego przegubów
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief 获取当前关节转矩
-    * @param  [in]  flag 0-阻塞，1-非阻塞
-    * @param  [out]  torques 关节转矩
-    * @return  错误码
+    * @brief Pobieranie bieżącego momentu obrotowego przegubów
+    * @param  [in]  flag 0-blokujący, 1-nieblokujący
+    * @param  [out]  torques Moment obrotowy przegubów
+    * @return  Kod błędu
     */
     int GetJointTorques(int flag, Object[] torques);
 
-获取系统时间
-+++++++++++++++++++++++++++++++++++++++++
+Pobieranie czasu systemowego
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief  获取系统时间
-    * @return  List[0]:int 错误码; List[1]:double t_ms 单位ms
+    * @brief  Pobieranie czasu systemowego
+    * @return  List[0]:int Kod błędu; List[1]:double t_ms jednostka ms
     */
     List<Number> GetSystemClock();
 
-查询机器人运动是否完成
-+++++++++++++++++++++++++++++++++++++++++
+Sprawdzanie, czy ruch robota został zakończony
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief  查询机器人运动是否完成
-    * @param   [out] state  0-未完成，1-完成
-    * @return  错误码
+    * @brief  Sprawdzanie, czy ruch robota został zakończony
+    * @param   [out] state  0-niezakończony, 1-zakończony
+    * @return  Kod błędu
     */
     public int GetRobotMotionDone(int[] state)
 
-查询机器人运动队列缓存长度
-+++++++++++++++++++++++++++++++++++++++++
+Sprawdzanie długości bufora kolejki ruchu robota
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief  查询机器人运动队列缓存长度
-    * @param   [out] len  缓存长度
-    * @return  错误码
+    * @brief  Sprawdzanie długości bufora kolejki ruchu robota
+    * @param   [out] len  Długość bufora
+    * @return  Kod błędu
     */
     public int GetMotionQueueLength(int[] len)
 
-获取机器人急停状态
-+++++++++++++++++++++++++++++++++++++++++
+Pobieranie stanu zatrzymania awaryjnego robota
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief 获取机器人急停状态
-    * @param [out] state 急停状态，0-非急停，1-急停
-    * @return 错误码
+    * @brief Pobieranie stanu zatrzymania awaryjnego robota
+    * @param [out] state Stan zatrzymania awaryjnego, 0-brak zatrzymania awaryjnego, 1-zatrzymanie awaryjne
+    * @return Kod błędu
     */
     public int GetRobotEmergencyStopState(int[] state)
 
-获取SDK与机器人的通讯状态
-+++++++++++++++++++++++++++++++++++++++++
+Pobieranie stanu komunikacji SDK z robotem
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief 获取SDK与机器人的通讯状态
-    * @return state 通讯状态，0-通讯正常，1-通讯异常
+    * @brief Pobieranie stanu komunikacji SDK z robotem
+    * @return state Stan komunikacji, 0-komunikacja normalna, 1-komunikacja nieprawidłowa
     */
     public int GetSDKComState()
 
-获取安全停止信号
-+++++++++++++++++++++++++++++++++++++++++++++
+Pobieranie sygnału bezpiecznego zatrzymania
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief 获取安全停止信号
-    * @param  [out] si0_state 安全停止信号SI0，0-无效，1-有效
-    * @param  [out] si1_state 安全停止信号SI1，0-无效，1-有效
-    * @return 错误码
+    * @brief Pobieranie sygnału bezpiecznego zatrzymania
+    * @param  [out] si0_state Sygnał bezpiecznego zatrzymania SI0, 0-nieaktywny, 1-aktywny
+    * @param  [out] si1_state Sygnał bezpiecznego zatrzymania SI1, 0-nieaktywny, 1-aktywny
+    * @return Kod błędu
     */
     public int GetSafetyStopState(int[] si0_state, int[] si1_state)
 
-获取机器人关节驱动器温度(℃)
-+++++++++++++++++++++++++++++++++++++++++++++
+Pobieranie temperatury sterownika przegubu robota (℃)
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief 获取机器人关节驱动器温度(℃)
-    * @param  [out] temperature 温度
-    * @return 错误码
+    * @brief Pobieranie temperatury sterownika przegubu robota (℃)
+    * @param  [out] temperature Temperatura
+    * @return Kod błędu
     */
     public int GetJointDriverTemperature(double[] temperature)
 
-获取机器人关节驱动器扭矩(Nm)
-+++++++++++++++++++++++++++++++++++++++++++++
+Pobieranie momentu obrotowego sterownika przegubu robota (Nm)
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief 获取机器人关节驱动器扭矩(Nm)
-    * @param  [out] torque 扭矩
-    * @return 错误码
+    * @brief Pobieranie momentu obrotowego sterownika przegubu robota (Nm)
+    * @param  [out] torque Moment obrotowy
+    * @return Kod błędu
     */
     public int GetJointDriverTorque(double[] torque)
 
-获取机器人实时状态结构体
-+++++++++++++++++++++++++++++++++++++++++++++
+Pobieranie struktury stanu robota w czasie rzeczywistym
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief 获取机器人实时状态结构体
-    * @return 实时状态结构体
+    * @brief Pobieranie struktury stanu robota w czasie rzeczywistym
+    * @return Struktura stanu w czasie rzeczywistym
     */
     public ROBOT_STATE_PKG GetRobotRealTimeState()
 
-机器人状态查询代码示例
-+++++++++++++++++++++++++++++++++++++++++++
+Przykład kodu zapytania o stan robota
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
@@ -344,55 +366,59 @@
         return 0;
     }
 
-逆运动学求解
-+++++++++++++++++++++++++++++++++++++++++
+Rozwiązanie kinematyki odwrotnej
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief  逆运动学求解
-    * @param  [in] type 0-绝对位姿(基坐标系)，1-增量位姿(基坐标系)，2-增量位姿(工具坐标系)
-    * @param  [in] desc_pos 笛卡尔位姿
-    * @param  [in] config 关节空间配置，[-1]-参考当前关节位置解算，[0~7]-依据特定关节空间配置求解
-    * @param  [out] joint_pos 关节位置
-    * @return  错误码
+    * @brief  Rozwiązanie kinematyki odwrotnej
+    * @param  [in] type 0-pozycja absolutna (układ bazowy), 1-pozycja przyrostowa (układ bazowy), 2-pozycja przyrostowa (układ narzędzia)
+    * @param  [in] desc_pos Pozycja kartezjańska
+    * @param  [in] config Konfiguracja przestrzeni przegubów, [-1]-obliczenia względem bieżącej pozycji przegubów, [0~7]-obliczenia według określonej konfiguracji przestrzeni przegubów
+    * @param  [out] joint_pos Pozycja przegubów
+    * @return  Kod błędu
     */ 
     int GetInverseKin(int type, DescPose desc_pos, int config, JointPos joint_pos);
 
-逆运动学求解(参考位置)
-+++++++++++++++++++++++++++++++++++++++++
+Rozwiązanie kinematyki odwrotnej (z pozycją referencyjną)
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief  逆运动学求解，参考指定关节位置求解
-    * @param  [in] posMode 0绝对位姿， 1相对位姿-基坐标系   2相对位姿-工具坐标系
-    * @param  [in] desc_pos 笛卡尔位姿
-    * @param  [in] joint_pos_ref 参考关节位置
-    * @param  [out] joint_pos 关节位置
-    * @return  错误码
+    * @brief  Rozwiązanie kinematyki odwrotnej, obliczenia względem podanej pozycji referencyjnej przegubów
+    * @param  [in] posMode 0-pozycja absolutna, 1-pozycja względna - układ bazowy, 2-pozycja względna - układ narzędzia
+    * @param  [in] desc_pos Pozycja kartezjańska
+    * @param  [in] joint_pos_ref Referencyjna pozycja przegubów
+    * @param  [out] joint_pos Pozycja przegubów
+    * @return  Kod błędu
     */   
     int GetInverseKinRef(int posMode, DescPose desc_pos, JointPos joint_pos_ref, JointPos joint_pos); 
 
-逆运动学求解，笛卡尔空间包含扩展轴位置
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Rozwiązanie kinematyki odwrotnej, przestrzeń kartezjańska z uwzględnieniem pozycji osi rozszerzenia
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief 逆运动学求解，笛卡尔空间包含扩展轴位置
-    * @param  type 0-绝对位姿(基坐标系)，1-增量位姿(基坐标系)，2-增量位姿(工具坐标系)
-    * @param  desc_pos 笛卡尔位姿
-    * @param  exaxis 扩展轴位置
-    * @param  tool 工具号
-    * @param  workPiece 工件号
-    * @param  joint_pos 关节位置
-    * @return 错误码
+    * @brief Rozwiązanie kinematyki odwrotnej, przestrzeń kartezjańska z uwzględnieniem pozycji osi rozszerzenia
+    * @param  type 0-pozycja absolutna (układ bazowy), 1-pozycja przyrostowa (układ bazowy), 2-pozycja przyrostowa (układ narzędzia)
+    * @param  desc_pos Pozycja kartezjańska
+    * @param  exaxis Pozycja osi rozszerzenia
+    * @param  tool Numer narzędzia
+    * @param  workPiece Numer przedmiotu
+    * @param  joint_pos Pozycja przegubów
+    * @return Kod błędu
     */
     public int GetInverseKinExaxis(int type, DescPose desc_pos, ExaxisPos exaxis, int tool, int workPiece, JointPos joint_pos)
     
-逆运动学求解包含扩展轴位置代码示例
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Przykład kodu rozwiązania kinematyki odwrotnej z uwzględnieniem pozycji osi rozszerzenia
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
@@ -413,35 +439,38 @@
         robot.Sleep(9999999);
     }
 
-获取逆运动学是否有解
-+++++++++++++++++++++++++++++++++++++++++
+Sprawdzanie, czy kinematyka odwrotna ma rozwiązanie
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief  逆运动学求解，参考指定关节位置判断是否有解
-    * @param  [in] posMode 0绝对位姿， 1相对位姿-基坐标系   2相对位姿-工具坐标系
-    * @param  [in] desc_pos 笛卡尔位姿
-    * @param  [in] joint_pos_ref 参考关节位置
-    * @return  错误码  List[0]:错误码; List[1]: int hasResult 0-无解，1-有解
+    * @brief  Sprawdzanie, czy kinematyka odwrotna ma rozwiązanie, odniesienie do podanej pozycji referencyjnej przegubów
+    * @param  [in] posMode 0-pozycja absolutna, 1-pozycja względna - układ bazowy, 2-pozycja względna - układ narzędzia
+    * @param  [in] desc_pos Pozycja kartezjańska
+    * @param  [in] joint_pos_ref Referencyjna pozycja przegubów
+    * @return  Kod błędu  List[0]:Kod błędu; List[1]: int hasResult 0-brak rozwiązania, 1-jest rozwiązanie
     */   
     List<Integer> GetInverseKinHasSolution(int posMode, DescPose desc_pos, JointPos joint_pos_ref);  
 
-正运动学求解
-+++++++++++++++++++++++++++++++++++++++++
+Rozwiązanie kinematyki prostej
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief  正运动学求解
-    * @param  [in] joint_pos 关节位置
-    * @param  [out] desc_pos 笛卡尔位姿
-    * @return  错误码
+    * @brief  Rozwiązanie kinematyki prostej
+    * @param  [in] joint_pos Pozycja przegubów
+    * @param  [out] desc_pos Pozycja kartezjańska
+    * @return  Kod błędu
     */
     int GetForwardKin(JointPos joint_pos, DescPose desc_pos); 
 
-机器人正逆运动学计算代码示例
-++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Przykład kodu obliczeń kinematyki prostej i odwrotnej robota
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
@@ -464,46 +493,50 @@
         return 0;
     }
 
-查询机器人示教管理点数据
-+++++++++++++++++++++++++++++++++++++++++
+Zapytanie o dane punktu zarządzania nauczaniem robota
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /** 
-    * @brief 查询机器人示教管理点位数据 
-    * @param [in]  name  点位名
-    * @return  List[0]:错误码; List[1] - List[20] : 点位数据double[20]{x,y,z,rx,ry,rz,j1,j2,j3,j4,j5,j6,tool,wobj,speed,acc,e1,e2,e3,e4} 
+    * @brief Zapytanie o dane punktu zarządzania nauczaniem robota 
+    * @param [in]  name  Nazwa punktu
+    * @return  List[0]:Kod błędu; List[1] - List[20] : Dane punktu double[20]{x,y,z,rx,ry,rz,j1,j2,j3,j4,j5,j6,tool,wobj,speed,acc,e1,e2,e3,e4} 
     */ 
     List<Number> GetRobotTeachingPoint(String name); 
 
-获取机器人DH参数补偿值
-+++++++++++++++++++++++++++++++++++++++++
+Pobieranie wartości kompensacji parametrów DH robota
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief 获取机器人DH参数补偿值
-    * @param dhCompensation 机器人DH参数补偿值(mm) [cmpstD1,cmpstA2,cmpstA3,cmpstD4,cmpstD5,cmpstD6]
-    * @return 错误码
+    * @brief Pobieranie wartości kompensacji parametrów DH robota
+    * @param dhCompensation Wartości kompensacji parametrów DH robota (mm) [cmpstD1,cmpstA2,cmpstA3,cmpstD4,cmpstD5,cmpstD6]
+    * @return Kod błędu
     */
     public int GetDHCompensation(Object[] dhCompensation)
 
-获取控制箱SN码
-++++++++++++++++++++++++++++++++++++++++++++++++++++
+Pobieranie numeru SN skrzynki kontrolnej
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. versionadded:: Java SDK-v1.0.4-3.8.1
 
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief 获取控制箱SN码
-    * @param [out] SNCode 控制箱SN码
-    * @return 错误码
+    * @brief Pobieranie numeru SN skrzynki kontrolnej
+    * @param [out] SNCode Numer SN skrzynki kontrolnej
+    * @return Kod błędu
     */
     int GetRobotSN(String[] SNCode);
 
-查询机器人示教管理点位数据代码示例
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Przykład kodu zapytania o dane punktu zarządzania nauczaniem robota
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
@@ -533,124 +566,133 @@
         return 0;
     }
 
-根据编号获取工具坐标系
-++++++++++++++++++++++++++++++++++++++++++++++++++++
+Pobieranie układu narzędzia według numeru
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. versionadded:: Java SDK-v1.0.9-3.8.6
 
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief 根据编号获取工具坐标系
-    * @param [in] id 工具坐标系编号
-    * @param [out] coord 坐标系数值
-    * @return 错误码
+    * @brief Pobieranie układu narzędzia według numeru
+    * @param [in] id Numer układu narzędzia
+    * @param [out] coord Wartości układu współrzędnych
+    * @return Kod błędu
     */
     int GetToolCoordWithID(int id, DescPose coord)
 
-根据编号获取工件坐标系
-++++++++++++++++++++++++++++++++++++++++++++++++++++
+Pobieranie układu przedmiotu według numeru
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. versionadded:: Java SDK-v1.0.9-3.8.6
 
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief 根据编号获取工件坐标系
-    * @param [in]  id 工件坐标系编号
-    * @param [out] coord 坐标系数值
-    * @return 错误码
+    * @brief Pobieranie układu przedmiotu według numeru
+    * @param [in]  id Numer układu przedmiotu
+    * @param [out] coord Wartości układu współrzędnych
+    * @return Kod błędu
     */
     public int GetWObjCoordWithID(int id, DescPose coord)
 
-根据编号获取外部工具坐标系
-++++++++++++++++++++++++++++++++++++++++++++++++++++
+Pobieranie zewnętrznego układu narzędzia według numeru
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. versionadded:: Java SDK-v1.0.9-3.8.6
 
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief 根据编号获取外部工具坐标系
-    * @param [in]  id 外部工具坐标系编号
-    * @param [out] coord 坐标系数值
-    * @return 错误码
+    * @brief Pobieranie zewnętrznego układu narzędzia według numeru
+    * @param [in]  id Numer zewnętrznego układu narzędzia
+    * @param [out] coord Wartości układu współrzędnych
+    * @return Kod błędu
     */
     public int GetExToolCoordWithID(int id, DescPose coord)
 
-根据编号获取扩展轴坐标系
-++++++++++++++++++++++++++++++++++++++++++++++++++++
+Pobieranie układu osi rozszerzenia według numeru
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. versionadded:: Java SDK-v1.0.9-3.8.6
 
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief 根据编号获取扩展轴坐标系
-    * @param [in]  id 外部工具坐标系编号
-    * @param [out] coord 坐标系数值
-    * @return 错误码
+    * @brief Pobieranie układu osi rozszerzenia według numeru
+    * @param [in]  id Numer zewnętrznego układu narzędzia
+    * @param [out] coord Wartości układu współrzędnych
+    * @return Kod błędu
     */
     public int GetExAxisCoordWithID(int id, DescPose coord)
 
-获取当前工具坐标系
-++++++++++++++++++++++++++++++++++++++++++++++++++++
+Pobieranie bieżącego układu narzędzia
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. versionadded:: Java SDK-v1.0.9-3.8.6
 
 .. code-block:: Java
     :linenos:
 
     /**
-     * @brief 获取当前工具坐标系
-     * @param [out] coord 坐标系数值
-     * @return 错误码
+     * @brief Pobieranie bieżącego układu narzędzia
+     * @param [out] coord Wartości układu współrzędnych
+     * @return Kod błędu
      */
     public int GetCurToolCoord(DescPose coord)
 
-获取当前工件坐标系
-++++++++++++++++++++++++++++++++++++++++++++++++++++
+Pobieranie bieżącego układu przedmiotu
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. versionadded:: Java SDK-v1.0.9-3.8.6
 
 .. code-block:: Java
     :linenos:
 
     /**
-     * @brief 获取当前工件坐标系
-     * @param [out] coord 坐标系数值
-     * @return 错误码
+     * @brief Pobieranie bieżącego układu przedmiotu
+     * @param [out] coord Wartości układu współrzędnych
+     * @return Kod błędu
      */
     public int GetCurWObjCoord(DescPose coord)
 
-获取当前外部工具坐标系
-++++++++++++++++++++++++++++++++++++++++++++++++++++
+Pobieranie bieżącego zewnętrznego układu narzędzia
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. versionadded:: Java SDK-v1.0.9-3.8.6
 
 .. code-block:: Java
     :linenos:
 
     /**
-     * @brief 获取当前外部工具坐标系
-     * @param  [out] coord 坐标系数值
-     * @return 错误码
+     * @brief Pobieranie bieżącego zewnętrznego układu narzędzia
+     * @param  [out] coord Wartości układu współrzędnych
+     * @return Kod błędu
      */
     public int GetCurExToolCoord(DescPose coord)
 
-获取当前扩展轴坐标系
-++++++++++++++++++++++++++++++++++++++++++++++++++++
+Pobieranie bieżącego układu osi rozszerzenia
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. versionadded:: Java SDK-v1.0.9-3.8.6
 
 .. code-block:: Java
     :linenos:
 
     /**
-     * @brief 获取当前扩展轴坐标系
-     * @param [out] coord 坐标系数值
-     * @return 错误码
+     * @brief Pobieranie bieżącego układu osi rozszerzenia
+     * @param [out] coord Wartości układu współrzędnych
+     * @return Kod błędu
      */
     public int GetCurExAxisCoord(DescPose coord)
 
-获取机器人坐标系及负载代码示例
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Przykład kodu układów współrzędnych robota i obciążenia
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: Java
     :linenos:
 
@@ -664,30 +706,30 @@
         DescPose exAxisCoord = new DescPose();
 
 
-        robot.GetCurToolCoord(toolCoord);//工具
+        robot.GetCurToolCoord(toolCoord);//narzędzie
         System.out.println("GetToolCoord:"+id+","+
                 toolCoord.tran.x+","+ toolCoord.tran.y+","+ toolCoord.tran.z+","+
                 toolCoord.rpy.rx+","+ toolCoord.rpy.ry+","+ toolCoord.rpy.rz);
 
 
-        robot.GetCurWObjCoord(toolCoord);//工件
+        robot.GetCurWObjCoord(toolCoord);//przedmiot
         System.out.println("GetCurWObjCoord:"+id+","+
                 toolCoord.tran.x+","+ toolCoord.tran.y+","+ toolCoord.tran.z+","+
                 toolCoord.rpy.rx+","+ toolCoord.rpy.ry+","+ toolCoord.rpy.rz);
 
-        robot.GetCurExToolCoord(toolCoord);//外部工具
+        robot.GetCurExToolCoord(toolCoord);//zewnętrzne narzędzie
         System.out.println("GetCurExToolCoord:"+id+","+
                 toolCoord.tran.x+","+ toolCoord.tran.y+","+ toolCoord.tran.z+","+
                 toolCoord.rpy.rx+","+ toolCoord.rpy.ry+","+ toolCoord.rpy.rz);
 
 
-        robot.GetCurExAxisCoord(toolCoord);//扩展轴
+        robot.GetCurExAxisCoord(toolCoord);//oś rozszerzenia
         System.out.println("GetCurExToolCoord:"+id+","+
                 toolCoord.tran.x+","+ toolCoord.tran.y+","+ toolCoord.tran.z+","+
                 toolCoord.rpy.rx+","+ toolCoord.rpy.ry+","+ toolCoord.rpy.rz);
 
 
-        List<Number> weightT = new ArrayList<>();//质心
+        List<Number> weightT = new ArrayList<>();//środek ciężkości
         DescTran cogT=new DescTran();
         weightT=robot.GetTargetPayload(0);
         robot.GetTargetPayloadCog(0,cogT);
@@ -706,18 +748,18 @@
                 wobjCoord.rpy.rx+","+ wobjCoord.rpy.ry+","+ wobjCoord.rpy.rz);
 
 
-        robot.GetExToolCoordWithID(id, extoolCoord);//外部工具
+        robot.GetExToolCoordWithID(id, extoolCoord);//zewnętrzne narzędzie
         System.out.println("GetExToolCoordWithID :"+ id+","+
                 extoolCoord.tran.x+","+ extoolCoord.tran.y+","+ extoolCoord.tran.z+","+
                 extoolCoord.rpy.rx+","+ extoolCoord.rpy.ry+","+ extoolCoord.rpy.rz);
 
-        robot.GetExAxisCoordWithID(id, exAxisCoord);//扩展轴
+        robot.GetExAxisCoordWithID(id, exAxisCoord);//oś rozszerzenia
         System.out.println("GetExAxisCoordWithID "+id+","+
                 exAxisCoord.tran.x+","+ exAxisCoord.tran.y+","+ exAxisCoord.tran.z+","+
                 exAxisCoord.rpy.rx+","+ exAxisCoord.rpy.ry+","+ exAxisCoord.rpy.rz);
 
 
-        double[] weight = new double[1];//负载质心
+        double[] weight = new double[1];//środek ciężkości ładunku
         DescTran getCog = new DescTran();
         robot.GetTargetPayloadWithID(id, weight, getCog);
         System.out.println("GetTargetPayloadWithID :"+ id+","+ weight[0]+","+
@@ -733,7 +775,7 @@
         robot.Sleep(100);
         robot.SetWObjCoord(id, coordSet, 0);
         robot.Sleep(100);
-        robot.ExtAxisActiveECoordSys(id, 1, coordSet, 1); //将标定结果应用到扩展轴坐标系
+        robot.ExtAxisActiveECoordSys(id, 1, coordSet, 1); //Zastosowanie wyniku kalibracji do układu współrzędnych osi rozszerzenia
         robot.Sleep(100);
         rtn = robot.SetExToolCoord(id, etcp, etool);
         robot.Sleep(100);

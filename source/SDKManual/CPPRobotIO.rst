@@ -1,69 +1,69 @@
-机器人IO
-============
+Wejścia/Wyjścia (IO) robota
+============================
 
-.. toctree:: 
+.. toctree::
     :maxdepth: 5
 
-设置控制箱数字量输出
-++++++++++++++++++++++++++++++++++
+Ustawianie wyjścia cyfrowego szafy sterowniczej
+++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  设置控制箱数字量输出
-    * @param  [in] id  io编号，范围[0~15]
-    * @param  [in] status 0-关，1-开
-    * @param  [in] smooth 0-不平滑， 1-平滑
-    * @param  [in] block  0-阻塞，1-非阻塞
-    * @return  错误码
+    * @brief  Ustawia wyjście cyfrowe szafy sterowniczej
+    * @param  [in] id  Numer IO, zakres [0~15]
+    * @param  [in] status 0-wył., 1-wł.
+    * @param  [in] smooth 0-niewygładzone, 1-wygładzone
+    * @param  [in] block  0-blokujące, 1-nieblokujące
+    * @return  Kod błędu
     */
     errno_t  SetDO(int id, uint8_t status, uint8_t smooth, uint8_t block);
 
-设置工具数字量输出
-++++++++++++++++++++++++++++++++++
+Ustawianie wyjścia cyfrowego narzędzia
+++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  设置工具数字量输出
-    * @param  [in] id  io编号，范围[0~1]
-    * @param  [in] status 0-关，1-开
-    * @param  [in] smooth 0-不平滑， 1-平滑
-    * @param  [in] block  0-阻塞，1-非阻塞
-    * @return  错误码
+    * @brief  Ustawia wyjście cyfrowe narzędzia
+    * @param  [in] id  Numer IO, zakres [0~1]
+    * @param  [in] status 0-wył., 1-wł.
+    * @param  [in] smooth 0-niewygładzone, 1-wygładzone
+    * @param  [in] block  0-blokujące, 1-nieblokujące
+    * @return  Kod błędu
     */
     errno_t  SetToolDO(int id, uint8_t status, uint8_t smooth, uint8_t block);
 
-设置控制箱模拟量输出
-++++++++++++++++++++++++++++++++++
+Ustawianie wyjścia analogowego szafy sterowniczej
++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  设置控制箱模拟量输出
-    * @param  [in] id  io编号，范围[0~1]
-    * @param  [in] value 电流或电压值百分比，范围[0~100]对应电流值[0~20mA]或电压[0~10V]
-    * @param  [in] block  0-阻塞，1-非阻塞
-    * @return  错误码
+    * @brief  Ustawia wyjście analogowe szafy sterowniczej
+    * @param  [in] id  Numer IO, zakres [0~1]
+    * @param  [in] value Procent wartości prądu lub napięcia, zakres [0~100] odpowiada wartości prądu [0~20mA] lub napięcia [0~10V]
+    * @param  [in] block  0-blokujące, 1-nieblokujące
+    * @return  Kod błędu
     */
     errno_t  SetAO(int id, float value, uint8_t block);
 
-设置工具模拟量输出
-++++++++++++++++++++++++++++++++++
+Ustawianie wyjścia analogowego narzędzia
++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  设置工具模拟量输出
-    * @param  [in] id  io编号，范围[0]
-    * @param  [in] value 电流或电压值百分比，范围[0~100]对应电流值[0~20mA]或电压[0~10V]
-    * @param  [in] block  0-阻塞，1-非阻塞
-    * @return  错误码
+    * @brief  Ustawia wyjście analogowe narzędzia
+    * @param  [in] id  Numer IO, zakres [0]
+    * @param  [in] value Procent wartości prądu lub napięcia, zakres [0~100] odpowiada wartości prądu [0~20mA] lub napięcia [0~10V]
+    * @param  [in] block  0-blokujące, 1-nieblokujące
+    * @return  Kod błędu
     */
     errno_t  SetToolAO(int id, float value, uint8_t block);
 
-设置数字量、模拟量输出代码示例
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Przykład kodu ustawiania wyjść cyfrowych i analogowych
+++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
@@ -119,101 +119,101 @@
          return 0;
      }
 
-获取控制箱数字量输入
-++++++++++++++++++++++++++++++++++
+Pobieranie wejścia cyfrowego szafy sterowniczej
+++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  获取控制箱数字量输入
-    * @param  [in] id  io编号，范围[0~15]
-    * @param  [in] block  0-阻塞，1-非阻塞
-    * @param  [out] result  0-低电平，1-高电平
-    * @return  错误码
-    */   
+    * @brief  Pobiera wejście cyfrowe szafy sterowniczej
+    * @param  [in] id  Numer IO, zakres [0~15]
+    * @param  [in] block  0-blokujące, 1-nieblokujące
+    * @param  [out] result  0-niski poziom, 1-wysoki poziom
+    * @return  Kod błędu
+    */
     errno_t  GetDI(int id, uint8_t block, uint8_t *result);
 
-获取工具数字量输入
-++++++++++++++++++++++++++++++++++
+Pobieranie wejścia cyfrowego narzędzia
+++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  获取工具数字量输入
-    * @param  [in] id  io编号，范围[0~1]
-    * @param  [in] block  0-阻塞，1-非阻塞
-    * @param  [out] result  0-低电平，1-高电平
-    * @return  错误码
-    */   
+    * @brief  Pobiera wejście cyfrowe narzędzia
+    * @param  [in] id  Numer IO, zakres [0~1]
+    * @param  [in] block  0-blokujące, 1-nieblokujące
+    * @param  [out] result  0-niski poziom, 1-wysoki poziom
+    * @return  Kod błędu
+    */
     errno_t  GetToolDI(int id, uint8_t block, uint8_t *result);
 
-获取控制箱模拟量输入
-+++++++++++++++++++++++++
+Pobieranie wejścia analogowego szafy sterowniczej
++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  获取控制箱模拟量输入
-    * @param  [in] id  io编号，范围[0~1]
-    * @param  [in] block  0-阻塞，1-非阻塞
-    * @param  [out] result  输入电流或电压值百分比，范围[0~100]对应电流值[0~20mS]或电压[0~10V]
-    * @return  错误码
-    */   
-    errno_t  GetAI(int id, uint8_t block, float *result); 
+    * @brief  Pobiera wejście analogowe szafy sterowniczej
+    * @param  [in] id  Numer IO, zakres [0~1]
+    * @param  [in] block  0-blokujące, 1-nieblokujące
+    * @param  [out] result  Procent wartości prądu lub napięcia wejściowego, zakres [0~100] odpowiada wartości prądu [0~20mA] lub napięcia [0~10V]
+    * @return  Kod błędu
+    */
+    errno_t  GetAI(int id, uint8_t block, float *result);
 
-获取工具模拟量输入
-+++++++++++++++++++++++++
+Pobieranie wejścia analogowego narzędzia
+++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  获取工具模拟量输入
-    * @param  [in] id  io编号，范围[0]
-    * @param  [in] block  0-阻塞，1-非阻塞
-    * @param  [out] result  输入电流或电压值百分比，范围[0~100]对应电流值[0~20mS]或电压[0~10V]
-    * @return  错误码
-    */   
+    * @brief  Pobiera wejście analogowe narzędzia
+    * @param  [in] id  Numer IO, zakres [0]
+    * @param  [in] block  0-blokujące, 1-nieblokujące
+    * @param  [out] result  Procent wartości prądu lub napięcia wejściowego, zakres [0~100] odpowiada wartości prądu [0~20mA] lub napięcia [0~10V]
+    * @return  Kod błędu
+    */
     errno_t  GetToolAI(int id, uint8_t block, float *result);
 
-获取机器人末端点记录按钮状态
-++++++++++++++++++++++++++++++++++
+Pobieranie stanu przycisku rejestracji punktu na końcówce robota
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-     * @brief 获取机器人末端点记录按钮状态
-     * @param [out] state 按钮状态，0-按下，1-松开
-     * @return 错误码
+     * @brief Pobiera stan przycisku rejestracji punktu na końcówce robota
+     * @param [out] state Stan przycisku, 0-wciśnięty, 1-zwolniony
+     * @return Kod błędu
      */
     errno_t  GetAxlePointRecordBtnState(uint8_t *state);
 
-获取机器人末端DO输出状态
-++++++++++++++++++++++++++++++++++
+Pobieranie stanu wyjścia DO na końcówce robota
+++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-     * @brief 获取机器人末端DO输出状态
-     * @param [out] do_state DO输出状态，do0~do1对应bit1~bit2,从bit0开始
-     * @return 错误码
+     * @brief Pobiera stan wyjścia DO na końcówce robota
+     * @param [out] do_state Stan wyjścia DO, do0~do1 odpowiadają bit1~bit2, zaczynając od bit0
+     * @return Kod błędu
      */
     errno_t  GetToolDO(uint8_t *do_state);
 
-获取机器人控制器DO输出状态
-++++++++++++++++++++++++++++++++++
+Pobieranie stanu wyjścia DO sterownika robota
+++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-     * @brief 获取机器人控制器DO输出状态
-     * @param [out] do_state_h DO输出状态，co0~co7对应bit0~bit7
-     * @param [out] do_state_l DO输出状态，do0~do7对应bit0~bit7
-     * @return 错误码
+     * @brief Pobiera stan wyjścia DO sterownika robota
+     * @param [out] do_state_h Stan wyjścia DO, co0~co7 odpowiadają bit0~bit7
+     * @param [out] do_state_l Stan wyjścia DO, do0~do7 odpowiadają bit0~bit7
+     * @return Kod błędu
      */
     errno_t  GetDO(uint8_t *do_state_h, uint8_t *do_state_l);
 
-获取机器人DI、DO状态代码示例
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Przykład kodu pobierania stanów DI i DO robota
+++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
@@ -257,89 +257,89 @@
          return 0;
      }
 
-等待控制箱数字量输入
-++++++++++++++++++++++++++++++++++
+Oczekiwanie na wejście cyfrowe szafy sterowniczej
+++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief 等待控制箱数字量输入
-    * @param  [in] id  io编号，范围[0~15]
-    * @param  [in]  status 0-关，1-开
-    * @param  [in]  max_time  最大等待时间，单位ms
-    * @param  [in]  opt  超时后策略，0-程序停止并提示超时，1-忽略超时提示程序继续执行，2-一直等待
-    * @return  错误码
+    * @brief Oczekiwanie na wejście cyfrowe szafy sterowniczej
+    * @param  [in] id  Numer IO, zakres [0~15]
+    * @param  [in]  status 0-wył., 1-wł.
+    * @param  [in]  max_time  Maksymalny czas oczekiwania, jednostka ms
+    * @param  [in]  opt  Strategia po przekroczeniu czasu, 0-zatrzymaj program i wyświetl błąd przekroczenia czasu, 1-ignoruj błąd przekroczenia czasu i kontynuuj wykonywanie programu, 2-czekaj w nieskończoność
+    * @return  Kod błędu
     */
     errno_t  WaitDI(int id, uint8_t status, int max_time, int opt);
 
-等待控制箱多路数字量输入
-++++++++++++++++++++++++++++++++++
+Oczekiwanie na wiele wejść cyfrowych szafy sterowniczej
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief 等待控制箱多路数字量输入
-    * @param  [in] mode 0-多路与，1-多路或
-    * @param  [in] id  io编号，bit0~bit7对应DI0~DI7，bit8~bit15对应CI0~CI7
-    * @param  [in]  status 0-关，1-开
-    * @param  [in]  max_time  最大等待时间，单位ms
-    * @param  [in]  opt  超时后策略，0-程序停止并提示超时，1-忽略超时提示程序继续执行，2-一直等待
-    * @return  错误码
+    * @brief Oczekiwanie na wiele wejść cyfrowych szafy sterowniczej
+    * @param  [in] mode 0-logiczne I dla wielu wejść, 1-logiczne LUB dla wielu wejść
+    * @param  [in] id  Numer IO, bit0~bit7 odpowiadają DI0~DI7, bit8~bit15 odpowiadają CI0~CI7
+    * @param  [in]  status 0-wył., 1-wł.
+    * @param  [in]  max_time  Maksymalny czas oczekiwania, jednostka ms
+    * @param  [in]  opt  Strategia po przekroczeniu czasu, 0-zatrzymaj program i wyświetl błąd przekroczenia czasu, 1-ignoruj błąd przekroczenia czasu i kontynuuj wykonywanie programu, 2-czekaj w nieskończoność
+    * @return  Kod błędu
     */
     errno_t  WaitMultiDI(int mode, int id, uint8_t status, int max_time, int opt);
 
-等待工具数字量输入
-++++++++++++++++++++++++++++++++++
+Oczekiwanie na wejście cyfrowe narzędzia
+++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief 等待工具数字量输入
-    * @param  [in] id  io编号，范围[0~1]
-    * @param  [in]  status 0-关，1-开
-    * @param  [in]  max_time  最大等待时间，单位ms
-    * @param  [in]  opt  超时后策略，0-程序停止并提示超时，1-忽略超时提示程序继续执行，2-一直等待
-    * @return  错误码
+    * @brief Oczekiwanie na wejście cyfrowe narzędzia
+    * @param  [in] id  Numer IO, zakres [0~1]
+    * @param  [in]  status 0-wył., 1-wł.
+    * @param  [in]  max_time  Maksymalny czas oczekiwania, jednostka ms
+    * @param  [in]  opt  Strategia po przekroczeniu czasu, 0-zatrzymaj program i wyświetl błąd przekroczenia czasu, 1-ignoruj błąd przekroczenia czasu i kontynuuj wykonywanie programu, 2-czekaj w nieskończoność
+    * @return  Kod błędu
     */
     errno_t  WaitToolDI(int id, uint8_t status, int max_time, int opt);
 
-等待控制箱模拟量输入
-+++++++++++++++++++++++++
+Oczekiwanie na wejście analogowe szafy sterowniczej
++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief 等待控制箱模拟量输入
-    * @param  [in] id  io编号，范围[0~1]
-    * @param  [in]  sign 0-大于，1-小于
-    * @param  [in]  value 输入电流或电压值百分比，范围[0~100]对应电流值[0~20mS]或电压[0~10V]
-    * @param  [in]  max_time  最大等待时间，单位ms
-    * @param  [in]  opt  超时后策略，0-程序停止并提示超时，1-忽略超时提示程序继续执行，2-一直等待
-    * @return  错误码
+    * @brief Oczekiwanie na wejście analogowe szafy sterowniczej
+    * @param  [in] id  Numer IO, zakres [0~1]
+    * @param  [in]  sign 0-większe niż, 1-mniejsze niż
+    * @param  [in]  value Procent wartości prądu lub napięcia wejściowego, zakres [0~100] odpowiada wartości prądu [0~20mA] lub napięcia [0~10V]
+    * @param  [in]  max_time  Maksymalny czas oczekiwania, jednostka ms
+    * @param  [in]  opt  Strategia po przekroczeniu czasu, 0-zatrzymaj program i wyświetl błąd przekroczenia czasu, 1-ignoruj błąd przekroczenia czasu i kontynuuj wykonywanie programu, 2-czekaj w nieskończoność
+    * @return  Kod błędu
     */
-    errno_t  WaitAI(int id, int sign, float value, int max_time, int opt);  
+    errno_t  WaitAI(int id, int sign, float value, int max_time, int opt);
 
-等待工具模拟量输入
-+++++++++++++++++++++++++
+Oczekiwanie na wejście analogowe narzędzia
+++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief 等待工具模拟量输入
-    * @param  [in] id  io编号，范围[0]
-    * @param  [in]  sign 0-大于，1-小于
-    * @param  [in]  value 输入电流或电压值百分比，范围[0~100]对应电流值[0~20mS]或电压[0~10V]
-    * @param  [in]  max_time  最大等待时间，单位ms
-    * @param  [in]  opt  超时后策略，0-程序停止并提示超时，1-忽略超时提示程序继续执行，2-一直等待
-    * @return  错误码
+    * @brief Oczekiwanie na wejście analogowe narzędzia
+    * @param  [in] id  Numer IO, zakres [0]
+    * @param  [in]  sign 0-większe niż, 1-mniejsze niż
+    * @param  [in]  value Procent wartości prądu lub napięcia wejściowego, zakres [0~100] odpowiada wartości prądu [0~20mA] lub napięcia [0~10V]
+    * @param  [in]  max_time  Maksymalny czas oczekiwania, jednostka ms
+    * @param  [in]  opt  Strategia po przekroczeniu czasu, 0-zatrzymaj program i wyświetl błąd przekroczenia czasu, 1-ignoruj błąd przekroczenia czasu i kontynuuj wykonywanie programu, 2-czekaj w nieskończoność
+    * @return  Kod błędu
     */
-    errno_t  WaitToolAI(int id, int sign, float value, int max_time, int opt); 
+    errno_t  WaitToolAI(int id, int sign, float value, int max_time, int opt);
 
-等待控制箱数字、模拟输入信号代码示例
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Przykład kodu oczekiwania na sygnały wejściowe cyfrowe i analogowe szafy sterowniczej
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. versionchanged:: C++SDK-v2.1.2.0
-    
+
 .. code-block:: c++
     :linenos:
 
@@ -376,115 +376,115 @@
      }
 
 
-设置控制箱DO停止/暂停后输出是否复位
-++++++++++++++++++++++++++++++++++++++++++
+Ustawianie resetowania wyjścia DO szafy sterowniczej po zatrzymaniu/wstrzymaniu
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C++SDK-v2.1.5.0
-    
+
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief 设置控制箱DO停止/暂停后输出是否复位
-    * @param [in] resetFlag 0-不复位；1-复位
-    * @param [in] reloadFlag 暂停恢复后是否重加载，0-不加载；1-加载
-    * @return 错误码
+    * @brief Ustawia resetowanie wyjścia DO szafy sterowniczej po zatrzymaniu/wstrzymaniu
+    * @param [in] resetFlag 0-nie resetuj; 1-resetuj
+    * @param [in] reloadFlag Czy przeładować po wznowieniu po wstrzymaniu, 0-nie ładuj; 1-ładuj
+    * @return Kod błędu
     */
     errno_t SetOutputResetCtlBoxDO(int resetFlag, int reloadFlag = 0);
 
-设置控制箱AO停止/暂停后输出是否复位
-++++++++++++++++++++++++++++++++++++++++++
+Ustawianie resetowania wyjścia AO szafy sterowniczej po zatrzymaniu/wstrzymaniu
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C++SDK-v2.1.5.0
-    
+
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief 设置控制箱AO停止/暂停后输出是否复位
-    * @param [in] resetFlag  0-不复位；1-复位
-    * @param [in] reloadFlag 暂停恢复后是否重加载，0-不加载；1-加载
-    * @return 错误码
+    * @brief Ustawia resetowanie wyjścia AO szafy sterowniczej po zatrzymaniu/wstrzymaniu
+    * @param [in] resetFlag  0-nie resetuj; 1-resetuj
+    * @param [in] reloadFlag Czy przeładować po wznowieniu po wstrzymaniu, 0-nie ładuj; 1-ładuj
+    * @return Kod błędu
     */
     errno_t SetOutputResetCtlBoxAO(int resetFlag, int reloadFlag = 0);
 
-设置末端工具DO停止/暂停后输出是否复位
-++++++++++++++++++++++++++++++++++++++++++
+Ustawianie resetowania wyjścia DO narzędzia końcowego po zatrzymaniu/wstrzymaniu
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C++SDK-v2.1.5.0
-    
+
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief 设置末端工具DO停止/暂停后输出是否复位
-    * @param [in] resetFlag  0-不复位；1-复位
-    * @param [in] reloadFlag 暂停恢复后是否重加载，0-不加载；1-加载
-    * @return 错误码
+    * @brief Ustawia resetowanie wyjścia DO narzędzia końcowego po zatrzymaniu/wstrzymaniu
+    * @param [in] resetFlag  0-nie resetuj; 1-resetuj
+    * @param [in] reloadFlag Czy przeładować po wznowieniu po wstrzymaniu, 0-nie ładuj; 1-ładuj
+    * @return Kod błędu
     */
     errno_t SetOutputResetAxleDO(int resetFlag, int reloadFlag = 0);
 
-设置末端工具AO停止/暂停后输出是否复位
-++++++++++++++++++++++++++++++++++++++++++
+Ustawianie resetowania wyjścia AO narzędzia końcowego po zatrzymaniu/wstrzymaniu
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C++SDK-v2.1.5.0
-    
+
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief 设置末端工具AO停止/暂停后输出是否复位
-    * @param [in] resetFlag  0-不复位；1-复位
-    * @param [in] reloadFlag 暂停恢复后是否重加载，0-不加载；1-加载
-    * @return  错误码
+    * @brief Ustawia resetowanie wyjścia AO narzędzia końcowego po zatrzymaniu/wstrzymaniu
+    * @param [in] resetFlag  0-nie resetuj; 1-resetuj
+    * @param [in] reloadFlag Czy przeładować po wznowieniu po wstrzymaniu, 0-nie ładuj; 1-ładuj
+    * @return  Kod błędu
     */
     errno_t SetOutputResetAxleAO(int resetFlag, int reloadFlag = 0);
 
-设置扩展DO停止/暂停后输出是否复位
-++++++++++++++++++++++++++++++++++++++++++
+Ustawianie resetowania wyjścia rozszerzonego DO po zatrzymaniu/wstrzymaniu
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C++SDK-v2.1.5.0
-    
+
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief 设置扩展DO停止/暂停后输出是否复位
-    * @param [in] resetFlag  0-不复位；1-复位
-    * @param [in] reloadFlag 暂停恢复后是否重加载，0-不加载；1-加载
-    * @return  错误码
+    * @brief Ustawia resetowanie wyjścia rozszerzonego DO po zatrzymaniu/wstrzymaniu
+    * @param [in] resetFlag  0-nie resetuj; 1-resetuj
+    * @param [in] reloadFlag Czy przeładować po wznowieniu po wstrzymaniu, 0-nie ładuj; 1-ładuj
+    * @return  Kod błędu
     */
     errno_t SetOutputResetExtDO(int resetFlag, int reloadFlag = 0);
 
-设置扩展AO停止/暂停后输出是否复位
-++++++++++++++++++++++++++++++++++++++++++
+Ustawianie resetowania wyjścia rozszerzonego AO po zatrzymaniu/wstrzymaniu
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C++SDK-v2.1.5.0
-    
+
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief 设置扩展AO停止/暂停后输出是否复位
-    * @param [in] resetFlag  0-不复位；1-复位
-    * @param [in] reloadFlag 暂停恢复后是否重加载，0-不加载；1-加载
-    * @return  错误码
+    * @brief Ustawia resetowanie wyjścia rozszerzonego AO po zatrzymaniu/wstrzymaniu
+    * @param [in] resetFlag  0-nie resetuj; 1-resetuj
+    * @param [in] reloadFlag Czy przeładować po wznowieniu po wstrzymaniu, 0-nie ładuj; 1-ładuj
+    * @return  Kod błędu
     */
     errno_t SetOutputResetExtAO(int resetFlag, int reloadFlag = 0);
 
-设置SmartTool停止/暂停后输出是否复位
-++++++++++++++++++++++++++++++++++++++++++
+Ustawianie resetowania wyjścia SmartTool po zatrzymaniu/wstrzymaniu
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C++SDK-v2.1.5.0
-    
+
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief 设置SmartTool停止/暂停后输出是否复位
-    * @param [in] resetFlag  0-不复位；1-复位
-    * @param [in] reloadFlag 暂停恢复后是否重加载，0-不加载；1-加载
-    * @return  错误码
+    * @brief Ustawia resetowanie wyjścia SmartTool po zatrzymaniu/wstrzymaniu
+    * @param [in] resetFlag  0-nie resetuj; 1-resetuj
+    * @param [in] reloadFlag Czy przeładować po wznowieniu po wstrzymaniu, 0-nie ładuj; 1-ładuj
+    * @return  Kod błędu
     */
     errno_t SetOutputResetSmartToolDO(int resetFlag, int reloadFlag = 0);
 
-设置LUA程序停止/暂停后输出复位代码示例
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Przykład kodu resetowania wyjść po zatrzymaniu/wstrzymaniu programu LUA
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C++SDK-v2.1.5.0
-    
+
 .. code-block:: c++
     :linenos:
 
@@ -525,261 +525,261 @@
     return 0;
     }
 
-设置控制箱可配置CI端口功能
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-    
+Ustawianie funkcji konfigurowalnych portów CI szafy sterowniczej
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief 设置控制箱可配置CI端口功能
-    * @param [in] config CI0-CI7功能编码；
-    * 0-无;1-起弧成功;2-焊机准备;3-传送带检测;4-暂停;5-恢复;6-启动;7-停止;
-    8-暂停/恢复;9-启动/停止;10-脚踏拖动;11-移至作业原点;12-手自动切换;
-    13-焊丝寻位成功;14-运动中断;15-启动主程序;16-启动倒带;17-启动确认;
-    18-光电检测信号X;19-光电检测信号Y;20-外部急停输入信号1;21-外部急停输入信号2;
-    22-一级缩减模式;23-二级缩减模式;24-三级缩减模式(停止);25-恢复焊接;26-终止焊接;
-    27-辅助拖动开启;28-辅助拖动关闭;29-辅助拖动开启/关闭;30-清除所有错误;
-    31-手自动切换(高低电平);32-使能;33-去使能;34-使能/去使能(上升下降沿);35-定点跟踪开始/结束
-    * @return 错误码
+    * @brief Ustawia funkcje konfigurowalnych portów CI szafy sterowniczej
+    * @param [in] config Kody funkcji CI0-CI7;
+    * 0-brak;1-sukces rozpoczęcia łuku;2-gotowość spawarki;3-wykrywanie przenośnika;4-wstrzymanie;5-wznowienie;6-uruchomienie;7-zatrzymanie;
+    8-wstrzymanie/wznowienie;9-uruchomienie/zatrzymanie;10-przeciąganie nożne;11-przejazd do punktu początkowego zadania;12-przełączanie ręczny/automatyczny;
+    13-sukces lokalizacji drutu spawalniczego;14-przerwanie ruchu;15-uruchomienie programu głównego;16-uruchomienie przewijania do tyłu;17-potwierdzenie uruchomienia;
+    18-sygnał detekcji fotoelektrycznej X;19-sygnał detekcji fotoelektrycznej Y;20-sygnał zewnętrznego awaryjnego zatrzymania 1;21-sygnał zewnętrznego awaryjnego zatrzymania 2;
+    22-tryb redukcji poziomu 1;23-tryb redukcji poziomu 2;24-tryb redukcji poziomu 3 (zatrzymanie);25-wznowienie spawania;26-zakończenie spawania;
+    27-włączenie wspomaganego przeciągania;28-wyłączenie wspomaganego przeciągania;29-włączenie/wyłączenie wspomaganego przeciągania;30-wyczyszczenie wszystkich błędów;
+    31-przełączanie ręczny/automatyczny (poziom wysoki/niski);32-włączenie;33-wyłączenie;34-włączenie/wyłączenie (zbocze narastające/opadające);35-rozpoczęcie/zakończenie śledzenia punktowego
+    * @return Kod błędu
     */
     errno_t SetDIConfig(int config[8]);
 
-获取控制箱可配置CI端口功能
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-    
+Pobieranie funkcji konfigurowalnych portów CI szafy sterowniczej
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief 获取控制箱可配置CI端口功能
-    * @param [in] config CI0-CI7功能编码；
-    * 0-无;1-起弧成功;2-焊机准备;3-传送带检测;4-暂停;5-恢复;6-启动;7-停止;
-    8-暂停/恢复;9-启动/停止;10-脚踏拖动;11-移至作业原点;12-手自动切换;
-    13-焊丝寻位成功;14-运动中断;15-启动主程序;16-启动倒带;17-启动确认;
-    18-光电检测信号X;19-光电检测信号Y;20-外部急停输入信号1;21-外部急停输入信号2;
-    22-一级缩减模式;23-二级缩减模式;24-三级缩减模式(停止);25-恢复焊接;26-终止焊接;
-    27-辅助拖动开启;28-辅助拖动关闭;29-辅助拖动开启/关闭;30-清除所有错误;
-    31-手自动切换(高低电平);32-使能;33-去使能;34-使能/去使能(上升下降沿);35-定点跟踪开始/结束
-    * @return 错误码
+    * @brief Pobiera funkcje konfigurowalnych portów CI szafy sterowniczej
+    * @param [in] config Kody funkcji CI0-CI7;
+    * 0-brak;1-sukces rozpoczęcia łuku;2-gotowość spawarki;3-wykrywanie przenośnika;4-wstrzymanie;5-wznowienie;6-uruchomienie;7-zatrzymanie;
+    8-wstrzymanie/wznowienie;9-uruchomienie/zatrzymanie;10-przeciąganie nożne;11-przejazd do punktu początkowego zadania;12-przełączanie ręczny/automatyczny;
+    13-sukces lokalizacji drutu spawalniczego;14-przerwanie ruchu;15-uruchomienie programu głównego;16-uruchomienie przewijania do tyłu;17-potwierdzenie uruchomienia;
+    18-sygnał detekcji fotoelektrycznej X;19-sygnał detekcji fotoelektrycznej Y;20-sygnał zewnętrznego awaryjnego zatrzymania 1;21-sygnał zewnętrznego awaryjnego zatrzymania 2;
+    22-tryb redukcji poziomu 1;23-tryb redukcji poziomu 2;24-tryb redukcji poziomu 3 (zatrzymanie);25-wznowienie spawania;26-zakończenie spawania;
+    27-włączenie wspomaganego przeciągania;28-wyłączenie wspomaganego przeciągania;29-włączenie/wyłączenie wspomaganego przeciągania;30-wyczyszczenie wszystkich błędów;
+    31-przełączanie ręczny/automatyczny (poziom wysoki/niski);32-włączenie;33-wyłączenie;34-włączenie/wyłączenie (zbocze narastające/opadające);35-rozpoczęcie/zakończenie śledzenia punktowego
+    * @return Kod błędu
     */
     errno_t GetDIConfig(int config[8]);
 
-设置控制箱可配置CO端口功能
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-    
+Ustawianie funkcji konfigurowalnych portów CO szafy sterowniczej
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief 设置控制箱可配置CO端口功能
-    * @param [out] config CO0-CO7功能编码；
-    * 0-无;1-机器人报错;2-机器人运动中;3-喷涂启停;4-喷涂清枪;5-送气信号;6-起弧信号;7-点动送丝;
-    8-反向送丝;9-JOB输入口1;10-JOB输入口2;11-JOB输入口3;12-传送带启停控制;13-机器人暂停中;14-到达作业原点;
-    15-到达干涉区;16-焊丝寻位启停控制;17-机器人启动完成;18-程序启动停止;19-自动手动模式;20-急停输出信号1-安全;
-    21-急停输出信号2-安全;22-LUA脚本程序运行停止;23-安全状态输出-安全;24-保护性停止状态输出-安全;
-    25-机器人运动中-安全;26-机器人缩减模式-安全;27-机器人非缩减模式-安全;28-机器人非停止;29-机器人报错-指令点错误;
-    30-机器人报错-驱动器错误;31-机器人报错-超出软限位错误;32-机器人报错-碰撞错误;33-机器人报错-活动从站数量错误;
-    34-机器人报错-从站错误;35-机器人报错-IO错误;36-机器人报错-夹爪错误;37-机器人报错-文件错误;38-机器人报错-奇异位姿错误;
-    39-机器人报错-驱动器通信错误;40-机器人报错-参数错误;41-机器人报错-外部轴超出软限位错误;42-机器人警告-警告;
-    43-机器人警告-安全门警告;44-机器人警告-运动警告;45-机器人警告-干涉区警告;46-机器人警告-安全墙警告;
-    47-使能状态;48-断线自动抬升中;49-立方体1干涉警告;50-立方体2干涉警告;51-立方体3干涉警告;52-立方体4干涉警告;
-    * @return 错误码
+    * @brief Ustawia funkcje konfigurowalnych portów CO szafy sterowniczej
+    * @param [out] config Kody funkcji CO0-CO7;
+    * 0-brak;1-błąd robota;2-robot w ruchu;3-uruchamianie/zatrzymywanie natryskiwania;4-czyszczenie pistoletu natryskowego;5-sygnał podawania gazu;6-sygnał rozpoczęcia łuku;7-podawanie drutu impulsowe;
+    8-podawanie drutu wsteczne;9-port wejściowy JOB 1;10-port wejściowy JOB 2;11-port wejściowy JOB 3;12-sterowanie uruchamianiem/zatrzymywaniem przenośnika;13-robot wstrzymany;14-osiągnięcie punktu początkowego zadania;
+    15-osiągnięcie obszaru interferencji;16-sterowanie uruchamianiem/zatrzymywaniem lokalizacji drutu spawalniczego;17-robot zakończył uruchomienie;18-uruchomienie/zatrzymanie programu;19-tryb automatyczny/ręczny;20-sygnał wyjściowy awaryjnego zatrzymania 1-bezpieczeństwo;
+    21-sygnał wyjściowy awaryjnego zatrzymania 2-bezpieczeństwo;22-uruchomienie/zatrzymanie programu skryptowego LUA;23-wyjście stanu bezpieczeństwa-bezpieczeństwo;24-wyjście stanu zatrzymania ochronnego-bezpieczeństwo;
+    25-robot w ruchu-bezpieczeństwo;26-tryb redukcji robota-bezpieczeństwo;27-tryb nieredukcji robota-bezpieczeństwo;28-robot niezatrzymany;29-błąd robota-błąd punktu instrukcji;
+    30-błąd robota-błąd sterownika;31-błąd robota-błąd przekroczenia miękkiego ograniczenia;32-błąd robota-błąd kolizji;33-błąd robota-błąd liczby aktywnych stacji podrzędnych;
+    34-błąd robota-błąd stacji podrzędnej;35-błąd robota-błąd IO;36-błąd robota-błąd chwytaka;37-błąd robota-błąd pliku;38-błąd robota-błąd osobliwej pozy i orientacji;
+    39-błąd robota-błąd komunikacji ze sterownikiem;40-błąd robota-błąd parametru;41-błąd robota-błąd przekroczenia miękkiego ograniczenia osi zewnętrznej;42-ostrzeżenie robota-ostrzeżenie;
+    43-ostrzeżenie robota-ostrzeżenie drzwi bezpieczeństwa;44-ostrzeżenie robota-ostrzeżenie ruchu;45-ostrzeżenie robota-ostrzeżenie obszaru interferencji;46-ostrzeżenie robota-ostrzeżenie ściany bezpieczeństwa;
+    47-stan włączenia;48-podnoszenie automatyczne po przerwaniu połączenia;49-ostrzeżenie interferencji prostopadłościan 1;50-ostrzeżenie interferencji prostopadłościan 2;51-ostrzeżenie interferencji prostopadłościan 3;52-ostrzeżenie interferencji prostopadłościan 4;
+    * @return Kod błędu
     */
     errno_t SetDOConfig(int config[8]);
 
-获取控制箱可配置CO端口功能
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-    
+Pobieranie funkcji konfigurowalnych portów CO szafy sterowniczej
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief 获取控制箱可配置CO端口功能
-    * @param [out] config CO0-CO7功能编码；
-    * 0-无;1-机器人报错;2-机器人运动中;3-喷涂启停;4-喷涂清枪;5-送气信号;6-起弧信号;7-点动送丝;
-    8-反向送丝;9-JOB输入口1;10-JOB输入口2;11-JOB输入口3;12-传送带启停控制;13-机器人暂停中;14-到达作业原点;
-    15-到达干涉区;16-焊丝寻位启停控制;17-机器人启动完成;18-程序启动停止;19-自动手动模式;20-急停输出信号1-安全;
-    21-急停输出信号2-安全;22-LUA脚本程序运行停止;23-安全状态输出-安全;24-保护性停止状态输出-安全;
-    25-机器人运动中-安全;26-机器人缩减模式-安全;27-机器人非缩减模式-安全;28-机器人非停止;29-机器人报错-指令点错误;
-    30-机器人报错-驱动器错误;31-机器人报错-超出软限位错误;32-机器人报错-碰撞错误;33-机器人报错-活动从站数量错误;
-    34-机器人报错-从站错误;35-机器人报错-IO错误;36-机器人报错-夹爪错误;37-机器人报错-文件错误;38-机器人报错-奇异位姿错误;
-    39-机器人报错-驱动器通信错误;40-机器人报错-参数错误;41-机器人报错-外部轴超出软限位错误;42-机器人警告-警告;
-    43-机器人警告-安全门警告;44-机器人警告-运动警告;45-机器人警告-干涉区警告;46-机器人警告-安全墙警告;
-    47-使能状态;48-断线自动抬升中;49-立方体1干涉警告;50-立方体2干涉警告;51-立方体3干涉警告;52-立方体4干涉警告;
-    * @return 错误码
+    * @brief Pobiera funkcje konfigurowalnych portów CO szafy sterowniczej
+    * @param [out] config Kody funkcji CO0-CO7;
+    * 0-brak;1-błąd robota;2-robot w ruchu;3-uruchamianie/zatrzymywanie natryskiwania;4-czyszczenie pistoletu natryskowego;5-sygnał podawania gazu;6-sygnał rozpoczęcia łuku;7-podawanie drutu impulsowe;
+    8-podawanie drutu wsteczne;9-port wejściowy JOB 1;10-port wejściowy JOB 2;11-port wejściowy JOB 3;12-sterowanie uruchamianiem/zatrzymywaniem przenośnika;13-robot wstrzymany;14-osiągnięcie punktu początkowego zadania;
+    15-osiągnięcie obszaru interferencji;16-sterowanie uruchamianiem/zatrzymywaniem lokalizacji drutu spawalniczego;17-robot zakończył uruchomienie;18-uruchomienie/zatrzymanie programu;19-tryb automatyczny/ręczny;20-sygnał wyjściowy awaryjnego zatrzymania 1-bezpieczeństwo;
+    21-sygnał wyjściowy awaryjnego zatrzymania 2-bezpieczeństwo;22-uruchomienie/zatrzymanie programu skryptowego LUA;23-wyjście stanu bezpieczeństwa-bezpieczeństwo;24-wyjście stanu zatrzymania ochronnego-bezpieczeństwo;
+    25-robot w ruchu-bezpieczeństwo;26-tryb redukcji robota-bezpieczeństwo;27-tryb nieredukcji robota-bezpieczeństwo;28-robot niezatrzymany;29-błąd robota-błąd punktu instrukcji;
+    30-błąd robota-błąd sterownika;31-błąd robota-błąd przekroczenia miękkiego ograniczenia;32-błąd robota-błąd kolizji;33-błąd robota-błąd liczby aktywnych stacji podrzędnych;
+    34-błąd robota-błąd stacji podrzędnej;35-błąd robota-błąd IO;36-błąd robota-błąd chwytaka;37-błąd robota-błąd pliku;38-błąd robota-błąd osobliwej pozy i orientacji;
+    39-błąd robota-błąd komunikacji ze sterownikiem;40-błąd robota-błąd parametru;41-błąd robota-błąd przekroczenia miękkiego ograniczenia osi zewnętrznej;42-ostrzeżenie robota-ostrzeżenie;
+    43-ostrzeżenie robota-ostrzeżenie drzwi bezpieczeństwa;44-ostrzeżenie robota-ostrzeżenie ruchu;45-ostrzeżenie robota-ostrzeżenie obszaru interferencji;46-ostrzeżenie robota-ostrzeżenie ściany bezpieczeństwa;
+    47-stan włączenia;48-podnoszenie automatyczne po przerwaniu połączenia;49-ostrzeżenie interferencji prostopadłościan 1;50-ostrzeżenie interferencji prostopadłościan 2;51-ostrzeżenie interferencji prostopadłościan 3;52-ostrzeżenie interferencji prostopadłościan 4;
+    * @return Kod błędu
     */
     errno_t GetDOConfig(int config[8]);
 
-设置末端可配置End-CI端口功能
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-    
+Ustawianie funkcji konfigurowalnych portów End-CI końcówki
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief 设置末端可配置End-CI端口功能
-    * @param [in] config End CI0-CI1功能编码；
-    * 0-无;1-拖动示教工具开关;2-点记录信号;3-手自动切换（脉冲信号）;4-TPD记录启动/停止;5-暂停运动;
-    6-恢复运动;7-启动;8-停止;9-暂停/恢复;10-启动/停止;11-力传感器辅助拖动开启;12-力传感器辅助拖动关闭;
-    13-力传感器辅助拖动开启/关闭;14-激光检测信号X;15-激光检测信号Y;16-PTP运动至作业原点;17-运动中断，根据信号停止当前运动;
-    18-启动主程序;19-启动倒带;20-启动确认;21-恢复焊接;22-终止焊接;23-清除错误;24-手自动切换（高低电平）
-    25-使能;26-去使能;27-使能/去使能;28-激光伺服跟踪启停信号;
-    * @return 错误码
+    * @brief Ustawia funkcje konfigurowalnych portów End-CI końcówki
+    * @param [in] config Kody funkcji End CI0-CI1;
+    * 0-brak;1-przełącznik narzędzia do przeciągania;2-sygnał rejestracji punktu;3-przełączanie ręczny/automatyczny (sygnał impulsowy);4-uruchamianie/zatrzymywanie rejestracji TPD;5-wstrzymanie ruchu;
+    6-wznowienie ruchu;7-uruchomienie;8-zatrzymanie;9-wstrzymanie/wznowienie;10-uruchomienie/zatrzymanie;11-włączenie wspomaganego przeciągania przez czujnik siły;12-wyłączenie wspomaganego przeciągania przez czujnik siły;
+    13-włączenie/wyłączenie wspomaganego przeciągania przez czujnik siły;14-sygnał detekcji laserowej X;15-sygnał detekcji laserowej Y;16-ruch PTP do punktu początkowego zadania;17-przerwanie ruchu, zatrzymanie bieżącego ruchu zgodnie z sygnałem;
+    18-uruchomienie programu głównego;19-uruchomienie przewijania do tyłu;20-potwierdzenie uruchomienia;21-wznowienie spawania;22-zakończenie spawania;23-wyczyszczenie błędu;24-przełączanie ręczny/automatyczny (poziom wysoki/niski)
+    25-włączenie;26-wyłączenie;27-włączenie/wyłączenie;28-sygnał uruchamiania/zatrzymywania śledzenia serwo laserowego;
+    * @return Kod błędu
     */
     errno_t SetToolDIConfig(int config[2]);
 
-获取末端可配置End-CI端口功能
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-    
+Pobieranie funkcji konfigurowalnych portów End-CI końcówki
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief 获取末端可配置End-CI端口功能
-    * @param [out] config End CI0-CI1功能编码；
-    * 0-无;1-拖动示教工具开关;2-点记录信号;3-手自动切换（脉冲信号）;4-TPD记录启动/停止;5-暂停运动;
-    6-恢复运动;7-启动;8-停止;9-暂停/恢复;10-启动/停止;11-力传感器辅助拖动开启;12-力传感器辅助拖动关闭;
-    13-力传感器辅助拖动开启/关闭;14-激光检测信号X;15-激光检测信号Y;16-PTP运动至作业原点;17-运动中断，根据信号停止当前运动;
-    18-启动主程序;19-启动倒带;20-启动确认;21-恢复焊接;22-终止焊接;23-清除错误;24-手自动切换（高低电平）
-    25-使能;26-去使能;27-使能/去使能;28-激光伺服跟踪启停信号;
-    * @return 错误码
+    * @brief Pobiera funkcje konfigurowalnych portów End-CI końcówki
+    * @param [out] config Kody funkcji End CI0-CI1;
+    * 0-brak;1-przełącznik narzędzia do przeciągania;2-sygnał rejestracji punktu;3-przełączanie ręczny/automatyczny (sygnał impulsowy);4-uruchamianie/zatrzymywanie rejestracji TPD;5-wstrzymanie ruchu;
+    6-wznowienie ruchu;7-uruchomienie;8-zatrzymanie;9-wstrzymanie/wznowienie;10-uruchomienie/zatrzymanie;11-włączenie wspomaganego przeciągania przez czujnik siły;12-wyłączenie wspomaganego przeciągania przez czujnik siły;
+    13-włączenie/wyłączenie wspomaganego przeciągania przez czujnik siły;14-sygnał detekcji laserowej X;15-sygnał detekcji laserowej Y;16-ruch PTP do punktu początkowego zadania;17-przerwanie ruchu, zatrzymanie bieżącego ruchu zgodnie z sygnałem;
+    18-uruchomienie programu głównego;19-uruchomienie przewijania do tyłu;20-potwierdzenie uruchomienia;21-wznowienie spawania;22-zakończenie spawania;23-wyczyszczenie błędu;24-przełączanie ręczny/automatyczny (poziom wysoki/niski)
+    25-włączenie;26-wyłączenie;27-włączenie/wyłączenie;28-sygnał uruchamiania/zatrzymywania śledzenia serwo laserowego;
+    * @return Kod błędu
     */
     errno_t GetToolDIConfig(int config[2]);
-    
-设置控制箱可配置CI有效状态
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-    
+
+Ustawianie stanu aktywnego konfigurowalnych CI szafy sterowniczej
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief 设置控制箱可配置CI有效状态
-    * @param [in] config CI0-CI7端口有效状态；0-高电平有效；1-低电平有效
-    * @return 错误码
+    * @brief Ustawia stan aktywny konfigurowalnych CI szafy sterowniczej
+    * @param [in] config Stan aktywny portów CI0-CI7; 0-aktywny wysoki poziom; 1-aktywny niski poziom
+    * @return Kod błędu
     */
     errno_t SetDIConfigLevel(int config[8]);
-        
-获取控制箱可配置CI有效状态
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-    
+
+Pobieranie stanu aktywnego konfigurowalnych CI szafy sterowniczej
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief 获取控制箱可配置CI有效状态
-    * @param [out] config CI0-CI7端口有效状态；0-高电平有效；1-低电平有效
-    * @return 错误码
+    * @brief Pobiera stan aktywny konfigurowalnych CI szafy sterowniczej
+    * @param [out] config Stan aktywny portów CI0-CI7; 0-aktywny wysoki poziom; 1-aktywny niski poziom
+    * @return Kod błędu
     */
     errno_t GetDIConfigLevel(int config[8]);
-        
-设置控制箱可配置CO有效状态
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-    
+
+Ustawianie stanu aktywnego konfigurowalnych CO szafy sterowniczej
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief 设置控制箱可配置CO有效状态
-    * @param [in] config CO0-CO7端口有效状态；0-高电平有效；1-低电平有效
-    * @return 错误码
+    * @brief Ustawia stan aktywny konfigurowalnych CO szafy sterowniczej
+    * @param [in] config Stan aktywny portów CO0-CO7; 0-aktywny wysoki poziom; 1-aktywny niski poziom
+    * @return Kod błędu
     */
     errno_t SetDOConfigLevel(int config[8]);
 
-获取控制箱可配置CO有效状态
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-    
+Pobieranie stanu aktywnego konfigurowalnych CO szafy sterowniczej
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief 获取控制箱可配置CO有效状态
-    * @param [out] config CO0-CO7端口有效状态；0-高电平有效；1-低电平有效
-    * @return 错误码
+    * @brief Pobiera stan aktywny konfigurowalnych CO szafy sterowniczej
+    * @param [out] config Stan aktywny portów CO0-CO7; 0-aktywny wysoki poziom; 1-aktywny niski poziom
+    * @return Kod błędu
     */
     errno_t GetDOConfigLevel(int config[8]);
-    
-设置末端可配置CI有效状态
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-    
+
+Ustawianie stanu aktywnego konfigurowalnych CI końcówki
++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief 设置末端可配置CI有效状态
-    * @param [in] config CI0-CI1端口有效状态；0-高电平有效；1-低电平有效
-    * @return 错误码
+    * @brief Ustawia stan aktywny konfigurowalnych CI końcówki
+    * @param [in] config Stan aktywny portów CI0-CI1; 0-aktywny wysoki poziom; 1-aktywny niski poziom
+    * @return Kod błędu
     */
     errno_t SetToolDIConfigLevel(int config[2]);
-    
-获取末端可配置CI有效状态
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-    
+
+Pobieranie stanu aktywnego konfigurowalnych CI końcówki
++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief 获取末端可配置CI有效状态
-    * @param [out] config CI0-CI1端口有效状态；0-高电平有效；1-低电平有效
-    * @return 错误码
+    * @brief Pobiera stan aktywny konfigurowalnych CI końcówki
+    * @param [out] config Stan aktywny portów CI0-CI1; 0-aktywny wysoki poziom; 1-aktywny niski poziom
+    * @return Kod błędu
     */
     errno_t GetToolDIConfigLevel(int config[2]);
-    
-设置控制箱标准DI有效状态
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-    
+
+Ustawianie stanu aktywnego standardowych DI szafy sterowniczej
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief 设置控制箱标准DI有效状态
-    * @param [in] config DI0-DI7端口有效状态；0-高电平有效；1-低电平有效
-    * @return 错误码
+    * @brief Ustawia stan aktywny standardowych DI szafy sterowniczej
+    * @param [in] config Stan aktywny portów DI0-DI7; 0-aktywny wysoki poziom; 1-aktywny niski poziom
+    * @return Kod błędu
     */
     errno_t SetStandardDILevel(int config[8]);
-    
-获取控制箱标准DI有效状态
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-    
+
+Pobieranie stanu aktywnego standardowych DI szafy sterowniczej
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief 获取控制箱标准DI有效状态
-    * @param [out] config DI0-DI7端口有效状态；0-高电平有效；1-低电平有效
-    * @return 错误码
+    * @brief Pobiera stan aktywny standardowych DI szafy sterowniczej
+    * @param [out] config Stan aktywny portów DI0-DI7; 0-aktywny wysoki poziom; 1-aktywny niski poziom
+    * @return Kod błędu
     */
     errno_t GetStandardDILevel(int config[8]);
 
-设置控制箱标准DO有效状态
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-    
+Ustawianie stanu aktywnego standardowych DO szafy sterowniczej
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief 设置控制箱标准DO有效状态
-    * @param [in] config DO0-DO7端口有效状态；0-高电平有效；1-低电平有效
-    * @return 错误码
+    * @brief Ustawia stan aktywny standardowych DO szafy sterowniczej
+    * @param [in] config Stan aktywny portów DO0-DO7; 0-aktywny wysoki poziom; 1-aktywny niski poziom
+    * @return Kod błędu
     */
     errno_t SetStandardDOLevel(int config[8]);
-    
-获取控制箱标准DO有效状态
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-    
+
+Pobieranie stanu aktywnego standardowych DO szafy sterowniczej
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief 获取控制箱标准DO有效状态
-    * @param [out] config DO0-DO7端口有效状态；0-高电平有效；1-低电平有效
-    * @return 错误码
+    * @brief Pobiera stan aktywny standardowych DO szafy sterowniczej
+    * @param [out] config Stan aktywny portów DO0-DO7; 0-aktywny wysoki poziom; 1-aktywny niski poziom
+    * @return Kod błędu
     */
     errno_t GetStandardDOLevel(int config[8]);
-        
-机器人IO配置代码示例
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-    
+
+Przykład kodu konfiguracji IO robota
+++++++++++++++++++++++++++++++++++++
+
 .. code-block:: c++
     :linenos:
 
@@ -800,7 +800,7 @@
         rtn = robot.SetDIConfig(setDIConfig);
         printf("SetDIConfig rtn is %d\n", rtn);
         rtn = robot.GetDIConfig(getDIConfig);
-        printf("GetDIConfig rtn is %d, value is %d %d %d %d %d %d %d %d \n", rtn, 
+        printf("GetDIConfig rtn is %d, value is %d %d %d %d %d %d %d %d \n", rtn,
             getDIConfig[0], getDIConfig[1], getDIConfig[2], getDIConfig[3], getDIConfig[4], getDIConfig[5], getDIConfig[6], getDIConfig[7]);
         int setDOConfig[8] = { 9, 10, 11, 12, 13, 14, 15, 16 };
         int getDOConfig[8] = { 0 };

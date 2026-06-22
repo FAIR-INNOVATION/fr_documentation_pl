@@ -1,72 +1,72 @@
-机器人安全设置
-=================
+Ustawienia bezpieczeństwa robota
+================================
 
-.. toctree:: 
+.. toctree::
     :maxdepth: 5
 
-设置碰撞等级
-++++++++++++++++++++++++++++++++
+Ustawianie poziomu kolizji
++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief 设置碰撞等级
-    * @param  [in]  mode  0-等级，1-百分比
-    * @param  [in]  level 碰撞阈值，等级对应范围[],百分比对应范围[0~1]
-    * @param  [in]  config 0-不更新配置文件，1-更新配置文件
-    * @return  错误码
+    * @brief Ustawia poziom kolizji
+    * @param  [in]  mode  0-poziom, 1-procent
+    * @param  [in]  level Próg kolizji, dla poziomu zakres [], dla procentu zakres [0~1]
+    * @param  [in]  config 0-nie aktualizuj pliku konfiguracyjnego, 1-aktualizuj plik konfiguracyjny
+    * @return  Kod błędu
     */
     errno_t  SetAnticollision(int mode, float level[6], int config);
 
-设置碰撞后策略
-++++++++++++++++++++++++++++++++
+Ustawianie strategii po kolizji
++++++++++++++++++++++++++++++++++++++++++++++
 .. versionchanged:: C++SDK-v2.1.5.0
 
 .. code-block:: c++
     :linenos:
 
     /**
-	 * @brief  设置碰撞后策略
-	 * @param  [in] strategy  0-报错暂停；1-继续运行;2-报错停止；3-重力矩模式；4-震荡相应模式；5-碰撞回弹模式 
-	 * @param  [in] safeTime  安全停止时间[1000 - 2000]ms
-	 * @param  [in] safeDistance  安全停止距离[1-150]mm
-	 * @param  [in] safetyMargin  j1-j6安全系数[1-10]
-	 * @return  错误码
-	 */
-	errno_t SetCollisionStrategy(int strategy, int safeTime, int safeDistance, int safetyMargin[]);
+     * @brief  Ustawia strategię po kolizji
+     * @param  [in] strategy  0-zgłoś błąd i wstrzymaj; 1-kontynuuj działanie; 2-zgłoś błąd i zatrzymaj; 3-tryb momentu grawitacyjnego; 4-tryb odpowiedzi oscylacyjnej; 5-tryb odbicia po kolizji
+     * @param  [in] safeTime  Czas bezpiecznego zatrzymania [1000 - 2000] ms
+     * @param  [in] safeDistance  Odległość bezpiecznego zatrzymania [1-150] mm
+     * @param  [in] safetyMargin  Współczynniki bezpieczeństwa dla j1-j6 [1-10]
+     * @return  Kod błędu
+     */
+    errno_t SetCollisionStrategy(int strategy, int safeTime, int safeDistance, int safetyMargin[]);
 
-自定义碰撞检测阈值功能开始
-++++++++++++++++++++++++++++++++++++++++++++++++
+Rozpoczęcie funkcji niestandardowego progu wykrywania kolizji
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C++SDK-v2.2.0-3.8.0
 
 .. code-block:: c++
     :linenos:
 
-	 /**
-	 * @brief  自定义碰撞检测阈值功能开始，设置关节端和TCP端的碰撞检测阈值
-	 * @param  [in] flag 1-仅关节检测开启；2-仅TCP检测开启；3-关节和TCP检测同时开启
-	 * @param  [in] jointDetectionThreshould 关节碰撞检测阈值 j1-j6
-	 * @param  [in] tcpDetectionThreshould TCP碰撞检测阈值，xyzabc
-	 * @param  [in] block 0-非阻塞；1-阻塞
-	 * @return  错误码
-	 */
-	errno_t CustomCollisionDetectionStart(int flag, double jointDetectionThreshould[6], double tcpDetectionThreshould[6], int block);
+     /**
+     * @brief  Rozpoczęcie funkcji niestandardowego progu wykrywania kolizji, ustawia progi wykrywania kolizji dla strony stawów i TCP
+     * @param  [in] flag 1-włączone tylko wykrywanie stawów; 2-włączone tylko wykrywanie TCP; 3-włączone jednocześnie wykrywanie stawów i TCP
+     * @param  [in] jointDetectionThreshould Próg wykrywania kolizji stawów j1-j6
+     * @param  [in] tcpDetectionThreshould Próg wykrywania kolizji TCP, xyzabc
+     * @param  [in] block 0-nieblokujący; 1-blokujący
+     * @return  Kod błędu
+     */
+    errno_t CustomCollisionDetectionStart(int flag, double jointDetectionThreshould[6], double tcpDetectionThreshould[6], int block);
 
-自定义碰撞检测阈值功能结束
-++++++++++++++++++++++++++++++++++++++++++++++++
+Zakończenie funkcji niestandardowego progu wykrywania kolizji
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C++SDK-v2.2.0-3.8.0
 
 .. code-block:: c++
     :linenos:
 
-	/**
-	 * @brief  自定义碰撞检测阈值功能关闭
-	 * @return  错误码
-	 */
-	errno_t CustomCollisionDetectionEnd();
+    /**
+     * @brief  Zakończenie funkcji niestandardowego progu wykrywania kolizji
+     * @return  Kod błędu
+     */
+    errno_t CustomCollisionDetectionEnd();
 
-机器人碰撞等级设置代码示例
-++++++++++++++++++++++++++++++++++++++++++++++++++
+Przykład kodu ustawiania poziomu kolizji robota
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. code-block:: c++
     :linenos:
@@ -115,46 +115,47 @@
          return 0;
      }
 
-设置正限位
-++++++++++++++++++++++++++++++++
+Ustawianie dodatniego ogranicznika
++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  设置正限位
-    * @param  [in] limit 六个关节位置，单位deg
-    * @return  错误码
+    * @brief  Ustawia dodatni ogranicznik
+    * @param  [in] limit Pozycje sześciu stawów, jednostka deg
+    * @return  Kod błędu
     */
     errno_t  SetLimitPositive(float limit[6]);
 
-设置负限位
-++++++++++++++++++++++++++++++++
+Ustawianie ujemnego ogranicznika
++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  设置负限位
-    * @param  [in] limit 六个关节位置，单位deg
-    * @return  错误码
+    * @brief  Ustawia ujemny ogranicznik
+    * @param  [in] limit Pozycje sześciu stawów, jednostka deg
+    * @return  Kod błędu
     */
-    errno_t  SetLimitNegative(float limit[6]);   
+    errno_t  SetLimitNegative(float limit[6]);
 
-获取关节软限位角度
-++++++++++++++++++++++++++++++++++++
+Pobieranie kątów miękkiego ograniczenia stawów
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  获取关节软限位角度
-    * @param  [in] flag 0-阻塞，1-非阻塞    
-    * @param  [out] negative  负限位角度，单位deg
-    * @param  [out] positive  正限位角度，单位deg
-    * @return  错误码
+    * @brief  Pobiera kąty miękkiego ograniczenia stawów
+    * @param  [in] flag 0-blokujący, 1-nieblokujący
+    * @param  [out] negative  Kąt ujemnego ograniczenia, jednostka deg
+    * @param  [out] positive  Kąt dodatniego ograniczenia, jednostka deg
+    * @return  Kod błędu
     */
     errno_t  GetJointSoftLimitDeg(uint8_t flag, float negative[6], float positive[6]);
-    
-机器人限位设置代码示例
-++++++++++++++++++++++++++++++++++++++++++++++
+
+Przykład kodu ustawiania ograniczników robota
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: c++
     :linenos:
 
@@ -182,38 +183,38 @@
       return 0;
     }
 
-设置机器人碰撞检测方法
-++++++++++++++++++++++++++++++++++++++++++
-    
+Ustawianie metody wykrywania kolizji robota
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief 设置机器人碰撞检测方法
-    * @param [in] method 碰撞检测方法：0-电流模式；1-双编码器；2-电流和双编码器同时开启
-    * @param [in] thresholdMode 碰撞等级阈值方式；0-碰撞等级固定阈值方式；1-自定义碰撞检测阈值
-    * @return  错误码
+    * @brief Ustawia metodę wykrywania kolizji robota
+    * @param [in] method Metoda wykrywania kolizji: 0-tryb prądowy; 1-podwójny enkoder; 2-tryb prądowy i podwójny enkoder jednocześnie
+    * @param [in] thresholdMode Sposób progu poziomu kolizji; 0-stały próg poziomu kolizji; 1-niestandardowy próg wykrywania kolizji
+    * @return  Kod błędu
     */
     errno_t SetCollisionDetectionMethod(int method, int thresholdMode = 0);
 
-设置静态下碰撞检测开始关闭
-++++++++++++++++++++++++++++++++++++++++++
+Włączanie/wyłączanie wykrywania kolizji w stanie statycznym
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C++SDK-v2.1.5.0
-    
+
 .. code-block:: c++
     :linenos:
 
     /**
-     * @brief 设置静态下碰撞检测开始关闭
-     * @param [in] status 0-关闭；1-开启
-     * @return 错误码
+     * @brief Włącza/wyłącza wykrywanie kolizji w stanie statycznym
+     * @param [in] status 0-wyłączone; 1-włączone
+     * @return Kod błędu
      */
     errno_t SetStaticCollisionOnOff(int status);
 
-设置机器人碰撞检测方法代码示例
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Przykład kodu ustawiania metody wykrywania kolizji robota
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C++SDK-v2.1.5.0
-    
+
 .. code-block:: c++
     :linenos:
 
@@ -240,24 +241,24 @@
       return 0;
     }
 
-关节扭矩功率检测
-++++++++++++++++++++++++++++++++++++++++++
+Detekcja mocy momentu stawów
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C++SDK-v2.1.5.0
-    
+
 .. code-block:: c++
     :linenos:
 
     /**
-     * @brief 关节扭矩功率检测
-     * @param [in] status 0-关闭；1-开启
-     * @param [in] power 设定最大功率(W);
-     * @return 错误码
+     * @brief Detekcja mocy momentu stawów
+     * @param [in] status 0-wyłączone; 1-włączone
+     * @param [in] power Ustawiona maksymalna moc (W);
+     * @return Kod błędu
      */
     errno_t SetPowerLimit(int status, double power);
 
-关节扭矩功率检测代码示例
-++++++++++++++++++++++++++++++++++++++++++++++++
-    
+Przykład kodu detekcji mocy momentu stawów
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: c++
     :linenos:
 
@@ -278,7 +279,7 @@
        float torques[] = { 0, 0, 0, 0, 0, 0 };
        robot.GetJointTorques(1, torques);
        int count = 100;
-       robot.ServoJTStart(); 
+       robot.ServoJTStart();
        int error = 0;
        while (count > 0)
        {
@@ -291,25 +292,25 @@
        robot.CloseRPC();
        return 0;
     }
-    
-设置安全速度参数
-++++++++++++++++++++++++++++++++++++++++++++++++
-    
+
+Ustawianie parametrów prędkości bezpiecznej
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief 设置安全速度参数
-    * @param [in] enable 0-关；1-手动模式启用；2-所有模式启用
-    * @param [in] maxTCPVel 限制最大TCP速度;[0-1000]mm/s
-    * @param [in] strategy 超速后策略；0-停止报警；1-自动限速；2-停止报警并去使能
-    * @return 错误码
+    * @brief Ustawia parametry prędkości bezpiecznej
+    * @param [in] enable 0-wył.; 1-włączony w trybie ręcznym; 2-włączony we wszystkich trybach
+    * @param [in] maxTCPVel Ograniczenie maksymalnej prędkości TCP; [0-1000] mm/s
+    * @param [in] strategy Strategia po przekroczeniu prędkości; 0-zatrzymaj i zgłoś alarm; 1-automatyczne ograniczenie prędkości; 2-zatrzymaj, zgłoś alarm i wyłącz zasilanie
+    * @return Kod błędu
     */
     errno_t SetVelReducePara(int enable, double maxTCPVel, int strategy);
-        
-设置安全速度参数的SDK代码示例
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-    
+
+Przykład kodu SDK ustawiania parametrów prędkości bezpiecznej
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. code-block:: c++
     :linenos:
 

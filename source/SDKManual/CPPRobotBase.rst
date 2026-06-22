@@ -1,155 +1,155 @@
-机器人基础
-=============
+Podstawy robota
+===============
 
 .. toctree:: 
     :maxdepth: 5
 
-实例化机器人
+Instancja robota
 ++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  机器人接口类构造函数
+    * @brief  Konstruktor klasy interfejsu robota
     */
     FRRobot();
 
-与控制器建立通信
-++++++++++++++++++++++++++++++++++
+Nawiązanie komunikacji z kontrolerem
+++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  与机器人控制器建立通信
-    * @param  [in] ip  控制器IP地址，出场默认为192.168.58.2
-    * @return 错误码
+    * @brief  Nawiązuje komunikację z kontrolerem robota
+    * @param  [in] ip  Adres IP kontrolera, domyślnie fabrycznie 192.168.58.2
+    * @return Kod błędu
     */
-    errno_t  RPC(const char *ip);
+    errno_t RPC(const char *ip);
 
-与控制器关闭通讯
-++++++++++++++++++++++++++++++++++
+Zerwanie komunikacji z kontrolerem
++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-     * @brief  与机器人控制器关闭通讯
-     * @return 错误码
-     */
-    errno_t  CloseRPC();
+     * @brief  Zrywa komunikację z kontrolerem robota
+     * @return Kod błędu
+     */
+    errno_t CloseRPC();
 
-查询SDK版本号
-++++++++++++++++++++++++++++++++++
+Sprawdzenie numeru wersji SDK
++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  查询SDK版本号
-    * @param  [out] version   SDK版本号
-    * @return  错误码
+    * @brief  Sprawdza numer wersji SDK
+    * @param  [out] version   Numer wersji SDK
+    * @return  Kod błędu
     */  
-    errno_t  GetSDKVersion(char *version);
+    errno_t GetSDKVersion(char *version);
 
-获取控制器IP
-++++++++++++++++++++++++++++++++++
+Pobranie adresu IP kontrolera
++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  获取控制器IP
-    * @param  [out] ip  控制器IP
-    * @return  错误码
+    * @brief  Pobiera adres IP kontrolera
+    * @param  [out] ip  Adres IP kontrolera
+    * @return  Kod błędu
     */
-    errno_t  GetControllerIP(char *ip);
+    errno_t GetControllerIP(char *ip);
 
-控制机器人进入或退出拖动示教模式
-++++++++++++++++++++++++++++++++++
+Sterowanie wejściem lub wyjściem robota z trybu przeciągania nauczania
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  控制机器人进入或退出拖动示教模式
-    * @param  [in] state 0-退出拖动示教模式，1-进入拖动示教模式
-    * @return  错误码
+    * @brief  Steruje wejściem lub wyjściem robota z trybu przeciągania nauczania
+    * @param  [in] state 0-wyjście z trybu przeciągania nauczania, 1-wejście w tryb przeciągania nauczania
+    * @return  Kod błędu
     */
-    errno_t  DragTeachSwitch(uint8_t state);
+    errno_t DragTeachSwitch(uint8_t state);
 
-查询机器人是否处于拖动模式
-++++++++++++++++++++++++++++++++++
+Sprawdzenie, czy robot jest w trybie przeciągania
++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  查询机器人是否处于拖动示教模式
-    * @param  [out] state 0-非拖动示教模式，1-拖动示教模式
-    * @return  错误码
+    * @brief  Sprawdza, czy robot jest w trybie przeciągania nauczania
+    * @param  [out] state 0-nie w trybie przeciągania nauczania, 1-w trybie przeciągania nauczania
+    * @return  Kod błędu
     */
-    errno_t  IsInDragTeach(uint8_t *state);
+    errno_t IsInDragTeach(uint8_t *state);
 
-控制机器人上使能或下使能
-++++++++++++++++++++++++++++++++++
+Sterowanie załączeniem lub odłączeniem robota
++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  控制机器人上使能或下使能，机器人上电后默认自动上使能
-    * @param  [in] state  0-下使能，1-上使能
-    * @return  错误码
+    * @brief  Steruje załączeniem lub odłączeniem robota. Po włączeniu zasilania robot domyślnie automatycznie się załącza.
+    * @param  [in] state  0-odłączenie, 1-załączenie
+    * @return  Kod błędu
     */
-    errno_t  RobotEnable(uint8_t state);
+    errno_t RobotEnable(uint8_t state);
 
-控制机器人手自动模式切换
-++++++++++++++++++++++++++++++++++
+Sterowanie przełączaniem trybu ręczny/automatyczny robota
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief 控制机器人手自动模式切换
-    * @param [in] mode 0-自动模式，1-手动模式
-    * @return 错误码
+    * @brief Steruje przełączaniem trybu ręczny/automatyczny robota
+    * @param [in] mode 0-tryb automatyczny, 1-tryb ręczny
+    * @return Kod błędu
     */
-    errno_t  Mode(int mode);
+    errno_t Mode(int mode);
 
-关闭机器人操作系统
-+++++++++++++++++++++++++++++++++++++++++
+Zamknięcie systemu operacyjnego robota
+++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C++SDK-v2.2.1-3.8.1
 
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief 关闭机器人操作系统
-    * @return 错误码
+    * @brief Zamyka system operacyjny robota
+    * @return Kod błędu
     */
     errno_t ShutDownRobotOS();
 
-设置与机器人通讯重连参数
-++++++++++++++++++++++++++++++++++++++++++
+Ustawienie parametrów ponownego łączenia komunikacji z robotem
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C++SDK-v2.1.5.0
     
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief 设置与机器人通讯重连参数
-    * @param [in] enable 网络故障时使能重连 true-使能 false-不使能
-    * @param [in] reconnectTime 重连时间，单位ms
-    * @param [in] period 重连周期，单位ms
-    * @return 错误码
+    * @brief Ustawia parametry ponownego łączenia komunikacji z robotem
+    * @param [in] enable Włączenie ponownego łączenia w przypadku awarii sieci true-włączone false-niewłączone
+    * @param [in] reconnectTime Czas ponownego połączenia, jednostka ms
+    * @param [in] period Okres ponawiania połączenia, jednostka ms
+    * @return Kod błędu
     */
     errno_t SetReConnectParam(bool enable, int reconnectTime = 30000, int period = 50);
 
-关闭机器人操作系统
-+++++++++++++++++++++++++++++
+Zamknięcie systemu operacyjnego robota
+++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief 关闭机器人操作系统
-    * @return 错误码
+    * @brief Zamyka system operacyjny robota
+    * @return Kod błędu
     */
     int ShutDownRobotOS();
 
-初始化日志参数
+Inicjalizacja parametrów logowania
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. versionadded:: C++SDK-v2.1.2.0
@@ -158,15 +158,15 @@
     :linenos:
 
     /**
-    * @brief 初始化日志参数;
-    * @param output_model：输出模式，0-直接输出；1-缓冲输出；2-异步输出;
-    * @param file_path: 文件保存路径+名称，,长度上限256，名称必须是xxx.log的形式，比如/home/fr/linux/fairino.log;
-    * @param file_num：滚动存储的文件数量，1~20个.单个文件上限50M;
-    * @return errno_t 错误码;
+    * @brief Inicjalizuje parametry logowania;
+    * @param output_model: Tryb wyjścia, 0-wyjście bezpośrednie; 1-wyjście buforowane; 2-wyjście asynchroniczne;
+    * @param file_path: Ścieżka zapisu pliku + nazwa, maksymalna długość 256, nazwa musi mieć formę xxx.log, np. /home/fr/linux/fairino.log;
+    * @param file_num: Liczba plików do przechowywania rotacyjnego, 1~20. Maksymalny rozmiar pojedynczego pliku 50 MB;
+    * @return errno_t Kod błędu;
     */
-	errno_t LoggerInit(int output_model = 0, std::string file_path = "", int file_num = 5);
+    errno_t LoggerInit(int output_model = 0, std::string file_path = "", int file_num = 5);
 
-设置日志过滤等级
+Ustawienie poziomu filtrowania logów
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C++SDK-v2.1.2.0
 
@@ -174,13 +174,13 @@
     :linenos:
 
     /**
-    * @brief 设置日志过滤等级;
-    * @param lvl: 过滤等级值，值越小输出日志越少，默认值是1. 1-error, 2-warnning, 3-inform, 4-debug;
+    * @brief Ustawia poziom filtrowania logów;
+    * @param lvl: Wartość poziomu filtrowania, im mniejsza wartość, tym mniej logów jest wypisywanych. Wartość domyślna to 1. 1-błąd, 2-ostrzeżenie, 3-informacja, 4-debugowanie;
     */
     void SetLoggerLevel(int lvl = 1);
 
-机器人基础控制代码示例
-++++++++++++++++++++++++++++++++++++++
+Przykład kodu podstawowego sterowania robotem
++++++++++++++++++++++++++++++++++++++++++++++
 
 .. code-block:: c++
     :linenos:
@@ -224,23 +224,23 @@
             return 0;
     }
 
-获取机器人软件版本代码示例
-++++++++++++++++++++++++++++++++++++++++++++++
+Przykład kodu pobierania wersji oprogramowania robota
++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief 获取机器人软件版本
-    * @param[out]	robotModel 机器人型号
-    * @param[out]	webversion web版本
-    * @param[out]	controllerVersion 控制器版本
-    * @return 错误码
+    * @brief Pobiera wersję oprogramowania robota
+    * @param[out] robotModel Model robota
+    * @param[out] webversion Wersja web
+    * @param[out] controllerVersion Wersja kontrolera
+    * @return Kod błędu
     */
     errno_t GetSoftwareVersion(char robotModel[64], char webVersion[64], char controllerVersion[64]);
 
-获取机器人硬件版本
-+++++++++++++++++++++++++
+Pobranie wersji sprzętowej robota
++++++++++++++++++++++++++++++++++
 
 .. versionadded:: C++SDK-v2.1.1.0
 
@@ -248,20 +248,20 @@
     :linenos:
 
     /**
-    * @brief 获取机器人硬件版本
-    * @param[out] ctrlBoxBoardversion 控制箱载板硬件版本
-    * @param[out] driver1version 驱动器1硬件版本
-    * @param[out] driver2version 驱动器2硬件版本
-    * @param[out] driver3version 驱动器3硬件版本
-    * @param[out] driver4version 驱动器4硬件版本
-    * @param[out] driver5version 驱动器5硬件版本
-    * @param[out] driver6version 驱动器6硬件版本
-    * @param[out] endBoardversion 未端版硬件版本
+    * @brief Pobiera wersję sprzętową robota
+    * @param[out] ctrlBoxBoardversion Wersja sprzętowa płyty nośnej skrzynki sterowniczej
+    * @param[out] driver1version Wersja sprzętowa napędu 1
+    * @param[out] driver2version Wersja sprzętowa napędu 2
+    * @param[out] driver3version Wersja sprzętowa napędu 3
+    * @param[out] driver4version Wersja sprzętowa napędu 4
+    * @param[out] driver5version Wersja sprzętowa napędu 5
+    * @param[out] driver6version Wersja sprzętowa napędu 6
+    * @param[out] endBoardversion Wersja sprzętowa płyty końcowej
     */
     errno_t GetHardwareVersion(char ctrlBoxBoardversion[128], char driver1version[128], char driver2version[128], char driver3version[128], char driver4version[128], char driver5version[128], char driver6version[128], char endBoardversion[128]);
 
-获取机器人固件版本
-+++++++++++++++++++++++++
+Pobranie wersji oprogramowania sprzętowego robota
++++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. versionadded:: C++SDK-v2.1.1.0
 
@@ -269,20 +269,20 @@
     :linenos:
 
     /**
-    * @brief 获取机器人固件版本
-    * @param[out] ctrlBoxBoardversion 控制箱载板固件版本
-    * @param[out] driver1version 驱动器1固件版本
-    * @param[out] driver2version 驱动器2固件版本
-    * @param[out] driver3version 驱动器3固件版本
-    * @param[out] driver4version 驱动器4固件版本
-    * @param[out] driver5version 驱动器5固件版本
-    * @param[out] driver6version 驱动器6固件版本
-    * @param[out] endBoardversion 未端版固件版本
+    * @brief Pobiera wersję oprogramowania sprzętowego robota
+    * @param[out] ctrlBoxBoardversion Wersja oprogramowania sprzętowego płyty nośnej skrzynki sterowniczej
+    * @param[out] driver1version Wersja oprogramowania sprzętowego napędu 1
+    * @param[out] driver2version Wersja oprogramowania sprzętowego napędu 2
+    * @param[out] driver3version Wersja oprogramowania sprzętowego napędu 3
+    * @param[out] driver4version Wersja oprogramowania sprzętowego napędu 4
+    * @param[out] driver5version Wersja oprogramowania sprzętowego napędu 5
+    * @param[out] driver6version Wersja oprogramowania sprzętowego napędu 6
+    * @param[out] endBoardversion Wersja oprogramowania sprzętowego płyty końcowej
     */
     errno_t GetFirmwareVersion(char ctrlBoxBoardversion[128], char driver1version[128], char driver2version[128], char driver3version[128], char driver4version[128], char driver5version[128], char driver6version[128], char endBoardversion[128]);
 
-获取机器人软固件版本代码示例
-++++++++++++++++++++++++++++++++++++++++++++++++++
+Przykład kodu pobierania wersji oprogramowania i oprogramowania sprzętowego robota
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. code-block:: c++
     :linenos:

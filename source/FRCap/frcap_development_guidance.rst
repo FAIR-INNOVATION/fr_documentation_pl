@@ -1,191 +1,192 @@
-开发指导
-=========================
+Przewodnik programisty
+======================
 
 .. toctree:: 
    :maxdepth: 6
 
-开发环境及条件
----------------
+Środowisko programistyczne i wymagania
+--------------------------------------
 
-开发环境最低需满足以下配置：
+Środowisko programistyczne musi spełniać co najmniej następującą konfigurację:
 
-- CPU：1.6 GHz或更快的处理器；
-- RAM：>=1 GB（建议2 GB以上）；
-- ROM：>=128GB；
-- OS：需要 Windows 10或更高版本、macOS 10.15或更高版本、Linux（x64）系统（Ubuntu、Debian等）。
-- 控制器版本： 在WebApp《系统设置-关于》中查看，开发环境注意区分QX与LA，指令示例QX环境下避免使用ES6+语法等现代JavaScript特性。
+- CPU: 1,6 GHz lub szybszy procesor.
+- RAM: >= 1 GB (zalecane 2 GB lub więcej).
+- ROM: >= 128 GB.
+- System operacyjny: Wymagany system Windows 10 lub nowszy, macOS 10.15 lub nowszy, Linux (x64) (Ubuntu, Debian itp.).
+- Wersja kontrolera: Sprawdź w WebApp w sekcji „Ustawienia systemowe - Informacje”. W środowisku programistycznym należy rozróżnić QX i LA. W przykładach instrukcji dla środowiska QX należy unikać używania składni ES6+ i innych nowoczesnych funkcji JavaScript.
 
-我们已经封装了一些接口和模块，但想要达到一个较好的开发效果，建议对Web开发有一定的了解，最好熟悉以下技术：
+Zapewniliśmy już kilka interfejsów i modułów, ale aby osiągnąć dobry efekt programistyczny, zaleca się posiadanie pewnej wiedzy na temat rozwoju aplikacji internetowych, najlepiej znajomość następujących technologii:
 
-- HTML，JavaScript/TypeScript，CSS；
-- Vue3；
-- Vite；
-- Node.js。
+- HTML, JavaScript/TypeScript, CSS.
+- Vue3.
+- Vite.
+- Node.js.
 
-开发工具
--------------
-我们推荐使用最新的Visual Studio Code（VSCode）软件进行开发。下载请访问VSCode官方下载页面，选择对应系统下载即可。
+Narzędzia programistyczne
+-------------------------
 
-同时在本地计算机中需安装有Node.js运行时环境，安装Node.js时会附带安装npm等工具，方便进行包管理。访问Node.js官方下载页面，选择版本为v20的对应系统下载即可。
+Zalecamy używanie najnowszego oprogramowania Visual Studio Code (VSCode) do programowania. Aby pobrać, odwiedź oficjalną stronę pobierania VSCode i wybierz odpowiedni system.
 
-在VSCode中开发还有可能会使用到以下的VSCode插件，可以按需进行安装配置。
+Jednocześnie na komputerze lokalnym musi być zainstalowane środowisko uruchomieniowe Node.js. Instalacja Node.js automatycznie instaluje narzędzia takie jak npm, ułatwiając zarządzanie pakietami. Odwiedź oficjalną stronę pobierania Node.js i wybierz wersję v20 dla odpowiedniego systemu.
 
-- Vue；
-- ESlint；
-- npm Intellisense；
-- Vue Language Features (Volar)；
-- TypeScript Vue Plugin (Volar)或者Vue.volar；
-- Tailwind CSS IntelliSense。
+Podczas programowania w VSCode mogą być również używane następujące wtyczki VSCode, które można zainstalować i skonfigurować według potrzeb.
 
-FRCap项目结构
--------------
+- Vue.
+- ESlint.
+- npm Intellisense.
+- Vue Language Features (Volar).
+- TypeScript Vue Plugin (Volar) lub Vue.volar.
+- Tailwind CSS IntelliSense.
 
-FRCap的项目文件结构：
+Struktura projektu FRCap
+------------------------
+
+Struktura plików projektu FRCap:
 
 .. image:: frcap_pictures/012.png
    :width: 3in
    :align: center
 
-.. centered:: 图表 5-1  FRCap项目结构
+.. centered:: Wykres 5-1 Struktura projektu FRCap
 
-- Public：
+- Public:
 
-公共资源文件夹，在构建过程中不会对内部文件进行构建处理，而是直接完整复制到构建目录下。
+Folder zasobów publicznych. Podczas procesu budowania pliki wewnątrz nie są przetwarzane, ale kopiowane w całości do katalogu budowania.
 
-内部默认包含了action文件夹和logo.svg。
+Wewnątrz domyślnie znajduje się folder action i logo.svg.
 
-Action文件夹是用来存放自定义指令后台接口逻辑文件的。
+Folder action jest przeznaczony do przechowywania plików logiki backendu interfejsów niestandardowych instrukcji.
 
-Logo.svg是插件图标。
+Logo.svg to ikona wtyczki.
 
-- Src：
+- Src:
 
-Assets文件夹主要用来放置静态资源。
+Folder Assets służy głównie do przechowywania zasobów statycznych.
 
-Components文件夹主要用来放置组件。
+Folder Components służy głównie do przechowywania komponentów.
 
-Utils文件夹主要用来放置工具类。
+Folder Utils służy głównie do przechowywania klas narzędziowych.
 
-App.vue首页代码。
+Kod strony głównej App.vue.
 
-Main.js主要负责资源全局引入，Vue框架创建等。
+Main.js odpowiada głównie za globalne wprowadzanie zasobów, tworzenie frameworka Vue itp.
 
-Style.css项目基础样式文件。
+Podstawowy plik stylów projektu Style.css.
 
-- Build.bat：Windows平台构建脚本。
-- Index.html：页面UI主框架。
-- Package.json：包描述文件和编译策略等。
-- Vite.config.js：Vite配置文件。
+- Build.bat: Skrypt budowania dla platformy Windows.
+- Index.html: Główna struktura interfejsu użytkownika strony.
+- Package.json: Plik opisu pakietu i strategie kompilacji.
+- Vite.config.js: Plik konfiguracyjny Vite.
 
-前端frcap-ui、frcap-api使用
-----------------------------
+Korzystanie z frcap-ui i frcap-api na froncie
+----------------------------------------------
 
-Frcap-ui提供了一些已经通过Vue组件封装好的HTML控件，可以导入项目中进行使用，降低页面UI开发难度和代码量，提高代码可读性。当然，您也可以选择一些优秀开源的UI组件库，例如Element plus等。
+Frcap-ui dostarcza kilka kontrolek HTML opakowanych w komponenty Vue, które można zaimportować do projektu w celu użycia, zmniejszając trudność tworzenia interfejsu użytkownika i ilość kodu, zwiększając czytelność kodu. Oczywiście można również wybrać niektóre doskonałe biblioteki komponentów UI typu open source, takie jak Element plus.
 
-首先在您的项目路径下打开终端，安装frcap-ui。
+Najpierw otwórz terminal w ścieżce projektu i zainstaluj frcap-ui.
 
 .. code-block:: c++
    :linenos:
 
    npm install frcap-ui -s
 
-安装成功后，在需要使用frcap-ui的组件中引入，以按钮控件为例。
+Po pomyślnej instalacji zaimportuj frcap-ui do komponentu, który go potrzebuje. Na przykładzie kontrolki przycisku.
 
 .. code-block:: javascript
    :linenos:
 
    import { AppButton } from 'frcap-ui'
 
-然后在组件的<template>元素中使用。
+Następnie użyj go w elemencie <template> komponentu.
 
 .. code-block:: c++
    :linenos:
 
    <AppButton button-text="Start" button-type="primary"></AppButton>
 
-在浏览器中预览开发项目效果。
+Wyświetl podgląd efektu projektu w przeglądarce.
 
 .. image:: frcap_pictures/009.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 5-2  AppButton效果
+.. centered:: Wykres 5-2 Efekt AppButton
 
-目前我们提供了4种比较常见的控件组件。
+Obecnie udostępniamy 4 typowe komponenty kontrolek.
 
-- AppButton：按钮组件。
+- AppButton: Komponent przycisku.
   
-  - buttonType: 按钮类型，String，对应不同的按钮样式，缺省为primary。
+  - buttonType: Typ przycisku, String, odpowiada różnym stylom przycisku. Domyślnie primary.
   
-    - primary：蓝色；
-    - secondery：灰色；
-    - safety：绿色；
-    - warning：黄色；
-    - serious：红色。
+    - primary: Niebieski.
+    - secondery: Szary.
+    - safety: Zielony.
+    - warning: Żółty.
+    - serious: Czerwony.
   
-  - buttonText：按钮文本，String，缺省值为“primary”。
+  - buttonText: Tekst przycisku, String. Domyślnie „primary”.
 
-- AppInput：输入组件。
+- AppInput: Komponent wejściowy.
   
-  - Type：必要项，String，缺省值text。表示输入框的类型。
+  - Type: Wymagany, String. Domyślnie text. Określa typ pola wejściowego.
   
-    - Number：数字输入框；
-    - Text：文本输入框。
+    - Number: Pole wejściowe liczby.
+    - Text: Pole wejściowe tekstu.
   
-  - inputLabel：必要项，String，输入框标签文本。
-  - inputUnit：String，输入框单位文本。
-  - hasUnit：Boolean，缺省false，指示是否需要单位文本。
-  - isEmptyErr：Boolean，输入框是否为空。
-  - isReadonly：Boolean，输入框是否只读。
+  - inputLabel: Wymagany, String. Tekst etykiety pola wejściowego.
+  - inputUnit: String. Tekst jednostki pola wejściowego.
+  - hasUnit: Boolean. Domyślnie false. Wskazuje, czy potrzebny jest tekst jednostki.
+  - isEmptyErr: Boolean. Czy pole wejściowe jest puste.
+  - isReadonly: Boolean. Czy pole wejściowe jest tylko do odczytu.
 
-- AppSelect：选择框组件。
+- AppSelect: Komponent pola wyboru.
   
-  - selectionLabel：必要项，String，选择框标签文本。
-  - optionsData：必要项，Array，选项数据。
+  - selectionLabel: Wymagany, String. Tekst etykiety pola wyboru.
+  - optionsData: Wymagany, Array. Dane opcji.
 
-- Modal：模态窗组件。
+- Modal: Komponent okna modalnego.
   
-  - show：Boolean，是否弹出模态窗。
-  - title：String，模态窗标题。
+  - show: Boolean. Czy okno modalne jest wyświetlane.
+  - title: String. Tytuł okna modalnego.
 
-我们为了方便FRCap中可能会创建自定义指令开发，已经将Http请求和API内置在“创建向导”下载的初始FRCap项目中。这样可以将自定义指令和默认提供的指令都放到frcap-api中的api.js文件中。api.js具体路径为“./src/api/api.js”。
+Aby ułatwić tworzenie niestandardowych instrukcji w FRCap, wbudowaliśmy już żądania HTTP i API w początkowy projekt FRCap pobrany za pomocą „Kreatora tworzenia”. W ten sposób zarówno niestandardowe instrukcje, jak i domyślnie dostarczone instrukcje można umieścić w pliku api.js w frcap-api. Konkretna ścieżka do api.js to „./src/api/api.js”.
 
-Frcap-api的使用与frcap-ui类似，具体如下：
+Użycie frcap-api jest podobne do frcap-ui, szczegółowo poniżej:
 
-1. 在组件等需要用到api的文件中导入api。
+1. Zaimportuj api w pliku komponentu lub innym pliku, który go potrzebuje.
 
 .. code-block:: javascript
    :linenos:
 
    import api from '@/api/api';
 
-2. 在接口中调用默认提供的指令。
+2. Wywołaj domyślnie dostarczone instrukcje w interfejsie.
 
 .. code-block:: c++
    :linenos:
 
    api.getRobotStatus()
 
-3. 在返回的promise中编写处理逻辑。
+3. Napisz logikę przetwarzania w zwróconym obietnicy (promise).
 
 .. code-block:: c++
    :linenos:
 
-    api. getRobotStatus ()
+    api.getRobotStatus()
     .then((res) => {
-    console.log(res.data);
+        console.log(res.data);
     })
     .catch((err) => {
         console.error(err);
     });
 
-后端自定义指令开发
-----------------------------
+Programowanie niestandardowych instrukcji backendu
+--------------------------------------------------
 
-数据库操作示例(LA)
-+++++++++++++++++++++++++
+Przykład operacji na bazie danych (LA)
+++++++++++++++++++++++++++++++++++++++
 
-1. 引入数据库模块
+1. Zaimportuj moduł bazy danych
 
 .. code-block:: javascript
    :linenos:
@@ -194,30 +195,30 @@ Frcap-api的使用与frcap-ui类似，具体如下：
     var Sqlite3_Action = require(node + '/better-sqlite3/better-sqlite3.js');
     var sqlite = new Sqlite3_Action();
 
-2. 获取点位数据库中内容
-   
+2. Pobierz zawartość bazy danych punktów
+
 .. code-block:: javascript
    :linenos:
 
-    // 匹配 cmd
+    // Dopasowanie cmd
     case 'get_points':
-    // 编写sql语句，按照数字升序 + 首字母开头升序 + 中文开头升序 的方式，反馈数据给前端页面进行显示
+    // Napisz instrukcję SQL, sortuj według rosnąco numerycznie + rosnąco według pierwszej litery + rosnąco według chińskiego początku, aby zwrócić dane do strony frontendowej do wyświetlenia
     var sql = "select * from points order by name ASC"; 
     var sql_data = sqlite.queryall(DB_POINTS, sql); 
-    // json数据格式化
+    // Formatowanie danych JSON
     for (var i = 0; i < sql_data.length; i++) {
         response_data[sql_data[i].name] = sql_data[i];
     }
-    //json数据反馈给前端
+    // Zwróć dane JSON do frontendu
     event_socket.emit('response', res, response_status, response_data);
     break;  
 
-数据库操作示例(QX)
-+++++++++++++++++++++++++
+Przykład operacji na bazie danych (QX)
+++++++++++++++++++++++++++++++++++++++
 
-.. note:: QX版本使用JSON格式文件存储数据。
+.. note:: Wersja QX używa plików w formacie JSON do przechowywania danych.
 
-1. 引入数据库模块
+1. Zaimportuj moduł bazy danych
 
 .. code-block:: javascript
    :linenos:
@@ -226,20 +227,20 @@ Frcap-api的使用与frcap-ui类似，具体如下：
    var sqlite_adapter = require(node + '/jsdb/sqlite_adapter');
    var db = new sqlite_adapter.Database(palletizing_db);
 
-2. 数据库使用示例
+2. Przykład użycia bazy danych
    
 .. code-block:: javascript
    :linenos:
 
-   // 执行SELECT查询并获取所有行
+   // Wykonaj zapytanie SELECT i pobierz wszystkie wiersze
    var rows = db.queryall('SELECT * FROM box_cfg');
    console.log('result:', rows);
 
-   //执行SELECT查询并获取单行
+   // Wykonaj zapytanie SELECT i pobierz pojedynczy wiersz
    var row = db.queryget('SELECT * FROM box_cfg WHERE flag=1');
    console.log('result:', row);
 
-   // 执行UPDATE语句
+   // Wykonaj instrukcję UPDATE
    db.run('UPDATE box_cfg SET height=100 WHERE flag=1', function(err) {
       if (err) {
          console.error('Update failed:', err);
@@ -248,7 +249,7 @@ Frcap-api的使用与frcap-ui类似，具体如下：
       }
    });
 
-   // 执行参数化查询
+   // Wykonaj sparametryzowane zapytanie
    var params = [100, 200, 300, 1];
    db.run('UPDATE box_cfg SET height=?, width=?, length=? WHERE flag=?', params, function(err) {
       if (err) {
@@ -258,13 +259,13 @@ Frcap-api的使用与frcap-ui类似，具体如下：
       }
    });
 
-   // 关闭数据库连接
+   // Zamknij połączenie z bazą danych
    db.close();
 
-socket通信操作示例
-+++++++++++++++++++++++++
+Przykład operacji komunikacji socket
+++++++++++++++++++++++++++++++++++++
 
-- 引入socket通信模块
+- Zaimportuj moduł komunikacji socket
    
 .. code-block:: javascript
    :linenos:
@@ -273,33 +274,33 @@ socket通信操作示例
     var Socket_Cmd = require(node + '/socket/socket_cmd');
     var socket_cmd = new Socket_Cmd();
 
-- 下发设置系统变量指令
+- Wyślij instrukcję ustawiania zmiennych systemowych
   
 .. code-block:: javascript
    :linenos:
 
-   // 匹配 cmd
+   // Dopasowanie cmd
    case 511:
-   //获取发送数据内容
+   // Pobierz treść wysyłanych danych
    content = data_json.content;
-   //获取发送数据长度
+   // Pobierz długość wysyłanych danych
    len = data_json.content.length;
-   //组发送数据
+   // Przygotuj dane do wysłania
    send_content = '/f/bIII1III511III' + len + 'III' + content + 'III/b/f'
-   //socket send
+   // socket send
    socket_cmd.send(send_content);
-   //socket recv(注意区分LA/QX)
+   // socket recv (zwróć uwagę na rozróżnienie LA/QX)
    // LA Version:
    socket_cmd.recv().then((recv_data)=>{
       response_data = recv_data;
-   event_socket.emit('response', res, response_status, response_data);
+      event_socket.emit('response', res, response_status, response_data);
    }).catch((err)=>{
       console.log(err);
    })
    // QX Version 
    // socket_cmd.recv().then(function(recv_data){
    //     response_data = recv_data;
-   // event_socket.emit('response', res, response_status, response_data);
+   //     event_socket.emit('response', res, response_status, response_data);
    // }).catch (function(err){
    //     console.log(err);
    // })

@@ -1,21 +1,21 @@
 C++
 ==============
 
-本文档为C++版本的二次开发接口文档。
+Niniejszy dokument stanowi dokumentację interfejsu API do wtórnego rozwoju w wersji C++.
 
 .. important::
 
-    机器人参数单位说明：机器人位置单位为毫米(mm)，姿态单位为度(°)。
+    Opis jednostek parametrów robota: jednostka pozycji robota to milimetr (mm), jednostka orientacji to stopień (°).
 
 .. important:: 
 
-    1)	非特别说明的代码示例中都默认机器人已经正常开机使能；
-    2)	文档中的所有代码示例都默认在机器人的工作空间内没有任何干涉；
-    3)	实际使用测试时请采用现场机器人的数据使用。
+    1) We wszystkich przykładach kodu, chyba określono inaczej, zakłada się, że robot jest normalnie włączony i załączony.
+    2) Wszystkie przykłady kodu w tym dokumencie zakładają, że w przestrzeni roboczej robota nie ma żadnych interferencji.
+    3) Podczas rzeczywistych testów należy używać danych z robota na miejscu.
 
 .. note:: 
     
-    当前文档适用于SDK-v2.0.0版本，向下兼容v1.x版本。
+    Obecny dokument dotyczy wersji SDK-v2.0.0 i jest wstecznie zgodny z wersjami v1.x.
 
 
 .. toctree:: 

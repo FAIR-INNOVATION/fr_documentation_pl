@@ -1,106 +1,106 @@
-机器人输入输出寄存器
-=========================
+Rejestry wejściowe i wyjściowe robota
+=====================================
 
-CNDE客户端与机器人可通过输入输出寄存器进行数据交互，具体包括两个过程：
+Klient CNDE i robot mogą wymieniać dane za pośrednictwem rejestrów wejściowych i wyjściowych. Obejmuje to dwa procesy:
 
-①CNDE客户端输入配置中包含输入寄存器，在输入数据时修改输入寄存器数值，机器人LUA程序中添加读输入寄存器指令，执行LUA程序即可读取到CNDE客户端修改的输入寄存器数值。
+① Konfiguracja wejść klienta CNDE zawiera rejestry wejściowe. Podczas wprowadzania danych modyfikowane są wartości rejestrów wejściowych. W programie LUA robota dodaje się instrukcję odczytu rejestrów wejściowych. Wykonanie programu LUA pozwala odczytać wartości rejestrów wejściowych zmodyfikowane przez klienta CNDE.
 
-②机器人LUA程序中添加写输出寄存器指令，执行LUA程序将数值写入输出寄存器，CNDE客户端输出配置中包含输出寄存器，启动机器人CNDE状态反馈，客户端接收CNDE输出数据即可读取到LUA程序中写入的输出寄存器数值。
+② W programie LUA robota dodaje się instrukcję zapisu rejestrów wyjściowych. Wykonanie programu LUA zapisuje wartości do rejestrów wyjściowych. Konfiguracja wyjść klienta CNDE zawiera rejestry wyjściowe. Po uruchomieniu informacji zwrotnej o stanie CNDE robota, klient odbiera dane wyjściowe CNDE i może odczytać wartości rejestrów wyjściowych zapisane w programie LUA.
 
-读输入寄存器
-~~~~~~~~~~~~~~~~~~
+Odczyt rejestrów wejściowych
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-打开WebApp，依次点击“示教程序”、“程序编程”，新建用户程序“testReg.lua”。
+Otwórz WebApp, kolejno kliknij „Program nauczania”, „Programowanie”, utwórz nowy program użytkownika „testReg.lua”.
 
 .. image:: cnde/012.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 4-1 新建“testReg.lua”程序
+.. centered:: Wykres 4-1 Utworzenie programu „testReg.lua”
 
-点击“变量”，在右侧指令添加框中选择“输入寄存器变量读取”，选择变量类型为“int”，寄存器起始索引为0，寄存器数量为3，点击“添加”按钮和“应用”按钮。
+Kliknij „Zmienne”, w prawym oknie dodawania instrukcji wybierz „Odczyt zmiennej rejestru wejściowego”. Wybierz typ zmiennej jako „int”, indeks początkowy rejestru 0, liczba rejestrów 3. Kliknij przycisk „Dodaj” i „Zastosuj”.
 
 .. image:: cnde/013.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 4-2 添加读取输入寄存器指令
+.. centered:: Wykres 4-2 Dodanie instrukcji odczytu rejestrów wejściowych
 
-此时“testReg.lua”中已经添加一条读取“int”型输入寄存器指令。
+W tym momencie do programu „testReg.lua” została dodana instrukcja odczytu rejestrów wejściowych typu „int”.
 
 .. image:: cnde/014.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 4-3 读取“int”型输入寄存器指令添加
+.. centered:: Wykres 4-3 Dodanie instrukcji odczytu rejestrów wejściowych typu „int”
 
-点击切换模式按钮，切换至程序可编辑模式，在读取输入寄存器指令前增加三个lua程序变量，用于接收读取到的三个输入寄存器值。
+Kliknij przycisk przełączania trybu, przełącz się do trybu edycji programu. Przed instrukcją odczytu rejestrów wejściowych dodaj trzy zmienne programu lua, które posłużą do odczytania trzech wartości rejestrów wejściowych.
 
 .. image:: cnde/015.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 4-4 添加读取输入寄存器数值
+.. centered:: Wykres 4-4 Dodanie odczytu wartości rejestrów wejściowych
 
-同样的方式，可分别添加“bit”型和“double”型寄存器数据读取。
+W ten sam sposób można dodać odczyt danych rejestrów typu „bit” i „double”.
 
 .. image:: cnde/016.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 4-5 添加“bit”型“double”型输入寄存器读取
+.. centered:: Wykres 4-5 Dodanie odczytu rejestrów wejściowych typu „bit” i „double”
 
-保存上述程序并将机器人切换到自动模式，执行该程序，输入寄存器数值将被读取至lua程序变量中。
+Zapisz powyższy program i przełącz robota w tryb automatyczny. Wykonaj program. Wartości rejestrów wejściowych zostaną odczytane do zmiennych programu lua.
 
-写输出寄存器
-~~~~~~~~~~~~~~~~~~~~~~
+Zapis rejestrów wyjściowych
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-打开WebApp，依次点击“示教程序”、“程序编程”，新建用户程序“testReg.lua”。
+Otwórz WebApp, kolejno kliknij „Program nauczania”, „Programowanie”, utwórz nowy program użytkownika „testReg.lua”.
 
 .. image:: cnde/017.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 4-6 新建“testReg.lua”程序 
+.. centered:: Wykres 4-6 Utworzenie programu „testReg.lua”
 
-点击“变量”，在右侧指令添加框中选择“输出寄存器变量写入”，选择变量类型为“int”，寄存器起始索引为0，寄存器数量为2，寄存器值为“18,55”，点击“添加”按钮；再次选择“输出寄存器变量读取”选择变量类型为“int”，寄存器起始索引为0，寄存器数量为2，点击“添加”和“应用”按钮。
+Kliknij „Zmienne”, w prawym oknie dodawania instrukcji wybierz „Zapis zmiennej rejestru wyjściowego”. Wybierz typ zmiennej jako „int”, indeks początkowy rejestru 0, liczba rejestrów 2, wartość rejestru „18,55”. Kliknij przycisk „Dodaj”. Następnie ponownie wybierz „Odczyt zmiennej rejestru wyjściowego”, wybierz typ zmiennej jako „int”, indeks początkowy rejestru 0, liczba rejestrów 2. Kliknij „Dodaj” i „Zastosuj”.
 
 .. image:: cnde/018.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 4-7 添加读写输出寄存器指令
+.. centered:: Wykres 4-7 Dodanie instrukcji zapisu i odczytu rejestrów wyjściowych
 
-此时“testReg.lua”中已经添加“int”型输出寄存器写和读指令。
+W tym momencie do programu „testReg.lua” zostały dodane instrukcje zapisu i odczytu rejestrów wyjściowych typu „int”.
 
 .. image:: cnde/019.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 4-8 “int”型输出寄存器写和读指令添加
+.. centered:: Wykres 4-8 Dodanie instrukcji zapisu i odczytu rejestrów wyjściowych typu „int”
 
-点击切换模式按钮，切换至程序可编辑模式，在读取输出寄存器指令前增加两个lua程序变量，用于接收读取到的两个输出寄存器值。
+Kliknij przycisk przełączania trybu, przełącz się do trybu edycji programu. Przed instrukcją odczytu rejestrów wyjściowych dodaj dwie zmienne programu lua, które posłużą do odczytania dwóch wartości rejestrów wyjściowych.
 
 .. image:: cnde/020.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 4-9 添加读取输入寄存器数值
+.. centered:: Wykres 4-9 Dodanie odczytu wartości rejestrów wejściowych
 
-保存上述程序并将机器人切换到自动模式，执行该程序，此时LUA程序变量“intValue1”和“intValue2”的值分别为18和55。“bit”、“double”型寄存器操作与“int”型寄存器相同。
+Zapisz powyższy program i przełącz robota w tryb automatyczny. Wykonaj program. W tym momencie zmienne programu LUA „intValue1” i „intValue2” będą miały odpowiednio wartości 18 i 55. Operacje na rejestrach typu „bit” i „double” są takie same jak na rejestrach typu „int”.
 
-CNDE输入输出寄存器交互应用
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Interaktywna aplikacja rejestrów wejściowych i wyjściowych CNDE
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. image:: cnde/021.png
    :width: 4in
    :align: center
 
-.. centered:: 图表 4-10 输入、输出寄存器数据交互
+.. centered:: Wykres 4-10 Wymiana danych w rejestrach wejściowych i wyjściowych
 
-机器人和CNDE客户端通过输入、输出寄存器的数据交互场景包括但不限于有以下几种类型：
+Scenariusze wymiany danych między robotem a klientem CNDE za pośrednictwem rejestrów wejściowych i wyjściowych obejmują między innymi następujące typy:
 
-①输入寄存器控制机器人运动；CNDE客户端进行机器人目标位置规划，将机器人目标位置写入输入寄存器中；在机器人LUA程序中读取输入寄存器数值获得机器人目标位置，再通过PTP、LIN、ServoJ等运动指令控制机器人运动到目标位置，LUA示例程序如下：
+① Sterowanie ruchem robota za pomocą rejestrów wejściowych: Klient CNDE planuje docelową pozycję robota i zapisuje ją do rejestrów wejściowych. W programie LUA robota odczytywane są wartości rejestrów wejściowych w celu uzyskania docelowej pozycji robota, a następnie za pomocą instrukcji ruchu, takich jak PTP, LIN, ServoJ, robot jest sterowany tak, aby przemiescił się do docelowej pozycji. Przykładowy program LUA jest następujący:
 
 .. code-block:: lua
     :linenos:
@@ -116,7 +116,7 @@ CNDE输入输出寄存器交互应用
         end	
     end
 
-②输入寄存器控制机器人动作：CNDE客户端向某个输入寄存器写入不同的数值，进而控制机器人进行不同的动作，机器人LUA程序中循环获取对应输入寄存器数值，根据寄存器数值不同，进行不同的动作，示例程序如下：
+② Sterowanie działaniami robota za pomocą rejestrów wejściowych: Klient CNDE zapisuje różne wartości do określonego rejestru wejściowego, aby sterować robotem w wykonywaniu różnych działań. Program LUA robota w pętli pobiera wartość odpowiedniego rejestru wejściowego i wykonuje różne działania w zależności od jego wartości. Przykładowy program jest następujący:
 
 .. code-block:: lua
     :linenos:
@@ -138,7 +138,7 @@ CNDE输入输出寄存器交互应用
         end
     end
 
-③机器人在运行过程中向输出寄存器写入当前程序状态，CNDE客户端通过读取输出寄存器状态，实现对机器人程序运行的监控，示例程序如下：
+③ Podczas pracy robot zapisuje bieżący stan programu do rejestrów wyjściowych. Klient CNDE odczytuje stan rejestrów wyjściowych, aby monitorować działanie programu robota. Przykładowy program jest następujący:
 
 .. code-block:: lua
     :linenos:

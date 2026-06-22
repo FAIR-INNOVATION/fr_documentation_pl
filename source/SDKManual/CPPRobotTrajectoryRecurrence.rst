@@ -1,118 +1,118 @@
-机器人轨迹复现
-=================
+Odtwarzanie trajektorii robota
+===============================
 
-.. toctree:: 
+.. toctree::
     :maxdepth: 5
 
-设置TPD轨迹记录参数
-++++++++++++++++++++++++++++
+Ustawianie parametrów rejestracji trajektorii TPD
++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  设置TPD轨迹记录参数
-    * @param  [in] type  记录数据类型，1-关节位置
-    * @param  [in] name  轨迹文件名
-    * @param  [in] period_ms  数据采样周期，固定值2ms或4ms或8ms
-    * @param  [in] di_choose  DI选择,bit0~bit7对应控制箱DI0~DI7，bit8~bit9对应末端DI0~DI1，0-不选择，1-选择
-    * @param  [in] do_choose  DO选择,bit0~bit7对应控制箱DO0~DO7，bit8~bit9对应末端DO0~DO1，0-不选择，1-选择
-    * @return  错误码
+    * @brief  Ustawia parametry rejestracji trajektorii TPD
+    * @param  [in] type  Typ rejestrowanych danych, 1-pozycja stawów
+    * @param  [in] name  Nazwa pliku trajektorii
+    * @param  [in] period_ms  Okres próbkowania danych, stałe wartości 2 ms, 4 ms lub 8 ms
+    * @param  [in] di_choose  Wybór DI, bity 0~7 odpowiadają DI0~DI7 szafy sterowniczej, bity 8~9 odpowiadają DI0~DI1 końcówki, 0-niewybrany, 1-wybrany
+    * @param  [in] do_choose  Wybór DO, bity 0~7 odpowiadają DO0~DO7 szafy sterowniczej, bity 8~9 odpowiadają DO0~DO1 końcówki, 0-niewybrany, 1-wybrany
+    * @return  Kod błędu
     */
     errno_t  SetTPDParam(int type, char name[30], int period_ms, uint16_t di_choose, uint16_t do_choose);
 
-开始TPD轨迹记录
-++++++++++++++++++++++++++++
+Rozpoczęcie rejestracji trajektorii TPD
+++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  开始TPD轨迹记录
-    * @param  [in] type  记录数据类型，1-关节位置
-    * @param  [in] name  轨迹文件名
-    * @param  [in] period_ms  数据采样周期，固定值2ms或4ms或8ms
-    * @param  [in] di_choose  DI选择,bit0~bit7对应控制箱DI0~DI7，bit8~bit9对应末端DI0~DI1，0-不选择，1-选择
-    * @param  [in] do_choose  DO选择,bit0~bit7对应控制箱DO0~DO7，bit8~bit9对应末端DO0~DO1，0-不选择，1-选择
-    * @return  错误码
+    * @brief  Rozpoczyna rejestrację trajektorii TPD
+    * @param  [in] type  Typ rejestrowanych danych, 1-pozycja stawów
+    * @param  [in] name  Nazwa pliku trajektorii
+    * @param  [in] period_ms  Okres próbkowania danych, stałe wartości 2 ms, 4 ms lub 8 ms
+    * @param  [in] di_choose  Wybór DI, bity 0~7 odpowiadają DI0~DI7 szafy sterowniczej, bity 8~9 odpowiadają DI0~DI1 końcówki, 0-niewybrany, 1-wybrany
+    * @param  [in] do_choose  Wybór DO, bity 0~7 odpowiadają DO0~DO7 szafy sterowniczej, bity 8~9 odpowiadają DO0~DO1 końcówki, 0-niewybrany, 1-wybrany
+    * @return  Kod błędu
     */
-    errno_t  SetTPDStart(int type, char name[30], int period_ms, uint16_t di_choose, uint16_t do_choose); 
+    errno_t  SetTPDStart(int type, char name[30], int period_ms, uint16_t di_choose, uint16_t do_choose);
 
-停止TPD轨迹记录
-++++++++++++++++++++++++++++
+Zatrzymanie rejestracji trajektorii TPD
++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  停止TPD轨迹记录
-    * @return  错误码
+    * @brief  Zatrzymuje rejestrację trajektorii TPD
+    * @return  Kod błędu
     */
     errno_t  SetWebTPDStop();
 
-删除TPD轨迹记录
-++++++++++++++++++++++++++++
+Usuwanie rejestracji trajektorii TPD
+++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  删除TPD轨迹记录
-    * @param  [in] name  轨迹文件名
-    * @return  错误码
-    */   
+    * @brief  Usuwa rejestrację trajektorii TPD
+    * @param  [in] name  Nazwa pliku trajektorii
+    * @return  Kod błędu
+    */
     errno_t  SetTPDDelete(char name[30]);
 
-TPD轨迹预加载
-++++++++++++++++++++++++++++
+Wstępne ładowanie trajektorii TPD
++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  TPD轨迹预加载
-    * @param  [in] name  轨迹文件名
-    * @return  错误码
-    */      
+    * @brief  Wstępne ładowanie trajektorii TPD
+    * @param  [in] name  Nazwa pliku trajektorii
+    * @return  Kod błędu
+    */
     errno_t  LoadTPD(char name[30]);
 
-TPD轨迹复现
-++++++++++++++++++++++++++++
+Odtwarzanie trajektorii TPD
++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  TPD轨迹复现
-    * @param  [in] name  轨迹文件名
-    * @param  [in] blend 0-不平滑，1-平滑
-    * @param  [in] ovl  速度缩放百分比，范围[0~100]
-    * @return  错误码
+    * @brief  Odtwarzanie trajektorii TPD
+    * @param  [in] name  Nazwa pliku trajektorii
+    * @param  [in] blend 0-niewygładzone, 1-wygładzone
+    * @param  [in] ovl  Procent skalowania prędkości, zakres [0~100]
+    * @return  Kod błędu
     */
     errno_t  MoveTPD(char name[30], uint8_t blend, float ovl);
 
-获取TPD起始位姿
-++++++++++++++++++++++++++++
+Pobieranie początkowej pozy i orientacji TPD
+++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief 获取TPD起始位姿
-    * @param [in] name TPD文件名,不需要文件后缀
-    * @return 错误码
-    */   
+    * @brief Pobiera początkową pozy i orientację TPD
+    * @param [in] name Nazwa pliku TPD, bez rozszerzenia
+    * @return Kod błędu
+    */
     errno_t GetTPDStartPose(char name[30], DescPose *desc_pose);
 
-运动到TPD轨迹记录起点
-++++++++++++++++++++++++++++
+Ruch do punktu początkowego rejestracji trajektorii TPD
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief 运动到TPD轨迹记录起点
-    * @param [in] name 轨迹文件名
-    * @param [in] moveType 运动类型；0-PTP; 1-LIN
-    * @param [in] ovl 速度缩放百分比，范围[0~100]
-    * @return 错误码
+    * @brief Ruch do punktu początkowego rejestracji trajektorii TPD
+    * @param [in] name Nazwa pliku trajektorii
+    * @param [in] moveType Typ ruchu; 0-PTP; 1-LIN
+    * @param [in] ovl Procent skalowania prędkości, zakres [0~100]
+    * @return Kod błędu
     */
     errno_t MoveToTPDStart(char name[30], uint8_t moveType, float ovl);
-    
-机器人TPD轨迹记录代码示例
-+++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Przykład kodu rejestracji trajektorii TPD robota
+++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. code-block:: c++
     :linenos:
@@ -160,73 +160,73 @@ TPD轨迹复现
     return 0;
     }
 
-轨迹预处理
-++++++++++++++++++++++++++++
+Wstępne przetwarzanie trajektorii
++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief 轨迹预处理
-    * @param [in] name 轨迹文件名
-    * @param [in] ovl 速度缩放百分比，范围[0~100]
-    * @param [in] opt 1-控制点，默认为1
-    * @return 错误码
-    */   
+    * @brief Wstępne przetwarzanie trajektorii
+    * @param [in] name Nazwa pliku trajektorii
+    * @param [in] ovl Procent skalowania prędkości, zakres [0~100]
+    * @param [in] opt 1-punkt kontrolny, domyślnie 1
+    * @return Kod błędu
+    */
     errno_t LoadTrajectoryJ(char name[30], float ovl, int opt);
 
-轨迹复现
-++++++++++++++++++++++++++++
+Odtwarzanie trajektorii
++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief 轨迹复现
-    * @return 错误码
-    */   
+    * @brief Odtwarzanie trajektorii
+    * @return Kod błędu
+    */
     errno_t MoveTrajectoryJ();
 
-获取轨迹起始位姿
-++++++++++++++++++++++++++++
+Pobieranie początkowej pozy i orientacji trajektorii
+++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief 获取轨迹起始位姿
-    * @param [in] name 轨迹文件名
-    * @return 错误码
-    */   
+    * @brief Pobiera początkową pozy i orientację trajektorii
+    * @param [in] name Nazwa pliku trajektorii
+    * @return Kod błędu
+    */
     errno_t GetTrajectoryStartPose(char name[30], DescPose *desc_pose);
 
-获取轨迹点编号
-++++++++++++++++++++++++++++
-.. code-block:: c++
-    :linenos:
-
-    /**
-    * @brief 获取轨迹点编号
-    * @return 错误码
-    */   
-    errno_t GetTrajectoryPointNum(int *pnum);
-
-设置轨迹运行中的速度
+Pobieranie numeru punktu trajektorii
 ++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief 设置轨迹运行中的速度
-    * @param [in] ovl 速度百分比[0-100.0]
-    * @param [in] mode 模式；0-降速模式；1-直接切换
-    * @return 错误码
+    * @brief Pobiera numer punktu trajektorii
+    * @return Kod błędu
     */
-    errno_t SetTrajectoryJSpeed(float ovl, int mode = 0);
+    errno_t GetTrajectoryPointNum(int *pnum);
 
-机器人设置轨迹运行中的速度代码示例
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Ustawianie prędkości podczas wykonywania trajektorii
++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
-    int TestSetTrajectoryJSpeed() 
+    /**
+    * @brief Ustawia prędkość podczas wykonywania trajektorii
+    * @param [in] ovl Procent prędkości [0-100.0]
+    * @param [in] mode Tryb; 0-tryb zmniejszania prędkości; 1-bezpośrednie przełączenie
+    * @return Kod błędu
+    */
+    errno_t SetTrajectoryJSpeed(float ovl, int mode = 0);
+
+Przykład kodu ustawiania prędkości podczas wykonywania trajektorii robota
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c++
+    :linenos:
+
+    int TestSetTrajectoryJSpeed()
     {
         ROBOT_STATE_PKG pkg = {};
         FRRobot robot;
@@ -238,7 +238,7 @@ TPD轨迹复现
         {
             return -1;
         }
-        
+
         rtn = robot.TrajectoryJUpLoad("D://zUP/trajHelix_aima_1.txt");
         printf("Upload TrajectoryJ A %d\n", rtn);
         char traj_file_name[90] = "/fruser/traj/trajHelix_aima_1.txt";
@@ -275,120 +275,120 @@ TPD轨迹复现
         return 0;
     }
 
-设置轨迹运行中的力和扭矩
-++++++++++++++++++++++++++++++++++++++++++++
+Ustawianie siły i momentu podczas wykonywania trajektorii
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief 设置轨迹运行中的力和扭矩
-    * @param [in] ft 三个方向的力和扭矩，单位N和Nm
-    * @return 错误码
-    */   
+    * @brief Ustawia siłę i moment podczas wykonywania trajektorii
+    * @param [in] ft Siły i momenty w trzech kierunkach, jednostka N i Nm
+    * @return Kod błędu
+    */
     errno_t SetTrajectoryJForceTorque(ForceTorque *ft);
 
-设置轨迹运行中的沿x方向的力
-++++++++++++++++++++++++++++++++++++++++++++
+Ustawianie siły wzdłuż osi X podczas wykonywania trajektorii
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief 设置轨迹运行中的沿x方向的力
-    * @param [in] fx 沿x方向的力，单位N
-    * @return 错误码
-    */   
+    * @brief Ustawia siłę wzdłuż osi X podczas wykonywania trajektorii
+    * @param [in] fx Siła wzdłuż osi X, jednostka N
+    * @return Kod błędu
+    */
     errno_t SetTrajectoryJForceFx(double fx);
 
-设置轨迹运行中的沿y方向的力
-++++++++++++++++++++++++++++++++++++++++
+Ustawianie siły wzdłuż osi Y podczas wykonywania trajektorii
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief 设置轨迹运行中的沿y方向的力
-    * @param [in] fy 沿y方向的力，单位N
-    * @return 错误码
-    */   
+    * @brief Ustawia siłę wzdłuż osi Y podczas wykonywania trajektorii
+    * @param [in] fy Siła wzdłuż osi Y, jednostka N
+    * @return Kod błędu
+    */
     errno_t SetTrajectoryJForceFy(double fy);
 
-设置轨迹运行中的沿z方向的力
-++++++++++++++++++++++++++++++++++++++++++++
+Ustawianie siły wzdłuż osi Z podczas wykonywania trajektorii
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief 设置轨迹运行中的沿z方向的力
-    * @param [in] fz 沿x方向的力，单位N
-    * @return 错误码
-    */   
+    * @brief Ustawia siłę wzdłuż osi Z podczas wykonywania trajektorii
+    * @param [in] fz Siła wzdłuż osi X, jednostka N
+    * @return Kod błędu
+    */
     errno_t SetTrajectoryJForceFz(double fz);
 
-设置轨迹运行中的绕x轴的扭矩
-++++++++++++++++++++++++++++++++++++++++++++
+Ustawianie momentu wokół osi X podczas wykonywania trajektorii
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief 设置轨迹运行中的绕x轴的扭矩
-    * @param [in] tx 绕x轴的扭矩，单位Nm
-    * @return 错误码
-    */   
+    * @brief Ustawia moment wokół osi X podczas wykonywania trajektorii
+    * @param [in] tx Moment wokół osi X, jednostka Nm
+    * @return Kod błędu
+    */
     errno_t SetTrajectoryJTorqueTx(double tx);
 
-设置轨迹运行中的绕y轴的扭矩
-++++++++++++++++++++++++++++++++++++++++++++
+Ustawianie momentu wokół osi Y podczas wykonywania trajektorii
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief 设置轨迹运行中的绕y轴的扭矩
-    * @param [in] ty 绕y轴的扭矩，单位Nm
-    * @return 错误码
-    */   
+    * @brief Ustawia moment wokół osi Y podczas wykonywania trajektorii
+    * @param [in] ty Moment wokół osi Y, jednostka Nm
+    * @return Kod błędu
+    */
     errno_t SetTrajectoryJTorqueTy(double ty);
 
-设置轨迹运行中的绕z轴的扭矩
-++++++++++++++++++++++++++++++++++++++++++++
+Ustawianie momentu wokół osi Z podczas wykonywania trajektorii
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief 设置轨迹运行中的绕z轴的扭矩
-    * @param [in] tz 绕z轴的扭矩，单位Nm
-    * @return 错误码
-    */   
+    * @brief Ustawia moment wokół osi Z podczas wykonywania trajektorii
+    * @param [in] tz Moment wokół osi Z, jednostka Nm
+    * @return Kod błędu
+    */
     errno_t SetTrajectoryJTorqueTz(double tz);
 
-上传轨迹J文件
-+++++++++++++++++++++++++++++
+Przesyłanie pliku trajektorii J
++++++++++++++++++++++++++++++++
 .. versionadded:: V3.7.7
 
 .. code-block:: c++
     :linenos:
 
     /**
-	 * @brief 上传轨迹J文件
-	 * @param [in] filePath 上传轨迹文件的全路径名   C://test/testJ.txt
-	 * @return 错误码
-	 */
-	errno_t TrajectoryJUpLoad(const std::string& filePath);
+     * @brief Przesyła plik trajektorii J
+     * @param [in] filePath Pełna ścieżka przesyłanego pliku trajektorii   C://test/testJ.txt
+     * @return Kod błędu
+     */
+    errno_t TrajectoryJUpLoad(const std::string& filePath);
 
-删除轨迹J文件
-+++++++++++++++++++++++++++++
+Usuwanie pliku trajektorii J
+++++++++++++++++++++++++++++
 .. versionadded:: V3.7.7
 
 .. code-block:: c++
     :linenos:
 
     /**
-	 * @brief 删除轨迹J文件
-	 * @param [in] fileName 文件名称 testJ.txt
-	 * @return 错误码
-	 */
-	errno_t TrajectoryJDelete(const std::string& fileName);
+     * @brief Usuwa plik trajektorii J
+     * @param [in] fileName Nazwa pliku testJ.txt
+     * @return Kod błędu
+     */
+    errno_t TrajectoryJDelete(const std::string& fileName);
 
-机器人轨迹J文件复现代码示例
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Przykład kodu odtwarzania pliku trajektorii J robota
++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. code-block:: c++
     :linenos:
@@ -446,41 +446,40 @@ TPD轨迹复现
       return 0;
     }
 
-轨迹预处理(轨迹前瞻)
+Wstępne przetwarzanie trajektorii (planowanie trajektorii z wyprzedzeniem)
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief 轨迹预处理(轨迹前瞻)
-    * @param [in] name 轨迹文件名
-    * @param [in] mode 采样模式，0-不进行采样；1-等数据间隔采样；2-等误差限制采样
-    * @param [in] errorLim 误差限制，使用直线拟合生效
-    * @param [in] type 平滑方式，0-贝塞尔平滑
-    * @param [in] precision 平滑精度，使用贝塞尔平滑时生效
-    * @param [in] vamx 设定的最大速度，mm/s
-    * @param [in] amax 设定的最大加速度，mm/s2
-    * @param [in] jmax 设定的最大加加速度，mm/s3
-    * @param [in] flag 匀速前瞻开启开关 0-不开启；1-开启
-    * @return 错误码
+    * @brief Wstępne przetwarzanie trajektorii (planowanie trajektorii z wyprzedzeniem)
+    * @param [in] name Nazwa pliku trajektorii
+    * @param [in] mode Tryb próbkowania, 0-bez próbkowania; 1-próbkowanie w równych odstępach danych; 2-próbkowanie z ograniczeniem błędu
+    * @param [in] errorLim Ograniczenie błędu, stosowane przy aproksymacji liniowej
+    * @param [in] type Sposób wygładzania, 0-wygładzanie Beziera
+    * @param [in] precision Dokładność wygładzania, stosowana przy wygładzaniu Beziera
+    * @param [in] vamx Ustawiona maksymalna prędkość, mm/s
+    * @param [in] amax Ustawione maksymalne przyspieszenie, mm/s2
+    * @param [in] jmax Ustawione maksymalne zryw, mm/s3
+    * @param [in] flag Przełącznik włączenia wyprzedzenia z jednostajną prędkością 0-niewłączone; 1-włączone
+    * @return Kod błędu
     */
     errno_t LoadTrajectoryLA(char name[30], int mode, double errorLim, int type, double precision, double vamx, double amax, double jmax, int flag = 0);
 
-轨迹复现(轨迹前瞻)
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
+Odtwarzanie trajektorii (planowanie trajektorii z wyprzedzeniem)
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  轨迹复现(轨迹前瞻)
-    * @return  错误码
+    * @brief  Odtwarzanie trajektorii (planowanie trajektorii z wyprzedzeniem)
+    * @return  Kod błędu
     */
     errno_t MoveTrajectoryLA();
 
-轨迹复现(轨迹前瞻)代码示例
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Przykład kodu odtwarzania trajektorii (planowanie trajektorii z wyprzedzeniem)
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. code-block:: c++
     :linenos:

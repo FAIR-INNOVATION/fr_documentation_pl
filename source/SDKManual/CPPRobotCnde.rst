@@ -1,72 +1,72 @@
 CNDE
-=============
+====
 
 .. toctree:: 
     :maxdepth: 5
 
-配置机器人CNDE状态反馈
+Konfiguracja informacji zwrotnej o stanie CNDE robota
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief 配置机器人CNDE状态反馈
-    * @param [in] states 可配置状态列表
-    * @param [in] period 状态反馈周期
-    * @return 错误码
+    * @brief Konfiguruje informację zwrotną o stanie CNDE robota
+    * @param [in] states Lista konfigurowalnych stanów
+    * @param [in] period Okres informacji zwrotnej o stanie
+    * @return Kod błędu
     */
     errno_t SetRobotRealtimeStateConfig(std::vector<RobotState> states, int period);
     
-CNDE状态配置添加一个机器人状态
+Dodanie stanu robota do konfiguracji stanu CNDE
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief CNDE状态配置添加一个机器人状态
-    * @param [in] state 可配置状态
-    * @return 错误码
+    * @brief Dodaje stan robota do konfiguracji stanu CNDE
+    * @param [in] state Konfigurowalny stan
+    * @return Kod błędu
     */
     errno_t AddRobotRealtimeState(RobotState state);
         
-CNDE状态配置删除一个机器人状态
+Usunięcie stanu robota z konfiguracji stanu CNDE
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief CNDE状态配置删除一个机器人状态
-    * @param [in] state 可配置状态
-    * @return 错误码
+    * @brief Usuwa stan robota z konfiguracji stanu CNDE
+    * @param [in] state Konfigurowalny stan
+    * @return Kod błędu
     */
     errno_t DeleteRobotRealtimeState(RobotState state);
             
-设置CNDE状态反馈周期
+Ustawienie okresu informacji zwrotnej o stanie CNDE
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief 设置CNDE状态反馈周期
-    * @param [in] period 可配置状态反馈周期 4-1000ms
-    * @return 错误码
+    * @brief Ustawia okres informacji zwrotnej o stanie CNDE
+    * @param [in] period Okres konfigurowalnej informacji zwrotnej o stanie 4-1000 ms
+    * @return Kod błędu
     */
     errno_t SetRobotRealtimeStatePeriod(int period);
                 
-获取当前CNDE状态反馈所有状态集合和周期
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Pobranie bieżącego zestawu wszystkich stanów i okresu informacji zwrotnej o stanie CNDE
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief 获取当前CNDE状态反馈所有状态集合和周期
-    * @param [out] states 可配置状态列表
-    * @param [out] period 可配置状态反馈周期
-    * @return 错误码
+    * @brief Pobiera bieżący zestaw wszystkich stanów i okres informacji zwrotnej o stanie CNDE
+    * @param [out] states Lista konfigurowalnych stanów
+    * @param [out] period Okres konfigurowalnej informacji zwrotnej o stanie
+    * @return Kod błędu
     */
     errno_t GetRobotRealtimeStateConfig(std::vector<RobotState>& states, int& period);
                 
-CNDE状态反馈使用代码示例
+Przykład kodu użycia informacji zwrotnej o stanie CNDE
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:

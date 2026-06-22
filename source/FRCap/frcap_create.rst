@@ -1,74 +1,74 @@
-创建向导
-=========================
+Kreator tworzenia
+=================
 
 .. toctree:: 
    :maxdepth: 6
 
-“创建向导”为FRCap-Tools中的一个工具，通过该工具您可以通过输入少量的参数方便快捷的初始化一个FRCap项目。
+„Kreator tworzenia” to narzędzie w FRCap-Tools, które umożliwia szybkie i wygodne zainicjowanie projektu FRCap poprzez wprowadzenie niewielkiej liczby parametrów.
 
-参数配置
--------------
+Konfiguracja parametrów
+-----------------------
 
-创建FRCap主要需要两类参数，FRCap的基础信息和各级配置。下面将会分别进行说明。
+Do utworzenia FRCap potrzebne są głównie dwa rodzaje parametrów: podstawowe informacje o FRCap oraz konfiguracje na różnych poziomach. Zostaną one opisane poniżej.
 
-基础信息
-++++++++++++++++
+Informacje podstawowe
++++++++++++++++++++++
 
-基础信息中包含了“插件名称”、“插件作者”和“插件描述”。
+Informacje podstawowe obejmują „Nazwę wtyczki”, „Autora wtyczki” i „Opis wtyczki”.
 
-插件名称：
+Nazwa wtyczki:
 
-- 必填项；
-- 不限制输入字符和字符长度, 不允许输入空格；
-- 建议名称最好不要超过7个CKJ字符（汉语、日语、韩语等）或者10个全大写拉丁字母或者14个全小写拉丁字母（英语、法语等）;
-- 推荐的例子：
+- Pole obowiązkowe.
+- Brak ograniczeń co do wprowadzanych znaków i długości. Nie wolno wprowadzać spacji.
+- Zaleca się, aby nazwa nie przekraczała 7 znaków CJK (chiński, japoński, koreański itp.), 10 wielkich liter łacińskich lub 14 małych liter łacińskich (angielski, francuski itp.).
+- Przykłady zalecane:
 
-  - 码垛机Palletizer；
-  - 打磨工艺软件；
-  - Device Config；
-  - HELLO FRCAP。
+  - Paletyzator Palletizer
+  - Oprogramowanie technologii szlifowania
+  - Konfiguracja urządzenia
+  - WITAJ FRCAP
 
-插件作者：
+Autor wtyczki:
 
-- 必填项；
-- 不限制输入字符和字符长度，例如可以输入您个人姓名、公司名称等；
-- 推荐的例子：
+- Pole obowiązkowe.
+- Brak ograniczeń co do wprowadzanych znaków i długości. Można wprowadzić np. swoje imię i nazwisko, nazwę firmy itp.
+- Przykłady zalecane:
 
   - Zhang San
   - Franklin Peter
   - FAIR Innovation (Suzhou) Robot Systems Co., Ltd.
 
-插件描述：
+Opis wtyczki:
 
-- 非必填项；
-- 不限制输入字符和字符长度，简要描述您的插件即可。
+- Pole nieobowiązkowe.
+- Brak ograniczeń co do wprowadzanych znaków i długości. Wystarczy krótki opis wtyczki.
 
-高级配置
----------
+Konfiguracja zaawansowana
+-------------------------
 
-插件类型：
+Typ wtyczki:
 
-- 必填项；
-- 类型选项分别是“配置”和“应用”。
-- “配置”推荐用于实现设置参数、按钮操作等相对简单的配置及控制操作的FRCap。导入后在WebApp中的“辅助应用”->“FRCap”中使用。
-- “应用”推荐实现复杂工艺场景的FRCap，例如码垛场景、焊接工艺等行业应用。导入后直接在WebApp中的“辅助应用”下使用。
+- Pole obowiązkowe.
+- Dostępne opcje to „Konfiguracja” i „Aplikacja”.
+- „Konfiguracja” jest zalecana do implementacji FRCap dla stosunkowo prostych konfiguracji i operacji sterowania, takich jak ustawianie parametrów, operacje przycisków itp. Po zaimportowaniu jest używana w WebApp w „Aplikacje pomocnicze” -> „FRCap”.
+- „Aplikacja” jest zalecana do implementacji FRCap dla złożonych scenariuszy procesowych, takich jak paletyzacja, technologia spawania itp. Po zaimportowaniu jest używana bezpośrednio w „Aplikacje pomocnicze” w WebApp.
 
-插件图标：
+Ikona wtyczki:
 
-- 非必填项；
-- 图标可以上传公司Logo或者任何您想使用的图标，注意使用版权，因任何原因导致的版权问题本公司概不负责；
-- 若您未上传图标，导出的FRCap项目中默认使用本公司“FAIRINO”Logo图标，您可以在项目文件夹下的public文件夹下进行替换修改。该图标仅供初始化示意，请勿直接在任何商业场景下使用“FAIRINO”Logo。
+- Pole nieobowiązkowe.
+- Ikona może być logo firmy lub dowolną ikoną, którą użytkownik chce użyć. Należy zwrócić uwagę na prawa autorskie. Firma nie ponosi odpowiedzialności za jakiekolwiek problemy z prawami autorskimi z jakiegokolwiek powodu.
+- Jeśli użytkownik nie prześle ikony, w wyeksportowanym projekcie FRCap domyślnie używane jest logo „FAIRINO” firmy. Można je zastąpić w folderze public w katalogu projektu. Ikona ta służy wyłącznie do celów poglądowych. Nie należy używać logo „FAIRINO” bezpośrednio w żadnych komercyjnych scenariuszach.
 
+Pobieranie
+----------
 
-下载
--------------
-以上所有的参数配置完成后且创建FRCap成功后，将跳转至下载页面。您需要确认名称无误即可将创建好的FRCap项目下载至本地计算机进行后续开发工作和构建使用。
+Po zakończeniu konfiguracji wszystkich powyższych parametrów i pomyślnym utworzeniu FRCap, nastąpi przekierowanie do strony pobierania. Należy potwierdzić, że nazwa jest prawidłowa, aby pobrać utworzony projekt FRCap na komputer lokalny w celu dalszego rozwoju i budowy.
 
-下载的插件为“.tar.gz”压缩格式。
+Pobrana wtyczka jest w formacie kompresji „.tar.gz”.
 
-在Windows系统我们推荐使用7-Zip软件解压。
+W systemie Windows zaleca się użycie oprogramowania 7-Zip do dekompresji.
 
-在Linux系统可以在终端使用以下指令进行解压。
+W systemie Linux można użyć następującej instrukcji w terminalu do dekompresji.
 
 .. code-block:: c++
    :linenos:
