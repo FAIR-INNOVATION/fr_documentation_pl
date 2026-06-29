@@ -126,7 +126,7 @@ Przykład kodu operacji na programie LUA robota
 
     public static int TestLuaOp(Robot robot)
     {
-        String program_name = "/fruser/Text1.lua";
+        String program_name = "Text1.lua";
         String[] loaded_name = new String[]{""};
         int[] state=new int[]{0};
         List<Integer> line=new ArrayList<>();

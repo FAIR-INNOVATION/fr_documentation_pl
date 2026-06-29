@@ -12,7 +12,7 @@ Ustawianie automatycznego ładowania domyślnego programu roboczego przy uruchom
     /**
     * @brief  Ustawia automatyczne ładowanie domyślnego programu roboczego przy uruchomieniu
     * @param  [in] flag  0-nie ładuj automatycznie domyślnego programu przy uruchomieniu, 1-ładuj automatycznie domyślny program przy uruchomieniu
-    * @param  [in] program_name Nazwa i ścieżka programu roboczego, np. "/fruser/movej.lua", gdzie "/fruser/" to stała ścieżka dla QX, "/usr/local/etc/controller/lua/" to stała ścieżka dla LA
+    * @param  [in] program_name Nazwa i ścieżka programu roboczego, np. "movej.lua", gdzie "/fruser/" to stała ścieżka dla QX, "/usr/local/etc/controller/lua/" to stała ścieżka dla LA
     * @return  Kod błędu
     */
     errno_t  LoadDefaultProgConfig(uint8_t flag, char program_name[64]);
@@ -127,7 +127,7 @@ Przykład kodu operacji na programie LUA robota
         return -1;
       }
       robot.SetReConnectParam(true, 30000, 500);
-      char program_name[64] = "/fruser/test.lua";
+      char program_name[64] = "test.lua";
       char loaded_name[64] = "";
       uint8_t state;
       int line;

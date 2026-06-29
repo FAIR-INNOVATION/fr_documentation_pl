@@ -1150,7 +1150,7 @@ Włączanie funkcji kompensacji momentu i współczynnik kompensacji
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototyp", "``SerCoderCompenParams(status, torqueCoeff)``"
+    "Prototyp", "``SetCoderCompenParams(status, torqueCoeff)``"
     "Opis", "Włączanie funkcji kompensacji momentu i współczynnik kompensacji"
     "Parametry wymagane", "- ``status``: Przełącznik, 0-wyłączone; 1-włączone
     - ``torqueCoeff``: Współczynniki kompensacji momentu J1-J6 [0-1]"

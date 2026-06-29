@@ -832,83 +832,94 @@ Pobieranie stanu włączenia wykonania LUA na końcówce
     */
     errno_t GetAxleLuaEnableStatus(int status[]);
 
-Ustawianie typu włączanego urządzenia końcowego LUA na końcówce
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Ustawianie włączonych typów urządzeń końcówki dla LUA
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C++SDK-v2.1.5.0
 
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief Ustawia typ włączanego urządzenia końcowego LUA na końcówce
-    * @param forceSensorEnable Stan włączenia czujnika siły, 0-nie włączaj; 1-włączaj
-    * @param gripperEnable Stan włączenia chwytaka, 0-nie włączaj; 1-włączaj
-    * @param IOEnable Stan włączenia urządzenia IO, 0-nie włączaj; 1-włączaj
+    * @brief Ustawia włączone typy urządzeń końcówki dla LUA
+    * @param forceSensorEnable Stan włączenia czujnika siły, 0-wyłączony; 1-włączony
+    * @param gripperEnable Stan włączenia chwytaka, 0-wyłączony; 1-włączony
+    * @param IOEnable Stan włączenia urządzenia IO, 0-wyłączony; 1-włączony
+    * @param dexhandEnable Stan włączenia dłoni, 0-wyłączony; 1-włączony
     * @return  Kod błędu
     */
-    errno_t SetAxleLuaEnableDeviceType(int forceSensorEnable, int gripperEnable, int IOEnable);
+    errno_t SetAxleLuaEnableDeviceType(int forceSensorEnable, int gripperEnable, int IOEnable, int dexhandEnable);
 
-Pobieranie typu włączanego urządzenia końcowego LUA na końcówce
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Pobieranie włączonych typów urządzeń końcówki dla LUA
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C++SDK-v2.1.5.0
 
 .. code-block:: c++
     :linenos:
-
+        
     /**
-    * @brief Pobiera typ włączanego urządzenia końcowego LUA na końcówce
-    * @param enable enable[0]:forceSensorEnable Stan włączenia czujnika siły, 0-nie włączaj; 1-włączaj
-    * @param enable enable[1]:gripperEnable Stan włączenia chwytaka, 0-nie włączaj; 1-włączaj
-    * @param enable enable[2]:IOEnable Stan włączenia urządzenia IO, 0-nie włączaj; 1-włączaj
-    * @return  Kod błędu
+    * @brief Pobiera włączone typy urządzeń końcówki dla LUA
+    * @param enable enable[0]:forceSensorEnable Stan włączenia czujnika siły, 0-wyłączony; 1-włączony
+    * @param enable enable[1]:gripperEnable Stan włączenia chwytaka, 0-wyłączony; 1-włączony
+    * @param enable enable[2]:IOEnable Stan włączenia urządzenia IO, 0-wyłączony; 1-włączony
+    * @param enable enable[3]:dexhandEnable Stan włączenia dłoni, 0-wyłączony; 1-włączony
+    * @return Kod błędu
     */
-    errno_t GetAxleLuaEnableDeviceType(int* forceSensorEnable, int* gripperEnable, int* IOEnable);
+    errno_t GetAxleLuaEnableDeviceType(int* forceSensorEnable, int* gripperEnable, int* IOEnable, int* dexhandEnable);
 
-Pobieranie aktualnie skonfigurowanego urządzenia końcowego
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Pobieranie aktualnie skonfigurowanych urządzeń końcówki
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C++SDK-v2.1.5.0
 
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief Pobiera aktualnie skonfigurowane urządzenie końcowe
-    * @param forceSensorEnable Numer włączonego urządzenia czujnika siły 0-niewłączone; 1-włączone
-    * @param gripperEnable Numer włączonego urządzenia chwytaka, 0-nie włączaj; 1-włączaj
-    * @param IODeviceEnable Numer włączonego urządzenia IO, 0-nie włączaj; 1-włączaj
-    * @return  Kod błędu
+    * @brief Pobiera aktualnie skonfigurowane urządzenia końcówki
+    * @param [out] forceSensorEnable Numer włączonego urządzenia czujnika siły, 0-wyłączony; 1-włączony
+    * @param [out] gripperEnable Numer włączonego urządzenia chwytaka, 0-wyłączony; 1-włączony
+    * @param [out] IODeviceEnable Numer włączonego urządzenia IO, 0-wyłączony; 1-włączony
+    * @param [out] decHandEnable Numer włączonego urządzenia dłoni, 0-wyłączony; 1-włączony
+    * @return Kod błędu
     */
-    errno_t GetAxleLuaEnableDevice(int forceSensorEnable[], int gripperEnable[], int IODeviceEnable[]);
+    errno_t GetAxleLuaEnableDevice(int forceSensorEnable[], int gripperEnable[], int IODeviceEnable[], int decHandEnable[]);
 
-Ustawianie włączenia funkcji sterowania ruchem chwytaka
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Ustawianie włączonych funkcji sterowania ruchem chwytaka
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C++SDK-v2.1.5.0
 
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief Ustawia włączenie funkcji sterowania ruchem chwytaka
+    * @brief Ustawia włączone funkcje sterowania ruchem chwytaka
     * @param id Numer urządzenia chwytaka
-    * @param func func[0]-włączenie chwytaka; func[1]-inicjalizacja chwytaka; 2-ustawienie pozycji; 3-ustawienie prędkości; 4-ustawienie momentu; 6-odczyt stanu chwytaka; 7-odczyt stanu inicjalizacji; 8-odczyt kodu błędu; 9-odczyt pozycji; 10-odczyt prędkości; 11-odczyt momentu
+    * @param func func[0]-włączenie chwytaka; func[1]-inicjalizacja chwytaka; func[2]-ustawienie pozycji; func[3]-ustawienie prędkości; func[4]-ustawienie momentu obrotowego; func[6]-odczyt stanu chwytaka;
+        func[7]-odczyt stanu inicjalizacji; func[8]-odczyt kodu błędu; func[9]-odczyt pozycji; func[10]-odczyt prędkości; func[11]-odczyt momentu obrotowego; func[12]-ustawienie liczby obrotów dla chwytaka obrotowego;
+        func[13]-ustawienie prędkości obrotowej dla chwytaka obrotowego; func[14]-ustawienie momentu obrotowego dla chwytaka obrotowego; func[15]-odczyt stanu chwytaka obrotowego; func[16]-odczyt stanu inicjalizacji chwytaka obrotowego;
+        func[17]-odczyt liczby obrotów chwytaka obrotowego; func[18]-odczyt prędkości chwytaka obrotowego; func[19]-odczyt momentu obrotowego chwytaka obrotowego; func[20]-ustawienie ruchu synchronicznego wieloosiowego; func[21]-komenda kasowania błędów;
+        func[22]-stan pracy pojedynczej osi; func[23]-stan pracy wszystkich osi;
     * @return  Kod błędu
     */
-    errno_t SetAxleLuaGripperFunc(int id, int func[]);
+    errno_t SetAxleLuaGripperFunc(int id, int func[32]);
 
-Pobieranie włączenia funkcji sterowania ruchem chwytaka
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Pobieranie włączonych funkcji sterowania ruchem chwytaka
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C++SDK-v2.1.5.0
 
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief Pobiera włączenie funkcji sterowania ruchem chwytaka
+    * @brief Pobiera włączone funkcje sterowania ruchem chwytaka
     * @param id Numer urządzenia chwytaka
-    * @param func func[0]-włączenie chwytaka; func[1]-inicjalizacja chwytaka; 2-ustawienie pozycji; 3-ustawienie prędkości; 4-ustawienie momentu; 6-odczyt stanu chwytaka; 7-odczyt stanu inicjalizacji; 8-odczyt kodu błędu; 9-odczyt pozycji; 10-odczyt prędkości; 11-odczyt momentu
+    * @param func func[0]-włączenie chwytaka; func[1]-inicjalizacja chwytaka; func[2]-ustawienie pozycji; func[3]-ustawienie prędkości; func[4]-ustawienie momentu obrotowego; func[6]-odczyt stanu chwytaka;
+        func[7]-odczyt stanu inicjalizacji; func[8]-odczyt kodu błędu; func[9]-odczyt pozycji; func[10]-odczyt prędkości; func[11]-odczyt momentu obrotowego; func[12]-ustawienie liczby obrotów dla chwytaka obrotowego;
+        func[13]-ustawienie prędkości obrotowej dla chwytaka obrotowego; func[14]-ustawienie momentu obrotowego dla chwytaka obrotowego; func[15]-odczyt stanu chwytaka obrotowego; func[16]-odczyt stanu inicjalizacji chwytaka obrotowego;
+        func[17]-odczyt liczby obrotów chwytaka obrotowego; func[18]-odczyt prędkości chwytaka obrotowego; func[19]-odczyt momentu obrotowego chwytaka obrotowego; func[20]-ustawienie ruchu synchronicznego wieloosiowego; func[21]-komenda kasowania błędów;
+        func[22]-stan pracy pojedynczej osi; func[23]-stan pracy wszystkich osi;
     * @return  Kod błędu
     */
-    errno_t GetAxleLuaGripperFunc(int id, int func[]);
+    errno_t GetAxleLuaGripperFunc(int id, int func[32]);
 
 Zapis pliku stacji podrzędnej Ethercat robota
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -961,69 +972,73 @@ Przykład kodu operacji na pliku LUA końcówki robota
 
     int TestAxleLua(void)
     {
-      ROBOT_STATE_PKG pkg = {};
-      FRRobot robot;
-      robot.LoggerInit();
-      robot.SetLoggerLevel(1);
-      int rtn = robot.RPC("192.168.58.2");
-      if (rtn != 0)
-      {
-        return -1;
-      }
-      robot.SetReConnectParam(true, 30000, 500);
-      robot.AxleLuaUpload("D://zUP/AXLE_LUA_End_DaHuan.lua");
-      AxleComParam param(7, 8, 1, 0, 5, 3, 1);
-      robot.SetAxleCommunicationParam(param);
-      AxleComParam getParam;
-      robot.GetAxleCommunicationParam(&getParam);
-      printf("GetAxleCommunicationParam param is %d %d %d %d %d %d %d\n", getParam.baudRate, getParam.dataBit, getParam.stopBit, getParam.verify, getParam.timeout, getParam.timeoutTimes, getParam.period);
-      robot.SetAxleLuaEnable(1);
-      int luaEnableStatus = 0;
-      robot.GetAxleLuaEnableStatus(&luaEnableStatus);
-      robot.SetAxleLuaEnableDeviceType(0, 1, 0);
-      int forceEnable = 0;
-      int gripperEnable = 0;
-      int ioEnable = 0;
-      robot.GetAxleLuaEnableDeviceType(&forceEnable, &gripperEnable, &ioEnable);
-      printf("GetAxleLuaEnableDeviceType param is %d %d %d\n", forceEnable, gripperEnable, ioEnable);
-      int func[16] = { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 };
-      robot.SetAxleLuaGripperFunc(1, func);
-      int getFunc[16] = { 0 };
-      robot.GetAxleLuaGripperFunc(1, getFunc);
-      int getforceEnable[16] = { 0 };
-      int getgripperEnable[16] = { 0 };
-      int getioEnable[16] = { 0 };
-      robot.GetAxleLuaEnableDevice(getforceEnable, getgripperEnable, getioEnable);
-      printf("\ngetforceEnable status : ");
-      for (int i = 0; i < 16; i++)
-      {
-        printf("%d,", getforceEnable[i]);
-      }
-      printf("\ngetgripperEnable status : ");
-      for (int i = 0; i < 16; i++)
-      {
-        printf("%d,", getgripperEnable[i]);
-      }
-      printf("\ngetioEnable status : ");
-      for (int i = 0; i < 16; i++)
-      {
-        printf("%d,", getioEnable[i]);
-      }
-      printf("\n");
-      robot.ActGripper(1, 0);
-      robot.Sleep(2000);
-      robot.ActGripper(1, 1);
-      robot.Sleep(2000);
-      robot.MoveGripper(1, 90, 10, 100, 50000, 0, 0, 0, 0, 0);
-      int pos = 0;
-      while (true)
-      {
-        robot.GetRobotRealTimeState(&pkg);
-        printf("gripper pos is %u\n", pkg.gripper_position);
-        robot.Sleep(100);
-      }
-      robot.CloseRPC();
-      return 0;
+        ROBOT_STATE_PKG pkg = {};
+        FRRobot robot;
+        robot.LoggerInit();
+        robot.SetLoggerLevel(1);
+        int rtn = robot.RPC("192.168.58.2");
+        if (rtn != 0)
+        {
+            return -1;
+        }
+        robot.SetReConnectParam(true, 30000, 500);
+        robot.AxleLuaUpload("D://zUP/AXLE_LUA_End_DaHuan.lua");
+        AxleComParam param(7, 8, 1, 0, 5, 3, 1);
+        robot.SetAxleCommunicationParam(param);
+        AxleComParam getParam;
+        robot.GetAxleCommunicationParam(&getParam);
+        printf("GetAxleCommunicationParam param is %d %d %d %d %d %d %d\n", getParam.baudRate, getParam.dataBit, getParam.stopBit, getParam.verify, getParam.timeout, getParam.timeoutTimes, getParam.period);
+        robot.SetAxleLuaEnable(1);
+        int luaEnableStatus = 0;
+        robot.GetAxleLuaEnableStatus(&luaEnableStatus);
+        robot.SetAxleLuaEnableDeviceType(0, 1, 0, 0);
+        int forceEnable = 0;
+        int gripperEnable = 0;
+        int ioEnable = 0;
+        int dexhandEnable = 0;
+        robot.GetAxleLuaEnableDeviceType(&forceEnable, &gripperEnable, &ioEnable, &dexhandEnable);
+        printf("GetAxleLuaEnableDeviceType param is %d %d %d %d\n", forceEnable, gripperEnable, ioEnable, dexhandEnable);
+        int func[32] = { 0,1,1,1,1,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 };
+        rtn = robot.SetAxleLuaGripperFunc(2, func);
+        printf("SetAxleLuaGripperFunc rtn is %d\n", rtn);
+        int getFunc[32] = { 0 };
+        rtn = robot.GetAxleLuaGripperFunc(2, getFunc);
+        printf("GetAxleLuaGripperFunc rtn is %d\n", rtn);
+        int getforceEnable[16] = { 0 };
+        int getgripperEnable[16] = { 0 };
+        int getioEnable[16] = { 0 };
+        int dexhandEnable1[16] = { 0 };
+        robot.GetAxleLuaEnableDevice(getforceEnable, getgripperEnable, getioEnable, dexhandEnable1);
+        printf("\ngetforceEnable status : ");
+        for (int i = 0; i < 16; i++)
+        {
+            printf("%d,", getforceEnable[i]);
+        }
+        printf("\ngetgripperEnable status : ");
+        for (int i = 0; i < 16; i++)
+        {
+            printf("%d,", getgripperEnable[i]);
+        }
+        printf("\ngetioEnable status : ");
+        for (int i = 0; i < 16; i++)
+        {
+            printf("%d,", getioEnable[i]);
+        }
+        printf("\n");
+        robot.ActGripper(2, 0);
+        robot.Sleep(2000);
+        robot.ActGripper(2, 1);
+        robot.Sleep(2000);
+        robot.MoveGripper(2, 1, 10, 100, 50000, 0, 0, 0, 0, 0);
+        int pos = 0;
+        while (true)
+        {
+            robot.GetRobotRealTimeState(&pkg);
+            printf("gripper pos is %u\n", pkg.gripper_position);
+            robot.Sleep(100);
+        }
+        robot.CloseRPC();
+        return 0;
     }
 
 Pobieranie stanu przycisków SmartTool
@@ -2036,4 +2051,189 @@ Przykład kodu przesyłania, pobierania i usuwania otwartego protokołu urządze
         robot.CloseRPC();
         robot.Sleep(1000);
         return 0;
+    }
+
+Sterowanie Ruchem Dłoni
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    
+.. code-block:: c++
+    :linenos:
+
+    /**
+    * @brief Sterowanie ruchem dłoni
+    * @param [in] idstart Początkowy numer stacji podrzędnej
+    * @param [in] slaveNum Liczba
+    * @param [in] pos Tablica pozycji, długość 16, zakres (-360~360)
+    * @param [in] speed Tablica procentów prędkości, długość 16, zakres [0~100]
+    * @param [in] force Tablica procentów momentu obrotowego, długość 16, zakres [0~100]
+    * @param [in] max_time Maksymalny czas oczekiwania, zakres [0~30000], jednostka ms
+    * @return Kod błędu, 0 w przypadku sukcesu
+    */
+    errno_t SetDexterousHandsMove(int idstart, int slaveNum, double pos[16], int speed[16], int force[16], int max_time);
+        
+Sterowanie Resetem i Aktywacją Dłoni
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    
+.. code-block:: c++
+    :linenos:
+
+    /**
+    * @brief Sterowanie resetem i aktywacją dłoni
+    * @param [in] id Numer stacji podrzędnej
+    * @param [in] act 0-reset 1-aktywacja
+    * @return Kod błędu, 0 w przypadku sukcesu
+    */
+    errno_t SetDexterousHandsAct(int id, int act);
+            
+Czyszczenie Błędu Dłoni
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    
+.. code-block:: c++
+    :linenos:
+
+    /**
+    * @brief Czyszczenie błędu dłoni
+    * @return Kod błędu, 0 w przypadku sukcesu
+    */
+    errno_t ClearDexterousHandsError();
+                
+Ustawianie Włączonych Funkcji Sterowania Ruchem Dłoni
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    
+.. code-block:: c++
+    :linenos:
+
+    /**
+    * @brief Ustawia włączone funkcje sterowania ruchem dłoni
+    * @param [in] id Numer urządzenia dłoni
+    * @param [in] func 0-wyzwolenie chwytu, 1-inicjalizacja chwytaka, 2-ustawienie pozycji, 3-ustawienie prędkości, 4-ustawienie momentu obrotowego, 6-odczyt stanu chwytaka, 7-odczyt stanu inicjalizacji, 8-odczyt kodu błędu, 9-odczyt pozycji, 10-odczyt prędkości, 11-odczyt momentu obrotowego, 12-ustawienie liczby obrotów, 13-ustawienie prędkości obrotowej, 14-ustawienie momentu obrotowego obrotu, 15-odczyt stanu chwytaka obrotowego, 16-odczyt stanu inicjalizacji obrotu, 17-odczyt liczby obrotów, 18-odczyt prędkości obrotowej, 19-odczyt momentu obrotowego obrotu, 20-ustawienie ruchu synchronicznego wieloosiowego, 21-komenda kasowania błędów, 22-stan pracy pojedynczej osi, 23-stan pracy wszystkich osi
+    * @return Kod błędu
+    */
+    errno_t SetDexterousHandsFunc(int id, int func[32]);
+                    
+Pobieranie Włączonych Funkcji Sterowania Ruchem Dłoni
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    
+.. code-block:: c++
+    :linenos:
+
+    /**
+    * @brief Pobiera włączone funkcje sterowania ruchem dłoni
+    * @param [in] id Numer urządzenia dłoni
+    * @param [out] func 0-wyzwolenie chwytu, 1-inicjalizacja chwytaka, 2-ustawienie pozycji, 3-ustawienie prędkości, 4-ustawienie momentu obrotowego, 6-odczyt stanu chwytaka, 7-odczyt stanu inicjalizacji, 8-odczyt kodu błędu, 9-odczyt pozycji, 10-odczyt prędkości, 11-odczyt momentu obrotowego, 12-ustawienie liczby obrotów, 13-ustawienie prędkości obrotowej, 14-ustawienie momentu obrotowego obrotu, 15-odczyt stanu chwytaka obrotowego, 16-odczyt stanu inicjalizacji obrotu, 17-odczyt liczby obrotów, 18-odczyt prędkości obrotowej, 19-odczyt momentu obrotowego obrotu, 20-ustawienie ruchu synchronicznego wieloosiowego, 21-komenda kasowania błędów, 22-stan pracy pojedynczej osi, 23-stan pracy wszystkich osi
+    * @return Kod błędu
+    */
+    errno_t GetDexterousHandsFunc(int id, int func[32]);
+                        
+Przykład Kodu Konfiguracji i Ruchu Dłoni na Końcówce Robota
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    
+.. code-block:: c++
+    :linenos:
+
+    int TestDexterousHands()
+    {
+    ROBOT_STATE_PKG pkg = {};
+    FRRobot robot;
+    robot.LoggerInit();
+    robot.SetLoggerLevel(1);
+    int rtn = robot.RPC("192.168.58.2");
+    if (rtn != 0)
+    {
+        return -1;
+    }
+    robot.SetReConnectParam(true, 30000, 500);
+    int id = 1;        // Numer stacji podrzędnej
+    int slaveNum = 4;     // Steruje 4 palcami
+    int max_time = 8000;   // Maksymalny czas oczekiwania 8 sekund
+    int speed[16] = {0};   // Tablica prędkości, wszystkie 0 oznacza użycie domyślnej prędkości
+    int force[16] = {0};   // Tablica momentu obrotowego
+    // Inicjalizacja tablicy momentu: pierwsze 4 palce ustawione na 50%, reszta 0 (wartości wysyłane przez komendę Move)
+    for (int i = 0; i < 16; i++)
+    {
+        force[i] = (i < 4) ? 50 : 0;
+    }
+    // Funkcja pomocnicza: ustawienie tablicy pozycji (tylko pierwsze 4 palce są skuteczne)
+    double pos[16] = {0.0};
+    JointPos j1(-91.876, -85.920, 109.279, -86.239, -96.664, -28.563);
+    JointPos j2(-40.954, -85.920, 109.279, -86.239, -96.664, -28.563);
+    ExaxisPos epos(0, 0, 0, 0);
+    DescPose offset_pos(0, 0, 0, 0, 0, 0);
+    printf("===== Rozpoczęto pełny test funkcji dłoni =====\n");
+    // 1. Wyczyść błąd
+    int ret = robot.ClearDexterousHandsError();
+    printf("ClearDexterousHandsError rtn %d\n", ret);
+    // ========== 2. Ustaw przełączniki funkcji ==========
+    int setFunc[32] = {0};
+    setFunc[2] = 1;  // Włącz funkcję ustawiania pozycji
+    setFunc[4] = 1;  // Włącz funkcję ustawiania momentu obrotowego
+    setFunc[9] = 1;  // Odczyt pozycji
+    setFunc[10] = 1;  // Odczyt momentu obrotowego
+    setFunc[11] = 1;  // Odczyt statusu
+    setFunc[22] = 1;  // Status ruchu pojedynczej osi
+    ret = robot.SetDexterousHandsFunc(id, setFunc);
+    printf("SetDexterousHandsFunc(włączono init + funkcje pozycji/momentu) rtn %d\n", ret);
+    // ========== 3. Odczyt statusu funkcji (weryfikacja, czy ustawienia zostały zastosowane) ==========
+    int getFunc[32] = {0}; // GetDexterousHandsFunc zwraca 32 liczby całkowite
+    ret = robot.GetDexterousHandsFunc(id, getFunc);
+    printf("GetDexterousHandsFunc rtn %d\n", ret);
+    if (ret == 0)
+    {
+        // Wyświetl wszystkie 32 wartości
+        printf("Wszystkie 32 wartości zwrócone przez GetDexterousHandsFunc:");
+        for (int i = 0; i < 32; i++)
+        {
+        printf(" [%d]={%d}", i, getFunc[i]);
+        if ((i + 1) % 8 == 0)
+        {
+            printf("\n");
+        } 
+        else if (i < 31)
+        {
+            printf(", ");
+        }
+        }
+    }
+    // ========== 4. Aktywuj dłoń ==========
+    ret = robot.SetDexterousHandsAct(id, 1);
+    printf("SetDexterousHandsAct(aktywacja) rtn %d\n", ret);
+    if (ret != 0)
+    {
+        printf("Aktywacja nie powiodła się, test przerwany");
+        return -1;
+    }
+    // ========== 5. Początkowy ruch do 20° (wysyłanie wartości pozycji i momentu przez komendę Move) ==========
+    memset(pos, 0, sizeof(pos));
+    pos[0] = 20;
+    pos[1] = 20;
+    pos[2] = 20;
+    pos[3] = 20;
+    ret = robot.SetDexterousHandsMove(id, slaveNum, pos, speed, force, max_time);
+    printf("Początkowy ruch do 20° -> %d\n", ret);
+    robot.Sleep(5000);
+    // ========== 6. Ruch wahadłowy 10 razy (10° ↔ 50°) ==========
+    printf("Rozpoczynanie 10 ruchów wahadłowych...");
+    for (int iteration = 1; iteration <= 10; iteration++)
+    {
+        robot.MoveJ(&j1, 0, 0, 100, 100, 100, &epos, -1, 0, &offset_pos);
+        memset(pos, 0, sizeof(pos));
+        pos[0] = 10;
+        pos[1] = 10;
+        pos[2] = 10;
+        pos[3] = 10;
+        ret = robot.SetDexterousHandsMove(id, slaveNum, pos, speed, force, max_time);
+        printf("Ruch do 10° -> %d\n", ret);
+        robot.Sleep(1000);
+        robot.MoveJ(&j2, 0, 0, 100, 100, 100, &epos, -1, 0, &offset_pos);
+        memset(pos, 0, sizeof(pos));
+        pos[0] = 50;
+        pos[1] = 50;
+        pos[2] = 50;
+        pos[3] = 50;
+        ret = robot.SetDexterousHandsMove(id, slaveNum, pos, speed, force, max_time);
+        printf("Ruch do 50° -> %d\n", ret);
+        robot.Sleep(1000);
+    }
+    printf("Test zakończony (ustawienie/odczyt przełączników funkcji + aktywacja + 10 ruchów wahadłowych).");
+    return 0;
     }

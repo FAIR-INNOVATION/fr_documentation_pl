@@ -217,7 +217,7 @@ Typ struktury informacji zwrotnej o stanie robota
 
         public byte EmergencyStop;          // Znacznik awaryjnego zatrzymania, 0-niewciśnięty, 1-wciśnięty
         public int motion_done;             // Sygnał osiągnięcia pozycji, 1-osiągnięto, 0-nie osiągnięto
-        public byte gripper_motiondone;     // Sygnał zakończenia ruchu chwytaka, 1-zakończono, 0-nie zakończono
+        public byte gripper_motiondone;     // Sygnał zakończenia ruchu chwytaka, 0-nie zakończono, 1-zakończono (nie wykryto obiektu), 2-ruch zakończony (wykryto obiekt)
         public int mc_queue_len;            // Długość kolejki instrukcji ruchu
         public byte collisionState;         // Wykrywanie kolizji, 1-kolizja, 0-brak kolizji
         public int trajectory_pnum;         // Numer punktu trajektorii

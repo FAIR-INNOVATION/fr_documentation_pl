@@ -465,6 +465,122 @@ Chwytak obrotowy
 
 .. note:: Liczba obrotów to absolutna liczba obrotów. Maksymalna liczba obrotów w przód to 90, maksymalna liczba obrotów w tył to 90. Po wykonaniu obrotu należy wykonać reset.
 
+Funkcja Wykrywania Upadku Przedmiotu Chwytaka
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Instrukcje Konfiguracji
+++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Użytkownicy mogą modyfikować otwarty protokół końcówki, aby odczytać wartość rejestru alarmu upadku chwytaka i przesłać ją z powrotem do robota. Gdy chwytak ustawi ten błąd, robot jednocześnie uruchomi błąd "Alarm Upadku Przedmiotu Chwytaka".
+
+Na przykładzie chwytaka Junduo, poniżej przedstawiono przykład dodania wykrywania upadku chwytaka do otwartego protokołu końcówki. Ten kod odczytuje bit 1 rejestru 0x07D0 chwytaka. Gdy ten bit jest ustawiony na 1, flaga upadku przedmiotu jest wyzwalana, a GripState otrzymuje wartość 3 i jest przekazywana do robota, uruchamiając błąd "Alarm Upadku Przedmiotu Chwytaka".
+
+W przypadku problemów podczas tworzenia, prosimy o kontakt z naszą firmą w celu uzyskania wsparcia technicznego.
+
+.. centered:: Przykład Dodania Logiki Wykrywania Upadku Chwytaka Junduo do Otwartego Protokołu Końcówki
+
+.. code-block:: console
+    :linenos:  
+
+    ……
+    local T5 = {0x01,0x03,0x07,0xD0,0x00,0x01,0x84,0x87}
+    ……
+    if (Rcmd3 == 7) then
+    T5[7], T5[8] = CrcValue(T5[1], T5[2], T5[3], T5[4], T5[5], T5[6])
+    EndTxGripData(T5[1], T5[2], T5[3], T5[4], T5[5], T5[6], T5[7], T5[8])
+    DelayMs(10)
+    a, Rxd1, Rxd2, Rxd3, Rxd4, Rxd5, Rxd6, Rxd7 = EndRxGripData()
+    RxdCrcH, RxdCrcL = CrcValue(Rxd1, Rxd2, Rxd3, Rxd4, Rxd5)
+    if ((a == 8) and (Rxd1 == Rcmd2) and (Rxd2 == 0x03) and (Rxd3 == 0x02) and (Rxd6 == RxdCrcH) and (Rxd7 == RxdCrcL)) then
+    local Fall = ((Rxd5 & 0x02) >> 1)
+    Rxd5 = ((Rxd5 & 0xC0) >> 6)
+    if(Fall == 0)then
+    if (Rxd5 == 0x00) then
+    GripState = 0x00
+    elseif (Rxd5 == 0x03) then
+    GripState = 0x01
+    elseif ((Rxd5 == 0x01) or (Rxd5 == 0x02)) then
+    GripState = 0x02
+    end
+    else
+    GripState = 0x03
+    end
+    GripStateBack(GripState)
+    end
+    end
+
+Na podstawie protokołu końcówki z dodaną logiką wykrywania upadku, przejdź do "Ustawienia Początkowe" -> "Urządzenia Perferyjne" -> "Chwytak", aby przesłać, zaktualizować i zastosować otwarty protokół LUA końcówki.
+
+.. figure:: robot_peripherals/316.png
+   :align: center
+   :width: 6in
+
+.. centered:: Rysunek 8.2‑13 Przesyłanie Protokołu Końcówki Chwytaka
+
+Po ponownym uruchomieniu robota chwytak może być używany normalnie. Jeśli podczas używania chwytaka nastąpi upadek przedmiotu, robot zgłosi "Przedmiot chwytaka upadł, proszę zresetować i ponownie aktywować chwytak", a robot jednocześnie zatrzyma bieżący ruch i bieżący program LUA.
+
+Kody błędów głównych i podrzędnych portów 8083 i 20004 zmienią się na 8-3, a odpowiadający im kod błędu chwytaka wynosi 3. Dla innych kodów błędów przesyłanych przez sam chwytak, kontroler doda 3 do oryginalnego kodu błędu.
+
+.. figure:: robot_peripherals/317.png
+   :align: center
+   :width: 3in
+
+.. centered:: Rysunek 8.2‑14 Błąd "Przedmiot Chwytaka Upadł"
+ 
+Należy pamiętać, że po wyczyszczeniu tego błędu użytkownik musi ręcznie wysłać polecenia "Reset Chwytaka" i "Aktywuj Chwytak", aby wyczyścić flagę upadku w rejestrze chwytaka. Można to zrobić za pomocą przycisków na stronie lub poleceń LUA; w przeciwnym razie błąd nadal będzie zgłaszany przy następnym uruchomieniu.
+
+.. figure:: robot_peripherals/318.png
+   :align: center
+   :width: 6in
+
+.. centered:: Rysunek 8.2‑15 Resetowanie i Aktywowanie Chwytaka przez Stronę
+
+.. figure:: robot_peripherals/319.png
+   :align: center
+   :width: 6in
+
+.. centered:: Rysunek 8.2‑16 Resetowanie i Aktywowanie Chwytaka za pomocą Poleceń LUA
+
+Ponadto chwytak Junduo udostępnia rejestr progu wykrywania upadku pod adresem 0x1399, który należy modyfikować za pomocą polecenia 0x10. Zakres modyfikacji wynosi 0~1000. Protokół końcówki dostarczony w tym dokumencie może zmienić wartość tego rejestru. Pierwszy zapis po każdym uruchomieniu protokołu zapisuje tę wartość (0x14, można modyfikować w zależności od potrzeb). Przykład pokazano poniżej w 2-2. W celu uzyskania szczegółowych informacji o użyciu, skontaktuj się z producentem chwytaka Junduo.
+
+.. centered:: Przykład Dodania Modyfikacji Progu Upadku Chwytaka Junduo do Otwartego Protokołu Końcówki
+
+.. code-block:: console
+    :linenos:  
+
+    ……
+    local T10 = {0x01,0x10,0x13,0x99,0x00,0x01,0x02,0x00,0x14,0x00,0x00}
+    ……
+    if Set == 0 then
+    T10[10],T10[11]= CrcValue(T10[1],T10[2],T10[3],T10[4],T10[5],T10[6],T10[7],T10[8],T10[9])
+    EndTxGripData(T10[1],T10[2],T10[3],T10[4],T10[5],T10[6],T10[7],T10[8],T10[9],T10[10],T10[11])
+    DelayMs(35)
+    a,Rxd1, Rxd2, Rxd3, Rxd4, Rxd5,Rxd6,Rxd7,Rxd8 = EndRxGripData()
+    Set=1
+    end
+
+Załącznik 1: Błędy Kontrolera Ruchu i Metody Postępowania
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. centered:: Tabela Kodów Błędów Kontrolera Ruchu
+
+.. list-table:: 
+   :widths: 15 40 100
+   :header-rows: 1
+
+   * - Główny Kod Błędu
+     - Podrzędny Kod Błędu
+     - Opis
+   * - 8-Błąd Urządzenia Końcówki
+     - 1
+     - Błąd timeoutu ruchu chwytaka, możliwy do zresetowania
+   * - 8-Błąd Urządzenia Końcówki
+     - 2
+     - Timeout komunikacji 485 końcówki, możliwy do zresetowania
+   * - 8-Błąd Urządzenia Końcówki
+     - 3
+     - Alarm upadku przedmiotu chwytaka, możliwy do zresetowania. Po wyczyszczeniu błędu, proszę zresetować i ponownie aktywować chwytak
+
 Czujnik siły
 ------------
 
@@ -7034,3 +7150,117 @@ Przykład skryptu Lua napisanego dla głowicy terapeutycznej Beiyikang
     --***
     LuaGc()
     end
+
+Funkcja Zręcznej Dłoni
+---------------------------------------------------------------------
+
+Przegląd
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Otwarty protokół LUA końcówki dodaje następujące funkcje:
+
+1. Otwarty protokół LUA końcówki dostosowuje się do zręcznej dłoni, aby umożliwić synchroniczny ruch stawów zręcznej dłoni.
+2. Dodano funkcję wysyłania synchronicznych poleceń do wielu urządzeń podrzędnych w celu jednoczesnej reakcji wielu silników podrzędnych.
+
+Konfiguracja Środowiska
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Wersja Firmware Końcówki: FR_END_FV201013_MAIN_U1_T01_20260407
+
+Wersja Oprogramowania Robota: V3.9.7 i nowsze
+
+Instrukcje Operacyjne Dotyczące Zręcznej Dłoni
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Konfiguracja Zręcznej Dłoni
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+1. Otwórz WebApp, przejdź do Ustawienia Początkowe -> Urządzenia Perferyjne -> Zręczna Dłoń -> Zarządzanie Protokołami, prześlij plik Lua zręcznej dłoni, wybierz przesłany plik i kliknij przycisk "Zastosuj". Po komunikacie o pomyślnej aktualizacji uruchom ponownie szafę sterowniczą.
+
+.. figure:: robot_peripherals/306.png
+   :align: center
+   :width: 6in
+
+.. centered:: Rysunek 8.19‑1 Zarządzanie Protokołami
+
+2. Otwórz WebApp, przejdź do Ustawienia Początkowe -> Urządzenia Perferyjne -> Zręczna Dłoń -> Parametry Komunikacji, skonfiguruj parametry komunikacji, w tym prędkość transmisji, bity danych, bity stopu itp., a po zakończeniu kliknij przycisk "Konfiguruj".
+
+.. figure:: robot_peripherals/307.png
+   :align: center
+   :width: 6in
+
+.. centered:: Rysunek 8.19‑2 Konfiguracja Parametrów Komunikacji
+
+Szczegółowe parametry komunikacji końcówki są następujące:
+
+- **Prędkość Transmisji**: Obsługuje 1-9600, 2-14400, 3-19200, 4-38400, 5-56000, 6-67600, 7-115200, 8-128000; układ drivera Rs485 końcówki to wolny 485, prędkość transmisji nie może przekraczać 200k;
+- **Bity Danych**: Obsługuje (8, 9), obecnie najczęściej używane jest 8;
+- **Bity Stopu**: 1-1, 2-0.5, 3-2, 4-1.5, obecnie najczęściej używane jest 1;
+- **Parzystość**: 0-Brak, 1-Nieparzysta, 2-Parzysta, obecnie najczęściej używane jest 0;
+- **Czas Timeout**: 1~1000ms, wartość ta musi być rozsądnie ustawiona w połączeniu z urządzeniami peryferyjnymi;
+- **Liczba Prób Timeout**: 1~10, głównie do ponownego wysyłania w przypadku timeoutu, aby zmniejszyć sporadyczne anomalie i poprawić doświadczenie użytkownika;
+- **Interwał Poleceń Okresowych**: 1~1000ms, głównie dla odstępu czasu między każdym wysłaniem polecenia okresowego;
+
+3. Otwórz WebApp, przejdź do Ustawienia Początkowe -> Urządzenia Perferyjne -> Zręczna Dłoń -> Aktywacja Protokołu Końcówki, aktywuj protokół końcówki, uruchom urządzenie zręcznej dłoni i skonfiguruj odpowiednie kody funkcyjne dla zręcznej dłoni.
+
+.. figure:: robot_peripherals/308.png
+   :align: center
+   :width: 6in
+
+.. figure:: robot_peripherals/309.png
+   :align: center
+   :width: 6in
+
+.. centered:: Rysunek 8.19‑3 Odpowiednie Kody Funkcyjne Zręcznej Dłoni
+
+4. Obecnie zdefiniowane kody funkcyjne otwartego protokołu LUA końcówki są pokazane na poniższych rysunkach.
+
+.. figure:: robot_peripherals/310.png
+   :align: center
+   :width: 6in
+
+.. figure:: robot_peripherals/311.png
+   :align: center
+   :width: 6in
+
+.. centered:: Rysunek 8.19‑4 Kody Funkcyjne Otwartego Protokołu
+
+.. note:: Zręczna dłoń musi obsługiwać odczyt kodów funkcyjnych związanych ze stanem pracy, aby umożliwić zapytanie o stan ruchu.
+  
+Sterowanie Ruchem Zręcznej Dłoni
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+1. Otwórz WebApp, przejdź do Program Nauczania -> Interfejs Programowania i otwórz polecenia peryferyjne zręcznej dłoni.
+
+.. figure:: robot_peripherals/312.png
+   :align: center
+   :width: 4in
+
+.. centered:: Rysunek 8.19‑5 Polecenia Peryferyjne Zręcznej Dłoni
+   
+2. Kliknij Aktywuj, wybierz odpowiedni adres początkowy zręcznej dłoni i dodaj odpowiednie polecenie aktywacji.
+
+.. figure:: robot_peripherals/313.png
+   :align: center
+   :width: 6in
+
+.. centered:: Rysunek 8.19‑6 Polecenie Aktywacji Zręcznej Dłoni
+
+3. Kliknij Sterowanie, wypełnij dane pozycji, prędkości i momentu obrotowego wymagane dla ruchu pojedynczego urządzenia podrzędnego zręcznej dłoni, wypełnij maksymalny czas timeoutu i dodaj odpowiednie polecenie sterowania.
+
+.. figure:: robot_peripherals/314.png
+   :align: center
+   :width: 6in
+
+.. centered:: Rysunek 8.19‑7 Polecenie Sterowania Zręcznej Dłoni
+
+Monitorowanie Danych Zręcznej Dłoni
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Otwórz WebApp, przejdź do Ustawienia Początkowe -> Urządzenia Perferyjne -> Zręczna Dłoń -> Aktywacja Protokołu Końcówki i włącz monitorowanie stanu. Po wysłaniu poleceń sterowania, w interfejsie Dexterous po prawej stronie można uzyskać dane zwrotne w czasie rzeczywistym dotyczące pozycji, prędkości i momentu obrotowego pojedynczego urządzenia podrzędnego zręcznej dłoni.
+
+.. figure:: robot_peripherals/315.png
+   :align: center
+   :width: 6in
+
+.. centered:: Rysunek 8.19‑8 Dane Zwrotne w Czasie Rzeczywistym Zręcznej Dłoni    

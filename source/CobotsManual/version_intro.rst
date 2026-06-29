@@ -1,3 +1,45 @@
+Wersja V3.9.7
+-----------------
+
+Data: 2026-06-25
+
+- **Zoptymalizowano japoński pakiet językowy oprogramowania**:
+
+    Opis: Zoptymalizowano zawartość tłumaczenia japońskiego pakietu językowego.
+
+- **Zoptymalizowano parametry ścieżki dla programów LUA robota**:
+
+    Opis: Wejście pliku wymaga teraz tylko nazwy; ścieżka nie jest już potrzebna.
+
+- **Zoptymalizowano funkcję splotu (weaving) dla nowych przejść spline-linia-łuk**:
+    Ścieżka: Aplikacje Pomocnicze -> Pakiet Procesów -> Biblioteka Eksperta Spawalniczego -> Nowe Spawanie z Splotem na Spline.
+
+    Opis: Dostosowano funkcję splotu do nowej funkcji przejścia spline-linia-łuk.
+
+- **Zoptymalizowano funkcję ochrony miękkich ograniczeń (soft limit) przegubów**:
+    Ścieżka: Ustawienia Początkowe -> Podstawowe -> Przeguby -> Miękkie Ograniczenia.
+
+    Opis: Zoptymalizowano współczynniki sztywności i tłumienia dla miękkich ograniczeń każdego przegubu.
+
+- **Dodano funkcję drukowania (print) dla programów LUA robota**:
+    Ścieżka: Program Teach Pendant -> Funkcja Drukowania.
+
+    Opis: Podgląd w czasie rzeczywistym niestandardowych informacji drukowanych z programów LUA.
+
+- **Dodano adapter Lua dla końcówki robota do trójpalczastej dłoni**:
+    Ścieżka: Ustawienia Początkowe -> Urządzenia PerYferyjne -> Przyssawka.
+
+    Opis: 1. Dodano adapter dla przyssawki i trójpalczastej dłoni na końcówce robota; 2. Zoptymalizowano istniejący otwarty protokół Lua dla końcówki robota.
+
+- **Dodano funkcję zgłaszania błędów przy upadku przedmiotu z chwytaka**:
+    Ścieżka: Ustawienia Początkowe -> Urządzenia PerYferyjne -> Chwytak.
+
+    Opis: Dodano zgłaszanie błędu przy upadku detalu z chwytaka; ruch zostaje zatrzymany po zgłoszeniu.
+
+- **Dodano funkcję sprzężenia zwrotnego dla zadziałania zabezpieczenia przed zwarciem 24V w module DO szafy sterowniczej szerokiego napięcia**:
+
+    Opis: Dodano zabezpieczenie przed zwarciem i komunikat błędu.
+
 Wersja V3.9.6
 -------------
 

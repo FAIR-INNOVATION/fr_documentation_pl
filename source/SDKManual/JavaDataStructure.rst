@@ -397,7 +397,7 @@ Typ struktury sprzężenia zwrotnego stanu robota
         public int ft_sensor_active;                // stan aktywacji czujnika siły
         public int EmergencyStop;                   // stan awaryjnego zatrzymania
         public int motion_done;                     // ruch zakończony
-        public int gripper_motiondone;              // ruch chwytaka zakończony
+        public int gripper_motiondone;              // Sygnał zakończenia ruchu chwytaka, 0-nie zakończono, 1-zakończono (nie wykryto obiektu), 2-ruch zakończony (wykryto obiekt)
         public int mc_queue_len;                    // długość kolejki ruchu
         public int collisionState;                  // stan kolizji
         public int trajectory_pnum;                 // numer punktu trajektorii

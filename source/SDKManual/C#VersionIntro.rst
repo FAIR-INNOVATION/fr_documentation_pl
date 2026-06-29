@@ -13,6 +13,36 @@ Informacje o aktualizacji wersji
      - **Data**
      - **Opis aktualizacji**
 
+   * - V3.9.7
+     - 2026-06-25
+     - | 1. Dodano błąd alarmu upadku przedmiotu z chwytaka, główny kod błędu 8, podkod błędu 3.
+       | 2. Zaktualizowano strukturę zwrotną statusu robota: dodano status wykrycia obiektu do sygnału zakończenia ruchu chwytaka; dodano do błędów chwytaka: 2-błąd komendy, 3-upadek przedmiotu, inne-kod błędu chwytaka +3;
+       | 3. Zaktualizowano przykłady kodu dla resetu wyjścia po zatrzymaniu/pauzie programu LUA; zoptymalizowano interfejs ładowania plików lua, wymagający teraz tylko nazwy pliku lua, bez potrzeby podawania ścieżki.
+       | 4. Zaktualizowano przykłady kodu dla kalibracji TCP czujnika fotoelektrycznego; zoptymalizowano interfejs ładowania plików, wymagający teraz tylko nazwy pliku lua, bez potrzeby podawania ścieżki.
+       | 5. Zaktualizowano przykłady kodu dla ustawiania prędkości podczas wykonywania trajektorii; zoptymalizowano interfejs ładowania plików trajektorii J, wymagający teraz tylko nazwy pliku trajektorii J, bez potrzeby podawania ścieżki.
+       | 6. Zaktualizowano przykłady kodu dla odtwarzania pliku trajektorii J robota; zoptymalizowano interfejs ładowania plików trajektorii J, wymagający teraz tylko nazwy pliku trajektorii J, bez potrzeby podawania ścieżki.
+       | 7. Zaktualizowano przykłady kodu dla odtwarzania trajektorii (look-ahead); zoptymalizowano interfejs ładowania plików trajektorii J, wymagający teraz tylko nazwy pliku trajektorii J, bez potrzeby podawania ścieżki.
+       | 8. Parametr nazwy programu zadania w interfejsie LoadDefaultProgConfig() wymaga teraz tylko nazwy pliku lua, bez potrzeby podawania ścieżki.
+       | 9. Parametr nazwy programu zadania w interfejsie ProgramLoad() wymaga teraz tylko nazwy pliku lua, bez potrzeby podawania ścieżki.
+       | 10. Parametr nazwy programu zadania w interfejsie GetLoadedProgram() wymaga teraz tylko nazwy pliku lua, bez potrzeby podawania ścieżki.
+       | 11. Zaktualizowano przykłady kodu dla operacji na programach LUA robota; zoptymalizowano interfejs ładowania plików, wymagający teraz tylko nazwy pliku lua, bez potrzeby podawania ścieżki.
+       | 12. Dodano parametr statusu włączenia dłoni do interfejsu SetAxleLuaEnableDeviceType();
+       | 13. Dodano parametr statusu włączenia dłoni do interfejsu GetAxleLuaEnableDeviceType();
+       | 14. Dodano parametr statusu numeru włączonego urządzenia dłoni do interfejsu GetAxleLuaEnableDevice();
+       | 15. Rozszerzono tablicę kodów funkcji chwytaka do 32 w SetAxleLuaGripperFunc(), dodano sterowanie chwytakiem obrotowym, itp.;
+       | 16. Rozszerzono tablicę kodów funkcji chwytaka do 32 w GetAxleLuaGripperFunc(), dodano status chwytaka obrotowego, itp.;
+       | 17. Poprawiono błąd nazwy interfejsu SetCoderCompenParams();
+       | 18. Dodano interfejs SetDexterousHandsMove() do sterowania ruchem dłoni.
+       | 19. Dodano interfejs SetDexterousHandsAct() do sterowania resetem i aktywacją dłoni.
+       | 20. Dodano interfejs ClearDexterousHandsError() do czyszczenia błędów dłoni.
+       | 21. Dodano interfejs SetDexterousHandsFunc() do ustawiania włączonych funkcji sterowania ruchem dłoni.
+       | 22. Dodano interfejs GetDexterousHandsFunc() do pobierania włączonych funkcji sterowania ruchem dłoni.
+       | 23. Dodano interfejs FT_LinInsertion() do wstawiania liniowego oraz przykłady kodu dla wstawiania rotacyjnego z czujnikiem siły.
+       | 24. Dodano interfejsy FT_FindSurface(), FT_CalCenterStart(), FT_CalCenterEnd() do pozycjonowania powierzchni oraz powiązane przykłady kodu.
+       | 25. Dodano SetWeaveBackCenterConfig(), GetWeaveBackCenterConfig() do ustawiania i pobierania parametrów powrotu do punktu zerowego cyklu po zakończeniu splotu.
+       | 26. Dodano interfejs SetWeaveOffsetRT() do ustawiania przesunięcia splotu w czasie rzeczywistym;
+       | 27. Dodano interfejs SetSpeedInstant() do ustawiania prędkości w czasie rzeczywistym;
+
    * - V3.9.6
      - 2026-05-26
      - | 1. Aktualizacja struktury sprzężenia zwrotnego stanu robota, dodano stan numeru układu współrzędnych osi rozszerzenia;

@@ -1267,4 +1267,4 @@ Włączanie funkcji kompensacji momentu i współczynnik kompensacji
     * @param [in] torqueCoeff Współczynniki kompensacji momentu dla J1-J6 [0-1]
     * @return Kod błędu
     */
-    errno_t SerCoderCompenParams(int status, double torqueCoeff[6]);
+    errno_t SetCoderCompenParams(int status, double torqueCoeff[6]);

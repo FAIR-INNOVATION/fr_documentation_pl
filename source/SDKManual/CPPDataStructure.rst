@@ -204,7 +204,7 @@ Pakiet informacji zwrotnej o stanie kontrolera
       uint8_t ft_sensor_active;  // Stan aktywacji czujnika siły i momentu, 0-reset, 1-aktywacja 
       uint8_t EmergencyStop;   // Znacznik awaryjnego zatrzymania, 0-niewciśnięty, 1-wciśnięty 
       int   motion_done;    // Sygnał osiągnięcia pozycji, 1-osiągnięto, 0-nie osiągnięto 
-      uint8_t gripper_motiondone; // Sygnał zakończenia ruchu chwytaka, 1-zakończono, 0-nie zakończono 
+      uint8_t gripper_motiondone; // Sygnał zakończenia ruchu chwytaka, 0-nie zakończono, 1-zakończono (nie wykryto obiektu), 2-ruch zakończony (wykryto obiekt)
       int   mc_queue_len;    // Długość kolejki instrukcji ruchu 
       uint8_t collisionState;   // Wykrywanie kolizji, 1-kolizja, 0-brak kolizji 
       int   trajectory_pnum;  // Numer punktu trajektorii 

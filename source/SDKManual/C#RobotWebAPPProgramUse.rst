@@ -12,7 +12,7 @@ Ustawienie automatycznego ładowania domyślnego programu roboczego przy starcie
     /**
     * @brief  Ustawia automatyczne ładowanie domyślnego programu roboczego przy starcie
     * @param  [in] flag  0-nie ładuj automatycznie domyślnego programu przy starcie, 1-ładuj automatycznie domyślny program przy starcie
-    * @param  [in] program_name Nazwa i ścieżka programu roboczego, np. "/fruser/movej.lua", gdzie "/fruser/" to stała ścieżka dla QX, a "/usr/local/etc/controller/lua/" to stała ścieżka dla LA
+    * @param  [in] program_name Nazwa i ścieżka programu roboczego, np. "movej.lua"
     * @return  Kod błędu
     */
     int LoadDefaultProgConfig(byte flag, string program_name); 
@@ -24,7 +24,7 @@ Ustawienie automatycznego ładowania domyślnego programu roboczego przy starcie
 
     /**
     * @brief  Ładuje określony program roboczy
-    * @param  [in] program_name Nazwa i ścieżka programu roboczego, np. "/fruser/movej.lua", gdzie "/fruser/" to stała ścieżka dla QX, a "/usr/local/etc/controller/lua/" to stała ścieżka dla LA
+    * @param  [in] program_name Nazwa i ścieżka programu roboczego, np. "movej.lua"
     * @return  Kod błędu
     */
     int ProgramLoad(string program_name); 
@@ -36,7 +36,7 @@ Pobranie nazwy załadowanego programu roboczego
 
     /**
     * @brief  Pobiera nazwę załadowanego programu roboczego
-    * @param  [out] program_name Nazwa i ścieżka programu roboczego, np. "/fruser/movej.lua", gdzie "/fruser/" to stała ścieżka dla QX, a "/usr/local/etc/controller/lua/" to stała ścieżka dla LA
+    * @param  [out] program_name Nazwa i ścieżka programu roboczego, np. "movej.lua"
     * @return  Kod błędu
     */
     int GetLoadedProgram(ref string program_name); 
@@ -116,7 +116,7 @@ Przykład kodu operacji na programie LUA robota
 
     private void btnWebApp_Click(object sender, EventArgs e)
     {
-        string program_name = "/fruser/Text1.lua";
+        string program_name = "Text1.lua";
         string loaded_name = "";
         byte state=0;
         int line=0;

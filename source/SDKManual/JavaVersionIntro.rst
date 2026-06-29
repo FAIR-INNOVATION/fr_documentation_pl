@@ -13,6 +13,25 @@ Informacje o aktualizacji wersji
      - **Data**
      - **Opis aktualizacji**
 
+   * - V3.9.7
+     - 2026-06-25
+     - | 1. Parametry PhotoelectricSensorTCPCalibration() mogą teraz dostosowywać się do nazw plików bez ścieżki;
+       | 2. Parametry LoadTrajectoryJ() mogą teraz dostosowywać się do nazw plików bez ścieżki;
+       | 3. Parametry LoadTrajectoryLA() mogą teraz dostosowywać się do nazw plików bez ścieżki;
+       | 4. Parametry LoadDefaultProgConfig() mogą teraz dostosowywać się do nazw plików bez ścieżki;
+       | 5. Parametry ProgramLoad() mogą teraz dostosowywać się do nazw plików bez ścieżki;
+       | 6. Dodano parametr statusu włączenia dłoni do interfejsu SetAxleLuaEnableDeviceType();
+       | 7. Dodano parametr statusu włączenia dłoni do interfejsu GetAxleLuaEnableDeviceType();
+       | 8. Zmodyfikowano interfejsy do pobierania typów włączenia urządzeń końcówki aktualnie skonfigurowanych oraz sterowania ruchem chwytaka;
+       | 9. Dodano włączenie i kody funkcji dla dłoni;
+       | 10. Dodano interfejs SetDexterousHandsMove() do sterowania ruchem dłoni;
+       | 11. Dodano interfejs SetDexterousHandsAct() do sterowania resetem i aktywacją dłoni;
+       | 12. Dodano interfejs ClearDexterousHandsError() do czyszczenia błędów dłoni;
+       | 13. Dodano interfejs SetDexterousHandsFunc() do ustawiania włączonych funkcji sterowania ruchem dłoni;
+       | 14. Dodano interfejs GetDexterousHandsFunc() do pobierania włączonych funkcji sterowania ruchem dłoni;
+       | 15. Dodano interfejsy do ustawiania i pobierania parametrów powrotu do punktu zerowego cyklu po zakończeniu splotu;
+       | 16. Dodano interfejs SetWeaveOffsetRT() do ustawiania przesunięcia splotu w czasie rzeczywistym oraz interfejs SetSpeedInstant() do ustawiania prędkości w czasie rzeczywistym.
+
    * - V3.9.6
      - 2026-05-26
      - | 1. Aktualizacja struktury sprzężenia zwrotnego stanu robota, dodano stan numeru układu współrzędnych osi rozszerzenia;

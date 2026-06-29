@@ -478,7 +478,7 @@ Przykład kodu resetowania wyjść po zatrzymaniu/wstrzymaniu programu LUA
         robot.SetOutputResetExtAO(resetFlag, resumeReloadFlag);
         robot.SetOutputResetSmartToolDO(resetFlag, resumeReloadFlag);
 
-        robot.ProgramLoad("/fruser/test.lua");
+        robot.ProgramLoad("test.lua");
         robot.ProgramRun();
 
         Thread.Sleep(2000);

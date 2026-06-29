@@ -857,26 +857,26 @@ Pobieranie stanu włączenia wykonania LUA końcowego
     "Wartość zwracana", "- Kod błędu sukces-0 błąd- errcode 
     - ``enable``: 0-niewłączony; 1-włączony"
 
-Ustawianie typu włączenia urządzenia końcowego LUA
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
+Ustawianie włączonych typów urządzeń końcówki dla LUA
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: python SDK-v2.0.5
 
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototyp", "``SetAxleLuaEnableDeviceType(forceSensorEnable, gripperEnable, IOEnable)``"
-    "Opis", "Ustawianie typu włączenia urządzenia końcowego LUA"
-    "Parametry wymagane", "- ``forceSensorEnable``: Stan włączenia czujnika siły, 0-niewłączony; 1-włączony
-    - ``gripperEnable``: Stan włączenia chwytaka, 0-niewłączony; 1-włączony
-    - ``IOEnable``: Stan włączenia urządzenia IO, 0-niewłączony; 1-włączony"
+    "Prototyp", "``SetAxleLuaEnableDeviceType(self, forceSensorEnable, gripperEnable, IOEnable, dexhandEnable)``"
+    "Opis", "Ustawia włączone typy urządzeń końcówki dla LUA"
+    "Parametry wymagane", "
+    - ``forceSensorEnable``: Stan włączenia czujnika siły, 0-wyłączony; 1-włączony
+    - ``gripperEnable``: Stan włączenia chwytaka, 0-wyłączony; 1-włączony
+    - ``IOEnable``: Stan włączenia urządzenia IO, 0-wyłączony; 1-włączony
+    - ``dexhandEnable``: Stan włączenia dłoni, 0-wyłączony; 1-włączony"
     "Parametry domyślne", "Brak"
-    "Wartość zwracana", "Kod błędu sukces-0 błąd- errcode "
+    "Wartość zwracana", "Kod błędu, 0-sukces; niezerowy-błąd"
 
-Pobieranie typu włączenia urządzenia końcowego LUA
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
+Pobieranie włączonych typów urządzeń końcówki dla LUA
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: python SDK-v2.0.5
 
 .. csv-table:: 
@@ -884,17 +884,17 @@ Pobieranie typu włączenia urządzenia końcowego LUA
     :widths: 10 30
 
     "Prototyp", "``GetAxleLuaEnableDeviceType()``"
-    "Opis", "Pobieranie typu włączenia urządzenia końcowego LUA"
+    "Opis", "Pobiera włączone typy urządzeń końcówki dla LUA"
     "Parametry wymagane", "Brak"
     "Parametry domyślne", "Brak"
-    "Wartość zwracana", "- Kod błędu sukces-0 błąd- errcode 
-    - ``forceSensorEnable``: Stan włączenia czujnika siły, 0-niewłączony; 1-włączony
-    - ``gripperEnable``: Stan włączenia chwytaka, 0-niewłączony; 1-włączony
-    - ``IOEnable``: Stan włączenia urządzenia IO, 0-niewłączony; 1-włączony"
+    "Wartość zwracana", "- Kod błędu, 0-sukces; niezerowy-błąd
+    - ``forceSensorEnable``: Stan włączenia czujnika siły, 0-wyłączony; 1-włączony
+    - ``gripperEnable``: Stan włączenia chwytaka, 0-wyłączony; 1-włączony
+    - ``IOEnable``: Stan włączenia urządzenia IO, 0-wyłączony; 1-włączony
+    - ``dexhandEnable``: Stan włączenia dłoni, 0-wyłączony; 1-włączony"
 
-Pobieranie aktualnie skonfigurowanego urządzenia końcowego
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
+Pobieranie aktualnie skonfigurowanych urządzeń końcówki
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: python SDK-v2.0.5
 
 .. csv-table:: 
@@ -902,17 +902,17 @@ Pobieranie aktualnie skonfigurowanego urządzenia końcowego
     :widths: 10 30
 
     "Prototyp", "``GetAxleLuaEnableDevice()``"
-    "Opis", "Pobieranie aktualnie skonfigurowanego urządzenia końcowego"
+    "Opis", "Pobiera aktualnie skonfigurowane urządzenia końcówki"
     "Parametry wymagane", "Brak"
     "Parametry domyślne", "Brak"
-    "Wartość zwracana", "- Kod błędu sukces-0 błąd- errcode 
-    - ``forceSensorEnable[8]``: Stan włączenia czujnika siły, 0-niewłączony; 1-włączony
-    - ``gripperEnable[8]``: Stan włączenia chwytaka, 0-niewłączony; 1-włączony
-    - ``IOEnable[8]``: Stan włączenia urządzenia IO, 0-niewłączony; 1-włączony"
+    "Wartość zwracana", "- Kod błędu, 0-sukces; niezerowy-błąd
+    - ``forceSensorEnable[8]``: Stan włączenia czujnika siły, 0-wyłączony; 1-włączony
+    - ``gripperEnable[8]``: Stan włączenia chwytaka, 0-wyłączony; 1-włączony
+    - ``IOEnable[8]``: Stan włączenia urządzenia IO, 0-wyłączony; 1-włączony
+    - ``dexhandEnable``: Stan włączenia dłoni, 0-wyłączony; 1-włączony"
 
-Ustawianie włączenia funkcji sterowania ruchem chwytaka
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
+Ustawianie włączonych funkcji sterowania ruchem chwytaka
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: python SDK-v2.0.5
 
 .. csv-table:: 
@@ -920,15 +920,15 @@ Ustawianie włączenia funkcji sterowania ruchem chwytaka
     :widths: 10 30
 
     "Prototyp", "``SetAxleLuaGripperFunc(id, func)``"
-    "Opis", "Ustawianie włączenia funkcji sterowania ruchem chwytaka"
-    "Parametry wymagane", "- ``id``: Numer urządzenia chwytaka
-    - ``func``: 0-włączenie chwytaka; 1-inicjalizacja chwytaka; 2-ustawienie pozycji; 3-ustawienie prędkości; 4-ustawienie momentu; 6-odczyt stanu chwytaka; 7-odczyt stanu inicjalizacji; 8-odczyt kodu błędu; 9-odczyt pozycji; 10-odczyt prędkości; 11-odczyt momentu, 12-15 zarezerwowane"
+    "Opis", "Ustawia włączone funkcje sterowania ruchem chwytaka"
+    "Parametry wymagane", "
+    - ``id``: Numer urządzenia chwytaka
+    - ``func``: 0-włączenie chwytaka; 1-inicjalizacja chwytaka; 2-ustawienie pozycji; 3-ustawienie prędkości; 4-ustawienie momentu obrotowego; 6-odczyt stanu chwytaka; 7-odczyt stanu inicjalizacji; 8-odczyt kodu błędu; 9-odczyt pozycji; 10-odczyt prędkości; 11-odczyt momentu obrotowego; 12-ustawienie liczby obrotów dla chwytaka obrotowego; 13-ustawienie prędkości obrotowej dla chwytaka obrotowego; 14-ustawienie momentu obrotowego dla chwytaka obrotowego; 15-odczyt stanu chwytaka obrotowego; 16-odczyt stanu inicjalizacji chwytaka obrotowego; 17-odczyt liczby obrotów chwytaka obrotowego; 18-odczyt prędkości chwytaka obrotowego; 19-odczyt momentu obrotowego chwytaka obrotowego; 20-ustawienie ruchu synchronicznego wieloosiowego; 21-komenda kasowania błędów; 22-stan pracy pojedynczej osi; 23-stan pracy wszystkich osi;"
     "Parametry domyślne", "Brak"
-    "Wartość zwracana", "Kod błędu sukces-0 błąd- errcode "
+    "Wartość zwracana", "Kod błędu, 0-sukces; niezerowy-błąd"
 
-Pobieranie włączenia funkcji sterowania ruchem chwytaka
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
+Pobieranie włączonych funkcji sterowania ruchem chwytaka
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: python SDK-v2.0.5
 
 .. csv-table:: 
@@ -936,11 +936,11 @@ Pobieranie włączenia funkcji sterowania ruchem chwytaka
     :widths: 10 30
 
     "Prototyp", "``GetAxleLuaGripperFunc(id)``"
-    "Opis", "Pobieranie włączenia funkcji sterowania ruchem chwytaka"
+    "Opis", "Pobiera włączone funkcje sterowania ruchem chwytaka"
     "Parametry wymagane", "- ``id``: Numer urządzenia chwytaka"
     "Parametry domyślne", "Brak"
-    "Wartość zwracana", "- Kod błędu sukces-0 błąd- errcode 
-    - ``func``: 0-włączenie chwytaka; 1-inicjalizacja chwytaka; 2-ustawienie pozycji; 3-ustawienie prędkości; 4-ustawienie momentu; 6-odczyt stanu chwytaka; 7-odczyt stanu inicjalizacji; 8-odczyt kodu błędu; 9-odczyt pozycji; 10-odczyt prędkości; 11-odczyt momentu, 12-15 zarezerwowane"
+    "Wartość zwracana", "- Kod błędu, 0-sukces; niezerowy-błąd
+    - ``func``: 0-włączenie chwytaka; 1-inicjalizacja chwytaka; 2-ustawienie pozycji; 3-ustawienie prędkości; 4-ustawienie momentu obrotowego; 6-odczyt stanu chwytaka; 7-odczyt stanu inicjalizacji; 8-odczyt kodu błędu; 9-odczyt pozycji; 10-odczyt prędkości; 11-odczyt momentu obrotowego; 12-ustawienie liczby obrotów dla chwytaka obrotowego; 13-ustawienie prędkości obrotowej dla chwytaka obrotowego; 14-ustawienie momentu obrotowego dla chwytaka obrotowego; 15-odczyt stanu chwytaka obrotowego; 16-odczyt stanu inicjalizacji chwytaka obrotowego; 17-odczyt liczby obrotów chwytaka obrotowego; 18-odczyt prędkości chwytaka obrotowego; 19-odczyt momentu obrotowego chwytaka obrotowego; 20-ustawienie ruchu synchronicznego wieloosiowego; 21-komenda kasowania błędów; 22-stan pracy pojedynczej osi; 23-stan pracy wszystkich osi;"
 
 Zapis pliku węzła podrzędnego Ethercat robota
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -1940,3 +1940,177 @@ Przykład kodu SDK operacji na pliku lua protokołu otwartego
 
     # Wywołanie funkcji testowej
     TestCtrlOpenLuaOperate(robot)
+
+Sterowanie Ruchem Dłoni
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototyp", "``SetDexterousHandsMove(self, idstart, slaveNum, pos, speed, force, max_time)``"
+    "Opis", "Sterowanie ruchem dłoni"
+    "Parametry Wymagane", "
+    - ``idstart``: Początkowy numer stacji podrzędnej;
+    - ``slaveNum``: Liczba;
+    - ``pos[16]``: Pozycja (-360~360);
+    - ``speed[16]``: Procent prędkości, zakres [0~100];
+    - ``force[16]``: Procent momentu obrotowego, zakres [0~100];
+    - ``max_time``: Maksymalny czas oczekiwania, zakres [0~30000], jednostka ms;"
+    "Parametry Domyślne", "Brak"
+    "Wartość Zwracana", "Kod błędu, 0-sukces; niezerowy-błąd"
+        
+Sterowanie Resetem i Aktywacją Dłoni
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototyp", "``SetDexterousHandsAct(self, id, act)``"
+    "Opis", "Sterowanie resetem i aktywacją dłoni"
+    "Parametry Wymagane", "
+    - ``id``: Numer stacji podrzędnej;
+    - ``act``: 0-reset 1-aktywacja"
+    "Parametry Domyślne", "Brak"
+    "Wartość Zwracana", "Kod błędu, 0-sukces; niezerowy-błąd"
+        
+Czyszczenie Błędu Dłoni
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototyp", "``ClearDexterousHandsError(self)``"
+    "Opis", "Czyszczenie błędu dłoni"
+    "Parametry Wymagane", "Brak"
+    "Parametry Domyślne", "Brak"
+    "Wartość Zwracana", "Kod błędu, 0-sukces; niezerowy-błąd"
+    
+Ustawianie Włączonych Funkcji Sterowania Ruchem Dłoni
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototyp", "``SetDexterousHandsFunc(self, id, func)``"
+    "Opis", "Ustawia włączone funkcje sterowania ruchem dłoni"
+    "Parametry Wymagane", "
+    - ``id``: Numer stacji podrzędnej dłoni;
+    - ``func``: Tablica funkcji, 32 elementy
+        0-wyzwolenie chwytu, 1-inicjalizacja chwytaka, 2-ustawienie pozycji, 3-ustawienie prędkości, 4-ustawienie momentu obrotowego,
+        6-odczyt stanu chwytaka, 7-odczyt stanu inicjalizacji, 8-odczyt kodu błędu, 9-odczyt pozycji, 10-odczyt prędkości,
+        11-odczyt momentu obrotowego, 12-ustawienie liczby obrotów, 13-ustawienie prędkości obrotowej, 14-ustawienie momentu obrotowego obrotu,
+        15-odczyt stanu chwytaka obrotowego, 16-odczyt stanu inicjalizacji obrotu, 17-odczyt liczby obrotów, 18-odczyt prędkości obrotowej,
+        19-odczyt momentu obrotowego obrotu, 20-ustawienie ruchu synchronicznego wieloosiowego, 21-komenda kasowania błędów, 22-stan pracy pojedynczej osi,
+        23-stan pracy wszystkich osi"
+    "Parametry Domyślne", "Brak"
+    "Wartość Zwracana", "Kod błędu, 0-sukces; niezerowy-błąd"
+    
+Pobieranie Włączonych Funkcji Sterowania Ruchem Dłoni
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototyp", "``GetDexterousHandsFunc(self, id)``"
+    "Opis", "Pobiera włączone funkcje sterowania ruchem dłoni"
+    "Parametry Wymagane", "
+    - ``id``: Numer stacji podrzędnej dłoni;
+    - ``func``: Tablica funkcji, 32 elementy
+        0-wyzwolenie chwytu, 1-inicjalizacja chwytaka, 2-ustawienie pozycji, 3-ustawienie prędkości, 4-ustawienie momentu obrotowego,
+        6-odczyt stanu chwytaka, 7-odczyt stanu inicjalizacji, 8-odczyt kodu błędu, 9-odczyt pozycji, 10-odczyt prędkości,
+        11-odczyt momentu obrotowego, 12-ustawienie liczby obrotów, 13-ustawienie prędkości obrotowej, 14-ustawienie momentu obrotowego obrotu,
+        15-odczyt stanu chwytaka obrotowego, 16-odczyt stanu inicjalizacji obrotu, 17-odczyt liczby obrotów, 18-odczyt prędkości obrotowej,
+        19-odczyt momentu obrotowego obrotu, 20-ustawienie ruchu synchronicznego wieloosiowego, 21-komenda kasowania błędów, 22-stan pracy pojedynczej osi,
+        23-stan pracy wszystkich osi"
+    "Parametry Domyślne", "Brak"
+    "Wartość Zwracana", "Kod błędu, 0-sukces; niezerowy-błąd"
+
+Przykład Kodu Konfiguracji i Ruchu Dłoni na Końcówce Robota  
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: python
+    :linenos:  
+     
+    from fairino import Robot
+    import time
+    robot = Robot.RPC('192.168.58.2')
+
+    def main(self):
+
+        id = 1                 
+        slaveNum = 4         
+        max_time = 8000      
+        speed = [0] * 16     
+        force = [0] * 16     
+
+        for i in range(16):
+            force[i] = 50 if i < 4 else 0
+
+        def set_positions(v1, v2, v3, v4):
+            pos = [0.0] * 16
+            pos[0] = v1
+            pos[1] = v2
+            pos[2] = v3
+            pos[3] = v4
+            return pos
+
+        j1 = [-53.426,-85.916,109.280,-86.236,-96.663,-28.560]
+        j2 = [-91.877,-85.917,109.281,-86.236,-96.663,-28.560]
+        epos = [0, 0, 0, 0]
+        offset_pos = [0, 0, 0, 0, 0, 0]
+
+        ret = robot.ClearDexterousHandsError()
+        print(f"ClearDexterousHandsError -> {ret}")
+
+        setFunc = [0] * 32
+        setFunc[2] = 1   
+        setFunc[4] = 1   
+        setFunc[9] = 1   
+        setFunc[10] = 1  
+        setFunc[11] = 1  
+        setFunc[22] = 1  
+
+        ret = robot.SetDexterousHandsFunc(id, setFunc)
+        print(f"SetDexterousHandsFunc(włączono init + funkcje pozycji/momentu) -> {ret}")
+
+        ret, getFunc = robot.GetDexterousHandsFunc(id)
+        print(f"GetDexterousHandsFunc -> {ret}")
+        if ret == 0:
+            print("GetDexterousHandsFunc :")
+            for i in range(len(getFunc)):
+                print(f"  [{i}]={getFunc[i]}", end="")
+                if (i + 1) % 8 == 0:
+                    print()  
+                elif i < len(getFunc) - 1:
+                    print(", ", end="")
+            if len(getFunc) % 8 != 0:
+
+        ret = robot.SetDexterousHandsAct(id, 1)
+        print(f"SetDexterousHandsAct() -> {ret}")
+        if ret != 0:
+            return
+            pos = set_positions(20, 20, 20, 20)
+        ret = robot.SetDexterousHandsMove(id, slaveNum, pos, speed, force, max_time)
+        print(f"ret: {ret}")
+        time.sleep(5)
+
+        for iteration in range(1, 11):
+            robot.MoveJ(joint_pos=j1, tool=1, user=0, vel=100, acc=100, ovl=100,
+                        exaxis_pos=epos, blendT=-1, offset_flag=0, offset_pos=offset_pos)
+
+            pos = set_positions(10, 10, 10, 10)
+            ret = robot.SetDexterousHandsMove(id, slaveNum, pos, speed, force, max_time)
+            time.sleep(1)
+
+            robot.MoveJ(joint_pos=j2, tool=1, user=0, vel=100, acc=100, ovl=100,
+                        exaxis_pos=epos, blendT=-1, offset_flag=0, offset_pos=offset_pos)
+
+            pos = set_positions(50, 50, 50, 50)
+            ret = robot.SetDexterousHandsMove(id, slaveNum, pos, speed, force, max_time)
+            time.sleep(1)
+
+    main(robot)

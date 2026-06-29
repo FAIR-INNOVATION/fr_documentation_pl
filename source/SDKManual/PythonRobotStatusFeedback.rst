@@ -98,7 +98,7 @@ Typ struktury pakietu sprzężenia zwrotnego stanu robota
             # Sygnały stanu
             ("EmergencyStop", c_uint8),         # Flaga zatrzymania awaryjnego, 0-brak zatrzymania awaryjnego, 1-zatrzymanie awaryjne wciśnięte
             ("motion_done", c_int),             # Sygnał osiągnięcia pozycji ruchu, 1-osiągnięto, 0-nie osiągnięto
-            ("gripper_motiondone", c_uint8),    # Sygnał zakończenia ruchu chwytaka, 1-zakończono, 0-nie zakończono
+            ("gripper_motiondone", c_uint8),    # Sygnał zakończenia ruchu chwytaka, 0-nie zakończono, 1-zakończono (nie wykryto obiektu), 2-ruch zakończony (wykryto obiekt)
             ("mc_queue_len", c_int),            # Długość kolejki instrukcji ruchu
             ("collisionState", c_uint8),        # Wykrycie kolizji, 1-kolizja, 0-brak kolizji
             ("trajectory_pnum", c_int),         # Numer punktu trajektorii
@@ -107,7 +107,7 @@ Typ struktury pakietu sprzężenia zwrotnego stanu robota
 
             # Informacje o chwytaku
             ("gripper_fault_id", c_uint8),      # Numer chwytaka z błędem
-            ("gripper_fault", c_uint16),        # Usterka chwytaka
+            ("gripper_fault", c_uint16),        # Usterka chwytaka 0-brak usterki 1-timeout 485 2-błąd polecenia 3-upadek przedmiotu Inne-kod usterki chwytaka
             ("gripper_active", c_uint16),      # Stan aktywacji chwytaka
             ("gripper_position", c_uint8),      # Pozycja chwytaka
             ("gripper_speed", c_int8),          # Prędkość chwytaka
@@ -281,14 +281,14 @@ Pakiet danych sprzężenia zwrotnego stanu kontrolera
     "ft_sensor_active","Stan aktywacji czujnika momentu, 0-reset, 1-aktywacja"
     "EmergencyStop","Flaga zatrzymania awaryjnego, 0-brak zatrzymania awaryjnego, 1-zatrzymanie awaryjne wciśnięte"
     "motion_done","Sygnał osiągnięcia pozycji ruchu, 1-osiągnięto, 0-nie osiągnięto"
-    "gripper_motiondone","Sygnał zakończenia ruchu chwytaka, 1-zakończono, 0-nie zakończono"
+    "gripper_motiondone","Sygnał zakończenia ruchu chwytaka, 0-nie zakończono, 1-zakończono (nie wykryto obiektu), 2-ruch zakończony (wykryto obiekt)"
     "mc_queue_len","Długość kolejki instrukcji ruchu"
     "collisionState","Wykrycie kolizji, 1-kolizja, 0-brak kolizji"
     "trajectory_pnum","Numer punktu trajektorii"
     "safety_stop0_state","Sygnał bezpiecznego zatrzymania SI0"
     "safety_stop1_state","Sygnał bezpiecznego zatrzymania SI1"
     "gripper_fault_id","Numer chwytaka z błędem"
-    "gripper_fault","Usterka chwytaka"
+    "gripper_fault","Usterka chwytaka 0-brak usterki 1-timeout 485 2-błąd polecenia 3-upadek przedmiotu Inne-kod usterki chwytaka"
     "gripper_active","Stan aktywacji chwytaka, 0-nieaktywny, 1-aktywny"
     "gripper_position","Pozycja chwytaka (procent)"
     "gripper_speed","Prędkość chwytaka (procent)"

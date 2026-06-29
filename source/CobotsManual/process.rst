@@ -286,6 +286,111 @@ Program nauczania spawania z adaptacją orientacji w połączeniu z osią rozsze
      - LTTrackOff
      - #Wyłączenie śledzenia laserowego
 
+Funkcja Wahadłowa z Przejściem Liniowo-Łukowym z Nową Splajną
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Przegląd
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Funkcja przejścia liniowo-łukowego z nową splajną z nałożonym ruchem wahadłowym jest połączeniem funkcji przejścia liniowo-łukowego z nową splajną robota i funkcji ruchu wahadłowego, umożliwiając robotowi wykonywanie ruchów wahadłowych typu "wahadło falą trójkątną", "wahadło falą trójkątną w kształcie pionowego L", "wahadło trójkątne do spawania pionowego", "wahadło falą sinusoidalną" oraz "wahadło falą sinusoidalną w kształcie pionowego L" podczas procesu przejścia liniowo-łukowego z nową splajną.
+
+Procedura Operacyjna
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+**Krok 1**: Skalibruj układ współrzędnych narzędzia robota za pomocą WebApp. Szczegółowe kroki operacyjne tej funkcji można znaleźć w odpowiednim rozdziale instrukcji użytkownika.
+
+**Krok 2**: Naucz nie mniej niż 4 punkty za pomocą WebApp. Uwaga: odległości między punktami powinny być równomiernie rozłożone, aby uzyskać najlepsze rezultaty.
+
+**Krok 3**: Ustaw parametry wahadła. Na głównym interfejsie WebApp kliknij "Program Nauczania" -> "Programowanie", aby przejść do obszaru "Instrukcje Ruchu".
+
+.. figure:: process/073.png
+   :align: center
+   :width: 4in
+   
+.. centered:: Rysunek 15.1‑23 Obszar "Instrukcje Ruchu"
+  
+W obszarze "Instrukcje Ruchu" kliknij przycisk "Wahadło", aby przejść do interfejsu konfiguracji "Weave". W obszarze "Edycja Instrukcji" wybierz numer procesu z menu rozwijanego "Wybierz Numer", kliknij "Edytuj", aby przejść do konfiguracji parametrów procesu wahadła. Po konfiguracji kliknij "Konfiguruj", aby zapisać numer procesu.
+
+.. figure:: process/074.png
+   :align: center
+   :width: 6in
+   
+.. centered:: Rysunek 15.1‑24 Ustawianie Parametrów Procesu Wahadła
+ 
+.. note:: Funkcja przejścia liniowo-łukowego z nową splajną z nałożonym ruchem wahadłowym jest obecnie stosowana do typów "wahadło falą trójkątną", "wahadło falą trójkątną w kształcie pionowego L", "wahadło trójkątne do spawania pionowego", "wahadło falą sinusoidalną" oraz "wahadło falą sinusoidalną w kształcie pionowego L". Wybierz "Uwzględnij" w menu rozwijanym "Czas oczekiwania wahadła" i "Kontynuuj ruch podczas czasu oczekiwania" w menu rozwijanym "Oczekiwanie pozycji wahadła".
+
+**Krok 4**: Dodaj instrukcje ruchu wahadłowego. W obszarze "Typ Instrukcji" interfejsu konfiguracji "Weave" kliknij "Rozpocznij Wahadło" -> "Dodaj" -> "Zatrzymaj Wahadło" -> "Dodaj" -> "Zastosuj", aby zakończyć ustawienia ruchu wahadłowego.
+
+.. figure:: process/075.png
+   :align: center
+   :width: 6in
+   
+.. centered:: Rysunek 15.1‑25 Ustawienia Ruchu Wahadłowego
+  
+**Krok 5**: Dodaj instrukcję przejścia liniowo-łukowego z nową splajną. W obszarze "Instrukcje Ruchu" kliknij przycisk "N-Spline", aby przejść do interfejsu konfiguracji "N-Spline". W obszarze "Typ Instrukcji" kliknij przycisk "Rozpocznij trajektorię wielopunktową", wybierz "Punkt przejścia łukowego" z menu rozwijanego "Tryb Sterowania", wprowadź parametry w polu "Globalny średni czas przejścia" i kliknij "Dodaj", aby zakończyć konfigurację trybu ruchu z nową splajną.
+
+.. figure:: process/076.png
+   :align: center
+   :width: 6in
+   
+.. centered:: Rysunek 15.1‑26 Konfiguracja Trybu Ruchu z Nową Splajną
+
+.. note:: "Globalny średni czas przejścia" dotyczy trybu sterowania "Punkt przejścia łukowego". Dla innych trybów można pozostawić ustawienia domyślne i zaleca się regulację wartości w górę, o ile to możliwe.
+
+Metody regulacji:
+
+1. Podziel całkowity czas ruchu przez (liczba punktów - 1), aby uzyskać parametr globalnego średniego czasu przejścia, z jednostkami czasu w milisekundach.
+2. Ustaw na podstawie czasu przejazdu dwóch punktów o największej odległości podczas pełnego ruchu. Jeśli obserwacja jest niewygodna lub nie ma wymogu płynnego przejścia pozycji, można ustawić domyślnie 10000 milisekund lub regulować w górę.
+
+**Krok 6**: Dodaj punkty ruchu. W obszarze "Typ Instrukcji" interfejsu konfiguracji "N-Spline" kliknij przycisk "Ustaw Punkt" -> "SPL". Wybierz punkt ruchu z menu rozwijanego "Nazwa Punktu", wprowadź współczynnik prędkości ruchu instrukcji w polu "Prędkość Debugowania", wprowadź parametr promienia wygładzania w polu "Promień Płynnego Przejścia", wybierz status ruchu punktu z menu rozwijanego "Czy to Ostatni Punkt" i kliknij "Dodaj", aby zakończyć konfigurację pojedynczego punktu ruchu.
+
+.. figure:: process/077.png
+   :align: center
+   :width: 6in
+   
+.. centered:: Rysunek 15.1‑27 Konfiguracja Punktów Ruchu
+ 
+.. note:: Powtórz Krok 6, aby zakończyć konfigurację wszystkich punktów ruchu, i wybierz "Tak" z menu rozwijanego "Czy to Ostatni Punkt" w konfiguracji ostatniego punktu.
+
+**Krok 7**: Zakończ instrukcję przejścia liniowo-łukowego z nową splajną. W obszarze "Typ Instrukcji" interfejsu konfiguracji "N-Spline" kliknij przycisk "Zakończ trajektorię wielopunktową", kliknij "Dodaj" -> "Zastosuj", aby zakończyć ogólną konfigurację instrukcji przejścia liniowo-łukowego z nową splajną.
+
+.. figure:: process/078.png
+   :align: center
+   :width: 6in
+   
+.. centered:: Rysunek 15.1‑28 Konfiguracja Zakończenia Ruchu z Nową Splajną
+  
+**Krok 8**: Napisz program LUA dla funkcji przejścia liniowo-łukowego z nową splajną + ruch wahadłowy. Dostosuj kolejność instrukcji wygenerowanych w Krokach od 4 do 7. Uruchom program LUA, aby zaimplementować funkcję przejścia liniowo-łukowego z nową splajną + ruch wahadłowy.
+
+.. figure:: process/079.png
+   :align: center
+   :width: 4in
+   
+.. centered:: Rysunek 15.1‑29 Program LUA dla Przejścia Liniowo-Łukowego z Nową Splajną + Ruch Wahadłowy
+ 
+.. note:: Przed punktem początkowym ruchu przejścia liniowo-łukowego z nową splajną można dodać ruch PTP, aby zapewnić, że robot dotrze do punktu początkowego ruchu.
+
+Ustawienie Strategii Powrotu do Środka dla Przejścia Liniowo-Łukowego z Nową Splajną + Ruch Wahadłowy
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Na głównym interfejsie WebApp kliknij "Aplikacje Pomocnicze" -> "Pakiet Procesowy" -> "Baza Eksperta Spawalniczego", aby przejść do obszaru "Baza Eksperta Spawalniczego".
+
+.. figure:: process/080.png
+   :align: center
+   :width: 6in
+   
+.. centered:: Rysunek 15.1‑30 Instrukcja Spawania z Wahadłem z Nową Splajną
+
+W obszarze "Baza Eksperta Spawalniczego" kliknij przycisk "Spawanie z Wahadłem z Nową Splajną", aby przejść do interfejsu konfiguracji "Spawanie z Wahadłem z Nową Splajną". W obszarze "Parametry Spawania z Wahadłem" wybierz "Brak powrotu do środka" lub "Powrót do środka z przedłużoną trajektorią" z menu rozwijanego "Typ Powrotu do Środka Wahadła", jak pokazano na Rysunku 3-2. Po wyborze kliknij przycisk "Konfiguruj", aby zakończyć ustawienie strategii powrotu do środka wahadła.
+
+.. figure:: process/081.png
+   :align: center
+   :width: 4in
+   
+.. centered:: Rysunek 15.1‑31 Typ Powrotu do Środka Wahadła dla Przejścia Liniowo-Łukowego z Nową Splajną
+
+.. note:: W menu rozwijanym "Typ Powrotu do Środka Wahadła", gdy wybrano "Brak powrotu do środka", ruch wahadłowy przejścia łukowego z nową splajną zatrzymuje się po osiągnięciu ostatniego punktu; gdy wybrano "Powrót do środka z przedłużoną trajektorią", ruch wahadłowy przejścia łukowego z nową splajną kontynuuje ruch po osiągnięciu ostatniego punktu, aby zapewnić zatrzymanie ruchu po zakończeniu pełnego cyklu wahadłowego.
+
 Konfiguracja systemu paletyzacji
 --------------------------------
 

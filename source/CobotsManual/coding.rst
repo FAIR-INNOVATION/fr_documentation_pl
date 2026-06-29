@@ -8592,3 +8592,134 @@ Poniżej przedstawiono przykładowy program LUA dla spawania linii przecięcia r
    :align: center
 
 .. centered:: Schemat 9.38-18 Przykładowy program spawania linii przecięcia rur z pozycjonerem
+
+Funkcja Drukowania PrintMsg() Programu LUA Robota
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Program LUA robota ma wbudowane instrukcje drukowania, które mogą wyświetlać określone informacje w oknie drukowania WebApp. Ta funkcja obsługuje drukowanie wartości liczbowych, ciągów znaków, tabel, wartości logicznych itp. Jest wyposażona w dodatkowe możliwości, takie jak przechowywanie dzienników drukowania, wyszukiwanie treści i pobieranie dzienników, ułatwiając debugowanie i śledzenie danych.
+
+Edycja i Dodawanie Instrukcji Drukowania
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Kliknij przycisk "Drukuj" na stronie "Instrukcje Logiczne", aby otworzyć stronę edycji instrukcji drukowania PrintMsg(). Najpierw ustaw odpowiednio tekst drukowania i typ danych.
+
+.. image:: coding/573.png
+   :width: 6in
+   :align: center
+
+.. centered:: Rysunek 9.39‑1 Strona Edycji Instrukcji Drukowania   
+
+- **Tekst**: Wprowadź niestandardowy ciąg opisowy, aby wskazać znaczenie drukowanej treści, np. "robot current pos :", "recv socket value :" itp.
+- **Typ**: Podzielony na "Zmienną" i "Funkcję", wybierz w zależności od potrzeb.
+- **Zmienna**: Drukuje wartości niestandardowych zmiennych, obsługując zmienne typu liczbowego, ciągu znaków, tabeli, logicznego itp.
+- **Funkcja**: Drukuje wartość zwracaną określonej funkcji instrukcji. Po wybraniu tego typu możesz wybrać funkcję docelową z listy funkcji poniżej, taką jak GetActualTCPPose() do pobierania pozycji TCP robota, GetDI() do odczytu stanu wejścia DI kontrolera, GetActualJointPosDegree() do pobierania bieżących kątów stawów robota itp.
+
+Jako przykład drukowania bieżącej pozycji stawów robota: wprowadź tekst drukowania "robot current joint pos :", wybierz Funkcję jako typ danych i wybierz funkcję GetActualJointPosDegree(), następnie kliknij kolejno Dodaj i Zastosuj. System automatycznie wygeneruje odpowiednią instrukcję drukowania w programie LUA:
+
+.. code-block:: console
+    :linenos:
+
+    PrintMsg("robot current joint pos :",GetActualJointPosDegree())
+
+.. image:: coding/574.png
+   :width: 6in
+   :align: center
+
+.. centered:: Rysunek 9.39‑2 Dodawanie Instrukcji Drukowania   
+
+Możesz również przełączyć panel programu na stronę edytowalną, wprowadzić nazwę instrukcji PrintMsg() i wprowadzić treść do wydrukowania w parametrach, oddzielając wiele treści drukowania przecinkami.
+
+.. image:: coding/575.png
+   :width: 6in
+   :align: center
+
+.. centered:: Rysunek 9.39‑3 Pisanie Niestandardowych Informacji Drukowania  
+
+Wyświetlanie Informacji Drukowania i Podstawowe Operacje
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Kliknij przycisk wyświetlania drukowania, aby otworzyć okno podręczne z informacjami drukowania. Przełącz robota w tryb automatyczny i uruchom program. Drukowana treść będzie wyświetlana w czasie rzeczywistym w oknie. Każda wiadomość zawiera cztery informacje: znacznik czasu, nazwę programu LUA, numer linii kodu i drukowaną treść.
+
+.. image:: coding/576.png
+   :width: 6in
+   :align: center
+
+.. centered:: Rysunek 9.39‑4 Okno Wyświetlania Treści Drukowania  
+
+Czyszczenie Treści Drukowania
+*******************************************************************
+
+Kliknij przycisk "Wyczyść" u góry okna drukowania, aby jednym kliknięciem wyczyścić całą wyświetlaną treść w oknie.
+
+.. image:: coding/577.png
+   :width: 6in
+   :align: center
+
+.. centered:: Rysunek 9.39‑5 Czyszczenie Treści Drukowania  
+
+Wyszukiwanie Treści Drukowania
+*******************************************************************
+
+Wprowadź słowo kluczowe w polu wyszukiwania i kliknij Znajdź. Okno wyświetli tylko rekordy drukowania zawierające słowo kluczowe, ukrywając resztę. Po wyczyszczeniu pola wyszukiwania i ponownym kliknięciu Znajdź, wszystkie informacje drukowania zostaną przywrócone.
+
+.. image:: coding/578.png
+   :width: 6in
+   :align: center
+
+.. centered:: Rysunek 9.39‑6 Wyszukiwanie Treści Drukowania  
+
+Konfiguracja i Zarządzanie Dziennikami Drukowania
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Konfiguracja Parametrów Przechowywania Dzienników Drukowania
+*******************************************************************
+
+W aplikacji webapp kliknij kolejno "Ustawienia Systemowe" i "Tryb Konserwacji", aby przejść do trybu konserwacji. Znajdź moduły "Zarządzanie Dziennikami" i "Dziennik Drukowania", aby skonfigurować włączanie/wyłączanie funkcji przechowywania dzienników drukowania, ustawić liczbę plików do zapisania i maksymalną liczbę wpisów drukowania na pojedynczy plik dziennika. Po włączeniu przechowywania dzienników drukowania wszystkie dane drukowania będą automatycznie zapisywane w plikach dziennika.
+
+.. image:: coding/579.png
+   :width: 6in
+   :align: center
+
+.. centered:: Rysunek 9.39‑7 Konfiguracja Parametrów Przechowywania Dzienników Drukowania 
+
+Gdy urządzenie robota restartuje system lub liczba wpisów w pojedynczym pliku dziennika osiąga ustawiony limit, automatycznie tworzony jest nowy plik dziennika i uruchamiana jest rotacja dzienników. Gdy całkowita liczba plików dziennika przekracza maksymalny limit przechowywania, system automatycznie usuwa najstarsze pliki dziennika.
+
+Pobieranie Dzienników Drukowania
+*******************************************************************
+
+Kliknij przycisk pobierania u góry okna drukowania, aby pobrać całą drukowaną treść w bieżącym oknie na lokalny komputer.
+
+.. image:: coding/580.png
+   :width: 6in
+   :align: center
+
+.. centered:: Rysunek 9.39‑8 Pobieranie Dzienników Drukowania 
+
+Oprócz bezpośredniego pobierania dzienników drukowania, dzienniki drukowania są również dołączane podczas pobierania dzienników kontrolera i kompletnych plików źródłowych danych.
+
+Przykłady Kodu Instrukcji Drukowania
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Drukowanie Odebranej Pozycji Docelowej Robota
+*******************************************************************
+
+Poniżej znajduje się program, w którym robot odczytuje docelowe pozycje Kartezjańskie x, y, z z slave'a ModbusTCP i steruje robotem, aby przesunął się do pozycji docelowej. W programie za każdym razem, gdy pozycja docelowa jest odczytywana, używana jest instrukcja PrintMsg() do wydrukowania pozycji docelowej.
+
+.. image:: coding/581.png
+   :width: 6in
+   :align: center
+
+.. centered:: Rysunek 9.39‑9 Przykład Drukowania Docelowej Pozycji Robota 
+
+Drukowanie Pozycji Robota w Czasie Rzeczywistym i Danych DI Szafy Sterowniczej
+*********************************************************************************************
+
+Poniżej znajduje się program nieblokującego ruchu robota, który w czasie rzeczywistym drukuje pozycję robota i wartości DI szafy sterowniczej podczas ruchu.
+
+.. note:: Uwaga: Podczas wywoływania instrukcji drukowania PrintMsg() w pętli, należy użyć instrukcji sleep_ms() w celu ustawienia interwału snu pętli, aby uniknąć nieskończonej pętli.
+
+.. image:: coding/582.png
+   :width: 6in
+   :align: center
+
+.. centered:: Rysunek 9.39‑10 Przykład Drukowania Bieżącej Pozycji i DI Podczas Ruchu Robota   

@@ -770,75 +770,82 @@ Pobranie stanu włączenia wykonania LUA końcowego
     */
     int GetAxleLuaEnableStatus(int[] status)
 
-Ustawienie typu włączenia urządzenia końcowego LUA
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
+Ustawianie włączonych typów urządzeń końcówki dla LUA
++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief Ustawienie typu włączenia urządzenia końcowego LUA
-    * @param forceSensorEnable Stan włączenia czujnika siły, 0-niewłączony；1-włączony
-    * @param gripperEnable Stan włączenia chwytaka, 0-niewłączony；1-włączony
-    * @param IOEnable Stan włączenia urządzenia IO, 0-niewłączony；1-włączony
+    * @brief Ustawia włączone typy urządzeń końcówki dla LUA
+    * @param forceSensorEnable Stan włączenia czujnika siły, 0-wyłączony; 1-włączony
+    * @param gripperEnable Stan włączenia chwytaka, 0-wyłączony; 1-włączony
+    * @param IOEnable Stan włączenia urządzenia IO, 0-wyłączony; 1-włączony
+    * @param dexhandEnable Stan włączenia dłoni, 0-wyłączony; 1-włączony
     * @return  Kod błędu
     */
-    public int SetAxleLuaEnableDeviceType(int forceSensorEnable, int gripperEnable, int IOEnable)
+    public int SetAxleLuaEnableDeviceType(int forceSensorEnable, int gripperEnable, int IOEnable, int dexhandEnable)
 
-Pobranie typu włączenia urządzenia końcowego LUA
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
+Pobieranie włączonych typów urządzeń końcówki dla LUA
++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
     /**
-     * @brief Pobranie typu włączenia urządzenia końcowego LUA
-     * @param enable enable[0]:forceSensorEnable Stan włączenia czujnika siły, 0-niewłączony；1-włączony
-     * @param enable enable[1]:gripperEnable Stan włączenia chwytaka, 0-niewłączony；1-włączony
-     * @param enable enable[2]:IOEnable Stan włączenia urządzenia IO, 0-niewłączony；1-włączony
+     * @brief Pobiera włączone typy urządzeń końcówki dla LUA
+     * @param enable enable[0]:forceSensorEnable Stan włączenia czujnika siły, 0-wyłączony; 1-włączony
+     * @param enable enable[1]:gripperEnable Stan włączenia chwytaka, 0-wyłączony; 1-włączony
+     * @param enable enable[2]:IOEnable Stan włączenia urządzenia IO, 0-wyłączony; 1-włączony
+     * @param enable enable[3]:dexhandEnable Stan włączenia dłoni, 0-wyłączony; 1-włączony
      * @return  Kod błędu
      */
     public int GetAxleLuaEnableDeviceType(int[] enable)
 
-Pobranie aktualnie skonfigurowanego urządzenia końcowego
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
+Pobieranie aktualnie skonfigurowanych urządzeń końcówki
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
     /**
-     * @brief Pobranie aktualnie skonfigurowanego urządzenia końcowego
-     * @param forceSensorEnable Numer urządzenia włączonego czujnika siły 0-niewłączony；1-włączony
-     * @param gripperEnable Numer urządzenia włączonego chwytaka, 0-niewłączony；1-włączony
-     * @param IODeviceEnable Numer urządzenia włączonego urządzenia IO, 0-niewłączony；1-włączony
+     * @brief Pobiera aktualnie skonfigurowane urządzenia końcówki
+     * @param forceSensorEnable Numer włączonego urządzenia czujnika siły, 0-wyłączony; 1-włączony
+     * @param gripperEnable Numer włączonego urządzenia chwytaka, 0-wyłączony; 1-włączony
+     * @param IODeviceEnable Numer włączonego urządzenia IO, 0-wyłączony; 1-włączony
+     * @param dexhandEnable Stan włączenia dłoni, 0-wyłączony; 1-włączony
      * @return  Kod błędu
      */
-    public int GetAxleLuaEnableDevice(int[] forceSensorEnable, int[] gripperEnable, int[] IODeviceEnable)
+    public int GetAxleLuaEnableDevice(int[] forceSensorEnable, int[] gripperEnable, int[] IODeviceEnable, int[] dexhandEnable)
 
-Ustawienie włączenia funkcji sterowania ruchem chwytaka
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
+Ustawianie włączonych funkcji sterowania ruchem chwytaka
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
     /**
-     * @brief Ustawienie włączenia funkcji sterowania ruchem chwytaka
+     * @brief Ustawia włączone funkcje sterowania ruchem chwytaka
      * @param id Numer urządzenia chwytaka
-     * @param func func[0]-włączenie chwytaka；func[1]-inicjalizacja chwytaka；2-ustawienie pozycji；3-ustawienie prędkości；4-ustawienie momentu；6-odczyt stanu chwytaka；7-odczyt stanu inicjalizacji；8-odczyt kodu błędu；9-odczyt pozycji；10-odczyt prędkości；11-odczyt momentu
+     * @param func func[0]-włączenie chwytaka; func[1]-inicjalizacja chwytaka; func[2]-ustawienie pozycji; func[3]-ustawienie prędkości; func[4]-ustawienie momentu obrotowego; func[6]-odczyt stanu chwytaka;
+        func[7]-odczyt stanu inicjalizacji; func[8]-odczyt kodu błędu; func[9]-odczyt pozycji; func[10]-odczyt prędkości; func[11]-odczyt momentu obrotowego; func[12]-ustawienie liczby obrotów dla chwytaka obrotowego;
+        func[13]-ustawienie prędkości obrotowej dla chwytaka obrotowego; func[14]-ustawienie momentu obrotowego dla chwytaka obrotowego; func[15]-odczyt stanu chwytaka obrotowego; func[16]-odczyt stanu inicjalizacji chwytaka obrotowego;
+        func[17]-odczyt liczby obrotów chwytaka obrotowego; func[18]-odczyt prędkości chwytaka obrotowego; func[19]-odczyt momentu obrotowego chwytaka obrotowego; func[20]-ustawienie ruchu synchronicznego wieloosiowego; func[21]-komenda kasowania błędów;
+        func[22]-stan pracy pojedynczej osi; func[23]-stan pracy wszystkich osi;
      * @return  Kod błędu
      */
     public int SetAxleLuaGripperFunc(int id, int[] func)
 
-Pobranie włączenia funkcji sterowania ruchem chwytaka
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
+Pobieranie włączonych funkcji sterowania ruchem chwytaka
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
     /**
-     * @brief Pobranie włączenia funkcji sterowania ruchem chwytaka
+     * @brief Pobiera włączone funkcje sterowania ruchem chwytaka
      * @param id Numer urządzenia chwytaka
-     * @param func func[0]-włączenie chwytaka；func[1]-inicjalizacja chwytaka；2-ustawienie pozycji；3-ustawienie prędkości；4-ustawienie momentu；6-odczyt stanu chwytaka；7-odczyt stanu inicjalizacji；8-odczyt kodu błędu；9-odczyt pozycji；10-odczyt prędkości；11-odczyt momentu
+     * @param func func[0]-włączenie chwytaka; func[1]-inicjalizacja chwytaka; func[2]-ustawienie pozycji; func[3]-ustawienie prędkości; func[4]-ustawienie momentu obrotowego; func[6]-odczyt stanu chwytaka;
+        func[7]-odczyt stanu inicjalizacji; func[8]-odczyt kodu błędu; func[9]-odczyt pozycji; func[10]-odczyt prędkości; func[11]-odczyt momentu obrotowego; func[12]-ustawienie liczby obrotów dla chwytaka obrotowego;
+        func[13]-ustawienie prędkości obrotowej dla chwytaka obrotowego; func[14]-ustawienie momentu obrotowego dla chwytaka obrotowego; func[15]-odczyt stanu chwytaka obrotowego; func[16]-odczyt stanu inicjalizacji chwytaka obrotowego;
+        func[17]-odczyt liczby obrotów chwytaka obrotowego; func[18]-odczyt prędkości chwytaka obrotowego; func[19]-odczyt momentu obrotowego chwytaka obrotowego; func[20]-ustawienie ruchu synchronicznego wieloosiowego; func[21]-komenda kasowania błędów;
+        func[22]-stan pracy pojedynczej osi; func[23]-stan pracy wszystkich osi;
      * @return  Kod błędu
      */
     public int GetAxleLuaGripperFunc(int id, int[] func)
@@ -1899,3 +1906,154 @@ Przykład kodu przesyłania, pobierania i usuwania protokołu otwartego urządze
         robot.Sleep(1000);
         return 0;
     }
+
+Sterowanie Ruchem Dłoni
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Sterowanie ruchem dłoni
+    * @param idstart Początkowy numer stacji podrzędnej
+    * @param slaveNum Liczba
+    * @param pos Tablica pozycji, długość 16, zakres (-360~360)
+    * @param speed Tablica procentów prędkości, długość 16, zakres [0~100]
+    * @param force Tablica procentów momentu obrotowego, długość 16, zakres [0~100]
+    * @param max_time Maksymalny czas oczekiwania, zakres [0~30000], jednostka ms
+    * @return Kod błędu
+    */
+    public int SetDexterousHandsMove(int idstart, int slaveNum, double[] pos, int[] speed, int[] force, int max_time) 
+        
+Sterowanie Resetem i Aktywacją Dłoni
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Sterowanie resetem i aktywacją dłoni
+    * @param id Numer stacji podrzędnej
+    * @param act 0-reset 1-aktywacja
+    * @return Kod błędu
+    */
+    public int SetDexterousHandsAct(int id, int act)
+            
+Czyszczenie Błędu Dłoni
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Czyszczenie błędu dłoni
+    * @return Kod błędu
+    */
+    public int ClearDexterousHandsError()
+                
+Ustawianie Włączonych Funkcji Sterowania Ruchem Dłoni
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Ustawia włączone funkcje sterowania ruchem dłoni
+    * @param id Numer stacji podrzędnej dłoni
+    * @param func Tablica funkcji, długość 32, Bit0-wyzwolenie chwytu, Bit1-inicjalizacja chwytaka, Bit2-ustawienie pozycji, Bit3-ustawienie prędkości, Bit4-ustawienie momentu obrotowego, Bit6-odczyt stanu chwytaka, Bit7-odczyt stanu inicjalizacji, Bit8-odczyt kodu błędu, Bit9-odczyt pozycji, Bit10-odczyt prędkości, Bit11-odczyt momentu obrotowego, Bit12-ustawienie liczby obrotów, Bit13-ustawienie prędkości obrotowej, Bit14-ustawienie momentu obrotowego obrotu, Bit15-odczyt stanu chwytaka obrotowego, Bit16-odczyt stanu inicjalizacji obrotu, Bit17-odczyt liczby obrotów, Bit18-odczyt prędkości obrotowej, Bit19-odczyt momentu obrotowego obrotu, Bit20-ustawienie ruchu synchronicznego wieloosiowego, Bit21-komenda kasowania błędów, Bit22-stan pracy pojedynczej osi, Bit23-stan pracy wszystkich osi
+    * @return Kod błędu
+    */
+    public int SetDexterousHandsFunc(int id, int[] func)
+                    
+Pobieranie Włączonych Funkcji Sterowania Ruchem Dłoni
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Pobiera włączone funkcje sterowania ruchem dłoni
+    * @param id Numer urządzenia dłoni
+    * @param func Tablica parametrów wyjściowych, długość 32, Bit0-wyzwolenie chwytu, Bit1-inicjalizacja chwytaka, Bit2-ustawienie pozycji, Bit3-ustawienie prędkości, Bit4-ustawienie momentu obrotowego, Bit6-odczyt stanu chwytaka, Bit7-odczyt stanu inicjalizacji, Bit8-odczyt kodu błędu, Bit9-odczyt pozycji, Bit10-odczyt prędkości, Bit11-odczyt momentu obrotowego, Bit12-ustawienie liczby obrotów, Bit13-ustawienie prędkości obrotowej, Bit14-ustawienie momentu obrotowego obrotu, Bit15-odczyt stanu chwytaka obrotowego, Bit16-odczyt stanu inicjalizacji obrotu, Bit17-odczyt liczby obrotów, Bit18-odczyt prędkości obrotowej, Bit19-odczyt momentu obrotowego obrotu, Bit20-ustawienie ruchu synchronicznego wieloosiowego, Bit21-komenda kasowania błędów, Bit22-stan pracy pojedynczej osi, Bit23-stan pracy wszystkich osi
+    * @return Kod błędu
+    */
+    public int GetDexterousHandsFunc(int id, int[] func)
+                    
+Przykład Kodu Konfiguracji i Ruchu Dłoni na Końcówce Robota
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    
+.. code-block:: Java
+    :linenos:
+
+    public static int TestDexterousHands(Robot robot) {
+        int id = 1;
+        int slaveNum = 4;
+        int max_time = 8000;
+        int[] speed = new int[16]; 
+        int[] force = new int[16]; 
+
+        robot.LoggerInit(FrLogType.DIRECT, FrLogLevel.INFO, "D://log", 10, 10);
+        for (int i = 0; i < 16; i++) {
+            force[i] = (i < 4) ? 50 : 0;
+        }
+
+        final double[] pos = new double[16];
+
+        JointPos j1 = new JointPos(-91.876, -85.920, 109.279, -86.239, -96.664, -28.563);
+        JointPos j2 = new JointPos(-40.954, -85.920, 109.279, -86.239, -96.664, -28.563);
+        ExaxisPos epos = new ExaxisPos(0, 0, 0, 0);
+        DescPose offset_pos = new DescPose(0, 0, 0, 0, 0, 0);
+
+        int ret = robot.ClearDexterousHandsError();
+        System.out.println("ClearDexterousHandsError -> " + ret);
+
+        int[] setFunc = new int[32];
+        setFunc[2] = 1;
+        setFunc[4] = 1;
+        setFunc[9] = 1;
+        setFunc[10] = 1;
+        setFunc[11] = 1;
+        setFunc[22] = 1;
+
+        ret = robot.SetDexterousHandsFunc(id, setFunc);
+
+        int[] getFunc = new int[32];
+        ret = robot.GetDexterousHandsFunc(id, getFunc);
+        System.out.println("GetDexterousHandsFunc -> " + ret);
+        if (ret == 0) {
+            for (int i = 0; i < getFunc.length; i++) {
+                System.out.print("  [" + i + "]=" + getFunc[i]);
+                if ((i + 1) % 8 == 0) {
+                    System.out.println();
+                } else if (i < getFunc.length - 1) {
+                    System.out.print(", ");
+                }
+            }
+            if (getFunc.length % 8 != 0) {
+                System.out.println();
+            }
+        }
+
+        ret = robot.SetDexterousHandsAct(id, 1);
+        if (ret != 0) {
+            return ret;
+        }
+
+        setPositions(pos, 20, 20, 20, 20);
+        ret = robot.SetDexterousHandsMove(id, slaveNum, pos, speed, force, max_time);
+        robot.Sleep(5000);
+        
+        for (int iteration = 1; iteration <= 10; iteration++) {
+            robot.MoveJ(j1, 0, 0, 100, 100, 100, epos, -1, 0, offset_pos);
+
+            setPositions(pos, 10, 10, 10, 10);
+            ret = robot.SetDexterousHandsMove(id, slaveNum, pos, speed, force, max_time);
+            robot.Sleep(1000);
+
+            robot.MoveJ(j2, 0, 0, 100, 100, 100, epos, -1, 0, offset_pos);
+            setPositions(pos, 50, 50, 50, 50);
+            ret = robot.SetDexterousHandsMove(id, slaveNum, pos, speed, force, max_time);
+            robot.Sleep(1000);
+        }
+        return 0;
+    }    
