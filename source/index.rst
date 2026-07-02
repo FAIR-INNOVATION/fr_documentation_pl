@@ -19,7 +19,7 @@ Przełączanie języka
 
     \ `Deutsch <https://fairino-doc-de.readthedocs.io/latest/>`__\ 
 
-    \ `português <https://fairino-doc-pt.readthedocs.io/latest/>`__\ 
+    \ `Português <https://fairino-doc-pt.readthedocs.io/latest/>`__\ 
 
 .. toctree::
    :maxdepth: 6

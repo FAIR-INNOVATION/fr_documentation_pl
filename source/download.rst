@@ -5,9 +5,13 @@
 Broszury
 --------------
 
-    :download:`Katalog produktów FAIRINO <_static/_doc/FAIRINO Product Catalogue.pdf>`
+    :download:`Profil Firmy FAIRINO <_static/_doc/FAIRINO Company Profile.pdf>`
 
-    :download:`Katalog produktów ekosystemu FAIRINO <_static/_doc/FAIRINO Accessories Ecosystem.pdf>`
+    :download:`Katalog Produktów Ekosystemu FAIRINO <_static/_doc/FAIRINO Accessories Ecosystem.pdf>`
+
+    :download:`Broszura Spawalnicza FAIRINO <_static/_doc/FAIRINO Welding Brochure.pdf>`
+
+    :download:`Robot Humanoidalny FAIRINO <_static/_doc/FAIRINO Humanoid Robot.pdf>`
 
 Certyfikaty
 ---------------------------------
