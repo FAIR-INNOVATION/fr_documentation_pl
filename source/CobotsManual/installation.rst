@@ -122,12 +122,6 @@ Informacje na tabliczce znamionowej
 
 .. centered:: Wykres 3.1-11 Robot współpracujący FR30
 
-.. figure:: installation/125.png
-	:align: center
-	:width: 6in
-
-.. centered:: Wykres 3.1-12 Robot współpracujący FR30L
-
 Skuteczność i odpowiedzialność
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -294,14 +288,6 @@ Joint 1, Joint 6 testują ruch poziomy robota, oś obrotu prostopadła do podło
      - 0,31
      - 0,22
 
-   * - **FR30L**
-     - 0,69
-     - 0,75
-     - 0,80
-     - 0,48
-     - 0,31
-     - 0,22
-
 .. centered:: Tabela 3.1-2 Czas zatrzymania kategorii 0 (ms)
 .. list-table::
    :widths: 10 15 15 15 15 15 15
@@ -381,14 +367,6 @@ Joint 1, Joint 6 testują ruch poziomy robota, oś obrotu prostopadła do podło
      - 130
 
    * - **FR20**
-     - 540
-     - 600
-     - 700
-     - 400
-     - 260
-     - 170
-
-   * - **FR30L**
      - 540
      - 600
      - 700
@@ -494,14 +472,6 @@ Joint 1, Joint 6 testują ruch poziomy robota, oś obrotu prostopadła do podło
      - 0,33
      - 0,25
 
-   * - **FR30L**
-     - 0,71
-     - 0,78
-     - 0,82
-     - 0,51
-     - 0,33
-     - 0,25
-
 .. centered:: Tabela 3.1-4 Czas bezpiecznego zatrzymania (ms)
 .. list-table::
    :widths: 10 15 15 15 15 15 15
@@ -581,14 +551,6 @@ Joint 1, Joint 6 testują ruch poziomy robota, oś obrotu prostopadła do podło
      - 150
 
    * - **FR20**
-     - 560
-     - 630
-     - 720
-     - 430
-     - 280
-     - 200
-
-   * - **FR30L**
      - 560
      - 630
      - 720
@@ -682,14 +644,6 @@ Joint 1, Joint 6 testują ruch poziomy robota, oś obrotu prostopadła do podło
      - 0,36
      - 0,27
 
-   * - **FR30L**
-     - 0,74
-     - 0,80
-     - 0,85
-     - 0,53
-     - 0,36
-     - 0,27
-
 .. centered:: Tabela 3.1-6 Czas zatrzymania miękkim limitem (ms)
 .. list-table::
    :widths: 10 15 15 15 15 15 15
@@ -769,14 +723,6 @@ Joint 1, Joint 6 testują ruch poziomy robota, oś obrotu prostopadła do podło
      - 170
 
    * - **FR20**
-     - 580
-     - 640
-     - 740
-     - 440
-     - 300
-     - 210
-
-   * - **FR30L**
      - 580
      - 640
      - 740
@@ -1892,7 +1838,7 @@ Podczas montażu robota na podstawie montażowej należy użyć 4 śrub M8 o kla
 
 	.. centered:: Wykres 3.4-10 Podstawa montażowa robota o wysokich wymaganiach dla FR10, FR16
 
-Wymagania instalacji ramienia robota FR20, FR30, FR30L
+Wymagania instalacji ramienia robota FR20, FR30
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 Podczas montażu robota na podstawie montażowej należy użyć 6 śrub M10 o klasie wytrzymałości nie niższej niż 8.8, aby zamocować robota na podstawie montażowej. Śruby należy dokręcić momentem nie mniejszym niż 45 Nm. Zaleca się użycie dwóch otworów kołkowych o średnicy 8 mm na podstawie montażowej w połączeniu z kołkami do pozycjonowania robota, aby zwiększyć dokładność montażu robota i zapobiec przemieszczaniu się robota spowodowanemu kolizjami. Gdy robot ma wysokie wymagania co do dokładności działania, należy obowiązkowo dodać kołki do pozycjonowania robota.
@@ -1901,7 +1847,7 @@ Podczas montażu robota na podstawie montażowej należy użyć 6 śrub M10 o kl
 	:align: center
 	:width: 6in
 
-.. centered:: Wykres 3.4-11 Wymiary instalacji robota współpracującego FR20, FR30, FR30L
+.. centered:: Wykres 3.4-11 Wymiary instalacji robota współpracującego FR20, FR30
 
 .. important:: 
 
@@ -1928,7 +1874,7 @@ Kołnierz narzędziowy robota ma cztery gwintowane otwory M6, które służą do
 	:align: center
 	:width: 6in
 
-.. centered:: Wykres 3.4-14 Rysunek kołnierza końcowego robota FR20/FR30/FR30L
+.. centered:: Wykres 3.4-14 Rysunek kołnierza końcowego robota FR20/FR30
 
 .. important:: 
 	- Upewnij się, że narzędzie jest prawidłowo i bezpiecznie zamocowane.
