@@ -71,11 +71,6 @@ Podczas montażu robota współpracującego na podstawie montażowej należy uż
      - ≥45 Nm
      - φ8 mm
 
-   * - FR30L
-     - 6 sztuk M10
-     - ≥45 Nm
-     - φ8 mm
-
 .. important:: 
    Zaleca się, aby podstawa montażowa robota spełniała następujące wymagania, zapewniając solidne i stabilne zamocowanie robota:
    
