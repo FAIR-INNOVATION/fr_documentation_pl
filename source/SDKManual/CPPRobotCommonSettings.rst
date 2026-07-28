@@ -210,77 +210,79 @@ Obliczenie zewnętrznego układu współrzędnych narzędzia
      */
     errno_t ComputeExTCF(DescPose *tcp_pose);  
 
-Ustawienie zewnętrznego układu współrzędnych narzędzia
-++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionchanged:: C++SDK-v2.1.2.0
+Ustawianie Zewnętrznego Układu Współrzędnych Narzędzia
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionchanged:: C++SDK-v3.9.8
 
 .. code-block:: c++
     :linenos:
 
     /**
     * @brief  Ustawia zewnętrzny układ współrzędnych narzędzia
-    * @param  [in] id Numer układu współrzędnych, zakres [0~14]
-    * @param  [in] etcp  Pozycja środka narzędzia względem środka kołnierza końcowego
-    * @param  [in] etool  Do określenia
+    * @param  [in] id Numer układu współrzędnych, 20-39 odpowiadają zewnętrznym układom współrzędnych narzędzi 0-19
+    * @param  [in] etcp  Pozycja punktu centralnego narzędzia względem środka kołnierza końcówki
+    * @param  [in] etool  Pozycja układu współrzędnych przedmiotu zamontowanego na końcówce robota
     * @return  Kod błędu
     */
-    errno_t SetExToolCoord(int id, DescPose *etcp, DescPose *etool);
+    errno_t  SetExToolCoord(int id, DescPose *etcp, DescPose *etool);
 
-Ustawienie listy zewnętrznych układów współrzędnych narzędzia
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionchanged:: C++SDK-v2.1.2.0
+Ustawianie Listy Zewnętrznych Układów Współrzędnych Narzędzi
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionchanged:: C++SDK-v3.9.8
 
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  Ustawia listę zewnętrznych układów współrzędnych narzędzia
-    * @param  [in] id Numer układu współrzędnych, zakres [0~14]
-    * @param  [in] etcp  Pozycja środka narzędzia względem środka kołnierza końcowego
-    * @param  [in] etool  Do określenia
+    * @brief  Ustawia listę zewnętrznych układów współrzędnych narzędzi
+    * @param  [in] id Numer układu współrzędnych, 20-39 odpowiadają zewnętrznym układom współrzędnych narzędzi 0-19
+    * @param  [in] etcp  Pozycja punktu centralnego narzędzia względem środka kołnierza końcówki
+    * @param  [in] etool  Pozycja układu współrzędnych przedmiotu zamontowanego na końcówce robota
     * @return  Kod błędu
     */
-    errno_t SetExToolList(int id, DescPose *etcp, DescPose *etool);
+    errno_t  SetExToolList(int id, DescPose *etcp, DescPose *etool);
 
-Przykład kodu operacji na zewnętrznym układzie współrzędnych narzędzia robota
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Przykład Kodu Operacji na Zewnętrznym Układzie Współrzędnych Narzędzia Robota
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionchanged:: C++SDK-v3.9.8
+
 .. code-block:: c++
     :linenos:
 
     int TestExtCoord(void)
     {
-       ROBOT_STATE_PKG pkg = {};
-       FRRobot robot;
-       robot.LoggerInit();
-       robot.SetLoggerLevel(1);
-       int rtn = robot.RPC("192.168.58.2");
-       if (rtn != 0)
-       {
-          return -1;
-       }
-       robot.SetReConnectParam(true, 30000, 500);
-       DescPose p1Desc(-89.606, 779.517, 193.516, 178.000, 0.476, -92.484);
-       JointPos p1Joint(-108.145, -50.137, 85.818, -125.599, -87.946, 74.329);
-       DescPose p2Desc(-24.656, 850.384, 191.361, 177.079, -2.058, -95.355);
-       JointPos p2Joint(-111.024, -41.538, 69.222, -114.913, -87.743, 74.329);
-       DescPose p3Desc(-99.813, 766.661, 241.878, -176.817, 1.917, -91.604);
-       JointPos p3Joint(-107.266, -56.116, 85.971, -122.560, -92.548, 74.331);
-       ExaxisPos exaxisPos(0, 0, 0, 0);
-       DescPose offdese(0, 0, 0, 0, 0, 0);
-       DescPose posTCP[3] = { p1Desc , p2Desc , p3Desc };
-       DescPose coordRtn = {};
-       robot.MoveJ(&p1Joint, &p1Desc, 1, 0, 100, 100, 100, &exaxisPos, -1, 0, &offdese);
-       robot.SetExTCPPoint(1);
-       robot.MoveJ(&p2Joint, &p2Desc, 1, 0, 100, 100, 100, &exaxisPos, -1, 0, &offdese);
-       robot.SetExTCPPoint(2);
-       robot.MoveJ(&p3Joint, &p3Desc, 1, 0, 100, 100, 100, &exaxisPos, -1, 0, &offdese);
-       robot.SetExTCPPoint(3);
-       rtn = robot.ComputeExTCF(&coordRtn);
-       printf("ComputeExTCF          %d coord is %f %f %f %f %f %f \n", rtn, coordRtn.tran.x, coordRtn.tran.y, coordRtn.tran.z, coordRtn.rpy.rx, coordRtn.rpy.ry, coordRtn.rpy.rz);
-       robot.SetExToolCoord(1, &coordRtn, &offdese);
-       robot.SetExToolList(1, &coordRtn, &offdese);
-       robot.CloseRPC();
-       return 0;
+        ROBOT_STATE_PKG pkg = {};
+        FRRobot robot;
+        robot.LoggerInit();
+        robot.SetLoggerLevel(1);
+        int rtn = robot.RPC("192.168.58.2");
+        if (rtn != 0)
+        {
+            return -1;
+        }
+        robot.SetReConnectParam(true, 30000, 500);
+        DescPose p1Desc(-89.606, 779.517, 193.516, 178.000, 0.476, -92.484);
+        JointPos p1Joint(-108.145, -50.137, 85.818, -125.599, -87.946, 74.329);
+        DescPose p2Desc(-24.656, 850.384, 191.361, 177.079, -2.058, -95.355);
+        JointPos p2Joint(-111.024, -41.538, 69.222, -114.913, -87.743, 74.329);
+        DescPose p3Desc(-99.813, 766.661, 241.878, -176.817, 1.917, -91.604);
+        JointPos p3Joint(-107.266, -56.116, 85.971, -122.560, -92.548, 74.331);
+        ExaxisPos exaxisPos(0, 0, 0, 0);
+        DescPose offdese(0, 0, 0, 0, 0, 0);
+        DescPose posTCP[3] = { p1Desc , p2Desc , p3Desc };
+        DescPose coordRtn = {};
+        robot.MoveJ(&p1Joint, 1, 0, 100, 100, 100, &exaxisPos, -1, 0, &offdese);
+        robot.SetExTCPPoint(1);
+        robot.MoveJ(&p2Joint, 1, 0, 100, 100, 100, &exaxisPos, -1, 0, &offdese);
+        robot.SetExTCPPoint(2);
+        robot.MoveJ(&p3Joint, 1, 0, 100, 100, 100, &exaxisPos, -1, 0, &offdese);
+        robot.SetExTCPPoint(3);
+        rtn = robot.ComputeExTCF(&coordRtn);
+        printf("ComputeExTCF          %d coord is %f %f %f %f %f %f \n", rtn, coordRtn.tran.x, coordRtn.tran.y, coordRtn.tran.z, coordRtn.rpy.rx, coordRtn.rpy.ry, coordRtn.rpy.rz);
+        robot.SetExToolCoord(21, &coordRtn, &offdese);
+        robot.SetExToolList(21, &coordRtn, &offdese);
+        robot.CloseRPC();
+        return 0;
     }
 
 Ustawienie punktu odniesienia przedmiotu - metoda trzypunktowa

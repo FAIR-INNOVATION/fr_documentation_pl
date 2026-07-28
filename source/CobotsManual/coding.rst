@@ -176,34 +176,70 @@ Użyj paska narzędzi u góry drzewa programu, aby je modyfikować.
 
    Działanie: Przełącza między trybem drzewa programu a trybem edycji lua.
 
-Opis ikon w prawym górnym rogu:
+Ikony w prawym górnym rogu są opisane w następujący sposób:
 
 .. note:: 
    .. image:: coding/240.png
       :height: 0.75in
       :align: left
 
-   Nazwa: **Dodawanie/edycja programowania**
-
-   Działanie: Dodaje/edytuje treść bieżącego polecenia programu
+   Nazwa: **Dodawanie/Edycja Programowania Programów**
+   
+   Funkcja: Dodawanie/edycja treści bieżącego polecenia programu
 
 .. note:: 
-   .. image:: coding/241.png
+   .. image:: coding/245.png
       :height: 0.75in
       :align: left
 
-   Nazwa: **Model robota**
-
-   Działanie: Powrót do interfejsu modelu 3D robota
+   Nazwa: **Lokalny Punkt Nauczania**
+   
+   Funkcja: Punkty nauczania stosowane tylko do bieżącego programu
 
 .. note:: 
    .. image:: coding/242.png
       :height: 0.75in
       :align: left
 
-   Nazwa: **Interfejs podprogramu NewDofile**
+   Nazwa: **Interfejs Podprogramu NewDofile**
+   
+   Funkcja: Gdy bieżące polecenie programu zawiera instrukcję NewDofile, kliknij, aby przejść i wybrać nazwę podprogramu w celu wyświetlenia jego zawartości.
 
-   Działanie: Gdy w bieżącym poleceniu programu znajduje się instrukcja NewDofile, kliknij, aby wybrać nazwę podprogramu i wyświetlić jego treść.
+.. note:: 
+   .. image:: coding/244.png
+      :height: 0.75in
+      :align: left
+
+   Nazwa: **Kopia Zapasowa Bieżącego Programu Nauczania**
+   
+   Funkcja: Rejestruje modyfikacje wprowadzone w bieżącym programie
+
+.. note:: 
+   .. image:: coding/602.png
+      :height: 0.75in
+      :align: left
+
+   Nazwa: **Dziennik Drukowania**
+   
+   Funkcja: Wyświetla określone informacje w oknie drukowania WebApp w celu ułatwienia debugowania i śledzenia danych
+
+.. note:: 
+   .. image:: coding/241.png
+      :height: 0.75in
+      :align: left
+
+   Nazwa: **Model Robota**
+   
+   Funkcja: Powrót do interfejsu modelu 3D robota
+
+.. note:: 
+   .. image:: coding/596.png
+      :height: 0.75in
+      :align: left
+
+   Nazwa: **Debugowanie Sieci Socket**
+   
+   Funkcja: Interfejs debugowania komunikacji sieciowej
 
 .. note:: 
    .. image:: coding/243.png
@@ -211,26 +247,53 @@ Opis ikon w prawym górnym rogu:
       :align: left
 
    Nazwa: **Ustawienia Modbus TCP**
-
-   Działanie: Konfiguruje parametry komunikacji Modbus TCP
+   
+   Funkcja: Konfiguracja parametrów komunikacji Modbus TCP
 
 .. note:: 
-   .. image:: coding/244.png
+   .. image:: coding/597.png
       :height: 0.75in
       :align: left
 
-   Nazwa: **Kopia zapasowa bieżącego programu nauczania**
-
-   Działanie: Rejestruje zmiany wprowadzone w bieżącym programie
+   Nazwa: **Ustawienia Modbus RTU**
+   
+   Funkcja: Konfiguracja parametrów komunikacji Modbus RTU
 
 .. note:: 
-   .. image:: coding/245.png
+   .. image:: coding/598.png
       :height: 0.75in
       :align: left
 
-   Nazwa: **Lokalny punkt nauczania**
+   Nazwa: **Zarządzanie Programami w Tle**
+   
+   Funkcja: Konfiguracja interfejsu programów w tle
 
-   Działanie: Punkt nauczania stosowany tylko w bieżącym programie
+.. note:: 
+   .. image:: coding/599.png
+      :height: 0.75in
+      :align: left
+
+   Nazwa: **Zarządzanie Zmiennymi Użytkownika**
+   
+   Funkcja: Konfiguracja interfejsu zmiennych użytkownika
+
+.. note:: 
+   .. image:: coding/600.png
+      :height: 0.75in
+      :align: left
+
+   Nazwa: **Punkty Nauczania**
+   
+   Funkcja: Konfiguracja interfejsu punktów nauczania
+
+.. note:: 
+   .. image:: coding/601.png
+      :height: 0.75in
+      :align: left
+
+   Nazwa: **Konfiguracja Programu Głównego**
+   
+   Funkcja: Konfiguracja programu głównego
 
 Polecenia programu
 ~~~~~~~~~~~~~~~~~~
@@ -1439,6 +1502,98 @@ Wybierz układ współrzędnych obiektu, który ma zostać automatycznie przeksz
 
 .. centered:: Schemat 9.5-33 Interfejs instrukcji WPTrsf
 
+Funkcja Transformacji Przedmiotu i Prędkości Bezpieczeństwa
+**************************************************************
+
+Przegląd
+""""""""""""""""""""""""""""""""""""
+
+Funkcja transformacji przedmiotu odnosi się do migracji trajektorii ruchu PTP\LIN\ARC\CIR w bieżącym układzie współrzędnych przedmiotu do działania w docelowym układzie współrzędnych przedmiotu.
+
+Funkcja prędkości bezpieczeństwa odnosi się do otwartej konfiguracji ograniczeń prędkości w przestrzeni kartezjańskiej\stawowej robota, umożliwiając ochronę prędkości zarówno w przestrzeni roboczej, jak i w przestrzeni stawów.
+
+Procedura Operacyjna Funkcji Transformacji Przedmiotu
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+**Krok 1**: Kalibracja układu współrzędnych przedmiotu robota za pomocą WebApp. Szczegółowe kroki operacyjne tej funkcji można znaleźć w odpowiednich rozdziałach podręcznika użytkownika.
+
+**Krok 2**: Nauczanie punktów. Nauczanie punktów ruchu PTP\LIN\ARC\CIR i pisanie programów LUA za pomocą WebApp. Szczegółowe kroki operacyjne tej funkcji można znaleźć w odpowiednich rozdziałach podręcznika użytkownika.
+
+**Krok 3**: Konfiguracja transformacji układu współrzędnych przedmiotu. W głównym interfejsie WebApp kliknij "Teach Program" - "Programowanie Programu", aby przejść do obszaru "Instrukcje Ruchu".
+
+.. image:: coding/583.png
+   :width: 4in
+   :align: center
+
+.. centered:: Rysunek 9.5-33-1 Obszar "Instrukcje Ruchu"
+
+W obszarze "Instrukcje Ruchu" kliknij przycisk "Transformacja Przedmiotu", aby przejść do interfejsu konfiguracji instrukcji "WPTrsf".
+
+.. image:: coding/584.png
+   :width: 6in
+   :align: center
+
+.. centered:: Rysunek 9.5-33-2 Konfiguracja Instrukcji WPTrsf
+
+W interfejsie konfiguracji instrukcji "WPTrsf" -> obszar konfiguracji "Edycja Instrukcji", wybierz numer docelowego układu współrzędnych przedmiotu z rozwijanego menu "Wybierz Układ Współrzędnych Przedmiotu", a następnie kliknij przyciski "Dodaj" - "Zastosuj", aby zakończyć konfigurację funkcji transformacji przedmiotu.
+
+**Krok 4**: Pisanie programu LUA dla funkcji transformacji przedmiotu. Dostosuj kolejność instrukcji wygenerowanych od Kroku 2 do Kroku 3 i uruchom program LUA, aby zaimplementować funkcję transformacji przedmiotu.
+
+.. image:: coding/585.png
+   :width: 4in
+   :align: center
+
+.. centered:: Rysunek 9.5-33-3 Program LUA dla Funkcji Transformacji Przedmiotu
+
+Procedura Operacyjna Funkcji Prędkości Bezpieczeństwa
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+W głównym interfejsie WebApp kliknij "Ustawienia Początkowe" - "Bezpieczeństwo" - "Prędkość Bezpieczeństwa", aby przejść do obszaru konfiguracji "Prędkość Bezpieczeństwa".
+
+.. image:: coding/586.png
+   :width: 6in
+   :align: center
+
+.. centered:: Rysunek 9.5-33-4 Konfiguracja Instrukcji Prędkości Bezpieczeństwa
+
+W obszarze konfiguracji "Prędkość Bezpieczeństwa" -> rozwijane menu "Włączenie Funkcji" można wybrać opcje "Wyłącz", "Włącz w Trybie Ręcznym" i "Włącz we Wszystkich Trybach".
+
+"Włącz w Trybie Ręcznym" oznacza, że funkcja jest włączana po przełączeniu na tryb ręczny w WebApp; "Włącz we Wszystkich Trybach" oznacza, że funkcja jest włączana po przełączeniu na tryb ręczny, tryb automatyczny i tryb przeciągania w WebApp.
+
+W obszarze konfiguracji "Prędkość Bezpieczeństwa" pokazanym poniżej, w polach wejściowych "Prędkość Graniczna TCP", "Prędkość Graniczna J1", "Prędkość Graniczna J2", "Prędkość Graniczna J3", "Prędkość Graniczna J4", "Prędkość Graniczna J5" i "Prędkość Graniczna J6" można odpowiednio ustawić ochronę prędkości w przestrzeni kartezjańskiej i stawowej robota.
+
+Warto zauważyć, że podczas ruchu robota powyższe zabezpieczenia prędkości są aktywowane na podstawie minimalnej wartości spośród nich.
+
+W obszarze konfiguracji "Prędkość Bezpieczeństwa" -> rozwijane menu "Tryb Po Przekroczeniu Prędkości" można wybrać opcje "Zatrzymaj i Alarm", "Automatyczne Ograniczenie Prędkości" i "Wyłącz Po Zatrzymaniu i Alarmie", jak pokazano w poniższej tabeli.
+
+.. centered:: Tabela 9.5-4 Wybór "Trybu Po Przekroczeniu Prędkości" w Różnych Opcjach "Włączenia Funkcji"
+
+.. list-table::
+   :widths: 25 25 25 25
+   :header-rows: 0
+   :align: center
+
+   * - \
+     - **Zatrzymaj i Alarm**
+     - **Automatyczne Ograniczenie Prędkości**
+     - **Wyłącz Po Zatrzymaniu i Alarmie**
+
+   * - **Włącz w Trybie Ręcznym**
+     - Obsługiwane
+     - Obsługiwane
+     - Obsługiwane
+
+   * - **Włącz we Wszystkich Trybach**
+     - Obsługiwane
+     - Nieobsługiwane
+     - Obsługiwane
+			
+"Zatrzymaj i Alarm": Gdy zarówno prędkość polecenia, jak i sprzężenia zwrotnego stawów przekraczają prędkość bezpieczeństwa, WebApp wyświetla ostrzeżenie o przekroczeniu prędkości;
+
+"Automatyczne Ograniczenie Prędkości": Gdy zarówno prędkość polecenia, jak i sprzężenia zwrotnego stawów przekraczają prędkość bezpieczeństwa, prędkość jest automatycznie redukowana do poziomu bezpiecznego;
+
+"Wyłącz Po Zatrzymaniu i Alarmie": Gdy zarówno prędkość polecenia, jak i sprzężenia zwrotnego stawów przekraczają prędkość bezpieczeństwa, WebApp wyświetla ostrzeżenie o przekroczeniu prędkości i wszystkie stawy robota są wyłączane.
+
 Polecenie transformacji narzędzia
 +++++++++++++++++++++++++++++++++
 
@@ -1735,6 +1890,71 @@ Ta instrukcja zawiera cztery polecenia: wykrywanie pozycji w czasie rzeczywistym
    :align: center
 
 .. centered:: Schemat 9.7-5 Interfejs instrukcji Conveyor
+
+Funkcja Ruchu Śledzenia w Miejscu na Taśmie Transportowej
+***********************************************************************
+
+Przegląd
+"""""""""""""""""""""""""""""""""""
+
+Funkcja ta umożliwia robotowi identyfikację i synchroniczne śledzenie obiektów poruszających się na taśmie transportowej, a następnie osiągnięcie "względnie nieruchomego" ruchu między robotem a obiektem bez zatrzymywania taśmy.
+
+Procedura Operacyjna
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+**Krok 1**: Kliknij "Aplikacje Pomocnicze" - "Pakiet Procesów" - "Śledzenie Taśmy", aby skonfigurować parametry śledzenia taśmy, w tym "Konfiguracja I/O", "Konfiguracja Parametrów", "Kompensacja Punktu Chwytu" (wymagana tylko dla funkcji "Śledzenie z Chwytem") i "Konfiguracja Punktów Referencyjnych". W "Konfiguracji Punktów Referencyjnych", pozycja "Punktu Początkowego a" to pozycja obiektu na początku ruchu taśmy; pozycja "Punktu Końcowego b" to pozycja obiektu na końcu ruchu taśmy. Szczegółowe kroki operacyjne znajdują się w odpowiednich rozdziałach.
+
+**Krok 2**: Ruch śledzenia wykorzystuje układ współrzędnych przedmiotu jako układ współrzędnych taśmy, dlatego należy ustawić układ współrzędnych przedmiotu. Kliknij "Ustawienia Początkowe" - "Podstawowe", wybierz "Układ Współrzędnych Przedmiotu", kliknij, aby wybrać układ współrzędnych przedmiotu inny niż "wobjcoord0" do kalibracji. Metoda kalibracji znajduje się w odpowiednich rozdziałach.
+
+**Krok 3**: Kliknij "Teach Program" - "Programowanie Programu" - "Taśma", aby przejść do strony konfiguracji funkcji taśmy.
+
+**Krok 4**: Kliknij przycisk "Włącz Śledzenie", wybierz "Ruch Śledzenia" jako tryb pracy i kliknij przycisk "Dodaj".
+
+.. image:: coding/590.png
+   :width: 6in
+   :align: center
+
+.. centered:: Rysunek 9.7-5-1 Ustawienia Włączenia Śledzenia
+
+**Krok 5**: Kliknij przycisk "Detekcja I/O w Czasie Rzeczywistym", ustaw maksymalny czas oczekiwania i kliknij przycisk "Dodaj".
+
+.. image:: coding/591.png
+   :width: 6in
+   :align: center
+
+.. centered:: Rysunek 9.7-5-2 Ustawienia Detekcji I/O w Czasie Rzeczywistym
+
+**Krok 6**: Kliknij przycisk "Detekcja Pozycji w Czasie Rzeczywistym", wybierz "Ruch Śledzenia" jako tryb pracy i kliknij przycisk "Dodaj".
+
+.. image:: coding/592.png
+   :width: 6in
+   :align: center
+
+.. centered:: Rysunek 9.7-5-3 Ustawienia Detekcji Pozycji w Czasie Rzeczywistym
+
+**Krok 7**: Kliknij przycisk "Ruch Śledzenia w Miejscu". Tryby pracy to "Czas", "Odległość" i "Czas + Odległość". W trybie "Czas" należy ustawić czas ruchu. Czas jest liczony od rozpoczęcia śledzenia taśmy, a śledzenie zatrzymuje się po osiągnięciu ustawionego czasu. W trybie "Odległość" należy ustawić odległość ruchu. Odległość jest liczona od rozpoczęcia śledzenia taśmy, a śledzenie zatrzymuje się po osiągnięciu ustawionej odległości. W trybie "Czas + Odległość" należy ustawić zarówno czas, jak i odległość ruchu. Obliczenie rozpoczyna się od włączenia śledzenia taśmy, a śledzenie zatrzymuje się, gdy spełniony zostanie jeden z warunków (czas lub odległość). Uwaga: Ze względu na bezpieczeństwo środowiska ruchu, maksymalna pozycja śledzenia tych trzech trybów nie przekroczy pozycji "Punktu Końcowego b" podczas kalibracji taśmy. Kliknij przycisk "Dodaj".
+
+.. image:: coding/593.png
+   :width: 6in
+   :align: center
+
+.. centered:: Rysunek 9.7-5-4 Ustawienia Parametrów Ruchu Śledzenia w Miejscu
+
+**Krok 8**: Kliknij przycisk "Wyłącz Śledzenie" i kliknij przycisk "Dodaj".
+
+.. image:: coding/594.png
+   :width: 6in
+   :align: center
+
+.. centered:: Rysunek 9.7-5-5 Ustawienia Wyłączenia Śledzenia
+
+**Krok 9**: Wygenerowany program LUA dla ruchu śledzenia w miejscu na taśmie jest pokazany na rysunku. Uruchom program, aby zrealizować ruch śledzenia w miejscu na taśmie.
+
+.. image:: coding/595.png
+   :width: 4in
+   :align: center
+
+.. centered:: Rysunek 9.7-5-6 Program LUA Ruchu Śledzenia w Miejscu na Taśmie
 
 Polecenie urządzenia do szlifowania
 +++++++++++++++++++++++++++++++++++
@@ -8723,3 +8943,75 @@ Poniżej znajduje się program nieblokującego ruchu robota, który w czasie rze
    :align: center
 
 .. centered:: Rysunek 9.39‑10 Przykład Drukowania Bieżącej Pozycji i DI Podczas Ruchu Robota   
+   
+Optymalizacja Funkcji Ładowania Web dla Dużych Programów LUA i Podprogramów
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Tło
+++++++++++++++++++++++++++++++++++++++++++++++
+
+Obecnie robot nie jest w stanie obsłużyć dużych programów LUA (200k+ linii). Podczas przesyłania dużego programu LUA strona internetowa nie może go załadować i używać.
+
+Jednocześnie podczas importowania programów bieżąca logika importu nie przeprowadza analizy i walidacji programu. Po imporcie program musi być ręcznie otwarty i zapisany w celu walidacji. Przy jednoczesnym użyciu dużej liczby wywołań podprogramów, każdy z nich musi być ręcznie otwierany pojedynczo, co jest czasochłonne i znacznie obniża wydajność pracy.
+
+Przegląd
+++++++++++++++++++++++++++++++++++++++++++++++
+
+Ta optymalizacja dotyczy importowanych programów. Backend automatycznie je analizuje i zapisuje. Po przesłaniu kolejnych podprogramów można je wywoływać bezpośrednio, bez konieczności ręcznego otwierania i zapisywania.
+
+W przypadku dużych programów LUA, gdy frontend web importuje duży program LUA (natywny program LUA, który nie wymaga wtórnej analizy), jest on nazywany z przedrostkiem RAW, np. RAW_test.lua. Ten typ programu oznacza, że program składa się wyłącznie z natywnych instrukcji LUA i nie zawiera informacji biznesowych aplikacji. Może być bezpośrednio umieszczony w interpreterze LUA do wykonania. Kontroler musi jedynie przeprowadzić walidację składniową, bez analizowania linia po linii. To znacznie skraca czas analizy importu pliku. Jednocześnie frontend nie wykonuje już renderowania animacji dla dużych programów LUA; programy są wyświetlane w formacie zwykłego tekstu, a dynamiczne podświetlanie i numery linii wykonania nie są już wyświetlane, co poprawia wydajność renderowania danych frontendu. Szczegółowe instrukcje wymagające analizy można znaleźć w Rozdziale 1.4.
+
+Po imporcie programu, Web powinien wyświetlić pasek postępu oraz komunikat potwierdzający po pomyślnym zakończeniu importu.
+
+W przypadku dużych programów LUA zaleca się stosowanie podprogramów w połączeniu z metodą `RAW_` w celu zwiększenia wydajności operacyjnej.
+
+Procedura Operacyjna dla Dużych Programów LUA
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+**Krok 1**: Nazwij duży program LUA z przedrostkiem `RAW_`, np. RAW_test200000.lua.
+
+**Krok 2**: Otwórz stronę internetową, kliknij kolejno "Teach Program" -> "Programowanie", wybierz polecenie "Importuj" i wybierz RAW_test200000.lua w wyborze plików "Importuj".
+
+.. image:: coding/587.png
+   :width: 6in
+   :align: center
+
+.. centered:: Rysunek 9.40‑1 Import Pliku `RAW_`    
+
+**Krok 3**: Poczekaj na zakończenie importu. Po zakończeniu importu operacje importu, analizy, zapisu i renderowania zostały już wykonane, a plik można uruchomić bezpośrednio.
+
+.. image:: coding/588.png
+   :width: 6in
+   :align: center
+
+.. centered:: Rysunek 9.40‑2 Oczekiwanie na Import   
+
+Procedura Operacyjna dla Podprogramów
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+**Krok 1**: Otwórz stronę internetową, kliknij kolejno "Teach Program" -> "Programowanie", wybierz polecenie "Importuj" i wybierz zbiorczo program główny oraz podprogramy w wyborze plików "Importuj".
+
+**Krok 2**: Poczekaj na pomyślne zaimportowanie wszystkich programów, przełącz robota w tryb automatyczny, a program główny może być uruchomiony bezpośrednio.
+
+Uwagi
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Pliki `RAW_` przeprowadzają tylko walidację składniową i nie analizują ani nie generują zawartości pliku linia po linii. Zawierają informacje o punktach, operacjach IO i innych niestandardowych zintegrowanych funkcjach LUA dla wygody klienta. Takie funkcje muszą być łączone z danymi niestandardowymi użytkownika w celu wtórnego generowania bezpośrednio wykonywalnych funkcji LUA i nie mogą być używane w plikach `RAW_`.
+
+.. image:: coding/589.png
+   :width: 6in
+   :align: center
+
+.. centered:: Rysunek 9.40‑3 Schemat Blokowy Importu Programu LUA 
+
+Podręcznik pisania plików `RAW_` można znaleźć w Podręczniku Użytkownika Skryptów Programowania FRLua. Następujące funkcje LUA wymagają analizy i nie mają zastosowania do plików `RAW_`.
+
+laserPTP(), EXT_AXIS_PTP(), SPTP(), NewSP(), SplinePTP(), laserLin(), SLIN(), Lin(), laserARC(), ARC() 
+laserCircle(), Circle(), TCPComputeCircleCenter(), unifCircle(), NewSpiral(), Spiral(), SCIRC() 
+ModbusSlaveWriteDO(), ModbusSlaveWriteDI(), ModbusSlaveWriteAO(), ModbusSlaveWriteAI(), ModbusSlaveReadDO(), ModbusSlaveReadDI(), ModbusSlaveReadAO(), ModbusSlaveReadAI(), ModbusSlaveWaitDI(), ModbusSlaveWaitAI()
+ModbusMasterWriteDO(), ModbusMasterWriteAO(), ModbusMasterReadDO(), ModbusMasterReadDI(), ModbusMasterReadAO(), ModbusMasterReadAI(), ModbusMasterWaitDI(), ModbusMasterWaitAI()
+ModbusSlaveWriteDO_RTU(), ModbusSlaveWriteDI_RTU(), ModbusSlaveWriteAO_RTU(), ModbusSlaveWriteAI_RTU(), ModbusSlaveReadDO_RTU(), ModbusSlaveReadDI_RTU(), ModbusSlaveReadAO_RTU(), ModbusSlaveReadAI_RTU(), ModbusSlaveWaitDI_RTU(), ModbusSlaveWaitAI_RTU()
+ModbusMasterWriteDO_RTU(), ModbusMasterWriteAO_RTU(), ModbusMasterReadDO_RTU(), ModbusMasterReadDI_RTU(), ModbusMasterReadAO_RTU(), ModbusMasterReadAI_RTU(), ModbusMasterWaitDI_RTU(), ModbusMasterWaitAI_RTU(), SetAO(), SetAuxAO(), SetToolAO(), WaitAI()
+FieldBusSlaveWaitAI(), WaitToolAI(), WaitAuxAI(), SPLCSetAO(), SPLCSetToolAO(), SetToolList(), SetWObjList(), SetExToolList(), PostureAdjustOn(), RegisterVar(), SetSysVarValue(), GetSysVarValue(), MultilayerOffsetTrsfToBase(), GetSegWeldDisDir(), DMP()
+LTSearchStart(), PointTableSwitch(), GetSegmentWeldPoint(), LaserRecordPoint(), GetIntersectionThrough3Point(), GetIntersectionThrough4Point(), GetUserVal(), SetUserVal(), MoveToIntersectLineStart(), MoveIntersectLine(), OriginPointWeaveStart()
+MatrixMoveStart(), MatrixMoveEnd(), MatrixSetCountPlus(), MatrixGetCount(), MatrixSetStartCount().   

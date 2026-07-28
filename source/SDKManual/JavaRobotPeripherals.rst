@@ -439,9 +439,6 @@ Konfiguracja parametrów przenośnika
     * @param [in] wpAxis Numer układu przedmiotu dla funkcji śledzenia ruchu wybierz numer układu przedmiotu, dla śledzenia chwytania, śledzenia TPD ustaw na 0
     * @param [in] vision Czy z wizją  0 nie  1 tak
     * @param [in] speedRadio Współczynnik prędkości dla opcji śledzenia chwytania przenośnika (1-100) dla innych opcji domyślnie 1
-    * @param [in] followType Typ śledzenia ruchu, 0-śledzenie ruchu; 1-śledzenie kontrolne
-    * @param [in] startDis Należy ustawić dla śledzenia kontrolnego, Odległość początkowa śledzenia, -1: automatyczne obliczenie (automatyczne śledzenie kontrolne po dotarciu przedmiotu pod robota), jednostka mm, wartość domyślna 0
-    * @param [in] endDis Należy ustawić dla śledzenia kontrolnego, Odległość końcowa śledzenia, jednostka mm, wartość domyślna 100
     * @return Kod błędu
     */
     int ConveyorSetParam(int encChannel, int resolution, double lead, int wpAxis, int vision, double speedRadio, int followType, int startDis, int endDis); 
@@ -564,6 +561,90 @@ Przykładowy program operacji przenośnika robota
 
         retval = robot.MoveGripper(index, 100, 40, 10, max_time, block, 0, 0, 0, 0);
 
+        return 0;
+    }
+
+Konfiguracja Parametrów Śledzenia w Miejscu na Taśmie Transportowej
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief  Konfiguruje parametry śledzenia w miejscu na taśmie transportowej
+    * @param  [in] trackMode 0-czas; 1-odległość; 2-czas i odległość, dowolny warunek spełniony
+    * @param  [in] trackTime Czas śledzenia, jednostka s
+    * @param  [in] trackDis Odległość śledzenia
+    * @return  Kod błędu
+    */
+    public int SetStationaryTrackPara(int trackMode, double trackTime, int trackDis)
+
+Przykład Kodu Śledzenia w Miejscu na Taśmie Transportowej
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    public static int TestStationaryTrack(Robot robot)
+    {
+        System.out.println("\n========== Test Śledzenia Stacjonarnego Taśmy ==========");
+
+        int rtn;
+
+        JointPos j1 = new JointPos(-35.146, -102.684, 120.805, -100.401, -90.295, 150.105);
+        DescPose d1 = new DescPose(-121.814, -348.341, 209.978, -173.152, -3.585, -5.446);
+
+        ExaxisPos ex = new ExaxisPos(0, 0, 0, 0);
+        DescPose zeroOff = new DescPose(0, 0, 0, 0, 0, 0);
+
+        int tool = 1;
+        int workpiece = 1;
+
+        rtn = robot.ConveyorSetParam(0, 10000, 200, 0, 0, 10,0,0,0);
+
+
+        robot.MoveJ(j1, d1, tool, workpiece, 100, 100, 100, ex, -1, 0, zeroOff);
+
+        // Step 1: Sygnał sterujący SetDO
+        System.out.println("--- Step 1: SetDO(6,1) ---");
+        rtn = robot.SetDO(6, 1, 0, 0);
+        System.out.println("  SetDO(6,1) rtn=" + rtn);
+
+        // Step 2: Rozpoczęcie śledzenia taśmy
+        System.out.println("--- Step 2: ConveyorTrackStart(2) ---");
+        rtn = robot.ConveyorTrackStart(2);
+        System.out.println("  ConveyorTrackStart(2) rtn=" + rtn);
+
+        // Step 3: Detekcja IO przedmiotu
+        System.out.println("--- Step 3: ConveyorIODetect(10000) ---");
+        rtn = robot.ConveyorIODetect(10000);
+        System.out.println("  ConveyorIODetect(10000) rtn=" + rtn);
+
+        // Step 4: Pobierz dane śledzenia
+        System.out.println("--- Step 4: ConveyorGetTrackData(2) ---");
+        rtn = robot.ConveyorGetTrackData(2);
+        System.out.println("  ConveyorGetTrackData(2) rtn=" + rtn);
+
+        // Step 5: Konfiguracja parametrów śledzenia stacjonarnego (tryb czasu, 200s, odległość 5)
+        System.out.println("--- Step 5: SetStationaryTrackPara(0,200,5) ---");
+        rtn = robot.SetStationaryTrackPara(0, 5, 5);
+        System.out.println("  SetStationaryTrackPara(0,200,5) rtn=" + rtn);
+
+        // Step 6: Wykonaj ruch stacjonarny
+        System.out.println("--- Step 6: MoveStationary() ---");
+        rtn = robot.MoveStationary();
+        robot.WaitStationaryMotionDone();
+        System.out.println("  MoveStationary() rtn=" + rtn);
+
+        // Step 7: Zakończenie śledzenia taśmy
+        System.out.println("--- Step 7: ConveyorTrackEnd() ---");
+        rtn = robot.ConveyorTrackEnd();
+        System.out.println("  ConveyorTrackEnd() rtn=" + rtn);
+
+        // Step 8: Sygnał wyłączenia SetDO
+        System.out.println("--- Step 8: SetDO(6,0) ---");
+        rtn = robot.SetDO(6, 0, 0, 0);
+        System.out.println("  SetDO(6,0) rtn=" + rtn);
+
+        System.out.println("\n========== Test Śledzenia Stacjonarnego Zakończony ==========");
         return 0;
     }
 

@@ -485,10 +485,7 @@ Konfiguracja parametrów przenośnika
                     - ``lead``: Przełożenie mechaniczne - odległość przejścia przenośnika na jeden obrót enkodera
                     - ``wpAxis``: Numer układu przedmiotu dla funkcji śledzenia ruchu wybierz numer układu przedmiotu, dla śledzenia chwytania, śledzenia TPD ustaw na 0
                     - ``vision``: Czy z wizją 0-nie 1-tak,
-                    - ``speedRadio``: Współczynnik prędkości - dla śledzenia chwytania przenośnika zakres prędkości (1-100), dla śledzenia ruchu, śledzenia TPD ustaw na 1
-    - ``followType``: Typ śledzenia ruchu, 0-śledzenie ruchu; 1-śledzenie kontrolne"
-    "Parametry domyślne", "- ``startDis``: Należy ustawić dla śledzenia kontrolnego, Odległość początkowa śledzenia, -1: automatyczne obliczenie (automatyczne śledzenie kontrolne po dotarciu przedmiotu pod robota), jednostka mm, wartość domyślna 0
-    - ``endDis``: Należy ustawić dla śledzenia kontrolnego, Odległość końcowa śledzenia, jednostka mm, wartość domyślna 100"
+                    - ``speedRadio``: Współczynnik prędkości - dla śledzenia chwytania przenośnika zakres prędkości (1-100), dla śledzenia ruchu, śledzenia TPD ustaw na 1"
     "Wartość zwracana", "Kod błędu sukces-0 błąd- errcode"
 
 Kompensacja punktu chwytania przenośnika
@@ -609,6 +606,111 @@ Przykład kodu operacji przenośnika robota
     retval = robot.MoveGripper(index, 100, 40, 10, max_time, block, 0, 0, 0, 0)
     print(f"MoveGripper retval is:{retval}")
     robot.CloseRPC()
+
+Konfiguracja Parametrów Śledzenia w Miejscu na Taśmie Transportowej
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-V3.9.8
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototyp", "``SetStationaryTrackPara(self, trackMode, trackTime, trackDis)``"
+    "Opis", "Konfiguruje parametry śledzenia w miejscu na taśmie transportowej"
+    "Parametry Wymagane", "
+    - ``trackMode``: 0-czas; 1-odległość; 2-czas i odległość, dowolny warunek spełniony
+    - ``trackTime``: Czas śledzenia, jednostka s
+    - ``trackDis``: Odległość śledzenia
+    "
+    "Parametry Domyślne", "Brak"
+    "Wartość Zwracana", "Kod błędu, 0-sukces; niezerowy-błąd"
+
+Oczekiwanie na Zakończenie Ruchu Pustego w Miejscu
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-V3.9.8
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototyp", "``WaitStationaryMotionDone(self)``"
+    "Opis", "Oczekuje na zakończenie ruchu pustego w miejscu"
+    "Parametry Wymagane", "Brak"
+    "Parametry Domyślne", "Brak"
+    "Wartość Zwracana", "Kod błędu, 0-sukces; niezerowy-błąd"
+
+Przykład Kodu Ruchu Śledzenia w Miejscu na Taśmie Transportowej
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-V3.9.8
+
+.. code-block:: python
+    :linenos: 
+
+    from fairino import Robot
+    import time
+
+
+    def main():
+        robot = Robot.RPC('192.168.58.2')
+        time.sleep(0.5) 
+        j1 = [-35.146, -102.684, 120.805, -100.401, -90.295, 150.105]
+        d1 = [-121.814, -348.341, 209.978, -173.152, -3.585, -5.446]
+
+        ex = [0.0, 0.0, 0.0, 0.0]
+        zeroOff = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+
+        tool = 1
+        workpiece = 1
+
+        para = [0, 10000, 200, 0, 0, 10]
+    
+        rtn = robot.ConveyorSetParam(para= para)
+        print(f"ConveyorSetParam rtn is {rtn}")
+
+        robot.MoveJ(joint_pos=j1, desc_pos=d1, tool=tool, user=workpiece,
+                    vel=100, acc=100, ovl=100, exaxis_pos=ex,
+                    blendT=-1, offset_flag=0, offset_pos=zeroOff)
+
+        print("--- Step 1: SetDO(6,1) ---")
+        rtn = robot.SetDO(6, 1, 0, 0)
+        print(f"  SetDO(6,1) rtn={rtn}")
+
+        print("--- Step 2: ConveyorTrackStart(2) ---")
+        rtn = robot.ConveyorTrackStart(2)
+        print(f"  ConveyorTrackStart(2) rtn={rtn}")
+
+        print("--- Step 3: ConveyorIODetect(10000) ---")
+        rtn = robot.ConveyorIODetect(10000)
+        print(f"  ConveyorIODetect(10000) rtn={rtn}")
+
+        print("--- Step 4: ConveyorGetTrackData(2) ---")
+        rtn = robot.ConveyorGetTrackData(2)
+        print(f"  ConveyorGetTrackData(2) rtn={rtn}")
+
+        print("--- Step 5: SetStationaryTrackPara(0,5,5) ---")
+        rtn = robot.SetStationaryTrackPara(0, 5, 5)
+        print(f"  SetStationaryTrackPara(0,5,5) rtn={rtn}")
+
+        print("--- Step 6: MoveStationary() ---")
+        rtn = robot.MoveStationary()
+        print(f"  MoveStationary() rtn={rtn}")
+
+        rtn = robot.WaitStationaryMotionDone()
+        print(f"  WaitStationaryMotionDone() rtn={rtn}")
+
+        print("--- Step 7: ConveyorTrackEnd() ---")
+        rtn = robot.ConveyorTrackEnd()
+        print(f"  ConveyorTrackEnd() rtn={rtn}")
+
+        print("--- Step 8: SetDO(6,0) ---")
+        rtn = robot.SetDO(6, 0, 0, 0)
+        print(f"  SetDO(6,0) rtn={rtn}")
+
+        robot.CloseRPC()
+
+
+    if __name__ == "__main__":
+        main()
 
 Konfiguracja czujnika końcowego
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

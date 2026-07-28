@@ -151,79 +151,119 @@ Przykład kodu ustawiania parametrów spawania
 .. code-block:: Java
     :linenos:
 
-    public static int TestSetWeldParam(Robot robot)
-    {
-        WeldingProcessParam para1=new WeldingProcessParam(177, 27, 1000, 178, 28, 176, 26, 1000);
-        WeldingProcessParam para2=new WeldingProcessParam(188, 28, 555, 199, 29, 133, 23, 333);
-
+    public static int TestSetWeldParam(Robot robot) {
+        // 1. Ustaw parametry procesu spawania
+        WeldingProcessParam para1 = new WeldingProcessParam(177, 27, 1000, 178, 28, 176, 26, 1000);
+        WeldingProcessParam para2 = new WeldingProcessParam(188, 28, 555, 199, 29, 133, 23, 333);
         robot.WeldingSetProcessParam(1, para1);
         robot.WeldingSetProcessParam(2, para2);
 
-        double startCurrent = 0;
-        double startVoltage = 0;
-        int startTime = 0;
-        double weldCurrent = 0;
-        double weldVoltage = 0;
-        double endCurrent = 0;
-        double endVoltage = 0;
-        int endTime = 0;
+        // 2. Pobierz i wydrukuj grupę parametrów 1
+        WeldingProcessParam param = new WeldingProcessParam(0, 0, 0, 0, 0, 0, 0, 0);
+        robot.WeldingGetProcessParam(1, param);
+        System.out.println("the Num 1 process param is "
+                + param.startCurrent + " " + param.startVoltage + " "
+                + param.startTime + " " + param.weldCurrent + " "
+                + param.weldVoltage + " " + param.endCurrent + " "
+                + param.endVoltage + " " + param.endTime);
 
-        WeldingProcessParam param=new WeldingProcessParam( startCurrent, startVoltage, startTime, weldCurrent, weldVoltage, endCurrent, endVoltage, endTime);
-        robot.WeldingGetProcessParam(1,param);
-        robot.WeldingGetProcessParam(2,param);
+        // 3. Pobierz i wydrukuj grupę parametrów 2
+        robot.WeldingGetProcessParam(2, param);
+        System.out.println("the Num 2 process param is "
+                + param.startCurrent + " " + param.startVoltage + " "
+                + param.startTime + " " + param.weldCurrent + " "
+                + param.weldVoltage + " " + param.endCurrent + " "
+                + param.endVoltage + " " + param.endTime);
 
-        WeldCurrentAORelation rela1=new WeldCurrentAORelation(0,400,0,10,0);
+        // 4. Ustaw zależność prąd/napięcie i wydrukuj wartość zwracaną
+        WeldCurrentAORelation rela1 = new WeldCurrentAORelation(0, 400, 0, 10, 0);
         int rtn = robot.WeldingSetCurrentRelation(rela1);
+        System.out.println("WeldingSetCurrentRelation rtn is: " + rtn);
 
-        WeldVoltageAORelation rela2=new WeldVoltageAORelation(0, 40, 0, 10, 1);
+        WeldVoltageAORelation rela2 = new WeldVoltageAORelation(0, 40, 0, 10, 1);
         rtn = robot.WeldingSetVoltageRelation(rela2);
+        System.out.println("WeldingSetVoltageRelation rtn is: " + rtn);
 
-        double current_min = 0;
-        double current_max = 0;
-        double vol_min = 0;
-        double vol_max = 0;
-        double output_vmin = 0;
-        double output_vmax = 0;
-        int curIndex = 0;
-        int volIndex = 0;
-        WeldCurrentAORelation rela3=new WeldCurrentAORelation(current_min, current_max, output_vmin, output_vmax, curIndex);
+        // 5. Pobierz i wydrukuj zależność prądu
+        WeldCurrentAORelation rela3 = new WeldCurrentAORelation(0, 0, 0, 0, 0);
         rtn = robot.WeldingGetCurrentRelation(rela3);
+        System.out.println("WeldingGetCurrentRelation rtn is: " + rtn);
+        System.out.println("current min " + rela3.currentMin
+                + " current max " + rela3.currentMax
+                + " output vol min " + rela3.outputVoltageMin
+                + " output vol max " + rela3.outputVoltageMax);
 
-        WeldVoltageAORelation rela4=new WeldVoltageAORelation(0,0,0,0,0);
+        // 6. Pobierz i wydrukuj zależność napięcia
+        WeldVoltageAORelation rela4 = new WeldVoltageAORelation(0, 0, 0, 0, 0);
         rtn = robot.WeldingGetVoltageRelation(rela4);
+        System.out.println("WeldingGetVoltageRelation rtn is: " + rtn);
+        System.out.println("vol min " + rela4.weldVoltageMin
+                + " vol max " + rela4.weldVoltageMax
+                + " output vol min " + rela4.outputVoltageMin
+                + " output vol max " + rela4.outputVoltageMax);
 
+        // 7. Ustaw prąd/napięcie i wydrukuj wartość zwracaną
         rtn = robot.WeldingSetCurrent(0, 100, 0, 0);
+        System.out.println("WeldingSetCurrent rtn is: " + rtn);
 
-        robot.Sleep(3000);
+        robot.Sleep(3000);  // Odpowiada this_thread::sleep_for(chrono::seconds(3))
 
         rtn = robot.WeldingSetVoltage(0, 10, 0, 0);
+        System.out.println("WeldingSetVoltage rtn is: " + rtn);
 
+        // 8. Ustaw parametry splotu
         rtn = robot.WeaveSetPara(0, 0, 2.000000, 0, 10.000000, 0.000000, 0.000000, 0, 0, 0, 0, 0, 60.000000,0);
+        System.out.println("rtn is: " + rtn);
 
         robot.WeaveOnlineSetPara(0, 0, 1, 0, 20, 0, 0, 0, 0);
 
+        // 9. Ustaw parametry wykrywania przerwania łuku i ponownego spawania
         rtn = robot.WeldingSetCheckArcInterruptionParam(1, 200);
+        System.out.println("WeldingSetCheckArcInterruptionParam  " + rtn);
+
         rtn = robot.WeldingSetReWeldAfterBreakOffParam(1, 5.7, 98.2, 0);
-        int enable = 0;
-        double length = 0;
-        double velocity = 0;
-        int moveType = 0;
-        int checkEnable = 0;
-        int arcInterruptTimeLength = 0;
-        List<Integer> inter=new ArrayList<>();
-        List<Number> num=new ArrayList<>();
+        System.out.println("WeldingSetReWeldAfterBreakOffParam  " + rtn);
 
-        inter = robot.WeldingGetCheckArcInterruptionParam();
-        num = robot.WeldingGetReWeldAfterBreakOffParam();
+        // 10. Pobierz i wydrukuj parametry wykrywania przerwania łuku
+        List<Integer> inter = robot.WeldingGetCheckArcInterruptionParam();
+        int checkEnable = inter.get(0);
+        int arcInterruptTimeLength = inter.get(1);
+        System.out.println("WeldingGetCheckArcInterruptionParam checkEnable " + checkEnable
+                + "  arcInterruptTimeLength " + arcInterruptTimeLength);
 
+        // 11. Pobierz i wydrukuj parametry ponownego spawania (zwraca List<Number>)
+        List<Number> num = robot.WeldingGetReWeldAfterBreakOffParam();
+        int enable = num.get(0).intValue();
+        double length = num.get(1).doubleValue();
+        double velocity = num.get(2).doubleValue();
+        int moveType = num.get(3).intValue();
+        System.out.printf("WeldingGetReWeldAfterBreakOffParam enable = %d, length = %f, velocity = %f, moveType = %d%n",
+                enable, length, velocity, moveType);
+
+        // 12. Ustaw rozszerzone DO i sterowanie w pętli
         robot.SetWeldMachineCtrlModeExtDoNum(17);
-        for (int i = 0; i < 5; i++)
-        {
+        for (int i = 0; i < 5; i++) {
+            int[] mode = new int[1];   // Do odbioru wartości wyjściowej
+
             robot.SetWeldMachineCtrlMode(0);
+            rtn = robot.GetWeldMachineCtrlMode(mode);
+            if (rtn == 0) {
+                System.out.println("GetWeldMachineCtrlMode " + mode[0]);
+            } else {
+                System.out.println("GetWeldMachineCtrlMode failed, err: " + rtn);
+            }
             robot.Sleep(1000);
+
             robot.SetWeldMachineCtrlMode(1);
+            rtn = robot.GetWeldMachineCtrlMode(mode);
+            if (rtn == 0) {
+                System.out.println("GetWeldMachineCtrlMode " + mode[0]);
+            } else {
+                System.out.println("GetWeldMachineCtrlMode failed, err: " + rtn);
+            }
             robot.Sleep(1000);
         }
+
         return 0;
     }
 
@@ -329,6 +369,18 @@ Ustawianie trybu sterowania spawarką
     * @return Kod błędu* @return Kod błędu
     */
     public int SetWeldMachineCtrlMode(int mode, int ioType)
+
+Pobieranie Trybu Sterowania Spawarką
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Pobiera tryb sterowania spawarką
+    * @param mode Tryb sterowania spawarką; 0-tryb jednopokrętłowy DC; 1-tryb jednopokrętłowy impulsowy; 2-tryb JOB; 3-tryb sterowania lokalnego; 4-tryb oddzielny; 5-tryb CC/CV; 6-TIG; 7-CMT
+    * @return Kod błędu
+    */
+    public int GetWeldMachineCtrlMode(int[] mode)
 
 Rozpoczęcie spawania
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -776,8 +828,60 @@ Przykład kodu konfiguracji rozszerzonych sygnałów IO spawania
         robot.SetExtDIWeldBreakOffRecover(70, 80);
         robot.SetWireSearchExtDIONum(0, 1);
 
+        int[] DIConfig = new int[16];
+        int[] DOConfig = new int[16];
+        int rtn = robot.GetExtDIConfig(DIConfig);
+        System.out.printf("GetExtDIConfig rtn is %d\n welder ready %d\narc done %d\nreweld start %d\nabort reweld %d\nwiresearch done %d\nLaser welding State %d\nlaser welding error state %d\n",
+            rtn, DIConfig[0], DIConfig[1], DIConfig[2], DIConfig[3], DIConfig[4], DIConfig[5], DIConfig[6]);
+
+        rtn = robot.GetExtDOConfig(DOConfig);
+        System.out.printf("GetExtDOConfig rtn is %d\n Arc Start %d\nAir Test %d\nWire forward %d\nWire Inverse %d\nwiresearch %d\nWeld Mode %d\nlaser Enable %d\nLaser On %d\nLaser Reset Error %d\n",
+            rtn, DOConfig[0], DOConfig[1], DOConfig[2], DOConfig[3], DOConfig[4], DOConfig[5], DOConfig[6], DOConfig[7], DOConfig[8]);
+
+
+
         return 0;
     }
+
+Pobieranie Konfiguracji Funkcji Rozszerzonego DI
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Pobiera konfigurację funkcji rozszerzonego DI
+    * @param DIConfig Konfiguracja wejścia rozszerzonego DI; DIConfig[0]-port rozszerzonego DI gotowości spawarki;
+    * DIConfig[1]-port rozszerzonego DI pomyślnego rozpoczęcia łuku;
+    * DIConfig[2]-port rozszerzonego DI wznowienia przerwania spawania;
+    * DIConfig[3]-port rozszerzonego DI wyjścia z przerwania spawania;
+    * DIConfig[4]-port rozszerzonego DI pomyślnego wyszukiwania drutu;
+    * DIConfig[5]-port rozszerzonego DI statusu pracy spawarki laserowej;
+    * DIConfig[6]-port rozszerzonego DI statusu awarii spawarki laserowej;
+    * DIConfig[7-15]-zarezerwowane
+    * @return  Kod błędu
+    */
+    public int GetExtDIConfig(int[] DIConfig)
+
+Pobieranie Konfiguracji Funkcji Rozszerzonego DO
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Pobiera konfigurację funkcji rozszerzonego DO
+    * @param DOConfig Konfiguracja wyjścia rozszerzonego DO; DOConfig[0]-port rozszerzonego DO rozpoczęcia łuku spawarki;
+    * DOConfig[1]-port rozszerzonego DO detekcji gazu;
+    * DOConfig[2]-port rozszerzonego DO podawania drutu do przodu;
+    * DOConfig[3]-port rozszerzonego DO podawania drutu do tyłu;
+    * DOConfig[4]-port rozszerzonego DO wyszukiwania drutu;
+    * DOConfig[5]-port rozszerzonego DO trybu sterowania spawarką;
+    * DOConfig[6]-port rozszerzonego DO włączenia spawarki laserowej;
+    * DOConfig[7]-port rozszerzonego DO uruchomienia spawarki laserowej (emisja lasera);
+    * DOConfig[8]-port rozszerzonego DO resetowania spawarki laserowej;
+    * DOConfig[9-15]-zarezerwowane
+    * @return  Kod błędu
+    */
+    public int GetExtDOConfig(int[] DOConfig)
 
 Sterowanie śledzeniem łuku
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

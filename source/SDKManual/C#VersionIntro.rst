@@ -13,6 +13,24 @@ Informacje o aktualizacji wersji
      - **Data**
      - **Opis aktualizacji**
 
+   * - V3.9.8
+     - 2026-07-27
+     - | 1. Zaktualizowano strukturę zwrotną statusu robota o bieżący status wykonania programu LUA robota: 0 - program nie jest uruchomiony; 1 - program jest uruchomiony (włączając program wstrzymany);
+       | 2. Zaktualizowano opisy parametrów dla interfejsów SetExToolCoord() i SetExToolList() do ustawiania zewnętrznego układu współrzędnych narzędzia i listy układów współrzędnych narzędzi. Numery zewnętrznych układów współrzędnych narzędzi zostały zaktualizowane na 20-39. Zaktualizowano przykłady kodu dla operacji na zewnętrznych układach współrzędnych narzędzi.
+       | 3. Dodano możliwość pobierania parametrów typu narzędzia, pozycji instalacji, ID narzędzia i numeru obciążenia do interfejsu GetToolCoordWithID() do pobierania parametrów układu współrzędnych narzędzia.
+       | 4. Dodano możliwość pobierania parametrów referencyjnego układu współrzędnych do interfejsu GetWObjCoordWithID() do pobierania parametrów układu współrzędnych przedmiotu.
+       | 5. Dodano możliwość pobierania parametrów pozy układu współrzędnych przedmiotu montowanego na końcówce robota do interfejsu GetExToolCoordWithID() do pobierania parametrów zewnętrznego układu współrzędnych narzędzia.
+       | 6. Dodano możliwość pobierania numeru osi rozszerzonej i parametrów flagi kalibracji do interfejsu GetExAxisCoordWithID() do pobierania parametrów układu współrzędnych osi rozszerzonej.
+       | 7. Dodano ustawienia parametrów prędkości bezpieczeństwa stawów robota do interfejsu SetVelReducePara() do ustawiania prędkości bezpieczeństwa robota.
+       | 8. Dodano przykład pobierania trybu sterowania spawarką do przykładu kodu konfiguracji parametrów spawania.
+       | 9. Dodano przykłady kodu do pobierania konfiguracji funkcji rozszerzonych DI i rozszerzonych DO do przykładu kodu konfiguracji rozszerzonych sygnałów spawania IO.
+       | 10. Dodano nowy przykład kodu do ustawiania prędkości bezpieczeństwa stawów robota;
+       | 11. Dodano nowy interfejs WaitStationaryMotionDone() do oczekiwania na zakończenie ruchu pustego w miejscu;
+       | 12. Dodano nowy interfejs SetStationaryTrackPara() do konfiguracji parametrów śledzenia w miejscu na taśmie transportowej, wraz z przykładem kodu śledzenia w miejscu na taśmie transportowej;
+       | 13. Dodano nowe interfejsy WorkPieceTrsfStart() i WorkPieceTrsfEnd() do rozpoczynania i kończenia transformacji układu współrzędnych przedmiotu, wraz z przykładem kodu transformacji układu współrzędnych przedmiotu.
+       | 14. Dodano interfejs GetWeldMachineCtrlMode() do pobierania trybu sterowania spawarką.
+       | 15. Dodano interfejsy GetExtDIConfig() i GetExtDOConfig() do pobierania konfiguracji funkcji rozszerzonych DI i rozszerzonych DO.
+
    * - V3.9.7
      - 2026-06-25
      - | 1. Dodano błąd alarmu upadku przedmiotu z chwytaka, główny kod błędu 8, podkod błędu 3.

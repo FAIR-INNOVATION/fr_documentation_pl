@@ -172,12 +172,12 @@ Ustawienie parametrów oscylacji
 
 Przykład kodu ustawiania parametrów spawania
 ++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: C#SDK-V1.1.3  Web-3.8.2
+.. versionadded:: C#SDK-V3.9.8
     
 .. code-block:: c#
     :linenos:
 
-    private void button7_Click(object sender, EventArgs e)
+    private void button42_Click(object sender, EventArgs e)
     {
         robot.WeldingSetProcessParam(1, 177, 27, 1000, 178, 28, 176, 26, 1000);
         robot.WeldingSetProcessParam(2, 188, 28, 555, 199, 29, 133, 23, 333);
@@ -249,12 +249,16 @@ Przykład kodu ustawiania parametrów spawania
         robot.SetWeldMachineCtrlModeExtDoNum(17);
         for (int i = 0; i < 5; i++)
         {
+            int getCtrlMode = -1;
             robot.SetWeldMachineCtrlMode(0);
+            robot.GetWeldMachineCtrlMode(ref getCtrlMode);
+            Console.WriteLine("GetWeldMachineCtrlMode {0}", getCtrlMode);
             Thread.Sleep(1000);
             robot.SetWeldMachineCtrlMode(1);
+            robot.GetWeldMachineCtrlMode(ref getCtrlMode);
+            Console.WriteLine("GetWeldMachineCtrlMode {0}", getCtrlMode);
             Thread.Sleep(1000);
         }
-
     }
 
 Natychmiastowe ustawienie parametrów oscylacji
@@ -359,6 +363,18 @@ Ustawienie trybu sterowania spawarką
     * @return Kod błędu
     */
     public int SetWeldMachineCtrlMode(int mode,int ioType = 1)
+
+Pobieranie Trybu Sterowania Spawarką
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Pobiera tryb sterowania spawarką
+    * @param [out] mode Tryb sterowania spawarką; 0-tryb jednopokrętłowy DC; 1-tryb jednopokrętłowy impulsowy; 2-tryb JOB; 3-tryb sterowania lokalnego; 4-tryb oddzielny; 5-tryb CC/CV; 6-TIG; 7-CMT
+    * @return Kod błędu
+    */
+    public int GetWeldMachineCtrlMode(ref int mode)    
 
 Rozpoczęcie spawania
 ++++++++++++++++++++
@@ -775,8 +791,8 @@ Rozszerzone I/O - konfiguracja sygnału wznowienia spawania po przerwaniu
     */
     int SetExtDIWeldBreakOffRecover(int reWeldDINum, int abortWeldDINum);
 
-Przykład kodu ustawiania rozszerzonych sygnałów I/O spawania
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Konfiguracja i Pobieranie Przykładu Kodu Rozszerzonego IO
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
@@ -791,7 +807,40 @@ Przykład kodu ustawiania rozszerzonych sygnałów I/O spawania
         robot.SetArcDoneExtDiNum(60);
         robot.SetExtDIWeldBreakOffRecover(70, 80);
         robot.SetWireSearchExtDIONum(0, 1);
+
+        int[] DIConfig = new int[16];
+        int[] DOConfig = new int[16];
+        int rtn = robot.GetExtDIConfig(ref DIConfig);
+        Console.WriteLine("GetExtDIConfig rtn={0}, spawarka gotowa={1}, rozpoczęcie łuku={2}, wznowienie przerwania={3}, wyjście z przerwania={4}, wyszukiwanie drutu={5}, stan lasera={6}, błąd lasera={7}",
+            rtn, DIConfig[0], DIConfig[1], DIConfig[2], DIConfig[3], DIConfig[4], DIConfig[5], DIConfig[6]);
+        rtn = robot.GetExtDOConfig(ref DOConfig);
+        Console.WriteLine("GetExtDOConfig rtn={0}, rozpoczęcie łuku spawarki={1}, test gazu={2}, podawanie drutu do przodu={3}, podawanie drutu do tyłu={4}, wyszukiwanie drutu={5}, tryb spawarki={6}, włączenie lasera={7}, uruchomienie lasera={8}, reset lasera={9}",
+            rtn, DOConfig[0], DOConfig[1], DOConfig[2], DOConfig[3], DOConfig[4], DOConfig[5], DOConfig[6], DOConfig[7], DOConfig[8]);
     }
+
+Pobieranie Konfiguracji Funkcji Rozszerzonego DI
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Pobiera konfigurację funkcji rozszerzonego DI
+    * @param [out] DIConfig Konfiguracja wejścia rozszerzonego DI; [0]-spawarka gotowa; [1]-rozpoczęcie łuku; [2]-wznowienie przerwania spawania; [3]-wyjście z przerwania spawania; [4]-wyszukiwanie drutu; [5]-status pracy spawarki laserowej; [6]-status awarii spawarki laserowej; [7-15]-zarezerwowane
+    * @return  Kod błędu
+    */
+    public int GetExtDIConfig(ref int[] DIConfig)
+
+Pobieranie Konfiguracji Funkcji Rozszerzonego DO
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Pobiera konfigurację funkcji rozszerzonego DO
+    * @param [out] DOConfig Konfiguracja wyjścia rozszerzonego DO; [0]-rozpoczęcie łuku spawarki; [1]-test gazu; [2]-podawanie drutu do przodu; [3]-podawanie drutu do tyłu; [4]-wyszukiwanie drutu; [5]-tryb sterowania spawarką; [6]-włączenie spawarki laserowej; [7]-uruchomienie spawarki laserowej; [8]-reset spawarki laserowej; [9-15]-zarezerwowane
+    * @return  Kod błędu
+    */
+    public int GetExtDOConfig(ref int[] DOConfig)
 
 Sterowanie śledzeniem łuku
 +++++++++++++++++++++++++++

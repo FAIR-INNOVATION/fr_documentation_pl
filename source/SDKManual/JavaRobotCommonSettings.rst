@@ -207,7 +207,7 @@ Ustawianie zewnętrznego układu współrzędnych narzędzia
 
     /**
     * @brief Ustawia zewnętrzny układ współrzędnych narzędzia
-    * @param [in] id Numer układu współrzędnych, zakres [0~14]
+    * @param [in] id Numer układu współrzędnych, 20-39 odpowiadają zewnętrznym układom współrzędnych narzędzi 0-19
     * @param [in] etcp Pozycja i orientacja środka narzędzia względem środka kołnierza końcowego
     * @param [in] etool Do ustalenia
     * @return Kod błędu
@@ -221,7 +221,7 @@ Ustawianie listy zewnętrznych układów współrzędnych narzędzia
 
     /**
     * @brief Ustawia listę zewnętrznych układów współrzędnych narzędzia
-    * @param [in] id Numer układu współrzędnych, zakres [0~14]
+    * @param [in] id Numer układu współrzędnych, 20-39 odpowiadają zewnętrznym układom współrzędnych narzędzi 0-19
     * @param [in] etcp Pozycja i orientacja środka narzędzia względem środka kołnierza końcowego
     * @param [in] etool Do ustalenia
     * @return Kod błędu

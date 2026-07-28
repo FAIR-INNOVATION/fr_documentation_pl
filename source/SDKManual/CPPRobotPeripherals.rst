@@ -460,9 +460,6 @@ Konfiguracja parametrów przenośnika
     * @param [in] para[3] Numer układu współrzędnych obiektu dla funkcji śledzenia ruchu, dla śledzenia chwytania i śledzenia TPD ustaw na 0
     * @param [in] para[4] Czy z wizją 0-bez 1-z
     * @param [in] para[5] Współczynnik prędkości dla opcji śledzenia chwytania przenośnika (1-100), dla innych opcji domyślnie 1
-    * @param [in] followType Typ śledzenia ruchu, 0-śledzenie ruchu; 1-śledzenie doganiające
-    * @param [in] startDis Dla śledzenia doganiającego, odległość początkowa śledzenia, -1: automatyczne obliczenie (po dojechaniu przedmiotu pod robota), jednostka mm, wartość domyślna 0
-    * @param [in] endDis Dla śledzenia doganiającego, odległość końcowa śledzenia, jednostka mm, wartość domyślna 100
     * @return Kod błędu
     */
     errno_t ConveyorSetParam(float para[6], int followType = 0, int startDis = 0, int endDis = 100);
@@ -592,6 +589,88 @@ Przykładowy program operacji przenośnikiem robota
       printf("ConveyorComDetectTrigger rtn is: %d\n", rtn);
       robot.CloseRPC();
       return 0;
+    }
+
+Konfiguracja Parametrów Śledzenia w Miejscu na Taśmie Transportowej
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C++SDK-v3.9.8
+    
+.. code-block:: c++
+    :linenos:
+
+    /**
+    * @brief Konfiguruje parametry śledzenia w miejscu na taśmie transportowej
+    * @param [in] trackMode 0-czas; 1-odległość; 2-czas i odległość, dowolny warunek spełniony
+    * @param [in] trackTime Czas śledzenia, jednostka s
+    * @param [in] trackDis Odległość śledzenia, jednostka mm
+    * @return Kod błędu
+    */
+    int SetStationaryTrackPara(int trackMode, double trackTime, int trackDis);
+    
+Przykład Kodu Śledzenia w Miejscu na Taśmie Transportowej
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C++SDK-v3.9.8
+    
+.. code-block:: c++
+    :linenos:
+
+    int TestStationaryTrack()
+    {
+        ROBOT_STATE_PKG pkg = {};
+        FRRobot robot;
+        robot.LoggerInit();
+        robot.SetLoggerLevel(1);
+        int rtn = robot.RPC("192.168.58.2");
+        if (rtn != 0)
+        {
+            return -1;
+        }
+        robot.SetReConnectParam(true, 30000, 500);
+        printf("\n========== Test Śledzenia Stacjonarnego Taśmy ==========");
+        JointPos j1(-35.146, -102.684, 120.805, -100.401, -90.295, 150.105);
+        DescPose d1(-121.814, -348.341, 209.978, -173.152, -3.585, -5.446);
+        ExaxisPos ex(0, 0, 0, 0);
+        DescPose zeroOff(0, 0, 0, 0, 0, 0);
+        int tool = 1;
+        int workpiece = 1;
+        float conveyorParam[6] = { 0, 10000, 200, 0, 0, 10 };
+        rtn = robot.ConveyorSetParam(conveyorParam);
+        robot.MoveJ(&j1, &d1, tool, workpiece, 100, 100, 100, &ex, -1, 0, &zeroOff);
+        // Step 1: Sygnał sterujący SetDO
+        printf("--- Step 1: SetDO(6,1) ---\n");
+        rtn = robot.SetDO(6, 1, 0, 0);
+        printf("  SetDO(6,1) rtn={0}\n", rtn);
+        // Step 2: Rozpoczęcie śledzenia taśmy
+        printf("--- Step 2: ConveyorTrackStart(2) ---\n");
+        rtn = robot.ConveyorTrackStart(2);
+        printf("  ConveyorTrackStart(2) rtn={0}\n", rtn);
+        // Step 3: Detekcja IO przedmiotu
+        printf("--- Step 3: ConveyorIODetect(10000) ---\n");
+        rtn = robot.ConveyorIODetect(10000);
+        printf("  ConveyorIODetect(10000) rtn={0}\n", rtn);
+        // Step 4: Pobierz dane śledzenia
+        printf("--- Step 4: ConveyorGetTrackData(2) ---\n");
+        rtn = robot.ConveyorGetTrackData(2);
+        printf("  ConveyorGetTrackData(2) rtn={0}\n", rtn);
+        // Step 5: Konfiguracja parametrów śledzenia stacjonarnego (tryb czasu, 200s, odległość 5)
+        printf("--- Step 5: SetStationaryTrackPara(0,200,5) ---\n");
+        rtn = robot.SetStationaryTrackPara(0, 5, 5);
+        printf("  SetStationaryTrackPara(0,200,5) rtn={0}\n", rtn);
+        // Step 6: Wykonaj ruch śledzenia stacjonarnego
+        printf("--- Step 6: MoveStationary() ---\n");
+        rtn = robot.MoveStationary();
+        rtn = robot.WaitStationaryMotionDone();
+        printf("  MoveStationary() rtn={0}\n", rtn);
+        // Step 7: Zakończenie śledzenia taśmy
+        printf("--- Step 7: ConveyorTrackEnd() ---\n");
+        rtn = robot.ConveyorTrackEnd();
+        printf("  ConveyorTrackEnd() rtn={0}\n", rtn);
+        // Step 8: Sygnał wyłączenia SetDO
+        printf("--- Step 8: SetDO(6,0) ---\n");
+        rtn = robot.SetDO(6, 0, 0, 0);
+        printf("  SetDO(6,0) rtn={0}\n", rtn);
+        printf("\n========== Test Śledzenia Stacjonarnego Zakończony ==========\n");
+        return 0;
     }
 
 Konfiguracja czujnika końcówki

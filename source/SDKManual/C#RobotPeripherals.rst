@@ -435,6 +435,104 @@ Zatrzymanie śledzenia taśmociągu
     */
     int ConveyorTrackEnd();
 
+Konfiguracja Parametrów Śledzenia w Miejscu na Taśmie Transportowej
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief  Konfiguruje parametry śledzenia w miejscu na taśmie transportowej
+    * @param  [in] trackMode 0-czas; 1-odległość; 2-czas i odległość, dowolny warunek spełniony
+    * @param  [in] trackTime Czas śledzenia, jednostka s
+    * @param  [in] trackDis Odległość śledzenia
+    * @return  Kod błędu
+    */
+    public int SetStationaryTrackPara(int trackMode, double trackTime, int trackDis)
+    
+Oczekiwanie na Zakończenie Ruchu Pustego w Miejscu
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Oczekuje na zakończenie ruchu pustego w miejscu
+    * @return Kod błędu
+    */
+    public int WaitStationaryMotionDone()
+        
+Przykład Kodu Ruchu Śledzenia w Miejscu na Taśmie Transportowej
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    public int TestStationaryTrack()
+    {
+        Console.WriteLine("\n========== Stationary Track Test ==========");
+
+        int rtn;
+
+        JointPos j1 = new JointPos(-35.146, -102.684, 120.805, -100.401, -90.295, 150.105);
+        DescPose d1 = new DescPose(-121.814, -348.341, 209.978, -173.152, -3.585, -5.446);
+
+        ExaxisPos ex = new ExaxisPos(0, 0, 0, 0);
+        DescPose zeroOff = new DescPose(0, 0, 0, 0, 0, 0);
+
+        int tool = 1;
+        int workpiece = 1;
+
+        rtn = robot.ConveyorSetParam(0, 10000, 200, 0, 0, 10);
+
+        robot.MoveJ(j1, d1, tool, workpiece, 100, 100, 100, ex, -1, 0, zeroOff);
+
+        // Step 1: Sygnał sterujący SetDO WŁ.
+        Console.WriteLine("--- Step 1: SetDO(6,1) ---");
+        rtn = robot.SetDO(6, 1, 0, 0);
+        Console.WriteLine("  SetDO(6,1) rtn={0}", rtn);
+
+        // Step 2: Rozpoczęcie śledzenia taśmy
+        Console.WriteLine("--- Step 2: ConveyorTrackStart(2) ---");
+        rtn = robot.ConveyorTrackStart(2);
+        Console.WriteLine("  ConveyorTrackStart(2) rtn={0}", rtn);
+
+        // Step 3: Detekcja IO przedmiotu
+        Console.WriteLine("--- Step 3: ConveyorIODetect(10000) ---");
+        rtn = robot.ConveyorIODetect(10000);
+        Console.WriteLine("  ConveyorIODetect(10000) rtn={0}", rtn);
+
+        // Step 4: Pobierz dane śledzenia
+        Console.WriteLine("--- Step 4: ConveyorGetTrackData(2) ---");
+        rtn = robot.ConveyorGetTrackData(2);
+        Console.WriteLine("  ConveyorGetTrackData(2) rtn={0}", rtn);
+
+        // Step 5: Konfiguracja parametrów śledzenia stacjonarnego (tryb czasu, 200s, odległość 5)
+        Console.WriteLine("--- Step 5: SetStationaryTrackPara(0,200,5) ---");
+        rtn = robot.SetStationaryTrackPara(0, 5, 5);
+        Console.WriteLine("  SetStationaryTrackPara(0,200,5) rtn={0}", rtn);
+
+        // Step 6: Wykonaj ruch stacjonarny
+        Console.WriteLine("--- Step 6: MoveStationary() ---");
+        rtn = robot.MoveStationary();
+        Console.WriteLine("  MoveStationary() rtn={0}", rtn);
+
+        // Step 7: Oczekuj na zakończenie ruchu stacjonarnego
+        Console.WriteLine("--- Step 7: WaitStationaryMotionDone() ---");
+        rtn = robot.WaitStationaryMotionDone();
+        Console.WriteLine("  WaitStationaryMotionDone() rtn={0}", rtn);
+
+        // Step 8: Zakończenie śledzenia taśmy
+        Console.WriteLine("--- Step 8: ConveyorTrackEnd() ---");
+        rtn = robot.ConveyorTrackEnd();
+        Console.WriteLine("  ConveyorTrackEnd() rtn={0}", rtn);
+
+        // Step 9: Sygnał sterujący SetDO WYŁ.
+        Console.WriteLine("--- Step 9: SetDO(6,0) ---");
+        rtn = robot.SetDO(6, 0, 0, 0);
+        Console.WriteLine("  SetDO(6,0) rtn={0}", rtn);
+
+        Console.WriteLine("\n========== Stationary Track Test Complete ==========");
+        return 0;
+    }    
+
 Konfiguracja parametrów taśmociągu
 ++++++++++++++++++++++++++++++++++
 .. code-block:: c#
@@ -448,9 +546,6 @@ Konfiguracja parametrów taśmociągu
     * @param [in] para[3] Numer układu współrzędnych przedmiotu dla funkcji śledzenia ruchu, dla śledzenia chwytania i śledzenia TPD ustaw na 0
     * @param [in] para[4] Czy z wizją 0-bez 1-z
     * @param [in] para[5] Współczynnik prędkości dla opcji śledzenia chwytania taśmociągu (1-100) dla innych opcji domyślnie 1 
-    * @param [in] followType Typ ruchu śledzenia, 0-ruch śledzący; 1-ruch doganiający
-    * @param [in] startDis Dla chwytania doganiającego, odległość początkowa śledzenia, -1: automatyczne obliczenie (po dotarciu przedmiotu pod robota), jednostka mm, wartość domyślna 0
-    * @param [in] endDis Dla chwytania doganiającego, odległość końcowa śledzenia, jednostka mm, wartość domyślna 100
     * @return Kod błędu
     */
     int ConveyorSetParam(int encChannel, int resolution, double lead, int wpAxis, int vision, double speedRadio, int followType, int startDis=0, int endDis=100);

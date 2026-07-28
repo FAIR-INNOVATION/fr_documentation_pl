@@ -445,4 +445,5 @@ Typ wyliczeniowy konfiguracji informacji zwrotnej o stanie robota
         SocketReadTimeout = 130,    // Przekroczenie limitu czasu odczytu socket, bit0-bit4 odpowiadają socketID 1-4
         TsWebStateComErr = 131,     // web - błąd komunikacji momentu: 0-normalny, 1-błąd
         ExaxisCoordID = 132         // Numer układu współrzędnych osi rozszerzonej
+        programRunState = 133       //Status wykonania programu LUA 0-program nie jest uruchomiony; 1-program jest uruchomiony (włączając program wstrzymany)
     };

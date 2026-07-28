@@ -744,4 +744,4 @@ Typ wyliczeniowy listy konfiguracyjnej sprzężenia zwrotnego stanu robota
         SocketReadTimeout = 130
         TsWebStateComErr = 131
         ExaxisCoordID = 132
-        CheckSum = 133
+        programRunState = 133

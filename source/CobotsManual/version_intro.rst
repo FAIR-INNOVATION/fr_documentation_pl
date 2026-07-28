@@ -1,3 +1,38 @@
+Wersja V3.9.8
+-----------------
+
+Data: 2026-07-27
+
+- **Zoptymalizowano ruch śledzenia taśmy transportowej**:
+    Ścieżka: Teach Program -> Polecenia Taśmy.
+
+    Opis: 1. Optymalizacja ustawień punktu wyzwalania IO i punktu początkowego programu; 2. Optymalizacja wielokrotnego wyzwalania sygnałów IO podczas ruchu.
+
+- **Zoptymalizowano ładowanie web dla dużych programów LUA i podprogramów**:
+    Ścieżka: Teach Program -> Importuj Program.
+
+    Opis: Przesyłanie dużych plików programów LUA (powyżej 50 MB) do ładowania i wykonywania.
+
+- **Zoptymalizowano polecenia ustawiania/pobierania narzędzi robota, układów współrzędnych przedmiotu i obciążenia**:
+    Ścieżka: Ustawienia Początkowe -> Narzędzia, Układy Współrzędnych Przedmiotu, Obciążenie.
+
+    Opis: Parametry układów współrzędnych i obciążenia mogą być normalnie ustawiane i pobierane poprzez interfejs poleceń portu 8080, SDK i WebApp.
+
+- **Dodano funkcje związane z SmartTool**:
+    Ścieżka: Ustawienia Początkowe -> Urządzenia PerYferyjne -> Rękojeść Spawalnicza.
+
+    Opis: 1. Reset pamięci przycisków IO po wyczyszczeniu lub utworzeniu nowego programu; 2. Dodano wybór numeru procesu dla 3 generowanych instrukcji związanych z rozpoczęciem łuku oraz usunięto limit czasu oczekiwania dla rozpoczęcia łuku; 3. Dodano funkcję globalnego czyszczenia punktów z resetem numeru sekwencji po czyszczeniu; 4. Usunięto ograniczenie dotyczące powtarzalnej konfiguracji PTP, LIN i ARC.
+
+- **Dodano obsługę pięciopalczastej dłoni**:
+    Ścieżka: Ustawienia Początkowe -> Urządzenia PerYferyjne -> Dłoń.
+
+    Opis: Dodano adapter Lua dla końcówki robota do pięciopalczastej dłoni.
+
+- **Dodano adaptację impedancji stawów FR3-WML dla przeciągania**:
+    Ścieżka: Aplikacje Pomocnicze -> Aplikacje Narzędziowe -> Blokada Przeciągania.
+
+    Opis: Dostosowano parametry hybrydowego przeciągania z siłą sześcioosiową i impedancją stawów dla FR3-WML w celu umożliwienia funkcji przeciągania.
+
 Wersja V3.9.7
 -----------------
 

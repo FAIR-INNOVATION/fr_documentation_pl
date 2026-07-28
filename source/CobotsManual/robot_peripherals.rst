@@ -641,6 +641,8 @@ Automatyczne generowanie protokołu Lua końcówki
 
 Ta nowa funkcja umożliwia automatyczne wygenerowanie protokołu Lua końcówki dla wbudowanych protokołów związanych z urządzeniem peryferyjnym SmartTool (obecnie obsługiwane są tylko cztery protokoły: End_SmartTool_V1.3.lua, End_SM_JD_V1.3.lua, End_SM_GZCX_V1.3.lua, End_SM_XJC_V1.3.lua). Po skonfigurowaniu na stronie internetowej, protokół Lua końcówki jest automatycznie generowany, przesyłany i stosowany na końcówce, bez konieczności pisania przez użytkownika. Użytkownik konfiguruje przyciski A, B, C, D, E, IO uchwytu spawalniczego SmartTool zgodnie z potrzebami. Po zakończeniu konfiguracji należy wyłączyć zasilanie robota i kliknąć „Zastosuj”. Wtedy strona wyświetli pytanie „Czy wejść w tryb boot i zastosować otwarty protokół?”. Po potwierdzeniu robot przechodzi w stan boot i automatycznie przesyła automatycznie wygenerowany protokół Lua końcówki. Po ponownym uruchomieniu robota można używać SmartTool zgodnie ze skonfigurowanymi przyciskami.
 
+Od wersji V3.9.8, SmartTool oparty na protokole końcówki robota obsługuje konfigurację różnych przycisków o tej samej funkcji. Dodano również możliwość wyboru numeru splotu i numeru procesu spawania. Numer splotu domyślnie wynosi 0. Jeśli skonfigurowano "Rozpoczęcie Splotu", można wybrać numer splotu. Ustawienia przycisków IO są zgodne z ustawieniami Rozpoczęcia Splotu. Maksymalny czas dla rozpoczęcia i zakończenia łuku można skonfigurować do 10000ms.
+
 .. figure:: robot_peripherals/284.png
    :align: center
    :width: 6in
@@ -685,6 +687,22 @@ SmartTool oparty na otwartym protokole zyskał nowy tryb zapobiegania przypadkow
    :width: 6in
 
 .. centered:: Schemat 8.3‑2-8 Funkcja „Tryb zapobiegania przypadkowemu dotknięciu” w SmartTool
+
+Funkcja Czyszczenia Pamięci Przycisków IO SmartTool
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+SmartTool oparty na otwartym protokole zyskał funkcję czyszczenia pamięci przycisków IO. Gdy użytkownik naciśnie przycisk IO raz, zostanie on zapamiętany w celu wygenerowania sparowanych instrukcji. Jeśli naciśnięta zostanie funkcja "Wyczyść Program" lub "Nowy Program", pamięć przycisków IO zostanie wyczyszczona, a następne naciśnięcie przycisku IO wygeneruje instrukcję ponownie.
+
+Funkcja Globalnego Czyszczenia Punktów
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Dodano funkcję globalnego czyszczenia punktów. Otwórz WebApp, kliknij kolejno "Teach Program" i "Teach Points", wybierz "System Mode", a następnie kliknij "Clear All", aby usunąć wszystkie punkty zapisane przez użytkownika. W tym momencie numery sekwencyjne punktów instrukcji generowanych i zapisywanych przez SmartTool zostaną zresetowane, zaczynając od 1.
+
+.. figure:: robot_peripherals/320.png
+   :align: center
+   :width: 6in
+
+.. centered:: Rysunek 8.3‑2-9 Funkcja Globalnego Czyszczenia Punktów
 
 Przykład protokołu Lua urządzenia peryferyjnego końcówki dla uchwytu spawalniczego
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -1124,7 +1142,9 @@ Funkcje przycisków A-E:
 
 .. centered:: Schemat 8.4‑2-2 Wprowadzenie rzeczywistej prędkości fizycznej
 
-Po pomyślnej konfiguracji, program nauczania otrzymuje nową powiązaną instrukcję ruchu. Podczas konfigurowania instrukcji ruchu ARC, należy najpierw skonfigurować instrukcję PTP/LIN.
+Po pomyślnej konfiguracji, program nauczania otrzymuje nową powiązaną instrukcję ruchu. 
+
+.. note:: Uwaga: Podczas konfigurowania instrukcji ruchu ARC, należy najpierw skonfigurować instrukcję PTP/LIN, aby zapewnić prawidłowe wykonanie kroków dodawania instrukcji.
 
 - Wyjście DO: Po wybraniu „Wyjście DO” pojawi się lista rozwijana umożliwiająca wybór opcji wyjścia DO0⁓DO7.
 
@@ -1138,7 +1158,7 @@ Funkcje przycisków IO:
 
 -  **Konfiguracja sygnału IO**: Z listy rozwijanej można wybrać opcje DO0⁓DO7, CO0⁓CO7, End-DO0, End-DO1 i rozszerzone IO (Aux-DO0⁓Aux-DO127);
 
--  **Instrukcje kombinowane**: Po wybraniu „Sygnał IO”, w określonych warunkach wyświetlane są opcje konfiguracji „Wybór spawarki” i „Prędkość punktowa”, generując różne instrukcje programu.
+-  **Instrukcje kombinowane**: Po wybraniu „Sygnał IO”, w określonych warunkach wyświetlane są opcje konfiguracji „Wybór spawarki” i „Prędkość punktowa”, generując różne instrukcje programu.Dodano również możliwość wyboru numeru procesu spawania. Ponadto maksymalny czas dla rozpoczęcia i zakończenia łuku można skonfigurować do 10000ms. Numer splotu domyślnie wynosi 0. Jeśli skonfigurowano "Rozpoczęcie Splotu", można wybrać numer splotu. Ustawienia przycisków IO są zgodne z ustawieniami Rozpoczęcia Splotu.
 
 .. important::
    -  Gdy sygnał IO jest skonfigurowany jako DO0~DO7 lub CO0~CO7 (bez konfiguracji „Rozpoczęcie łuku”), program dodaje SetDO; w tym przypadku ukrywane są „Wybór spawarki” i „Prędkość punktowa”.
@@ -1149,6 +1169,7 @@ Funkcje przycisków IO:
    -  Gdy sygnał IO jest skonfigurowany jako CO0~CO7 (z konfiguracją „Rozpoczęcie łuku”) lub rozszerzone IO (z konfiguracją „Rozpoczęcie łuku spawarki”), a „Wybór spawarki” to „Spawanie”, to po pierwszym naciśnięciu program dodaje ARCStart, po drugim ARCEnd, po trzecim ArcStart, po czwartym ARCStart, naprzemiennie; w tym przypadku ukrywane są „Wybór spawarki” i „Prędkość punktowa”.
    -  Gdy sygnał IO jest skonfigurowany jako CO0~CO7 (z konfiguracją „Rozpoczęcie łuku”) lub rozszerzone IO (z konfiguracją „Rozpoczęcie łuku spawarki”), a „Wybór spawarki” to „LIN+spawanie”, to po pierwszym naciśnięciu program dodaje LIN i ARCStart, po drugim LIN i ARCEnd, po trzecim LIN i ARCStart, po czwartym LIN i ARCEnd, naprzemiennie; w tym przypadku wyświetlane są „Wybór spawarki” i „Prędkość punktowa”.
    -  Gdy sygnał IO jest skonfigurowany jako CO0~CO7 (z konfiguracją „Rozpoczęcie łuku”) lub rozszerzone IO (z konfiguracją „Rozpoczęcie łuku spawarki”), a „Wybór spawarki” to „LIN+spawanie+wahadło”, to po pierwszym naciśnięciu program dodaje LIN, ARCStart i WeaveStart, po drugim LIN, ARCEnd i WeaveEnd, po trzecim LIN, ARCStart i WeaveStart, po czwartym LIN, ARCEnd i WeaveEnd, naprzemiennie; w tym przypadku ukrywane są „Wybór spawarki” i „Prędkość punktowa”.
+   -  Gdy naciśnięta zostanie funkcja "Wyczyść Program" lub "Nowy Program", pamięć przycisków IO zostanie wyczyszczona, a następne naciśnięcie przycisku IO wygeneruje instrukcję ponownie.
   
 .. image:: robot_peripherals/031.png
    :width: 4in
@@ -6401,50 +6422,55 @@ Za pomocą przycisku przeciągania dostosuj końcówkę robota tak, aby była sk
 
 .. centered:: Schemat 8.14‑13 Automatyczne zerowanie czujnika siły/momentu
 
-Mieszane przeciąganie z wykorzystaniem siły sześcioosiowej i impedancji stawów
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Hybrydowe Przeciąganie z Siłą Sześcioosiową i Impedancją Stawów
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-1. Wspomaganie przeciągania
+Przeciąganie Wspomagane
+********************************************************
 
-**Krok 1**: W menu „Aplikacje pomocnicze” -> „Aplikacje narzędziowe” kliknij „Blokowanie przeciągania”, aby przejść do interfejsu funkcji blokowania przeciągania.
+**Krok 1**: W menu "Aplikacje Pomocnicze" -> "Aplikacje Narzędziowe" kliknij "Blokada Przeciągania", aby przejść do interfejsu funkcji blokady przeciągania.
 
-**Krok 2**: W sekcji „Mieszane przeciąganie z wykorzystaniem siły sześcioosiowej i impedancji stawów” ustaw stan sterowania na „Włączony”. Stan włączenia impedancji ustaw na „Wyłączony”. Ustaw wzmocnienie przeciągania, prędkość liniową końcówki na 1000 mm/s, ograniczenie prędkości kątowej na 100°/s, a następnie kliknij przycisk „Zastosuj”. Funkcja zostanie włączona. Konkretna konfiguracja jest pokazana na rysunku 4.
-
-**Krok 3**: Przełącz tryb robota na tryb przeciągania i przeciągnij robota. Konkretny efekt: Przeciąganie końcówki robota jest lekkie, z dobrym odczuciem. Przeciąganie stawów robota jest ciężkie.
+**Krok 2**: W sekcji "Hybrydowe Przeciąganie z Siłą Sześcioosiową i Impedancją Stawów" ustaw status sterowania na "Włączony", status włączenia impedancji na "Wyłączony", ustaw wzmocnienie przeciągania, prędkość liniową końcówki na 1000mm/s, limit prędkości kątowej na 100°/s, a następnie kliknij przycisk "Zastosuj", aby włączyć funkcję. Konfiguracja szczegółowa jest pokazana na poniższym rysunku.
 
 .. figure:: robot_peripherals/241.png
    :align: center
    :width: 4in
 
-.. centered:: Schemat 8.14‑14 Parametry konfiguracji wspomagania przeciągania siłą sześcioosiową
+.. centered:: Rysunek 8.14‑14 Parametry Konfiguracyjne dla Przeciągania Wspomaganego Siłą Sześcioosiową
 
-2. Sterowanie impedancją stawów
+Sterowanie Impedancją Stawów
+********************************************************
 
-Rolą sterowania impedancją jest ograniczenie siły przeciągania i pozycji przeciągania. Jego domyślny stan to „Wyłączony”.
+Funkcją sterowania impedancją jest ograniczanie siły i pozycji przeciągania. Jego domyślny status to "Wyłączony".
 
-Konkretna operacja jest pokazana na rysunku 5. Ustaw stan włączenia impedancji na „Włączony”, a następnie ustaw współczynniki tłumienia i sztywności zgodnie z rysunkiem 5. Funkcja współczynnika sztywności nie jest jeszcze dostępna.
+Szczegółowe operacje przedstawiono na poniższym rysunku. Ustaw status włączenia impedancji na "Włączony", a następnie ustaw współczynnik tłumienia i współczynnik sztywności zgodnie z rysunkiem. Funkcja współczynnika sztywności nie jest jeszcze dostępna.
 
 .. figure:: robot_peripherals/242.png
    :align: center
    :width: 4in
 
-.. centered:: Schemat 8.14‑15 Parametry konfiguracji impedancji stawów
+.. centered:: Rysunek 8.14‑15 Parametry Konfiguracyjne dla Impedancji Stawów
 
-Szczegółowe działanie parametrów:
+Szczegółowe funkcje parametrów:
 
-- **Stan sterowania**: Po włączeniu, funkcja ta może być używana w trybie przeciągania.
+- **Status Sterowania**: Po włączeniu, funkcja ta może być używana w trybie przeciągania.
   
-- **Włączenie impedancji**: Po włączeniu, należy skonfigurować parametry sztywności i tłumienia. Ich rolą jest ograniczenie siły przeciągania i pozycji przeciągania.
+- **Włączenie Impedancji**: Po włączeniu, należy skonfigurować parametry sztywności i tłumienia. Ich funkcją jest ograniczanie siły i pozycji przeciągania.
   
-- **Wzmocnienie przeciągania**: Zalecane ustawienie parametrów w zakresie [0-5]. Gdy parametr jest ustawiony na 0, robot nie może być przeciągany. Gdy parametr jest ustawiony na 1, efekt przeciągania nie ulega poprawie. Gdy parametr jest większy niż 1, przeciąganie jest lekkie, a odczucia są dobre. Im większy parametr, tym lżejsze przeciąganie.
+- **Wzmocnienie Przeciągania**: Zaleca się ustawienie parametrów między [0-5]. Przy ustawieniu 0, robot nie może być przeciągany. Przy ustawieniu 1, efekt przeciągania nie ulega poprawie. Przy wartościach powyżej 1, przeciąganie jest lekkie, a doświadczenie przeciągania jest dobre. Im większy parametr, tym łatwiejsze przeciąganie.
   
-- **Wzmocnienie sztywności**: Ustawione na 0. Jego rolą jest powrót do pozycji początkowej sprzed przeciągnięcia po przeciągnięciu.
+- **Wzmocnienie Sztywności**: Przy ustawieniu 0, przywraca robota do pozycji początkowej sprzed przeciągania po przeciągnięciu.
   
-- **Wzmocnienie tłumienia**: Jego rolą jest ograniczenie siły przeciągania. Zakres parametrów dla osi 1-3: [0-0.5], dla osi 4-5: [0-0.1]; dla osi 6: [0-0.05].
+- **Wzmocnienie Tłumienia**: Jego funkcją jest ograniczanie siły przeciągania. Zakres parametrów dla osi 1-3 to [0-0.5], dla osi 4-5 to [0-0.1]; dla osi 6 to [0-0.05].
   
-- **Prędkość liniowa końcówki**: 1000 mm/s. Gdy ograniczenie prędkości liniowej końcówki zostanie przekroczone, robot przełączy się w tryb ręczny i wyświetli ostrzeżenie o przekroczeniu prędkości TCP.
+- **Prędkość Liniowa Końcówki**: 1000mm/s. Po przekroczeniu limitu prędkości liniowej końcówki, robot przełącza się w tryb ręczny i wyświetla ostrzeżenie o przekroczeniu prędkości TCP.
   
-- **Ograniczenie prędkości kątowej**: 100°/s. Gdy ograniczenie prędkości kątowej zostanie przekroczone, robot przełączy się w tryb ręczny i wyświetli ostrzeżenie o przekroczeniu prędkości TCP.
+- **Limit Prędkości Kątowej**: 100°/s. Po przekroczeniu limitu prędkości kątowej, robot przełącza się w tryb ręczny i wyświetla ostrzeżenie o przekroczeniu prędkości TCP.
+
+.. note::
+  1. Dla robota FR3WML, zalecane ustawienia parametrów są następujące: wzmocnienie przeciągania [0.15, 0.15, 0.15, 0.15, 0.15, 0.2], wzmocnienie tłumienia po włączeniu impedancji [0.1, 0.1, 0.1, 0.05, 0.05, 0.05].
+
+  2. Gdy wszystkie parametry wzmocnienia przeciągania są ustawione na 0, opór przeciągania jest silny i trudno przeciągać; gdy wszystkie parametry wzmocnienia przeciągania są ustawione na 5, odczucie przeciągania jest lekkie; im większy parametr, tym łatwiejsze przeciąganie.
 
 Funkcja śledzenia punktowego laserem z osią rozszerzoną
 -------------------------------------------------------
@@ -7224,6 +7250,20 @@ Szczegółowe parametry komunikacji końcówki są następujące:
    :width: 6in
 
 .. centered:: Rysunek 8.19‑4 Kody Funkcyjne Otwartego Protokołu
+
+Polecenia sterowania ruchem dłoni to 0x31-0x36, opisane poniżej:
+
+- ① 0x31 to kod funkcji inicjalizacji dłoni. Szczegółowa implementacja jest określana na podstawie rzeczywistych warunków dłoni.
+- ② 0x32-0x34 to kody funkcji do wysyłania parametrów sterowania dłoni, odpowiadające odpowiednio parametrom sterowania pozycją, parametrom sterowania prędkością i parametrom sterowania momentem obrotowym, używane do ustawiania docelowych wartości ruchu dla każdego stawu.
+- ③ 0x35 to kod funkcji wyzwalania ruchu chwytu. Sterowanie ruchem dłoni ma zazwyczaj dwa tryby: jeden, w którym ruch jest wykonywany natychmiast po zapisaniu do rejestru pozycji; drugi, w którym ruch rozpoczyna się dopiero po zapisaniu określonej wartości do rejestru wyzwalania akcji po zapisaniu do rejestru pozycji. Czy włączyć tę funkcję wyzwalania, jest określane na podstawie rzeczywistych warunków dłoni.
+- ④ 0x36 to kod funkcji synchronicznego ruchu wieloosiowego. Czy obsługiwany jest synchroniczny ruch wieloosiowy, jest określane na podstawie rzeczywistych warunków dłoni. Jeśli jest obsługiwany, służy do osiągnięcia skoordynowanego planowania w czasie wielu stawów palców, uruchamiania jednocześnie i osiągania odpowiednich docelowych pozycji/prędkości w tym samym czasie. Jeśli nie jest obsługiwany, każda oś jest sterowana sekwencyjnie za pomocą poleceń sterowania pojedynczą osią, aby osiągnąć podobny efekt współpracy.
+
+Polecenia zapytania o status dłoni to 0xA0-0xA6, opisane poniżej:
+
+- ⑤ 0xA0 to kod funkcji odczytu statusu pracy pojedynczej osi, używany do zapytania o bieżący status ruchu i informacje o statusie chwytu określonego stawu.
+- ⑥ 0xA2 to kod funkcji odczytu statusu inicjalizacji, używany do zapytania o status zakończenia inicjalizacji i gotowość systemu dłoni. Szczegółowa implementacja jest określana na podstawie rzeczywistych warunków dłoni.
+- ⑦ 0xA3-0xA5 to kody funkcji odczytu parametrów statusu w czasie rzeczywistym dłoni, odpowiadające odpowiednio bieżącej rzeczywistej pozycji, bieżącej rzeczywistej prędkości i bieżącemu rzeczywistemu momentowi obrotowemu, używane do sterowania w pętli zamkniętej i monitorowania statusu.
+- ⑧ 0xA6 to kod funkcji odczytu informacji alarmowych dłoni, używany do uzyskania podstawowych kodów błędów i statusu alarmowego dłoni, ułatwiając diagnozowanie nieprawidłowości i obsługę zabezpieczeń.
 
 .. note:: Zręczna dłoń musi obsługiwać odczyt kodów funkcyjnych związanych ze stanem pracy, aby umożliwić zapytanie o stan ruchu.
   

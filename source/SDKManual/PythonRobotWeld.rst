@@ -393,6 +393,125 @@ Ustawianie trybu sterowania spawarką
     "Parametry domyślne", "Brak"
     "Wartość zwracana", "Kod błędu sukces-0 błąd- errcode" 
 
+Pobieranie Trybu Sterowania Spawarką
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v3.9.8
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototyp", "``GetWeldMachineCtrlMode(self)``"
+    "Opis", "Pobiera tryb sterowania spawarką"
+    "Parametry Wymagane", "
+    - ``mode``: Tryb sterowania spawarką; 0-tryb jednopokrętłowy DC; 1-tryb jednopokrętłowy impulsowy; 2-tryb JOB; 3-tryb sterowania lokalnego; 4-tryb oddzielny; 5-tryb CC/CV; 6-TIG; 7-CMT
+    "
+    "Parametry Domyślne", "Brak"
+    "Wartość Zwracana", "Kod błędu, 0-sukces; niezerowy-błąd" 
+
+Przykład Kodu Pobierania Trybu Sterowania Spawarką
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v3.9.8
+
+.. code-block:: python
+    :linenos:
+
+    from fairino import Robot
+    import time
+
+    def main():
+        robot = Robot.RPC('192.168.58.2')
+        time.sleep(0.5)  
+
+        robot.WeldingSetProcessParam(1, 177, 27, 1000, 178, 28, 176, 26, 1000)
+        robot.WeldingSetProcessParam(2, 188, 28, 555, 199, 29, 133, 23, 333)
+
+        start_current = 0
+        start_voltage = 0
+        start_time = 0
+        weld_current = 0
+        weld_voltage = 0
+        end_current = 0
+        end_voltage = 0
+        end_time = 0
+
+        error, start_current, start_voltage, start_time, weld_current, weld_voltage, end_current,end_voltage, end_time = robot.WeldingGetProcessParam(1)
+        print(f"the Num 1 process param is {start_current} {start_voltage} {start_time} {weld_current} {weld_voltage} {end_current} {end_voltage} {end_time}")
+
+        error, start_current, start_voltage, start_time, weld_current, weld_voltage, end_current,end_voltage, end_time = robot.WeldingGetProcessParam(2)
+        print(f"the Num 2 process param is {start_current} {start_voltage} {start_time} {weld_current} {weld_voltage} {end_current} {end_voltage} {end_time}")
+
+        rtn = robot.WeldingSetCurrentRelation(0, 400, 0, 10, 0)
+        print(f"WeldingSetCurrentRelation rtn is: {rtn}")
+
+        rtn = robot.WeldingSetVoltageRelation(0, 40, 0, 10, 1)
+        print(f"WeldingSetVoltageRelation rtn is: {rtn}")
+
+        current_min = 0
+        current_max = 0
+        vol_min = 0
+        vol_max = 0
+        output_vmin = 0
+        output_vmax = 0
+        cur_index = 0
+        vol_index = 0
+
+        rtn,current_min, current_max, output_vmin, output_vmax, cur_index = robot.WeldingGetCurrentRelation()
+        print(f"WeldingGetCurrentRelation rtn is: {rtn}")
+        print(
+            f"current min {current_min} current max {current_max} output vol min {output_vmin} output vol max {output_vmax}")
+
+        rtn,vol_min, vol_max, output_vmin, output_vmax, vol_index = robot.WeldingGetVoltageRelation()
+        print(f"WeldingGetVoltageRelation rtn is: {rtn}")
+        print(f"vol min {vol_min} vol max {vol_max} output vol min {output_vmin} output vol max {output_vmax}")
+
+        rtn = robot.WeldingSetCurrent(1, 100, 0, 0)
+        print(f"WeldingSetCurrent rtn is: {rtn}")
+
+        time.sleep(3)
+
+        rtn = robot.WeldingSetVoltage(1, 10, 0, 0)
+        print(f"WeldingSetVoltage rtn is: {rtn}")
+
+        rtn = robot.WeaveSetPara(0, 0, 2.000000, 0, 10.000000, 0.000000, 0.000000, 0, 0, 0, 0, 0,0.0, 60.000000)
+        print(f"rtn is: {rtn}")
+
+        robot.WeaveOnlineSetPara(0, 0, 1, 0, 20, 0, 0, 0, 0)
+
+        rtn = robot.WeldingSetCheckArcInterruptionParam(1, 200)
+        print(f"WeldingSetCheckArcInterruptionParam {rtn}")
+
+        rtn = robot.WeldingSetReWeldAfterBreakOffParam(1, 5.7, 98.2, 0)
+        print(f"WeldingSetReWeldAfterBreakOffParam {rtn}")
+
+        enable = 0
+        length = 0
+        velocity = 0
+        move_type = 0
+        check_enable = 0
+        arc_interrupt_time_length = 0
+
+        rtn,check_enable, arc_interrupt_time_length = robot.WeldingGetCheckArcInterruptionParam()
+        print(
+            f"WeldingGetCheckArcInterruptionParam checkEnable {check_enable} arcInterruptTimeLength {arc_interrupt_time_length}")
+
+        rtn,enable, length, velocity, move_type = robot.WeldingGetReWeldAfterBreakOffParam()
+        print(
+            f"WeldingGetReWeldAfterBreakOffParam enable = {enable}, length = {length}, velocity = {velocity}, moveType = {move_type}")
+
+        robot.SetWeldMachineCtrlModeExtDoNum(17)
+        for i in range(5):
+            robot.SetWeldMachineCtrlMode(0,1)
+            error,getCtrlMode=robot.GetWeldMachineCtrlMode
+            print(f"GetWeldMachineCtrlMode = {getCtrlMode}")
+            time.sleep(1)
+            robot.SetWeldMachineCtrlMode(1,1)
+            error, getCtrlMode = robot.GetWeldMachineCtrlMode
+            print(f"GetWeldMachineCtrlMode = {getCtrlMode}")
+            time.sleep(1)
+
+        robot.CloseRPC()    
+
 Rozpoczęcie spawania
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -904,6 +1023,116 @@ Przykład kodu konfiguracji rozszerzonych sygnałów IO spawania
     rtn = robot.SetWireSearchExtDIONum(0, 1)
     print(f"SetWireSearchExtDIONum rtn is {rtn}")
     robot.CloseRPC()
+
+Pobieranie Konfiguracji Funkcji Rozszerzonego DI
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-V3.9.8
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototyp", "``GetExtDIConfig(self)``"
+    "Opis", "Pobiera konfigurację funkcji rozszerzonego DI"
+    "Parametry Wymagane", "
+    - ``DIConfig``: Konfiguracja wejścia rozszerzonego DI; DIConfig[0]-port rozszerzonego DI gotowości spawarki
+    - ``DIConfig[1]``: Port rozszerzonego DI pomyślnego rozpoczęcia łuku
+    - ``DIConfig[2]``: Port rozszerzonego DI wznowienia przerwania spawania
+    - ``DIConfig[3]``: Port rozszerzonego DI wyjścia z przerwania spawania
+    - ``DIConfig[4]``: Port rozszerzonego DI pomyślnego wyszukiwania drutu
+    - ``DIConfig[5]``: Port rozszerzonego DI statusu pracy spawarki laserowej
+    - ``DIConfig[6]``: Port rozszerzonego DI statusu awarii spawarki laserowej
+    - ``DIConfig[7-15]``: Zarezerwowane
+    "
+    "Parametry Domyślne", "Brak"
+    "Wartość Zwracana", "Kod błędu, 0-sukces; niezerowy-błąd" 
+
+Pobieranie Konfiguracji Funkcji Rozszerzonego DO
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-V3.9.8
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototyp", "``GetExtDOConfig(self)``"
+    "Opis", "Pobiera konfigurację funkcji rozszerzonego DO"
+    "Parametry Wymagane", "
+    - ``DOConfig``: Konfiguracja wyjścia rozszerzonego DO; DOConfig[0]-port rozszerzonego DO rozpoczęcia łuku spawarki
+    - ``DOConfig[1]``: Port rozszerzonego DO detekcji gazu
+    - ``DOConfig[2]``: Port rozszerzonego DO podawania drutu do przodu
+    - ``DOConfig[3]``: Port rozszerzonego DO podawania drutu do tyłu
+    - ``DOConfig[4]``: Port rozszerzonego DO wyszukiwania drutu
+    - ``DOConfig[5]``: Port rozszerzonego DO trybu sterowania spawarką
+    - ``DOConfig[6]``: Port rozszerzonego DO włączenia spawarki laserowej
+    - ``DOConfig[7]``: Port rozszerzonego DO uruchomienia spawarki laserowej (emisja lasera)
+    - ``DOConfig[8]``: Port rozszerzonego DO resetowania spawarki laserowej
+    - ``DOConfig[9-15]``: Zarezerwowane
+    "
+    "Parametry Domyślne", "Brak"
+    "Wartość Zwracana", "Kod błędu, 0-sukces; niezerowy-błąd" 
+
+Przykład Kodu Pobierania Rozszerzonego DI/DO
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-V3.9.8
+
+.. code-block:: python
+    :linenos:
+
+    from fairino import Robot
+    import time
+
+    def main():
+        robot = Robot.RPC('192.168.58.2')
+        time.sleep(0.5)  
+
+    rtn = robot.SetArcStartExtDoNum(10)
+        print(f"SetArcStartExtDoNum rtn is {rtn}")
+
+        rtn = robot.SetAirControlExtDoNum(20)
+        print(f"SetAirControlExtDoNum rtn is {rtn}")
+
+        rtn = robot.SetWireForwardFeedExtDoNum(30)
+        print(f"SetWireForwardFeedExtDoNum rtn is {rtn}")
+
+        rtn = robot.SetWireReverseFeedExtDoNum(40)
+        print(f"SetWireReverseFeedExtDoNum rtn is {rtn}")
+
+        rtn = robot.SetWeldReadyExtDiNum(50)
+        print(f"SetWeldReadyExtDiNum rtn is {rtn}")
+
+        rtn = robot.SetArcDoneExtDiNum(60)
+        print(f"SetArcDoneExtDiNum rtn is {rtn}")
+
+        rtn = robot.SetExtDIWeldBreakOffRecover(70, 80)
+        print(f"SetExtDIWeldBreakOffRecover rtn is {rtn}")
+
+        rtn = robot.SetWireSearchExtDIONum(0, 1)
+        print(f"SetWireSearchExtDIONum rtn is {rtn}")
+
+        rtn, DIConfig = robot.GetExtDIConfig()
+        print(f"GetExtDIConfig rtn is {rtn}")
+        print(f"welder ready {DIConfig[0]}")
+        print(f"arc done {DIConfig[1]}")
+        print(f"reweld start {DIConfig[2]}")
+        print(f"abort reweld {DIConfig[3]}")
+        print(f"wiresearch done {DIConfig[4]}")
+        print(f"Laser welding State {DIConfig[5]}")
+        print(f"laser welding error state {DIConfig[6]}")
+
+        rtn, DOConfig = robot.GetExtDOConfig()
+        print(f"GetExtDOConfig rtn is {rtn}")
+        print(f"Arc Start {DOConfig[0]}")
+        print(f"Air Test {DOConfig[1]}")
+        print(f"Wire forward {DOConfig[2]}")
+        print(f"Wire Inverse {DOConfig[3]}")
+        print(f"wiresearch {DOConfig[4]}")
+        print(f"Weld Mode {DOConfig[5]}")
+        print(f"laser Enable {DOConfig[6]}")
+        print(f"Laser On {DOConfig[7]}")
+        print(f"Laser Reset Error {DOConfig[8]}")
+
+        robot.CloseRPC()
 
 Sterowanie śledzeniem łuku
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

@@ -583,65 +583,73 @@ Przykład kodu zapytania o dane punktu nauczania w zarządzaniu nauczaniem robot
       return 0;
     }
 
-Pobieranie układu współrzędnych narzędzia według numeru
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: C++SDK-v3.8.6
-
+Pobieranie Układu Współrzędnych Narzędzia według ID
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionchanged:: C++SDK-v3.9.8
+    
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief Pobiera układ współrzędnych narzędzia według numeru
+    * @brief Pobiera układ współrzędnych narzędzia według ID
     * @param [in] id Numer układu współrzędnych narzędzia
     * @param [out] coord Wartości układu współrzędnych
+    * @param [out] type Typ narzędzia: 0-narzędzie; 1-czujnik
+    * @param [out] install Pozycja instalacji: 0-koniec robota; 1-na zewnątrz robota
+    * @param [out] toolID ID narzędzia
+    * @param [out] loadNo Numer obciążenia
     * @return Kod błędu
     */
-    errno_t GetToolCoordWithID(int id, DescPose& coord);
+    errno_t GetToolCoordWithID(int id, DescPose& coord, int& type, int& install, int& toolID, int& loadNo);
 
-Pobieranie układu współrzędnych obiektu według numeru
-++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: C++SDK-v3.8.6
-
+Pobieranie Układu Współrzędnych Przedmiotu według ID
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionchanged:: C++SDK-v3.9.8
+    
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief Pobiera układ współrzędnych obiektu według numeru
-    * @param [in] id Numer układu współrzędnych obiektu
+    * @brief Pobiera układ współrzędnych przedmiotu według ID
+    * @param [in] id Numer układu współrzędnych przedmiotu
     * @param [out] coord Wartości układu współrzędnych
+    * @param [out] refFrame Referencyjny układ współrzędnych
     * @return Kod błędu
     */
-    errno_t GetWObjCoordWithID(int id, DescPose& coord);
-
-Pobieranie zewnętrznego układu współrzędnych narzędzia według numeru
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: C++SDK-v3.8.6
-
+    errno_t GetWObjCoordWithID(int id, DescPose& coord, int& refFrame);
+    
+Pobieranie Zewnętrznego Układu Współrzędnych Narzędzia według ID
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionchanged:: C++SDK-v3.9.8
+    
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief Pobiera zewnętrzny układ współrzędnych narzędzia według numeru
+    * @brief Pobiera zewnętrzny układ współrzędnych narzędzia według ID
+    * @param [in] id Numer zewnętrznego układu współrzędnych narzędzia, 20-39 odpowiadają zewnętrznym układom współrzędnych narzędzi 0-19
+    * @param [out] coord Pozycja TCP stałego narzędzia zewnętrznego na robocie
+    * @param [out] tcoord Pozycja układu współrzędnych przedmiotu zamontowanego na końcówce robota
+    * @return Kod błędu
+    */
+    errno_t GetExToolCoordWithID(int id, DescPose& coord, DescPose& tcoord);
+    
+Pobieranie Układu Współrzędnych Osi Rozszerzonej według ID
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionchanged:: C++SDK-v3.9.8
+    
+.. code-block:: c++
+    :linenos:
+
+    /**
+    * @brief Pobiera układ współrzędnych osi rozszerzonej według ID
     * @param [in] id Numer zewnętrznego układu współrzędnych narzędzia
     * @param [out] coord Wartości układu współrzędnych
+    * @param [out] axisCoordNum Numer osi rozszerzonej; bit0-bit3 odpowiadają osiom rozszerzonym 1-4; np. wartość axisCoordNum 3 odpowiada osiom rozszerzonym [1, 2]
+    * @param [out] calibFlag Flaga kalibracji; 0-niekalibrowany; 1-kalibrowany
     * @return Kod błędu
     */
-    errno_t GetExToolCoordWithID(int id, DescPose& coord);
-
-Pobieranie układu współrzędnych osi rozszerzonej według numeru
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: C++SDK-v3.8.6
-
-.. code-block:: c++
-    :linenos:
-
-    /**
-    * @brief Pobiera układ współrzędnych osi rozszerzonej według numeru
-    * @param [in] id Numer zewnętrznego układu współrzędnych narzędzia
-    * @param [out] coord Wartości układu współrzędnych
-    * @return Kod błędu
-    */
-    errno_t GetExAxisCoordWithID(int id, DescPose& coord);
+    errno_t GetExAxisCoordWithID(int id, DescPose& coord, int& axisCoordNum, int& calibFlag);
 
 Pobieranie masy i środka ciężkości obciążenia według numeru
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -724,80 +732,85 @@ Przykład kodu pobierania układów współrzędnych i obciążenia robota
 
     int TestCoord()
     {
-      ROBOT_STATE_PKG pkg = {};
-      FRRobot robot;
-      robot.LoggerInit();
-      robot.SetLoggerLevel(1);
-      int rtn = robot.RPC("192.168.58.2");
-      if (rtn != 0)
-      {
+        ROBOT_STATE_PKG pkg = {};
+        FRRobot robot;
+        robot.LoggerInit();
+        robot.SetLoggerLevel(1);
+        int rtn = robot.RPC("192.168.58.2");
+        if (rtn != 0)
+        {
+            return 0;
+        }
+        robot.SetReConnectParam(true, 30000, 500);
+        robot.Sleep(2000);
+        int id = 1;
+        DescPose toolCoord = {};
+        DescPose extoolCoord = {};
+        DescPose exworkpieceCoord = {};
+        DescPose wobjCoord = {};
+        DescPose exAxisCoord = {};
+        int type = 0, install = 0, toolID = 0, loadNo = 0;
+        robot.GetToolCoordWithID(id, toolCoord, type, install, toolID, loadNo);
+        printf("GetToolCoordWithID %d, %f %f %f %f %f %f,  type = %d, install = %d, toolID = %d, loadNo = %d\n", id,
+            toolCoord.tran.x, toolCoord.tran.y, toolCoord.tran.z,
+            toolCoord.rpy.rx, toolCoord.rpy.ry, toolCoord.rpy.rz, type, install, toolID, loadNo);
+        int refFrame = 0;
+        robot.GetWObjCoordWithID(id, wobjCoord, refFrame);
+        printf("GetWObjCoordWithID %d, %f %f %f %f %f %f, refFrame = %d\n", id,
+            wobjCoord.tran.x, wobjCoord.tran.y, wobjCoord.tran.z,
+            wobjCoord.rpy.rx, wobjCoord.rpy.ry, wobjCoord.rpy.rz, refFrame);
+        robot.GetExToolCoordWithID(21, extoolCoord, exworkpieceCoord);
+        printf("GetExToolCoordWithID %d, %f %f %f %f %f %f\n", id,
+            extoolCoord.tran.x, extoolCoord.tran.y, extoolCoord.tran.z,
+            extoolCoord.rpy.rx, extoolCoord.rpy.ry, extoolCoord.rpy.rz,
+            exworkpieceCoord.tran.x, exworkpieceCoord.tran.y, exworkpieceCoord.tran.z,
+            exworkpieceCoord.rpy.rx, exworkpieceCoord.rpy.ry, exworkpieceCoord.rpy.rz);
+        int axisCoordNum = 0, calibFlag = 0;
+        robot.GetExAxisCoordWithID(id, exAxisCoord, axisCoordNum, calibFlag);
+        printf("GetExAxisCoordWithID %d, %f %f %f %f %f %f, axisCoordNum = %d, calibFlag = %d\n", id,
+            exAxisCoord.tran.x, exAxisCoord.tran.y, exAxisCoord.tran.z,
+            exAxisCoord.rpy.rx, exAxisCoord.rpy.ry, exAxisCoord.rpy.rz, axisCoordNum, calibFlag);
+        double weight = 0.0;
+        DescTran cog = {};
+        robot.GetTargetPayloadWithID(id, weight, cog);
+        printf("GetTargetPayloadWithID %d, %f %f %f %f\n", id, weight,
+            cog.x, cog.y, cog.z);
+        robot.GetCurToolCoord(toolCoord);
+        printf("GetCurToolCoord %f %f %f %f %f %f\n",
+            toolCoord.tran.x, toolCoord.tran.y, toolCoord.tran.z,
+            toolCoord.rpy.rx, toolCoord.rpy.ry, toolCoord.rpy.rz);
+        robot.GetCurWObjCoord(wobjCoord);
+        printf("GetCurWObjCoord %f %f %f %f %f %f\n",
+            wobjCoord.tran.x, wobjCoord.tran.y, wobjCoord.tran.z,
+            wobjCoord.rpy.rx, wobjCoord.rpy.ry, wobjCoord.rpy.rz);
+        robot.GetCurExToolCoord(extoolCoord);
+        printf("GetExToolCoordWithID %f %f %f %f %f %f\n",
+            extoolCoord.tran.x, extoolCoord.tran.y, extoolCoord.tran.z,
+            extoolCoord.rpy.rx, extoolCoord.rpy.ry, extoolCoord.rpy.rz);
+        robot.GetCurExAxisCoord(exAxisCoord);
+        printf("GetCurExAxisCoord %f %f %f %f %f %f\n",
+            exAxisCoord.tran.x, exAxisCoord.tran.y, exAxisCoord.tran.z,
+            exAxisCoord.rpy.rx, exAxisCoord.rpy.ry, exAxisCoord.rpy.rz);
+        float weightT = 0.0;
+        DescTran cogT = {};
+        robot.GetTargetPayload(0, &weightT);
+        robot.GetTargetPayloadCog(0, &cogT);
+        printf("GetTargetPayload %f %f %f %f\n", weightT,
+            cogT.x, cogT.y, cogT.z);
+        DescPose coordSet(0, 1, 2, 3, 4, 5);
+        robot.SetToolCoord(1, &coordSet, 0, 0, 1, 0);
+        robot.SetWObjCoord(1, &coordSet, 0);
+        robot.SetLoadWeight(1, 1.3);
+        //DescTran cog = {};
+        cog.x = 10;
+        cog.y = 20;
+        cog.z = 30;
+        robot.SetLoadCoord(1, &cog);
+        DescPose etcp(0, 0, 100, 0, 0, 0);
+        DescPose etool(0, 0, 50, 0, 0, 0);
+        rtn = robot.SetExToolCoord(21, &etcp, &etool);
+        printf("SetExToolCoord rtn is %d\n", rtn);
+        robot.ExtAxisActiveECoordSys(1, 1, coordSet, 1);
+        robot.CloseRPC();
         return 0;
-      }
-      robot.SetReConnectParam(true, 30000, 500);
-      int id = 1;
-      DescPose toolCoord = {};
-      DescPose extoolCoord = {};
-      DescPose wobjCoord = {};
-      DescPose exAxisCoord = {};
-      robot.GetToolCoordWithID(id, toolCoord);
-      printf("GetToolCoordWithID %d, %f %f %f %f %f %f\n", id,
-        toolCoord.tran.x, toolCoord.tran.y, toolCoord.tran.z,
-        toolCoord.rpy.rx, toolCoord.rpy.ry, toolCoord.rpy.rz);
-      robot.GetWObjCoordWithID(id, wobjCoord);
-      printf("GetWObjCoordWithID %d, %f %f %f %f %f %f\n", id,
-        wobjCoord.tran.x, wobjCoord.tran.y, wobjCoord.tran.z,
-        wobjCoord.rpy.rx, wobjCoord.rpy.ry, wobjCoord.rpy.rz);
-
-      robot.GetExToolCoordWithID(id, extoolCoord);
-      printf("GetExToolCoordWithID %d, %f %f %f %f %f %f\n", id,
-        extoolCoord.tran.x, extoolCoord.tran.y, extoolCoord.tran.z,
-        extoolCoord.rpy.rx, extoolCoord.rpy.ry, extoolCoord.rpy.rz);
-
-      robot.GetExAxisCoordWithID(id, exAxisCoord);
-      printf("GetExAxisCoordWithID %d, %f %f %f %f %f %f\n", id,
-        exAxisCoord.tran.x, exAxisCoord.tran.y, exAxisCoord.tran.z,
-        exAxisCoord.rpy.rx, exAxisCoord.rpy.ry, exAxisCoord.rpy.rz);
-      double weight = 0.0;
-      DescTran cog = {};
-      robot.GetTargetPayloadWithID(id, weight, cog);
-      printf("GetTargetPayloadWithID %d, %f %f %f %f\n", id, weight,
-        cog.x, cog.y, cog.z);
-      robot.GetCurToolCoord(toolCoord);
-      printf("GetCurToolCoord %f %f %f %f %f %f\n",
-        toolCoord.tran.x, toolCoord.tran.y, toolCoord.tran.z,
-        toolCoord.rpy.rx, toolCoord.rpy.ry, toolCoord.rpy.rz);
-      robot.GetCurWObjCoord(wobjCoord);
-      printf("GetCurWObjCoord %f %f %f %f %f %f\n",
-        wobjCoord.tran.x, wobjCoord.tran.y, wobjCoord.tran.z,
-        wobjCoord.rpy.rx, wobjCoord.rpy.ry, wobjCoord.rpy.rz);
-      robot.GetCurExToolCoord(extoolCoord);
-      printf("GetExToolCoordWithID %f %f %f %f %f %f\n",
-        extoolCoord.tran.x, extoolCoord.tran.y, extoolCoord.tran.z,
-        extoolCoord.rpy.rx, extoolCoord.rpy.ry, extoolCoord.rpy.rz);
-      robot.GetCurExAxisCoord(exAxisCoord);
-      printf("GetCurExAxisCoord %f %f %f %f %f %f\n",
-        exAxisCoord.tran.x, exAxisCoord.tran.y, exAxisCoord.tran.z,
-        exAxisCoord.rpy.rx, exAxisCoord.rpy.ry, exAxisCoord.rpy.rz);
-      float weightT = 0.0;
-      DescTran cogT = {};
-      robot.GetTargetPayload(0, &weightT);
-      robot.GetTargetPayloadCog(0, &cogT);
-      printf("GetTargetPayload %f %f %f %f\n", weightT,
-        cogT.x, cogT.y, cogT.z);
-      DescPose coordSet(0,1,2,3,4,5);
-      robot.SetToolCoord(1, &coordSet, 0, 0, 1, 0);
-      robot.SetWObjCoord(1, &coordSet, 0);
-      robot.SetLoadWeight(1, 1.3);
-      DescTran cog = {};
-      cog.x = 10;
-      cog.y = 20;
-      cog.z = 30;
-      robot.SetLoadCoord(1, &cog);
-      DescPose etcp(0, 0, 100, 0, 0, 0);
-      DescPose etool(0, 0, 50, 0, 0, 0);
-      rtn = robot.SetExToolCoord(1, &etcp, &etool);
-      printf("SetExToolCoord rtn is %d\n", rtn);
-      robot.ExtAxisActiveECoordSys(1, 1, coordSet, 1);
-      robot.CloseRPC();
-      return 0;
     }

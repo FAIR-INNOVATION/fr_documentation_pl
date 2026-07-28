@@ -654,4 +654,5 @@ Typ wyliczeniowy konfiguracji sprzężenia zwrotnego stanu robota
         SocketReadTimeout,    // Przekroczenie czasu odczytu socket, bity 0-4 odpowiadają socketID 1-4
         TsWebStateComErr,     // Nieudana komunikacja momentu web: 0-normalny, 1-nieudana
         ExaxisCoordID          // numer układu współrzędnych osi rozszerzonej
+        programRunState       //Status wykonania programu LUA 0-program nie jest uruchomiony; 1-program jest uruchomiony (włączając program wstrzymany)
     };
