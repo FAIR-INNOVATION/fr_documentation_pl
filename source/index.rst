@@ -34,6 +34,12 @@ Przełączanie języka
 
 .. toctree:: 
    :maxdepth: 6
+   :caption: Sklep z Wtyczkami
+
+   CapSoftware
+
+.. toctree:: 
+   :maxdepth: 6
    :caption: Otwarta platforma
 
    ROSGuide/index
