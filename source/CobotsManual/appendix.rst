@@ -163,7 +163,79 @@ Dodatek 1: Błędy kontrolera ruchu i sposoby ich rozwiązywania
    "13-Błąd parametrów ustawienia", "16", "Błąd kanału enkodera taśmociągu, możliwy do zresetowania"
    "13-Błąd parametrów ustawienia", "17", "Błąd numeru osi przedmiotu taśmociągu, możliwy do zresetowania"
 
-Dodatek 2: Tabela kodów awarii serwonapędu
+Załącznik 2: Tabela Usterek Szafy Sterowniczej Szerokiego Napięcia
+---------------------------------------------------------------------------------
+
+.. list-table::
+   :widths: 20 40 80
+   :header-rows: 0
+   :align: center
+
+   * - **Kod Usterki**
+     - **Nazwa Usterki**
+     - **Metoda Postępowania**
+
+   * - 3
+     - MCU pomocniczy offline
+     - | 1. Ponownie wgrać oprogramowanie MCU pomocniczego
+       | 2. Naprawić MCU pomocniczy lub wymienić szafę sterowniczą  
+
+   * - 4
+     - Niezgodność wejścia awaryjnego MCU głównego i pomocniczego
+     - | 1. Sprawdzić wiązkę przycisku awaryjnego skrzynki przycisków lub wymienić zespół skrzynki przycisków
+       | 2. Sprawdzić dwie wiązki zwarciowe przycisku awaryjnego na zaciskach szafy sterowniczej  
+       | 3. Jeśli usterka nadal występuje, naprawić lub wymienić szafę sterowniczą 
+
+   * - 5
+     - Niezgodność wejścia bezpieczeństwa MCU głównego i pomocniczego
+     - | 1. Sprawdzić dwie wiązki zwarciowe bezpieczeństwa na zaciskach szafy sterowniczej
+       | 2. Jeśli usterka nadal występuje, naprawić lub wymienić szafę sterowniczą
+
+   * - 6
+     - Niezgodność wejścia awaryjnego i przycisku zezwalającego 3-pozycyjnego MCU głównego i pomocniczego
+     - | 1. Sprawdzić przełącznik zezwalający 3-pozycyjny na panelu operatorskim i wiązkę panelu operatorskiego
+       | 2. Wymienić zespół panelu operatorskiego
+       | 3. Sprawdzić, czy Web jest w trybie panelu operatorskiego i czy panel operatorski jest podłączony
+       | 4. Jeśli usterka nadal występuje, naprawić lub wymienić szafę sterowniczą
+
+   * - 7
+     - Niezgodność wejścia/wyjścia STO głównego
+     - | 1. Sprawdzić, czy wtyk przewodu ciężkiego szafy sterowniczej i wiązka STO są pewnie podłączone
+       | 2. Sprawdzić, czy napęd obsługuje funkcję STO
+       | 3. Dla konfiguracji certyfikowana szafa sterownicza szerokiego napięcia + robot niecertyfikowany, sprawdzić czy włączono tryb bezpieczeństwa funkcjonalnego
+       | 4. Certyfikowana szafa sterownicza szerokiego napięcia w trybie certyfikacji włącza funkcję wykrywania usterek STO; robot niecertyfikowany nie obsługuje trybu bezpieczeństwa funkcjonalnego
+       | 5. Jeśli usterka nadal występuje, naprawić lub wymienić szafę sterowniczą
+
+   * - 8
+     - Niezgodność wejścia/wyjścia STO pomocniczego
+     - | 1. Sprawdzić, czy wtyk przewodu ciężkiego szafy sterowniczej i wiązka STO są pewnie podłączone
+       | 2. Sprawdzić, czy napęd obsługuje funkcję STO
+       | 3. Dla konfiguracji certyfikowana szafa sterownicza szerokiego napięcia + robot niecertyfikowany, sprawdzić czy włączono tryb bezpieczeństwa funkcjonalnego
+       | 4. Certyfikowana szafa sterownicza szerokiego napięcia w trybie certyfikacji włącza funkcję wykrywania usterek STO; robot niecertyfikowany nie obsługuje trybu bezpieczeństwa funkcjonalnego
+       | 5. Jeśli usterka nadal występuje, naprawić lub wymienić szafę sterowniczą
+
+   * - 9
+     - MCU główny wykrywa niezgodność wejścia/wyjścia przekaźnika 48V
+     - | 1. Sprawdzić wejście i sprzężenie zwrotne przekaźnika wymuszonego w szafie sterowniczej
+       | 2. Sprawdzić, czy przekaźnik 48V w szafie sterowniczej nie jest zablokowany
+       | 3. Sprawdzić, czy obwód sprzężenia zwrotnego przekaźnika 48V w szafie sterowniczej działa prawidłowo
+       | 4. Jeśli usterka nadal występuje, naprawić lub wymienić szafę sterowniczą
+
+   * - 10
+     - MCU pomocniczy wykrywa niezgodność wejścia/wyjścia przekaźnika 48V
+     - | 1. Sprawdzić wejście i sprzężenie zwrotne przekaźnika wymuszonego w szafie sterowniczej
+       | 2. Sprawdzić, czy przekaźnik 48V w szafie sterowniczej nie jest zablokowany
+       | 3. Sprawdzić, czy obwód sprzężenia zwrotnego przekaźnika 48V w szafie sterowniczej działa prawidłowo
+       | 4. Jeśli usterka nadal występuje, naprawić lub wymienić szafę sterowniczą
+
+   * - \
+     - Szafa sterownicza wyłączona, brak napięcia 48V
+     - | 1. Sprawdzić obwód układu zabezpieczenia przed zwarciem 24V i sprawdzić, czy nie ma zwarć na 24V
+       | 2. Sprawdzić wiązki zwarciowe zacisków wejścia awaryjnego i wejścia bezpieczeństwa
+       | 3. Sprawdzić, czy płytka pomocnicza zasilania 24V w szafie sterowniczej dostarcza napięcie 24V
+       | 4. Jeśli usterka nadal występuje, naprawić lub wymienić szafę sterowniczą
+
+Dodatek 3: Tabela kodów awarii serwonapędu
 ------------------------------------------------
 
 .. list-table::
@@ -377,7 +449,27 @@ Dodatek 2: Tabela kodów awarii serwonapędu
      - | 1. Sprawdź, czy tarcza enkodera optycznego nie jest zabrudzona lub źle przyklejona
        | 2. Jeśli awaria nie zostanie usunięta, napraw lub wymień zespół enkodera magnetycznego
 
-Dodatek 3: Aktualizacja 485 płyty końcowej
+   * - 46
+     - Błąd konfiguracji typu robota
+     - | 1. Bez wyłączania zasilania sprawdzić numer wersji oprogramowania napędu z usterką
+       | 2. Ponownie skonfigurować typ robota
+       | 3. Jeśli usterka nadal występuje, wymienić lub naprawić płytkę napędu
+
+   * - 47
+     - Błąd wykrywania napięcia hamulca
+     - | 1. Sprawdzić, czy okablowanie hamulca jest nieprawidłowe
+       | 2. Sprawdzić, czy obwód hamulca jest nieprawidłowy
+
+   * - 50
+     - Błąd polecenia pozycji
+     - | 1. Sprawdzić, czy polecenie pozycji wysłane przez komputer nadrzędny (kontroler) jest nieprawidłowe (lub mutacja polecenia pozycji)
+
+   * - 51
+     - Błąd modułu enkodera magnetycznego - błąd enkodera optycznego
+     - | 1. Sprawdzić, czy okablowanie czujnika momentu obrotowego jest nieprawidłowe
+       | 2. Jeśli usterka nadal występuje, naprawić lub wymienić czujnik momentu obrotowego
+
+Dodatek 4: Aktualizacja 485 płyty końcowej
 ------------------------------------------------
 
 Podczas użytkowania w terenie może zaistnieć konieczność aktualizacji oprogramowania sprzętowego w celu spełnienia nowych wymagań. Dostarczony zostanie nowy plik aktualizacji (XX_XX_MAIN.bin). Aktualizacja płyty końcowej odbywa się przez interfejs 485 (wymagany jest moduł USB na 485). Kroki aktualizacji są następujące:
@@ -434,7 +526,7 @@ Podczas użytkowania w terenie może zaistnieć konieczność aktualizacji oprog
 
 .. centered:: Wykres 18.3-6 Zapytanie o wersję oprogramowania sprzętowego
 
-Dodatek 4: Aktualizacja 485 skrzynki sterowniczej
+Dodatek 5: Aktualizacja 485 skrzynki sterowniczej
 -------------------------------------------------------
 
 W skrzynce sterowniczej robota znajduje się interfejs "Zasilanie i komunikacja". Podłącz odpowiednio A i B narzędzia USB-485 do "485-A" i "485-B" tego interfejsu.
@@ -447,7 +539,7 @@ Proces aktualizacji jest taki sam jak w przypadku płyty końcowej, należy odpo
 
 .. centered:: Wykres 18.4-1 Interfejs zasilania i komunikacji
 
-Dodatek 5: Lista części zamiennych i części zużywających się
+Dodatek 6: Lista części zamiennych i części zużywających się
 -----------------------------------------------------------------
 
 .. list-table::
