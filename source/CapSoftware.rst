@@ -34,6 +34,10 @@ Paletyzator frcap
 
       .. raw:: html
 
+         <div style="font-size:16px;color:#888;margin-bottom:10px;">Obsługa Wersji >= 3.9.0</div>
+
+      .. raw:: html
+
          <div style="font-size:16px;color:#666;line-height:1.5;margin-bottom:12px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;">Oferuje kompletny pakiet procesów paletyzacji, obsługujący konfiguracje typów skrzynek, trybów, stanowisk roboczych, palet i innych ustawień paletyzacji.</div>
 
       +++
@@ -76,6 +80,10 @@ Cap Załadunku i Rozładunku
       .. raw:: html
 
          <div style="font-size:16px;color:#888;margin-bottom:10px;">Zaktualizowano 2026-07-31</div>
+
+      .. raw:: html
+
+         <div style="font-size:16px;color:#888;margin-bottom:10px;">Obsługa Wersji >= 3.9.8</div>
 
       .. raw:: html
 

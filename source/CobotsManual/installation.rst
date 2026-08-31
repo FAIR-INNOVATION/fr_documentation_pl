@@ -1348,6 +1348,139 @@ Pozycje ustawień oprogramowania dotyczących cyfrowych wyjść to „Wyjście D
      - Nieaktywny
      - Aktywny
 
+Podręcznik Bezpieczeństwa Podłączania Zasilania Szafy Sterowniczej DC
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Definicja i Identyfikacja Zacisków
+************************************************************************************
+Panel przedni szafy sterowniczej DC jest wyposażony w 3-stykowe złącze wejścia zasilania, odpowiadające odpowiednio dodatniemu biegunowi zasilania (+V), ujemnemu biegunowi zasilania (-V) i uziemieniu ochronnemu (PE). Aby uniknąć uszkodzenia urządzenia z powodu błędnego podłączenia, należy ściśle przestrzegać poniższej tabeli:
+
+.. list-table::
+   :widths: 15 10 35 35
+   :header-rows: 0
+   :align: center
+
+   * - **Oznaczenie Zacisku** 
+     - **Standard Kolorów**
+     - **Definicja Funkcji**
+     - **Zabronione Operacje**
+
+   * - 	.. figure:: installation/144.png
+          :align: center
+          :width: 2in
+     - Czerwony
+     - Wejście dodatnie zasilania DC, tylko dla kabla dodatniego 30-60VDC
+     - Zwarcie z PE lub -V jest surowo zabronione
+
+   * - 	.. figure:: installation/145.png
+          :align: center
+          :width: 2in
+     - Czarny
+     - Wejście ujemne zasilania DC, tylko dla kabla ujemnego 30-60VDC, tworzy obwód zasilania
+     - Połączenie z obudową lub PE jest surowo zabronione
+
+   * - 	.. figure:: installation/146.png
+          :align: center
+          :width: 2in
+     - Żółty (Żółto-Zielony)
+     - Zacisk uziemienia ochronnego (bezpieczna masa obudowy)
+     - Użycie jako ujemnego lub dodatniego bieguna zasilania jest surowo zabronione
+
+.. warning::
+  Ostrzeżenie o Poważnym Ryzyku: To urządzenie nie posiada wbudowanych obwodów zabezpieczenia przed odwrotną polaryzacją, błędnym podłączeniem ani przepięciem. Każda z następujących nieprawidłowych operacji spowoduje natychmiastowe uszkodzenie wewnętrznej płyty głównej i elementów mocy, prowadząc do trwałego, nieodwracalnego uszkodzenia urządzenia:
+  
+  1. Odwrócona polaryzacja (kable +V i -V zamienione);
+  2. +V lub -V błędnie podłączone do gniazda PE;
+  3. Zacisk ujemny błędnie uziemiony (-V zwarte z PE);
+  4. Podłączenie do prądu przemiennego (110V/220V/380V) lub napięcia stałego poza zakresem 30~60Vdc.
+
+Przygotowania do Bezpiecznego Podłączania
+*************************************************************************
+
+Przed podłączeniem operatorzy muszą wykonać następujące przygotowania:
+
+Potwierdzenie Odłączenia Zasilania
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+Całkowicie odciąć zasilanie przednie i umieścić tabliczkę ostrzegawczą o bezpieczeństwie. Za pomocą multimetru sprawdzić zaciski wejściowe zasilania, aby potwierdzić brak napięcia i ładunku resztkowego. Nigdy nie wykonywać podłączania przy włączonym zasilaniu.
+
+Kontrola Urządzenia
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+Sprawdzić, czy zaciski urządzenia nie są uszkodzone, utlenione lub poluzowane, a obudowa nie jest wilgotna, zalana wodą lub uszkodzona mechanicznie, aby upewnić się, że urządzenie jest w dobrym stanie.
+
+Potwierdzenie Zasilania
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+Potwierdzić, że przednie źródło zasilania to zasilacz stabilizowany DC 30-60VDC. Podłączanie do zasilania AC 110V/220V/380V, zasilania DC poniżej 30VDC lub powyżej 60VDC jest surowo zabronione.
+
+Dobór Kabli
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+Zaleca się stosowanie elastycznych przewodów miedzianych o przekroju 4mm² (AWG11) lub większym. Długość pojedynczego kabla zasilającego nie powinna przekraczać 2 metrów. Nie używać kabli o zbyt małym przekroju, uszkodzonej izolacji lub zestarzałych.
+
+Dobór Złączy Kablowych
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+Końce kabli muszą być zaciśnięte za pomocą izolowanych tulejek zaciskowych (zalecany model: DBV5.5-10 tulejka widełkowa). Wkładanie gołych przewodów miedzianych bezpośrednio do otworów zaciskowych jest surowo zabronione.
+
+Kalibracja Narzędzi
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+Przygotować sprawdzony multimetr, izolowany śrubokręt i szczypce do zaciskania. Wcześniej skalibrować multimetr, aby upewnić się, że jego funkcja pomiaru napięcia działa prawidłowo, umożliwiając dokładny pomiar napięcia i rozróżnienie polaryzacji.
+
+Standardowa Procedura Podłączania
+************************************************************************************
+
+Zaciskanie Złączy Kablowych
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+Za pomocą szczypiec do zaciskania przymocować tulejki zaciskowe (zalecane DBV5.5-10) na jednym końcu każdego z trzech kolorowych kabli: czerwonego (+V), czarnego (-V) i żółto-zielonego (PE). Upewnić się, że zacisk jest mocny, a rdzeń miedziany nie jest odsłonięty. Używanie kabli o tym samym kolorze lub o nieczytelnej identyfikacji kolorów jest surowo zabronione.
+
+Wkładanie i Dokręcanie Wtyczki Zaciskowej
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+Włożyć zaciśnięte tulejki do odpowiednich otworów dołączonej wtyczki zaciskowej (zwrócić uwagę na kierunek wkładania, płaska strona tulejki skierowana w stronę styku sprężynowego):
+Kabel czerwony → włożyć do otworu +V;
+Kabel czarny → włożyć do otworu -V;
+Kabel żółto-zielony → włożyć do otworu PE.
+Za pomocą izolowanego śrubokrętu płaskiego dokręcić śrubę zaciskową nad każdym otworem w kierunku zgodnym z ruchem wskazówek zegara.
+
+.. figure:: installation/147.png
+  :align: center
+  :width: 4in
+
+.. centered:: Wiązka kabli z tulejkami zaciskowymi włożona do zielonej wtyczki
+
+Kontrola Siły Naciągu
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+Po dokręceniu każdego kabla, pociągnąć go mocno ręką, aby upewnić się, że tulejka nie jest poluzowana, a rdzeń nie wysunął się. W przypadku poluzowania, ponownie zacisnąć tulejkę i dokręcić.
+
+Wkładanie do Szafy Sterowniczej
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+Włożyć podłączoną wtyczkę do wejścia zasilania szafy sterowniczej DC, zgodnie z kierunkiem prowadnicy. Upewnić się, że wtyczka jest całkowicie włożona.
+
+.. figure:: installation/148.png
+  :align: center
+  :width: 3in
+
+.. centered:: Wtyczka z wiązką kabli włożona do wejścia zasilania szafy sterowniczej DC
+
+Końcowa Kontrola Izolacji Przed Włączeniem Zasilania
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+Przed podłączeniem zasilania, za pomocą multimetru zmierzyć impedancję między +V a -V na końcu wtyczki, aby potwierdzić brak zwarcia; zmierzyć impedancję między +V/-V a PE, aby potwierdzić, że są w stanie izolacji (rozwarcia).
+
+Uruchomienie i Postępowanie w Przypadku Nieprawidłowości
+************************************************************************************
+
+- Normalne Uruchomienie: Zamknąć przedni wyłącznik zasilania i obserwować diodę kontrolną na panelu szafy sterowniczej. Prawidłowym stanem jest stałe świecenie diody, bez nietypowych dźwięków lub zapachów.
+- Stan Nieprawidłowy (Natychmiast wyłączyć!): W przypadku silnego piszczenia, dymu, iskier, zapachów lub gdy amperomierz przedniego zasilania natychmiast wskaże przeciążenie, należy natychmiast odłączyć główne zasilanie i nie włączać go ponownie. Skontaktować się z pomocą techniczną po całkowitym ostygnięciu urządzenia. Nie próbować samodzielnie demontować urządzenia w celu kontroli.
+
+.. warning:: Ostateczne Ostrzeżenie: Włączenie zasilania oznacza, że w pełni zrozumiałeś i przestrzegasz powyższych specyfikacji podłączania. W przypadku jakichkolwiek niejasnych oznaczeń, natychmiast skontaktuj się z pomocą techniczną. Nie polegaj na doświadczeniu przy podłączaniu!
+
 Plan przeglądów konserwacyjnych
 +++++++++++++++++++++++++++++++
 

@@ -105,6 +105,30 @@ Panel podłączenia robota współpracującego przedstawiono na poniższym wykre
 
 Złącze panelu przyciskowego jest domyślnie portem sterowania panelem operatorskim. Adres IP to 192.168.58.2. Użyj kabla sieciowego, aby połączyć złącze panelu przyciskowego z komputerem. Ustaw adres IP komputera na 192.168.58.10 lub w tej samej podsieci. Otwórz przeglądarkę Google Chrome i wprowadź 192.168.58.2, aby uzyskać dostęp do strony panelu operatorskiego.
 
+Informacje o Otworach Montażowych Szafy Sterowniczej
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. image:: installation/149.png
+   :width: 6in
+   :align: center
+
+.. centered:: Rysunek 1.2-2 Wymiary Zewnętrzne Szafy Sterowniczej - Wymiary Otworów Montażowych 1
+
+.. image:: installation/150.png
+   :width: 6in
+   :align: center
+
+.. centered:: Rysunek 1.2-3 Wymiary Zewnętrzne Szafy Sterowniczej - Wymiary Otworów Montażowych 2
+
+.. note:: 
+  1. Otwory z wymiarami są dostępnymi otworami montażowymi;
+  2. Łącznie jest 16 otworów montażowych, rozmieszczonych po lewej i prawej stronie szafy sterowniczej, po 8 z każdej strony;
+  3. Specyfikacja śrub dla otworów montażowych to M3, o skoku 0,5mm;
+  4. Głębokość wkręcania śrub w blaszaną obudowę szafy sterowniczej wynosi ≤5mm;
+  5. Zalecany moment dokręcania to 0,6Nm, maksymalny moment dokręcania to 0,84Nm.
+
+:download:`Wymiary Zewnętrzne Szafy Sterowniczej - Wymiary Otworów Montażowych <../_static/_doc/Control box outer dimensions - mounting hole dimensions.zip>`
+
 Poznanie panelu przyciskowego i końcowego LED
 ---------------------------------------------
 
