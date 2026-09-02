@@ -283,8 +283,442 @@ Następnie kliknij zakładkę „Joints”. Można zmienić docelową pozycję r
     :width: 6in
     :align: center
 
+Pakiet Funkcjonalności Adaptacji Robotów Produkcyjnych do Środowiska Symulacyjnego Gazebo
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Wprowadzenie
+------------------------------------------------------------
+
+Ten projekt dostarcza pakiety funkcjonalności symulacyjnych dla robotów współpracujących z serii FR o 6 stopniach swobody w środowisku symulacyjnym Gazebo Classic, zaimplementowane w oparciu o architekturę ROS2 Humble i ros2_control. Każdy robot odpowiada niezależnemu pakietowi ROS2, który wykorzystuje standardowy interfejs sprzętowy GazeboSystem ros2_control, obsługujący sterowanie stawami i sprzężenie zwrotne stanu stawów. Domyślna nazwa przestrzeni roboczej w tym podręczniku to FR_Gazebo_ws; w przypadku własnej nazwy należy ją odpowiednio zastąpić.
+
+Obsługiwane Modele (11 Pakietów Funkcjonalności)
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+Tabela 1-1 Odpowiedniość Obsługiwanych Modeli i Pakietów Funkcjonalności
+
+.. list-table::
+   :widths: 50 50
+   :header-rows: 0
+   :align: center
+
+   * - **Model** 
+     - **Pakiet Funkcjonalności**
+
+   * - FR3
+     - fr3v6_ros2_control
+
+   * - FR5
+     - fr5v6_ros2_control
+
+   * - FR10
+     - fr10v6_ros2_control
+
+   * - FR16
+     - fr16v6_ros2_control
+
+   * - FR20
+     - fr20v6_ros2_control
+
+   * - FR30
+     - fr30v6_ros2_control
+
+   * - FR3C
+     - fr3c_ros2_control
+
+   * - FR5C
+     - fr5c_ros2_control
+
+   * - FR5WML
+     - fr5l_ros2_control
+
+   * - FR3WML
+     - fr3wml_ros2_control
+
+   * - FR3WMS
+     - fr3wms_ros2_control
+
+Główne Cechy
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+- Ujednolicona Nomenklatura Stawów: Wszystkie modele mają 6 obrotowych stawów, nazwanych j1 ~ j6, w kolejności: podstawa → ramię → łokieć → nadgarstek1 → nadgarstek2 → nadgarstek3.
+- Ujednolicony Interfejs Sterowania: Polecenia trajectory_msgs/msg/JointTrajectory (sterowanie pozycją) są wysyłane przez temat /joint_trajectory_controller/joint_trajectory.
+- Sprzężenie Zwrotne Stanu Stawów: Kąty stawów są przekazywane w czasie rzeczywistym przez temat joint_states pod przestrzenią nazw każdego modelu.
+- Skrypty Demonstracyjne: Każdy pakiet funkcjonalności zawiera skrypt *_demo.py, który automatycznie czeka na gotowość kontrolera, a następnie demonstruje ruch każdego stawu.
+
+.. image:: img/039.png
+    :width: 6in
+    :align: center
+
+.. centered:: Rysunek 1-1 Efekt Ładowania Robota w Środowisku Symulacyjnym Gazebo
+
+Wymagania Środowiskowe
+------------------------------
+
+System Operacyjny
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+Ubuntu 22.04 LTS (oficjalnie wspierana wersja dla ROS 2 Humble).
+
+Zależności Programowe
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+Tabela 2-1 Lista Zależności Programowych
+
+.. list-table::
+   :widths: 30 30 40
+   :header-rows: 0
+   :align: center
+
+   * - **Oprogramowanie/Komponent** 
+     - **Wersja/Opis**
+     - **Ścieżka Instalacji**
+
+   * - ROS 2
+     - Humble
+     - /opt/ros/humble
+
+   * - Gazebo
+     - Gazebo Classic 11 (gzserver / gzclient)
+     - Instalowane z gazebo_ros
+
+   * - Przestrzeń Robocza Źródłowa ros2_control
+     - Zawiera ros2_control, gazebo_ros2_control, ros2_controllers, controller_manager, joint_trajectory_controller, joint_state_broadcaster, itp.
+     - ~/ros2_control_ws
+
+   * - Python 3
+     - Do uruchamiania skryptów launch i demo
+     - Wbudowany w system
+		
+.. note:: Pakiety gazebo_ros2_control, joint_trajectory_controller, joint_state_broadcaster i inne wymagane przez ten projekt pochodzą ze skompilowanej ze źródeł przestrzeni roboczej ~/ros2_control_ws (repozytorium ros-controls). Przed uruchomieniem/kompilacją należy zasilić tę przestrzeń roboczą; w przeciwnym razie wystąpią błędy "nie znaleziono kontrolera/wtyczki". Zaleca się również użycie domyślnego typu kompilacji, aby uniknąć problemów z ładowaniem wtyczek spowodowanych symbolami debugowania.
+
+Kroki Instalacji i Kompilacji Pakietów Funkcjonalności
+------------------------------------------------------------------------------------------
+
+Przygotowanie: Sprawdzenie Przestrzeni Roboczej ros2_control
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+Sprawdzić, czy ~/ros2_control_ws istnieje i został skompilowany (zawiera repozytorium ros-controls). Jeśli już istnieje, przejść bezpośrednio do Sekcji 3.2. Jeśli trzeba go skonfigurować, wykonać następujące polecenia:
+
+.. centered:: Kod 3-1 Konfiguracja Przestrzeni Roboczej ros2_control
+    
+.. code-block:: console
+
+    # 1. Utworzyć przestrzeń roboczą i pobrać kod źródłowy ros-controls
+    mkdir -p ~/ros2_control_ws/src
+    cd ~/ros2_control_ws/src
+    git clone https://github.com/ros-controls/ros2_control -b humble
+
+    # 2. Skompilować (ROS 2 Humble musi być już zasilony)
+    source /opt/ros/humble/setup.bash
+    cd ~/ros2_control_ws
+    rosdep install --from-paths src --ignore-src -r -y
+    colcon build
+    source ~/ros2_control_ws/install/setup.bash
+
+Klonowanie Repozytorium
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+Najpierw sklonować lokalnie pakiety adaptacyjne Gazebo, w tym fr3c_ros2_control, fr3v6_ros2_control, fr3wml_ros2_control, fr3wms_ros2_control, fr5c_ros2_control, fr5l_ros2_control, fr5v6_ros2_control, fr10v6_ros2_control, fr16v6_ros2_control, fr20v6_ros2_control, fr30v6_ros2_control. Utworzyć folder FR_Gazebo_ws/src i sklonować powyższe pakiety do katalogu src.
+
+.. image:: img/040.png
+    :width: 6in
+    :align: center
+
+.. centered:: Rysunek 3-1 Pakiety Adaptacyjne Robota w Katalogu src
+
+Kompilacja Przestrzeni Roboczej
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+Wszystkie pakiety w tym projekcie są pakietami plikowymi (instalują tylko URDF/launch/config/meshes).
+
+.. centered:: Kod 3-2 Kompilacja Przestrzeni Roboczej FR_Gazebo_ws
+    
+.. code-block:: console
+
+    # 1. Załadować środowiska w kolejności (kolejność nie może być odwrócona)
+    source /opt/ros/humble/setup.bash
+    source ~/ros2_control_ws/install/setup.bash
+
+    # 2. Wejść do przestrzeni roboczej i skompilować
+    cd ~/FR_Gazebo_ws
+    colcon build
+
+    # 3. Po kompilacji załadować środowisko przestrzeni roboczej
+    source ~/FR_Gazebo_ws/install/setup.bash
+
+Weryfikacja Wyniku Kompilacji
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+Po pomyślnej kompilacji wszystkie 11 pakietów funkcjonalności powinno pojawić się w katalogu install/:
+
+Kod 3-3 Weryfikacja Wyniku Kompilacji
+    
+.. code-block:: console
+
+    ls ~/FR_Gazebo_ws/install
+    # Powinno pokazać: fr3v6_ros2_control  fr5v6_ros2_control  fr10v6_ros2_control  ... łącznie 11
+
+.. image:: img/041.png
+    :width: 6in
+    :align: center
+
+.. centered:: Rysunek 3-2 Wyjście Terminala Pomyślnej Kompilacji
+
+Instrukcje Użytkowania
+------------------------------------------------------------------------------------------
+
+Uruchamianie Symulacji (Na Przykładzie FR5)
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+.. centered:: Kod 4-1 Uruchamianie Symulacji FR5
+    
+.. code-block:: console
+
+    # 1. Załadować środowiska w kolejności
+    cd ~/FR_Gazebo_ws
+    source /opt/ros/humble/setup.bash
+    source ~/ros2_control_ws/install/setup.bash
+    source ~/FR_Gazebo_ws/install/setup.bash
+
+    # 2. Uruchomić (launch automatycznie uruchomi gzserver/gzclient, wygeneruje robota i załaduje kontrolery. Jeśli trzeba wyczyścić stare procesy, patrz uwaga na końcu Sekcji 4.2)
+    ros2 launch fr5v6_ros2_control spawn_fr5v6.launch.py
+    
+Podczas uruchamiania, launch automatycznie będzie czekać na gotowość controller_manager przed załadowaniem kontrolerów. Poniższy log oznacza gotowość. Jeśli "Successfully loaded" nie pojawi się po więcej niż 3 minutach, patrz Sekcja 5.2 w celu sprawdzenia kolejności zasilania środowisk:
+
+.. centered:: Kod 4-2 Log Pomyślnego Załadowania Kontrolera
+    
+.. code-block:: console
+
+    Successfully loaded controller joint_trajectory_controller into state active
+
+.. image:: img/042.png
+    :width: 6in
+    :align: center
+
+.. centered:: Rysunek 4-1 Log Terminala Pomyślnego Załadowania Kontrolera
+
+.. image:: img/043.png
+    :width: 6in
+    :align: center
+
+.. centered:: Rysunek 4-2 Początkowa Pozycja Robota w Interfejsie Gazebo
+
+Tabela Odniesienia Poleceń Uruchamiania dla Wszystkich Modeli
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+Proces operacyjny jest taki sam dla wszystkich modeli, różnią się tylko nazwa pakietu, nazwa pliku launch i przestrzeń nazw:
+
+Tabela 4-1 Tabela Odniesienia Poleceń Uruchamiania dla Wszystkich Modeli
+
+.. list-table::
+   :widths: 20 40 20 20
+   :header-rows: 0
+   :align: center
+
+   * - **Model** 
+     - **Polecenie Uruchamiania**
+     - **Przestrzeń Nazw**
+     - **Temat Stanu Stawów**
+
+   * - FR3 
+     - ros2 launch fr3v6_ros2_control spawn_fr3v6.launch.py
+     - fr3v6
+     - /fr3v6/joint_states
+
+   * - FR5 
+     - ros2 launch fr5v6_ros2_control spawn_fr5v6.launch.py
+     - fr5v6
+     - /fr5v6/joint_states
+
+   * - FR10 
+     - ros2 launch fr10v6_ros2_control spawn_fr10v6.launch.py
+     - fr10v6
+     - /fr10v6/joint_states
+
+   * - FR16 
+     - ros2 launch fr16v6_ros2_control spawn_fr16v6.launch.py
+     - fr16v6
+     - /fr16v6/joint_states
+
+   * - FR20 
+     - ros2 launch fr20v6_ros2_control spawn_fr20v6.launch.py
+     - fr20v6
+     - /fr20v6/joint_states
+
+   * - FR30 
+     - ros2 launch fr30v6_ros2_control spawn_fr30v6.launch.py
+     - fr30v6
+     - /fr30v6/joint_states
+
+   * - FR3C 
+     - ros2 launch fr3c_ros2_control spawn_fr3c.launch.py
+     - fr3c
+     - /fr3c/joint_states
+
+   * - FR3WML 
+     - ros2 launch fr3wml_ros2_control spawn_FR3WML.launch.py
+     - fr3wml
+     - /fr3wml/joint_states
+
+   * - FR3WMS 
+     - ros2 launch fr3wms_ros2_control spawn_FR3WMS.launch.py
+     - fr3wms
+     - /fr3wms/joint_states
+
+   * - FR5C 
+     - ros2 launch fr5c_ros2_control spawn_fr5c.launch.py
+     - fr5c
+     - /fr5c/joint_states
+
+   * - FR5WML 
+     - ros2 launch fr5l_ros2_control spawn_fr5l.launch.py
+     - fr5l
+     - /fr5l/joint_states
+			
+.. note:: Tylko jeden model może być uruchomiony jednocześnie. Aby przełączyć, należy najpierw zamknąć bieżący proces Gazebo (pkill -9 gzserver; pkill -9 gzclient); w przeciwnym razie nowa instancja nie uruchomi się z powodu konfliktów portów.
+
+Sterowanie Ręczne (Wysyłanie Docelowych Stawów)
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+Po gotowości kontrolera, wysłać docelowe stawy (6 kątów stawów w radianach) do /joint_trajectory_controller/joint_trajectory:
+
+.. centered:: Kod 4-3 Ręczne Wysyłanie Poleceń Trajektorii Stawów
+    
+.. code-block:: console
+
+    # Przesunięcie do docelowych stawów [1.57, -0.78, -1.57, -1.2, 1.57, 1.3] (jednostka: radiany)
+    ros2 topic pub --once /joint_trajectory_controller/joint_trajectory \
+    trajectory_msgs/msg/JointTrajectory \
+    "{joint_names: [j1,j2,j3,j4,j5,j6],
+        points: [{positions: [1.57, -0.78, -1.57, -1.2, 1.57, 1.3],
+                time_from_start: {sec: 2, nanosec: 0}}]}"
+
+    # Powrót do pozycji zerowej
+    ros2 topic pub --once /joint_trajectory_controller/joint_trajectory \
+    trajectory_msgs/msg/JointTrajectory \
+    "{joint_names: [j1,j2,j3,j4,j5,j6],
+        points: [{positions: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
+                time_from_start: {sec: 2, nanosec: 0}}]}"
+
+.. note:: Wzór przeliczeniowy kątów: radiany = stopnie × π / 180. Popularne wartości: 90° ≈ 1.5708, −90° ≈ −1.5708, 100° ≈ 1.7453.
+
+Uruchamianie Skryptów Demonstracyjnych
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+Każdy pakiet funkcjonalności zawiera skrypt demonstracyjny, który automatycznie czeka na gotowość controller_manager, a następnie wykonuje ruch wahadłowy 0→±90° dla każdego stawu:
+
+.. centered:: Kod 4-4 Uruchamianie Skryptu Demonstracyjnego
+    
+.. code-block:: console
+
+    # Na przykładzie FR5 (dla innych modeli zastąpić nazwę pakietu w ścieżce skryptu)
+    python3 ~/FR_Gazebo_ws/src/fr5v6_ros2_control/scripts/fr5v6_demo.py
+
+Tabela 4-2 Tabela Odniesienia Ścieżek Skryptów Demonstracyjnych dla Wszystkich Modeli
+
+.. list-table::
+   :widths: 30 70
+   :header-rows: 0
+   :align: center
+
+   * - **Model** 
+     - **Ścieżka Skryptu Demonstracyjnego**
+
+   * - FR3
+     - ~/FR_Gazebo_ws/src/fr3v6_ros2_control/scripts/fr3v6_demo.py
+
+   * - FR5
+     - ~/FR_Gazebo_ws/src/fr5v6_ros2_control/scripts/fr5v6_demo.py
+
+   * - FR10
+     - ~/FR_Gazebo_ws/src/fr10v6_ros2_control/scripts/fr10v6_demo.py
+
+   * - FR16
+     - ~/FR_Gazebo_ws/src/fr16v6_ros2_control/scripts/fr16v6_demo.py
+
+   * - FR20
+     - ~/FR_Gazebo_ws/src/fr20v6_ros2_control/scripts/fr20v6_demo.py
+
+   * - FR30
+     - ~/FR_Gazebo_ws/src/fr30v6_ros2_control/scripts/fr30v6_demo.py
+
+   * - FR3C
+     - ~/FR_Gazebo_ws/src/fr3c_ros2_control/scripts/fr3c_demo.py
+
+   * - FR3WML
+     - ~/FR_Gazebo_ws/src/fr3wml_ros2_control/scripts/fr3wml_demo.py
+
+   * - FR3WMS
+     - ~/FR_Gazebo_ws/src/fr3wms_ros2_control/scripts/fr3wms_demo.py
+
+   * - FR5C
+     - ~/FR_Gazebo_ws/src/fr5c_ros2_control/scripts/fr5c_demo.py
+
+   * - FR5WML
+     - ~/FR_Gazebo_ws/src/fr5l_ros2_control/scripts/fr5l_demo.py
+
+.. image:: img/044.png
+    :width: 6in
+    :align: center
+
+.. centered:: Rysunek 4-3 Pozycja Robota Podczas Działania Skryptu Demonstracyjnego
+
+Monitorowanie Stanu Stawów
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+.. centered:: Kod 4-5 Monitorowanie Stanu Stawów
+    
+.. code-block:: console
+        
+    # Wyświetlanie kątów stawów w czasie rzeczywistym
+    ros2 topic echo /joint_states
+
+.. image:: img/045.png
+    :width: 6in
+    :align: center
+
+.. centered:: Rysunek 4-4 Wyjście Stanu Stawów w Czasie Rzeczywistym
+
+Częste Problemy
+------------------------------------------------------------------------------------------
+
+Konflikt Portów / Gazebo nie otwiera się przy uruchamianiu
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+- Przyczyna: Poprzedni proces Gazebo nie został zakończony, zajmując port.
+- Rozwiązanie: Przed uruchomieniem wyczyścić pozostałe procesy: pkill -9 gzserver; pkill -9 gzclient
+
+Zawieszenie na "Waiting for controller_manager..." przez ponad 2 minuty
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+- Przyczyna: controller_manager nie jest gotowy, często ponieważ ~/ros2_control_ws/install/setup.bash nie został zasilony, lub ładowanie siatek jest zbyt wolne.
+- Rozwiązanie: Najpierw wyjść Ctrl+C; potwierdzić, że trzy środowiska zostały zasilone w kolejności (ros2 → ros2_control_ws → FR_Gazebo_ws).
+
+Robot nie porusza się przy ręcznym wysyłaniu poleceń
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+- Przyczyna: Najprawdopodobniej problem z synchronizacją; polecenie zostało wysłane zanim kontroler wszedł w stan aktywny i zostało odrzucone.
+- Rozwiązanie: Potwierdzić, że terminal wyświetla "Successfully loaded controller joint_trajectory_controller into state active" przed wysłaniem poleceń sterowania; lub bezpośrednio użyć skryptu demo z Sekcji 4.4.
+
+Błąd: nie znaleziono wtyczki joint_trajectory_controller/gazebo_ros2_control
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+- Przyczyna: Zależności związane z ros2_control nie zostały załadowane.
+- Rozwiązanie: Potwierdzić, że ~/ros2_control_ws/install/setup.bash został zasilony; i potwierdzić, że kolejność ładowania w ~/.bashrc lub bieżącym terminalu to ROS → ros2_control_ws → ta przestrzeń robocza.
+
+Brakujące Komponenty / Niekompletne Stawy po Załadowaniu Robota
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+- Przyczyna: Brakuje plików siatek odniesionych w URDF.
+- Rozwiązanie: Potwierdzić, że katalog meshes/ odpowiedniego pakietu funkcjonalności istnieje i jest kompletny.
+
+Czy można uruchomić dwa modele jednocześnie?
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+- Nie. Wiele instancji symulacyjnych będzie konkurować o ten sam port Gazebo; należy uruchamiać tylko jeden model naraz.
+
 Wtyczka `fairino_hardware` (niestandardowy pakiet konfiguracyjny moveit robota)
-----------------------------------------------------------------------------------------
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 Wtyczka `fairino_hardware` jest warstwą pośredniczącą łączącą moveit z robotem. Za pośrednictwem wtyczki `fairino_hardware` `move_group` wysyła plan ruchu do `moveit_control`, który następnie przekazuje go do `ros2_control`. `ros2_control` z kolei za pośrednictwem wtyczki `fairino_hardware` wprawia w ruch rzeczywistego robota. Ponadto wtyczka `fairino_hardware` odbiera również dane zwrotne z rzeczywistego robota, umożliwiając synchronizację modelu robota w interfejsie symulacji `rviz2` z rzeczywistym robotem. Dzięki temu użytkownik może za pośrednictwem interfejsu `rviz2` wprawiać w ruch rzeczywistego robota.
 
@@ -293,7 +727,7 @@ Ponadto dzięki implementacji wtyczki `fairino_hardware` roboty FAIRINO mogą zo
 W wtyczce `fairino_hardware` dostosowanej do wersji oprogramowania ramienia mechanicznego V3.8.3 dodano tryb momentu obrotowego oraz interfejs momentu obrotowego instrukcji, umożliwiając ramieniu mechanicznemu przejście w tryb momentu i odbieranie instrukcji momentu obrotowego.
 
 Kompilacja wtyczki `fairino_hardware`
-"""""""""""""""""""""""""""""""""""""
+----------------------------------------------------------------------------------------
 
 Skompiluj pakiet funkcjonalny wtyczki `fairino_hardware` w oficjalnie dostarczonym pakiecie funkcjonalnym `ros2_ws`. Po kompilacji, zgodnie z poprzednią sekcją dotyczącą kompilacji pakietu funkcjonalnego wtyczki `fairino_hardware`, w ścieżce
 
@@ -307,7 +741,7 @@ powinien znajdować się wygenerowany plik `.so` wtyczki `libfairino_hardware.so
 Należy pamiętać, że nazwy stawów robota w wtyczce `fairino_hardware` muszą być takie same jak nazwy stawów robota skonfigurowane w `moveit2`. W niniejszej wtyczce `fairino_hardware` nazwy sześciu stawów robota, od pozycji podstawy do końcówki, to odpowiednio `j1`, `j2`, `j3`, `j4`, `j5`, `j6`. Dlatego podczas konfiguracji robota w `moveit2` należy nazwać stawy robota jako `j1`, `j2`, `j3`, `j4`, `j5`, `j6`.
 
 Użycie wtyczki `fairino_hardware`
-"""""""""""""""""""""""""""""""""
+----------------------------------------------------------------------------------------
 
 Jeśli używany jest niestandardowy pakiet konfiguracyjny moveit robota, przejdź do katalogu
 
@@ -347,7 +781,7 @@ Należy pamiętać, że parametr `robot_control_mode` w trzeciej linii pliku okr
 Obecny kontroler Moveit2 obsługuje tylko tryb sterowania pozycją. Nie należy ustawiać `robot_control_mode` na 1.
 
 Uruchomienie wtyczki
-""""""""""""""""""""
+----------------------------------------------------------------------------------------
 Otwórz terminal, przejdź do obszaru roboczego `ros2_ws` i wykonaj `source`, aby dodać wtyczkę `fairino_hardware`. Można również dodać tę ścieżkę do pliku „~/.bashrc”, ale nie jest to zalecane.
 
 .. code-block:: shell
@@ -367,7 +801,7 @@ Następnie wróć do katalogu głównego, przejdź do obszaru roboczego `test_fa
     ros2 launch fairino5_v6_robot_moveit_config demo.launch.py
 
 Wynik działania
-"""""""""""""""
+----------------------------------------------------------------------------------------
 Po uruchomieniu pliku `demo.launch.py` interfejs `rviz2` będzie wyglądał następująco:
 
 .. image:: img/fairino_harware_024.png

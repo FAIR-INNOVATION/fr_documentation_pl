@@ -187,6 +187,75 @@ Pobranie czasu systemowego
     */
     public int GetSystemClock(ref double t_ms)
 
+Synchronizacja Czasu Systemowego z Robotem
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Pobiera bieżący czas systemowy komputera hosta i wysyła go do robota w celu synchronizacji czasu systemowego (ze względu na ograniczenia systemu QNX, dokładność synchronizacji jest na poziomie minut)
+    * @return Kod błędu
+    */
+    public int SetRobottime()
+
+Przykład Kodu Synchronizacji Czasu Systemowego z Robotem
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    public void testSetAndGetRobotTime()
+    {
+        double t_ms = 0.0;
+
+        int ret = robot.GetSystemClock(ref t_ms);
+        if (ret == 0)
+        {
+            Console.WriteLine($"system clock : {t_ms}");
+            // Konwersja znacznika czasu w milisekundach na DateTime (czas UTC)
+            DateTime utcTime = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddMilliseconds(t_ms);
+            Console.WriteLine($"BEFORE UTC Time   : {utcTime:yyyy-MM-dd HH:mm:ss}");
+        }
+        else
+        {
+            Console.WriteLine($"GetSystemClock failed,ret:{ret}");
+        }
+
+        robot.SetRobottime();
+
+        // Pobranie czasu robota po ustawieniu
+        double t_ms_after = 0;
+        ret = robot.GetSystemClock(ref t_ms_after);
+        if (ret == 0)
+        {
+            Console.WriteLine($"system clock : {t_ms}");
+            DateTime robotTimeAfter = DateTimeOffset.FromUnixTimeMilliseconds((long)t_ms_after).UtcDateTime;
+
+            // Pobranie czasu PC przed ustawieniem (jako wartość oczekiwana)
+            DateTime pcTimeBefore = DateTime.Now;
+
+            // Obcięcie zarówno czasu oczekiwanego (czas PC), jak i czasu robota do minut
+            DateTime pcMinute = new DateTime(pcTimeBefore.Year, pcTimeBefore.Month, pcTimeBefore.Day,
+                                                pcTimeBefore.Hour, pcTimeBefore.Minute, 0, DateTimeKind.Utc);
+            DateTime robotMinute = new DateTime(robotTimeAfter.Year, robotTimeAfter.Month, robotTimeAfter.Day,
+                                                robotTimeAfter.Hour, robotTimeAfter.Minute, 0, DateTimeKind.Utc);
+
+            // Porównanie spójności
+            bool isConsistent = (pcMinute == robotMinute);
+            if (isConsistent)
+            {
+                Console.WriteLine($"Consistent     | PC time: {pcMinute:yyyy-MM-dd HH:mm}  | Robot time: {robotMinute:yyyy-MM-dd HH:mm}");
+            }
+            else
+            {
+                Console.WriteLine($"[Inconsistent | PC time: {pcMinute:yyyy-MM-dd HH:mm}  | Robot time: {robotMinute:yyyy-MM-dd HH:mm}");
+            }
+        }
+        else
+        {
+            Console.WriteLine($"GetSystemClock failed,ret:{ret}");
+        }
+    }    
+
 Sprawdzenie, czy ruch robota został zakończony
 ++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
@@ -420,9 +489,10 @@ Rozwiązanie odwrotnej kinematyki z uwzględnieniem pozycji osi rozszerzonej w p
     * @param [in] tool Numer narzędzia
     * @param [in] workPiece Numer przedmiotu
     * @param [out] joint_pos Pozycja stawów
+    * @param [in] config -1: automatyczne rozwiązanie, 0-7 odpowiada ośmiu zestawom rozwiązań
     * @return Kod błędu
     */
-    public int GetInverseKinExaxis(int type, DescPose desc_pos, ExaxisPos exaxis, int tool, int workPiece, ref JointPos joint_pos);
+    public int GetInverseKinExaxis(int type, DescPose desc_pos, ExaxisPos exaxis, int tool, int workPiece, ref JointPos joint_pos, int config = -1);
 
 Przykład kodu rozwiązania odwrotnej kinematyki z uwzględnieniem pozycji osi rozszerzonej
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -432,27 +502,16 @@ Przykład kodu rozwiązania odwrotnej kinematyki z uwzględnieniem pozycji osi r
     public void TestInverseKinExaxis()
     {
         ROBOT_STATE_PKG pkg = new ROBOT_STATE_PKG();
-        
-
-        DescPose desc = new DescPose(99.957f, -0.002f, 29.994f, -176.569f, -6.757f, -167.462f);
-        ExaxisPos exaxis = new ExaxisPos(100.0f, 0.0f, 0.0f, 0.0f);
-        JointPos jointPos = new JointPos(0,0,0,0,0,0);
-        DescPose offsetPos = new DescPose(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f);
-        int rtn;
         robot.GetRobotRealTimeState(ref pkg);
         int toolnum = pkg.tool;
         int workPcsNum = pkg.user;
 
-        robot.GetInverseKinExaxis(0, desc, exaxis, toolnum, workPcsNum, ref jointPos);
+        DescPose desc = new DescPose(-547.469, -47.361, 184.149, 169.843, 4.579, 82.557);
+        ExaxisPos exaxis = new ExaxisPos(0.0, 0.0, 0.0, 0.0);
+        JointPos jointPos = new JointPos(0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
+
+        robot.GetInverseKinExaxis(0, desc, exaxis, toolnum, workPcsNum, ref jointPos, 0);
         Console.WriteLine($"GetInverseKinExaxis joint is {jointPos.jPos[0]}, {jointPos.jPos[1]}, {jointPos.jPos[2]}, {jointPos.jPos[3]}, {jointPos.jPos[4]}, {jointPos.jPos[5]}");
-
-        robot.ExtAxisMove(exaxis, 100, -1);
-
-        int blendMode = 0;
-        int velAccMode = 0;
-        float oacc = 100.0f;
-        byte flag = 0;
-        robot.MoveJ(jointPos, desc, toolnum, workPcsNum, (float)100.0, (float)100.0, (float)100.0, exaxis, -1, 0, offsetPos);
     }
 
 Sprawdzenie, czy istnieje rozwiązanie odwrotnej kinematyki

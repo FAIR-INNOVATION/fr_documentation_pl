@@ -655,6 +655,16 @@ Od wersji V3.9.8, SmartTool oparty na protokole końcówki robota obsługuje kon
 
 .. centered:: Schemat 8.3‑2-5 Komunikat strony „Czy wejść w tryb boot i zastosować otwarty protokół?”
 
+Ponadto podczas korzystania z przycisków IO użytkownik musi wybrać typ komunikacji bieżącej spawarki, w tym: I/O kontrolera, Protokół komunikacji cyfrowej (UDP), Protokół komunikacji cyfrowej (Modbus TCP). Dla I/O kontrolera i Protokołu komunikacji cyfrowej (UDP), odpowiednie DO musi być skonfigurowane z funkcją rozpoczęcia łuku, aby można było generować instrukcje związane ze spawaniem. Dla Protokołu komunikacji cyfrowej (Modbus TCP), instrukcja musi być skonfigurowana jako spawanie, aby można było generować instrukcje związane ze spawaniem; w przeciwnym razie generowane będą tylko instrukcje ustawiania wyjścia DO.
+
+.. note:: Należy zauważyć, że przy wyborze Protokołu komunikacji cyfrowej (UDP) lub Protokołu komunikacji cyfrowej (Modbus TCP) do komunikacji ze spawarką, konfiguracja instrukcji spawania wymaga prawidłowego nawiązania połączenia komunikacyjnego.
+
+.. figure:: robot_peripherals/321.png
+   :align: center
+   :width: 4in
+
+.. centered:: Rysunek 8.3‑2-6 Wybór Typu Sterowania Spawarką i Typu Instrukcji
+
 Import szablonu programu generowanego przez SmartTool
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -664,7 +674,7 @@ Jeśli przycisk SmartTool został skonfigurowany z funkcją generowania programu
    :align: center
    :width: 4in
 
-.. centered:: Schemat 8.3‑2-6 Import szablonu programu generowanego przez SmartTool
+.. centered:: Schemat 8.3‑2-7 Import szablonu programu generowanego przez SmartTool
 
 Konfiguracja punktów instrukcji ruchu SmartTool
 ++++++++++++++++++++++++++++++++++++++++++++++++
@@ -675,7 +685,7 @@ Podczas konfigurowania trzech instrukcji „PTP”, „LIN”, „ARC” w Smart
    :align: center
    :width: 4in
 
-.. centered:: Schemat 8.3‑2-7 Konfiguracja „Globalnych punktów nauczania” i „Lokalnych punktów nauczania” dla punktów instrukcji ruchu SmartTool
+.. centered:: Schemat 8.3‑2-8 Konfiguracja „Globalnych punktów nauczania” i „Lokalnych punktów nauczania” dla punktów instrukcji ruchu SmartTool
 
 Tryb zapobiegania przypadkowemu dotknięciu SmartTool
 +++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -686,7 +696,7 @@ SmartTool oparty na otwartym protokole zyskał nowy tryb zapobiegania przypadkow
    :align: center
    :width: 6in
 
-.. centered:: Schemat 8.3‑2-8 Funkcja „Tryb zapobiegania przypadkowemu dotknięciu” w SmartTool
+.. centered:: Schemat 8.3‑2-9 Funkcja „Tryb zapobiegania przypadkowemu dotknięciu” w SmartTool
 
 Funkcja Czyszczenia Pamięci Przycisków IO SmartTool
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -702,7 +712,7 @@ Dodano funkcję globalnego czyszczenia punktów. Otwórz WebApp, kliknij kolejno
    :align: center
    :width: 6in
 
-.. centered:: Rysunek 8.3‑2-9 Funkcja Globalnego Czyszczenia Punktów
+.. centered:: Rysunek 8.3‑2-10 Funkcja Globalnego Czyszczenia Punktów
 
 Przykład protokołu Lua urządzenia peryferyjnego końcówki dla uchwytu spawalniczego
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -1099,6 +1109,51 @@ Kliknij kartę „Niestandardowy protokół”, aby przejść do interfejsu. Wł
 
 .. centered:: Schemat 8.3‑12 Włączanie czujnika siły
 
+Adaptacja Czujnika Siły Kaiwei
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Przegląd
++++++++++++++++++++++++++++++++++++++++++++++
+Do listy zaadaptowanych urządzeń dodano nowy czujnik siły Kaiwei, o modelu KWL-SFTE75B.
+
+Adaptacja Czujnika Siły Kaiwei
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+(1) Przejdź do Ustawienia Początkowe -> Urządzenia PerYferyjne -> Czujnik Siły i wybierz zaadaptowane urządzenie.
+
+.. figure:: robot_peripherals/322.png
+   :align: center
+   :width: 6in
+
+.. centered:: Rysunek 8.3‑13 Zaadaptowane Urządzenia
+
+(2) Na liście zaadaptowanych urządzeń wybierz producenta KWL, wybierz typ KWL-SFTE75B, wybierz pozycję montażową i kliknij Konfiguruj.
+
+.. figure:: robot_peripherals/323.png
+   :align: center
+   :width: 6in
+
+.. centered:: Rysunek 8.3‑13 Konfiguracja Producenta
+
+(3) Wybierz odpowiedni numer pozycji montażowej, kliknij Resetuj, a następnie Aktywuj. Gdy Act_State na pasku narzędzi FT wyświetli wartość 1, czujnik jest gotowy do normalnego użytkowania.
+
+.. figure:: robot_peripherals/324.png
+   :align: center
+   :width: 6in
+
+.. centered:: Rysunek 8.3‑14 Operacje Aktywacji i Resetowania
+
+Instrukcja Użytkowania Urządzenia
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+(1) Na pasku narzędzi FT, Fx, Fy, Fz, Tx, Ty, Tz reprezentują dane siły sześcioosiowej, z jednostkami w N i N·m.
+
+.. figure:: robot_peripherals/325.png
+   :align: center
+   :width: 4in
+
+.. centered:: Rysunek 8.3‑15 Dane Siły Sześcioosiowej na Pasku Narzędzi FT
+
 Uchwyt spawalniczy
 ---------------------------------------------------
 
@@ -1158,7 +1213,10 @@ Funkcje przycisków IO:
 
 -  **Konfiguracja sygnału IO**: Z listy rozwijanej można wybrać opcje DO0⁓DO7, CO0⁓CO7, End-DO0, End-DO1 i rozszerzone IO (Aux-DO0⁓Aux-DO127);
 
--  **Instrukcje kombinowane**: Po wybraniu „Sygnał IO”, w określonych warunkach wyświetlane są opcje konfiguracji „Wybór spawarki” i „Prędkość punktowa”, generując różne instrukcje programu.Dodano również możliwość wyboru numeru procesu spawania. Ponadto maksymalny czas dla rozpoczęcia i zakończenia łuku można skonfigurować do 10000ms. Numer splotu domyślnie wynosi 0. Jeśli skonfigurowano "Rozpoczęcie Splotu", można wybrać numer splotu. Ustawienia przycisków IO są zgodne z ustawieniami Rozpoczęcia Splotu.
+-  **Instrukcje Złożone**: Po wybraniu "Sygnału IO", w określonych warunkach wyświetlane są elementy konfiguracyjne "Wybór Spawarki" i "Prędkość Punktu" w celu wygenerowania różnych instrukcji programu.
+
+  - Użytkownik musi wybrać typ komunikacji bieżącej spawarki, w tym: I/O kontrolera, Protokół komunikacji cyfrowej (UDP), Protokół komunikacji cyfrowej (Modbus TCP). Dla I/O kontrolera i Protokołu komunikacji cyfrowej (UDP), odpowiednie DO musi być skonfigurowane z funkcją rozpoczęcia łuku, aby można było generować instrukcje związane ze spawaniem. Dla Protokołu komunikacji cyfrowej (Modbus TCP), instrukcja musi być skonfigurowana jako spawanie, aby można było generować instrukcje związane ze spawaniem; w przeciwnym razie generowane będą tylko instrukcje ustawiania wyjścia DO. Należy zauważyć, że przy wyborze Protokołu komunikacji cyfrowej (UDP) lub Protokołu komunikacji cyfrowej (Modbus TCP) do komunikacji ze spawarką, konfiguracja instrukcji spawania wymaga prawidłowego nawiązania połączenia komunikacyjnego.
+  - Dodano również możliwość wyboru numeru procesu spawania. Ponadto maksymalny czas dla rozpoczęcia i zakończenia łuku można skonfigurować do 10000ms. Numer splotu domyślnie wynosi 0. Jeśli skonfigurowano "Rozpoczęcie Splotu", można wybrać numer splotu. Ustawienia przycisków IO są zgodne z ustawieniami Rozpoczęcia Splotu.
 
 .. important::
    -  Gdy sygnał IO jest skonfigurowany jako DO0~DO7 lub CO0~CO7 (bez konfiguracji „Rozpoczęcie łuku”), program dodaje SetDO; w tym przypadku ukrywane są „Wybór spawarki” i „Prędkość punktowa”.
@@ -6468,7 +6526,15 @@ Szczegółowe funkcje parametrów:
 - **Limit Prędkości Kątowej**: 100°/s. Po przekroczeniu limitu prędkości kątowej, robot przełącza się w tryb ręczny i wyświetla ostrzeżenie o przekroczeniu prędkości TCP.
 
 .. note::
-  1. Dla robota FR3WML, zalecane ustawienia parametrów są następujące: wzmocnienie przeciągania [0.15, 0.15, 0.15, 0.15, 0.15, 0.2], wzmocnienie tłumienia po włączeniu impedancji [0.1, 0.1, 0.1, 0.05, 0.05, 0.05].
+  1. Ustawienia parametrów przeciągania
+
+  (1) Dla robota FR3WML zalecane ustawienia parametrów są następujące: wzmocnienie przeciągania [1.5, 1.5, 1.5, 1.5, 1.5, 2], wzmocnienie tłumienia po włączeniu impedancji [0.1, 0.1, 0.1, 0.05, 0.05, 0.05];
+
+  (2) Dla robota FR3WMS zalecane ustawienia parametrów są następujące: wzmocnienie przeciągania [2, 2, 2, 2, 2, 2], wzmocnienie tłumienia po włączeniu impedancji [0.1, 0.1, 0.1, 0.05, 0.05, 0.05];
+
+  (3) Dla robota FR3C zalecane ustawienia parametrów są następujące: wzmocnienie przeciągania [2, 2, 2, 2, 2, 2], wzmocnienie tłumienia po włączeniu impedancji [0.1, 0.1, 0.1, 0.05, 0.05, 0.05].
+
+  (4) Dla robota FR5C zalecane ustawienia parametrów są następujące: wzmocnienie przeciągania [2, 2, 2, 2, 2, 2], wzmocnienie tłumienia po włączeniu impedancji [0.1, 0.1, 0.1, 0.05, 0.05, 0.05].
 
   2. Gdy wszystkie parametry wzmocnienia przeciągania są ustawione na 0, opór przeciągania jest silny i trudno przeciągać; gdy wszystkie parametry wzmocnienia przeciągania są ustawione na 5, odczucie przeciągania jest lekkie; im większy parametr, tym łatwiejsze przeciąganie.
 

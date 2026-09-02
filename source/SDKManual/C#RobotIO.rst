@@ -504,6 +504,7 @@ Ustawienie funkcji konfigurowalnego portu CI skrzynki sterowniczej
     22-tryb redukcji pierwszego poziomu;23-tryb redukcji drugiego poziomu;24-tryb redukcji trzeciego poziomu (zatrzymanie);25-wznów spawanie;26-zakończ spawanie;
     27-włącz pomocnicze przeciąganie;28-wyłącz pomocnicze przeciąganie;29-włącz/wyłącz pomocnicze przeciąganie;30-wyczyść wszystkie błędy;
     31-przełączanie ręczny/automatyczny (poziom wysoki/niski);32-załącz;33-odłącz;34-załącz/odłącz (zbocze narastające/opadające);35-rozpocznij/zakończ śledzenie punktowe
+    36-Wejście w ruch z prędkością bezpieczeństwa;37-Blokada przeciągania z pętlą prądową;38-Blokada wspomagana czujnikiem siły
     * @return Kod błędu
     */
     public int SetDIConfig(int[] config)
@@ -524,6 +525,11 @@ Pobranie funkcji konfigurowalnego portu CI skrzynki sterowniczej
     22-tryb redukcji pierwszego poziomu;23-tryb redukcji drugiego poziomu;24-tryb redukcji trzeciego poziomu (zatrzymanie);25-wznów spawanie;26-zakończ spawanie;
     27-włącz pomocnicze przeciąganie;28-wyłącz pomocnicze przeciąganie;29-włącz/wyłącz pomocnicze przeciąganie;30-wyczyść wszystkie błędy;
     31-przełączanie ręczny/automatyczny (poziom wysoki/niski);32-załącz;33-odłącz;34-załącz/odłącz (zbocze narastające/opadające);35-rozpocznij/zakończ śledzenie punktowe
+    36-Wejście w ruch z prędkością bezpieczeństwa;37-Blokada przeciągania z pętlą prądową;38-Blokada wspomagana czujnikiem siły
+    201-Zewnętrzny sygnał wejściowy awaryjnego zatrzymania 1-dwukanałowy; 202-Zewnętrzny sygnał wejściowy awaryjnego zatrzymania 2-dwukanałowy; 203-Tryb zmniejszony poziomu 1-dwukanałowy;
+    204-Tryb zmniejszony poziomu 2-dwukanałowy; 205-Tryb zmniejszony poziomu 3-dwukanałowy; 206-Normalne zatrzymanie-dwukanałowy; 207-Ściana bezpieczeństwa 1-dwukanałowy; 208-Ściana bezpieczeństwa 2-dwukanałowy;
+    209-Ściana bezpieczeństwa 3-dwukanałowy; 210-Ściana bezpieczeństwa 4-dwukanałowy; 211-Ściana bezpieczeństwa 5-dwukanałowy; 212-Ściana bezpieczeństwa 6-dwukanałowy; 213-Ściana bezpieczeństwa 7-dwukanałowy;
+    214-Ściana bezpieczeństwa 8-dwukanałowy; 215-Reset bezpiecznego zatrzymania-dwukanałowy;
     * @return Kod błędu
     */
     public int GetDIConfig(out int[] config)
@@ -570,9 +576,103 @@ Pobranie funkcji konfigurowalnego portu CO skrzynki sterowniczej
     39-błąd robota-błąd komunikacji napędu;40-błąd robota-błąd parametru;41-błąd robota-błąd przekroczenia miękkiego limitu zewnętrznej osi;42-ostrzeżenie robota-ostrzeżenie;
     43-ostrzeżenie robota-ostrzeżenie drzwi bezpieczeństwa;44-ostrzeżenie robota-ostrzeżenie ruchu;45-ostrzeżenie robota-ostrzeżenie strefy interferencji;46-ostrzeżenie robota-ostrzeżenie ściany bezpieczeństwa;
     47-stan załączenia;48-podnoszenie automatyczne po przerwaniu połączenia;49-ostrzeżenie interferencji sześcianu 1;50-ostrzeżenie interferencji sześcianu 2;51-ostrzeżenie interferencji sześcianu 3;52-ostrzeżenie interferencji sześcianu 4;
+    201-Sygnał wyjściowy awaryjnego zatrzymania 1-dwukanałowy; 202-Sygnał wyjściowy awaryjnego zatrzymania 2-dwukanałowy; 203-Wyjście statusu bezpieczeństwa-dwukanałowy; 204-Wyjście statusu zatrzymania ochronnego-dwukanałowy; 205-Robot w ruchu-dwukanałowy;
+	206-Robot w trybie zmniejszonym-dwukanałowy; 207-Robot w trybie niezmnieszonym-dwukanałowy;
     * @return Kod błędu
     */
     public int GetDOConfig(out int[] config)
+
+Konfiguracja Funkcji CI Dwukanałowej Bezpieczeństwa
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Konfiguracja funkcji CI dwukanałowej bezpieczeństwa
+    * @param [in] ID ID dwukanałowy; [0-3]
+    * @param [in] config Konfiguracja funkcji; 0-brak konfiguracji; 201-Zewnętrzny sygnał wejściowy awaryjnego zatrzymania 1; 202-Zewnętrzny sygnał wejściowy awaryjnego zatrzymania 2; 203-Tryb zmniejszony poziomu 1; 204-Tryb zmniejszony poziomu 2; 205-Tryb zmniejszony poziomu 3;
+                        206-Normalne zatrzymanie; 207-Ściana bezpieczeństwa 1; 208-Ściana bezpieczeństwa 2; 209-Ściana bezpieczeństwa 3; 210-Ściana bezpieczeństwa 4; 211-Ściana bezpieczeństwa 5; 212-Ściana bezpieczeństwa 6; 213-Ściana bezpieczeństwa 7;
+                        214-Ściana bezpieczeństwa 8; 215-Reset bezpiecznego zatrzymania;
+    * @return Kod błędu
+    */
+    public int SetSafetyDIConfig(int ID, int config)
+
+Konfiguracja Funkcji CO Dwukanałowej Bezpieczeństwa
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Konfiguracja funkcji CO dwukanałowej bezpieczeństwa
+    * @param [in] ID ID dwukanałowy; [0-3]
+    * @param [in] config Konfiguracja funkcji; 0-brak konfiguracji; 201-Sygnał wyjściowy awaryjnego zatrzymania 1; 202-Sygnał wyjściowy awaryjnego zatrzymania 2; 203-Wyjście statusu bezpieczeństwa; 204-Wyjście statusu zatrzymania ochronnego; 205-Robot w ruchu;
+                        206-Robot w trybie zmniejszonym; 207-Robot w trybie niezmnieszonym;
+    * @return Kod błędu
+    */
+    public int SetSafetyDOConfig(int ID, int config)
+
+Przykład Kodu Weryfikacji Konfiguracji Funkcji CI/CO Dwukanałowej Bezpieczeństwa
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    
+.. code-block:: c#
+    :linenos:
+
+    public void TestSafetyIOConfig()
+    {
+        int rtn = 0;
+
+        rtn = robot.SetSafetyDIConfig(0, 201);
+        Console.WriteLine($"SetSafetyDIConfig rtn is {rtn}");
+        rtn = robot.SetSafetyDIConfig(1, 202);
+        Console.WriteLine($"SetSafetyDIConfig rtn is {rtn}");
+        rtn = robot.SetSafetyDIConfig(2, 203);
+        Console.WriteLine($"SetSafetyDIConfig rtn is {rtn}");
+        rtn = robot.SetSafetyDIConfig(3, 204);
+        Console.WriteLine($"SetSafetyDIConfig rtn is {rtn}");
+
+        int[] getDIConfig = new int[8];
+        rtn = robot.GetDIConfig(out getDIConfig);
+        Console.WriteLine($"GetDIConfig rtn is {rtn}, value is {string.Join(" ", getDIConfig)}");
+
+        rtn = robot.SetSafetyDIConfig(0, 0);
+        Console.WriteLine($"SetSafetyDIConfig rtn is {rtn}");
+        rtn = robot.SetSafetyDIConfig(1, 0);
+        Console.WriteLine($"SetSafetyDIConfig rtn is {rtn}");
+        rtn = robot.SetSafetyDIConfig(2, 0);
+        Console.WriteLine($"SetSafetyDIConfig rtn is {rtn}");
+        rtn = robot.SetSafetyDIConfig(3, 0);
+        Console.WriteLine($"SetSafetyDIConfig rtn is {rtn}");
+
+        rtn = robot.GetDIConfig(out getDIConfig);
+        Console.WriteLine($"GetDIConfig rtn is {rtn}, value is {string.Join(" ", getDIConfig)}");
+
+        rtn = robot.SetSafetyDOConfig(0, 204);
+        Console.WriteLine($"SetSafetyDOConfig rtn is {rtn}");
+        rtn = robot.SetSafetyDOConfig(1, 205);
+        Console.WriteLine($"SetSafetyDOConfig rtn is {rtn}");
+        rtn = robot.SetSafetyDOConfig(2, 206);
+        Console.WriteLine($"SetSafetyDOConfig rtn is {rtn}");
+        rtn = robot.SetSafetyDOConfig(3, 207);
+        Console.WriteLine($"SetSafetyDOConfig rtn is {rtn}");
+
+        int[] getDOConfig = new int[8];
+        rtn = robot.GetDOConfig(out getDOConfig);
+        Console.WriteLine($"GetDOConfig rtn is {rtn}, value is {string.Join(" ", getDOConfig)}");
+
+        rtn = robot.SetSafetyDOConfig(0, 0);
+        Console.WriteLine($"SetSafetyDOConfig rtn is {rtn}");
+        rtn = robot.SetSafetyDOConfig(1, 0);
+        Console.WriteLine($"SetSafetyDOConfig rtn is {rtn}");
+        rtn = robot.SetSafetyDOConfig(2, 0);
+        Console.WriteLine($"SetSafetyDOConfig rtn is {rtn}");
+        rtn = robot.SetSafetyDOConfig(3, 0);
+        Console.WriteLine($"SetSafetyDOConfig rtn is {rtn}");
+
+        rtn = robot.GetDOConfig(out getDOConfig);
+        Console.WriteLine($"GetDOConfig rtn is {rtn}, value is {string.Join(" ", getDOConfig)}");
+    }    
 
 Ustawienie funkcji konfigurowalnego portu End-CI końcowego
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

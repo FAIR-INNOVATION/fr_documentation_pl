@@ -509,9 +509,10 @@ Eksploracja po spirali
     * @param  [in] ft Próg siły/momentu, fx, fy, fz, tx, ty, tz, zakres [0~100]
     * @param  [in] max_t_ms Maksymalny czas eksploracji, jednostka ms
     * @param  [in] max_vel Maksymalna prędkość liniowa, jednostka mm/s
+    * @param  [in] strategy Strategia postępowania w przypadku niewykrycia siły/momentu obrotowego, 0-błąd; 1-ostrzeżenie, kontynuuj ruch
     * @return   Kod błędu
     */
-    errno_t  FT_SpiralSearch(int rcs, float dr, float ft, float max_t_ms, float max_vel);
+    errno_t  FT_SpiralSearch(int rcs, float dr, float ft, float max_t_ms, float max_vel, int strategy = 0);
 
 Wstawianie obrotowe
 +++++++++++++++++++++++++++++++++++++++++++++
@@ -611,9 +612,10 @@ Wstawianie liniowe
     * @param  [in] lin_a Przyspieszenie liniowe, jednostka mm/s^2, tymczasowo nieużywane
     * @param  [in] max_dis Maksymalna odległość wstawiania, jednostka mm
     * @param  [in] linorn  Kierunek wstawiania, 0-kierunek ujemny, 1-kierunek dodatni
+    * @param  [in] strategy Strategia postępowania w przypadku niewykrycia siły/momentu obrotowego, 0-błąd; 1-ostrzeżenie, kontynuuj ruch
     * @return   Kod błędu
     */
-    errno_t  FT_LinInsertion(int rcs, float ft, float lin_v, float lin_a, float max_dis, uint8_t linorn);
+    errno_t  FT_LinInsertion(int rcs, float ft, float lin_v, float lin_a, float max_dis, uint8_t linorn, int strategy=0);
 
 Przykład kodu dla instrukcji eksploracji po spirali, wstawiania liniowego itp.
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -725,9 +727,10 @@ Lokalizacja powierzchni
     * @param  [in] lin_a Przyspieszenie liniowe eksploracji, jednostka mm/s^2, tymczasowo nieużywane, domyślnie 0
     * @param  [in] max_dis Maksymalna odległość eksploracji, jednostka mm
     * @param  [in] ft  Próg siły/momentu zakończenia działania, fx, fy, fz, tx, ty, tz
+    * @param  [in] strategy Strategia postępowania w przypadku niewykrycia siły/momentu obrotowego, 0-błąd; 1-ostrzeżenie, kontynuuj ruch
     * @return   Kod błędu
     */
-    errno_t  FT_FindSurface(int rcs, uint8_t dir, uint8_t axis, float lin_v, float lin_a, float max_dis, float ft);
+    errno_t  FT_FindSurface(int rcs, uint8_t dir, uint8_t axis, float lin_v, float lin_a, float max_dis, float ft, int stragety = 0);
 
 Rozpoczęcie obliczania pozycji płaszczyzny środkowej
 ++++++++++++++++++++++++++++++++++++++++++++++++++++

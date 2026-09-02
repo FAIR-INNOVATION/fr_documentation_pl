@@ -412,9 +412,10 @@ Rozwiązanie kinematyki odwrotnej, przestrzeń kartezjańska z uwzględnieniem p
     * @param  tool Numer narzędzia
     * @param  workPiece Numer przedmiotu
     * @param  joint_pos Pozycja przegubów
+    * @param  config -1: automatyczne rozwiązanie, 0-7 odpowiada ośmiu zestawom rozwiązań
     * @return Kod błędu
     */
-    public int GetInverseKinExaxis(int type, DescPose desc_pos, ExaxisPos exaxis, int tool, int workPiece, JointPos joint_pos)
+    public int GetInverseKinExaxis(int type, DescPose desc_pos, ExaxisPos exaxis, int tool, int workPiece, JointPos joint_pos, int config)
     
 Przykład kodu rozwiązania kinematyki odwrotnej z uwzględnieniem pozycji osi rozszerzenia
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -428,15 +429,16 @@ Przykład kodu rozwiązania kinematyki odwrotnej z uwzględnieniem pozycji osi r
         ExaxisPos exaxis=new ExaxisPos(100.0, 0.0, 0.0, 0.0);
         JointPos jointPos =new JointPos();
         DescPose offsetPos =new DescPose();
+
         ROBOT_STATE_PKG pkg=robot.GetRobotRealTimeState();
         int toolnum = pkg.tool;
         int workPcsNum = pkg.user;
-        robot.GetInverseKinExaxis(0, desc, exaxis, toolnum, workPcsNum, jointPos);
+        robot.GetInverseKinExaxis(0, desc, exaxis, toolnum, workPcsNum, jointPos, 0);
         System.out.printf("GetInverseKinExaxis joint is %f, %f, %f, %f, %f, %f\n", jointPos.J1, jointPos.J2, jointPos.J3, jointPos.J4, jointPos.J5, jointPos.J6);
+
         robot.ExtAxisMove(exaxis, 100, -1);
         robot.MoveJ(jointPos, desc, toolnum, workPcsNum, 100.0, 100.0, 100.0, exaxis, -1, 0, offsetPos);
-        robot.CloseRPC();
-        robot.Sleep(9999999);
+
     }
 
 Sprawdzanie, czy kinematyka odwrotna ma rozwiązanie

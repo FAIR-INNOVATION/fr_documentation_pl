@@ -529,12 +529,13 @@ Ustawianie funkcji konfigurowalnego portu CI
     "Opis", "Ustawianie funkcji konfigurowalnego portu CI"
     "Parametry wymagane", "
     - ``config``: Tablica kodów funkcji CI0-CI7, 0-brak;1-pomyślne zajarzenie łuku;2-gotowość spawarki;3-wykrywanie przenośnika;4-wstrzymanie;5-wznowienie;6-uruchomienie;7-zatrzymanie;
-      58-wstrzymanie/wznowienie;9-uruchomienie/zatrzymanie;10-przeciąganie nożne;11-przejście do punktu początkowego zadania;12-przełączanie ręczny/automatyczny;
-      613-pomyślne znalezienie pozycji drutu;14-przerwanie ruchu;15-uruchomienie programu głównego;16-uruchomienie przewijania;17-potwierdzenie uruchomienia;
-      718-sygnał detekcji fotoelektrycznej X;19-sygnał detekcji fotoelektrycznej Y;20-zewnętrzny sygnał zatrzymania awaryjnego 1;21-zewnętrzny sygnał zatrzymania awaryjnego 2;
-      822-tryb redukcji pierwszego stopnia;23-tryb redukcji drugiego stopnia;24-tryb redukcji trzeciego stopnia (zatrzymanie);25-wznowienie spawania;26-zakończenie spawania;
-      927-włączenie przeciągania wspomaganego;28-wyłączenie przeciągania wspomaganego;29-włączenie/wyłączenie przeciągania wspomaganego;30-wyczyszczenie wszystkich błędów;
-      1031-przełączanie ręczny/automatyczny (poziom wysoki/niski);32-włączenie zasilania;33-wyłączenie zasilania;34-włączenie/wyłączenie zasilania (zbocze narastające/opadające);35-rozpoczęcie/zakończenie śledzenia punktowego"
+      8-wstrzymanie/wznowienie;9-uruchomienie/zatrzymanie;10-przeciąganie nożne;11-przejście do punktu początkowego zadania;12-przełączanie ręczny/automatyczny;
+      13-pomyślne znalezienie pozycji drutu;14-przerwanie ruchu;15-uruchomienie programu głównego;16-uruchomienie przewijania;17-potwierdzenie uruchomienia;
+      18-sygnał detekcji fotoelektrycznej X;19-sygnał detekcji fotoelektrycznej Y;20-zewnętrzny sygnał zatrzymania awaryjnego 1;21-zewnętrzny sygnał zatrzymania awaryjnego 2;
+      22-tryb redukcji pierwszego stopnia;23-tryb redukcji drugiego stopnia;24-tryb redukcji trzeciego stopnia (zatrzymanie);25-wznowienie spawania;26-zakończenie spawania;
+      27-włączenie przeciągania wspomaganego;28-wyłączenie przeciągania wspomaganego;29-włączenie/wyłączenie przeciągania wspomaganego;30-wyczyszczenie wszystkich błędów;
+      31-przełączanie ręczny/automatyczny (poziom wysoki/niski);32-włączenie zasilania;33-wyłączenie zasilania;34-włączenie/wyłączenie zasilania (zbocze narastające/opadające);35-rozpoczęcie/zakończenie śledzenia punktowego
+      36-Wejście w ruch z prędkością bezpieczeństwa;37-Blokada przeciągania z pętlą prądową;38-Blokada wspomagana czujnikiem siły"
     "Parametry domyślne", "Brak"
     "Wartość zwracana", "Kod błędu sukces-0 błąd- errcode "
     
@@ -549,12 +550,17 @@ Pobieranie funkcji konfigurowalnego portu CI skrzynki kontrolnej
     "Opis", "Pobieranie funkcji konfigurowalnego portu CI skrzynki kontrolnej"
     "Parametry wymagane", "
     - ``config``: Tablica kodów funkcji CI0-CI7, 0-brak;1-pomyślne zajarzenie łuku;2-gotowość spawarki;3-wykrywanie przenośnika;4-wstrzymanie;5-wznowienie;6-uruchomienie;7-zatrzymanie;
-      58-wstrzymanie/wznowienie;9-uruchomienie/zatrzymanie;10-przeciąganie nożne;11-przejście do punktu początkowego zadania;12-przełączanie ręczny/automatyczny;
-      613-pomyślne znalezienie pozycji drutu;14-przerwanie ruchu;15-uruchomienie programu głównego;16-uruchomienie przewijania;17-potwierdzenie uruchomienia;
-      718-sygnał detekcji fotoelektrycznej X;19-sygnał detekcji fotoelektrycznej Y;20-zewnętrzny sygnał zatrzymania awaryjnego 1;21-zewnętrzny sygnał zatrzymania awaryjnego 2;
-      822-tryb redukcji pierwszego stopnia;23-tryb redukcji drugiego stopnia;24-tryb redukcji trzeciego stopnia (zatrzymanie);25-wznowienie spawania;26-zakończenie spawania;
-      927-włączenie przeciągania wspomaganego;28-wyłączenie przeciągania wspomaganego;29-włączenie/wyłączenie przeciągania wspomaganego;30-wyczyszczenie wszystkich błędów;
-      1031-przełączanie ręczny/automatyczny (poziom wysoki/niski);32-włączenie zasilania;33-wyłączenie zasilania;34-włączenie/wyłączenie zasilania (zbocze narastające/opadające);35-rozpoczęcie/zakończenie śledzenia punktowego"
+      8-wstrzymanie/wznowienie;9-uruchomienie/zatrzymanie;10-przeciąganie nożne;11-przejście do punktu początkowego zadania;12-przełączanie ręczny/automatyczny;
+      13-pomyślne znalezienie pozycji drutu;14-przerwanie ruchu;15-uruchomienie programu głównego;16-uruchomienie przewijania;17-potwierdzenie uruchomienia;
+      18-sygnał detekcji fotoelektrycznej X;19-sygnał detekcji fotoelektrycznej Y;20-zewnętrzny sygnał zatrzymania awaryjnego 1;21-zewnętrzny sygnał zatrzymania awaryjnego 2;
+      22-tryb redukcji pierwszego stopnia;23-tryb redukcji drugiego stopnia;24-tryb redukcji trzeciego stopnia (zatrzymanie);25-wznowienie spawania;26-zakończenie spawania;
+      27-włączenie przeciągania wspomaganego;28-wyłączenie przeciągania wspomaganego;29-włączenie/wyłączenie przeciągania wspomaganego;30-wyczyszczenie wszystkich błędów;
+      31-przełączanie ręczny/automatyczny (poziom wysoki/niski);32-włączenie zasilania;33-wyłączenie zasilania;34-włączenie/wyłączenie zasilania (zbocze narastające/opadające);35-rozpoczęcie/zakończenie śledzenia punktowego
+      36-Wejście w ruch z prędkością bezpieczeństwa;37-Blokada przeciągania z pętlą prądową;38-Blokada wspomagana czujnikiem siły
+      201-Zewnętrzny sygnał wejściowy awaryjnego zatrzymania 1-dwukanałowy; 202-Zewnętrzny sygnał wejściowy awaryjnego zatrzymania 2-dwukanałowy; 203-Tryb zmniejszony poziomu 1-dwukanałowy;
+      204-Tryb zmniejszony poziomu 2-dwukanałowy; 205-Tryb zmniejszony poziomu 3-dwukanałowy; 206-Normalne zatrzymanie-dwukanałowy; 207-Ściana bezpieczeństwa 1-dwukanałowy; 208-Ściana bezpieczeństwa 2-dwukanałowy;
+      209-Ściana bezpieczeństwa 3-dwukanałowy; 210-Ściana bezpieczeństwa 4-dwukanałowy; 211-Ściana bezpieczeństwa 5-dwukanałowy; 212-Ściana bezpieczeństwa 6-dwukanałowy; 213-Ściana bezpieczeństwa 7-dwukanałowy;
+      214-Ściana bezpieczeństwa 8-dwukanałowy; 215-Reset bezpiecznego zatrzymania-dwukanałowy;"
     "Parametry domyślne", "Brak"
     "Wartość zwracana", "Kod błędu sukces-0 błąd- errcode "
     
@@ -592,15 +598,17 @@ Pobieranie funkcji konfigurowalnego portu CO
     "Opis", "Pobieranie funkcji konfigurowalnego portu CO"
     "Parametry wymagane", "
     - ``config``: Tablica kodów funkcji CO0-CO7, 0-brak;1-błąd robota;2-robot w ruchu;3-uruchamianie/zatrzymywanie natrysku;4-czyszczenie pistoletu natryskowego;5-sygnał podawania gazu;6-sygnał zajarzenia łuku;7-punktowe podawanie drutu;
-      58-podawanie drutu wstecz;9-wejście JOB 1;10-wejście JOB 2;11-wejście JOB 3;12-sterowanie uruchamianiem/zatrzymywaniem przenośnika;13-robot wstrzymany;14-osiągnięcie punktu początkowego zadania;
-      615-osiągnięcie strefy interferencji;16-sterowanie uruchamianiem/zatrzymywaniem poszukiwania pozycji drutu;17-robot uruchomiony;18-uruchomienie/zatrzymanie programu;19-tryb ręczny/automatyczny;20-sygnał wyjścia zatrzymania awaryjnego 1-bezpieczeństwo;
-      721-sygnał wyjścia zatrzymania awaryjnego 2-bezpieczeństwo;22-zatrzymanie działania skryptu LUA;23-wyjście stanu bezpieczeństwa-bezpieczeństwo;24-wyjście stanu zatrzymania ochronnego-bezpieczeństwo;
-      825-robot w ruchu-bezpieczeństwo;26-robot w trybie redukcji-bezpieczeństwo;27-robot w trybie nieredukcji-bezpieczeństwo;28-robot niezatrzymany;29-błąd robota-błąd punktu instrukcji;
-      930-błąd robota-błąd sterownika;31-błąd robota-błąd przekroczenia miękkiego ograniczenia;32-błąd robota-błąd kolizji;33-błąd robota-błąd liczby aktywnych węzłów podrzędnych;
-      1034-błąd robota-błąd węzła podrzędnego;35-błąd robota-błąd IO;36-błąd robota-błąd chwytaka;37-błąd robota-błąd pliku;38-błąd robota-błąd osobliwej pozy;
-      1139-błąd robota-błąd komunikacji sterownika;40-błąd robota-błąd parametru;41-błąd robota-błąd przekroczenia miękkiego ograniczenia osi zewnętrznej;42-ostrzeżenie robota-ostrzeżenie;
-      1243-ostrzeżenie robota-ostrzeżenie drzwi bezpieczeństwa;44-ostrzeżenie robota-ostrzeżenie ruchu;45-ostrzeżenie robota-ostrzeżenie strefy interferencji;46-ostrzeżenie robota-ostrzeżenie ściany bezpieczeństwa;
-      1347-stan włączenia zasilania;48-automatyczne podnoszenie podczas utraty połączenia;49-ostrzeżenie interferencji sześcianu 1;50-ostrzeżenie interferencji sześcianu 2;51-ostrzeżenie interferencji sześcianu 3;52-ostrzeżenie interferencji sześcianu 4;"
+      8-podawanie drutu wstecz;9-wejście JOB 1;10-wejście JOB 2;11-wejście JOB 3;12-sterowanie uruchamianiem/zatrzymywaniem przenośnika;13-robot wstrzymany;14-osiągnięcie punktu początkowego zadania;
+      15-osiągnięcie strefy interferencji;16-sterowanie uruchamianiem/zatrzymywaniem poszukiwania pozycji drutu;17-robot uruchomiony;18-uruchomienie/zatrzymanie programu;19-tryb ręczny/automatyczny;20-sygnał wyjścia zatrzymania awaryjnego 1-bezpieczeństwo;
+      21-sygnał wyjścia zatrzymania awaryjnego 2-bezpieczeństwo;22-zatrzymanie działania skryptu LUA;23-wyjście stanu bezpieczeństwa-bezpieczeństwo;24-wyjście stanu zatrzymania ochronnego-bezpieczeństwo;
+      25-robot w ruchu-bezpieczeństwo;26-robot w trybie redukcji-bezpieczeństwo;27-robot w trybie nieredukcji-bezpieczeństwo;28-robot niezatrzymany;29-błąd robota-błąd punktu instrukcji;
+      30-błąd robota-błąd sterownika;31-błąd robota-błąd przekroczenia miękkiego ograniczenia;32-błąd robota-błąd kolizji;33-błąd robota-błąd liczby aktywnych węzłów podrzędnych;
+      34-błąd robota-błąd węzła podrzędnego;35-błąd robota-błąd IO;36-błąd robota-błąd chwytaka;37-błąd robota-błąd pliku;38-błąd robota-błąd osobliwej pozy;
+      39-błąd robota-błąd komunikacji sterownika;40-błąd robota-błąd parametru;41-błąd robota-błąd przekroczenia miękkiego ograniczenia osi zewnętrznej;42-ostrzeżenie robota-ostrzeżenie;
+      43-ostrzeżenie robota-ostrzeżenie drzwi bezpieczeństwa;44-ostrzeżenie robota-ostrzeżenie ruchu;45-ostrzeżenie robota-ostrzeżenie strefy interferencji;46-ostrzeżenie robota-ostrzeżenie ściany bezpieczeństwa;
+      47-stan włączenia zasilania;48-automatyczne podnoszenie podczas utraty połączenia;49-ostrzeżenie interferencji sześcianu 1;50-ostrzeżenie interferencji sześcianu 2;51-ostrzeżenie interferencji sześcianu 3;52-ostrzeżenie interferencji sześcianu 4;
+      201-Sygnał wyjściowy awaryjnego zatrzymania 1-dwukanałowy; 202-Sygnał wyjściowy awaryjnego zatrzymania 2-dwukanałowy; 203-Wyjście statusu bezpieczeństwa-dwukanałowy; 204-Wyjście statusu zatrzymania ochronnego-dwukanałowy; 205-Robot w ruchu-dwukanałowy;
+	  206-Robot w trybie zmniejszonym-dwukanałowy; 207-Robot w trybie niezmnieszonym-dwukanałowy;"
     "Parametry domyślne", "Brak"
     "Wartość zwracana", "Kod błędu sukces-0 błąd- errcode "
     

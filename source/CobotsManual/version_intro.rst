@@ -1,3 +1,41 @@
+Wersja V3.9.9
+-----------------
+
+Data: 2026-09-01
+
+- **Zoptymalizowano pakiet procesów montażu ze sterowaniem siłowym**:
+    Ścieżka: Teach Program -> Polecenia Sterowania Siłą.
+
+    Opis: Poprawiono użyteczność i niezawodność procesu.
+
+- **Zoptymalizowano konfigurację dynamicznych urządzeń podrzędnych stacji głównej IGH**:
+
+    Opis: Poprawiono kompatybilność wielomodelową i wygodę konserwacji.
+
+- **Dodano rozszerzenie funkcji przeciągania z impedancją stawów dla wielu modeli**:
+    Ścieżka: Aplikacje Pomocnicze -> Blokada Przeciągania.
+
+    Opis: Dodano obsługę funkcji przeciągania dla modeli FR3-WML, FR3-WMS, FR3-C i FR5-C.
+
+- **Dodano funkcję weryfikacji konfiguracji bezpieczeństwa**:
+    Ścieżka: Ustawienia Początkowe -> Bezpieczeństwo.
+
+    Opis: Przebudowa strony bezpieczeństwa, weryfikacja hasła konfiguracji bezpieczeństwa, weryfikacja legalności konfiguracji oraz generowanie raportów bezpieczeństwa w formacie PDF.
+
+- **Dodano pełną adaptację czujnika siły sześcioosiowej Kaiwei**:
+    Ścieżka: Ustawienia Początkowe -> Urządzenia PerYferyjne -> Czujnik Siły.
+
+    Opis: Dodano adaptację czujnika siły KWL.
+
+- **Dodano obsługę funkcji splotu dla odtwarzania skanowania laserowego**:
+    Ścieżka: Programowanie Programu -> Rejestracja Laserowa -> Polecenie Odtwarzania Śledzenia Laserowego.
+
+    Opis: Poprawiono adaptacyjność procesu spawania laserowego i jakość spoiny.
+
+- **Dodano diagnostykę zdrowia łącza fizycznego stosu protokołów IGH**:
+
+    Opis: Dodano funkcję odczytu i wyświetlania w interfejsie w celu szybkiej lokalizacji problemów z magistralą.
+
 Wersja V3.9.8
 -----------------
 

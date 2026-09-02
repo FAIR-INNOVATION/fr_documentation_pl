@@ -475,13 +475,14 @@ Poszukiwanie spiralne
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototyp", "``FT_SpiralSearch(rcs, ft, dr=0.7, max_t_ms=60000, max_vel=5)``"
+    "Prototyp", "``FT_SpiralSearch(rcs, ft, dr=0.7, max_t_ms=60000, max_vel=5, strategy=0)``"
     "Opis", "Poszukiwanie spiralne"
     "Parametry wymagane", "- ``rcs``: Układ odniesienia, 0-układ narzędzia, 1-układ bazowy
     - ``ft``: Próg siły lub momentu (0~100), jednostka N lub Nm;"
     "Parametry domyślne", "- ``dr``: Posuw promienia na okrążenie, jednostka mm domyślnie 0.7;
     - ``max_t_ms``: Maksymalny czas poszukiwania, jednostka ms domyślnie 60000;
-    - ``max_vel``: Maksymalna prędkość liniowa, jednostka mm/s domyślnie 5"
+    - ``max_vel``: Maksymalna prędkość liniowa, jednostka mm/s domyślnie 5;
+    - ``strategy``：strategy Strategia postępowania w przypadku niewykrycia siły/momentu obrotowego, 0-błąd; 1-ostrzeżenie, kontynuuj ruch;"
     "Wartość zwracana", "Kod błędu sukces-0 błąd- errcode "
 
 Wkładanie obrotowe
@@ -567,14 +568,15 @@ Wkładanie liniowe
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototyp", "``FT_LinInsertion(rcs, ft, disMax, linorn, lin_v=1.0, lin_a=1.0)``"
+    "Prototyp", "``FT_LinInsertion(rcs, ft, disMax, linorn, lin_v=1.0, lin_a=1.0, strategy=0)``"
     "Opis", "Wkładanie liniowe"
     "Parametry wymagane", "- ``rcs``: Układ odniesienia, 0-układ narzędzia, 1-układ bazowy;
     - ``ft``: Próg siły lub momentu (0~100), jednostka N lub Nm;
     - ``disMax``: Maksymalna odległość wkładania, jednostka mm;
     - ``linorn``: Kierunek wkładania: 0-kierunek ujemny, 1-kierunek dodatni"
     "Parametry domyślne", "- ``lin_v``: Prędkość liniowa, jednostka mm/s domyślnie 1;
-    - ``lin_a``: Przyspieszenie liniowe, jednostka mm/s^2, tymczasowo nieużywane domyślnie 1"
+    - ``lin_a``: Przyspieszenie liniowe, jednostka mm/s^2, tymczasowo nieużywane domyślnie 1;
+    - ``strategy``：Strategia postępowania w przypadku niewykrycia siły/momentu obrotowego, 0-błąd; 1-ostrzeżenie, kontynuuj ruch;"
     "Wartość zwracana", "Kod błędu sukces-0 błąd- errcode "
 
 Przykład kodu instrukcji poszukiwania spiralnego, wkładania liniowego itp.
@@ -660,7 +662,7 @@ Lokalizacja powierzchni
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototyp", "``FT_FindSurface (rcs, dir, axis, disMax, ft, lin_v=3.0, lin_a=0.0)``"
+    "Prototyp", "``FT_FindSurface (rcs, dir, axis, disMax, ft, lin_v=3.0, lin_a=0.0, stragety = 0)``"
     "Opis", "Lokalizacja powierzchni"
     "Parametry wymagane", "- ``rcs``: Układ odniesienia, 0-układ narzędzia, 1-układ bazowy;
     - ``dir``: Kierunek ruchu, 1-kierunek dodatni, 2-kierunek ujemny;
@@ -668,7 +670,8 @@ Lokalizacja powierzchni
     - ``disMax``: Maksymalna odległość poszukiwania, jednostka mm;
     - ``ft``: Próg siły zakończenia działania, jednostka N;"
     "Parametry domyślne", "- ``lin_v``: Prędkość liniowa poszukiwania, jednostka mm/s domyślnie 3;
-    - ``lin_a``: Przyspieszenie liniowe poszukiwania, jednostka mm/s^2 domyślnie 0;"
+    - ``lin_a``: Przyspieszenie liniowe poszukiwania, jednostka mm/s^2 domyślnie 0;
+    - ``strategy``：Strategia postępowania w przypadku niewykrycia siły/momentu obrotowego, 0-błąd; 1-ostrzeżenie, kontynuuj ruch;"
     "Wartość zwracana", "Kod błędu sukces-0 błąd- errcode"
 
 Rozpoczęcie obliczania pozycji środkowej płaszczyzny

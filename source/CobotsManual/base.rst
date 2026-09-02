@@ -1448,3 +1448,134 @@ Parametry admitancji dla otwartej zgodności orientacji
 .. centered:: Wykres 6.11‑4 Ustawianie odniesienia układu współrzędnych czujnika siły
 
 **Krok 4**: Uruchom skrypt, sprawdź efekt zgodności orientacji. Regulacja parametru bezwładności wpływa na reakcję przyspieszenia i zdolność odporności na zakłócenia. Im większa bezwładność, tym bardziej wyraźne opóźnienie robota. Współczynnik tłumienia wpływa na gładkość podczas zgodności orientacji. Im większe tłumienie, tym trudniejsza jest zgodność orientacji.
+
+Konfiguracja Ruchu
+---------------------------------------------
+
+Optymalizacja Charakterystyki Prędkości w Kształcie T + Funkcja Wygładzania Blending
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Przegląd
+++++++++++++++++++++++
+
+Blending między dwoma segmentami trajektorii zapobiega częstym problemom z uruchamianiem/zatrzymywaniem spowodowanym przez całkowite zatrzymania, poprawiając w ten sposób wydajność ruchu robota.
+
+Ta funkcja dotyczy głównie blendingu między poleceniami PTP-PTP, LIN-LIN, ARC-ARC, LIN-ARC i ARC-LIN. Blending między innymi typami poleceń nie jest skuteczny.
+
+Procedura Operacyjna
+++++++++++++++++++++++
+
+Ponieważ metody operacyjne dla każdego polecenia są podobne, ten podręcznik używa blendingu między PTP-PTP jako przykładu do zilustrowania działania tej funkcji. Funkcję tę można zaimplementować na dwa sposoby: używając instrukcji Lua lub używając przełącznika konfiguracji ruchu.
+
+Metoda z Instrukcjami Lua
+*****************************
+
+**Krok 1**: Wybierz punkty nauczania do wykonania funkcji PTP. Ten podręcznik używa "A0" ~ "A5" jako nazw punktów nauczania.
+
+**Krok 2**: Kliknij "Teach Program" -> "Programowanie Programu" i wybierz polecenie "Punkt do Punktu" z "Instrukcji Ruchu". W obszarze "Edytuj Instrukcję" wybierz punkt nauczania i ustaw prędkość debugowania. Wybierz "Tryb Wygładzania Przyspieszenia" dla zabezpieczenia ruchu i ustaw parametr "Płynne Przejście" w punktach, gdzie wymagane jest wygładzanie.
+
+.. image:: base/103.png
+   :width: 6in
+   :align: center
+
+.. centered:: Rysunek 7.13-1 Ustawienia Instrukcji Blending dla PTP z Wygładzaniem Przyspieszenia
+
+**Krok 3**: Wygeneruj i uruchom program Lua, aby uzyskać funkcję blendingu PTP-PTP. W tym trybie tylko instrukcje między AccSmoothStart() i AccSmoothEnd() używają zoptymalizowanej prędkości w kształcie T dla ruchu, podczas gdy inne instrukcje używają oryginalnej prędkości w kształcie T.
+
+.. image:: base/104.png
+   :width: 4in
+   :align: center
+
+.. centered:: Rysunek 7.13-2 Typowy Program dla Blendingu PTP-PTP z Metodą Instrukcji Lua
+
+Metoda z Przełącznikiem Konfiguracji Ruchu
+***********************************
+
+**Krok 1**: Kliknij "Ustawienia Początkowe" -> "Bezpieczeństwo" -> "Konfiguracja Ruchu" i włącz przełącznik "Tryb Wygładzania Przyspieszenia".
+
+.. image:: base/105.png
+   :width: 6in
+   :align: center
+
+.. centered:: Rysunek 7.13-3 Ustawienia Przełącznika Konfiguracji Trybu Wygładzania Przyspieszenia
+
+**Krok 2**: Wybierz punkty nauczania do wykonania funkcji PTP-PTP. Ten podręcznik używa "A0" ~ "A5" jako nazw punktów nauczania.
+
+**Krok 3**: Kliknij "Teach Program" -> "Programowanie Programu" i wybierz polecenie "Punkt do Punktu" z "Instrukcji Ruchu". W obszarze "Edytuj Instrukcję" wybierz punkt nauczania i ustaw prędkość debugowania. Wybierz "Brak" dla zabezpieczenia ruchu i ustaw parametr "Płynne Przejście" w punktach, gdzie wymagane jest wygładzanie.
+
+.. image:: base/106.png
+   :width: 6in
+   :align: center
+
+.. centered:: Rysunek 7.13-4 Ustawienia Instrukcji Blending dla Zwykłego PTP
+
+**Krok 4**: Wygeneruj i uruchom program Lua, aby uzyskać funkcję blendingu PTP-PTP. Typowy program jest taki sam jak zwykły program PTP. W tym trybie wszystkie instrukcje używają zoptymalizowanej prędkości w kształcie T dla ruchu.
+
+.. image:: base/107.png
+   :width: 4in
+   :align: center
+
+.. centered:: Rysunek 7.13-5 Typowy Program dla Blendingu PTP-PTP z Przełącznikiem Konfiguracji
+
+Funkcja Parametrów Adaptacyjnych FIR + Funkcja Pauzy/Wznawiania FIR
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Przegląd
+++++++++++++++++++++++
+
+Funkcja adaptacyjnej konfiguracji parametrów trybu optymalnego czasowo robota eliminuje potrzebę debugowania i konfigurowania różnych parametrów. Ta funkcja adaptacyjnie uzupełnia konfigurację parametrów dla trybu optymalnego czasowo na podstawie bieżącego stanu operacyjnego robota, poprawiając wydajność debugowania.
+
+Procedura Operacyjna
+++++++++++++++++++++++
+
+Sposób użycia podstawowych poleceń ruchu PTP, LIN i ARC robota jest podobny. Ten przykład używa polecenia ruchu PTP w trybie optymalnym czasowo jako głównego przykładu.
+
+**Krok 1**: W interfejsie kontrolnym Web robota kliknij kolejno "Ustawienia Początkowe" -> "Bezpieczeństwo" -> "Konfiguracja Ruchu", aby przejść do interfejsu "Konfiguracja Ruchu".
+
+.. image:: base/098.png
+   :width: 6in
+   :align: center
+
+.. centered:: Rysunek 7.13-6 Interfejs Konfiguracji Ruchu
+
+**Krok 2**: W interfejsie "Konfiguracja Ruchu" kliknij przełącznik "Tryb Optymalny Czasowo", aby przejść do interfejsu "Tryb Optymalny Czasowo".
+
+.. image:: base/099.png
+   :width: 3in
+   :align: center
+
+.. centered:: Rysunek 7.13-7 Interfejs Trybu Optymalnego Czasowo
+
+.. note:: W sekcji "Konfiguracja Parametrów" interfejsu "Tryb Optymalny Czasowo", "Współczynnik Regulacji" można ustawić od -100 do 100, reprezentując współczynnik skali używany do kontrolowania stopnia optymalizacji czasowej dla poleceń ruchu. Wartość domyślna to 1.
+
+**Krok 3**: Określ punkty nauczania do wykonania ruchu PTP. Ten przykład używa "A0" ~ "A5" jako nazw punktów nauczania.
+
+**Krok 4**: W interfejsie kontrolnym Web robota kliknij kolejno "Teach Program" -> "Programowanie Programu", aby przejść do interfejsu "Instrukcje Ruchu".
+
+.. image:: base/100.png
+   :width: 2in
+   :align: center
+
+.. centered:: Rysunek 7.13-8 Interfejs Instrukcji Ruchu
+
+**Krok 5**: W interfejsie "Instrukcje Ruchu" kliknij "Punkt do Punktu", aby przejść do interfejsu edycji instrukcji "PTP". Wybierz punkt nauczania z menu rozwijanego "Nazwa Punktu", ustaw pożądany stosunek prędkości w polu "Prędkość Debugowania", wybierz "Zatrzymaj" z pola "W Tym Punkcie", wybierz "Nie" z menu rozwijanego "Przesunięcie" i wybierz "Brak" z pola "Zabezpieczenie Ruchu". Następnie kliknij "Dodaj".
+
+.. image:: base/101.png
+   :width: 6in
+   :align: center
+
+.. centered:: Rysunek 7.13-9 Interfejs Edycji Instrukcji Ruchu PTP
+
+**Krok 6**: W interfejsie edycji instrukcji ruchu "PTP" kliknij "Zastosuj", aby automatycznie wygenerować odpowiedni program LUA.
+
+.. image:: base/102.png
+   :width: 4in
+   :align: center
+
+.. centered:: Rysunek 7.13-10 Typowy Program LUA dla Ruchu PTP w Trybie Optymalnym Czasowo
+
+.. note:: 
+   Typowy program LUA dla ruchu PTP w trybie optymalnym czasowo nie różni się od zwykłego programu LUA dla ruchu PTP. Różnica polega na tym, że funkcja "Tryb Optymalny Czasowo" została włączona w Kroku 2.
+
+   Gdy przełącznik funkcji "Tryb Optymalny Czasowo" jest włączony, podstawowe polecenia ruchu robota PTP, LIN i ARC są w trybie optymalnym czasowo. Wyłączenie przełącznika funkcji "Tryb Optymalny Czasowo" w tym interfejsie przywróci podstawowe polecenia ruchu PTP, LIN i ARC do ich normalnego stanu.
+   Przełącznik funkcji "Tryb Wygładzania Przyspieszenia" nie może być włączony jednocześnie z trybem optymalnym czasowo w tym interfejsie.

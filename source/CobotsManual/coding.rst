@@ -2286,6 +2286,218 @@ Realizuje funkcję regulacji prędkości odtwarzania śledzenia laserowego, umo�
 
 .. centered:: Schemat 9.8-4 Interfejs instrukcji LT-Rec
 
+Odtwarzanie Trajektorii Skanowania Laserowego z Nałożonym Splotem
+****************************************************************************************************************
+
+Przegląd
+""""""""""""""""""""""""""""""""""""""""""""""""
+Funkcja odtwarzania trajektorii skanowania laserowego z nałożonym splotem odnosi się do nakładania ruchów splotu fali trójkątnej / pionowej fali trójkątnej w kształcie L / okrągłej fali zgodnej z ruchem wskazówek zegara / okrągłej fali przeciwnej do ruchu wskazówek zegara / fali sinusoidalnej / pionowej fali sinusoidalnej w kształcie L / trójkątnej fali do spawania pionowego podczas odtwarzania trajektorii skanowania laserowego. Obsługuje zarówno splot regularny, jak i splot w punktach stałych, i może być dostosowana do ruchu osi rozszerzonych, jak pokazano w Tabeli 1-1.
+
+.. centered:: Tabela 9.8-1 Tryby Odtwarzania Trajektorii Skanowania Laserowego z Nałożonym Splotem
+
+.. list-table::
+   :widths: 40 30 30
+   :header-rows: 0
+   :align: center
+
+   * - **Odtwarzanie Trajektorii**
+     - **Splot Regularny**
+     - **Splot w Punktach Stałych**
+
+   * - Robot
+     - Tak
+     - Tak
+
+   * - Oś Rozszerzona
+     - Nie
+     - Tak
+
+Odtwarzanie Trajektorii Skanowania Laserowego z Nałożonym Splotem Regularnym
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+**Krok 1**: Skonfiguruj czujnik laserowy liniowy przez WebApp. Szczegółowe kroki operacyjne tej funkcji można znaleźć w odpowiednich rozdziałach podręcznika użytkownika.
+
+**Krok 2**: Skalibruj układ współrzędnych narzędzia przez WebApp. Szczegółowe kroki operacyjne tej funkcji można znaleźć w odpowiednich rozdziałach podręcznika użytkownika.
+
+**Krok 3**: Skalibruj układ współrzędnych czujnika przez WebApp. Szczegółowe kroki operacyjne tej funkcji można znaleźć w odpowiednich rozdziałach podręcznika użytkownika.
+
+**Krok 4**: Naucz punkty ruchu przez WebApp. Naucz punkty ruchu dla odtwarzania trajektorii skanowania laserowego docelowego przedmiotu i napisz podstawowy program LUA dla odpowiednich ruchów LIN robota. Szczegółowe kroki operacyjne tej funkcji można znaleźć w odpowiednich rozdziałach podręcznika użytkownika.
+
+**Krok 5**: Skonfiguruj numer parametrów splotu przez WebApp. Szczegółowe kroki operacyjne tej funkcji można znaleźć w odpowiednich rozdziałach podręcznika użytkownika.
+
+**Krok 6**: Polecenie rejestracji laserowej. W głównym interfejsie WebApp kliknij "Teach Program" -> "Programowanie Programu", aby przejść do obszaru "Polecenia Spawania".
+
+.. image:: coding/609.png
+   :width: 4in
+   :align: center
+
+.. centered:: Rysunek 9.8-4-1 Obszar "Polecenia Spawania"
+ 
+**Krok 7**: Rozpocznij rejestrację laserową. W obszarze "Polecenia Spawania" kliknij przycisk "Rejestracja Laserowa", aby przejść do obszaru konfiguracji polecenia "LT-Rec".
+
+W obszarze konfiguracji "Typ Polecenia" kliknij przycisk "Rejestracja Danych Spoiny", wybierz opcję "Rozpocznij Rejestrację" z menu rozwijanego "Wybór Funkcji"; ustaw czas rejestracji z opóźnieniem w polu wejściowym "Czas Opóźnienia".
+
+W obszarze konfiguracji polecenia "LT-Rec" kliknij przycisk "Dodaj". Okno "Podgląd Programu" wyświetli wstępnie wygenerowany program LUA. Kliknij "Zastosuj", aby zakończyć operację rozpoczęcia rejestracji laserowej.
+
+.. image:: coding/610.png
+   :width: 6in
+   :align: center
+
+.. centered:: Rysunek 9.8-4-2 Rozpoczęcie Rejestracji Laserowej
+
+**Krok 8**: Zatrzymaj rejestrację laserową. W obszarze konfiguracji polecenia "LT-Rec", w obszarze konfiguracji "Typ Polecenia", kliknij przycisk "Rejestracja Danych Spoiny", wybierz opcję "Zatrzymaj Rejestrację" z menu rozwijanego "Wybór Funkcji"; ustaw czas rejestracji z opóźnieniem w polu wejściowym "Czas Opóźnienia".
+
+W obszarze konfiguracji polecenia "LT-Rec" kliknij przycisk "Dodaj". Okno "Podgląd Programu" wyświetli wstępnie wygenerowany program LUA. Kliknij "Zastosuj", aby zakończyć operację zatrzymania rejestracji laserowej.
+
+.. image:: coding/611.png
+   :width: 6in
+   :align: center
+
+.. centered:: Rysunek 9.8-4-3 Zatrzymanie Rejestracji Laserowej
+
+**Krok 9**: Przejdź do punktu spoiny. W obszarze konfiguracji polecenia "LT-Rec", w obszarze konfiguracji "Typ Polecenia", kliknij przycisk "Przejdź do Punktu Spoiny", wybierz tryb ruchu "PTP" lub "LIN" z menu rozwijanego "Tryb Ruchu"; ustaw prędkość polecenia w polu wejściowym "Prędkość"; kliknij przycisk "Początek" lub "Koniec", aby wybrać docelowy punkt ruchu.
+
+W obszarze konfiguracji polecenia "LT-Rec" kliknij przycisk "Dodaj". Okno "Podgląd Programu" wyświetli wstępnie wygenerowany program LUA. Kliknij "Zastosuj", aby zakończyć operację.
+
+.. image:: coding/612.png
+   :width: 6in
+   :align: center
+
+.. centered:: Rysunek 9.8-4-4 Przejdź do Punktu Spoiny
+
+**Krok 10**: Odtwarzanie trajektorii laserowej. W obszarze konfiguracji polecenia "LT-Rec", w obszarze konfiguracji "Typ Polecenia", kliknij przycisk "Rejestracja Danych Spoiny", wybierz opcję "Odtwarzanie Trajektorii" z menu rozwijanego "Wybór Funkcji"; ustaw czas rejestracji z opóźnieniem w polu wejściowym "Czas Opóźnienia"; ustaw prędkość polecenia w polu wejściowym "Prędkość".
+
+W obszarze konfiguracji polecenia "LT-Rec" kliknij przycisk "Dodaj". Okno "Podgląd Programu" wyświetli wstępnie wygenerowany program LUA. Kliknij "Zastosuj", aby zakończyć operację odtwarzania trajektorii laserowej.
+
+.. image:: coding/613.png
+   :width: 6in
+   :align: center
+
+.. centered:: Rysunek 9.8-4-5 Odtwarzanie Trajektorii Laserowej
+
+**Krok 11**: Nałóż splot regularny. W obszarze konfiguracji polecenia "LT-Rec", w obszarze konfiguracji "Typ Polecenia", kliknij przycisk "Odtwarzanie Śledzenia Laserowego", wybierz opcję "Splot Regularny" z menu rozwijanego "Nałóż Splot"; wybierz skonfigurowany numer parametrów splotu z menu rozwijanego "Wybierz Numer" z Kroku 5.
+
+W obszarze konfiguracji polecenia "LT-Rec" kliknij przycisk "Dodaj". Okno "Podgląd Programu" wyświetli wstępnie wygenerowany program LUA. Kliknij "Zastosuj", aby zakończyć operację nałożenia splotu regularnego.
+
+.. image:: coding/614.png
+   :width: 6in
+   :align: center
+
+.. centered:: Rysunek 9.8-4-6 Nałóż Splot Regularny
+
+**Krok 12**: Napisz program LUA dla odtwarzania trajektorii skanowania laserowego + splot regularny. Dostosuj kolejność poleceń LUA wygenerowanych od Kroku 4 do Kroku 11 i uruchom program LUA, aby zaimplementować funkcję odtwarzania trajektorii skanowania laserowego z nałożonym splotem regularnym.
+
+.. image:: coding/615.png
+   :width: 6in
+   :align: center
+
+.. centered:: Rysunek 9.8-4-7 Program LUA dla Odtwarzania Trajektorii Skanowania Laserowego z Nałożonym Splotem Regularnym
+
+Odtwarzanie Trajektorii Skanowania Laserowego z Nałożonym Splotem w Punktach Stałych
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+**Krok 1**: Skonfiguruj czujnik laserowy liniowy przez WebApp. Szczegółowe kroki operacyjne tej funkcji można znaleźć w odpowiednich rozdziałach podręcznika użytkownika.
+
+**Krok 2**: Skonfiguruj oś rozszerzoną przez WebApp. Szczegółowe kroki operacyjne tej funkcji można znaleźć w odpowiednich rozdziałach podręcznika użytkownika.
+
+**Krok 3**: Skalibruj układ współrzędnych narzędzia przez WebApp. Szczegółowe kroki operacyjne tej funkcji można znaleźć w odpowiednich rozdziałach podręcznika użytkownika.
+
+**Krok 4**: Skalibruj układ współrzędnych czujnika przez WebApp. Szczegółowe kroki operacyjne tej funkcji można znaleźć w odpowiednich rozdziałach podręcznika użytkownika.
+
+**Krok 5**: Naucz punkty ruchu przez WebApp. Naucz punkty ruchu dla odtwarzania trajektorii skanowania laserowego docelowego przedmiotu i napisz podstawowy program LUA dla odpowiednich ruchów LIN robota i asynchronicznego ruchu osi rozszerzonej. Szczegółowe kroki operacyjne tej funkcji można znaleźć w odpowiednich rozdziałach podręcznika użytkownika.
+
+**Krok 6**: Skonfiguruj numer parametrów splotu przez WebApp. Szczegółowe kroki operacyjne tej funkcji można znaleźć w odpowiednich rozdziałach podręcznika użytkownika.
+
+**Krok 7**: Polecenie rejestracji laserowej. W głównym interfejsie WebApp kliknij "Teach Program" -> "Programowanie Programu", aby przejść do obszaru "Polecenia Spawania".
+
+.. image:: coding/616.png
+   :width: 4in
+   :align: center
+
+.. centered:: Rysunek 9.8-4-8 Obszar "Polecenia Spawania"
+
+**Krok 8**: Rozpocznij rejestrację laserową. W obszarze "Polecenia Spawania" kliknij przycisk "Rejestracja Laserowa", aby przejść do obszaru konfiguracji polecenia "LT-Rec".
+
+W obszarze konfiguracji "Typ Polecenia" kliknij przycisk "Rejestracja Danych Spoiny", wybierz opcję "Rozpocznij Rejestrację" z menu rozwijanego "Wybór Funkcji"; ustaw czas rejestracji z opóźnieniem w polu wejściowym "Czas Opóźnienia".
+
+W obszarze konfiguracji polecenia "LT-Rec" kliknij przycisk "Dodaj". Okno "Podgląd Programu" wyświetli wstępnie wygenerowany program LUA. Kliknij "Zastosuj", aby zakończyć operację rozpoczęcia rejestracji laserowej.
+
+.. image:: coding/617.png
+   :width: 6in
+   :align: center
+
+.. centered:: Rysunek 9.8-4-9 Rozpoczęcie Rejestracji Laserowej
+ 
+**Krok 9**: Zatrzymaj rejestrację laserową. W obszarze konfiguracji polecenia "LT-Rec", w obszarze konfiguracji "Typ Polecenia", kliknij przycisk "Rejestracja Danych Spoiny", wybierz opcję "Zatrzymaj Rejestrację" z menu rozwijanego "Wybór Funkcji"; ustaw czas rejestracji z opóźnieniem w polu wejściowym "Czas Opóźnienia".
+
+W obszarze konfiguracji polecenia "LT-Rec" kliknij przycisk "Dodaj". Okno "Podgląd Programu" wyświetli wstępnie wygenerowany program LUA. Kliknij "Zastosuj", aby zakończyć operację zatrzymania rejestracji laserowej.
+
+.. image:: coding/618.png
+   :width: 6in
+   :align: center
+
+.. centered:: Rysunek 9.8-4-10 Zatrzymanie Rejestracji Laserowej
+  
+**Krok 10**: Przejdź do punktu spoiny. W obszarze konfiguracji polecenia "LT-Rec", w obszarze konfiguracji "Typ Polecenia", kliknij przycisk "Przejdź do Punktu Spoiny", wybierz tryb ruchu "PTP" lub "LIN" z menu rozwijanego "Tryb Ruchu"; ustaw prędkość polecenia w polu wejściowym "Prędkość"; kliknij przycisk "Początek" lub "Koniec", aby wybrać docelowy punkt ruchu.
+
+W obszarze konfiguracji polecenia "LT-Rec" kliknij przycisk "Dodaj". Okno "Podgląd Programu" wyświetli wstępnie wygenerowany program LUA. Kliknij "Zastosuj", aby zakończyć operację.
+
+.. image:: coding/619.png
+   :width: 6in
+   :align: center
+
+.. centered:: Rysunek 9.8-4-11 Przejdź do Punktu Spoiny
+  
+**Krok 11**: Odtwarzanie trajektorii laserowej. W obszarze konfiguracji polecenia "LT-Rec", w obszarze konfiguracji "Typ Polecenia", kliknij przycisk "Rejestracja Danych Spoiny", wybierz opcję "Odtwarzanie Trajektorii" z menu rozwijanego "Wybór Funkcji"; ustaw czas rejestracji z opóźnieniem w polu wejściowym "Czas Opóźnienia"; ustaw prędkość polecenia w polu wejściowym "Prędkość".
+
+W obszarze konfiguracji polecenia "LT-Rec" kliknij przycisk "Dodaj". Okno "Podgląd Programu" wyświetli wstępnie wygenerowany program LUA. Kliknij "Zastosuj", aby zakończyć operację odtwarzania trajektorii laserowej.
+
+.. image:: coding/620.png
+   :width: 6in
+   :align: center
+
+.. centered:: Rysunek 9.8-4-12 Odtwarzanie Trajektorii Laserowej
+  
+**Krok 12**: Nałóż splot w punktach stałych. W obszarze konfiguracji polecenia "LT-Rec", w obszarze konfiguracji "Typ Polecenia", kliknij przycisk "Odtwarzanie Śledzenia Laserowego", wybierz opcję "Splot w Punktach Stałych" z menu rozwijanego "Nałóż Splot"; wybierz skonfigurowany numer parametrów splotu z menu rozwijanego "Wybierz Numer" z Kroku 6.
+
+Wybierz opcję "Punkt Referencyjny" z menu rozwijanego "Podstawa Splotu"; wybierz punkt referencyjny z menu rozwijanego "Punkt Referencyjny".
+
+W obszarze konfiguracji polecenia "LT-Rec" kliknij przycisk "Dodaj". Okno "Podgląd Programu" wyświetli wstępnie wygenerowany program LUA. Kliknij "Zastosuj", aby zakończyć operację nałożenia splotu regularnego.
+
+.. image:: coding/621.png
+   :width: 6in
+   :align: center
+
+.. centered:: Rysunek 9.8-4-13 Podstawa Splotu jako Punkt Referencyjny z Nałożonym Splotem w Punktach Stałych
+
+.. note:: Uwaga: Gdy opcja "Punkt Referencyjny" jest wybrana w menu rozwijanym "Podstawa Splotu", kierunek ruchu robota do przodu to kierunek linii łączącej bieżący punkt i punkt referencyjny, a bieżący punkt i punkt referencyjny muszą znajdować się w tych samych układach współrzędnych narzędzia i przedmiotu.
+
+Gdy opcja "Układ Współrzędnych Narzędzia" jest wybrana w menu rozwijanym "Podstawa Splotu", kierunek ruchu robota do przodu to kierunek osi X bieżącego układu współrzędnych narzędzia.
+
+.. image:: coding/622.png
+   :width: 6in
+   :align: center
+
+.. centered:: Rysunek 9.8-4-14 Podstawa Splotu jako Układ Współrzędnych Narzędzia z Nałożonym Splotem w Punktach Stałych
+ 
+**Krok 13**: Napisz program LUA dla odtwarzania trajektorii skanowania laserowego + splot w punktach stałych. Dostosuj kolejność poleceń LUA wygenerowanych od Kroku 5 do Kroku 13 i uruchom program LUA, aby zaimplementować funkcję odtwarzania trajektorii skanowania laserowego z nałożonym splotem w punktach stałych.
+
+.. note:: Uwaga: W porównaniu z programem LUA, program LUA dla odtwarzania trajektorii skanowania laserowego z nałożonym splotem w punktach stałych nie zawiera polecenia MoveLTR(), a ostatni parametr (czas splotu) domyślnie generowanego polecenia OriginPointWeaveStartt() musi zostać zmodyfikowany na dowolną nieujemną wartość całkowitą większą niż 0. Podczas pracy robota kontroler automatycznie przekonwertuje ten parametr na rzeczywisty czas wykonania odtwarzanej trajektorii.
+
+.. image:: coding/623.png
+   :width: 6in
+   :align: center
+
+.. centered:: (a) Podstawa Splotu jako Punkt Referencyjny
+
+.. image:: coding/624.png
+   :width: 6in
+   :align: center
+
+.. centered:: (b) Podstawa Splotu jako Układ Współrzędnych Narzędzia
+
+.. centered:: Rysunek 9.8-4-15 Program LUA dla Odtwarzania Trajektorii Skanowania Laserowego z Nałożonym Splotem w Punktach Stałych   
+
 Polecenie lokalizacji drutu spawalniczego
 +++++++++++++++++++++++++++++++++++++++++
 
@@ -2814,38 +3026,86 @@ Ta instrukcja zawiera osiem instrukcji: FT_Guard (wykrywanie kolizji), FT_Contro
 
 .. centered:: Schemat 9.9-1 Interfejs instrukcji F/T
 
-Funkcja optymalizacji wstawiania obrotowego ze sterowaniem siłą
-***************************************************************
+Optymalizacja Pakietu Procesów Montażu ze Sterowaniem Siłowym
+*************************************************
 
 Przegląd
-""""""""
+""""""""""""""""""""""""""""""""""""
+Funkcje wstawiania spiralnego i wstawiania liniowego ze sterowaniem siłowym są ogólnie używane do operacji wyszukiwania otworów i wstawiania w montażu, podczas gdy funkcja pozycjonowania powierzchni jest ogólnie używana do lokalizowania powierzchni w przestrzeni kartezjańskiej. W zależności od scenariusza aplikacyjnego, ustaw odpowiednie parametry ruchu i strategię postępowania w przypadku niewykrycia siły zewnętrznej. Gdy siła zewnętrzna wykryta po zakończeniu nie osiągnie ustawionego progu, użytkownik może wybrać zatrzymanie całego programu (skonfigurowane jako "Błąd", z czerwonym błędem wyświetlanym na interfejsie) lub kontynuowanie ruchu (skonfigurowane jako "Ostrzeżenie", z żółtym ostrzeżeniem wyświetlanym na interfejsie).
 
-Funkcja wstawiania obrotowego ze sterowaniem siłą jest zwykle używana do wykonywania czynności wstawiania obrotowego. Przed wykonaniem czynności konieczne jest przesunięcie końcówki robota do całkowicie wyrównanego, nauczonego otworu. Zgodnie ze scenariuszem aplikacji należy ustawić odpowiednie parametry ruchu i strategię obsługi w przypadku niewykrycia siły zewnętrznej. Gdy wykryta siła zewnętrzna po zakończeniu nie osiągnie ustawionego progu, użytkownik może zdecydować o zatrzymaniu całego programu (funkcja skonfigurowana jako „Błąd”, wyświetlany czerwony błąd na interfejsie) lub kontynuowaniu ruchu (funkcja skonfigurowana jako „Ostrzeżenie”, wyświetlane żółte ostrzeżenie na interfejsie).
-
-Procedura operacyjna
-""""""""""""""""""""
-
-**Krok 1**: Kolejno kliknij „Program nauczania” -> „Programowanie” -> „Zestaw sterowania siłą” - instrukcja „Rot”, ustaw odpowiednie parametry ruchu zgodnie z rzeczywistym scenariuszem aplikacji. Strategia obsługi w przypadku niewykrycia siły zewnętrznej może być ustawiona jako „Błąd” lub „Ostrzeżenie”. Gdy skonfigurowane jako „Błąd”, jeśli robot zawsze wykrywa siłę zewnętrzną mniejszą od ustawionego progu i osiągnął już ustawiony kąt obrotu, zgłasza błąd na interfejsie i zatrzymuje wykonywanie dalszego programu. Gdy skonfigurowane jako „Ostrzeżenie”, jeśli robot zawsze wykrywa siłę zewnętrzną mniejszą od ustawionego progu i osiągnął już ustawiony kąt obrotu, wyświetla ostrzeżenie na interfejsie i kontynuuje wykonywanie dalszego programu.
+Procedura Operacyjna dla Optymalizacji Wstawiania Spiralnego ze Sterowaniem Siłowym
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+**Krok 1**: Kliknij kolejno "Teach Program" -> "Programowanie Programu" -> "Zestaw Sterowania Siłą" -> polecenie "Rot". Ustaw odpowiednie parametry ruchu w zależności od rzeczywistego scenariusza aplikacyjnego. Strategia postępowania w przypadku niewykrycia siły zewnętrznej może być ustawiona na "Błąd" lub "Ostrzeżenie". Gdy skonfigurowane jako "Błąd", jeśli robot wykryje, że siła zewnętrzna była zawsze poniżej ustawionego progu i osiągnięto ustawiony kąt obrotu, na interfejsie pojawi się błąd, a wykonywanie dalszych programów zostanie zatrzymane. Gdy skonfigurowane jako "Ostrzeżenie", jeśli robot wykryje, że siła zewnętrzna była zawsze poniżej ustawionego progu i osiągnięto ustawiony kąt obrotu, na interfejsie pojawi się ostrzeżenie, a wykonywanie dalszych programów będzie kontynuowane.
 
 .. image:: coding/531.png
    :width: 3in
    :align: center
 
-.. centered:: Schemat 9.9-2 Konfiguracja parametrów wstawiania obrotowego ze sterowaniem siłą
+.. centered:: Rysunek 9.9-2 Konfiguracja Parametrów Wstawiania Obrotowego ze Sterowaniem Siłowym
 
-**Krok 2**: Funkcja wstawiania obrotowego ze sterowaniem siłą musi być używana w połączeniu z funkcją „FT_Control” do ruchu. Typowe programy lua z ustawioną strategią obsługi w przypadku niewykrycia siły zewnętrznej jako „Błąd” lub „Ostrzeżenie” i tymi samymi parametrami ruchu są pokazane odpowiednio na rysunkach.
+**Krok 2**: Funkcja wstawiania obrotowego ze sterowaniem siłowym musi być używana razem z funkcją "FT_Control" do ruchu. Ustaw te same parametry ruchu. Typowe programy LUA ze strategią postępowania w przypadku niewykrycia siły zewnętrznej ustawioną na "Błąd" lub "Ostrzeżenie" są pokazane odpowiednio na rysunkach.
 
 .. image:: coding/532.png
    :width: 6in
    :align: center
 
-.. centered:: Schemat 9.9-3 Typowy program lua z konfiguracją „Błąd”
+.. centered:: Rysunek 9.9-3 Typowy Program LUA Skonfigurowany jako "Błąd"
 
 .. image:: coding/533.png
    :width: 6in
    :align: center
 
-.. centered:: Schemat 9.9-4 Typowy program lua z konfiguracją „Ostrzeżenie”
+.. centered:: Rysunek 9.9-4 Typowy Program LUA Skonfigurowany jako "Ostrzeżenie"
+
+Procedura Operacyjna dla Optymalizacji Wstawiania Liniowego ze Sterowaniem Siłowym
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+**Krok 1**: Kliknij kolejno "Teach Program" -> "Programowanie Programu" -> "Zestaw Sterowania Siłą" -> polecenie "Lin". Ustaw odpowiednie parametry ruchu w zależności od rzeczywistego scenariusza aplikacyjnego. Strategia postępowania w przypadku niewykrycia siły zewnętrznej może być ustawiona na "Błąd" lub "Ostrzeżenie". Gdy skonfigurowane jako "Błąd", jeśli robot wykryje, że siła zewnętrzna była zawsze poniżej ustawionego progu i osiągnięto ustawioną odległość wstawiania, na interfejsie pojawi się błąd, a wykonywanie dalszych programów zostanie zatrzymane. Gdy skonfigurowane jako "Ostrzeżenie", jeśli robot wykryje, że siła zewnętrzna była zawsze poniżej ustawionego progu i osiągnięto ustawioną odległość wstawiania, na interfejsie pojawi się ostrzeżenie, a wykonywanie dalszych programów będzie kontynuowane. Jak pokazano na Rysunku 3-1.
+
+.. image:: coding/603.png
+   :width: 3in
+   :align: center
+
+.. centered:: Rysunek 9.9-5 Konfiguracja Parametrów Wstawiania Liniowego ze Sterowaniem Siłowym
+
+**Krok 2**: Funkcja wstawiania liniowego ze sterowaniem siłowym musi być używana razem z funkcją "FT_Control" do ruchu. Ustaw te same parametry ruchu. Typowe programy LUA ze strategią postępowania w przypadku niewykrycia siły zewnętrznej ustawioną na "Błąd" lub "Ostrzeżenie" są pokazane odpowiednio na Rysunku 3-2 i Rysunku 3-3.
+
+.. image:: coding/604.png
+   :width: 6in
+   :align: center
+
+.. centered:: Rysunek 9.9-6 Typowy Program LUA Skonfigurowany jako "Błąd"
+
+.. image:: coding/605.png
+   :width: 6in
+   :align: center
+
+.. centered:: Rysunek 9.9-6 Typowy Program LUA Skonfigurowany jako "Ostrzeżenie"
+
+Procedura Operacyjna dla Optymalizacji Pozycjonowania Powierzchni ze Sterowaniem Siłowym
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+**Krok 1**: Kliknij kolejno "Teach Program" -> "Programowanie Programu" -> "Zestaw Sterowania Siłą" -> polecenie "FindSurface". Ustaw odpowiednie parametry ruchu w zależności od rzeczywistego scenariusza aplikacyjnego. Strategia postępowania w przypadku niewykrycia siły zewnętrznej może być ustawiona na "Błąd" lub "Ostrzeżenie". Gdy skonfigurowane jako "Błąd", jeśli robot wykryje, że siła zewnętrzna była zawsze poniżej ustawionego progu i osiągnięto ustawioną odległość poszukiwania, na interfejsie pojawi się błąd, a wykonywanie dalszych programów zostanie zatrzymane. Gdy skonfigurowane jako "Ostrzeżenie", jeśli robot wykryje, że siła zewnętrzna była zawsze poniżej ustawionego progu i osiągnięto ustawioną odległość poszukiwania, na interfejsie pojawi się ostrzeżenie, a wykonywanie dalszych programów będzie kontynuowane. Jak pokazano na Rysunku 4-1.
+
+.. image:: coding/606.png
+   :width: 3in
+   :align: center
+
+.. centered:: Rysunek 9.9-7 Konfiguracja Parametrów Pozycjonowania Powierzchni ze Sterowaniem Siłowym
+
+**Krok 2**: Funkcja pozycjonowania powierzchni ze sterowaniem siłowym musi być używana razem z funkcją "FT_Control" do ruchu. Ustaw te same parametry ruchu. Typowe programy LUA ze strategią postępowania w przypadku niewykrycia siły zewnętrznej ustawioną na "Błąd" lub "Ostrzeżenie" są pokazane odpowiednio na Rysunku 4-2 i Rysunku 4-3.
+
+.. image:: coding/607.png
+   :width: 6in
+   :align: center
+
+.. centered:: Rysunek 9.9-8 Typowy Program LUA Skonfigurowany jako "Błąd"
+
+.. image:: coding/608.png
+   :width: 6in
+   :align: center
+
+.. centered:: Rysunek 9.9-9 Typowy Program LUA Skonfigurowany jako "Ostrzeżenie"
 
 Polecenie rejestracji momentu obrotowego
 ++++++++++++++++++++++++++++++++++++++++

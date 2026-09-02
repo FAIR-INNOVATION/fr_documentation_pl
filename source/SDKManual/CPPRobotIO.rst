@@ -541,6 +541,7 @@ Ustawianie funkcji konfigurowalnych portów CI szafy sterowniczej
     22-tryb redukcji poziomu 1;23-tryb redukcji poziomu 2;24-tryb redukcji poziomu 3 (zatrzymanie);25-wznowienie spawania;26-zakończenie spawania;
     27-włączenie wspomaganego przeciągania;28-wyłączenie wspomaganego przeciągania;29-włączenie/wyłączenie wspomaganego przeciągania;30-wyczyszczenie wszystkich błędów;
     31-przełączanie ręczny/automatyczny (poziom wysoki/niski);32-włączenie;33-wyłączenie;34-włączenie/wyłączenie (zbocze narastające/opadające);35-rozpoczęcie/zakończenie śledzenia punktowego
+    36-Wejście w ruch z prędkością bezpieczeństwa;37-Blokada przeciągania z pętlą prądową;38-Blokada wspomagana czujnikiem siły
     * @return Kod błędu
     */
     errno_t SetDIConfig(int config[8]);
@@ -561,6 +562,11 @@ Pobieranie funkcji konfigurowalnych portów CI szafy sterowniczej
     22-tryb redukcji poziomu 1;23-tryb redukcji poziomu 2;24-tryb redukcji poziomu 3 (zatrzymanie);25-wznowienie spawania;26-zakończenie spawania;
     27-włączenie wspomaganego przeciągania;28-wyłączenie wspomaganego przeciągania;29-włączenie/wyłączenie wspomaganego przeciągania;30-wyczyszczenie wszystkich błędów;
     31-przełączanie ręczny/automatyczny (poziom wysoki/niski);32-włączenie;33-wyłączenie;34-włączenie/wyłączenie (zbocze narastające/opadające);35-rozpoczęcie/zakończenie śledzenia punktowego
+    36-Wejście w ruch z prędkością bezpieczeństwa;37-Blokada przeciągania z pętlą prądową;38-Blokada wspomagana czujnikiem siły
+    201-Zewnętrzny sygnał wejściowy awaryjnego zatrzymania 1-dwukanałowy; 202-Zewnętrzny sygnał wejściowy awaryjnego zatrzymania 2-dwukanałowy; 203-Tryb zmniejszony poziomu 1-dwukanałowy;
+    204-Tryb zmniejszony poziomu 2-dwukanałowy; 205-Tryb zmniejszony poziomu 3-dwukanałowy; 206-Normalne zatrzymanie-dwukanałowy; 207-Ściana bezpieczeństwa 1-dwukanałowy; 208-Ściana bezpieczeństwa 2-dwukanałowy;
+    209-Ściana bezpieczeństwa 3-dwukanałowy; 210-Ściana bezpieczeństwa 4-dwukanałowy; 211-Ściana bezpieczeństwa 5-dwukanałowy; 212-Ściana bezpieczeństwa 6-dwukanałowy; 213-Ściana bezpieczeństwa 7-dwukanałowy;
+    214-Ściana bezpieczeństwa 8-dwukanałowy; 215-Reset bezpiecznego zatrzymania-dwukanałowy;
     * @return Kod błędu
     */
     errno_t GetDIConfig(int config[8]);
@@ -607,6 +613,8 @@ Pobieranie funkcji konfigurowalnych portów CO szafy sterowniczej
     39-błąd robota-błąd komunikacji ze sterownikiem;40-błąd robota-błąd parametru;41-błąd robota-błąd przekroczenia miękkiego ograniczenia osi zewnętrznej;42-ostrzeżenie robota-ostrzeżenie;
     43-ostrzeżenie robota-ostrzeżenie drzwi bezpieczeństwa;44-ostrzeżenie robota-ostrzeżenie ruchu;45-ostrzeżenie robota-ostrzeżenie obszaru interferencji;46-ostrzeżenie robota-ostrzeżenie ściany bezpieczeństwa;
     47-stan włączenia;48-podnoszenie automatyczne po przerwaniu połączenia;49-ostrzeżenie interferencji prostopadłościan 1;50-ostrzeżenie interferencji prostopadłościan 2;51-ostrzeżenie interferencji prostopadłościan 3;52-ostrzeżenie interferencji prostopadłościan 4;
+    201-Sygnał wyjściowy awaryjnego zatrzymania 1-dwukanałowy; 202-Sygnał wyjściowy awaryjnego zatrzymania 2-dwukanałowy; 203-Wyjście statusu bezpieczeństwa-dwukanałowy; 204-Wyjście statusu zatrzymania ochronnego-dwukanałowy; 205-Robot w ruchu-dwukanałowy;
+	206-Robot w trybie zmniejszonym-dwukanałowy; 207-Robot w trybie niezmnieszonym-dwukanałowy;
     * @return Kod błędu
     */
     errno_t GetDOConfig(int config[8]);

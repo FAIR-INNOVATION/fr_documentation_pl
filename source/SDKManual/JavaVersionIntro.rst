@@ -12,6 +12,26 @@ Informacje o aktualizacji wersji
    * - **Numer wersji**
      - **Data**
      - **Opis aktualizacji**
+     
+   * - V3.9.9
+     - 2026-09-01
+     - | 1. Zaktualizowano interfejs GetGripperMotionDone() do pobierania statusu ruchu chwytaka, zaktualizowano definicję i zakres użycia parametrów wyjściowych statusu chwytaka;
+       | 2. Zmodyfikowano GetInverseKinExaxis(), interfejs rozwiązania kinematyki odwrotnej uwzględniający pozycje osi rozszerzonych, dodano parametry konfiguracji stawów z wartością domyślną -1 odnoszącą się do bieżącej konfiguracji stawów;
+       | 3. Zmodyfikowano interfejsy sterowania siłowego FT_SpiralSearch(), FT_LinInsertion() i FT_FindSurface() o parametry strategii postępowania w przypadku niewykrycia siły/momentu obrotowego;
+       | 4. Zmodyfikowano SetDIConfig(), GetDIConfig(), SetDOConfig(), GetDOConfig() CIO skrzynki sterowniczej robota;
+       | 5. Zaktualizowano opisy parametrów interfejsów konfiguracji funkcji, zaktualizowano nowo dodane nazwy funkcji i kody funkcji; dodano interfejs GetSafetyParamsCheckSum() do pobierania sumy kontrolnej parametrów konfiguracji bezpieczeństwa;
+       | 6. Zmodyfikowano przykłady kodu podstawowego sterowania robotem, dodano przykłady kodu przełączania do ręcznego trybu szybkiego;
+       | 7. Dodano interfejs weryfikacji hasła operacji bezpieczeństwa SafetyOPPasswordCheck();
+       | 8. Dodano interfejs GripperWaitMotionDone() do oczekiwania na status ruchu chwytaka, obsługujący ustawienia limitu czasu i strategii (dotyczy tylko otwartego protokołu końcówki);
+       | 9. Dodano interfejs SetRobottime() do synchronizacji czasu systemowego z robotem;
+       | 10. Dodano interfejs ServoJ() dla ruchu w trybie serwo w przestrzeni stawów, obsługujący wprowadzenie wielu punktów jednocześnie;
+       | 11. Dodano przykłady kodu dla odtwarzania rejestracji laserowej + splot regularny;
+       | 12. Dodano przykłady kodu dla odtwarzania rejestracji laserowej + asynchroniczny ruch osi rozszerzonych + splot w punktach stałych;
+       | 13. Dodano interfejs wyszukiwania spiralnego FT_SpiralSearch();
+       | 14. Dodano interfejs HiSpeedManualSwitch() do przełączania w ręczny tryb szybki;
+       | 15. Dodano interfejs SetSafetyDIConfig() do konfiguracji funkcji CI dwukanałowej bezpieczeństwa;
+       | 16. Dodano interfejs SetSafetyDOConfig() do konfiguracji funkcji CO dwukanałowej bezpieczeństwa;
+       | 17. Dodano przykłady weryfikacji ustawiania-odczytu-zerowania konfiguracji funkcji CI/CO dwukanałowej bezpieczeństwa.
 
    * - V3.9.8
      - 2026-07-27

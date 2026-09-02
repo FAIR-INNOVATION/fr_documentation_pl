@@ -4,715 +4,434 @@ Bezpieczeństwo
 .. toctree:: 
    :maxdepth: 6
 
-Bezpieczne zatrzymanie
-----------------------
+Tło
+------------------------------------------------
+Jako kluczowa jednostka wykonawcza w rozwoju inteligentnej produkcji przemysłowej, wydajność bezpieczeństwa robotów przemysłowych stała się kluczowym elementem w zarządzaniu całym cyklem życia urządzeń. Obecnie branża ogólnie wymaga, aby parametry związane z funkcjami bezpieczeństwa były stałe i niezmienne oraz aby ustanowiono kompletny i możliwy do śledzenia mechanizm weryfikacji, aby spełnić rygorystyczne wymagania audytu zgodności bezpieczeństwa.
+Integratorzy systemów i użytkownicy końcowi w Europie postawili dalsze wyraźne wymagania dotyczące przejrzystości i weryfikowalności konfiguracji bezpieczeństwa podczas rzeczywistego odbioru projektów. W szczególności, po zakończeniu debugowania funkcji bezpieczeństwa, system powinien być w stanie automatycznie wygenerować raport konfiguracji bezpieczeństwa zawierający sumę kontrolną (Checksum) integralności, a ta suma kontrolna musi być wyświetlana w czasie rzeczywistym w interfejsie zarządzania Web urządzenia. Mechanizm ten ma na celu zapewnienie, że wszelkie modyfikacje parametrów bezpieczeństwa mogą być skutecznie identyfikowane i rejestrowane, dostarczając w ten sposób wiarygodnej podstawy do oceny stanu bezpieczeństwa urządzenia, odbioru na miejscu i późniejszej konserwacji.
+W związku z tym, projekt architektury bezpieczeństwa tego urządzenia nie tylko spełnia odpowiednie międzynarodowe normy bezpieczeństwa, ale także posiada wbudowane funkcje eksportu konfiguracji bezpieczeństwa i wyświetlania sumy kontrolnej w czasie rzeczywistym, aby pomóc operatorom i menedżerom bezpieczeństwa w wygodny i niezawodny sposób zakończyć potwierdzanie konfiguracji i prace związane z certyfikacją zgodności.
 
-Kliknij menu "Ustawienia początkowe" -> "Bezpieczeństwo", kliknij podmenu "Bezpieczne zatrzymanie", aby przejść do interfejsu konfiguracji. Ustaw funkcje parametrów trybu bezpiecznego zatrzymania i strategii bezpiecznego zatrzymania.
+Suma Kontrolna Konfiguracji Bezpieczeństwa
+------------------------------------------------
+
+Otwórz stronę internetową. Suma kontrolna bezpieczeństwa znajduje się w prawym górnym rogu strony, reprezentowana przez 8-cyfrową liczbę szesnastkową. Suma kontrolna bezpieczeństwa jest unikalna; gdy parametry konfiguracji bezpieczeństwa ulegną zmianie, suma kontrolna bezpieczeństwa zmienia się odpowiednio.
 
 .. image:: safety/001.png
    :width: 4in
    :align: center
 
-.. centered:: Wykres 7.1-1 Konfiguracja bezpiecznego zatrzymania
+.. centered:: Rysunek 7.1-1 Wyświetlanie Sumy Kontrolnej Konfiguracji Bezpieczeństwa
 
-Konfigurowalne bezpieczne zatrzymanie dwukanałowe + tryb redukcji
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Kliknij na sumę kontrolną bezpieczeństwa, aby wyświetlić zestaw parametrów konfiguracji bezpieczeństwa reprezentowanych przez bieżącą sumę kontrolną.
 
-Omówienie
-++++++++++++++++++++++++++++++++++++
-
-Gdy sposób wyzwalania bezpiecznego zatrzymania jest ustawiony na "dwukanałowy", konieczne jest zapewnienie stanu wyczyszczenia obu kanałów i ręczne wyczyszczenie ostrzeżenia na interfejsie operacyjnym, aby robot mógł zostać zresetowany. Ponadto do strategii dodano opcję trybu redukcji. Gdy użytkownik wybierze tę strategię, robot przejdzie do ruchu w trybie redukcji.
-
-Procedura operacyjna
-++++++++++++++++++++++++++++++++++++
-
-**Krok 1**: Kliknij "Ustawienia początkowe" -> "Bezpieczeństwo" -> przycisk "Bezpieczne zatrzymanie". Sposób wyzwalania można wybrać między dwoma trybami: "Domyślny" i "Dwukanałowy". Różnica między nimi polega na tym, że w trybie "Domyślny" po wyzwoleniu i przywróceniu błąd interfejsu jest automatycznie czyszczony, podczas gdy w trybie "Dwukanałowy" po wyzwoleniu i przywróceniu konieczne jest ręczne wyczyszczenie błędu interfejsu. "Strategia bezpiecznego zatrzymania" może wybrać typy takie jak "Zatrzymaj", "Wstrzymaj", "Tryb redukcji pierwszego poziomu" i "Tryb redukcji drugiego poziomu". Szczegółowy opis: po wybraniu "Zatrzymaj" robot zatrzyma bieżący ruch; po wybraniu "Wstrzymaj" robot wstrzyma bieżący ruch, a po przywróceniu i wyczyszczeniu błędu wznowi działanie; po wybraniu "Tryb redukcji pierwszego poziomu" robot przejdzie do ruchu w trybie redukcji pierwszego poziomu; po wybraniu "Tryb redukcji drugiego poziomu" robot przejdzie do ruchu w trybie redukcji drugiego poziomu.
-
-.. image:: safety/048.png
-   :width: 4in
-   :align: center
-
-.. centered:: Wykres 7.1-2 Ustawienia strategii bezpiecznego zatrzymania
-
-**Krok 2**: Ponieważ gdy sposób wyzwalania jest ustawiony na "Domyślny", po przywróceniu wyzwolenia błąd interfejsu jest automatycznie czyszczony, nie ma potrzeby szczegółowego opisywania. Dlatego głównie opisujemy działanie, gdy sposób wyzwalania jest ustawiony na "Dwukanałowy": po przywróceniu wyzwolenia należy ręcznie kliknąć operację "Wyczyść" w prawym górnym rogu, aby robot mógł zostać zresetowany.
-
-.. image:: safety/049.png
-   :width: 4in
-   :align: center
-
-.. centered:: Wykres 7.1-3 Ręczne czyszczenie operacji wyzwolenia bezpiecznego zatrzymania
-
-Bezpieczny ruch z ograniczoną prędkością
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Po wyzwoleniu bezpiecznego zatrzymania robota, użytkownik może kliknąć przycisk w aplikacji webowej, skonfigurować wejście CI skrzynki sterowniczej lub skonfigurować wejście End DI narzędzia końcowego, aby sterować robotem w celu przejścia w stan bezpiecznego ruchu z ograniczoną prędkością. W stanie bezpiecznego ruchu z ograniczoną prędkością można punktowo poruszać robotem z bezpieczną prędkością lub przejść w tryb przeciągania, aby przeciągnąć robota, co pomaga użytkownikowi w usunięciu usterki.
-
-W aplikacji webowej robota kolejno kliknij "Ustawienia początkowe", "Bezpieczeństwo", "Bezpieczne zatrzymanie", znajdź na tej stronie "Bezpieczny ruch z ograniczoną prędkością" i ustaw go na włączony.
-
-.. image:: safety/057.png
-   :width: 4in
-   :align: center
-
-.. centered:: Wykres 7.1-4 Włączanie bezpiecznego ruchu z ograniczoną prędkością
-
-W tym momencie, gdy bezpieczne zatrzymanie zostanie wyzwolone, w prawym górnym rogu aplikacji webowej robota pojawi się ostrzeżenie "Wyzwolono bezpieczne zatrzymanie" oraz przycisk "Przejdź do bezpiecznego ruchu z ograniczoną prędkością".
-
-.. image:: safety/058.png
-   :width: 4in
-   :align: center
-
-.. centered:: Wykres 7.1-5 Okno dialogowe przejścia do bezpiecznego ruchu z ograniczoną prędkością
-
-Kliknij przycisk "Przejdź", a robot automatycznie zatrzyma program LUA i przełączy się w tryb ręczny. Jednocześnie przycisk "Przejdź do bezpiecznego ruchu z ograniczoną prędkością" zmieni się na "Włączono". W tym momencie, za pomocą przycisku końcowego, panelu przyciskowego, aplikacji webowej itp., można sterować robotem, aby przejść w tryb przeciągania i przeciągnąć robota, lub punktowo poruszać robotem za pomocą aplikacji webowej lub panelu operatorskiego.
-
-.. image:: safety/059.png
-   :width: 4in
-   :align: center
-
-.. centered:: Wykres 7.1-6 Przejście do bezpiecznego ruchu z ograniczoną prędkością
-
-Podczas bezpiecznego ruchu robota z ograniczoną prędkością i punktowego poruszania robotem w przestrzeni kartezjańskiej, maksymalna prędkość ruchu robota jest ustawioną bezpieczną prędkością. Jeśli bieżące ustawienie prędkości globalnej robota jest większe niż bezpieczna prędkość, punktowy ruch robota zostanie automatycznie zmniejszony do bezpiecznej prędkości. Ustawienie bezpiecznej prędkości znajduje się w "Ustawienia początkowe", "Bezpieczeństwo", "Bezpieczna prędkość".
-
-Po bezpiecznym zatrzymaniu robota, oprócz możliwości sterowania robotem w celu przejścia do bezpiecznej prędkości z prawego górnego rogu aplikacji webowej, można to również zrobić poprzez wejście CI skrzynki sterowniczej i wejście CI końcówki. W aplikacji webowej kolejno kliknij "Ustawienia początkowe", "Podstawowe", "Ustawienia I/O", "DI". Skonfiguruj port CI skrzynki sterowniczej lub End DI narzędzia końcowego jako "Przejdź do bezpiecznego ruchu z ograniczoną prędkością". Po wyzwoleniu bezpiecznego zatrzymania wystarczy wyzwolić sygnał wejściowy skonfigurowanego portu, aby przejść do bezpiecznego ruchu z ograniczoną prędkością.
-
-.. image:: safety/060.png
+.. image:: safety/002.png
    :width: 6in
    :align: center
 
-.. centered:: Wykres 7.1-7 Przejście do bezpiecznego ruchu z ograniczoną prędkością za pomocą przycisku
+.. centered:: Rysunek 7.1-2 Parametry Konfiguracji Bezpieczeństwa
 
-Bezpieczne zatrzymanie tylko w trybie automatycznym
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Gdy robot włączy tryb bezpiecznego zatrzymania (certyfikacja CR, bezpieczeństwo funkcjonalne) i jest używany z trójpozycyjnym przełącznikiem załączającym panelu operatorskiego, można włączyć "Bezpieczne zatrzymanie tylko w trybie automatycznym". Gdy sygnał bezpiecznego zatrzymania robota zostanie wyzwolony, można przełączyć robota w tryb ręczny na panelu operatorskim i w trybie ręcznym punktowo poruszać robotem lub przejść w tryb przeciągania, aby przeciągnąć robota, co pomaga użytkownikowi w usunięciu usterki.
-
-W aplikacji webowej robota kolejno kliknij "Ustawienia początkowe", "Bezpieczeństwo", "Bezpieczne zatrzymanie", znajdź na tej stronie "Bezpieczne zatrzymanie tylko w trybie automatycznym" i ustaw je na włączone.
-
-.. image:: safety/061.png
-   :width: 4in
-   :align: center
-
-.. centered:: Wykres 7.1-8 Włączenie bezpiecznego zatrzymania tylko w trybie automatycznym
-
-Gdy robot nie włączy trybu bezpiecznego zatrzymania (certyfikacja CR, bezpieczeństwo funkcjonalne) lub gdy nie używa się panelu operatorskiego, nie można włączyć funkcji "Bezpieczne zatrzymanie tylko w trybie automatycznym". W takim przypadku aplikacja webowa wyświetli komunikat o błędzie "Bezpieczne zatrzymanie tylko w trybie automatycznym wymaga włączenia trójpozycyjnego przełącznika załączającego na panelu operatorskim". Jednocześnie, gdy tryb bezpiecznego zatrzymania zostanie wyłączony lub panel operatorski zostanie wyłączony, funkcja "Bezpieczne zatrzymanie tylko w trybie automatycznym" również zostanie automatycznie wyłączona.
-
-.. image:: safety/062.png
-   :width: 3in
-   :align: center
-
-.. centered:: Wykres 7.1-9 Komunikat błędu przy włączaniu bezpiecznego zatrzymania tylko w trybie automatycznym
-
-Bezpieczna prędkość
--------------------
-
-Kliknij menu "Ustawienia początkowe" -> "Bezpieczeństwo", kliknij podmenu "Bezpieczna prędkość", aby przejść do interfejsu konfiguracji. Ustaw bezpieczną prędkość.
-
-.. note:: Ręczna prędkość TCP jest mniejsza niż 250 mm/s.
-
-.. image:: safety/002.png
-   :width: 4in
-   :align: center
-
-.. centered:: Wykres 7.2-1 Konfiguracja bezpiecznej prędkości ręcznej
-
-Funkcja bezpiecznej prędkości
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Omówienie
-+++++++++++++++++++++++++++++
-
-Funkcja bezpiecznej prędkości robota polega na aktywnym ograniczaniu prędkości robota w środowiskach współpracy człowiek-robot lub dynamicznych, utrzymując energię kinetyczną i siłę uderzenia w bezpiecznych progach, aby zapobiec obrażeniom personelu w przypadku przypadkowego kontaktu oraz skutecznie chronić urządzenia i przedmioty przed uszkodzeniami spowodowanymi kolizjami.
-
-Procedura operacyjna
-+++++++++++++++++++++++++++++
-
-**Krok 1**: Kliknij przycisk "Ustawienia początkowe" - "Bezpieczeństwo" - "Bezpieczna prędkość", aby ustawić parametry bezpiecznej prędkości. Obejmuje to głównie trzy części: "Włączenie funkcji", "Ograniczenie prędkości" i "Tryb po przekroczeniu prędkości".
-
-W sekcji włączenia funkcji można wybrać trzy typy: "Nie włączaj", "Włącz w trybie ręcznym" i "Włącz we wszystkich trybach".
-
-W sekcji ograniczenia prędkości ustaw ograniczenie prędkości. Gdy prędkość liniowa robota osiągnie to ograniczenie prędkości, zostanie podjęte działanie zgodnie z ustawionymi parametrami w sekcji "Tryb po przekroczeniu prędkości". "Tryb po przekroczeniu prędkości" można wybrać spośród trzech trybów: "Zatrzymaj z alarmem", "Automatyczne ograniczenie prędkości" i "Odłącz po zatrzymaniu z alarmem". Automatyczne ograniczenie prędkości może być używane tylko w "Włącz w trybie ręcznym".
-
-Po zakończeniu ustawiania wymaganych parametrów nie są potrzebne żadne dodatkowe operacje. Robot będzie przetwarzany zgodnie z ustawionymi parametrami. Ustawienia parametrów pokazano na rysunku.
-
-.. image:: safety/056.png
-   :width: 4in
-   :align: center
-
-.. centered:: Wykres 7.2-2 Ustawienia parametrów bezpiecznej prędkości
-
-Bezpieczeństwo I/O
-------------------
-
-Kliknij menu "Ustawienia początkowe" -> "Bezpieczeństwo", kliknij podmenu "Bezpieczeństwo I/O", aby przejść do interfejsu konfiguracji.
-
-HMI umożliwia ustawienie stanu bezpieczeństwa dla 16 wejść cyfrowych i 16 wyjść cyfrowych. Można je ustawić jako aktywne lub nieaktywne. Gdy kontroler stwierdzi, że znajduje się w stanie bezpieczeństwa, 16 wejść cyfrowych i 16 wyjść cyfrowych zostaje ustawionych w stan bezpieczeństwa.
+Parametry konfiguracji bezpieczeństwa obsługują eksport raportów PDF. Kliknij Pobierz, aby wyświetlić podgląd raportu PDF, a także obsługuje eksport. Kliknij przycisk Zapisz, aby pobrać raport PDF.
 
 .. image:: safety/003.png
-   :width: 4in
+   :width: 6in
    :align: center
 
-.. centered:: Wykres 7.3-1 Konfiguracja stanu bezpieczeństwa I/O
+.. centered:: Rysunek 7.1-3 Podgląd PDF Raportu Konfiguracji Bezpieczeństwa
 
-W systemie LA:
-    "Bezpieczeństwo I/O" zapewnia funkcję bezpieczeństwa DIO. Funkcja bezpieczeństwa to dwukanałowe DI lub DO. Gdy wykryty zostanie sygnał bezpieczeństwa DI lub wyzwolony zostanie znacznik stanu bezpieczeństwa, DO jest wyjściem.
+Zarządzanie Parametrami Konfiguracji Bezpieczeństwa
+------------------------------------------------
+
+Wszystkie parametry konfiguracji bezpieczeństwa związane z robotem są zarządzane jednolicie na stronie internetowej "Ustawienia Początkowe" -> "Bezpieczeństwo". Modyfikacja parametrów konfiguracji bezpieczeństwa wymaga najpierw wprowadzenia "Hasła Konfiguracji Bezpieczeństwa" do weryfikacji. Dopiero po pomyślnej weryfikacji można dokonać modyfikacji konfiguracji parametrów bezpieczeństwa.
 
 .. image:: safety/004.png
    :width: 4in
    :align: center
 
-.. centered:: Wykres 7.3-2 Konfiguracja funkcji bezpieczeństwa I/O
+.. centered:: Rysunek 7.2-1 Weryfikacja Hasła Konfiguracji Bezpieczeństwa
 
-Awaryjne zatrzymanie
---------------------
-
-Kliknij menu "Ustawienia początkowe" -> "Bezpieczeństwo", kliknij podmenu "Awaryjne zatrzymanie", aby przejść do interfejsu konfiguracji.
-
-Typy awaryjnego zatrzymania 0, 1a, 1b, 2 są konfigurowalne. Limit czasu zatrzymania jest konfigurowalny. Limit odległości zatrzymania jest konfigurowalny.
-
-- Za pośrednictwem kontrolera wysyłanego do płyty skrzynki sterowniczej, typ awaryjnego zatrzymania 0 powoduje bezpośrednie odcięcie zasilania płyty skrzynki sterowniczej.
-  
-- Typ awaryjnego zatrzymania 1a oznacza, że po zwolnieniu zatrzymania zasilanie korpusu jest odcinane.
-
-- Typ awaryjnego zatrzymania 1b oznacza, że po zwolnieniu zatrzymania zasilanie korpusu nie jest odcinane, a korpus jest odłączany.
-
-- Typ awaryjnego zatrzymania 2 oznacza naciśnięcie awaryjnego zatrzymania, robot zwalnia i zatrzymuje się, pozostając załączonym. Po zwolnieniu awaryjnego zatrzymania robot powinien działać normalnie.
+Po modyfikacji parametrów konfiguracji bezpieczeństwa kliknij "Zastosuj". Wymagane jest drugie potwierdzenie zmodyfikowanych parametrów konfiguracji bezpieczeństwa. Kliknij "Potwierdź", aby zastosować parametry. Po pomyślnym zastosowaniu parametrów suma kontrolna konfiguracji bezpieczeństwa zostanie odpowiednio zaktualizowana.
 
 .. image:: safety/005.png
-   :width: 4in
-   :align: center
-
-.. centered:: Wykres 7.4-1 Konfiguracja awaryjnego zatrzymania
-
-Funkcja automatycznego załączania po przywróceniu bezpiecznego zatrzymania
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Omówienie
-+++++++++++++++++++++
-
-Po doświadczeniu awaryjnego zatrzymania typu 1b, robot oferuje dwa tryby: ręczne załączanie i automatyczne załączanie, do wyboru przez użytkownika. Gdy wybrano ręczne załączanie, użytkownik musi po zwolnieniu przycisku awaryjnego zatrzymania zmienić tryb pracy robota na automatyczny i ręcznie kliknąć przycisk załączania, aby załączyć robota. Gdy wybrano automatyczne załączanie, po zwolnieniu przycisku awaryjnego zatrzymania robot automatycznie się załącza.
-
-Procedura operacyjna
-+++++++++++++++++++++++++++
-
-**Krok 1**: Kliknij "Ustawienia początkowe" -> "Bezpieczeństwo" -> przycisk "Awaryjne zatrzymanie". Wybierz "Typ 1b" w sekcji "Typ zatrzymania" i ustaw parametry "Limit czasu zatrzymania" i "Limit odległości zatrzymania" zgodnie z rzeczywistymi potrzebami. "Strategia załączania po resecie awaryjnego zatrzymania" może być wybrana jako "Ręczne załączanie" lub "Automatyczne załączanie".
-
-.. image:: safety/046.png
-   :width: 4in
-   :align: center
-
-.. centered:: Wykres 7.4-2 Ustawienia strategii załączania
-
-**Krok 2**: Gdy wybrano "Automatyczne załączanie", po zwolnieniu przycisku awaryjnego zatrzymania robot automatycznie się załącza. Gdy wybrano "Ręczne załączanie", użytkownik musi po zwolnieniu przycisku awaryjnego zatrzymania, w trybie automatycznym, ręcznie kliknąć przycisk załączania, aby załączyć robota.
-
-.. image:: safety/047.png
    :width: 6in
    :align: center
 
-.. centered:: Wykres 7.4-3 Operacja ręcznego załączania
+.. centered:: Rysunek 7.2-2 Drugie Potwierdzenie Parametrów Konfiguracji Bezpieczeństwa
 
-Zatrzymanie ochronne
---------------------
+Zarządzanie Hasłem Konfiguracji Bezpieczeństwa
+------------------------------------------------
 
-Kliknij menu "Ustawienia początkowe" -> "Bezpieczeństwo", kliknij podmenu "Zatrzymanie ochronne", aby przejść do interfejsu konfiguracji.
-
-Typy zatrzymania ochronnego 0, 1, 2. Typ zatrzymania ochronnego 0 powoduje bezpośrednie odcięcie zasilania płyty skrzynki sterowniczej. Typ zatrzymania ochronnego 1 powoduje, że płyta skrzynki sterowniczej najpierw informuje kontroler, aby zatrzymał robota, a następnie kontroler informuje płytę skrzynki sterowniczej o odcięciu zasilania. Typ zatrzymania ochronnego 2 powoduje, że płyta skrzynki sterowniczej informuje kontroler, aby zatrzymał robota.
+Hasło konfiguracji bezpieczeństwa można zmienić w "Ustawieniach Systemu" -> "Tryb Konserwacji" -> "Konfiguracja Parametrów Bezpieczeństwa". Domyślne hasło to 12345678. Zmiana hasła wymaga weryfikacji starego hasła. Nowe i stare hasło nie mogą być identyczne. Długość hasła wynosi minimum 1 znak i maksimum 8 znaków, i rozróżnia wielkość liter oraz symbole.
 
 .. image:: safety/006.png
    :width: 4in
    :align: center
 
-.. centered:: Wykres 7.5-1 Konfiguracja zatrzymania ochronnego
+.. centered:: Rysunek 7.3-1 Zarządzanie Hasłem Konfiguracji Bezpieczeństwa
 
-.. important::
-    Znaczniki stanu danych bezpieczeństwa i informacje o usterce płyty nośnej skrzynki sterowniczej są uzyskiwane za pośrednictwem interfejsu internetowego i informacji zwrotnej o stanie kontrolera. Gdy znacznik ma wartość 1, w stanie alarmu WebAPP pojawia się informacja o nieprawidłowości stanu danych bezpieczeństwa. Po uzyskaniu usterki płyty nośnej skrzynki sterowniczej, konkretna informacja o usterce jest wyświetlana w stanie alarmu WebAPP na podstawie kodu błędu.
+Jeśli zapomnisz starego hasła, skontaktuj się z odpowiednim personelem technicznym FAIRINO.
+
+Parametry Konfiguracji Bezpieczeństwa
+--------------------------------------------------------------------------------------------------
+
+Parametry Bezpieczeństwa Robota
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Prędkość Robota
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Kliknij na pasku menu "Ustawienia Początkowe" -> "Bezpieczeństwo" i kliknij podmenu "Prędkość Robota", aby przejść do interfejsu konfiguracji.
+
+Prędkość robota jest używana do ograniczania maksymalnej prędkości liniowej, przyspieszenia liniowego i przyspieszenia kątowego stawów robota.
 
 .. image:: safety/007.png
    :width: 4in
    :align: center
 
-.. centered:: Wykres 7.5-2 Stan alarmu WebAPP
+.. centered:: Rysunek 7.4-1 Prędkość Robota
+ 
+Planowanie Opóźnienia Zatrzymania
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-Konfiguracja strefy interferencji
----------------------------------
+Kliknij na pasku menu "Ustawienia Początkowe" -> "Bezpieczeństwo" i kliknij podmenu "Planowanie Opóźnienia Zatrzymania", aby przejść do interfejsu konfiguracji.
 
-W menu "Ustawienia początkowe" -> "Bezpieczeństwo" -> "Strefa interferencji" kliknij podmenu "Pojedynczy", aby przejść do interfejsu konfiguracji funkcji strefy interferencji.
+- Swobodne Zatrzymanie: Po wejściu w stan zatrzymania, prędkość kątowa każdej osi zwalnia i zatrzymuje się zgodnie z ustawionym procentem opóźnienia zatrzymania pomnożonym przez maksymalne przyspieszenie stawu;
+- Zsynchronizowane Zatrzymanie: Po wejściu w stan zatrzymania, prędkość pozy TCP zwalnia i zatrzymuje się zgodnie z ustawionym procentem opóźnienia zatrzymania pomnożonym przez maksymalne przyspieszenie pozy;
 
-Najpierw musimy skonfigurować sposób interferencji i operację wejścia do strefy interferencji. Sposoby interferencji dzielą się na "interferencję osi" i "interferencję sześcianu".
+Opóźnienie zatrzymania jest procentem przyspieszenia.
 
-.. image:: safety/025.png
-   :width: 3in
-   :align: center
-
-.. centered:: Wykres 7.6-1 Sposoby strefy interferencji
-
-Kontroluj za pomocą suwaka, czy funkcja jest włączona. Najpierw skonfiguruj "Kontynuuj ruch" lub "Zatrzymaj" dla ruchu w strefie interferencji. Następnie ustaw konfigurację przeciągania po wejściu do strefy interferencji. Użytkownik może ustawić strategię po wejściu do strefy interferencji w trybie przeciągania: brak ograniczenia przeciągania, sprzężenie zwrotne impedancji i przełączenie z powrotem na tryb ręczny.
-
-.. image:: safety/026.png
-   :width: 3in
-   :align: center
-
-.. centered:: Wykres 7.6-2 Konfiguracja strefy interferencji
-
-Wybierz interferencję osi. Należy skonfigurować parametry interferencji osi. Metody wykrywania dzielą się na "pozycję instrukcji" i "pozycję sprzężenia zwrotnego". Tryby strefy interferencji dzielą się na "interferencja w zakresie" i "interferencja poza zakresem". Następnie ustaw zakres każdego stawu oraz czy zakres każdego stawu jest włączony. Można wprowadzić wartości lub użyć "ikony odświeżania" po "Wartość minimalna" i "Wartość maksymalna", aby zapisać bieżącą pozycję robota. Na koniec kliknij "Konfiguruj".
-
-.. image:: safety/027.png
-   :width: 3in
-   :align: center
-
-.. centered:: Wykres 7.6-3 Konfiguracja interferencji osi
-
-Wybierz interferencję sześcianu. Należy skonfigurować parametry interferencji sześcianu. Metody wykrywania dzielą się na "pozycję instrukcji" i "pozycję sprzężenia zwrotnego". Tryby strefy interferencji dzielą się na "interferencja w zakresie" i "interferencja poza zakresem". Układ odniesienia dzieli się na "współrzędne podstawowe" i "współrzędne przedmiotu". Wybierz zgodnie z rzeczywistym użyciem. Następnie ustaw zakres. Zakres można ustawić na dwa sposoby. Najpierw spójrz na pierwszą metodę "metoda dwóch punktów", która polega na dwóch przeciwległych wierzchołkach sześcianu. Możemy wprowadzić lub zarejestrować pozycję za pomocą nauczania robota. Na koniec kliknij "Zastosuj".
-
-.. image:: safety/028.png
-   :width: 3in
-   :align: center
-
-.. centered:: Wykres 7.6-4 Konfiguracja interferencji sześcianu
-
-Następnie spójrz na drugą metodę "punkt środkowy + długość boku", która polega na punkcie środkowym sześcianu i długości boku sześcianu tworzących strefę interferencji. Możemy wprowadzić lub zarejestrować pozycję za pomocą nauczania robota. Na koniec kliknij "Zastosuj".
-
-.. image:: safety/029.png
-   :width: 3in
-   :align: center
-
-.. centered:: Wykres 7.6-5 Konfiguracja interferencji sześcianu
-
-Funkcja bezpiecznego sprzężenia zwrotnego wejścia do interferencji osi podczas przeciągania wspomaganego czujnikiem siły
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Omówienie
-+++++++++++++++++++++++++
-
-Funkcja bezpiecznego sprzężenia zwrotnego wejścia do interferencji osi podczas przeciągania wspomaganego czujnikiem siły polega na tym, że gdy przeciąganie wspomagane czujnikiem siły i strefa interferencji współistnieją, a robot wchodzi do strefy interferencji, robot automatycznie przełącza się w tryb przeciągania, uzyskując efekt sprzężenia zwrotnego impedancji. Gdy robot opuści strefę interferencji, automatycznie przełącza się z powrotem na przeciąganie wspomagane czujnikiem siły. Może to spełnić różne scenariusze użytkowania przeciągania wspomaganego czujnikiem siły.
-
-Procedura operacyjna
-++++++++++++++++++++
-
-Pierścień ograniczenia stawu
-****************************
-**Krok 1**: Zaloguj się do interfejsu internetowego, kliknij przełącznik "Pierścień ograniczenia stawu". Pierścień ograniczenia stawu pojawi się w stawie robota, jak pokazano na poniższym rysunku.
-
-.. image:: safety/030.png
-   :width: 4in
-   :align: center
-
-.. centered:: Wykres 7.6-6 Pierścień ograniczenia stawu w interfejsie internetowym
-
-**Krok 2**: Biały znacznik na pierścieniu ograniczenia stawu reprezentuje rzeczywisty kąt stawu. Wycięcie reprezentuje pozycję miękkiego limitu odpowiedniego stawu. Rozmiar wycięcia pierścienia ograniczenia stawu zmienia się wraz z rozmiarem miękkiego limitu. Podczas ruchu stawu, pierścień ograniczenia stawu pozostaje nieruchomy względem stawu.
-
-Konfiguracja interferencji osi
-******************************
-**Krok 1**: Skonfiguruj i aktywuj interferencję osi. Kolejno kliknij "Ustawienia początkowe" -> "Bezpieczeństwo" -> "Strefa interferencji" -> "Pojedynczy", aby przejść do strony konfiguracji strefy interferencji. Kliknij kartę "Interferencja osi", aby przejść do interfejsu, i włącz suwak "Włącz funkcję".
-
-**Krok 2**: Można ustawić "Strategię ruchu" na "Kontynuuj ruch", wybrać "Strategię przeciągania" jako "Sprzężenie zwrotne impedancji" i ustawić parametry sprzężenia zwrotnego impedancji, jak pokazano na poniższym rysunku. Parametry sprzężenia zwrotnego impedancji reprezentują siłę odbicia podczas sprzężenia zwrotnego impedancji. Im większa wartość, tym większa siła odbicia. Zalecana konfiguracja parametru to "5".
-
-.. image:: safety/031.png
-   :width: 4in
-   :align: center
-
-.. centered:: Wykres 7.6-7 Interfejs konfiguracji interferencji osi
-
-**Krok 3**: Ustaw zakres strefy interferencji osi. Można ustawić "Tryb wykrywania" na "Pozycja sprzężenia zwrotnego". "Tryb strefy interferencji" można wybrać między dwoma trybami: "interferencja w zakresie" i "interferencja poza zakresem". Ustaw zakres strefy interferencji dla każdego stawu i wybierz "Włącz", aby aktywować zakres interferencji odpowiedniej osi, jak pokazano na poniższym rysunku.
-
-.. image:: safety/032.png
-   :width: 4in
-   :align: center
-
-.. centered:: Wykres 7.6-8 Interfejs konfiguracji zakresu strefy interferencji
-
-**Krok 4**: Ustaw "Tryb strefy interferencji" na "interferencja w zakresie". Na pierścieniu ograniczenia stawu w interfejsie internetowym kolor zielony oznacza obszar swobodnego ruchu, a żółty obszar interferencji. Obszar, w którym znajduje się biały znacznik, jest podświetlony, jak pokazano na poniższym rysunku.
-
-.. image:: safety/033.png
-   :width: 4in
-   :align: center
-
-.. centered:: Wykres 7.6-9 Wyświetlanie pierścienia ograniczenia stawu przy "interferencji w zakresie"
-
-**Krok 5**: Ustaw "Tryb strefy interferencji" na "interferencja poza zakresem". Na pierścieniu ograniczenia stawu w interfejsie internetowym kolor zielony oznacza obszar swobodnego ruchu, a żółty obszar interferencji. Obszar, w którym znajduje się biały znacznik, jest podświetlony, jak pokazano na poniższym rysunku.
-
-.. image:: safety/034.png
-   :width: 4in
-   :align: center
-
-.. centered:: Wykres 7.6-10 Wyświetlanie pierścienia ograniczenia stawu przy "interferencji poza zakresem"
-
-Wejście do strefy interferencji osi podczas przeciągania wspomaganego czujnikiem siły
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-**Krok 1**: Kolejno kliknij "Aplikacje pomocnicze" -> "Narzędzia aplikacyjne" -> "Blokada przeciągania", aby przełączyć "Przełącznik stanu" funkcji blokady wspomaganej czujnikiem siły na "Włączony", wybrać opcję "Włączony" dla strefy interferencji, ustaw odpowiednie współczynniki i zastosuj, jak pokazano na poniższym rysunku.
-
-.. image:: safety/035.png
-   :width: 4in
-   :align: center
-
-.. centered:: Wykres 7.6-11 Interfejs konfiguracji przeciągania wspomaganego czujnikiem siły
-
-**Krok 2**: Przeciągnij robota w trybie przeciągania wspomaganego czujnikiem siły. Gdy kąt stawu robota osiągnie zakres strefy interferencji, robot przełączy się w tryb przeciągania w pętli prądowej, uzyskując efekt sprzężenia zwrotnego impedancji, umożliwiając oddalenie się od strefy interferencji osi. Po opuszczeniu zakresu strefy interferencji osi robot przełączy się z powrotem na przeciąganie wspomagane czujnikiem siły.
-
-Konfiguracja interferencji sześcianu
-+++++++++++++++++++++++++++++++++++++++
-
-**Krok 1**: Ustaw strefę interferencji sześcianu. Kolejno kliknij "Ustawienia początkowe" -> "Bezpieczeństwo" -> "Strefa interferencji" -> "Pojedynczy", aby przejść do strony konfiguracji strefy interferencji. Kliknij kartę "Interferencja sześcianu", aby przejść do interfejsu, i włącz suwak "Włącz funkcję".
-
-**Krok 2**: Można ustawić "Strategię ruchu" na "Kontynuuj ruch", wybrać "Strategię przeciągania" jako "Brak ograniczenia przeciągania", jak pokazano na poniższym rysunku.
-
-.. image:: safety/036.png
-   :width: 4in
-   :align: center
-
-.. centered:: Wykres 7.6-12 Konfiguracja strefy interferencji sześcianu
-
-**Krok 3**: Ustaw konfigurację parametrów strefy interferencji sześcianu. Można ustawić "Tryb wykrywania" na "Pozycja sprzężenia zwrotnego". "Tryb strefy interferencji" można wybrać między dwoma trybami: "interferencja w zakresie" i "interferencja poza zakresem". "Współrzędne odniesienia" ustaw na "Współrzędne podstawowe".
-
-**Krok 4**: Wybierz metodę nauczania zakresu strefy interferencji sześcianu jako "metoda dwóch punktów". Naucz robota wyboru dwóch punktów, odpowiednio minimalnego i maksymalnego punktu w przestrzeni kartezjańskiej. Kliknij "Zastosuj", a w interfejsie internetowym pojawi się wirtualny sześcian, jak pokazano na poniższym rysunku.
-
-.. image:: safety/037.png
-   :width: 4in
-   :align: center
-
-.. centered:: Wykres 7.6-13 Ustawianie strefy interferencji sześcianu metodą "dwóch punktów"
-
-.. image:: safety/038.png
-   :width: 4in
-   :align: center
-
-.. centered:: Wykres 7.6-14 Wyświetlanie wirtualnego sześcianu w interfejsie internetowym
-
-**Krok 5**: Wybierz metodę nauczania zakresu strefy interferencji sześcianu jako "punkt środkowy + długość boku". Naucz robota jednego punktu, ustaw długości boków osi X, Y, Z z punktem nauczania jako środkiem, jak pokazano na poniższym rysunku. Kliknij "Zastosuj", a w interfejsie internetowym pojawi się wirtualny sześcian.
-
-.. image:: safety/039.png
-   :width: 4in
-   :align: center
-
-.. centered:: Wykres 7.6-15 Ustawianie strefy interferencji sześcianu metodą "punkt środkowy + długość boku"
-
-**Krok 6**: Ustaw "Tryb strefy interferencji" na "interferencja w zakresie". Gdy końcówka robota znajduje się poza zakresem sześcianu, wirtualny sześcian w interfejsie internetowym jest wyświetlany w kolorze żółtym z przezroczystością 40%. Gdy końcówka robota znajduje się w zakresie sześcianu, sześcian jest żółty z przezroczystością 90% i pojawia się ostrzeżenie "Wejście w strefę interferencji", jak pokazano na poniższym rysunku.
-
-.. image:: safety/040.png
-   :width: 4in
-   :align: center
-
-.. centered:: Wykres 7.6-16 Wejście do strefy interferencji sześcianu w trybie "interferencja w zakresie"
-
-**Krok 7**: Ustaw "Tryb strefy interferencji" na "interferencja poza zakresem". Gdy końcówka robota znajduje się w zakresie sześcianu, wirtualny sześcian w interfejsie internetowym jest wyświetlany w kolorze zielonym z przezroczystością 40%. Gdy końcówka robota znajduje się poza zakresem sześcianu, sześcian jest zielony z przezroczystością 90% i pojawia się ostrzeżenie "Wejście w strefę interferencji", jak pokazano na poniższym rysunku.
-
-.. image:: safety/041.png
-   :width: 4in
-   :align: center
-
-.. centered:: Wykres 7.6-17 Wyświetlanie strefy interferencji sześcianu w trybie "interferencja poza zakresem"
-
-Konfiguracja ściany bezpieczeństwa
-++++++++++++++++++++++++++++++++++
-**Krok 1**: Ustaw ścianę bezpieczeństwa. Kolejno kliknij "Ustawienia początkowe" -> "Bezpieczeństwo" -> "Ściana bezpieczeństwa", aby przejść do interfejsu konfiguracji ściany bezpieczeństwa. Interfejs internetowy obsługuje jednoczesne ustawienie maksymalnie 8 ścian bezpieczeństwa. Wybierz ścianę bezpieczeństwa i skonfiguruj ją. Po zakończeniu konfiguracji włącz odpowiednią ścianę bezpieczeństwa. W interfejsie internetowym pojawi się wirtualna ściana w kolorze pomarańczowym z przezroczystością 40%, jak pokazano na poniższym rysunku.
-
-.. image:: safety/042.png
-   :width: 4in
-   :align: center
-
-.. centered:: Wykres 7.6-18 Konfiguracja ściany bezpieczeństwa
-
-.. image:: safety/043.png
-   :width: 4in
-   :align: center
-
-.. centered:: Wykres 7.6-19 Wyświetlanie wirtualnej ściany w interfejsie internetowym
-
-**Krok 2**: Gdy końcówka robota wejdzie w ścianę bezpieczeństwa, wirtualna ściana staje się pomarańczowa z przezroczystością 90% i pojawia się ostrzeżenie "Wejście w ścianę bezpieczeństwa", jak pokazano na poniższym rysunku.
-
-.. image:: safety/044.png
-   :width: 4in
-   :align: center
-
-.. centered:: Wykres 7.6-20 Wyświetlanie wirtualnej ściany w interfejsie internetowym po wejściu końcówki robota w ścianę bezpieczeństwa
-
-Funkcja interferencji sześcianu
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Omówienie
-+++++++++++++++++++++++++++++++
-
-Funkcja interferencji sześcianu obsługuje jednoczesne definiowanie i aktywowanie wielu niezależnych stref interferencji sześcianu. Pozycja i rozmiar każdej strefy interferencji w przestrzeni trójwymiarowej mogą być ustawiane niezależnie. Ponadto każda strefa interferencji jest wyposażona w oddzielne wyjście sygnału CO, które może generować odpowiedni sygnał wyjściowy w oparciu o rzeczywistą pozycję robota.
-
-Procedura operacyjna
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-**Krok 1**: Włącz i wykonaj podstawową konfigurację funkcji interferencji sześcianu. Kolejno kliknij "Ustawienia początkowe" -> "Bezpieczeństwo" -> "Strefa interferencji" -> instrukcja "Interferencja sześcianu". Użyj suwaka, aby kontrolować, czy każda strefa interferencji sześcianu jest włączona, i wykonaj podstawową konfigurację.
-
-Strategię ruchu po wejściu do strefy interferencji można wybrać jako "Kontynuuj ruch" lub "Zatrzymaj". Gdy wybrano "Kontynuuj ruch", robot po wejściu do strefy interferencji wyświetli ostrzeżenie, ale będzie kontynuował ruch. Gdy wybrano "Zatrzymaj", robot po wejściu do strefy interferencji wyświetli ostrzeżenie i zatrzyma ruch. Strategię przeciągania po wejściu do strefy interferencji można wybrać jako "Brak ograniczenia przeciągania", "Sprzężenie zwrotne impedancji" i "Przełączenie z powrotem na tryb ręczny".
-
-.. image:: safety/050.png
-   :width: 4in
-   :align: center
-
-.. centered:: Wykres 7.6-21 Włączanie sterowania i podstawowa konfiguracja sześcianu
-
-**Krok 2**: Wykonaj konfigurację strefy interferencji sześcianu. Dla każdego ID strefy interferencji można ustawić różne parametry konfiguracyjne. Należy pamiętać, że:
-
-(1) Metoda wykrywania musi być wybrana jako "Pozycja instrukcji" lub "Pozycja sprzężenia zwrotnego" zgodnie z rzeczywistymi wymaganiami funkcjonalnymi.
-
-(2) Gdy tryb strefy interferencji jest wybrany jako "interferencja poza zakresem", ma to zastosowanie tylko do pojedynczej strefy interferencji.
-
-.. image:: safety/051.png
-   :width: 4in
-   :align: center
-
-.. centered:: Wykres 7.6-22 Konfiguracja strefy interferencji sześcianu
-
-**Krok 3**: Wykonaj ustawienie zakresu strefy interferencji. Ustawienie zakresu można wybrać metodę "dwóch punktów" lub "punkt środkowy + długość boku" do wygenerowania strefy interferencji sześcianu. Metoda "dwóch punktów" generuje strefę poprzez określenie dwóch przeciwległych wierzchołków sześcianu. Metoda "punkt środkowy + długość boku" generuje strefę poprzez określenie punktu środkowego sześcianu i trzech długości boków.
-
-.. image:: safety/052.png
-   :width: 4in
-   :align: center
-
-.. centered:: Wykres 7.6-23 Generowanie strefy interferencji metodą "dwóch punktów"
-
-.. image:: safety/053.png
-   :width: 4in
-   :align: center
-
-.. centered:: Wykres 7.6-24 Generowanie strefy interferencji metodą "punkt środkowy + długość boku"
-
-**Krok 4**: Wykonaj ustawienie sygnału CO. Kolejno kliknij "Ustawienia początkowe" -> "Podstawowe" -> "Ustawienia I/O" - instrukcja "DO", aby skonfigurować odpowiednie wyjście CO dla każdego sześcianu.
-
-.. image:: safety/054.png
-   :width: 4in
-   :align: center
-
-.. centered:: Wykres 7.6-25 Konfiguracja wyjścia CO
-
-**Krok 5**: Każda strefa interferencji sześcianu będzie wyświetlana w interfejsie robota zgodnie z ustawionym numerem ID. Gdy punkt środkowy końcówki robota wejdzie do strefy interferencji, interfejs wyświetli ostrzeżenie "Wejście w strefę interferencji", a odpowiedni interfejs CO wygeneruje sygnał wyjściowy.
-
-.. image:: safety/055.png
-   :width: 4in
-   :align: center
-
-.. centered:: Wykres 7.6-26 Wyświetlanie interfejsu dla wielu stref interferencji sześcianu
-
-Tryb redukcji
--------------
-
-Kliknij menu "Ustawienia początkowe" -> "Bezpieczeństwo", kliknij podmenu "Tryb redukcji", aby przejść do interfejsu konfiguracji. Wybierz "Tryb pierwszego/drugiego poziomu", aby skonfigurować prędkość stawów i prędkość TCP końcówki.
-
-.. image:: safety/045.png
-   :width: 4in
-   :align: center
-
-.. centered:: Wykres 7.7-1 Tryb redukcji
-
-Ściana bezpieczeństwa
----------------------
-
-Kliknij menu "Ustawienia początkowe" -> "Bezpieczeństwo", kliknij podmenu "Konfiguracja ściany bezpieczeństwa", aby przejść do interfejsu konfiguracji.
-
-- **Konfiguracja ściany bezpieczeństwa**: Kliknij przycisk włączania, aby włączyć odpowiednią ścianę bezpieczeństwa. Gdy ściana bezpieczeństwa nie ma skonfigurowanego zakresu bezpieczeństwa, pojawi się komunikat o błędzie. Kliknij listę rozwijaną, wybierz ścianę bezpieczeństwa, którą chcesz ustawić. Automatycznie wyświetli się odległość bezpieczeństwa (można nie ustawiać, domyślnie 0). Następnie kliknij przycisk "Ustaw", aby zakończyć ustawianie.
-  
 .. image:: safety/008.png
-   :width: 4in
-   :align: center
-
-.. centered:: Wykres 7.8-1 Konfiguracja ściany bezpieczeństwa
-
-- **Konfiguracja punktów odniesienia ściany bezpieczeństwa**: Po wybraniu ściany bezpieczeństwa można ustawić cztery punkty odniesienia. Pierwsze trzy punkty to punkty odniesienia płaszczyzny, służące do potwierdzenia płaszczyzny ustawionej ściany bezpieczeństwa. Czwarty punkt to punkt odniesienia zakresu bezpieczeństwa, służący do potwierdzenia zakresu bezpieczeństwa ustawionej ściany bezpieczeństwa.
-
-.. important::
-   Jeśli ustawienie punktów odniesienia powiedzie się, zaświeci się zielone światło. W przeciwnym razie zaświeci się żółte światło. Zmieni się na zielone dopiero po pomyślnym ustawieniu punktów odniesienia. Gdy wszystkie cztery punkty odniesienia zostaną pomyślnie ustawione, można obliczyć ich zakres bezpieczeństwa. Po pomyślnym obliczeniu stan punktów parametrów zakresu bezpieczeństwa powróci do domyślnego.
-
-.. image:: safety/009.png
-   :width: 4in
-   :align: center
-
-.. centered:: Wykres 7.8-2 Ustawianie punktów odniesienia zakresu bezpieczeństwa
-
-- Efekt zastosowania: Włącz pomyślnie skonfigurowaną ścianę bezpieczeństwa. Przeciągnij robota. Jeśli końcowe TCP robota znajduje się w ustawionym zakresie bezpieczeństwa, system działa normalnie. Jeśli znajduje się poza ustawionym zakresem bezpieczeństwa, pojawi się komunikat o błędzie.
-
-.. image:: safety/010.png
    :width: 6in
    :align: center
 
-.. centered:: Wykres 7.8-3 Efekt po pomyślnym ustawieniu zakresu bezpieczeństwa
+.. centered:: Rysunek 7.4-2 Planowanie Opóźnienia Zatrzymania Robota
 
-Program bezpieczeństwa działający w tle
----------------------------------------
+Bezpieczne Zatrzymanie
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-Kliknij menu "Ustawienia początkowe" -> "Bezpieczeństwo", kliknij podmenu "Program bezpieczeństwa działający w tle", aby przejść do interfejsu konfiguracji.
+Kliknij na pasku menu "Ustawienia Początkowe" -> "Bezpieczeństwo" i kliknij "Bezpieczne Zatrzymanie", aby przejść do interfejsu konfiguracji w celu ustawienia trybu bezpiecznego zatrzymania i parametrów strategii bezpiecznego zatrzymania.
 
-Użytkownik klika przycisk "Włącz funkcję", aby włączyć lub wyłączyć ustawienia programu bezpieczeństwa działającego w tle. Wybierz "Sytuacje awaryjne" i "Programy działające w tle", a następnie kliknij przycisk "Ustaw", aby skonfigurować parametry logiki przetwarzania sytuacji awaryjnych.
+Gdy tryb wyzwalania bezpiecznego zatrzymania jest ustawiony na "Dwukanałowy", oba kanały muszą zostać wyczyszczone, a ostrzeżenie musi zostać ręcznie usunięte na interfejsie operacyjnym, zanim robot będzie mógł zostać zresetowany. Ponadto dodano opcję trybu zmniejszonego w konfiguracji strategii. Gdy użytkownik wybierze tę strategię, robot przejdzie do ruchu w trybie zmniejszonym.
 
-Włącz program bezpieczeństwa działający w tle i ustaw scenariusze sytuacji awaryjnych oraz programy działające w tle. Gdy użytkownik uruchomi program, a wystąpiąca sytuacja awaryjna będzie zgodna z ustawionym scenariuszem sytuacji awaryjnej, robot wykona odpowiedni program działający w tle, pełniąc funkcję ochrony bezpieczeństwa.
+**Krok 1**: Kliknij "Ustawienia Początkowe" -> "Bezpieczeństwo" -> "Bezpieczne Zatrzymanie". Tryb wyzwalania można wybrać jako "Domyślny" lub "Dwukanałowy". Różnica między nimi polega na tym, że w trybie "Domyślnym" błąd interfejsu jest automatycznie usuwany po wyzwoleniu i przywróceniu; w trybie "Dwukanałowym" błąd interfejsu musi być ręcznie usunięty po wyzwoleniu i przywróceniu. "Strategia Bezpiecznego Zatrzymania" może być wybrana jako "Zatrzymaj", "Wstrzymaj", "Tryb Zmniejszony Poziom 1" i "Tryb Zmniejszony Poziom 2". Szczegółowe opisy są następujące: gdy wybrano "Zatrzymaj", robot zatrzyma bieżący ruch; gdy wybrano "Wstrzymaj", robot wstrzyma bieżący ruch, a po przywróceniu i usunięciu błędu wznowi wstrzymanie; gdy wybrano "Tryb Zmniejszony Poziom 1", robot przejdzie do ruchu w trybie zmniejszonym poziomu 1; gdy wybrano "Tryb Zmniejszony Poziom 2", robot przejdzie do ruchu w trybie zmniejszonym poziomu 2.
+
+.. image:: safety/009.png
+   :width: 6in
+   :align: center
+
+.. centered:: Rysunek 7.4-3 Planowanie Opóźnienia Zatrzymania Robota
+
+**Krok 2**: Gdy tryb wyzwalania jest ustawiony na "Domyślny", błąd interfejsu może być automatycznie usunięty po przywróceniu wyzwolenia. Gdy tryb wyzwalania jest ustawiony na "Dwukanałowy", operacja jest następująca: po przywróceniu wyzwolenia, ręcznie kliknij "Wyczyść" w prawym górnym rogu, aby zresetować robota.
+
+Prędkość Bezpieczeństwa
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Kliknij na pasku menu "Ustawienia Początkowe" -> "Bezpieczeństwo" i kliknij "Prędkość Bezpieczeństwa", aby przejść do interfejsu konfiguracji w celu ustawienia prędkości bezpieczeństwa. Zakres ręcznej prędkości TCP wynosi 1-1500mm/s.
+
+Funkcja prędkości bezpieczeństwa robota jest używana w środowiskach współpracy człowiek-robot lub dynamicznych, aby aktywnie ograniczać prędkość operacyjną robota, kontrolując energię kinetyczną i siłę uderzenia w granicach bezpieczeństwa, zapobiegając w ten sposób obrażeniom personelu w przypadku przypadkowego kontaktu i skutecznie chroniąc sprzęt i przedmioty obrabiane przed uszkodzeniami spowodowanymi kolizją.
+
+**Krok 1**: Kliknij "Ustawienia Początkowe" -> "Bezpieczeństwo" -> "Prędkość Bezpieczeństwa", aby ustawić parametry prędkości bezpieczeństwa, głównie trzy części: "Włączenie Funkcji", "Ograniczenie Prędkości" i "Tryb Po Przekroczeniu Prędkości".
+
+Wśród nich, Włączenie Funkcji można wybrać jako "Wyłącz", "Włącz w Trybie Ręcznym" i "Włącz we Wszystkich Trybach";
+
+W Ograniczeniu Prędkości ustaw limit prędkości. Gdy prędkość liniowa robota osiągnie ten limit, zostanie przetworzona zgodnie z parametrami ustawionymi w "Trybie Po Przekroczeniu Prędkości". "Tryb Po Przekroczeniu Prędkości" można wybrać jako "Zatrzymaj i Alarm", "Automatyczne Ograniczenie Prędkości" i "Wyłącz Po Zatrzymaniu i Alarmie". Automatyczne ograniczenie prędkości jest dostępne tylko w "Włącz w Trybie Ręcznym".
+
+Po ustawieniu wymaganych parametrów nie są potrzebne żadne dodatkowe operacje. Ruch robota będzie przetwarzany zgodnie z ustawionymi parametrami. Ustawienia parametrów są pokazane na rysunku.
+
+.. image:: safety/010.png
+   :width: 4in
+   :align: center
+
+.. centered:: Rysunek 7.4-4 Ustawienia Parametrów Prędkości Bezpieczeństwa
+
+Awaryjne Zatrzymanie
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Kliknij na pasku menu "Ustawienia Początkowe" -> "Bezpieczeństwo" i kliknij "Awaryjne Zatrzymanie", aby przejść do interfejsu konfiguracji.
+
+Typy awaryjnego zatrzymania 0, 1a, 1b, 2 mogą być ustawione, limit czasu zatrzymania może być ustawiony, a limit odległości zatrzymania może być ustawiony.
+
+Poprzez kontroler wysyłający do płytki szafy sterowniczej, awaryjne zatrzymanie typu 0 bezpośrednio odcina zasilanie płytki szafy sterowniczej;
+
+- Awaryjne zatrzymanie typu 1a: po zatrzymaniu z opóźnieniem, odcina zasilanie korpusu robota;
+- Awaryjne zatrzymanie typu 1b: po zatrzymaniu z opóźnieniem, nie odcina zasilania korpusu robota, ale wyłącza korpus robota;
+- Awaryjne zatrzymanie typu 2: po naciśnięciu awaryjnego zatrzymania, robot zwalnia do zatrzymania i pozostaje włączony. Po zwolnieniu awaryjnego zatrzymania, robot powinien być w stanie normalnie działać.
 
 .. image:: safety/011.png
    :width: 4in
    :align: center
 
-.. centered:: Wykres 7.9-1 Program bezpieczeństwa działający w tle
+.. centered:: Rysunek 7.4-5 Ustawienia Awaryjnego Zatrzymania
 
-Ograniczenie kierunku narzędzia (tylko w systemie LA)
------------------------------------------------------
+Ochronne Zatrzymanie
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-Kliknij menu "Ustawienia początkowe" -> "Bezpieczeństwo", kliknij podmenu "Ograniczenie kierunku narzędzia", aby przejść do interfejsu konfiguracji.
+Kliknij na pasku menu "Ustawienia Początkowe" -> "Bezpieczeństwo" i kliknij podmenu "Ochronne Zatrzymanie", aby przejść do interfejsu konfiguracji.
 
-Ograniczenie kierunku narzędzia to funkcja ochronna działająca w przestrzeni kartezjańskiej końcówki narzędzia robota, służąca do ograniczania zakresu ruchu orientacji końcówki robota. Obejmuje ona ustawienie włączenia funkcji, ustawienie podstawowego kierunku narzędzia i ustawienie maksymalnego kąta odchylenia. Maksymalny kąt odchylenia określa maksymalną granicę kąta między osią Z kartezjańskiego układu współrzędnych końcówki narzędzia a podstawowym kierunkiem narzędzia, co zwykle można rozumieć jako przestrzeń stożkową.
+Typy ochronnego zatrzymania 0, 1, 2. Ochronne zatrzymanie typu 0 bezpośrednio odcina zasilanie płytki szafy sterowniczej. Ochronne zatrzymanie typu 1: płytka szafy sterowniczej najpierw powiadamia kontroler, aby kontrolował zatrzymanie robota, następnie kontroler przekazuje informację zwrotną do płytki szafy sterowniczej w celu odcięcia zasilania. Ochronne zatrzymanie typu 2: płytka szafy sterowniczej powiadamia kontroler, aby kontrolował zatrzymanie robota.
 
 .. image:: safety/012.png
    :width: 4in
    :align: center
 
-.. centered:: Wykres 7.10-1 Ograniczenie kierunku narzędzia
+.. centered:: Rysunek 7.4-6 Konfiguracja Ochronnego Zatrzymania
 
-Wartości graniczne robota (tylko w systemie LA)
------------------------------------------------
+Automatyczne Włączanie przy Starcie
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-Kliknij menu "Ustawienia początkowe" -> "Bezpieczeństwo", kliknij podmenu "Wartości graniczne robota", aby przejść do interfejsu konfiguracji.
-
-Wartości graniczne robota obejmują pęd i moc. Wartość graniczna pędu służy do ograniczenia maksymalnego pędu robota, a wartość graniczna mocy służy do ograniczenia pracy mechanicznej wykonywanej przez robota.
+Kliknij na pasku menu "Ustawienia Początkowe" -> "Bezpieczeństwo" i kliknij podmenu "Włączanie Robota", aby przejść do interfejsu konfiguracji. Możesz wybrać, czy robot włącza się automatycznie przy starcie, czy nie.
 
 .. image:: safety/013.png
    :width: 4in
    :align: center
 
-.. centered:: Wykres 7.11-1 Wartości graniczne robota
+.. centered:: Rysunek 7.4-7 Automatyczne Włączanie przy Starcie
 
-Wykrywanie mocy (tylko w systemie QX)
--------------------------------------
+Ograniczenie Orientacji Narzędzia (Używane tylko w systemie LA)
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-Kliknij menu "Ustawienia początkowe" -> "Bezpieczeństwo", kliknij podmenu "Wykrywanie mocy", aby przejść do interfejsu konfiguracji.
+Kliknij na pasku menu "Ustawienia Początkowe" -> "Bezpieczeństwo" i kliknij podmenu "Ograniczenie Orientacji Narzędzia", aby przejść do interfejsu konfiguracji.
 
-Gdy pętla prądowa działa bezpośrednio na robocie (tylko instrukcja servoJT), służy do ograniczania pracy wykonywanej przez robota. Jeśli całka prędkości i momentu obrotowego robota przekroczy wartość graniczną, następuje ochrona mocy.
+Ograniczenie orientacji narzędzia jest funkcją ochronną działającą w przestrzeni kartezjańskiej końcówki narzędzia robota, mającą na celu ograniczenie zakresu ruchu postawy końcówki robota. Obejmuje ustawienie włączenia funkcji, ustawienie referencyjnego kierunku narzędzia i ustawienie maksymalnego kąta odchylenia. Maksymalny kąt odchylenia definiuje maksymalną wartość graniczną kąta między osią Z kartezjańskiego układu współrzędnych końcówki narzędzia a referencyjnym kierunkiem narzędzia, co zwykle można rozumieć jako przestrzeń stożkową.
 
 .. image:: safety/014.png
    :width: 4in
    :align: center
 
-.. centered:: Wykres 7.12-1 Wykrywanie mocy
+.. centered:: Rysunek 7.4-8 Ograniczenie Orientacji Narzędzia
 
-Konfiguracja ruchu
-------------------
+Ograniczenia Robota (Używane tylko w systemie LA)
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-Optymalizacja charakterystyki prędkości w kształcie litery T + funkcja wygładzania blending
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Kliknij na pasku menu "Ustawienia Początkowe" -> "Bezpieczeństwo" i kliknij podmenu "Ograniczenia Robota", aby przejść do interfejsu konfiguracji.
 
-Omówienie
-++++++++++++++++++++++
-
-Wygładzanie blending między dwoma segmentami trajektorii może uniknąć częstego uruchamiania i zatrzymywania spowodowanego całkowitym zatrzymaniem, zwiększając tym samym wydajność ruchu robota.
-
-Funkcja ta działa głównie dla blending między instrukcjami PTP-PTP, LIN-LIN, ARC-ARC, LIN-ARC, ARC-LIN. Blending między innymi instrukcjami nie jest aktywny.
-
-Procedura operacyjna
-++++++++++++++++++++++
-
-Ponieważ sposoby operacji dla poszczególnych instrukcji są podobne, niniejsza instrukcja opisuje metodę działania funkcji na przykładzie blending między PTP-PTP. Funkcję tę można zaimplementować na dwa sposoby: za pomocą instrukcji Lua lub za pomocą przełącznika konfiguracji ruchu.
-
-Sposób użycia instrukcji Lua
-*****************************
-
-**Krok 1**: Wybierz punkty nauczania, dla których ma być wykonana funkcja PTP. W niniejszej instrukcji jako nazwy punktów nauczania użyto "A0" do "A5".
-
-**Krok 2**: Kliknij "Program nauczania" -> przycisk "Programowanie". Wybierz instrukcję "Punkt-punkt" z "Instrukcji ruchu". W "Edycji instrukcji" wybierz punkt nauczania i ustaw prędkość调试. Wybierz "Tryb wygładzania przyspieszenia" dla ochrony ruchu. Ustaw parametr "Płynne przejście" w punktach wymagających wygładzania.
-
-.. image:: safety/020.png
-   :width: 6in
-   :align: center
-
-.. centered:: Wykres 7.13-1 Ustawienia instrukcji blending PTP z wygładzaniem przyspieszenia
-
-**Krok 3**: Wygeneruj program Lua i uruchom go. Funkcja blending PTP-PTP zostanie zaimplementowana. W ten sposób tylko instrukcje pomiędzy AccSmoothStart() i AccSmoothEnd() będą używać zoptymalizowanej prędkości w kształcie litery T do ruchu, a dla pozostałych instrukcji używana będzie oryginalna prędkość w kształcie litery T.
-
-.. image:: safety/021.png
-   :width: 4in
-   :align: center
-
-.. centered:: Wykres 7.13-2 Typowy program blending PTP-PTP przy użyciu instrukcji Lua
-
-Sposób użycia przełącznika konfiguracji ruchu
-*********************************************
-
-**Krok 1**: Kliknij "Ustawienia początkowe" -> "Bezpieczeństwo" -> przycisk "Konfiguracja ruchu". Włącz przełącznik "Tryb wygładzania przyspieszenia".
-
-.. image:: safety/022.png
-   :width: 6in
-   :align: center
-
-.. centered:: Wykres 7.13-3 Ustawienie przełącznika konfiguracji trybu wygładzania przyspieszenia
-
-**Krok 2**: Wybierz punkty nauczania, dla których ma być wykonana funkcja PTP-PTP. W niniejszej instrukcji jako nazwy punktów nauczania użyto "A0" do "A5".
-
-**Krok 3**: Kliknij "Program nauczania" -> przycisk "Programowanie". Wybierz instrukcję "Punkt-punkt" z "Instrukcji ruchu". W "Edycji instrukcji" wybierz punkt nauczania i ustaw prędkość调试. Wybierz "Brak" dla ochrony ruchu. Ustaw parametr "Płynne przejście" w punktach wymagających wygładzania.
-
-.. image:: safety/023.png
-   :width: 6in
-   :align: center
-
-.. centered:: Wykres 7.13-4 Ustawienia instrukcji blending dla standardowego PTP
-
-**Krok 4**: Wygeneruj program Lua i uruchom go. Funkcja blending PTP-PTP zostanie zaimplementowana. Typowy program jest taki sam jak standardowy program PTP. W ten sposób wszystkie instrukcje będą używać zoptymalizowanej prędkości w kształcie litery T do ruchu.
-
-.. image:: safety/024.png
-   :width: 4in
-   :align: center
-
-.. centered:: Wykres 7.13-5 Typowy program blending PTP-PTP przy użyciu przełącznika konfiguracji
-
-Funkcja adaptacyjnych parametrów FIR + funkcja wstrzymywania i wznawiania FIR
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Omówienie
-++++++++++++++++++++++
-
-Funkcja adaptacyjnej konfiguracji parametrów trybu optymalnego czasowo robota umożliwia konfigurację jej parametrów bez konieczności debugowania. Funkcja ta automatycznie dostosowuje konfigurację parametrów trybu optymalnego czasowo w oparciu o aktualny stan pracy robota, zwiększając wydajność debugowania.
-
-Procedura operacyjna
-++++++++++++++++++++++
-
-Podstawowe instrukcje ruchu robota PTP, LIN i ARC są używane w podobny sposób. W tym przykładzie jako główny przykład użyto instrukcji ruchu PTP w trybie optymalnym czasowo.
-
-**Krok 1**: W interfejsie sterowania sieciowego robota kolejno kliknij "Ustawienia początkowe" -> "Bezpieczeństwo" -> "Konfiguracja ruchu", aby przejść do interfejsu "Konfiguracja ruchu".
+Ograniczenia robota obejmują pęd i moc, gdzie ograniczenie pędu jest używane do ograniczania maksymalnego pędu robota, a ograniczenie mocy jest używane do ograniczania pracy mechanicznej wykonywanej przez robota.
 
 .. image:: safety/015.png
+   :width: 4in
+   :align: center
+
+.. centered:: Rysunek 7.4-9 Ograniczenia Robota
+
+Stawy
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Miękkie Ograniczenia Stawów
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Na pasku menu "Ustawienia Początkowe" -> "Bezpieczeństwo" -> "Stawy" kliknij "Miękkie Ograniczenia Stawów", aby przejść do interfejsu miękkich ograniczeń.
+
+W zakresie ruchu robota mogą znajdować się inne urządzenia. Kąty ograniczeń mogą przeprowadzić miękkie ograniczenie robota, zapobiegając przemieszczaniu się robota poza określone wartości współrzędnych i zapobiegając kolizjom. Wyzwolenie miękkiego ograniczenia powoduje automatyczne zatrzymanie robota, bez odległości zatrzymania.
+
+Administratorzy mogą używać wartości domyślnych lub wprowadzać wartości kątowe. Wprowadzając wartości kątowe, dodatnie i ujemne kąty stawów robota mogą być ograniczane oddzielnie. Gdy wprowadzona wartość przekracza wartości kątów miękkich ograniczeń stawów robota wymienione w tabeli podstawowych parametrów robota w Sekcji 2.1-Podstawowe Parametry, kąt ograniczenia zostanie dostosowany do maksymalnej wartości możliwej do ustawienia. Gdy robot zgłosi błąd przekroczenia limitu polecenia stawu, należy przejść do trybu przeciągania i przeciągnąć staw robota z powrotem w zakres kąta ograniczenia.
+
+Funkcja ochrony miękkich ograniczeń stawów jest aktywnym mechanizmem ochrony, który monitoruje stan ruchu stawów ramienia robota w czasie rzeczywistym i dynamicznie ogranicza operatora przed przekroczeniem ustawionego zakresu miękkich ograniczeń podczas nauczania przez przeciąganie. Ta funkcja sprawia, że miękkie ograniczenia mają znaczenie nawet w nauczaniu przez przeciąganie, zwiększając w ten sposób bezpieczeństwo współpracy człowieka z robotem.
+
+- **Krok 1**: Zaloguj się do interfejsu internetowego i kliknij kolejno "Ustawienia Początkowe" -> "Bezpieczeństwo" -> "Stawy" -> "Miękkie Ograniczenia Stawów", aby przejść do modułu ustawiania miękkich ograniczeń robota.
+- **Krok 2**: Na podstawie rzeczywistego zakresu pracy robota, racjonalnie ustaw miękkie ograniczenia dla każdego stawu. W tym momencie sprawdź, czy bieżąca pozycja kątowa każdego stawu robota mieści się w zakresie wstępnie ustawionych miękkich ograniczeń. Jeśli tak, kliknij "Zastosuj", aby wysłać wstępnie ustawione miękkie ograniczenia. Jeśli nie, przesuń każdy staw w zakres wstępnie ustawiony; w przeciwnym razie po kliknięciu "Zastosuj" pojawi się komunikat o przekroczeniu limitu, jak pokazano na poniższym rysunku. W tym momencie możesz przesunąć lub przeciągnąć przekroczony staw w kierunku zakresu miękkich ograniczeń, aby usunąć błąd.
+- **Krok 3**: Po pomyślnym ustawieniu zakresu miękkich ograniczeń, wybierz "Włącz" dla "Ochrony Miękkich Ograniczeń Stawów", aby aktywować tę funkcję, jak pokazano na poniższym rysunku. W trybie przeciągania, ustawione miękkie ograniczenia będą obowiązywać, a podczas przeciągania w pobliżu miękkich ograniczeń wyczuwalny będzie opór.
+- **Krok 4**: Aby wyłączyć funkcję ochrony miękkich ograniczeń stawów, kliknij "Ochrona Miękkich Ograniczeń Stawów", aby ją wyłączyć.
+
+.. image:: safety/016.png
+   :width: 4in
+   :align: center
+
+.. centered:: Rysunek 7.4-10 Miękkie Ograniczenia Stawów
+
+Poziom Kolizji
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Na pasku menu "Ustawienia Początkowe" -> "Bezpieczeństwo" -> "Stawy" kliknij "Poziom Kolizji", aby przejść do interfejsu poziomu kolizji.
+Poziomy kolizji są podzielone na poziomy od 1 do 10. Poziomy 1 do 3 są bardziej czułe, a robot musi działać z zalecaną prędkością. Można również wybrać niestandardowe ustawienia procentowe, gdzie 100% odpowiada poziomowi 10. Jak pokazano na poniższym rysunku:
+
+.. image:: safety/017.png
    :width: 6in
    :align: center
 
-.. centered:: Wykres 7.13-6 Interfejs konfiguracji ruchu
+.. centered:: Rysunek 7.4-11 Diagram Poziomu Kolizji
 
-**Krok 2**: W interfejsie "Konfiguracja ruchu" kliknij przełącznik "Tryb optymalny czasowo", aby przejść do interfejsu "Tryb optymalny czasowo".
+Strategie kolizji to "Zatrzymaj przy Kolizji", "Wstrzymaj przy Kolizji" i "Kontynuuj Ruch". Aby uniknąć siły ściskającej między robotem a obiektami po kolizji, dodano strategie "Tryb Momentu Grawitacyjnego", "Tryb Reakcji Oscylacyjnej" i "Tryb Odbicia po Kolizji". Po wyzwoleniu wszystkie trzy strategie przełączą się z trybu automatycznego lub ręcznego na tryb przeciągania, a następnie z powrotem na tryb ręczny. Tryb momentu grawitacyjnego oddala się od punktu kolizji na podstawie wielkości i kierunku siły kolizji; tryb reakcji oscylacyjnej wraca do pozycji kolizji po oddaleniu się od niej; tryb odbicia po kolizji przyspiesza oddalanie się od punktu kolizji zgodnie z ustawionymi parametrami.
 
-.. image:: safety/016.png
-   :width: 3in
-   :align: center
-
-.. centered:: Wykres 7.13-7 Interfejs trybu optymalnego czasowo
-
-.. note:: W sekcji "Konfiguracja parametrów" interfejsu "Tryb optymalny czasowo", w sekcji "Współczynnik regulacji" można ustawić wartość od -100 do 100, co oznacza współczynnik skalowania służący do kontrolowania stopnia optymalizacji czasowej instrukcji ruchu. Wartość domyślna to 1.
-
-**Krok 3**: Określ punkty nauczania, dla których ma być wykonany ruch PTP. W tym przykładzie jako nazwy punktów nauczania użyto "A0" do "A5".
-
-**Krok 4**: W interfejsie sterowania sieciowego robota kolejno kliknij "Program nauczania" -> "Programowanie", aby przejść do interfejsu "Instrukcje ruchu".
-
-.. image:: safety/017.png
-   :width: 2in
-   :align: center
-
-.. centered:: Wykres 7.13-8 Interfejs instrukcji ruchu
-
-**Krok 5**: W interfejsie "Instrukcje ruchu" kliknij "Punkt-punkt", aby przejść do interfejsu edycji instrukcji "PTP". W polu "Nazwa punktu" wybierz punkt nauczania, w polu "Prędkość调试" ustaw żądany współczynnik prędkości, w polu "W tym punkcie" wybierz "Zatrzymaj", w polu "Czy przesunięcie" wybierz "Nie", a w polu "Ochrona ruchu" wybierz "Brak". Następnie kliknij "Dodaj".
+W sekcji "Strategia Kolizji" kliknij menu rozwijane, aby wybrać "Tryb Odbicia po Kolizji" i ustaw czas bezpieczeństwa na 1000ms, odległość bezpieczeństwa na 150mm, prędkość bezpieczeństwa na 150mm/s i współczynnik bezpieczeństwa dla każdego stawu na 5. Konkretny interfejs jest pokazany na poniższym rysunku.
 
 .. image:: safety/018.png
    :width: 6in
    :align: center
 
-.. centered:: Wykres 7.13-9 Interfejs edycji instrukcji ruchu PTP
+.. centered:: Rysunek 7.4-12 Strategia Kolizji: Tryb Odbicia po Kolizji
 
-**Krok 6**: W interfejsie edycji instrukcji ruchu "PTP" kliknij "Zastosuj", a odpowiedni program LUA zostanie automatycznie wygenerowany.
+Znaczenie każdego parametru:
+
+- Czas Bezpieczeństwa: Określa czas trwania w trybie przeciągania po przełączeniu z trybu automatycznego na tryb przeciągania, zakres [1000-2000]ms;
+- Odległość Bezpieczeństwa: Określa pozycję, w której robot oddala się od punktu kolizji po kolizji, zakres [150-200]mm;
+- Prędkość Bezpieczeństwa: Określa maksymalną prędkość TCP, z jaką robot oddala się od punktu kolizji po kolizji. Przekroczenie tego limitu prędkości ograniczy siłę odbicia, zakres [50-250]mm/s;
+- Współczynnik Bezpieczeństwa: Określa szybkość zanikania siły odbicia. Im mniejszy współczynnik, tym szybsze zanikanie i szybsza prędkość odbicia; im większy współczynnik, tym wolniejsze zanikanie. Zakres [1-10], bezwymiarowy.
+- Przed wejściem robota w tryb przeciągania wymagane jest wykrycie momentu obrotowego. Ta funkcja ma na celu zapobieganie nieprawidłowym zjawiskom, takim jak unoszenie lub opadanie po wejściu robota w tryb przeciągania z powodu błędnych parametrów obciążenia lub błędnych ustawień trybu instalacji przez operatora. Jeśli moment obrotowy stawu zostanie wykryty poza dopuszczalnym zakresem, kontroler natychmiast zgłosi błąd i zabroni robotowi wejścia w tryb przeciągania.
+
+Kroki włączenia funkcji wykrywania kolizji dla liniowej prowadnicy zębatkowej:
+
+- Krok 1: Upewnij się, że zarówno prowadnica, jak i robot są zamontowane frontalnie. Przed włączeniem funkcji wykrywania kolizji dla liniowej prowadnicy zębatkowej sprawdź, czy metoda instalacji jest frontalna. W szczególności, najpierw upewnij się, że prowadnica i robot są zamontowane frontalnie. Następnie kliknij kolejno "Ustawienia Początkowe" -> "Podstawowe" -> "Instalacja", aby przejść do strony instalacji swobodnej. Jeśli zarówno "Obrot Podstawy" jak i "Nachylenie Podstawy" wynoszą 0, oprogramowanie jest ustawione na frontalne; w przeciwnym razie należy je zmienić na 0. Jeśli nie są 0, interfejs wyświetli błąd.
+- Krok 2: Włącz funkcję wykrywania kolizji dla liniowej prowadnicy zębatkowej i ustaw parametry. Kliknij kolejno "Ustawienia Początkowe" -> "Bezpieczeństwo" -> "Stawy" -> "Poziom Kolizji", aby przejść do strony ustawień poziomu kolizji. Po kliknięciu suwaka funkcji "Wykrywanie Kolizji dla Liniowej Prowadnicy Zębatkowej" ustaw promień koła zębatego i masę suwaka. Promień koła zębatego można obliczyć na podstawie skoku i przełożenia. Masa suwaka nie obejmuje robota i jego obciążenia końcowego. Istnieje 11 opcji poziomu prowadnicy, gdzie Poziom 1 jest najłatwiejszy do wywołania kolizji, a Poziom 10 jest najtrudniejszy. Gdy kontroler jest włączony po raz pierwszy i przed wykonaniem programu adaptacji, poziom kolizji należy najpierw ustawić na "Wyłączony".
 
 .. image:: safety/019.png
    :width: 4in
    :align: center
 
-.. centered:: Wykres 7.13-10 Typowy program LUA ruchu PTP w trybie optymalnym czasowo
+.. centered:: Rysunek 7.4-13 Funkcja Wykrywania Kolizji dla Liniowej Prowadnicy Zębatkowej
+
+- Krok 3: Wykonaj program "Rail_Adaptation_Program.lua", aby dostosować się do bieżącej prowadnicy. Po każdym ponownym uruchomieniu kontrolera należy wykonać program "Rail_Adaptation_Program.lua" (aby zapobiec zmianom typu robota i innym czynnikom wpływającym na właściwości dynamiczne prowadnicy). Przed wykonaniem programu upewnij się, że poziom kolizji prowadnicy jest ustawiony na "Wyłączony". W trybie automatycznym uruchom program LUA z prędkością 100% prędkości interfejsu. Po wykonaniu jednego cyklu programu adaptacja jest zakończona i można zatrzymać wykonanie.
+
+.. image:: safety/020.png
+   :width: 4in
+   :align: center
+
+.. centered:: Rysunek 7.4-14 Wykonanie "Rail_Adaptation_Program.lua" w celu Dostosowania do Bieżącej Prowadnicy
+
+- Krok 4: Racjonalnie ustaw poziom kolizji prowadnicy i wykonuj zadania. Użytkownicy mogą racjonalnie ustawić poziom kolizji prowadnicy na podstawie wydajności sterownika silnika i prędkości wykonywania zadania. Jeśli prowadnica i robot działają asynchronicznie, kolizja z robotem lub prowadnicą może wywołać "błąd kolizji 8 osi, możliwy do zresetowania". W tym przypadku prowadnica zatrzymuje się, jak pokazano na Rysunku 2-9. Jeśli prowadnica i robot działają synchronicznie, kolizja z robotem może wywołać alarm, powodując zatrzymanie prowadnicy, podczas gdy robot reaguje zgodnie z ustawioną strategią kolizji.
+
+Tryb Zmniejszony
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Kliknij na pasku menu "Ustawienia Początkowe" -> "Bezpieczeństwo" i kliknij podmenu "Tryb Zmniejszony", aby przejść do interfejsu konfiguracji. Wybierz "Tryb Poziom 1/Poziom 2", aby skonfigurować prędkość stawów i prędkość TCP końcówki.
+
+.. image:: safety/021.png
+   :width: 4in
+   :align: center
+
+.. centered:: Rysunek 7.4-15 Tryb Zmniejszony
+
+I/O
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Kliknij na pasku menu "Ustawienia Początkowe" -> "Bezpieczeństwo" i kliknij podmenu "I/O", aby przejść do interfejsu konfiguracji.
+
+HMI zapewnia możliwość ustawienia stanu bezpieczeństwa dla 16 wejść cyfrowych i 16 wyjść cyfrowych, które mogą być ustawione jako ważne lub nieważne. Gdy kontroler stwierdzi, że znajduje się w stanie bezpieczeństwa, 16 wejść cyfrowych i 16 wyjść cyfrowych jest ustawianych na stan bezpieczeństwa.
+
+.. image:: safety/022.png
+   :width: 6in
+   :align: center
+
+.. centered:: Rysunek 7.4-16 Konfiguracja Stanu Bezpieczeństwa I/O
+
+W systemie LA:
+
+"I/O Bezpieczeństwo" zapewnia funkcje bezpieczeństwa DIO. Funkcja bezpieczeństwa to dwukanałowe DI lub DO. Gdy sygnał bezpieczeństwa DI lub flaga stanu bezpieczeństwa zostanie wyzwolona, DO jest wysyłane.
+
+.. image:: safety/023.png
+   :width: 6in
+   :align: center
+
+.. centered:: Rysunek 7.4-17 Konfiguracja Funkcji Bezpieczeństwa I/O
+
+Sprzęt
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Wykrywanie Mocy ServoJT (Używane tylko w systemie QX)
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Kliknij na pasku menu "Ustawienia Początkowe" -> "Bezpieczeństwo" i kliknij podmenu "Wykrywanie Mocy", aby przejść do interfejsu konfiguracji.
+
+Gdy działa bezpośrednio na pętlę prądową robota (tylko servoJT), jest używane do ograniczania pracy wykonywanej przez robota. Gdy całka prędkości i momentu obrotowego robota zostanie wykryta jako przekraczająca limit, aktywowana jest ochrona mocy.
+
+.. image:: safety/024.png
+   :width: 4in
+   :align: center
+
+.. centered:: Rysunek 7.4-18 Wykrywanie Mocy ServoJT
+
+Płaszczyzny
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Ściana Bezpieczeństwa
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Kliknij na pasku menu "Ustawienia Początkowe" -> "Bezpieczeństwo" i kliknij podmenu "Konfiguracja Ściany Bezpieczeństwa", aby przejść do interfejsu konfiguracji.
+
+- Konfiguracja Ściany Bezpieczeństwa: Kliknij przycisk Włącz, aby włączyć odpowiednią ścianę bezpieczeństwa. Gdy dla ściany bezpieczeństwa nie skonfigurowano zakresu bezpieczeństwa, wyświetlony zostanie błąd. Kliknij przycisk konfiguracji w prawym górnym rogu, wybierz ścianę bezpieczeństwa, którą chcesz ustawić, automatycznie wyświetlona zostanie odległość bezpieczeństwa (opcjonalna, domyślnie 0), a następnie kliknij przycisk "Ustaw", aby ustawić pomyślnie.
+- Konfiguracja Punktów Referencyjnych Ściany Bezpieczeństwa: Po wybraniu ściany bezpieczeństwa można ustawić cztery punkty referencyjne. Pierwsze trzy punkty to punkty referencyjne płaszczyzny, używane do potwierdzenia płaszczyzny ustawionej ściany bezpieczeństwa. Czwarty punkt to punkt referencyjny zakresu bezpieczeństwa, używany do potwierdzenia zakresu bezpieczeństwa ustawionej ściany bezpieczeństwa.
+
+Jeśli punkty referencyjne zostaną ustawione pomyślnie, zaświeci się zielone światło. W przeciwnym razie zaświeci się żółte światło, aż do momentu pomyślnego ustawienia punktów referencyjnych i zmiany koloru na zielony. Gdy wszystkie cztery punkty referencyjne zostaną pomyślnie ustawione, można obliczyć zakres bezpieczeństwa. Po pomyślnym obliczeniu stan punktu parametru zakresu bezpieczeństwa powraca do domyślnego.
+
+.. image:: safety/025.png
+   :width: 6in
+   :align: center
+
+.. centered:: Rysunek 7.4-19 Ustawienia Punktów Referencyjnych Zakresu Bezpieczeństwa
+
+- Efekt Zastosowania: Włącz pomyślnie skonfigurowaną ścianę bezpieczeństwa. Przeciągnij robota. Jeśli TCP końcówki robota znajduje się w ustawionym zakresie bezpieczeństwa, system działa prawidłowo. Jeśli znajduje się poza ustawionym zakresem bezpieczeństwa, wyświetlony zostanie błąd.
+
+.. image:: safety/026.png
+   :width: 6in
+   :align: center
+
+.. centered:: Rysunek 7.4-20 Efekt po Pomyślnym Ustawieniu Zakresu Bezpieczeństwa
+
+Strefa Interferencji
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Na pasku menu "Ustawienia Początkowe" -> "Bezpieczeństwo" -> "Strefa Interferencji" kliknij pozycję podmenu "Pojedyncza", aby przejść do interfejsu konfiguracji strefy interferencji.
+
+Musimy skonfigurować metodę interferencji i operację po wejściu do strefy interferencji. Metody interferencji są podzielone na "Interferencję Osi" i "Interferencję Prostopadłościanu".
+
+.. image:: safety/027.png
+   :width: 4in
+   :align: center
+
+.. centered:: Rysunek 7.4-21 Metody Strefy Interferencji
+
+Kliknij ikonę strefy interferencji, użyj przełącznika, aby kontrolować, czy jest włączona, i kliknij przycisk konfiguracji w prawym górnym rogu w celu konfiguracji parametrów.
+
+.. image:: safety/028.png
+   :width: 6in
+   :align: center
+
+.. centered:: Rysunek 7.4-22 Konfiguracja Strefy Interferencji
+
+Najpierw skonfiguruj ruch strefy interferencji jako "Kontynuuj Ruch" lub "Zatrzymaj". Następnie ustaw konfigurację przeciągania po wejściu do strefy interferencji. Użytkownicy mogą ustawić strategię po wejściu do strefy interferencji w trybie przeciągania zgodnie ze swoimi potrzebami: brak ograniczeń przeciągania, powrót impedancji lub przełączenie na tryb ręczny.
+
+Przy wyborze Interferencji Osi, należy skonfigurować parametry interferencji osi. Metoda wykrywania może być "Pozycja Polecenia" lub "Pozycja Sprzężenia Zwrotnego". Tryb strefy interferencji może być "Interferencja w Zakresie" lub "Interferencja poza Zakresem". Następnie ustaw zakres dla każdego stawu i czy zakres dla każdego stawu jest włączony. Możesz wprowadzać wartości lub użyć ikony "Odśwież" po "Min" i "Max", aby zapisać bieżącą pozycję robota, a na końcu kliknij Konfiguruj.
+
+.. image:: safety/029.png
+   :width: 6in
+   :align: center
+
+.. centered:: Rysunek 7.4-23 Konfiguracja Interferencji Osi
+
+Przy wyborze Interferencji Prostopadłościanu, należy skonfigurować parametry interferencji prostopadłościanu. Metoda wykrywania może być "Pozycja Polecenia" lub "Pozycja Sprzężenia Zwrotnego". Tryb strefy interferencji może być "Interferencja w Zakresie" lub "Interferencja poza Zakresem". Układ współrzędnych odniesienia może być "Współrzędna Bazowa" lub "Współrzędna Przedmiotu", wybierany zgodnie z rzeczywistym użyciem. Następnie ustaw zakres. Istnieją dwie metody ustawiania zakresu. Pierwsza metoda to "Metoda Dwóch Punktów", która wykorzystuje dwa przeciwległe wierzchołki prostopadłościanu. Pozycje mogą być wprowadzane lub rejestrowane poprzez nauczanie robota. Na koniec kliknij Zastosuj.
+
+.. image:: safety/030.png
+   :width: 6in
+   :align: center
+
+.. centered:: Rysunek 7.4-24 Konfiguracja Interferencji Prostopadłościanu
+
+Druga metoda to "Metoda Punkt Centralny + Długość Boku", gdzie punkt centralny prostopadłościanu i długość boku prostopadłościanu tworzą strefę interferencji. Pozycje mogą być wprowadzane lub rejestrowane poprzez nauczanie robota. Na koniec kliknij Zastosuj.
+
+.. image:: safety/031.png
+   :width: 6in
+   :align: center
+
+.. centered:: Rysunek 7.4-25 Konfiguracja Interferencji Prostopadłościanu
+
+Załącznik: Instrukcja Blokowania Oczekiwania Chwytaka
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Kliknij "Teach Program" -> "Instrukcje PerYferyjne" -> "Chwytak", aby dodać instrukcję oczekiwania na zakończenie ruchu chwytaka, która może blokować do czasu zakończenia akcji zaciskania w celu uzyskania rzeczywistej pozycji fizycznej chwytaka.
+
+.. image:: safety/032.png
+   :width: 4in
+   :align: center
+
+.. centered:: Rysunek 7.4-26 Instrukcja Oczekiwania na Zakończenie Ruchu Chwytaka
+ 
+- Stan Chwytaka: Ruch nie zakończony, ruch zakończony bez wykrycia obiektu, ruch zakończony z wykryciem obiektu;
+- Czas Limitu: Jednostka ms, -1 oznacza oczekiwanie wieczne.
+- Strategia Limitu: Można wybrać zatrzymanie z błędem lub kontynuowanie wykonywania.
+- Typ Chwytaka: Można wybrać chwytak równoległy lub chwytak obrotowy.
 
 .. note:: 
-   Typowy program LUA ruchu PTP w trybie optymalnym czasowo nie różni się od standardowego programu LUA ruchu PTP. Różnica polega na tym, że w Kroku 2 włączono funkcję "Tryb optymalny czasowo".
+   Uwaga: Instrukcja oczekiwania na zakończenie ruchu chwytaka jest odpowiednia tylko dla protokołów niestandardowych; zaadaptowane urządzenia obecnie jej nie obsługują.
 
-   Gdy przełącznik funkcji "Tryb optymalny czasowo" jest włączony, podstawowe instrukcje ruchu robota PTP, LIN i ARC działają w trybie optymalnym czasowo. Wyłączenie przełącznika funkcji "Tryb optymalny czasowo" w tym interfejsie przywraca podstawowe instrukcje ruchu PTP, LIN i ARC do ich standardowego stanu.
-   W tym interfejsie nie można jednocześnie włączyć przełącznika funkcji "Tryb wygładzania przyspieszenia".
+   Można również bezpośrednio użyć GetGripperMotionDone() do oceny. Parametr wejściowy to typ chwytaka: 0 dla chwytaka równoległego, 1 dla chwytaka obrotowego. Wartości zwracane to błąd chwytaka i stan chwytaka. Błąd chwytaka 0 oznacza brak błędu, inne wartości oznaczają, że wystąpił błąd. Stan chwytaka 0 oznacza ruch nie zakończony, 1 oznacza ruch zakończony bez wykrycia obiektu, 2 oznacza ruch zakończony z wykryciem obiektu. Przykładowe programy dla oczekiwania na zakończenie ruchu chwytaka i uzyskiwania pozycji chwytaka są następujące:
+
+.. image:: safety/033.png
+   :width: 6in
+   :align: center
+
+.. centered:: Rysunek 7.4-27 Przykładowy Program Ruchu Chwytaka

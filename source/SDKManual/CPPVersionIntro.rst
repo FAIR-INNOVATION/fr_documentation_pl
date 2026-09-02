@@ -13,6 +13,21 @@ Informacje o aktualizacji wersji
      - **Data**
      - **Opis aktualizacji**
 
+   * - V3.9.9
+     - 2026-09-01
+     - | 1. Zmodyfikowano opis parametrów interfejsu GetGripperMotionDone() do pobierania stanu chwytaka, zaktualizowano definicję stanu chwytaka;
+       | 2. Zmodyfikowano GetInverseKinExaxis(), interfejs rozwiązania kinematyki odwrotnej uwzględniający pozycje osi rozszerzonych, dodano parametry konfiguracji stawów z wartością domyślną -1 odnoszącą się do bieżącej konfiguracji stawów;
+       | 3. Zmodyfikowano interfejsy sterowania siłowego FT_SpiralSearch(), FT_LinInsertion() i FT_FindSurface() o parametry strategii postępowania w przypadku niewykrycia siły/momentu obrotowego;
+       | 4. Zmodyfikowano opisy parametrów interfejsów konfiguracji funkcji CIO skrzynki sterowniczej robota SetDIConfig(), GetDIConfig(), SetDOConfig(), GetDOConfig(), zaktualizowano nowo dodane nazwy funkcji i kody funkcji;
+       | 5. Zmodyfikowano przykłady kodu podstawowego sterowania robotem, dodano przykłady kodu przełączania do ręcznego trybu szybkiego;
+       | 6. Dodano polecenie ServoJ() dla ruchu w trybie serwo w przestrzeni stawów (wprowadzenie wielopunktowe) oraz przykłady kodu;
+       | 7. Dodano polecenie GetSafetyParamsCheckSum() do pobierania sumy kontrolnej parametrów konfiguracji bezpieczeństwa, polecenie SafetyOPPasswordCheck() do weryfikacji hasła operacji bezpieczeństwa oraz przykłady kodu;
+       | 8. Dodano polecenie GripperWaitMotionDone() do oczekiwania na zakończenie ruchu chwytaka oraz przykłady kodu;
+       | 9. Dodano polecenie SetRobotTime() do synchronizacji czasu systemowego z robotem oraz przykłady kodu;
+       | 10. Dodano konfiguracje SetSafetyDIConfig() dla funkcji CI dwukanałowej bezpieczeństwa, SetSafetyDOConfig() dla funkcji CO dwukanałowej bezpieczeństwa oraz przykłady kodu;
+       | 11. Dodano polecenie HiSpeedManualSwitch() do przełączania w ręczny tryb szybki;
+       | 12. Dodano przykłady kodu dla nakładania splotu podczas odtwarzania trajektorii czujnika laserowego;
+
    * - V3.9.8
      - 2026-07-27
      - | 1. Zaktualizowano strukturę zwrotną statusu robota o bieżący status wykonania programu LUA robota: 0 - program nie jest uruchomiony; 1 - program jest uruchomiony (włączając program wstrzymany);

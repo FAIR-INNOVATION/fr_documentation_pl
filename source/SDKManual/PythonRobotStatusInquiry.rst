@@ -406,13 +406,14 @@ Rozwiązanie kinematyki odwrotnej, przestrzeń kartezjańska z uwzględnieniem p
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototyp", "``GetInverseKinExaxis(type, desc_pos, exaxis, tool, workPiece)``"
+    "Prototyp", "``GetInverseKinExaxis(type, desc_pos, exaxis, tool, workPiece, config = -1)``"
     "Opis", "Rozwiązanie kinematyki odwrotnej, przestrzeń kartezjańska z uwzględnieniem pozycji osi rozszerzenia"
     "Parametry wymagane", "- ``type``: 0-pozycja absolutna (układ bazowy), 1-pozycja przyrostowa (układ bazowy), 2-pozycja przyrostowa (układ narzędzia)
     - ``desc_pos``: Pozycja kartezjańska
     - ``exaxis``: Pozycja osi rozszerzenia
     - ``tool``: Numer narzędzia
-    - ``workPiece``: Numer przedmiotu"
+    - ``workPiece``: Numer przedmiotu
+    - ``config -1``: automatyczne rozwiązanie, 0-7 odpowiada ośmiu zestawom rozwiązań"
     "Parametry domyślne", "Brak"
     "Wartość zwracana", "- Kod błędu sukces-0 błąd- errcode
     - ``joint_pos``: Pozycja przegubów"

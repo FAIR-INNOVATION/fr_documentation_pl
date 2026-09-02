@@ -403,9 +403,10 @@ Rozwiązanie odwrotnej kinematyki z pozycją osi rozszerzonej w przestrzeni kart
     * @param [in] tool Numer narzędzia
     * @param [in] workPiece Numer obiektu
     * @param [out] joint_pos Pozycja stawów
+    * @param [in] config Konfiguracja przestrzeni stawów, [-1] - rozwiązanie w oparciu o bieżącą pozycję stawów jako odniesienie, [0~7] - rozwiązanie zgodnie z określoną konfiguracją przestrzeni stawów
     * @return Kod błędu
     */
-    errno_t GetInverseKinExaxis(int type, DescPose desc_pos, ExaxisPos exaxis, int tool, int workPiece, JointPos& joint_pos);
+    errno_t GetInverseKinExaxis(int type, DescPose desc_pos, ExaxisPos exaxis, int tool, int workPiece, JointPos& joint_pos, int config = -1);
 
 Przykład kodu rozwiązania odwrotnej kinematyki z pozycją osi rozszerzonej
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

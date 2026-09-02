@@ -182,6 +182,14 @@ Przykład kodu
         robot.Mode(0);
         Thread.Sleep(1000);
         robot.Mode(1);
+        
+        rtn = robot.HiSpeedManualSwitch(1);
+        Console.WriteLine($"change high speed mode {rtn}");
+        Thread.Sleep(10000);
+
+        rtn = robot.HiSpeedManualSwitch(0);
+        Console.WriteLine($"change low speed mode {rtn}");
+        Thread.Sleep(1000);
     }
 
 Inicjalizacja parametrów logowania
@@ -296,3 +304,15 @@ Przykład kodu
         Console.WriteLine($"Firm driver6 Version  is: {ver[17]}");
         Console.WriteLine($"Firm end Version  is: {ver[18]}");
     }
+
+Przełączanie do Ręcznego Trybu Szybkiego
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Przełączanie do ręcznego trybu szybkiego
+    * @param [in] state 0-wyjście z ręcznego trybu szybkiego; 1-wejście w ręczny tryb szybki
+    * @return Kod błędu
+    */
+    public int HiSpeedManualSwitch(int state)    

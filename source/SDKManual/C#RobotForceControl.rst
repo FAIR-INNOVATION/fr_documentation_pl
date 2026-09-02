@@ -481,6 +481,24 @@ Wstawianie obrotowe
     */
     public int FT_RotInsertion(int rcs, double angVelRot, double ft, double max_angle, int orn, double max_angAcc, int rotorn, int strategy)
 
+Wyszukiwanie Spiralne
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief  Wyszukiwanie spiralne
+    * @param  [in] rcs Referencyjny układ współrzędnych, 0-układ narzędzia, 1-układ podstawy
+    * @param  [in] dr Posuw promienia na obrót
+    * @param  [in] ft Próg siły/momentu obrotowego, fx,fy,fz,tx,ty,tz, zakres [0~100]
+    * @param  [in] max_t_ms Maksymalny czas wyszukiwania, jednostka ms
+    * @param  [in] max_vel Maksymalna prędkość liniowa, jednostka mm/s
+    * @param  [in] strategy Strategia postępowania w przypadku niewykrycia siły/momentu obrotowego, 0-błąd; 1-ostrzeżenie, kontynuuj ruch
+    * @return  Kod błędu
+    */
+    public int FT_SpiralSearch(int rcs, float dr, float ft, float max_t_ms, float max_vel, int strategy = 0)
+
 Wstawianie Liniowe
 +++++++++++++++++++++++++++++++++++++++++++++
     
@@ -495,9 +513,10 @@ Wstawianie Liniowe
     * @param  [in] lin_a Przyspieszenie liniowe, jednostka mm/s^2, tymczasowo nieużywane
     * @param  [in] max_dis Maksymalna odległość wstawiania, jednostka mm
     * @param  [in] linorn  Kierunek wstawiania, 0-kierunek ujemny, 1-kierunek dodatni
+    * @param  [in] strategy Strategia postępowania w przypadku niewykrycia siły/momentu obrotowego, 0-błąd; 1-ostrzeżenie, kontynuuj ruch
     * @return  Kod błędu
     */
-    public int FT_LinInsertion(int rcs, float ft, float lin_v, float lin_a, float max_dis, byte linorn)
+    public int FT_LinInsertion(int rcs, float ft, float lin_v, float lin_a, float max_dis, byte linorn, int strategy=0)
 
 Przykład Kodu Wstawiania Rotacyjnego z Czujnikiem Siły
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -1027,9 +1046,10 @@ Pozycjonowanie Powierzchni
     * @param  [in] lin_a Przyspieszenie liniowe poszukiwania, jednostka mm/s^2, tymczasowo nieużywane, domyślnie 0
     * @param  [in] max_dis Maksymalna odległość poszukiwania, jednostka mm
     * @param  [in] ft  Próg siły/momentu zakończenia ruchu, fx,fy,fz,tx,ty,tz
+    * @param  [in] strategy Strategia postępowania w przypadku niewykrycia siły/momentu obrotowego, 0-błąd; 1-ostrzeżenie, kontynuuj ruch
     * @return  Kod błędu
     */
-    public int FT_FindSurface(int rcs, byte dir, byte axis, float lin_v, float lin_a, float max_dis, float ft)
+    public int FT_FindSurface(int rcs, byte dir, byte axis, float lin_v, float lin_a, float max_dis, float ft, int stragety = 0)
 
 Rozpoczęcie Obliczania Pozycji Płaszczyzny Środkowej
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
