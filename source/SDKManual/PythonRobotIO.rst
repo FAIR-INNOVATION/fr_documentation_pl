@@ -13,10 +13,10 @@ Ustawianie wyjścia cyfrowego skrzynki kontrolnej
 
     "Prototyp", "``SetDO(id, status, smooth=0, block=0)``"
     "Opis", "Ustawianie wyjścia cyfrowego skrzynki kontrolnej"
-    "Parametry wymagane", "-  ``id``: Numer wejścia/wyjścia, zakres [0~15];
-    - ``status``: 0-wył., 1-wł.;"
+    "Parametry wymagane", "- ``id``: Numer wejścia/wyjścia, zakres [0~15];
+    - ``status``: 0-wył., 1-wł."
     "Parametry domyślne", "- ``smooth``: 0-niewygładzane, 1-wygładzane domyślnie 0;
-    - ``block``: 0-blokujący, 1-nieblokujący domyślnie 0"
+    - ``block``: 0-blokujący, 1-nieblokujący domyślnie 0;"
     "Wartość zwracana", "Kod błędu sukces-0 błąd- errcode"
 
 Ustawianie wyjścia cyfrowego narzędzia
@@ -876,3 +876,136 @@ Przykład kodu SDK związany z konfiguracją IO
 
     # Wywołanie funkcji testowej
     TestIOConfig(robot)
+
+Konfiguracja Funkcji CI Dwukanałowej Bezpieczeństwa
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototyp", "``SetSafetyDIConfig(self, ID, config)``"
+    "Opis", "Konfiguracja funkcji CI dwukanałowej bezpieczeństwa"
+    "Parametry Wymagane", "
+    - ``ID``: ID dwukanałowy; [0-3]
+    - ``config``: Konfiguracja funkcji; 0-brak konfiguracji; 201-Zewnętrzny sygnał wejściowy awaryjnego zatrzymania 1; 202-Zewnętrzny sygnał wejściowy awaryjnego zatrzymania 2; 203-Tryb zmniejszony poziomu 1; 204-Tryb zmniejszony poziomu 2; 205-Tryb zmniejszony poziomu 3;
+                           206-Normalne zatrzymanie; 207-Ściana bezpieczeństwa 1; 208-Ściana bezpieczeństwa 2; 209-Ściana bezpieczeństwa 3; 210-Ściana bezpieczeństwa 4; 211-Ściana bezpieczeństwa 5; 212-Ściana bezpieczeństwa 6; 213-Ściana bezpieczeństwa 7;
+                           214-Ściana bezpieczeństwa 8; 215-Reset bezpiecznego zatrzymania;
+    "
+    "Parametry Domyślne", "Brak"
+    "Wartość Zwracana", "Kod błędu, 0-sukces; niezerowy-błąd"
+
+Konfiguracja Funkcji CO Dwukanałowej Bezpieczeństwa
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototyp", "``SetSafetyDOConfig(self, ID, config)``"
+    "Opis", "Konfiguracja funkcji CO dwukanałowej bezpieczeństwa"
+    "Parametry Wymagane", "
+    - ``ID``: ID dwukanałowy; [0-3]
+    - ``config``: Konfiguracja funkcji; 0-brak konfiguracji; 201-Sygnał wyjściowy awaryjnego zatrzymania 1; 202-Sygnał wyjściowy awaryjnego zatrzymania 2; 203-Wyjście statusu bezpieczeństwa; 204-Wyjście statusu zatrzymania ochronnego; 205-Robot w ruchu; 206-Robot w trybie zmniejszonym; 207-Robot w trybie niezmnieszonym;
+    "
+    "Parametry Domyślne", "Brak"
+    "Wartość Zwracana", "Kod błędu, 0-sukces; niezerowy-błąd"
+
+Przykład Kodu Konfiguracji Funkcji IO Dwukanałowej Bezpieczeństwa    
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: python
+    :linenos:
+
+    from fairino import Robot
+    import time
+
+    def main():
+        # Nawiązanie połączenia z kontrolerem robota
+        robot = Robot.RPC('192.168.58.2')
+        time.sleep(0.5)  # Oczekiwanie na połączenie i odbiór danych
+
+        print("========== Safety IO Config Test ==========")
+
+        # ========== Ustaw Konfigurację DI Bezpieczeństwa ==========
+        print("\n--- Set Safety DI Configuration ---")
+        rtn = robot.SetSafetyDIConfig(0, 201)
+        print(f"SetSafetyDIConfig(0, 201) rtn is {rtn}")
+
+        rtn = robot.SetSafetyDIConfig(1, 202)
+        print(f"SetSafetyDIConfig(1, 202) rtn is {rtn}")
+
+        rtn = robot.SetSafetyDIConfig(2, 203)
+        print(f"SetSafetyDIConfig(2, 203) rtn is {rtn}")
+
+        rtn = robot.SetSafetyDIConfig(3, 204)
+        print(f"SetSafetyDIConfig(3, 204) rtn is {rtn}")
+
+        # Pobierz konfigurację DI
+        rtn, getDIConfig = robot.GetDIConfig()
+        print(f"GetDIConfig rtn is {rtn}, value is {getDIConfig[0]} {getDIConfig[1]} {getDIConfig[2]} {getDIConfig[3]} {getDIConfig[4]} {getDIConfig[5]} {getDIConfig[6]} {getDIConfig[7]}")
+
+        # ========== Wyczyść Konfigurację DI Bezpieczeństwa ==========
+        print("\n--- Clear Safety DI Configuration ---")
+        rtn = robot.SetSafetyDIConfig(0, 0)
+        print(f"SetSafetyDIConfig(0, 0) rtn is {rtn}")
+
+        rtn = robot.SetSafetyDIConfig(1, 0)
+        print(f"SetSafetyDIConfig(1, 0) rtn is {rtn}")
+
+        rtn = robot.SetSafetyDIConfig(2, 0)
+        print(f"SetSafetyDIConfig(2, 0) rtn is {rtn}")
+
+        rtn = robot.SetSafetyDIConfig(3, 0)
+        print(f"SetSafetyDIConfig(3, 0) rtn is {rtn}")
+
+        # Pobierz konfigurację DI w celu weryfikacji czyszczenia
+        rtn, getDIConfig = robot.GetDIConfig()
+        print(f"GetDIConfig rtn is {rtn}, value is {getDIConfig[0]} {getDIConfig[1]} {getDIConfig[2]} {getDIConfig[3]} {getDIConfig[4]} {getDIConfig[5]} {getDIConfig[6]} {getDIConfig[7]}")
+
+        # ========== Ustaw Konfigurację DO Bezpieczeństwa ==========
+        print("\n--- Set Safety DO Configuration ---")
+        rtn = robot.SetSafetyDOConfig(0, 204)
+        print(f"SetSafetyDOConfig(0, 204) rtn is {rtn}")
+
+        rtn = robot.SetSafetyDOConfig(1, 205)
+        print(f"SetSafetyDOConfig(1, 205) rtn is {rtn}")
+
+        rtn = robot.SetSafetyDOConfig(2, 206)
+        print(f"SetSafetyDOConfig(2, 206) rtn is {rtn}")
+
+        rtn = robot.SetSafetyDOConfig(3, 207)
+        print(f"SetSafetyDOConfig(3, 207) rtn is {rtn}")
+
+        # Pobierz konfigurację DO
+        rtn, getDOConfig = robot.GetDOConfig()
+        print(f"GetDOConfig rtn is {rtn}, value is {getDOConfig[0]} {getDOConfig[1]} {getDOConfig[2]} {getDOConfig[3]} {getDOConfig[4]} {getDOConfig[5]} {getDOConfig[6]} {getDOConfig[7]}")
+
+        # ========== Wyczyść Konfigurację DO Bezpieczeństwa ==========
+        print("\n--- Clear Safety DO Configuration ---")
+        rtn = robot.SetSafetyDOConfig(0, 0)
+        print(f"SetSafetyDOConfig(0, 0) rtn is {rtn}")
+
+        rtn = robot.SetSafetyDOConfig(1, 0)
+        print(f"SetSafetyDOConfig(1, 0) rtn is {rtn}")
+
+        rtn = robot.SetSafetyDOConfig(2, 0)
+        print(f"SetSafetyDOConfig(2, 0) rtn is {rtn}")
+
+        rtn = robot.SetSafetyDOConfig(3, 0)
+        print(f"SetSafetyDOConfig(3, 0) rtn is {rtn}")
+
+        # Pobierz konfigurację DO w celu weryfikacji czyszczenia
+        rtn, getDOConfig = robot.GetDOConfig()
+        print(f"GetDOConfig rtn is {rtn}, value is {getDOConfig[0]} {getDOConfig[1]} {getDOConfig[2]} {getDOConfig[3]} {getDOConfig[4]} {getDOConfig[5]} {getDOConfig[6]} {getDOConfig[7]}")
+
+        time.sleep(2)
+
+        # Zamknięcie połączenia
+        robot.CloseRPC()
+        time.sleep(1)
+
+        print("\n========== Test Complete ==========")
+
+
+    if __name__ == "__main__":
+        main()    

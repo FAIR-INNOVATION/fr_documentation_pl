@@ -356,3 +356,73 @@ Przykład Kodu Ustawiania Prędkości Bezpieczeństwa Stawów Robota
         robot.Sleep(2000);
         return 0;
     }    
+
+Pobieranie Sumy Kontrolnej Parametrów Konfiguracji Bezpieczeństwa
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Pobiera sumę kontrolną parametrów konfiguracji bezpieczeństwa
+    * @param status Status weryfikacji, 0-ważny, 1-w trakcie weryfikacji, 2-weryfikacja nieudana
+    * @param checksum Suma kontrolna, 8-cyfrowa liczba szesnastkowa
+    * @return Kod błędu
+    */
+    public int GetSafetyParamsCheckSum(int[] status, long[] checksum)
+
+Weryfikacja Hasła Operacji Bezpieczeństwa
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Weryfikacja hasła operacji bezpieczeństwa
+    * @param status Weryfikacja, 0-włączona, 1-wyłączona
+    * @param password Hasło
+    * @return Kod błędu
+    */
+    public int SafetyOPPasswordCheck(int status, String password)
+
+Przykład Kodu Pobierania Sumy Kontrolnej Parametrów Konfiguracji Bezpieczeństwa i Weryfikacji Hasła Operacji Bezpieczeństwa    
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    public static void TestSafetyParamsCheckSum(Robot robot)
+    {
+        int[] status = new int[1];
+        long[] checksum = new long[1];
+
+        int error = robot.GetSafetyParamsCheckSum(status, checksum);
+        System.out.println(String.format("GetSafetyParamsCheckSum: error=%d, status=%d, hex_code=%08X", 
+            error, status[0], checksum[0]));
+        
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
+
+        error = robot.SafetyOPPasswordCheck(0, "12345678");
+        System.out.println(String.format("SafetyOPPasswordCheck: error=%d", error));
+
+        if (error == 0)
+        {
+            Object[] level = {2.0, 2.0, 2.0, 2.0, 2.0, 2.0};
+            error = robot.SetAnticollision(0, level, 1);
+            System.out.println(String.format("SetAnticollision: error=%d", error));
+
+            error = robot.SetCollisionStrategy(0, 1000, 150, 0, new int[]{10, 10, 10, 10, 10, 10});
+            System.out.println(String.format("SetCollisionStrategy: error=%d", error));
+        }
+
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
+
+        error = robot.GetSafetyParamsCheckSum(status, checksum);
+        System.out.println(String.format("GetSafetyParamsCheckSum(again): error=%d, status=%d, hex_code=%08X", 
+            error, status[0], checksum[0]));
+    }    

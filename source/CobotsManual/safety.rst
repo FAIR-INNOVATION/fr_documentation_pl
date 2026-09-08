@@ -186,7 +186,7 @@ Kliknij na pasku menu "Ustawienia Początkowe" -> "Bezpieczeństwo" i kliknij po
 .. centered:: Rysunek 7.4-7 Automatyczne Włączanie przy Starcie
 
 Ograniczenie Orientacji Narzędzia (Używane tylko w systemie LA)
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 Kliknij na pasku menu "Ustawienia Początkowe" -> "Bezpieczeństwo" i kliknij podmenu "Ograniczenie Orientacji Narzędzia", aby przejść do interfejsu konfiguracji.
 
@@ -408,30 +408,3 @@ Druga metoda to "Metoda Punkt Centralny + Długość Boku", gdzie punkt centraln
    :align: center
 
 .. centered:: Rysunek 7.4-25 Konfiguracja Interferencji Prostopadłościanu
-
-Załącznik: Instrukcja Blokowania Oczekiwania Chwytaka
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Kliknij "Teach Program" -> "Instrukcje PerYferyjne" -> "Chwytak", aby dodać instrukcję oczekiwania na zakończenie ruchu chwytaka, która może blokować do czasu zakończenia akcji zaciskania w celu uzyskania rzeczywistej pozycji fizycznej chwytaka.
-
-.. image:: safety/032.png
-   :width: 4in
-   :align: center
-
-.. centered:: Rysunek 7.4-26 Instrukcja Oczekiwania na Zakończenie Ruchu Chwytaka
- 
-- Stan Chwytaka: Ruch nie zakończony, ruch zakończony bez wykrycia obiektu, ruch zakończony z wykryciem obiektu;
-- Czas Limitu: Jednostka ms, -1 oznacza oczekiwanie wieczne.
-- Strategia Limitu: Można wybrać zatrzymanie z błędem lub kontynuowanie wykonywania.
-- Typ Chwytaka: Można wybrać chwytak równoległy lub chwytak obrotowy.
-
-.. note:: 
-   Uwaga: Instrukcja oczekiwania na zakończenie ruchu chwytaka jest odpowiednia tylko dla protokołów niestandardowych; zaadaptowane urządzenia obecnie jej nie obsługują.
-
-   Można również bezpośrednio użyć GetGripperMotionDone() do oceny. Parametr wejściowy to typ chwytaka: 0 dla chwytaka równoległego, 1 dla chwytaka obrotowego. Wartości zwracane to błąd chwytaka i stan chwytaka. Błąd chwytaka 0 oznacza brak błędu, inne wartości oznaczają, że wystąpił błąd. Stan chwytaka 0 oznacza ruch nie zakończony, 1 oznacza ruch zakończony bez wykrycia obiektu, 2 oznacza ruch zakończony z wykryciem obiektu. Przykładowe programy dla oczekiwania na zakończenie ruchu chwytaka i uzyskiwania pozycji chwytaka są następujące:
-
-.. image:: safety/033.png
-   :width: 6in
-   :align: center
-
-.. centered:: Rysunek 7.4-27 Przykładowy Program Ruchu Chwytaka

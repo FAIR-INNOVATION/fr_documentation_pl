@@ -763,6 +763,73 @@ Przykład kodu lokalizacji powierzchni
     robot.MoveCart(ycenter, 9, 0, 60.0)
     robot.CloseRPC()
 
+Przykład Kodu Strategii Niepowodzenia Poszukiwania ze Sterowaniem Siłowym
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: python
+    :linenos:
+
+    from fairino import Robot
+    import time
+
+    def main():
+        # Nawiązanie połączenia z kontrolerem robota
+        robot = Robot.RPC('192.168.58.2')
+        time.sleep(0.5)  # Oczekiwanie na połączenie i odbiór danych
+
+        print("========== Rozpoczęcie testu strategii sterowania siłowego FT ==========")
+
+        # ========== FT_SpiralSearch: strategy 0 / 1 ==========
+        print("=== FT_SpiralSearch strategy=0 ===")
+        rtn = robot.FT_SpiralSearch(0, 5, 5.0, 3000.0, 3.0, 0)
+        print(f"FT_SpiralSearch(0) rtn is {rtn}")
+        time.sleep(5)
+        robot.ResetAllError()
+        time.sleep(2)
+
+        print("=== FT_SpiralSearch strategy=1 ===")
+        rtn = robot.FT_SpiralSearch(0, 5, 1.0, 3000.0, 3.0, 1)
+        print(f"FT_SpiralSearch(1) rtn is {rtn}")
+        time.sleep(5)
+        robot.ResetAllError()
+        time.sleep(2)
+
+        # ========== FT_LinInsertion: strategy 0/1 ==========
+        print("=== FT_LinInsertion strategy=0 ===")
+        rtn = robot.FT_LinInsertion(0, 20.0, 15.0, 1.0, 10.0, 1, 0)
+        print(f"FT_LinInsertion(0) rtn is {rtn}")
+        time.sleep(5)
+        robot.ResetAllError()
+        time.sleep(2)
+
+        print("=== FT_LinInsertion strategy=1 ===")
+        rtn = robot.FT_LinInsertion(0, 20.0, 15.0, 1.0, 10.0, 1, 1)
+        print(f"FT_LinInsertion(1) rtn is {rtn}")
+        time.sleep(5)
+        robot.ResetAllError()
+        time.sleep(2)
+
+        # ========== FT_FindSurface: strategy 0/1 ==========
+        print("=== FT_FindSurface strategy=0 ===")
+        rtn = robot.FT_FindSurface(0, 1, 1, 15.0, 5, 50.0, 20.0, 0)
+        print(f"FT_FindSurface(0) rtn is {rtn}")
+        time.sleep(10)
+        robot.ResetAllError()
+        time.sleep(5)
+
+        print("=== FT_FindSurface strategy=1 ===")
+        rtn = robot.FT_FindSurface(0, 1, 1, 15.0, 5, 50.0, 20.0, 1)
+        print(f"FT_FindSurface(1) rtn is {rtn}")
+        time.sleep(10)
+        robot.ResetAllError()
+
+        print("koniec")
+
+        # Zamknięcie połączenia
+        robot.CloseRPC()
+
+    if __name__ == "__main__":
+        main()
+
 Włączenie sterowania zgodnego
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 

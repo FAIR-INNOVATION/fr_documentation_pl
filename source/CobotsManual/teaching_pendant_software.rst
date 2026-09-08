@@ -110,7 +110,7 @@ Ekran logowania wygląda następująco:
 Ustawienia wielojęzyczne
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-- System aktualnie zawiera osiem języków: chiński uproszczony, chiński tradycyjny, angielski, francuski, koreański, japoński, rosyjski i włoski.
+- System obecnie posiada 11 języków: chiński uproszczony, chiński tradycyjny, angielski, francuski, koreański, japoński, rosyjski, włoski, niemiecki, portugalski i polski.
 
 - Nazwa pakietu językowego musi mieć format: [kod języka].json, na przykład: es.json, gdzie kod języka jest zgodny z normą ISO 639-1.
 
@@ -169,6 +169,16 @@ Ustawienia wielojęzyczne
    * - niemiecki
      - Deutsch
      - de
+     - Tak
+
+   * - Portugalski
+     - Português
+     - pt
+     - Tak
+
+   * - Polski
+     - Polski
+     - pl
      - Tak
 
 1. Na ekranie logowania (lub na ekranie pierwszej aktywacji) wybierz język w prawym górnym rogu.

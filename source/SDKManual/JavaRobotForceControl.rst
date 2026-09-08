@@ -480,6 +480,58 @@ Wstawianie obrotowe
     */
     public int FT_RotInsertion(int rcs, double angVelRot, double ft, double max_angle, int orn, double max_angAcc, int rotorn, int strategy)
 
+Wyszukiwanie Spiralne
++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief  Wyszukiwanie spiralne
+    * @param  [in] rcs Referencyjny układ współrzędnych, 0-układ narzędzia, 1-układ podstawy
+    * @param  [in] dr Posuw promienia na obrót
+    * @param  [in] ft Próg siły/momentu obrotowego, fx,fy,fz,tx,ty,tz, zakres [0~100]
+    * @param  [in] max_t_ms Maksymalny czas wyszukiwania, jednostka ms
+    * @param  [in] max_vel Maksymalna prędkość liniowa, jednostka mm/s
+    * @param  [in] strategy Strategia postępowania w przypadku niewykrycia siły/momentu obrotowego, 0-błąd; 1-ostrzeżenie, kontynuuj ruch
+    * @return  Kod błędu
+    */
+    public int FT_SpiralSearch(int rcs, double dr, double ft, double max_t_ms, double max_vel, int strategy)
+
+Wstawianie Liniowe
++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Wstawianie liniowe
+    * @param rcs Referencyjny układ współrzędnych, 0-układ narzędzia, 1-układ podstawy
+    * @param ft Próg siły/momentu obrotowego, fx,fy,fz,tx,ty,tz, zakres [0~100]
+    * @param lin_v Prędkość liniowa, jednostka mm/s
+    * @param lin_a Przyspieszenie liniowe, jednostka mm/s^2, tymczasowo nieużywane
+    * @param max_dis Maksymalna odległość wstawiania, jednostka mm
+    * @param linorn Kierunek wstawiania, 0-kierunek ujemny, 1-kierunek dodatni
+    * @return Kod błędu
+    */
+    public int FT_LinInsertion(int rcs, double ft, double lin_v, double lin_a, double max_dis, int linorn, int strategy)
+
+Pozycjonowanie Powierzchni
++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Pozycjonowanie powierzchni
+    * @param rcs Referencyjny układ współrzędnych, 0-układ narzędzia, 1-układ podstawy
+    * @param dir Kierunek ruchu, 1-kierunek dodatni, 2-kierunek ujemny
+    * @param axis Oś ruchu, 1-oś x, 2-oś y, 3-oś z
+    * @param lin_v Prędkość liniowa poszukiwania, jednostka mm/s
+    * @param lin_a Przyspieszenie liniowe poszukiwania, jednostka mm/s^2, tymczasowo nieużywane, domyślnie 0
+    * @param max_dis Maksymalna odległość poszukiwania, jednostka mm
+    * @param ft Próg siły/momentu zakończenia ruchu, fx,fy,fz,tx,ty,tz
+    * @return Kod błędu
+    */
+    public int FT_FindSurface(int rcs, int dir, int axis, double lin_v, double lin_a, double max_dis, double ft, int strategy)
+
 Przykład kodu wstawiania obrotowego z czujnikiem siły robota
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java

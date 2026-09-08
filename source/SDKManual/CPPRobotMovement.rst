@@ -673,6 +673,131 @@ Przykład kodu ruchu w trybie serwo w przestrzeni stawów robota opartego na kom
         return 0;
     }
 
+Ruch w Trybie Serwo w Przestrzeni Stawów (Obsługuje Wprowadzenie Wielu Punktów Jednocześnie)
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    
+.. code-block:: c++
+    :linenos:
+
+    /**
+    * @brief Ruch w trybie serwo w przestrzeni stawów (obsługuje wprowadzenie wielu punktów jednocześnie)
+    * @param [in] joint_pos Zbiór docelowych pozycji stawów (obsługuje do 10 grup), jednostka deg
+    * @param [in] axisPos Pozycja osi zewnętrznych, jednostka mm
+    * @param [in] acc Procent przyspieszenia, zakres [0~100], jeszcze nieudostępniony, domyślnie 0
+    * @param [in] vel Procent prędkości, zakres [0~100], jeszcze nieudostępniony, domyślnie 0
+    * @param [in] cmdT Cykl wysyłania polecenia, jednostka s, zalecany zakres [0.001~0.0016]
+    * @param [in] filterT Czas filtrowania, jednostka s, jeszcze nieudostępniony, domyślnie 0
+    * @param [in] gain Wzmacniacz proporcjonalny pozycji docelowej, jeszcze nieudostępniony, domyślnie 0
+    * @param [out] servoJCmdCount Licznik punktów polecenia ServoJ [0-10000]
+    * @param [in] id ID polecenia ServoJ, domyślnie 0
+    * @param [in] comType Typ wysyłania polecenia; 0-xmlrpc; 1-UDP (odpowiada portowi robota 20007)
+    * @return Kod błędu
+    */
+    errno_t ServoJ(std::vector<JointPos> joint_pos, ExaxisPos* axisPos, float acc, float vel, float cmdT, float filterT, float gain, int& servoJCmdCount, int id = 0, int comType = 0);
+
+Przykład Kodu Ruchu w Trybie Serwo w Przestrzeni Stawów (Wprowadzenie Wielu Punktów)
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    
+.. code-block:: c++
+    :linenos:
+
+    int TestServoJMultiPos()
+    {
+        ROBOT_STATE_PKG pkg = {};
+        FRRobot robot;
+        robot.LoggerInit();
+        robot.SetLoggerLevel(1);
+        robot.SetReConnectParam(true, 30000, 500);
+        int rtn = robot.RPC("192.168.58.2");
+        if (rtn != 0)
+        {
+            return -1;
+        }
+        std::ifstream fin("C://Users/fr/Desktop/ServoJPath.txt");
+        if (!fin.is_open())
+        {
+            std::cerr << "open ServoJPath.txt failed\n";
+            return -1;
+        }
+        std::vector<JointPos> all_joint_data;
+        std::string line;
+        while (std::getline(fin, line))
+        {
+            std::istringstream iss(line);
+            double val;
+            int col_idx = 0;
+            std::vector<double> one_pose;
+            JointPos onePose = {};
+            while (iss >> val)
+            {
+                if (col_idx >= 1 && col_idx <= 6)
+                {
+                    one_pose.push_back(val);
+                }
+                col_idx++;
+            }
+            if (one_pose.size() == 6)
+            {
+                onePose.jPos[0] = one_pose[0];
+                onePose.jPos[1] = one_pose[1];
+                onePose.jPos[2] = one_pose[2];
+                onePose.jPos[3] = one_pose[3];
+                onePose.jPos[4] = one_pose[4];
+                onePose.jPos[5] = one_pose[5];
+                all_joint_data.push_back(onePose);
+            }
+        }
+        fin.close();
+        std::cout << "read " << all_joint_data.size() << " servoJPos\n";
+        std::vector<JointPos> back_forth_path;
+        back_forth_path.insert(back_forth_path.end(), all_joint_data.begin(), all_joint_data.end());
+        for (auto it = all_joint_data.rbegin() + 1; it != all_joint_data.rend(); ++it)
+        {
+            back_forth_path.push_back(*it);
+        }
+        ExaxisPos epos = {};
+        DescPose offset_pos = {};
+        robot.Sleep(1000);
+        while (1)
+        {
+            robot.ResetAllError();
+            robot.MoveJ(&all_joint_data[0], 0, 0, 100, 100, 100, &epos, -1, 0, &offset_pos);
+            int moveCount = 0;
+            while (moveCount < back_forth_path.size() - 10)
+            {
+                robot.GetRobotRealTimeState(&pkg);
+                int singleServoJCount = 50 - pkg.mc_queue_len;
+                if (singleServoJCount <= 0)
+                {
+                    robot.Sleep(100);
+                    continue;
+                }
+                if (singleServoJCount > 10)
+                {
+                    singleServoJCount = 10;
+                }
+                std::vector<JointPos> joint_pos = {};
+                for (int j = 0; j < singleServoJCount; j++)
+                {
+                    joint_pos.push_back(back_forth_path[moveCount]);
+                    moveCount++;
+                }
+                ExaxisPos axisPos = { 0.0, 0.0, 0.0, 0.0 };
+                int servoJCmdCount = 0;
+                rtn = robot.ServoJ(joint_pos, &axisPos, 100.0, 100.0, 0.008, 0.008, 1.0, servoJCmdCount);
+                if (rtn != 0)
+                {
+                    break;
+                }
+            }
+            robot.Sleep(4000);
+        }
+        robot.Sleep(1000);
+        robot.CloseRPC();
+        robot.Sleep(1000);
+        return 0;
+    }
+
 Rozpoczęcie sterowania momentem stawów
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C++SDK-v2.1.5.0

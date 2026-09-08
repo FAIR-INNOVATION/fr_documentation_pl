@@ -122,6 +122,19 @@ Zamknięcie systemu operacyjnego robota
     */
     errno_t ShutDownRobotOS();
 
+Przełączanie do Ręcznego Trybu Szybkiego
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. code-block:: c++
+    :linenos:
+
+    /**
+    * @brief Przełączanie do ręcznego trybu szybkiego
+    * @param [in] state 0-wyjście z ręcznego trybu szybkiego; 1-wejście w ręczny tryb szybki
+    * @return Kod błędu
+    */
+    errno_t HiSpeedManualSwitch(int state);    
+
 Ustawienie parametrów ponownego łączenia komunikacji z robotem
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C++SDK-v2.1.5.0

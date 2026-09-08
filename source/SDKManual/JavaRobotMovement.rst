@@ -871,6 +871,120 @@ Przykładowy program ruchu w trybie serwo w przestrzeni przegubów
         }
     }
 
+Ruch w Trybie Serwo w Przestrzeni Stawów (Obsługuje Wprowadzenie Wielu Punktów Jednocześnie)
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Ruch w trybie serwo w przestrzeni stawów (obsługuje wprowadzenie wielu punktów jednocześnie)
+    * @param [in] joint_pos Zbiór docelowych pozycji stawów (obsługuje do 10 grup), jednostka deg
+    * @param [in] axisPos Pozycja osi zewnętrznych, jednostka mm
+    * @param [in] acc Procent przyspieszenia, zakres [0~100], jeszcze nieudostępniony, domyślnie 0
+    * @param [in] vel Procent prędkości, zakres [0~100], jeszcze nieudostępniony, domyślnie 0
+    * @param [in] cmdT Cykl wysyłania polecenia, jednostka s, zalecany zakres [0.001~0.0016]
+    * @param [in] filterT Czas filtrowania, jednostka s, jeszcze nieudostępniony, domyślnie 0
+    * @param [in] gain Wzmacniacz proporcjonalny pozycji docelowej, jeszcze nieudostępniony, domyślnie 0
+    * @param [out] servoJCmdCount Licznik punktów polecenia ServoJ [0-10000]
+    * @param [in] id ID polecenia ServoJ, domyślnie 0
+    * @param [in] comType Typ wysyłania polecenia; 0-xmlrpc; 1-UDP (odpowiada portowi robota 20007)
+    * @return Kod błędu
+    */
+    public int ServoJ(List<JointPos> joint_pos, ExaxisPos axisPos, float acc, float vel, float cmdT, float filterT, float gain, ref int servoJCmdCount, int id = 0, int comType = 0)
+
+Przykład Kodu Ruchu w Trybie Serwo w Przestrzeni Stawów (Obsługuje Wprowadzenie Wielu Punktów Jednocześnie)
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    public static void TestServoJPath(Robot robot)
+    {
+        // Odczyt pliku ścieżki ServoJ, pobranie kolumn 2~7 każdej linii jako 6 pozycji stawów
+        String filePath = "D:\\zUP\\ServoJPath.txt";
+        List<JointPos> allJointData = new ArrayList<>();
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath)))
+        {
+            String line;
+            while ((line = reader.readLine()) != null)
+            {
+                String[] cols = line.split("[ \\t]+");
+                if (cols.length < 7)
+                    continue;
+                JointPos pose = new JointPos(0, 0, 0, 0, 0, 0);
+                pose.J1 = Double.parseDouble(cols[1]);
+                pose.J2 = Double.parseDouble(cols[2]);
+                pose.J3 = Double.parseDouble(cols[3]);
+                pose.J4 = Double.parseDouble(cols[4]);
+                pose.J5 = Double.parseDouble(cols[5]);
+                pose.J6 = Double.parseDouble(cols[6]);
+                allJointData.add(pose);
+            }
+        }
+        catch (IOException e)
+        {
+            System.out.println("Failed to read file: " + e.getMessage());
+            return;
+        }
+        System.out.println("Total " + allJointData.size() + " joint position sets read");
+        if (allJointData.isEmpty())
+            return;
+
+        // Utworzenie ścieżki tam i z powrotem: kolejność do przodu + kolejność do tyłu
+        List<JointPos> backForthPath = new ArrayList<>(allJointData);
+        for (int i = allJointData.size() - 2; i >= 0; i--)
+        {
+            backForthPath.add(allJointData.get(i));
+        }
+
+        ExaxisPos epos = new ExaxisPos(0.0, 0.0, 0.0, 0.0);
+        DescPose offsetPos = new DescPose(0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
+        robot.MoveJ(allJointData.get(0), 0, 0, 100, 100, 100, epos, -1, 0, offsetPos);
+
+        robot.Sleep(1000);
+
+        ROBOT_STATE_PKG pkg = new ROBOT_STATE_PKG();
+        while (true)
+        {
+            robot.ResetAllError();
+            robot.MoveJ(allJointData.get(0), 0, 0, 100, 100, 100, epos, -1, 0, offsetPos);
+            int moveCount = 0;
+            while (moveCount < backForthPath.size() - 10)
+            {
+                pkg = robot.GetRobotRealTimeState();
+
+                int singleServoJCount = 50 - pkg.mc_queue_len;
+                if (singleServoJCount <= 0)
+                {
+                    robot.Sleep(100);
+                    continue;
+                }
+                if (singleServoJCount > 10)
+                {
+                    singleServoJCount = 10;
+                }
+
+                List<JointPos> jointPos = new ArrayList<>();
+                for (int j = 0; j < singleServoJCount; j++)
+                {
+                    jointPos.add(backForthPath.get(moveCount));
+                    moveCount++;
+                }
+
+                System.out.println("Sending " + singleServoJCount + " waypoints, moveCount=" + moveCount);
+
+                ExaxisPos axisPos = new ExaxisPos(0.0, 0.0, 0.0, 0.0);
+                int[] servoJCmdCount = new int[1];
+                int rtn = robot.ServoJ(jointPos, axisPos, 100.0f, 100.0f, 0.008f, 0.008f, 1.0f, servoJCmdCount, 0, 0);
+                if (rtn != 0)
+                {
+                    System.out.println("ServoJ failed: " + rtn);
+                    break;
+                }
+            }
+            robot.Sleep(4000);
+        }
+    }
+
 Rozpoczęcie sterowania momentem obrotowym przegubów
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 

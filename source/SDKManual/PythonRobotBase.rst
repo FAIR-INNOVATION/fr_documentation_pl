@@ -128,6 +128,21 @@ Zamykanie systemu operacyjnego robota
     "Parametry domyślne", "Brak"
     "Wartość zwracana", "Kod błędu sukces-0 błąd- errcode"
 
+Przełączanie do Ręcznego Trybu Szybkiego
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototyp", "``HiSpeedManualSwitch(self, state)``"
+    "Opis", "Przełączanie do ręcznego trybu szybkiego"
+    "Parametry Wymagane", "
+    - ``state``：0-wyjście z ręcznego trybu szybkiego; 1-wejście w ręczny tryb szybki
+    "
+    "Parametry Domyślne", "Brak"
+    "Wartość Zwracana", "Kod błędu, 0-sukces; niezerowy-błąd"
+
 Inicjalizacja parametrów logowania
 +++++++++++++++++++++++++++++++++++++++++++++++++++++
 

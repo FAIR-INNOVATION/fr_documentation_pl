@@ -342,6 +342,54 @@ Przykład kodu pobierania stanu chwytaka obrotowego
       return 0;
     }
 
+Oczekiwanie na Status Ruchu Chwytaka
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c++
+    :linenos:
+
+    /**
+    * @brief Oczekuje na status ruchu chwytaka (zdefiniowany tylko dla otwartego protokołu końcówki; dla zaadaptowanych urządzeń pobierany status ruchu jest wartością przelotową)
+    * @param [in] status 0-ruch nie zakończony, 1-ruch zakończony bez wykrycia obiektu, 2-ruch zakończony z wykryciem obiektu
+    * @param [in] timeout Limit czasu (ms), -1 dla nieskończonego oczekiwania
+    * @param [in] strategy 0-zatrzymaj z błędem, 1-kontynuuj działanie
+    * @param [in] type 0-chwytak równoległy, 1-chwytak obrotowy
+    * @return Kod błędu
+    */
+    errno_t GripperWaitMotionDone(int status, int timeout, int strategy, int type);
+    
+Przykład Kodu Oczekiwania na Status Ruchu Chwytaka
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c++
+    :linenos:
+
+    int TestGripperWaitMotionDone()
+    {
+    ROBOT_STATE_PKG pkg = {};
+    FRRobot robot;
+    robot.LoggerInit();
+    robot.SetLoggerLevel(1);
+    robot.SetReConnectParam(true, 30000, 500);
+    int rtn = robot.RPC("192.168.58.2");
+    if (rtn != 0)
+    {
+        return -1;
+    }
+    for (int i = 0; i < 10; i++)
+    {
+        rtn = robot.MoveGripper(1, 0, 10, 100, 30000, 0, 0, 0, 0, 0);
+        printf("MoveGripper(Open) ret=%d\n", rtn);
+        rtn = robot.GripperWaitMotionDone(1, 10000, 0, 0);
+        printf("GripperWaitMotionDone(Wait for motion completed without object detection) ret=%d\n", rtn);
+        rtn = robot.MoveGripper(1, 90, 10, 100, 30000, 0, 0, 0, 0, 0);
+        printf("MoveGripper(Close) ret=%d\n", rtn);
+        rtn = robot.GripperWaitMotionDone(1, 10000, 0, 0);
+        printf("GripperWaitMotionDone(Wait for motion completed without object detection) ret=%d\n", rtn);
+    }
+    robot.Sleep(1000);
+    robot.CloseRPC();
+    robot.Sleep(1000);
+    }
+
 Uruchamianie, zatrzymywanie przenośnika
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
@@ -1950,6 +1998,159 @@ Przykład kodu synchronizacji śledzenia laserowego z osią rozszerzoną i robot
             printf("Synchronizacja śledzenia laserowego z osią rozszerzoną i robotem, %d raz\n", cnt);
         }
         robot.CloseRPC();
+    }
+
+Przykład Kodu Odtwarzania Rejestracji Laserowej + Asynchroniczny Ruch Osi Rozszerzonych + Splot w Punktach Stałych
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    
+.. code-block:: c++
+    :linenos:
+
+    void TestLaserRecordReplayExaxisWithWave()
+    {
+    ROBOT_STATE_PKG pkg = {};
+    FRRobot robot = {};
+    robot.LoggerInit();
+    robot.SetLoggerLevel(1);
+    robot.SetReConnectParam(true, 30000, 500);
+    int rtn = robot.RPC("192.168.58.2");
+    if (rtn != 0)
+    {
+        return;
+    }
+    JointPos startjointPos = JointPos(105.600, -65.393, -93.638, -79.687, 79.175, 134.046);
+    DescPose startdescPose = DescPose(42.376, 533.597, 362.564, -34.957, -0.564, 169.063);
+    JointPos endjointPos = JointPos(105.600, -65.393, -93.638, -79.687, 79.175, 134.046);
+    DescPose enddescPose = DescPose(42.376, 533.597, 362.564, -34.957, -0.564, 169.063);
+    DescPose offdese = DescPose(0, 0, 0, 0, 0, 0);
+    ExaxisPos exaxis0Pos(0, 134.296, 0, 0);
+    ExaxisPos exaxis1Pos(0, 74.335, 0, 0);
+    // MoveJ do punktu bezpiecznego (Oś rozszerzona 0,174.957,0,0)
+    rtn = robot.MoveJ(&startjointPos, &startdescPose, 5, 0, 100, 100, 50, &exaxis0Pos, -1, 0, &offdese);
+    printf("MoveJ start: %d\n", rtn);
+    // Asynchroniczny ruch osi rozszerzonej do pozycji początkowej 105.003
+    rtn = robot.ExtAxisMove(exaxis1Pos, 50, -1);
+    printf("ExtAxisMove 105.003: %d\n", rtn);
+    robot.Sleep(3000);
+    // MoveL do punktu początkowego
+    rtn = robot.MoveL(&endjointPos, &enddescPose, 5, 0, 100, 100, 50, -1, 0, &exaxis1Pos, 0, 0, &offdese, 100, 0, 0, 10);
+    printf("MoveL end: %d\n", rtn);
+    // Rozpocznij rejestrację laserową
+    rtn = robot.LaserSensorRecord1(2, 10);
+    printf("LaserSensorRecord start: %d\n", rtn);
+    // Oś rozszerzona przesuwa się do 174.957 podczas rejestracji
+    rtn = robot.ExtAxisMove(exaxis0Pos, 50, -1);
+    printf("ExtAxisMove 174.957: %d\n", rtn);
+    robot.Sleep(3000);
+    // Zatrzymaj rejestrację laserową
+    rtn = robot.LaserSensorRecord1(0, 10);
+    printf("LaserSensorRecord stop: %d\n", rtn);
+    // Oś rozszerzona wraca do 105.003, MoveL powrót do punktu początkowego
+    rtn = robot.ExtAxisMove(exaxis1Pos, 50, -1);
+    printf("ExtAxisMove back: %d\n", rtn);
+    // MoveL do punktu początkowego
+    rtn = robot.MoveL(&endjointPos, &enddescPose, 5, 0, 100, 100, 50, -1, 0, &exaxis1Pos, 0, 0, &offdese, 100, 0, 0, 10);
+    printf("MoveL back: %d\n", rtn);
+    // Ruch PTP do początku ścieżki zarejestrowanej laserowo
+    rtn = robot.MoveToLaserRecordStart(0, 30);
+    printf("MoveToLaserRecordStart: %d\n", rtn);
+    // Rozpocznij odtwarzanie
+    rtn = robot.LaserSensorRecord1(3, 10);
+    printf("LaserSensorRecord replay: %d\n", rtn);
+    // Rozpocznij splot w punktach stałych
+    DescPose refPoint = DescPose(49.381, 533.608, 362.556, -34.961, -0.564, 169.062);
+    rtn = robot.OriginPointWeaveStart(0, 1, refPoint, 5);
+    printf("OriginPointWeaveStart: %d\n", rtn);
+    // Oś rozszerzona przesuwa się do 174.957 podczas splotu
+    rtn = robot.ExtAxisMove(exaxis0Pos, 50, -1);
+    printf("ExtAxisMove replay: %d\n", rtn);
+    // Zakończ splot
+    rtn = robot.OriginPointWeaveEnd();
+    printf("OriginPointWeaveEnd: %d\n", rtn);
+    // Zatrzymaj odtwarzanie
+    rtn = robot.LaserSensorRecord1(0, 10);
+    printf("LaserSensorRecord stop: %d\n", rtn);
+    robot.CloseRPC();
+    robot.Sleep(1000);
+    }
+                                                            
+Przykład Kodu Odtwarzania Rejestracji Laserowej + Splot Normalny
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    
+.. code-block:: c++
+    :linenos:
+
+    void TestLaserReproduceNormalWeave()
+    {
+    ROBOT_STATE_PKG pkg = {};
+    FRRobot robot = {};
+    robot.LoggerInit();
+    robot.SetLoggerLevel(1);
+    robot.SetReConnectParam(true, 30000, 500);
+    int rtn = robot.RPC("192.168.58.2");
+    if (rtn != 0)
+    {
+        return;
+    }
+
+    JointPos startjointPos = JointPos(68.930, -70.217, -121.821, -75.522, 91.216, 137.289);
+    DescPose startdescPose = DescPose(216.097, 304.517, 34.164, -3.871, 0.792, 132.864);
+    JointPos endjointPos = JointPos(58.092, -78.843, -115.569, -73.420, 91.662, 126.457);
+    DescPose enddescPose = DescPose(296.276, 307.453, 34.803, -3.868, 0.783, 132.864);
+    DescPose offdese = DescPose(0, 0, 0, 0, 0, 0);
+    ExaxisPos exaxis0Pos(0, 174.957, 0, 0);
+    ExaxisPos exaxis1Pos(0, 105.003, 0, 0);
+
+    robot.Sleep(1000);
+
+    // MoveL do pozycji początkowej (Oś rozszerzona 0,174.957,0,0)
+    rtn = robot.MoveL(&startjointPos, &startdescPose, 5, 0, 100, 100, 100, -1, 0, &exaxis0Pos, 0, 0, &offdese, 100, 0, 0, 10);
+    printf("MoveL start: %d\n", rtn);
+
+    // Rozpocznij rejestrację laserową
+    rtn = robot.LaserSensorRecord1(2, 10);
+    printf("LaserSensorRecord start: %d\n", rtn);
+
+    // MoveL do pozycji końcowej
+    rtn = robot.MoveL(&endjointPos, &enddescPose, 5, 0, 100, 100, 100, -1, 0, &exaxis0Pos, 0, 0, &offdese, 100, 0, 0, 10);
+    printf("MoveL end: %d\n", rtn);
+
+    // Zatrzymaj rejestrację laserową
+    rtn = robot.LaserSensorRecord1(0, 10);
+    printf("LaserSensorRecord stop: %d\n", rtn);
+
+    // MoveL powrót do pozycji początkowej
+    rtn = robot.MoveL(&startjointPos, &startdescPose, 5, 0, 100, 100, 100, -1, 0, &exaxis0Pos, 0, 0, &offdese, 100, 0, 0, 10);
+    printf("MoveL back: %d\n", rtn);
+
+    // Ruch LIN do początku ścieżki zarejestrowanej laserowo
+    rtn = robot.MoveToLaserRecordStart(1, 30);
+    printf("MoveToLaserRecordStart: %d\n", rtn);
+
+    // Rozpocznij splot normalny
+    rtn = robot.WeaveStart(0);
+    printf("WeaveStart: %d\n", rtn);
+
+    // Rozpocznij odtwarzanie rejestracji
+    rtn = robot.LaserSensorRecord1(3, 10);
+    printf("LaserSensorRecord replay: %d\n", rtn);
+
+    // Ruch odtwarzania śledzenia laserowego
+    rtn = robot.MoveLTR();
+    printf("MoveLTR: %d\n", rtn);
+
+    robot.Sleep(3000);
+
+    // Zatrzymaj odtwarzanie rejestracji
+    rtn = robot.LaserSensorRecord1(0, 10);
+    printf("LaserSensorRecord stop: %d\n", rtn);
+
+    // Zakończ splot normalny
+    rtn = robot.WeaveEnd(0);
+    printf("WeaveEnd: %d\n", rtn);
+
+    robot.CloseRPC();
+    robot.Sleep(1000);
     }
 
 Włączanie/wyłączanie funkcji transmisji przez końcówkę
