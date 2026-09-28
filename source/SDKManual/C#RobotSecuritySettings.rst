@@ -291,7 +291,7 @@ Przykład kodu SDK ustawiania parametrów bezpiecznej prędkości
 Pobieranie Sumy Kontrolnej Parametrów Konfiguracji Bezpieczeństwa
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     
-.. code-block:: c++
+.. code-block:: c#
     :linenos:  
 
     /**
@@ -301,7 +301,49 @@ Pobieranie Sumy Kontrolnej Parametrów Konfiguracji Bezpieczeństwa
     * @return  Kod błędu
     */
     public int GetSafetyParamsCheckSum(ref int status, ref uint checksum)
+
+Ustawianie włączenia szyfrowania mTLS i ścieżki certyfikatu
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    
+.. code-block:: c#
+    :linenos:  
+
+    //Główny przełącznik mTLS: domyślnie false; przed inicjalizacją RPC ustaw false, aby wymusić tryb jawny
+    public bool EnableMtls { get; set; } = false;
+
+    //Katalog certyfikatów mTLS: domyślnie null = certs/ w tym samym katalogu co dll SDK; należy ustawić przed RPC()
+    public string MtlsCertDir { get; set; }
         
+Przykład kodu ustawiania włączenia szyfrowania mTLS i ścieżki certyfikatu
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    
+.. code-block:: c#
+    :linenos:  
+
+    public Form1()
+    {
+        InitializeComponent();
+        robot = new Robot();//Utwórz instancję obiektu robota
+        string path = "D://log/";
+        robot.LoggerInit(FrLogType.BUFFER, FrLogLevel.INFO, path, 5, 5);
+        robot.SetLoggerLevel(FrLogLevel.INFO);
+
+        // Wyświetl końcową konfigurację CNDE
+        List<RobotState> finalStates;
+        int finalPeriod;
+        robot.GetRobotRealtimeStateConfig(out finalStates, out finalPeriod);
+        Console.WriteLine($"Liczba stanów końcowej konfiguracji: {finalStates.Count}");
+        foreach (var s in finalStates) Console.WriteLine($"  {s}");
+        Console.WriteLine($"Końcowy okres: {finalPeriod} ms");
+        robot.SetReconnectParam(true, 1000, 500);//Parametry ponownego połączenia
+            
+        robot.EnableMtls = true;
+        robot.MtlsCertDir = @"D:\C#SDK\MTLS-certs";   // Jeśli ścieżka certyfikatu nie zostanie ustawiona, domyślnie jest to <katalog libfairino.dll>\certs
+        rrpc = robot.RPC("192.168.58.2"); //Nawiąż połączenie ze skrzynką sterowniczą
+                                            //Limit czasu odbioru portu 20004
+                                            //robot.SetReceivePortTimeout(40);
+    }
+
 Weryfikacja Hasła Operacji Bezpieczeństwa
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     

@@ -10,9 +10,10 @@ Instancja robota
     :linenos:
 
     /**
-    * @brief  Konstruktor klasy interfejsu robota
+    * @brief Konstruktor klasy interfejsu robota
+    * @param [in] _TLSEnable Włączenie szyfrowania komunikacji zintegrowanego protokołu poleceń SDK robota; domyślnie wyłączone
     */
-    FRRobot();
+    FRRobot(bool _TLSEnable = false);
 
 Nawiązanie komunikacji z kontrolerem
 ++++++++++++++++++++++++++++++++++++

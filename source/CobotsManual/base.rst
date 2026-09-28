@@ -51,6 +51,20 @@ Kliknij przycisk "Zmień nazwę", aby zmienić nazwę układu współrzędnych. 
 
 .. centered:: Wykres 6.2‑1-2 Zmiana nazwy układu współrzędnych
 
+Kliknij przycisk importu po "Model narzędzia", aby otworzyć okno importu modelu narzędzia, wybierz żądany plik modelu narzędzia (obsługiwane są tylko pliki w formacie .stl i .dae), a po potwierdzeniu importu model narzędzia zostanie wyświetlony na końcu robota w modelu 3D. Kliknij przycisk przełączania modelu narzędzia na pasku operacyjnym sceny 3D, aby sterować wyświetlaniem i ukrywaniem.
+
+.. image:: base/108.png
+   :width: 4in
+   :align: center
+
+.. centered:: Rysunek 6.2-1-3 Import modelu narzędzia
+
+.. image:: base/109.png
+   :width: 4in
+   :align: center
+
+.. centered:: Rysunek 6.2-1-3 Ładowanie modelu narzędzia
+  
 Kliknij "Modyfikuj", aby ponownie ustawić układ współrzędnych narzędzia o danym numerze zgodnie z instrukcjami. Metody kalibracji narzędzia dzielą się na metodę czteropunktową i metodę sześciopunktową. Metoda czteropunktowa kalibruje tylko TCP narzędzia, czyli pozycję środka punktu narzędzia, a jego orientacja jest domyślnie zgodna z orientacją końcówki. Metoda sześciopunktowa dodaje dwa punkty do metody czteropunktowej w celu kalibracji orientacji narzędzia. Tutaj omówimy metodę sześciopunktową jako przykład.
 
 .. image:: base/002.png
@@ -971,6 +985,21 @@ Funkcje konfigurowalne dla wyjść przedstawiono w poniższej tabeli:
    * - 47
      - Załączenie robota
      - Stan załączenia robota
+   * - 48
+     - Port wejściowy JOB 4
+     - Sygnał portu wejściowego JOB 4
+   * - 49
+     - Port wejściowy JOB 5
+     - Sygnał portu wejściowego JOB 5
+   * - 50
+     - Port wejściowy JOB 6
+     - Sygnał portu wejściowego JOB 6
+   * - 51
+     - Port wejściowy JOB 7
+     - Sygnał portu wejściowego JOB 7
+   * - 52
+     - Port wejściowy JOB 8
+     - Sygnał portu wejściowego JOB 8  
 
 Funkcja konfigurowalna wysokiego/niskiego stanu aktywnego DO skrzynki sterowniczej
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

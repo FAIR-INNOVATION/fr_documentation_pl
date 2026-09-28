@@ -12,7 +12,16 @@ Informacje o aktualizacji wersji
    * - **Numer wersji**
      - **Data**
      - **Opis aktualizacji**
-     
+
+   * - V4.0.0
+     - 2026-09-23
+     - | 1. Zmodyfikowano opis parametrów interfejsu SetWeldMachineCtrlMode() do ustawiania trybu sterowania spawarką, dodając tryby impulsowy i bezimpulsowy dla spawarek Panasonic;
+       | 2. Dodano polecenie SendTCPFrame() do wysyłania niestandardowych ramek poleceń przez TCP 8080, wraz z przykładem kodu;
+       | 3. Dodano polecenie TCFToAllJoint() do uzyskiwania 8 zestawów rozwiązań odwrotnych robota, wraz z przykładem kodu;
+       | 4. Dodano polecenie SetPhySpeedInstant() do ustawiania prędkości fizycznej w czasie rzeczywistym, wraz z przykładem kodu;
+       | 5. Dodano polecenie MtlsLink() do ustawiania ścieżki certyfikatu szyfrowania komunikacji TLS dla zintegrowanego protokołu poleceń w SDK, wraz z przykładem kodu;
+       | 6. Dodano opisy niektórych kodów błędów SDK;
+
    * - V3.9.9
      - 2026-09-01
      - | 1. Zaktualizowano interfejs GetGripperMotionDone() do pobierania statusu ruchu chwytaka, zaktualizowano definicję i zakres użycia parametrów wyjściowych statusu chwytaka;

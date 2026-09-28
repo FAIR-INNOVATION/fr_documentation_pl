@@ -66,7 +66,7 @@ Użyj paska narzędzi u góry drzewa programu, aby je modyfikować.
 
    Nazwa: **Otwórz**
 
-   Działanie: Otwiera plik programu użytkownika
+   Działanie: Otwieranie plików programów użytkownika i obsługa sortowania według liter (A~Z lub Z~A) albo według czasu ostatniej modyfikacji.
 
 .. note:: 
    .. image:: coding/007.png
@@ -294,6 +294,12 @@ Ikony w prawym górnym rogu są opisane w następujący sposób:
    Nazwa: **Konfiguracja Programu Głównego**
    
    Funkcja: Konfiguracja programu głównego
+
+.. image:: coding/625.png
+   :width: 6in
+   :align: center
+
+.. centered:: Rysunek 9.3-1 Sortowanie nazw programów
 
 Polecenia programu
 ~~~~~~~~~~~~~~~~~~
@@ -3027,7 +3033,7 @@ Ta instrukcja zawiera osiem instrukcji: FT_Guard (wykrywanie kolizji), FT_Contro
 .. centered:: Schemat 9.9-1 Interfejs instrukcji F/T
 
 Optymalizacja Pakietu Procesów Montażu ze Sterowaniem Siłowym
-*************************************************
+*****************************************************************************
 
 Przegląd
 """"""""""""""""""""""""""""""""""""

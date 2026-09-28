@@ -1328,15 +1328,40 @@ Przykład kodu kalibracji TCP czujnika fotoelektrycznego
         Console.WriteLine($"Orientacja RPY narzędzia: RX={TCP.rpy.rx:F3}, RY={TCP.rpy.ry:F3}, RZ={TCP.rpy.rz:F3}");
     }
 
-Ustawianie Prędkości Globalnej w Czasie Rzeczywistym
+Ustawianie prędkości w czasie rzeczywistym
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief Ustawia prędkość globalną w czasie rzeczywistym
+    * @brief Ustaw prędkość (ramka polecenia, niskie opóźnienie)
     * @param [in] vel Procent prędkości, zakres [0~100]
     * @return Kod błędu
     */
     public int SetWeaveOffsetRT(DescPose offset)
+
+Ustawianie prędkości fizycznej w czasie rzeczywistym
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Ustaw prędkość fizyczną w czasie rzeczywistym
+    * @param [in] speed Wartość prędkości fizycznej, mm/s
+    * @return  Kod błędu
+    */
+    public int SetPhySpeedInstant(double speed)    
+
+Przykład kodu ustawiania prędkości fizycznej w czasie rzeczywistym
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. code-block:: c#
+    :linenos:
+
+    void SetPhySpeedInstantInput(double speed)
+    {
+        int rtn = robot.SetPhySpeedInstant(speed);
+        Console.WriteLine($"SetPhySpeedInstant({speed}) : {rtn}");
+    }    

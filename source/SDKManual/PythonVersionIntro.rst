@@ -13,6 +13,14 @@ Informacje o aktualizacji wersji
      - **Data**
      - **Opis aktualizacji**
 
+   * - V4.0.0
+     - 2026-09-23
+     - | 1. Zmodyfikowano interfejs Robot() do nawiązywania połączenia RPC i tworzenia instancji robota, dodając konfigurację parametru włączenia szyfrowania TLS dla komunikacji zintegrowanego protokołu poleceń w SDK. Przed użyciem należy najpierw zainstalować biblioteki zależności Pythona; polecenia instalacji to: pip install python3-dtls, pip install python-mbedtls;
+       | 2. Zmodyfikowano opis parametrów interfejsu SetWeldMachineCtrlMode() do ustawiania trybu sterowania spawarką, dodając tryby impulsowy i bezimpulsowy dla spawarek Panasonic;
+       | 3. Dodano polecenie SendTCPFrame() do wysyłania niestandardowych ramek poleceń przez TCP 8080, wraz z przykładem kodu;
+       | 4. Dodano polecenie TCFToAllJoint() do uzyskiwania 8 zestawów rozwiązań odwrotnych robota, wraz z przykładem kodu;
+       | 5. Dodano polecenie SetPhySpeedInstant() do ustawiania prędkości fizycznej w czasie rzeczywistym, wraz z przykładem kodu.
+
    * - V3.9.9
      - 2026-09-01
      - | 1. Zaktualizowano interfejs GetGripperMotionDone() do pobierania statusu ruchu chwytaka, zaktualizowano definicję i zakres użycia parametrów wyjściowych statusu chwytaka;

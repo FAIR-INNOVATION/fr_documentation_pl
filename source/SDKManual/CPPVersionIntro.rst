@@ -13,6 +13,16 @@ Informacje o aktualizacji wersji
      - **Data**
      - **Opis aktualizacji**
 
+   * - V4.0.0
+     - 2026-09-23
+     - | 1. Zmodyfikowano interfejs FRRobot() do tworzenia instancji robota, dodając konfigurację parametru włączenia szyfrowania TLS dla komunikacji zintegrowanego protokołu poleceń w SDK;
+       | 2. Zmodyfikowano opis parametrów interfejsu SetWeldMachineCtrlMode() do ustawiania trybu sterowania spawarką, dodając tryby impulsowy i bezimpulsowy dla spawarek Panasonic;
+       | 3. Dodano polecenie SendTCPFrame() do wysyłania niestandardowych ramek poleceń przez TCP 8080, wraz z przykładem kodu;
+       | 4. Dodano polecenie TCFToAllJoint() do uzyskiwania 8 zestawów rozwiązań odwrotnych robota, wraz z przykładem kodu;
+       | 5. Dodano polecenie SetPhySpeedInstant() do ustawiania prędkości fizycznej w czasie rzeczywistym, wraz z przykładem kodu;
+       | 6. Dodano polecenie MtlsLink() do ustawiania ścieżki certyfikatu szyfrowania komunikacji TLS dla zintegrowanego protokołu poleceń w SDK, wraz z przykładem kodu;
+       | 7. Dodano opisy niektórych kodów błędów SDK.
+
    * - V3.9.9
      - 2026-09-01
      - | 1. Zmodyfikowano opis parametrów interfejsu GetGripperMotionDone() do pobierania stanu chwytaka, zaktualizowano definicję stanu chwytaka;

@@ -358,7 +358,7 @@ Ustawienie trybu sterowania spawarką
 
     /**
     * @brief Ustawia tryb sterowania spawarką
-    * @param [in] mode Tryb sterowania spawarką; 0-tryb jednorodny DC; 1-tryb jednorodny pulsacyjny; 2-tryb JOB; 3-tryb sterowania lokalnego; 4-tryb oddzielny; 5-tryb CC/CV; 6-TIG; 7-CMT
+    * @param [in] mode Tryb sterowania spawarką; 0-Tryb synergiczny DC; 1-Tryb synergiczny impulsowy; 2-Tryb JOB; 3-Tryb sterowania lokalnego; 4-Tryb osobny; 5-Tryb CC/CV; 6-TIG; 7-CMT; 8-Panasonic-Tryb impulsowy, 9-Panasonic-Tryb bez impulsu
     * @param [in] ioType Typ sterowania; 0-I/O skrzynki sterowniczej; 1-protokół komunikacji cyfrowej (UDP); 2-protokół komunikacji cyfrowej (ModbusTCP)
     * @return Kod błędu
     */

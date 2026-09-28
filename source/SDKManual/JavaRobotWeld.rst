@@ -343,18 +343,17 @@ Pobieranie parametrów wznawiania spawania po przerwaniu robota
     */
     List<Number> WeldingGetReWeldAfterBreakOffParam();
 
-Ustawianie rozszerzonego portu DO trybu sterowania spawarką
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
+Ustawianie trybu sterowania spawarką
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
-    /** 
-    * @brief Ustawianie rozszerzonego portu DO trybu sterowania spawarką
-    * @param [in] DONum Port DO trybu sterowania spawarką (0-127)
-    * @return Kod błędu 
+    /**
+    * @brief Ustaw port DO rozszerzenia trybu sterowania spawarką
+    * @param DONum Port DO trybu sterowania spawarką (0-127)
+    * @return Kod błędu
     */
-    int SetWeldMachineCtrlModeExtDoNum(int DONum);
+    public int SetWeldMachineCtrlModeExtDoNum(int DONum)
 
 Ustawianie trybu sterowania spawarką
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

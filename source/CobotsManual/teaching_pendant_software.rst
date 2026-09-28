@@ -562,8 +562,8 @@ W trójwymiarowym wirtualnym obszarze robota WebAPP tworzone są różne rodzaje
    
    Opis: Układ współrzędnych zewnętrznej osi jest domyślnie wyłączony. Można go ręcznie włączyć. Procedura jest taka sama jak w przypadku układu współrzędnych narzędzia.
 
-Trójwymiarowa wirtualna trajektoria i importowanie modelu narzędzia
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Wirtualna trajektoria 3D i model narzędzia
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. note:: 
    .. image:: teaching_pendant_software/020.png
@@ -573,7 +573,7 @@ Trójwymiarowa wirtualna trajektoria i importowanie modelu narzędzia
 
    Nazwa: **Rysowanie trajektorii**
    
-   Opis: Kliknij przycisk, aby włączyć funkcję rysowania trajektorii. Podczas działania programu nauczania trójwymiarowy model robota będzie rysował ścieżkę trajektorii ruchu robota.
+   Opis: kliknij przycisk, aby otworzyć funkcję rysowania trajektorii. Podczas wykonywania programu nauczania model 3D robota rysuje ścieżkę ruchu robota.
 
 .. note:: 
    .. image:: teaching_pendant_software/029.png
@@ -581,10 +581,10 @@ Trójwymiarowa wirtualna trajektoria i importowanie modelu narzędzia
       :height: 0.75in
       :align: left
 
-   Nazwa: **Importuj model narzędzia**
+   Nazwa: **Model narzędzia**
    
-   Opis: Kliknij przycisk, aby wyświetlić okno modalne importowania modelu narzędzia. Po pomyślnym przesłaniu i zaimportowaniu pliku model narzędzia zostanie wyświetlony na końcówce robota. Obecnie obsługiwane formaty plików modeli narzędzi to STL i DAE.
-
+   Opis: kliknij przycisk, aby włączyć/wyłączyć model narzędzia.
+   
 Pasek operacji na samym robocie
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

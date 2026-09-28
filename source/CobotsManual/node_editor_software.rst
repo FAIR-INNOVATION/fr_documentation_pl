@@ -22,6 +22,12 @@ Programowanie węzłów graficznych to oprogramowanie programistyczne opracowane
 
 .. centered:: Schemat 11.1-1 Interfejs programowania węzłów graficznych
 
+.. image:: node_editor_software/136.png
+   :width: 6in
+   :align: center
+
+.. centered:: Rysunek 11.1-2 Sortowanie obszaru roboczego
+   
 Pasek narzędzi
 ~~~~~~~~~~~~~~
 
@@ -40,7 +46,7 @@ Użyj paska narzędzi w górnej lewej części strony programowania węzłów gr
 
    Nazwa: **Otwórz**
    
-   Działanie: Otwiera plik programu użytkownika, w oknie dialogowym wybierz załadowanie lub usunięcie pliku
+   Działanie: otwieranie plików programów użytkownika, wybór ładowania lub usuwania plików w oknie dialogowym oraz obsługa sortowania według liter (A~Z lub Z~A) albo według czasu ostatniej modyfikacji
 
 .. note:: 
    .. image:: coding/010.png

@@ -2037,6 +2037,17 @@ Gdy nie używasz krzywej procesu spawania, czyli wybierasz numer parametrów pro
 
 .. centered:: Schemat 8.6-11 Nieużywanie krzywej procesu spawania 
 
+Numer procesu JOB spawarki
+*********************************************************************************************************
+
+Wybierz rozszerzony sygnał AO i numer procesu, a następnie wprowadź czas oczekiwania. Gdy numer procesu jest skonfigurowany jako nieujemny 1, gdy I/O uchwytu spawalniczego wybiera rozszerzone DO, a sygnał skonfigurowany dla rozszerzonego DO to "start łuku spawarki", start łuku spawarki wybierze odpowiedni proces.
+
+.. figure:: robot_peripherals/326.png
+   :align: center
+   :width: 6in
+
+.. centered:: Rysunek 8.6-11-1 Numer procesu JOB spawarki
+
 Ustawienie zależności między prądem/napięciem spawania a wyjściem analogowym
 *****************************************************************************
 

@@ -479,6 +479,36 @@ Opis operacji związanych z trybem zdalnym robota
 
 .. note:: Aby przełączyć się na inny protokół, należy najpierw kliknąć przycisk „Odinstaluj”, a następnie przystąpić do konfiguracji innego protokołu.
 
+Aktualizacja Oprogramowania Sprzętowego Karty
+----------------------------------------------------------------------------
+
+Karta FRH-PCIeN-EC/EIP/CC/PN-RJ-V10
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+(1) Wybierz pakiet oprogramowania sprzętowego do aktualizacji, nazwany BoardFirm_xxx.tar.gz, kliknij przycisk "Aktualizuj" i poczekaj na aktualizację;
+
+.. image:: remote_mode/056.png
+   :width: 3in
+   :align: center
+
+.. centered:: Rysunek 18.3-1 Pakiet Aktualizacji Oprogramowania Sprzętowego
+
+(2) Po zakończeniu aktualizacji uruchom ponownie szafę sterowniczą;
+
+.. image:: remote_mode/057.png
+   :width: 6in
+   :align: center
+
+.. centered:: Rysunek 18.3-2 Aktualizacja Zakończona
+   
+(3) Uruchom ponownie szafę sterowniczą. Jeśli pojawi się komunikat ostrzegawczy pokazany na rysunku, oznacza to, że ta aktualizacja oprogramowania sprzętowego nie powiodła się. Po usunięciu ostrzeżenia ponownie wykonaj operację aktualizacji.
+
+.. image:: remote_mode/058.png
+   :width: 3in
+   :align: center
+
+.. centered:: Rysunek 18.3-3 Aktualizacja Oprogramowania Sprzętowego Nie Powiodła Się
+
 Dodatek
 -------------------
 

@@ -1,3 +1,46 @@
+Wersja V4.0.0
+-----------------
+
+Data: 2026-09-23
+
+- **Zoptymalizowany tryb redukcji prędkości**: 
+
+    Opis: Zoptymalizowano prędkość globalną po wyjściu z trybu redukcji.
+
+- **Zoptymalizowana komunikacja w trybie zdalnym karty Hilscher**: 
+    Ścieżka: Tryb zdalny -> Aktualizacja oprogramowania układowego.
+
+    Opis: Poprawiono czasu rzeczywistego i stabilność komunikacji.
+
+- **Zoptymalizowany problem identyfikacji obciążenia pętli prądowej**: 
+    Ścieżka: Ustawienia początkowe -> Obciążenie -> Ruch identyfikacyjny.
+
+    Opis: Identyfikacja obciążenia dla dużych modeli jest ukryta. Funkcja dla małych modeli (FR3-FR16 i odpowiadających modeli) działa normalnie. Odchylenie standardowe identyfikacji obciążenia dla małych modeli wynosi około 30%.
+
+- **Dodano funkcję regulacji prędkości w czasie rzeczywistym opartą na prędkości fizycznej podczas spawania**: 
+
+    Opis: Regulacja prędkości ruchu robota w czasie rzeczywistym.
+
+- **Dodano funkcję otwierania pliku programu WebApp i interakcji z modelem narzędzia + funkcję rozszerzenia JOB spawania**: 
+    Ścieżka: Program nauczania -> Instrukcja sterowania siłą.
+
+    Opis: 1. Pliki funkcji otwierania programu są sortowane według A-Z lub czasu, aby ułatwić wyszukiwanie; 2. Modele narzędzi są powiązane z narzędziami w celu powiązanego ładowania; 3. CO jest rozszerzone z 3 funkcji sygnału JOB do 8, obsługując 256 procesów; 4. Komunikacja UDP spawarki dodaje konfigurację numeru procesu JOB.
+
+- **Dodano adaptację modelu blokady przeciągania pętli prądowej**: 
+    Ścieżka: Aplikacja pomocnicza -> Aplikacja narzędzia -> Blokada przeciągania.
+
+    Opis: Rozszerzono na cztery nowe modele: FR20, FR30, FR3WML, FR3WMS.
+
+- **Dodano funkcję bezpieczeństwa sieciowego**: 
+    Ścieżka: Ustawienia początkowe -> Bezpieczeństwo -> Bezpieczeństwo sieciowe.
+
+    Opis: 1. Podczas dostępu do webApp przez przeglądarkę protokół komunikacyjny automatycznie przełącza się na HTTPS; 2. Klient dodaje funkcję certyfikatu protokołu poleceń; 3. Przy uruchomieniu oprogramowania dodano weryfikację integralności.
+
+- **Dodano funkcję eksportu dziennika bezpieczeństwa**: 
+    Ścieżka: Ustawienia początkowe -> Bezpieczeństwo -> Dziennik bezpieczeństwa.
+
+    Opis: Dodano funkcje eksportu i usuwania dziennika bezpieczeństwa.
+
 Wersja V3.9.9
 -----------------
 

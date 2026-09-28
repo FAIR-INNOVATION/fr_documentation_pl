@@ -388,8 +388,8 @@ Ustawianie trybu sterowania spawarką
     "Prototyp", "``SetWeldMachineCtrlMode(mode, ioType)``"
     "Opis", "Ustawianie trybu sterowania spawarką"
     "Parametry wymagane", "
-    - ``ioType``: Typ sterowania; 0-IO skrzynki kontrolnej; 1-protokół komunikacji cyfrowej (UDP); 2-protokół komunikacji cyfrowej (ModbusTCP)
-    - ``mode``: Tryb sterowania spawarką; 0-jednowartościowy"
+    - ``ioType``: Typ sterowania; 0-IO skrzynki sterowniczej; 1-Cyfrowy protokół komunikacyjny (UDP); 2-Cyfrowy protokół komunikacyjny (ModbusTCP)
+    - ``mode``: Tryb sterowania spawarką; tryb sterowania spawarką; 0-Tryb synergiczny DC; 1-Tryb synergiczny impulsowy; 2-Tryb JOB; 3-Tryb sterowania lokalnego; 4-Tryb osobny; 5-Tryb CC/CV; 6-TIG; 7-CMT, 8-Panasonic-Tryb impulsowy, 9-Panasonic-Tryb bez impulsu"
     "Parametry domyślne", "Brak"
     "Wartość zwracana", "Kod błędu sukces-0 błąd- errcode" 
 

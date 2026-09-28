@@ -156,6 +156,39 @@ Dodano funkcję blokowania stopni swobody dla nauczania przeciągania. Gdy prze�
 
 .. centered:: Wykres 14.5‑1 Konfiguracja blokady nauczania przeciągania
 
+Funkcja blokady przeciągania FR3-WML/FR3-WMS/FR20/FR30
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Przegląd
++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Ta funkcja dostosowuje parametry funkcji blokady przeciągania pętli prądowej do właściwości dynamicznych nowych modeli, tak aby podczas przeciągania efektor końcowy zawsze pozostawał stabilny i nieruchomy na określonym stopniu swobody i nie poruszał się wraz z przyłożoną siłą zewnętrzną. Funkcja blokady przeciągania pętli prądowej została rozszerzona na modele FR3WMS/FR3-WML/FR20/FR30.
+
+W trybie przeciągania pozycja końcowa jest ograniczana. Gdy kierunek zewnętrznej siły przeciągającej nie znajduje się na ograniczonym stopniu swobody, końcówka robota może być normalnie przeciągana; w przeciwnym razie jej ruch jest ograniczany.
+
+Blokada przeciągania
++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Przed ustawieniem funkcji blokady przeciągania należy sprawdzić metodę montażu robota, obciążenie i ustawienia układu współrzędnych, aby zapewnić, że w normalnym trybie przeciągania ramię robota nie wykazuje wyraźnych przesunięć w górę lub w dół bez siły zewnętrznej.
+
+W pasku menu "Aplikacja pomocnicza" -> "Aplikacja narzędzia" kliknij "Blokada przeciągania", aby wejść do interfejsu funkcji konfiguracji blokady nauczania przez przeciąganie. W pasku menu "Blokada przeciągania pętli prądowej", gdy przełącznik funkcji nauczania przez przeciąganie jest ustawiony na włączony i kliknięto Zastosuj, każdy parametr stopnia swobody staje się aktywny, gdy użytkownik przeciąga robota, blokując odpowiedni stopień swobody.
+
+Objaśnienie elementów konfiguracji w pasku menu "Blokada przeciągania pętli prądowej":
+
+(1) Ustawienia parametrów stopni swobody: gdy parametry są ustawione na X:10, Y:0, Z:10, RX:10, RY:10, RZ:10, przeciąganie robota w trybie przeciągania może ograniczyć robota do ruchu tylko w kierunku Y. Jeśli konieczne jest utrzymanie niezmienionej pozy robota podczas przeciągania i ruch tylko w kierunkach X, Y, Z, ustaw X, Y, Z na 0, a RX, RY, RZ na 10. Wraz ze zmniejszaniem parametru siła ograniczająca ten stopień swobody maleje. Wartość maksymalna to 10, z maksymalną siłą ograniczającą; minimalna to 0, bez siły ograniczającej.
+
+(2) Przełącznik nauczania przez przeciąganie: włącza funkcję blokady przeciągania w trybie przeciągania.
+
+.. image:: application/050.png
+   :width: 4in
+   :align: center
+
+.. centered:: Rysunek 14.5-1-2 Konfiguracja blokady nauczania przez przeciąganie
+
+Ustawienia parametrów muszą spełniać następujące ograniczenia:
+
+(1) Ustawienia parametrów są ograniczone do zakresu 0~10. W niektórych modelach (takich jak FR20 i FR30) ustawienia parametrów są ograniczone do zakresu 0~5. Dlatego jeśli zostanie wprowadzona wartość spoza zakresu 0~10, zostanie ona zmieniona na najbliższe 0 lub 10. Na przykład, jeśli parametr zostanie ustawiony na 15, zmieni się na 10.
+
 Normalne wyzwalanie ochrony przed kolizją przy przeciąganiu wspomaganym przez czujnik siły
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

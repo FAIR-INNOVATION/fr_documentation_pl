@@ -21,7 +21,7 @@ Strona jest podzielona na trzy obszary: „Pasek operacji”, „Pasek narzędzi
 
 **Pasek operacji**
 
-1) **Załaduj**: Odpowiada za ponowne załadowanie obszaru roboczego.
+1) **Ładowanie**: Odpowiada za ponowne ładowanie obszaru roboczego i obsługuje sortowanie według liter (A~Z lub Z~A) albo według czasu ostatniej modyfikacji.
 2) **Importuj**: Odpowiada za import odpowiednich programów programowania graficznego.
 3) **Eksportuj**: Odpowiada za eksport zapisanych programów programowania graficznego z obszaru roboczego. Funkcja przycisku „Zapisz” polega na zapisaniu po edycji bloków kodu jako odpowiedniego programu nauczania.
 4) **Zapisz**: Odpowiada za zapisanie edytowanych graficznych bloków kodu.
@@ -37,6 +37,12 @@ Strona jest podzielona na trzy obszary: „Pasek operacji”, „Pasek narzędzi
 
 **Obszar roboczy**: W obszarze edycji kodu można edytować i wyświetlać graficzne bloki kodu.
 
+.. image:: graphical/151.png
+   :width: 6in
+   :align: center
+
+.. centered:: Rysunek 10.1-2 Sortowanie plików obszaru roboczego
+   
 Logiczne polecenia programowania graficznego
 --------------------------------------------
 Logiczne polecenia programowania graficznego obejmują polecenia logiczne, takie jak pętle, liczby itp.

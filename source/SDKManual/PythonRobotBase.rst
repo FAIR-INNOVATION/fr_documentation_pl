@@ -5,18 +5,36 @@ Podstawy robota
     :maxdepth: 5
 
 Tworzenie instancji robota
-++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototyp", "``RPC(ip)``"
+    "Prototyp", "``RPC(self, ip, tls_enable, tls_cert_path)``"
     "Opis", "Tworzy instancję obiektu robota"
-    "Parametry wymagane", "- ``ip``: Adres IP robota, domyślny adres fabryczny to „192.168.58.2”"
+    "Parametry wymagane", "
+    - ``ip``: Adres IP robota; domyślny adres fabryczny to `192.168.58.2`
+    - ``tls_enable``: Czy włączyć szyfrowaną komunikację (mTLS + DTLS); domyślnie False
+    - ``tls_cert_path``: Ścieżka folderu certyfikatów; katalog musi zawierać: ca.crt / client.crt / client.key; wymagane, gdy tls_enable=True
+    "
     "Parametry domyślne", "Brak"
-    "Wartość zwracana", "- Sukces: Zwraca obiekt robota
-    - Błąd: Utworzony obiekt zostanie zniszczony"
+    "Wartość zwracana", "- Sukces: zwraca obiekt robota
+    - Błąd: utworzony obiekt zostanie zniszczony"
+
+Przykład kodu tworzenia instancji
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: python
+    :linenos:
+
+    from fairino import Robot
+    import time
+
+    robot = Robot.RPC(
+        '192.168.58.2',
+        tls_enable=True,
+        tls_cert_path=r"E:\certs"
+    )
 
 Zamykanie połączenia RPC
 ++++++++++++++++++++++++
