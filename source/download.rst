@@ -206,7 +206,7 @@ Certyfikaty robotów:
      - ✅
      - --
      - --
-     - :download:`Pobierz <_static/_doc/Cleaning Robot CLASS3 Certificate(FR3-FR16).pdf>`
+     - :download:`Pobierz <_static/_doc/Cleaning Robot CLASS3 Certificate(FR3-FR16).zip>`
 
 Certyfikaty skrzynki sterowniczej:
 
