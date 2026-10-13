@@ -243,7 +243,7 @@ Domyślnie istnieje sześć funkcji. Administrator nie ma ograniczeń funkcjonal
 
 .. centered:: Tabela 15.2‑1 Szczegóły uprawnień
 
-.. image:: system/007.png
+.. image:: safety/069.png
    :width: 6in
    :align: center
 
@@ -265,11 +265,7 @@ Domyślnie istnieje sześć funkcji. Administrator nie ma ograniczeń funkcjonal
 
 - **Ustaw uprawnienia funkcji**: Kliknij ikonę „Ustaw” w kolumnie operacji tabeli. Można ustawić uprawnienia bieżącej funkcji. Po zakończeniu ustawiania kliknij przycisk „Zapisz” u dołu, aby potwierdzić ustawienia.
 
-.. image:: system/010.png
-   :width: 6in
-   :align: center
-
-.. image:: system/011.png
+.. image:: safety/070.png
    :width: 6in
    :align: center
 

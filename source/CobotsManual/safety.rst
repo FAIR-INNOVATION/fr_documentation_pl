@@ -387,21 +387,6 @@ Deklaracja Ryzyk Resztkowych Cyberbezpieczeństwa
      - Brak
      - | ① Użytkownicy muszą umieścić panel operatorski robota w bezpiecznym obszarze roboczym i zabronić nieautoryzowanemu personelowi wstępu do tego obszaru;
 
-Zarządzanie Uprawnieniami
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. centered:: Tabela 3-1 Szczegóły Uprawnień
-
-.. image:: safety/069.png
-   :width: 6in
-   :align: center
-
-.. image:: safety/070.png
-   :width: 6in
-   :align: center
-
-.. centered:: Rysunek 7.3-24 Ustawianie Uprawnień Funkcyjnych
-
 Parametry Konfiguracji Bezpieczeństwa
 --------------------------------------------------------------------------------------------------
 
