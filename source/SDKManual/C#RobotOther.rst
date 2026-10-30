@@ -697,3 +697,92 @@ Przykład kodu wysyłania niestandardowej ramki polecenia przez TCP 8080
             }
         }
     }    
+
+Aktualizacja przez przesłanie pakietu kopii zapasowej danych  
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Aktualizacja przez przesłanie pakietu kopii zapasowej danych
+    * @param [in] filePath Ścieżka pliku pakietu kopii zapasowej danych do przesłania; D://zUP/fr_user_data.tar.gz
+    * @return Kod błędu
+    */
+    public int DataPackageUpgrade(string filePath)
+    
+Pobieranie procentu postępu aktualizacji pakietu kopii zapasowej danych  
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Pobierz procent postępu aktualizacji pakietu kopii zapasowej danych
+    * @param [out] progress Procent postępu aktualizacji [0-100], -1: aktualizacja nie powiodła się
+    * @return Kod błędu
+    */
+    public int GetDataPackageUpgradeProgress(ref int progress)
+    
+Pobieranie procentu postępu aktualizacji wszystkich parametrów przegubów  
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Pobierz procent postępu aktualizacji wszystkich parametrów przegubów
+    * @param [out] progress Procent postępu aktualizacji [0-100], -1: aktualizacja nie powiodła się
+    * @return Kod błędu
+    */
+    public int GetJointAllParamUpgradeProgress(ref int progress)
+        
+Przykład kodu aktualizacji przez przesłanie pakietu kopii zapasowej danych i sprawdzania postępu  
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. code-block:: c#
+    :linenos:
+
+    public void TestDataPackageUpgrade()
+    {
+        int rtn = robot.DataPackageUpgrade("D://zUP/upgrade/FR5/fr_user_data.tar.gz");
+        Console.WriteLine($"robot DataPackageUpgrade rtn is {rtn}");
+
+        int upgradeProgress = 0;
+        while (upgradeProgress < 100)
+        {
+            int ret = robot.GetDataPackageUpgradeProgress(ref upgradeProgress);
+            Console.WriteLine($"robot data package upgrade progress : {upgradeProgress}, rtn : {ret}");
+            if (ret != 0 || upgradeProgress == -1)
+            {
+                break;
+            }
+            Thread.Sleep(200);
+        }
+    }
+            
+Przykład kodu aktualizacji wszystkich parametrów przegubów i sprawdzania postępu  
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. code-block:: c#
+    :linenos:
+    
+    public void TestJointAllParamUpgrade()
+    {
+        robot.RobotEnable(0);
+        Thread.Sleep(200);
+        int rtn = robot.JointAllParamUpgrade("D://zUP/upgrade/FR5/jointallparameters.db");
+        Console.WriteLine($"robot JointAllParamUpgrade rtn is {rtn}");
+
+        int upgradeProgress = 0;
+        while (upgradeProgress < 100)
+        {
+            int ret = robot.GetJointAllParamUpgradeProgress(ref upgradeProgress);
+            Console.WriteLine($"robot joint all param upgrade progress : {upgradeProgress}, rtn : {ret}");
+            if (ret != 0 || upgradeProgress == -1)
+            {
+                break;
+            }
+            Thread.Sleep(200);
+        }
+    }    

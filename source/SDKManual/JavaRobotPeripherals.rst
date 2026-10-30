@@ -72,62 +72,72 @@ Sterowanie chwytakiem
     */
     int MoveGripper(int index, int pos, int vel, int force, int max_time, int block, int type, double rotNum, int rotVel, int rotTorque); 
 
-Pobranie stanu ruchu chwytaka
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-.. code-block:: Java
-    :linenos:
-
-    /**
-    * @brief  Pobranie stanu ruchu chwytaka
-    * @return List[0]:Kod błędu; List[1] : fault  0-brak błędu, 1-jest błąd; List[2]: status  0-ruch niezakończony, 1-ruch zakończony
-    */
-    List<Integer> GetGripperMotionDone(); 
-
-Oczekiwanie na Status Ruchu Chwytaka
+Pobieranie stanu ruchu chwytaka
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief  Oczekuje na status ruchu chwytaka
-    * @param  [in]  status  0-ruch nie zakończony, 1-ruch zakończony bez wykrycia obiektu, 2-ruch zakończony z wykryciem obiektu
-    * @param  [in] timeout Limit czasu (ms), -1 dla nieskończonego oczekiwania
-    * @param  [in] strategy  0-zatrzymaj z błędem, 1-kontynuuj działanie
-    * @param  [in] type  0-chwytak równoległy, 1-chwytak obrotowy
+    * @brief  Pobierz stan ruchu chwytaka (od wersji 401 protokół efektora końcowego i definicja sprzężenia zwrotnego stanu ruchu chwytaka dostosowanych urządzeń są ujednolicone)
+    * @param  [out] fault  0-Brak błędu, inny-Błąd
+    * @param  [out] staus  0-Ruch nieukończony, 1-Ruch ukończony, nie wykryto obiektu, 2-Ruch ukończony, wykryto obiekt, 3-Ruch ukończony, wykryto upadek obiektu
     * @return  Kod błędu
     */
-    public int GripperWaitMotionDone(int status, int timeout, int strategy, int type)
-
-Przykład Kodu Oczekiwania na Status Ruchu Chwytaka
+    public List<Integer> GetGripperMotionDone()
+    
+Oczekiwanie na stan ruchu chwytaka
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
-    public static void TestGripperWaitMotionDone(Robot robot)
+    /**
+    * @brief  Oczekuj na stan ruchu chwytaka (od wersji 401 protokół efektora końcowego i definicja sprzężenia zwrotnego stanu ruchu chwytaka dostosowanych urządzeń są ujednolicone)
+    * @param  [in]  staus  0-Ruch nieukończony, 1-Ruch ukończony, nie wykryto obiektu, 2-Ruch ukończony, wykryto obiekt, 3-Ruch ukończony, wykryto upadek obiektu
+    * @param  [in] timeout Limit czasu (ms), -1 oznacza oczekiwanie bezterminowe
+    * @param  [in] strategy  0-Zatrzymaj i zgłoś błąd, 1-Kontynuuj działanie
+    * @param  [in] type  0-Chwytak równoległy, 1-Chwytak obrotowy
+    * @return  Kod błędu
+    */
+    public int GripperWaitMotionDone(int staus, int timeout, int strategy, int type)
+
+Przykład kodu oczekiwania na stan ruchu chwytaka
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    public void TestGetGripperMotionDone()
     {
         int rtn;
+        int status = 0;
+        int fault = 0;
+        ROBOT_STATE_PKG pkg = new ROBOT_STATE_PKG();
 
-        // Chwytak otwarty
-        rtn = robot.MoveGripper(1, 0, 100, 100, 30000, 0, 0, 0, 0, 0);
-        System.out.println("MoveGripper(otwórz) ret=" + rtn);
-        try {
-            Thread.sleep(4000);
-        } catch (InterruptedException e) {
-            Thread.currentThread().interrupt();
+        // Otwórz chwytak
+        rtn = robot.MoveGripper(2, 50, 50, 100, 30000, 0, 0, 0, 0, 0);
+        System.out.println("MoveGripper(Otwórz) ret=" + rtn);
+        robot.Sleep(2000);
+        pkg = robot.GetRobotRealTimeState();
+        System.out.println(" gripper_motiondone " + pkg.gripper_motiondone);
+        // Zamknij chwytak
+        rtn = robot.MoveGripper(2, 90, 100, 100, 30000, 0, 0, 0, 0, 0);
+        System.out.println("MoveGripper(Zamknij) ret=" + rtn);
+        robot.Sleep(2000);
+        pkg = robot.GetRobotRealTimeState();
+        System.out.println(" gripper_motiondone " + pkg.gripper_motiondone);
+        // Oczekuj na ukończenie ruchu bez wykrycia obiektu, limit czasu 5s, zatrzymaj i zgłoś błąd
+        rtn = robot.GripperWaitMotionDone(2, 5000, 0, 0);
+        System.out.println("GripperWaitMotionDone(oczekiwanie na ukończenie bez wykrycia obiektu) ret=" + rtn);
+
+        while (true)
+        {
+            List<Integer> result = robot.GetGripperMotionDone();
+            fault = result.get(1);
+            status = result.get(2);
+            System.out.println("motion status:" + fault + "," + status);
+            pkg = robot.GetRobotRealTimeState();
+            System.out.println(" error code " + pkg.main_code + "," + pkg.sub_code);
+            robot.Sleep(500);
         }
-
-        // Chwytak zamknięty
-        rtn = robot.MoveGripper(1, 90, 100, 100, 30000, 0, 0, 0, 0, 0);
-        System.out.println("MoveGripper(zamknij) ret=" + rtn);
-
-        // Oczekiwanie na zakończenie ruchu bez wykrycia obiektu, timeout 30s, zatrzymaj z błędem
-        rtn = robot.GripperWaitMotionDone(2, 30000, 0, 0);
-        System.out.println("GripperWaitMotionDone(oczekiwanie na zakończenie bez wykrycia obiektu) ret=" + rtn);
-
-        // Chwytak otwarty
-        rtn = robot.MoveGripper(1, 0, 100, 100, 30000, 0, 0, 0, 0, 0);
-        System.out.println("MoveGripper(otwórz) ret=" + rtn);
     }
 
 Pobranie stanu aktywacji chwytaka

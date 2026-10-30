@@ -608,6 +608,60 @@ Kliknij "Teach Program" -> "Instrukcje PerYferyjne" -> "Chwytak", aby dodać ins
 
 .. centered:: Rysunek 8.2-17 Przykładowy Program Ruchu Chwytaka
 
+Odpytywanie stanu chwytaka dostosowanego do efektora końcowego
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Przegląd
++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Ta aktualizacja dodaje funkcje odpytywania stanu pracy i pozycji chwytaka, ułatwiając użytkownikom uzyskanie stanu zakończenia ruchu chwytaka w programach nauczania oraz monitorowanie w czasie rzeczywistym pozycji, prędkości, momentu i stanu ruchu chwytaka za pośrednictwem WebApp.
+
+Konfiguracja środowiska
++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+- Wersja oprogramowania układowego efektora końcowego: FR_END_FV201014_MAIN_U1_T01_20260626
+- Wersja oprogramowania robota: V4.0.1 i nowsza
+
+Opis aktualizacji poleceń chwytaka
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Pobieranie stanu zakończenia ruchu chwytaka
+*********************************************************************************
+
+Otwórz WebApp, przejdź do Program nauczania -> Interfejs programowania programu i otwórz Polecenie peryferyjne - Chwytak. Wygeneruj polecenie Pobierz stan zakończenia ruchu chwytaka. To polecenie służy wyłącznie do odpytywania bieżącego stanu zakończenia ruchu chwytaka.
+
+.. image:: safety/073.png
+   :width: 6in
+   :align: center
+
+.. centered:: Rysunek 8.2-19 Pobieranie stanu zakończenia ruchu chwytaka
+
+Pobieranie bieżącej pozycji chwytaka
+*********************************************************************************
+
+Otwórz WebApp, przejdź do Program nauczania -> Interfejs programowania programu i otwórz Polecenie peryferyjne - Chwytak. Wygeneruj polecenie Pobierz bieżącą pozycję chwytaka. To polecenie służy wyłącznie do odpytywania bieżącej rzeczywistej pozycji chwytaka.
+
+.. image:: safety/074.png
+   :width: 6in
+   :align: center
+
+.. centered:: Rysunek 8.2-20 Pobieranie bieżącej pozycji chwytaka
+
+Monitorowanie danych chwytaka
+*********************************************************************************
+
+Otwórz WebApp, przejdź do Ustawienia początkowe -> Peryferia -> Chwytak -> interfejs i włącz monitorowanie stanu. Po wysłaniu poleceń sterujących w interfejsie Gripper po prawej stronie można uzyskać dane sprzężenia zwrotnego w czasie rzeczywistym dotyczące pozycji, prędkości i momentu chwytaka oraz stan ruchu chwytaka.
+
+Definicje kodów stanu ruchu chwytaka: 0-W ruchu; 1-Ruch zakończony, nie wykryto obiektu; 2-Ruch zakończony, wykryto obiekt; 3-Przedmiot obrabiany upadł.
+
+.. image:: safety/075.png
+   :width: 6in
+   :align: center
+
+.. centered:: Rysunek 8.2-21 Kody stanu ruchu chwytaka
+
+.. note:: Uwaga: gdy przedmiot obrabiany upadnie, strona WebApp wyświetli ostrzeżenie alarmowe, a SDK będzie mógł odczytać odpowiedni kod usterki. Obsługa usterek musi być wykonana w następującej kolejności: wyczyść alarm → zresetuj chwytak → ponownie aktywuj chwytak, po czym można kontynuować wysyłanie poleceń ruchu.
+
 Czujnik siły
 ------------
 

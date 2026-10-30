@@ -345,6 +345,42 @@ Aktualizacja pliku konfiguracji pełnych parametrów przegubu
     */
     public int JointAllParamUpgrade(String path)
 
+Pobieranie procentu postępu aktualizacji wszystkich parametrów przegubów
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Pobierz procent postępu aktualizacji wszystkich parametrów przegubów
+    * @return List[0]: Kod błędu; List[1]: Procent postępu aktualizacji [0-100], -1: aktualizacja nie powiodła się
+    */
+    public List<Integer> GetJointAllParamUpgradeProgress()
+
+Przykład kodu aktualizacji wszystkich parametrów przegubów i sprawdzania postępu
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    public static void TestJointAllParamUpgrade(Robot robot)
+    {
+        ROBOT_STATE_PKG pkg = new ROBOT_STATE_PKG();
+        int rtn = 0;
+
+        robot.RobotEnable(0);
+        robot.Sleep(200);
+
+        rtn = robot.JointAllParamUpgrade("D://zUP/upgrade/FR3WMS/jointallparameters.db");
+        System.out.println("robot JointAllParamUpgrade rtn is " + rtn);
+        int upgradeProgress = 0;
+        while (upgradeProgress < 100)
+        {
+            List<Integer> state = robot.GetJointAllParamUpgradeProgress();
+            upgradeProgress = state.get(1);
+            System.out.println("robot joint all param upgrade progress : " + upgradeProgress);
+            robot.Sleep(200);
+        }
+    }    
+
 Przykład kodu aktualizacji firmware stacji podrzędnej robota
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
@@ -615,4 +651,51 @@ Przykład kodu wysyłania niestandardowej ramki polecenia przez TCP8080
         robot.Sleep(2000);
 
         System.out.println("========== Weryfikacja TCP zakończona (odpowiedzi powyżej) ==========");
+    }    
+
+Aktualizacja przez przesłanie pakietu kopii zapasowej danych
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Aktualizacja przez przesłanie pakietu kopii zapasowej danych
+    * @param [in] filePath Ścieżka pliku pakietu kopii zapasowej danych do przesłania; D://zUP/fr_user_data.tar.gz
+    * @return Kod błędu
+    */
+    public int DataPackageUpgrade(String filePath)
+
+Pobieranie procentu postępu aktualizacji pakietu kopii zapasowej danych
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Pobierz procent postępu aktualizacji pakietu kopii zapasowej danych
+    * @return List[0]: Kod błędu; List[1]: Procent postępu aktualizacji [0-100], -1: aktualizacja nie powiodła się
+    */
+    public List<Integer> GetDataPackageUpgradeProgress()
+
+Przykład kodu aktualizacji przez przesłanie pakietu kopii zapasowej danych i sprawdzania postępu
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    public static void TestDataPackageUpgrade(Robot robot)
+    {
+        ROBOT_STATE_PKG pkg = new ROBOT_STATE_PKG();
+        int rtn = 0;
+        robot.Sleep(200);
+
+        rtn = robot.DataPackageUpgrade("D://zUP/upgrade/FR3WMS/fr_user_data.tar.gz");
+        System.out.println("robot DataPackageUpgrade rtn is " + rtn);
+
+        int upgradeProgress = 0;
+        while (upgradeProgress < 100)
+        {
+            List<Integer> state = robot.GetDataPackageUpgradeProgress();
+            upgradeProgress = state.get(1);
+            System.out.println("robot data package upgrade progress : " + upgradeProgress);
+            robot.Sleep(200);
+        }
     }    

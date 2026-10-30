@@ -77,11 +77,11 @@ Pobieranie stanu ruchu chwytaka
     :widths: 10 30
 
     "Prototyp", "``GetGripperMotionDone()``"
-    "Opis", "Pobieranie stanu ruchu chwytaka"
+    "Opis", "Pobierz stan ruchu chwytaka (od wersji 401 protokół efektora końcowego i definicja sprzężenia zwrotnego stanu ruchu chwytaka dostosowanych urządzeń są ujednolicone)"
     "Parametry wymagane", "Brak"
     "Parametry domyślne", "Brak"
-    "Wartość zwracana", "- Kod błędu sukces-0 błąd- errcode 
-    - ``[fault,status]``: Stan ruchu chwytaka, fault:0-brak błędu, 1-jest błąd; status:0-ruch niezakończony, 1-ruch zakończony"
+    "Wartość zwracana", "- Kod błędu Sukces-0  Błąd- errcode 
+    - ``[fault,status]``: Stan ruchu chwytaka, fault: 0-Brak błędu, inny-Błąd; status: 0-Ruch nieukończony, 1-Ruch ukończony, nie wykryto obiektu, 2-Ruch ukończony, wykryto obiekt, 3-Ruch ukończony, wykryto upadek obiektu"
 
 Pobieranie stanu aktywacji chwytaka
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -2227,7 +2227,7 @@ Oczekiwanie na Status Ruchu Chwytaka
     "Prototyp", "``GripperWaitMotionDone(self, status, timeout, strategy, type)``"
     "Opis", "Oczekiwanie na status ruchu chwytaka"
     "Parametry Wymagane", "
-    - ``status``：0-ruch nie zakończony, 1-ruch zakończony bez wykrycia obiektu, 2-ruch zakończony z wykryciem obiektu
+    - ``status``：0-ruch nie zakończony, 1-ruch zakończony bez wykrycia obiektu, 2-ruch zakończony z wykryciem obiektu, 3-Ruch ukończony, wykryto upadek obiektu
     - ``timeout``：Limit czasu (ms), -1 dla nieskończonego oczekiwania
     - ``strategy``：0-zatrzymaj z błędem, 1-kontynuuj działanie
     - ``type``：0-chwytak równoległy, 1-chwytak obrotowy
@@ -2243,39 +2243,46 @@ Przykład Kodu Oczekiwania na Status Ruchu Chwytaka
     from fairino import Robot
     import time
 
-
     def main():
-        # Nawiązanie połączenia z kontrolerem robota
+        # Establish connection with the robot controller
         robot = Robot.RPC('192.168.58.2')
-        time.sleep(0.5)  # Oczekiwanie na połączenie i odbiór danych
+        time.sleep(0.5)  # Wait for connection and data reception
 
-        print("========== Test oczekiwania na zakończenie ruchu chwytaka ==========")
+        print("========== Gripper Motion Done Test ==========")
 
-        # ========== Chwytak otwarty ==========
-        rtn = robot.MoveGripper(1, 0, 100, 100, 30000, 0, 0, 0, 0, 0)
-        print(f"MoveGripper(otwórz) ret={rtn}")
-        time.sleep(4)
+        # Open the gripper
+        rtn = robot.MoveGripper(2, 50, 50, 100, 30000, 0, 0, 0, 0, 0)
+        print(f"MoveGripper(open) ret={rtn}")
+        time.sleep(2)
+        rtn, pkg = robot.GetRobotRealTimeState()
+        print(f"gripper_motiondone {pkg.gripper_motiondone}")
 
-        # ========== Chwytak zamknięty ==========
-        rtn = robot.MoveGripper(1, 90, 100, 100, 30000, 0, 0, 0, 0, 0)
-        print(f"MoveGripper(zamknij) ret={rtn}")
+        # Close the gripper
+        rtn = robot.MoveGripper(2, 90, 100, 100, 30000, 0, 0, 0, 0, 0)
+        print(f"MoveGripper(close) ret={rtn}")
+        time.sleep(2)
+        rtn, pkg = robot.GetRobotRealTimeState()
+        print(f"gripper_motiondone {pkg.gripper_motiondone}")
 
-        # ========== Oczekiwanie na zakończenie ruchu (brak wykrycia obiektu, timeout 30s, zatrzymaj z błędem) ==========
-        rtn = robot.GripperWaitMotionDone(1, 30000, 0, 0)
-        print(f"GripperWaitMotionDone(oczekiwanie na zakończenie bez wykrycia obiektu) ret={rtn}")
+        # Wait for motion done, no object detected, timeout 5s, stop with error
+        rtn = robot.GripperWaitMotionDone(2, 5000, 0, 0)
+        print(f"GripperWaitMotionDone(no object detected) ret={rtn}")
 
-        # ========== Chwytak otwarty ==========
-        rtn = robot.MoveGripper(1, 0, 100, 100, 30000, 0, 0, 0, 0, 0)
-        print(f"MoveGripper(otwórz) ret={rtn}")
+        # Loop and query gripper motion status
+        while True:
+            rtn, status = robot.GetGripperMotionDone()
+            print(f"motion status:{status[0]},{status[1]}\n")
 
-        print("========== Test zakończony ==========")
+            rtn, pkg = robot.GetRobotRealTimeState()
+            print(f"error code {pkg.main_code},{pkg.sub_code}")
 
-        # Zamknięcie połączenia
+            time.sleep(0.5)
+
+        # Close connection (never reached due to infinite loop)
         robot.CloseRPC()
 
-
     if __name__ == "__main__":
-        main()    
+        main()  
 
 Przykład Kodu Odtwarzania Rejestracji Laserowej + Asynchroniczny Ruch Osi Rozszerzonych + Splot w Punktach Stałych    
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

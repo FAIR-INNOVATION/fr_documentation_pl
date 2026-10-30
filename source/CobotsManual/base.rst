@@ -986,20 +986,29 @@ Funkcje konfigurowalne dla wyjść przedstawiono w poniższej tabeli:
      - Załączenie robota
      - Stan załączenia robota
    * - 48
+     - Automatyczne podnoszenie podczas zerwania drutu
+     - Stan automatycznego podnoszenia podczas zerwania drutu
+   * - 49
      - Port wejściowy JOB 4
      - Sygnał portu wejściowego JOB 4
-   * - 49
+   * - 50
      - Port wejściowy JOB 5
      - Sygnał portu wejściowego JOB 5
-   * - 50
+   * - 51
      - Port wejściowy JOB 6
      - Sygnał portu wejściowego JOB 6
-   * - 51
+   * - 52
      - Port wejściowy JOB 7
      - Sygnał portu wejściowego JOB 7
-   * - 52
+   * - 53
      - Port wejściowy JOB 8
-     - Sygnał portu wejściowego JOB 8  
+     - Sygnał portu wejściowego JOB 8
+   * - 59
+     - Robot w pozycji
+     - Wysyła sygnał stanu, gdy serwo robota jest włączone i nie występuje usterka ani alarm
+   * - 200
+     - Zajęte
+     - Funkcja jest zajęta
 
 Funkcja konfigurowalna wysokiego/niskiego stanu aktywnego DO skrzynki sterowniczej
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1481,8 +1490,20 @@ Parametry admitancji dla otwartej zgodności orientacji
 Konfiguracja Ruchu
 ---------------------------------------------
 
+Kliknij "Ustawienia początkowe" -> "Podstawowe" na pasku menu, a następnie kliknij podmenu "Konfiguracja ruchu", aby wejść do interfejsu konfiguracji.
+
+Tryb wygładzania przyspieszenia
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Funkcja "Tryb wygładzania przyspieszenia" wykonuje głównie blending między poleceniami PTP-PTP, LIN-LIN, ARC-ARC, LIN-ARC i ARC-LIN; blending między innymi poleceniami nie działa.
+
+.. image:: base/110.png
+   :width: 4in
+   :align: center
+
+.. centered:: Rysunek 6.11-4 Tryb wygładzania przyspieszenia
+
 Optymalizacja Charakterystyki Prędkości w Kształcie T + Funkcja Wygładzania Blending
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Przegląd
 ++++++++++++++++++++++
@@ -1518,7 +1539,7 @@ Metoda z Instrukcjami Lua
 .. centered:: Rysunek 7.13-2 Typowy Program dla Blendingu PTP-PTP z Metodą Instrukcji Lua
 
 Metoda z Przełącznikiem Konfiguracji Ruchu
-***********************************
+****************************************************
 
 **Krok 1**: Kliknij "Ustawienia Początkowe" -> "Bezpieczeństwo" -> "Konfiguracja Ruchu" i włącz przełącznik "Tryb Wygładzania Przyspieszenia".
 
@@ -1546,8 +1567,21 @@ Metoda z Przełącznikiem Konfiguracji Ruchu
 
 .. centered:: Rysunek 7.13-5 Typowy Program dla Blendingu PTP-PTP z Przełącznikiem Konfiguracji
 
+Tryb optymalny czasowo (automatyczna konfiguracja)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+"Tryb optymalny czasowo" jest realizowany bez konieczności debugowania i konfigurowania jego parametrów. Funkcja ta adaptacyjnie wykonuje konfigurację parametrów trybu optymalnego czasowo zgodnie z bieżącym stanem pracy robota, poprawiając wydajność debugowania.
+
+.. note:: Uwaga: tryb optymalny czasowo i tryb wygładzania przyspieszenia wykluczają się wzajemnie.
+
+.. image:: base/111.png
+   :width: 4in
+   :align: center
+
+.. centered:: Rysunek 7.13-6-1 Tryb optymalny czasowo (automatyczna konfiguracja)
+
 Funkcja Parametrów Adaptacyjnych FIR + Funkcja Pauzy/Wznawiania FIR
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Przegląd
 ++++++++++++++++++++++
@@ -1608,3 +1642,134 @@ Sposób użycia podstawowych poleceń ruchu PTP, LIN i ARC robota jest podobny. 
 
    Gdy przełącznik funkcji "Tryb Optymalny Czasowo" jest włączony, podstawowe polecenia ruchu robota PTP, LIN i ARC są w trybie optymalnym czasowo. Wyłączenie przełącznika funkcji "Tryb Optymalny Czasowo" w tym interfejsie przywróci podstawowe polecenia ruchu PTP, LIN i ARC do ich normalnego stanu.
    Przełącznik funkcji "Tryb Wygładzania Przyspieszenia" nie może być włączony jednocześnie z trybem optymalnym czasowo w tym interfejsie.
+
+Czas filtrowania ruchu serwo i wzmocnienie pozycji
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Przegląd
+++++++++++++++++++++++++++++++++++++
+
+Celem funkcji czasu filtrowania ruchu serwo i wzmocnienia pozycji jest poprawa gładkości i dokładności trajektorii ruchu serwo robota. Na przykład parametr czasu filtrowania może wygładzić krzywą prędkości ruchu serwo typu T w krzywą prędkości ruchu serwo typu S; parametr wzmocnienia pozycji może regulować responsywność sprzężenia zwrotnego pozycji przegubów względem polecenia w ruchu serwo.
+
+Przebieg operacji funkcji globalnego czasu filtrowania serwo w przestrzeni kartezjańskiej/przegubowej
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+**Step1**: Ustawienia konfiguracji ruchu. Na głównym interfejsie WebApp kliknij "Ustawienia początkowe" -> "Podstawowe" -> "Konfiguracja ruchu", aby wejść do obszaru poleceń "Konfiguracja ruchu".
+
+.. image:: base/112.png
+   :width: 6in
+   :align: center
+
+.. centered:: Rysunek 7.13-11 Obszar poleceń "Konfiguracja ruchu"
+
+**Step2**: Ustawienia filtrowania ruchu. W obszarze poleceń "Konfiguracja ruchu" kliknij listę rozwijaną "Filtrowanie ruchu", aby wejść do obszaru konfiguracji "Konfiguracja parametrów", ustaw parametr "Czas filtrowania" i kliknij przycisk "Zastosuj", aby zakończyć ustawianie globalnej funkcji filtrowania ruchu serwo.
+
+.. note:: Uwaga: gdy jednocześnie istnieją parametry globalnego czasu filtrowania i czasu filtrowania polecenia, czas filtrowania ruchu serwo jest sumą obu.
+
+.. image:: base/113.png
+   :width: 4in
+   :align: center
+
+.. centered:: Rysunek 7.13-12 Obszar konfiguracji "Filtrowanie ruchu"
+
+.. note:: Uwaga: zakres parametru globalnego czasu filtrowania ruchu serwo wynosi 0~200 ms. Gdy wartość domyślna wynosi 0, oznacza to, że globalna funkcja filtrowania ruchu serwo jest wyłączona.
+
+Przebieg operacji funkcji ruchu z poleceniem serwo w przestrzeni kartezjańskiej
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+**Step1**: Polecenie ruchu serwo. Na głównym interfejsie WebApp kliknij "Program nauczania" -> "Programowanie programu", aby wejść do obszaru poleceń "Polecenie ruchu".
+
+.. image:: base/114.png
+   :width: 2in
+   :align: center
+
+.. centered:: Rysunek 7.13-13 Obszar poleceń "Polecenie ruchu"
+
+**Step2**: Rozpoczęcie ruchu serwo. W obszarze poleceń "Polecenie ruchu" kliknij przycisk "Ruch serwo", aby wejść do obszaru konfiguracji polecenia "servoMotion".
+
+W interfejsie "Edycja polecenia" obszaru konfiguracji polecenia "servoMotion" kliknij przycisk "Rozpoczęcie ruchu serwo", ustaw parametry "Czas filtrowania" i "Wzmocnienie pozycji" i kliknij przycisk "Dodaj". Wstępnie wygenerowany program LUA zostanie wyświetlony w polu "Podgląd programu".
+
+.. image:: base/115.png
+   :width: 6in
+   :align: center
+
+.. centered:: Rysunek 7.13-14 Rozpoczęcie ruchu serwo
+
+.. note:: Uwaga: zakres parametru "Czas filtrowania" wynosi 0~200 ms; zakres parametru "Wzmocnienie pozycji" wynosi -1~100. Gdy wartość domyślna wynosi -1, oznacza to zgodność z wbudowanym ustawieniem bieżącej wersji pełnoparametrowej.
+
+**Step3**: Ruch serwo w przestrzeni kartezjańskiej. W interfejsie "Edycja polecenia" obszaru konfiguracji polecenia "servoMotion" kliknij przycisk "Ruch w przestrzeni kartezjańskiej" i wybierz tryb ruchu na liście rozwijanej "Tryb ruchu".
+
+Ustaw parametry "Pozycja kartezjańska", "Współczynnik skali", "Przyspieszenie", "Prędkość", "Okres polecenia", "Czas filtrowania" i "Wzmocnienie skali" i kliknij przycisk "Dodaj". Wstępnie wygenerowany program LUA zostanie wyświetlony w polu "Podgląd programu".
+
+.. image:: base/116.png
+   :width: 6in
+   :align: center
+
+.. centered:: Rysunek 7.13-15 Ruch w przestrzeni kartezjańskiej
+
+.. note:: Uwaga: parametr "Czas filtrowania" na rysunku pozostaje na wartości domyślnej.
+
+**Step4**: Zakończenie ruchu serwo. W interfejsie "Edycja polecenia" obszaru konfiguracji polecenia "servoMotion" kliknij przycisk "Zakończenie ruchu serwo" i kliknij przycisk "Dodaj". Wstępnie wygenerowany program LUA zostanie wyświetlony w polu "Podgląd programu".
+
+.. image:: base/117.png
+   :width: 6in
+   :align: center
+
+.. centered:: Rysunek 7.13-16 Zakończenie ruchu serwo
+
+**Step5**: Program LUA ruchu serwo w przestrzeni kartezjańskiej. Kliknij przycisk "Zastosuj", aby automatycznie wygenerować program LUA.
+
+.. image:: base/118.png
+   :width: 4in
+   :align: center
+
+.. centered:: Rysunek 7.13-17 Program LUA ruchu serwo w przestrzeni kartezjańskiej
+
+Przebieg operacji funkcji ruchu z poleceniem serwo w przestrzeni przegubowej
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+**Step1**: Polecenie ruchu serwo. W obszarze poleceń "Polecenie ruchu" kliknij przycisk "Ruch serwo", aby wejść do obszaru konfiguracji polecenia "servoMotion".
+
+.. image:: base/119.png
+   :width: 2in
+   :align: center
+
+.. centered:: Rysunek 7.13-18 Obszar poleceń "Polecenie ruchu"
+
+**Step2**: Rozpoczęcie ruchu serwo. W obszarze poleceń "Polecenie ruchu" kliknij przycisk "Ruch serwo", aby wejść do obszaru konfiguracji polecenia "servoMotion".
+
+W interfejsie "Edycja polecenia" obszaru konfiguracji polecenia "servoMotion" kliknij przycisk "Rozpoczęcie ruchu serwo", ustaw parametry "Czas filtrowania" i "Wzmocnienie pozycji" i kliknij przycisk "Dodaj". Wstępnie wygenerowany program LUA zostanie wyświetlony w polu "Podgląd programu".
+
+.. image:: base/120.png
+   :width: 6in
+   :align: center
+
+.. centered:: Rysunek 7.13-19 Rozpoczęcie ruchu serwo
+
+.. note:: Uwaga: zakres parametru "Czas filtrowania" wynosi 0~200 ms; zakres parametru "Wzmocnienie pozycji" wynosi -1~100. Gdy wartość domyślna wynosi -1, oznacza to zgodność z wbudowanym ustawieniem bieżącej wersji pełnoparametrowej.
+
+**Step3**: Ruch serwo w przestrzeni przegubowej. W interfejsie "Edycja polecenia" obszaru konfiguracji polecenia "servoMotion" kliknij przycisk "Ruch w przestrzeni przegubowej".
+
+Ustaw parametry "Pozycja przegubów", "Pozycja osi rozszerzonej", "Przyspieszenie", "Prędkość" i "Okres polecenia" i kliknij przycisk "Dodaj". Wstępnie wygenerowany program LUA zostanie wyświetlony w polu "Podgląd programu".
+
+.. image:: base/121.png
+   :width: 6in
+   :align: center
+
+.. centered:: Rysunek 7.13-20 Ruch w przestrzeni przegubowej
+
+**Step4**: Zakończenie ruchu serwo. W interfejsie "Edycja polecenia" obszaru konfiguracji polecenia "servoMotion" kliknij przycisk "Zakończenie ruchu serwo" i kliknij przycisk "Dodaj". Wstępnie wygenerowany program LUA zostanie wyświetlony w polu "Podgląd programu".
+
+.. image:: base/122.png
+   :width: 6in
+   :align: center
+
+.. centered:: Rysunek 7.13-21 Zakończenie ruchu serwo
+
+**Step5**: Program LUA ruchu serwo w przestrzeni przegubowej. Kliknij przycisk "Zastosuj", aby automatycznie wygenerować program LUA.
+
+.. image:: base/123.png
+   :width: 4in
+   :align: center
+
+.. centered:: Rysunek 7.13-22 Program LUA ruchu serwo w przestrzeni przegubowej

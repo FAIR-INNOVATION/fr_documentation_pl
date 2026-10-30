@@ -418,6 +418,53 @@ Aktualizacja pliku konfiguracji pełnych parametrów stawów
     */
     errno_t JointAllParamUpgrade(std::string path);
 
+Pobieranie procentu postępu aktualizacji wszystkich parametrów przegubów
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. code-block:: c++
+    :linenos:
+
+    /**
+    * @brief Pobierz procent postępu aktualizacji wszystkich parametrów przegubów
+    * @param [out] progress Procent postępu aktualizacji [0-100], -1: aktualizacja nie powiodła się
+    * @return Kod błędu
+    */
+    errno_t GetJointAllParamUpgradeProgress(int& progress);
+    
+Przykład kodu aktualizacji wszystkich parametrów przegubów i sprawdzania postępu
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. code-block:: c++
+    :linenos:
+
+    int TestJointAllParamUpgrade()
+    {
+        ROBOT_STATE_PKG pkg = {};
+        FRRobot robot;
+        robot.LoggerInit();
+        robot.SetLoggerLevel(1);
+        int rtn = robot.RPC("192.168.58.2");
+        if (rtn != 0)
+        {
+            return -1;
+        }
+        robot.SetReConnectParam(true, 30000, 500);
+        robot.RobotEnable(0);
+        robot.Sleep(200);
+        rtn = robot.JointAllParamUpgrade("D://zUP/upgrade/FR3WMS/jointallparameters.db");
+        printf("robot JointAllParamUpgrade rtn is %d\n", rtn);
+        
+        int upgradeProgress = 0;
+        while (upgradeProgress < 100)
+        {
+            robot.GetJointAllParamUpgradeProgress(upgradeProgress);
+            printf("robot joint all param upgrade progress : %d\n", upgradeProgress);
+            robot.Sleep(200);
+        }
+        robot.CloseRPC();
+        return 0;
+    }    
+
 Przykład kodu aktualizacji oprogramowania sprzętowego stacji podrzędnej robota
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -757,5 +804,64 @@ Przykład kodu wysyłania niestandardowej ramki polecenia przez TCP8080
         robot.Sleep(2000);
         robot.CloseRPC();
         robot.Sleep(1000);
+        return 0;
+    }    
+
+Aktualizacja przez przesłanie pakietu kopii zapasowej danych
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    
+.. code-block:: c++
+    :linenos:
+
+    /**
+    * @brief Aktualizacja przez przesłanie pakietu kopii zapasowej danych
+    * @param [in] filePath Ścieżka pliku pakietu kopii zapasowej danych do przesłania; D://zUP/fr_user_data.tar.gz
+    * @return Kod błędu
+    */
+    errno_t DataPackageUpgrade(std::string filePath);
+    
+Pobieranie procentu postępu aktualizacji pakietu kopii zapasowej danych
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    
+.. code-block:: c++
+    :linenos:
+
+    /**
+    * @brief Pobierz procent postępu aktualizacji pakietu kopii zapasowej danych
+    * @param [out] progress Procent postępu aktualizacji [0-100], -1: aktualizacja nie powiodła się
+    * @return Kod błędu
+    */
+    errno_t GetDataPackageUpgradeProgress(int& progress);
+        
+Przykład kodu aktualizacji przez przesłanie pakietu kopii zapasowej danych i sprawdzania postępu
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    
+.. code-block:: c++
+    :linenos:
+
+    int TestDataPackageUpgrade()
+    {
+        ROBOT_STATE_PKG pkg = {};
+        FRRobot robot;
+        robot.LoggerInit();
+        robot.SetLoggerLevel(1);
+        int rtn = robot.RPC("192.168.58.2");
+        if (rtn != 0)
+        {
+            return -1;
+        }
+        robot.SetReConnectParam(true, 30000, 500);
+        robot.Sleep(200);
+        rtn = robot.DataPackageUpgrade("D://zUP/upgrade/FR5/fr_user_data.tar.gz");
+        printf("robot DataPackageUpgrade rtn is %d\n", rtn);
+        
+        int upgradeProgress = 0;
+        while (upgradeProgress < 100)
+        {
+            robot.GetDataPackageUpgradeProgress(upgradeProgress);
+            printf("robot data package upgrade progress : %d\n", upgradeProgress);
+            robot.Sleep(200);
+        }
+        robot.CloseRPC();
         return 0;
     }    

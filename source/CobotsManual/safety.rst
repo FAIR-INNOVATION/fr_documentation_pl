@@ -273,6 +273,9 @@ W WebApp robota kliknij kolejno "Ustawienia początkowe", "Bezpieczeństwo" i "B
 - **Sterowanie przez ModbusRTU**: Gdy robot działa jako slave ModbusRTU, wyjście DO robota, start/stop programu, przełączanie ręczne/automatyczne, tryb zmniejszony itp. mogą być sterowane przez „Funkcjonalne Wejście Cyfrowe (Cewka)”. Po wyłączeniu „Sterowania przez ModbusRTU” powyższe funkcje sterowania przez „Funkcjonalne Wejście Cyfrowe (Cewka)” są wszystkie wyłączone.
 - **Sterowanie przez CNDE**: Wejście CNDE robota może być skonfigurowane dla wyjścia DO robota, wyjścia AO, prędkości pracy i innych kontroli. Po wyłączeniu „Sterowania przez CNDE” klient CNDE nie może kontrolować powyższych funkcji.
 - **Funkcja resetu IP skrzynki przycisków**: Skrzynka przycisków robota V2.0 ma przycisk resetu IP. Wyłączenie „Funkcji resetu IP skrzynki przycisków” uniemożliwi reset IP robota przez skrzynkę przycisków.
+- **Sterowanie przez port 8082**: Port 8082 robota jest portem przesyłania plików LUA i plików zapisu trajektorii TPD. Przez ten port można modyfikować zawartość i nazwę pliku LUA bieżącego ruchu. Gdy konfiguracja nie jest włączona, robot nie będzie odpowiadać na żądania modyfikacji plików klienta.
+- **Sterowanie przez NTP**: Skrzynka sterownicza w wersji LA ma usługę synchronizacji czasu NTP. Wyłączenie tej funkcji uniemożliwia robotowi synchronizację czasu NTP.
+- **Sterowanie przez DHCP**: Po wyłączeniu robot wyłącza usługę DHCP.
 
 Wprowadź hasło bezpieczeństwa na stronie konfiguracji bezpieczeństwa i odblokuj je, ustaw porty komunikacyjne do włączenia na „Włączone”, kliknij „Zastosuj”, potwierdź włączone funkcje w wyświetlonym oknie potwierdzenia konfiguracji bezpieczeństwa i kliknij przycisk „Potwierdź”.
 
@@ -287,6 +290,20 @@ Wprowadź hasło bezpieczeństwa na stronie konfiguracji bezpieczeństwa i odblo
    :align: center
 
 .. centered:: Rysunek 7.3-21 Porty Komunikacyjne Włączone
+
+Konfiguracja włączenia usługi synchronizacji czasu PTP robota
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Usługę synchronizacji czasu PTP robota można skonfigurować jako wyłączoną, synchronizację czasu programową lub synchronizację czasu sprzętową, a także można ustawić porty sieciowe Eth0 i Eth1 skrzynki sterowniczej robota dla usługi synchronizacji czasu PTP. Funkcje "Rejestrowanie logów" i "Wykrywanie dokładności synchronizacji" nie są jeszcze dostępne.
+
+.. image:: safety/076.png
+   :width: 6in
+   :align: center
+
+.. centered:: Rysunek 7.3-21-1 Konfiguracja usługi synchronizacji czasu PTP robota
+
+Fizyczna ochrona antysabotażowa skrzynki sterowniczej robota
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Skrzynka sterownicza robota ma fizyczną etykietę zabezpieczającą przed sabotażem. Użytkownicy muszą regularnie sprawdzać, czy etykieta zabezpieczająca przed sabotażem na skrzynce sterowniczej robota jest nienaruszona.
 
 Weryfikacja Integralności Oprogramowania Robota
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -427,6 +444,34 @@ Bezpieczne Zatrzymanie
 
 Kliknij na pasku menu "Ustawienia Początkowe" -> "Bezpieczeństwo" i kliknij "Bezpieczne Zatrzymanie", aby przejść do interfejsu konfiguracji w celu ustawienia trybu bezpiecznego zatrzymania i parametrów strategii bezpiecznego zatrzymania.
 
+Tryb zatrzymania bezpieczeństwa
+**********************************************************************
+
+Gdy tryb zatrzymania bezpieczeństwa jest wybrany jako "Certyfikacja CR", tryb ten spełnia głównie wymagania bezpieczeństwa krajowego systemu certyfikacji robotów (Certyfikacja CR) i jest odpowiedni do odbioru projektów krajowych lub scenariuszy dostępu do rynku. Certyfikacja CR to autorytatywna certyfikacja chińskich produktów robotycznych wprowadzona pod kierownictwem wielu krajowych ministerstw i komisji, koncentrująca się na ocenie bezpieczeństwa i niezawodności robotów.
+
+W tym trybie funkcja zatrzymania bezpieczeństwa systemu jest konfigurowana i weryfikowana zgodnie ze specyfikacjami branżowymi krajowych robotów współpracujących. W praktyce branży robotów współpracujących takie podstawowe funkcje bezpieczeństwa są zwykle projektowane i oceniane w odniesieniu do wyższego poziomu bezpieczeństwa funkcjonalnego, aby zapewnić absolutne bezpieczeństwo podczas współpracy człowiek-robot.
+
+.. image:: safety/071.png
+   :width: 6in
+   :align: center
+
+.. centered:: Rysunek 7.4-2-1 Tryb certyfikacji CR
+
+Bezpieczeństwo funkcjonalne (Functional Safety) to międzynarodowo uznana metodologia inżynierska, której głównym celem jest zapewnienie, że system w przypadku wystąpienia usterki może niezawodnie przejść w stan bezpieczny. W przypadku robotów współpracujących bezpieczeństwo funkcjonalne jest zwykle oceniane zgodnie z ISO 13849-1 (Części systemów sterowania związane z bezpieczeństwem maszyn) & 10218 itp., w celu określenia poziomu wydajności systemów sterowania związanych z bezpieczeństwem.
+
+Gdy wybrany jest tryb "Bezpieczeństwo funkcjonalne", wdrażanie i weryfikacja funkcji zatrzymania bezpieczeństwa są zgodne z międzynarodowym systemem norm bezpieczeństwa funkcjonalnego. Tryb ten jest odpowiedni do eksportu produktów (np. zgodność z dyrektywą maszynową w certyfikacji CE UE) lub scenariuszy, w których klient ma jasną międzynarodową podstawę normatywną dla bezpieczeństwa intrinsycznego.
+
+.. note:: Uwaga: po pomyślnym skonfigurowaniu trybu bezpieczeństwa funkcjonalnego należy ponownie uruchomić skrzynkę sterowniczą, aby zmiany parametrów systemu sterowania bezpieczeństwem zaczęły obowiązywać.
+
+.. image:: safety/072.png
+   :width: 6in
+   :align: center
+
+.. centered:: Rysunek 7.4-2-2 Tryb bezpieczeństwa funkcjonalnego
+
+Metoda wyzwalania
+**********************************************************************
+
 Gdy tryb wyzwalania bezpiecznego zatrzymania jest ustawiony na "Dwukanałowy", oba kanały muszą zostać wyczyszczone, a ostrzeżenie musi zostać ręcznie usunięte na interfejsie operacyjnym, zanim robot będzie mógł zostać zresetowany. Ponadto dodano opcję trybu zmniejszonego w konfiguracji strategii. Gdy użytkownik wybierze tę strategię, robot przejdzie do ruchu w trybie zmniejszonym.
 
 **Krok 1**: Kliknij "Ustawienia Początkowe" -> "Bezpieczeństwo" -> "Bezpieczne Zatrzymanie". Tryb wyzwalania można wybrać jako "Domyślny" lub "Dwukanałowy". Różnica między nimi polega na tym, że w trybie "Domyślnym" błąd interfejsu jest automatycznie usuwany po wyzwoleniu i przywróceniu; w trybie "Dwukanałowym" błąd interfejsu musi być ręcznie usunięty po wyzwoleniu i przywróceniu. "Strategia Bezpiecznego Zatrzymania" może być wybrana jako "Zatrzymaj", "Wstrzymaj", "Tryb Zmniejszony Poziom 1" i "Tryb Zmniejszony Poziom 2". Szczegółowe opisy są następujące: gdy wybrano "Zatrzymaj", robot zatrzyma bieżący ruch; gdy wybrano "Wstrzymaj", robot wstrzyma bieżący ruch, a po przywróceniu i usunięciu błędu wznowi wstrzymanie; gdy wybrano "Tryb Zmniejszony Poziom 1", robot przejdzie do ruchu w trybie zmniejszonym poziomu 1; gdy wybrano "Tryb Zmniejszony Poziom 2", robot przejdzie do ruchu w trybie zmniejszonym poziomu 2.
@@ -473,6 +518,8 @@ Poprzez kontroler wysyłający do płytki szafy sterowniczej, awaryjne zatrzyman
 - Awaryjne zatrzymanie typu 1b: po zatrzymaniu z opóźnieniem, nie odcina zasilania korpusu robota, ale wyłącza korpus robota;
 - Awaryjne zatrzymanie typu 2: po naciśnięciu awaryjnego zatrzymania, robot zwalnia do zatrzymania i pozostaje włączony. Po zwolnieniu awaryjnego zatrzymania, robot powinien być w stanie normalnie działać.
 
+.. note:: Uwaga: zatrzymanie awaryjne jest obsługiwane tylko przez sprzęt szerokonapięciowy.
+
 .. image:: safety/011.png
    :width: 4in
    :align: center
@@ -484,7 +531,11 @@ Ochronne Zatrzymanie
 
 Kliknij na pasku menu "Ustawienia Początkowe" -> "Bezpieczeństwo" i kliknij podmenu "Ochronne Zatrzymanie", aby przejść do interfejsu konfiguracji.
 
-Typy ochronnego zatrzymania 0, 1, 2. Ochronne zatrzymanie typu 0 bezpośrednio odcina zasilanie płytki szafy sterowniczej. Ochronne zatrzymanie typu 1: płytka szafy sterowniczej najpierw powiadamia kontroler, aby kontrolował zatrzymanie robota, następnie kontroler przekazuje informację zwrotną do płytki szafy sterowniczej w celu odcięcia zasilania. Ochronne zatrzymanie typu 2: płytka szafy sterowniczej powiadamia kontroler, aby kontrolował zatrzymanie robota.
+Istnieją trzy typy zatrzymania ochronnego: 0, 1 i 2. W dowolnym trybie funkcja zatrzymania bezpieczeństwa jest wyzwalana zgodnie z sygnałem zatrzymania bezpieczeństwa skrzynki sterowniczej, a odpowiednia funkcja zatrzymania Cat.0, Cat.1 lub Cat.2 jest wykonywana zgodnie ze skonfigurowanym poziomem zatrzymania bezpieczeństwa. W przypadku zatrzymania ochronnego typu 0 płyta skrzynki sterowniczej bezpośrednio odcina zasilanie. W przypadku zatrzymania ochronnego typu 1 płyta skrzynki sterowniczej najpierw powiadamia sterownik o zatrzymaniu robota, a następnie sterownik przekazuje informację zwrotną do płyty skrzynki sterowniczej o odcięciu zasilania. W przypadku zatrzymania ochronnego typu 2 płyta skrzynki sterowniczej powiadamia sterownik o zatrzymaniu robota.
+
+- Jeśli typ zatrzymania to 0, zasilanie korpusu zostaje odcięte, a przeguby wykonują bezpieczny hamulec;
+- Jeśli typ zatrzymania to 1, wykonywane jest zatrzymanie z opóźnieniem, zasilanie korpusu zostaje odcięte, a przeguby wykonują bezpieczny hamulec;
+- Jeśli typ zatrzymania to 2, wykonywane jest zatrzymanie z opóźnieniem, zasilanie korpusu jest utrzymywane, a przeguby nie wykonują bezpiecznego hamulca;
 
 .. image:: safety/012.png
    :width: 4in
@@ -645,7 +696,7 @@ Wykrywanie Mocy ServoJT (Używane tylko w systemie QX)
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 Kliknij na pasku menu "Ustawienia Początkowe" -> "Bezpieczeństwo" i kliknij podmenu "Wykrywanie Mocy", aby przejść do interfejsu konfiguracji.
 
-Gdy działa bezpośrednio na pętlę prądową robota (tylko servoJT), jest używane do ograniczania pracy wykonywanej przez robota. Gdy całka prędkości i momentu obrotowego robota zostanie wykryta jako przekraczająca limit, aktywowana jest ochrona mocy.
+Gdy działa bezpośrednio na pętlę prądową robota (tylko z poleceniem servoJT), służy do ograniczenia maksymalnej mocy robota. Gdy zostanie wykryte, że moc robota przekracza wartość graniczną, wykonywana jest ochrona mocowa.
 
 .. image:: safety/024.png
    :width: 4in
@@ -869,7 +920,7 @@ To urządzenie podlega ocenie zgodności zgodnie z Rozporządzeniem maszynowym U
        | [Reakcja robota]:
        | Jeśli typ zatrzymania to 0, zasilanie korpusu zostaje odcięte, przeguby wykonują bezpieczny hamulec, a utrzymanie pozycji jest monitorowane
        | Jeśli typ zatrzymania to 1, wykonywane jest zatrzymanie z opóźnieniem, zasilanie korpusu zostaje odcięte, przeguby wykonują bezpieczny hamulec, a utrzymanie pozycji jest monitorowane	
-     - 202.0512143
+     - 202.051
 
    * - SF02
      - Safeguard Stop-Zatrzymanie ochronne
@@ -881,7 +932,7 @@ To urządzenie podlega ocenie zgodności zgodnie z Rozporządzeniem maszynowym U
        | Jeśli typ zatrzymania to 0, zasilanie korpusu zostaje odcięte, przeguby wykonują bezpieczny hamulec, a utrzymanie pozycji jest monitorowane;
        | Jeśli typ zatrzymania to 1, wykonywane jest zatrzymanie z opóźnieniem, zasilanie korpusu zostaje odcięte, przeguby wykonują bezpieczny hamulec, a utrzymanie pozycji jest monitorowane;
        | Jeśli typ zatrzymania to 2, wykonywane jest zatrzymanie z opóźnieniem, zasilanie korpusu jest utrzymywane, przeguby nie wykonują bezpiecznego hamulca i pozostają włączone, a wykonywana jest detekcja bezruchu + droga zatrzymania + czas zatrzymania;	
-     - 191.3170862
+     - 191.317
 
    * - SF03
      - Joint Position Limit-Ograniczenie pozycji przegubów
@@ -890,7 +941,7 @@ To urządzenie podlega ocenie zgodności zgodnie z Rozporządzeniem maszynowym U
        | [Dla każdego przegubu można ustawić limity soft. Płyta bezpieczeństwa wykrywa pozycję przegubu w czasie rzeczywistym. Jeśli limit zostanie przekroczony, wykonywane jest działanie zatrzymania Cat.2, z blokadową detekcją bezruchu + droga zatrzymania + czas zatrzymania.
        | [Zdarzenie wyzwalające]: Przegub przesuwa się poza zakres pozycji granicznej;
        | [Reakcja robota]: Alarm usterki - przekroczono limit soft, wykonywane jest działanie zatrzymania Cat.2, z blokadową detekcją bezruchu + droga zatrzymania + czas zatrzymania;
-     - 158.5302637
+     - 158.530
 
    * - SF04
      - Joint Speed Limit-Ograniczenie prędkości przegubów
@@ -899,7 +950,7 @@ To urządzenie podlega ocenie zgodności zgodnie z Rozporządzeniem maszynowym U
        | Dla każdego przegubu można ustawić ograniczenie prędkości. Zgodnie z odpowiednią prędkością bezpieczeństwa sterownika, obwód bezpieczeństwa wykrywa, czy prędkość w czasie rzeczywistym każdego przegubu robota przekracza limit. Jeśli limit zostanie przekroczony, wykonywane jest zatrzymanie Cat.1 z blokadowym monitorowaniem utrzymania pozycji lub zatrzymanie Cat.2 z blokadową detekcją bezruchu + droga zatrzymania + czas zatrzymania.
        | [Zdarzenie wyzwalające]: Prędkość przegubu przekracza ustawioną wartość;
        | [Reakcja robota]: Alarm usterki - przekroczono prędkość. Opcjonalnie wykonać zatrzymanie Cat.1 z blokadowym monitorowaniem utrzymania pozycji lub domyślnie wykonać zatrzymanie Cat.2 z blokadową detekcją bezruchu + droga zatrzymania + czas zatrzymania;	
-     - 158.5302637
+     - 158.530
           
    * - SF05
      - Joint Torque Limit-Ograniczenie momentu przegubów
@@ -908,7 +959,7 @@ To urządzenie podlega ocenie zgodności zgodnie z Rozporządzeniem maszynowym U
        | Dla każdego przegubu można ustawić ograniczenie momentu. Zgodnie z odpowiednim momentem bezpieczeństwa sterownika, obwód bezpieczeństwa wykrywa, czy moment w czasie rzeczywistym każdego przegubu robota przekracza limit. Jeśli limit zostanie przekroczony, wykonywane jest zatrzymanie Cat.2, z blokadową detekcją bezruchu + droga zatrzymania + czas zatrzymania
        | [Zdarzenie wyzwalające]: Moment przegubu przekracza ustawioną wartość momentu
        | [Reakcja robota]: Alarm usterki - przekroczono moment przegubu x, wykonywane jest zatrzymanie Cat.2, z blokadową detekcją bezruchu + droga zatrzymania + czas zatrzymania
-     - 67.48193213
+     - 62.808
      	          
    * - SF06
      - | TCP Pose Limit-Ograniczenie pozy TCP (płaszczyzna bezpieczeństwa, kierunek narzędzia)
@@ -919,7 +970,7 @@ To urządzenie podlega ocenie zgodności zgodnie z Rozporządzeniem maszynowym U
        | Zakres ograniczenia TCP i odpowiedni DI (maksymalnie 8 konfigurowalnych) są ustawiane z góry na odpowiedniej stronie sterownika. Gdy DI zostanie włączony, odpowiednie ograniczenie zostaje aktywowane. Gdy TCP przekroczy zakres ograniczenia, wykonywane jest zatrzymanie Cat.2, z blokadową detekcją bezruchu + droga zatrzymania + czas zatrzymania
        | [Zdarzenie wyzwalające]: Poza TCP przekracza ustawiony zakres
        | [Reakcja robota]: Alarm usterki - przekroczono płaszczyznę bezpieczeństwa/kierunek narzędzia, wykonywane jest działanie zatrzymania Cat.2, z blokadową detekcją bezruchu + droga zatrzymania + czas zatrzymania	
-     - 70.07272665
+     - 70.072
           	          
    * - SF07
      - manual mode, reduced-speed-Tryb ręczny, prędkość zredukowana
@@ -928,7 +979,7 @@ To urządzenie podlega ocenie zgodności zgodnie z Rozporządzeniem maszynowym U
        | Gdy tryb sterownika jest w trybie ręcznym o zredukowanej prędkości, wykrywane jest, czy prędkość TCP jest ≤250mm/s. Jeśli prędkość zostanie przekroczona, wykonywane jest działanie zatrzymania Cat.0 lub Cat.1, z blokadowym monitorowaniem utrzymania pozycji.
        | [Zdarzenie wyzwalające]: Prędkość TCP przekracza ustawioną prędkość
        | [Reakcja robota]: Alarm usterki - przekroczenie prędkości TCP, wykonywane jest działanie zatrzymania Cat.0 lub Cat.1, z blokadowym monitorowaniem utrzymania pozycji.	
-     - 70.07272665
+     - 70.072
              	          
    * - SF08
      - TCP Force Limit-Ograniczenie siły TCP
@@ -937,7 +988,7 @@ To urządzenie podlega ocenie zgodności zgodnie z Rozporządzeniem maszynowym U
        | Sterownik może skonfigurować ograniczenie siły TCP. Obwód bezpieczeństwa monitoruje siłę TCP robota w czasie rzeczywistym. Jeśli siła TCP przekroczy wartość graniczną, wykonywane jest zatrzymanie Cat.2, z blokadową detekcją bezruchu + droga zatrzymania + czas zatrzymania
        | [Zdarzenie wyzwalające]: Siła TCP przekracza ustawiony limit
        | [Reakcja robota]: Alarm usterki - usterka kolizji przegubu x, wykonywane jest zatrzymanie Cat.2, z blokadową detekcją bezruchu + droga zatrzymania + czas zatrzymania	
-     - 124.720124  
+     - 62.808
              	          
    * - SF09
      - Momentum Limit-Ograniczenie pędu
@@ -946,7 +997,7 @@ To urządzenie podlega ocenie zgodności zgodnie z Rozporządzeniem maszynowym U
        | Sterownik może skonfigurować ograniczenie pędu robota. Obwód bezpieczeństwa monitoruje pęd robota w czasie rzeczywistym. Jeśli pęd robota przekroczy wartość graniczną, wykonywane jest zatrzymanie Cat.2, z blokadową detekcją bezruchu + droga zatrzymania + czas zatrzymania
        | [Zdarzenie wyzwalające]: Pęd przekracza ustawiony limit pędu
        | [Reakcja robota]: Alarm usterki - przekroczono pęd, wykonywane jest zatrzymanie Cat.2, z blokadową detekcją bezruchu + droga zatrzymania + czas zatrzymania	
-     - 67.48193213
+     - 62.808
                 	          
    * - SF10
      - Power Limit-Ograniczenie mocy
@@ -955,7 +1006,7 @@ To urządzenie podlega ocenie zgodności zgodnie z Rozporządzeniem maszynowym U
        | Sterownik może skonfigurować ograniczenie mocy robota. Obwód bezpieczeństwa monitoruje moc robota w czasie rzeczywistym. Jeśli moc robota przekroczy wartość graniczną, wykonywane jest zatrzymanie Cat.2, z blokadową detekcją bezruchu + droga zatrzymania + czas zatrzymania
        | [Zdarzenie wyzwalające]: Moc przekracza ustawiony limit mocy
        | [Reakcja robota]: Alarm usterki - przekroczono moc, wykonywane jest zatrzymanie Cat.2, z blokadową detekcją bezruchu + droga zatrzymania + czas zatrzymania
-     - 67.48193213
+     - 62.808
                 	          
    * - SF11
      - System Emergency Stop Output-Wyjście systemowego zatrzymania awaryjnego
@@ -966,7 +1017,7 @@ To urządzenie podlega ocenie zgodności zgodnie z Rozporządzeniem maszynowym U
        | [Reakcja robota]:
        | Typ zatrzymania awaryjnego 0: Wyjście sygnału systemowego zatrzymania awaryjnego
        | Typ zatrzymania awaryjnego 1: Wyjście sygnału systemowego zatrzymania awaryjnego	
-     - 191.3170862
+     - 191.317
                    	          
    * - SF12
      - Robot Moving State Output-Wyjście stanu ruchu robota
@@ -975,7 +1026,7 @@ To urządzenie podlega ocenie zgodności zgodnie z Rozporządzeniem maszynowym U
        | Gdy robot jest w stanie ruchu, sterownik wyprowadza sygnał DO ruchu
        | [Zdarzenie wyzwalające]: Robot jest w stanie ruchu
        | [Reakcja robota]: Wyjście sygnału ruchu robota	
-     - 68.7283255
+     - 68.728
                 	          
    * - SF13
      - Robot Not Stopping State Output-Wyjście stanu niezatrzymania robota
@@ -984,7 +1035,7 @@ To urządzenie podlega ocenie zgodności zgodnie z Rozporządzeniem maszynowym U
        | Gdy robot jest w stanie niezatrzymania, sterownik wyprowadza sygnał DO niezatrzymania
        | [Zdarzenie wyzwalające]: Robot jest w stanie niezatrzymania
        | [Reakcja robota]: Wyjście sygnału niezatrzymania robota	
-     - 68.7283255
+     - 68.728
 
    * - SF14
      - Reduced Mode State Output-Wyjście stanu trybu zredukowanego
@@ -993,7 +1044,7 @@ To urządzenie podlega ocenie zgodności zgodnie z Rozporządzeniem maszynowym U
        | Gdy robot jest w stanie zredukowanym, sterownik wyprowadza sygnał DO zredukowany
        | [Zdarzenie wyzwalające]: Robot jest w trybie zredukowanym
        | [Reakcja robota]: Wyjście sygnału trybu zredukowanego	
-     - 68.7283255
+     - 68.728
     
    * - SF15
      - Not Reduced Mode State Output-Wyjście stanu trybu niezredukowanego
@@ -1002,7 +1053,7 @@ To urządzenie podlega ocenie zgodności zgodnie z Rozporządzeniem maszynowym U
        | Gdy robot jest w stanie niezredukowanym, sterownik wyprowadza sygnał DO niezredukowany
        | [Zdarzenie wyzwalające]: Robot jest w trybie niezredukowanym
        | [Reakcja robota]: Wyjście sygnału trybu niezredukowanego	
-     - 68.7283255
+     - 68.728
     
    * - SF16
      - 3P enabling function-Funkcja zezwolenia 3-pozycyjnego
@@ -1012,7 +1063,7 @@ To urządzenie podlega ocenie zgodności zgodnie z Rozporządzeniem maszynowym U
        | Gdy zezwolenie 3-pozycyjne jest w pozycji 2, robot jest włączony, z blokadową aktywacją trybu ręcznego o zredukowanej prędkości i detekcji ręcznej zredukowanej prędkości
        | [Zdarzenie wyzwalające]: W trybie fizycznego teach pendantu przycisk zezwolenia 3-pozycyjnego zostaje wciśnięty do pozycji środkowej (pozycja 2)
        | [Reakcja robota]: Przeguby są włączone, bezpieczne hamulce przegubów są zwolnione, robot wchodzi w tryb ręczny o zredukowanej prędkości, z blokadową aktywacją trybu ręcznego o zredukowanej prędkości i detekcji ręcznej zredukowanej prędkości	
-     - 68.7283255
+     - 68.728
          
    * - SF17
      - monitored-standstill-Monitorowany bezruch (po zatrzymaniu Cat.2)
@@ -1021,7 +1072,7 @@ To urządzenie podlega ocenie zgodności zgodnie z Rozporządzeniem maszynowym U
        | Po zakończeniu zatrzymania Cat.2 obwód bezpieczeństwa wykrywa zmiany pozycji przegubów na podstawie polecenia robota i rzeczywistej pozycji. Jeśli odchylenie przekroczy limit, wykonywane jest zatrzymanie Cat.0 lub Cat.1
        | [Zdarzenie wyzwalające]: W bezruchu i bez ruchu pozycja robota zmienia się nieprawidłowo
        | [Reakcja robota]: Zakres zmiany pozycji robota przekracza ustawioną wartość, wykonywane jest działanie zatrzymania Cat.0 lub Cat.1	
-     - 60.05290188
+     - 47.515
             
    * - SF18
      - stopping time limiting-Ograniczenie czasu zatrzymania (po zatrzymaniu Cat.2)
@@ -1030,7 +1081,7 @@ To urządzenie podlega ocenie zgodności zgodnie z Rozporządzeniem maszynowym U
        | Po wyzwoleniu sygnału zatrzymania Cat.2 obwód bezpieczeństwa wykrywa czas zatrzymania na podstawie czasu sygnału zakończenia zatrzymania robota. Jeśli odchylenie przekroczy limit, wykonywane jest zatrzymanie Cat.0 lub Cat.1
        | [Zdarzenie wyzwalające]: Gdy robot wyzwala zatrzymanie
        | [Reakcja robota]: Gdy robot wyzwala zatrzymanie, jeśli czas zatrzymania przekracza ustawiony czas, wykonywane jest działanie zatrzymania Cat.0 lub Cat.1	
-     - 60.05290188 
+     - 47.515
             
    * - SF19
      - stopping distance limiting-Ograniczenie drogi zatrzymania (po zatrzymaniu Cat.2)
@@ -1039,7 +1090,7 @@ To urządzenie podlega ocenie zgodności zgodnie z Rozporządzeniem maszynowym U
        | Gdy sygnał zatrzymania Cat.2 jest wyzwolony, pozycja robota jest rejestrowana. Obwód bezpieczeństwa oblicza drogę zatrzymania, odejmując zarejestrowaną pozycję od rzeczywistej pozycji robota w czasie rzeczywistym. Jeśli odchylenie przekroczy limit, wykonywane jest zatrzymanie Cat.0 lub Cat.1
        | [Zdarzenie wyzwalające]: Gdy robot wyzwala zatrzymanie
        | [Reakcja robota]: Gdy robot wyzwala zatrzymanie, jeśli droga zatrzymania przekracza ustawioną drogę zatrzymania, wykonywane jest działanie zatrzymania Cat.0 lub Cat.1	
-     - 60.05290188
+     - 47.515
                   
    * - SF20
      - hold-to-run control-Sterowanie hold-to-run
@@ -1051,7 +1102,7 @@ To urządzenie podlega ocenie zgodności zgodnie z Rozporządzeniem maszynowym U
        | [Reakcja robota]: Robot wchodzi w stan przeciągania
        | [Zdarzenie wyzwalające]: Przełącznik zezwolenia 3-pozycyjnego wchodzi w pozycję środkową, sterownik jest w trybie ręcznym, a przycisk końcowy jest zwolniony
        | [Reakcja robota]: Robot wchodzi w zatrzymanie Cat.2, z blokadową detekcją bezruchu + droga zatrzymania + czas zatrzymania
-     - 68.7283255
+     - 68.699
                       
    * - SF21
      - start/restart interlock-Blokada rozruchu/ponownego rozruchu
@@ -1060,7 +1111,7 @@ To urządzenie podlega ocenie zgodności zgodnie z Rozporządzeniem maszynowym U
        | Przy rozruchu/ponownym rozruchu/przełączeniu trybu wyzwalany jest stan zatrzymania bezpieczeństwa Cat.2. Po wykonaniu zatrzymania sterownik nie może się poruszać, z blokadową detekcją bezruchu. Stan zatrzymania musi zostać zresetowany poprzez reset zatrzymania bezpieczeństwa przez DI, zanim będzie można wykonać dalsze operacje
        | [Zdarzenie wyzwalające]: Rozruch/ponowny rozruch/przełączenie trybu sterownika
        | [Reakcja robota]: Blokada wyzwolona, wejście w zatrzymanie bezpieczeństwa Cat.2	
-     - 191.3170862
+     - 191.317
                       
    * - SF22
      - reset safety-Reset stanu zatrzymania bezpieczeństwa
@@ -1069,7 +1120,7 @@ To urządzenie podlega ocenie zgodności zgodnie z Rozporządzeniem maszynowym U
        | W stanie wyzwolonego zatrzymania bezpieczeństwa najpierw wykonaj reset błędu/usterki przez DI. Po pomyślnym resecie błędu/usterki wykonaj ponownie reset stanu zatrzymania przez DI, po czym robot może wyjść ze stanu zatrzymania
        | [Zdarzenie wyzwalające]: DI resetu stanu zatrzymania bezpieczeństwa wyzwolony
        | [Reakcja robota]: Robot wychodzi z zatrzymania bezpieczeństwa	
-     - 191.3170862
+     - 191.317
                          
    * - SF23
      - normal stop-Zatrzymanie normalne
@@ -1078,18 +1129,18 @@ To urządzenie podlega ocenie zgodności zgodnie z Rozporządzeniem maszynowym U
        | Podczas ruchu robota zatrzymanie normalne jest wyzwalane przez sygnał DI. Zgodnie ze skonfigurowanym typem zatrzymania bezpieczeństwa wykonywane jest działanie zatrzymania Cat.0 lub Cat.1
        | [Zdarzenie wyzwalające]: Zatrzymanie ruchu wyzwolone
        | [Reakcja robota]: Robot wykonuje działanie zatrzymania Cat.0 lub Cat.1, z blokadowym monitorowaniem utrzymania pozycji	
-     - 191.3170862
+     - 191.317
                          
    * - SF24
      - mode activation-Aktywacja trybu
-     - PL a
+     - PL d
      - | Mode activation-Aktywacja trybu
        | Tryb sterownika może przechodzić w różne tryby poprzez przełącznik trybu interfejsu oprogramowania i przełącznik przycisku końcowego, w tym ręczny o zredukowanej prędkości/ręczny o wysokiej prędkości/automatyczny/przeciąganie
        | [Zdarzenie wyzwalające]: Przełączenie przełącznika interfejsu oprogramowania
        | [Reakcja robota]: Robot może przełączać się między trybami ręczny o zredukowanej prędkości/ręczny o wysokiej prędkości/automatyczny, z blokadowym monitorowaniem ręcznym o zredukowanej prędkości/monitorowaniem ręcznym o wysokiej prędkości + monitorowaniem czasu ręcznego o wysokiej prędkości/monitorowaniem ręcznym o zredukowanej prędkości/monitorowaniem prędkości przegubów
        | [Zdarzenie wyzwalające]: Przełączenie przełącznika przeciągania końcowego
        | [Reakcja robota]: Robot może przełączać się między trybami ręczny o zredukowanej prędkości/przeciąganie, z blokadowym monitorowaniem ręcznym o zredukowanej prędkości/monitorowaniem prędkości przeciągania/monitorowaniem bezruchu	
-     - /
+     - 191.317
                              
    * - SF25
      - Position Holding Monitoring-Monitorowanie utrzymania pozycji
@@ -1098,7 +1149,7 @@ To urządzenie podlega ocenie zgodności zgodnie z Rozporządzeniem maszynowym U
        | Gdy sterownik przechodzi ze stanu włączonego w stan wyłączony, pozycja jest rejestrowana podczas załączania hamulca, i stale wykrywane jest, czy różnica między pozycją przegubów robota a zarejestrowaną pozycją przekracza próg graniczny. Jeśli próg zostanie przekroczony, wykonywana jest operacja Cat.0
        | [Zdarzenie wyzwalające]: Podczas załączania hamulca zmiana pozycji przegubów robota przekracza próg
        | [Reakcja robota]: Wykonywana jest operacja Cat.0	
-     - 60.05290188
+     - 47.515
                                 
    * - SF26
      - single-point-of-control-Pojedynczy punkt sterowania (tryb sterowania lokalny/zdalny)
@@ -1107,7 +1158,7 @@ To urządzenie podlega ocenie zgodności zgodnie z Rozporządzeniem maszynowym U
        | Tryb lokalny sterownika i tryb sterowania zdalnego wykluczają się wzajemnie. Tryb jest przełączany ręcznie na interfejsie sterownika i tylko jeden z nich może być wybrany do sterowania
        | [Zdarzenie wyzwalające]: Ręczne przełączenie trybu sterowania na interfejsie sterownika
        | [Reakcja robota]: Sterownik może wybrać tylko jeden tryb jednocześnie, maskując działanie drugiego źródła sterowania	
-     - /
+     - 10.6
                                    
    * - SF27
      - external control enable-Zezwolenie na sterowanie zewnętrzne
@@ -1116,7 +1167,7 @@ To urządzenie podlega ocenie zgodności zgodnie z Rozporządzeniem maszynowym U
        | Sterownik ma tryb sterowania zdalnego. Wejście i wyjście z trybu zdalnego są wykonywane ręcznie i lokalnie na interfejsie sterownika. W tym trybie inne lokalne funkcje sterowania są maskowane
        | [Zdarzenie wyzwalające]: Przełączenie trybu sterowania zdalnego na interfejsie lokalnym
        | [Reakcja robota]: Sterownik wchodzi w tryb zdalny, maskując działanie lokalnego źródła sterowania	
-     - /
+     - 10.6
                                    
    * - SF28
      - manual mode, high-speed-Tryb ręczny, wysoka prędkość
@@ -1125,7 +1176,7 @@ To urządzenie podlega ocenie zgodności zgodnie z Rozporządzeniem maszynowym U
        | Kliknij przycisk przełączenia ręcznego o wysokiej prędkości na stronie ręcznego o zredukowanej prędkości. Sterownik może przełączyć się z trybu ręcznego o zredukowanej prędkości na tryb ręczny o wysokiej prędkości. Obwód bezpieczeństwa wykrywa, czy prędkość TCP jest ≤1000mm/s. Jeśli prędkość zostanie przekroczona, wykonywane jest działanie zatrzymania Cat.0 lub Cat.1, z blokadowym monitorowaniem utrzymania pozycji
        | [Zdarzenie wyzwalające]: W trybie wysokiej prędkości prędkość TCP przekracza ustawiony limit
        | [Reakcja robota]: Wykonywane jest zatrzymanie z opóźnieniem, alarm usterki - przekroczenie prędkości TCP, wykonywane jest działanie zatrzymania Cat.0 lub Cat.1, z blokadowym monitorowaniem utrzymania pozycji	
-     - 60.05290188
+     - 47.515
 
    * - SF29
      - manual mode, high-speed time limitation-Tryb ręczny, ograniczenie czasu wysokiej prędkości
@@ -1134,7 +1185,7 @@ To urządzenie podlega ocenie zgodności zgodnie z Rozporządzeniem maszynowym U
        | Gdy tryb sterownika jest w trybie ręcznym o wysokiej prędkości i przełącznik 3-pozycyjny wyjdzie z pozycji środkowej, obwód bezpieczeństwa wykrywa czas trwania. Jeśli przekroczy 5 min, skrzynka sterownicza obniża globalną prędkość ręczną o wysokiej prędkości do 25% (prędkość TCP 250mm/s), z blokadowym monitorowaniem odpowiedniej prędkości (prędkość TCP ≤250mm/s)
        | [Zdarzenie wyzwalające]: W trybie ręcznym o wysokiej prędkości przełącznik 3P jest zwolniony przez ponad 5 min
        | [Reakcja robota]: Skrzynka sterownicza obniża prędkość ręczną o wysokiej prędkości do 250mm/s, z blokadowym monitorowaniem 250mm/s	
-     - 49.81517752
+     - 68.728
    
    * - SF30
      - hand-guided control-Sterowanie prowadzone ręcznie
@@ -1143,7 +1194,7 @@ To urządzenie podlega ocenie zgodności zgodnie z Rozporządzeniem maszynowym U
        | Gdy przełącznik 3-pozycyjny jest w pozycji środkowej i przycisk przeciągania końcowego jest wciśnięty, tryb sterownika wchodzi w tryb przeciągania. Obwód bezpieczeństwa wykrywa, czy prędkość TCP jest ≤250mm/s (konfigurowalny limit prędkości), prędkość każdego przegubu jest ≤45°/s (monitorowana przez SF04, konfigurowalny limit prędkości, konfigurowalny Cat.0/Cat.1), ograniczenie pozycji każdego przegubu (monitorowane przez SF03, konfigurowalny zakres, Cat.2), ograniczenie pozy TCP (monitorowane przez SF06, konfigurowalny zakres, Cat.2). Jeśli prędkość zostanie przekroczona, wykonywane jest działanie zatrzymania Cat.0 lub Cat.1, z blokadowym monitorowaniem utrzymania pozycji
        | [Zdarzenie wyzwalające]: Prędkość TCP przekracza limit prędkości przeciągania (domyślnie 250mm/s, regulowany)
        | [Reakcja robota]: Wykonywane jest zatrzymanie z opóźnieniem, alarm usterki - przekroczenie prędkości TCP, wykonywane jest działanie zatrzymania Cat.0 lub Cat.1, z blokadowym monitorowaniem utrzymania pozycji
-     - 49.81517752 	
+     - 68.699
    
    * - SF31
      - Speed and separation monitoring (SSM)-Monitorowanie prędkości i separacji
@@ -1152,7 +1203,7 @@ To urządzenie podlega ocenie zgodności zgodnie z Rozporządzeniem maszynowym U
        | Gdy tryb sterownika jest w trybie automatycznym, przełącznik fotoelektryczny/przełącznik czujnika odległości podłączony zewnętrznie przez DI skrzynki sterowniczej wykrywa względną pozycję maszyny i personelu. Gdy odpowiedni DI odległości otrzyma sygnał, skrzynka sterownicza wykonuje reakcję bezpieczeństwa. Zgodnie z odpowiednią odległością wchodzi w redukcję poziomu 1 (konfigurowalna prędkość, domyślnie 200mm/s), redukcję poziomu 2 (konfigurowalna prędkość, domyślnie 100mm/s) lub redukcję poziomu 3 (zatrzymanie ruchu). Jednocześnie obwód bezpieczeństwa wchodzi w monitorowanie prędkości i separacji. Jeśli prędkość po wejściu w redukcję przekroczy prędkość odpowiadającą danemu poziomowi redukcji, wykonywane jest działanie zatrzymania Cat.0 lub Cat.1, z blokadowym monitorowaniem utrzymania pozycji
        | [Zdarzenie wyzwalające]: Prędkość TCP przekracza ustawioną prędkość
        | [Reakcja robota]: Wykonywane jest zatrzymanie z opóźnieniem, alarm usterki - przekroczenie prędkości TCP, wykonywane jest działanie zatrzymania Cat.0 lub Cat.1, z blokadowym monitorowaniem utrzymania pozycji	
-     - 60.05290188
+     - 47.515
 
 .. note:: Uwaga: ***MTTFd**: Średni czas do niebezpiecznej awarii (jednostka: lata).
 

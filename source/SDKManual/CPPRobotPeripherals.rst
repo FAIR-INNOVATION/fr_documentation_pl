@@ -5,34 +5,38 @@ Urządzenia peryferyjne robota
     :maxdepth: 5
 
 Konfiguracja chwytaka
-+++++++++++++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
-    /**
-    * @brief  Konfiguruje chwytak
-    * @param  [in] company   Producent chwytaka, do ustalenia
-    * @param  [in] device   Numer urządzenia, tymczasowo nieużywany, domyślnie 0
-    * @param  [in] softvesion   Numer wersji oprogramowania, tymczasowo nieużywany, domyślnie 0
-    * @param  [in] bus   Pozycja magistrali końcowej, na której zamontowane jest urządzenie, tymczasowo nieużywane, domyślnie 0
-    * @return   Kod błędu
-    */
-    errno_t  SetGripperConfig(int company, int device, int softvesion, int bus);
+	/**
+	 * @brief  Konfiguruj chwytak
+	 * @param  [in] company  Producent chwytaka, 1-ROBOTIQ, 2-Huiling, 3-Tianji, 4-Dahuan, 5-Zhixing, 6-Junduo, 7-Meituan, 8-Zengguang
+	 * @param  [in] device  Numer urządzenia, ROBOTIQ (0-2F-85; 1-2F-140; 2-Chwytak próżniowy; 3-Chwytak trójpalczasty; 4-Hand-E),
+								   Huiling (0-Z-EFG-RNM; 1-Z-EFG-100; 2-Z-EFG-20P; 3-Z-EFG-50), Tianji (0-TEG-110), Dahuan (0-PGI-140),
+								   Zhixing (0-CTPM2F20), Junduo (0-RG, 1-REG), Meituan (0-MT-ACTUATOR), Zengguang (0-RM-GB-11-40-2-ITG)
+	 * @param  [in] softvesion  Numer wersji oprogramowania, obecnie nieużywany, domyślnie 0
+	 * @param  [in] bus Urządzenie zamontowane na pozycji magistrali efektora końcowego, obecnie nieużywane, domyślnie 0
+	 * @return  Kod błędu
+	 */
+	errno_t SetGripperConfig(int company, int device, int softvesion, int bus);
 
 Pobieranie konfiguracji chwytaka
-+++++++++++++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
-    /**
-    * @brief  Pobiera konfigurację chwytaka
-    * @param  [in] company   Producent chwytaka, do ustalenia
-    * @param  [in] device   Numer urządzenia, tymczasowo nieużywany, domyślnie 0
-    * @param  [in] softvesion   Numer wersji oprogramowania, tymczasowo nieużywany, domyślnie 0
-    * @param  [in] bus   Pozycja magistrali końcowej, na której zamontowane jest urządzenie, tymczasowo nieużywane, domyślnie 0
-    * @return   Kod błędu
-    */
-    errno_t  GetGripperConfig(int *company, int *device, int *softvesion, int *bus);
+	/**
+	 *@brief  Pobierz konfigurację chwytaka
+	 *@param  [out] company  Producent chwytaka, 1-Robotiq, 2-Huiling, 3-Tianji, 4-Dahuan, 5-Zhixing, 6-Junduo, 7-Meituan, 8-Zengguang
+	 *@param  [out] device  Numer urządzenia, ROBOTIQ (0-2F-85; 1-2F-140; 2-Chwytak próżniowy; 3-Chwytak trójpalczasty; 4-Hand-E),
+								   Huiling (0-Z-EFG-RNM; 1-Z-EFG-100; 2-Z-EFG-20P; 3-Z-EFG-50), Tianji (0-TEG-110), Dahuan (0-PGI-140),
+								   Zhixing (0-CTPM2F20), Junduo (0-RG, 1-REG), Meituan (0-MT-ACTUATOR), Zengguang (0-RM-GB-11-40-2-ITG)
+	 *@param  [out] softvesion  Numer wersji oprogramowania, obecnie nieużywany, domyślnie 0
+	 *@param  [out] bus Urządzenie zamontowane na pozycji magistrali efektora końcowego, obecnie nieużywane, domyślnie 0
+	 *@return  Kod błędu
+	 */
+	errno_t GetGripperConfig(int *company, int *device, int *softvesion, int *bus);
 
 Aktywacja chwytaka
 +++++++++++++++++++++++++++++++++++++++++++++
@@ -76,12 +80,12 @@ Pobieranie stanu ruchu chwytaka
     :linenos:
 
     /**
-     * @brief  Pobiera stan ruchu chwytaka
-     * @param  [out] fault   0-brak błędu, 1-jest błąd
-     * @param  [out] staus   0-ruch niezakończony, 1-ruch zakończony
-     * @return   Kod błędu
-     */
-    errno_t  GetGripperMotionDone(uint16_t *fault, uint8_t *status);
+    * @brief Pobierz stan ruchu chwytaka (od wersji 401 protokół efektora końcowego i definicja sprzężenia zwrotnego stanu ruchu chwytaka dostosowanych urządzeń są ujednolicone)
+    * @param [out] fault 0-Brak błędu, inny-Błąd
+    * @param [out] status 0-Ruch nieukończony, 1-Ruch ukończony, nie wykryto obiektu; 2-Ruch ukończony, wykryto obiekt; 3-Ruch ukończony, wykryto upadek obiektu;
+    * @return Kod błędu
+    */
+    errno_t GetGripperMotionDone(int& fault,int& status);
 
 Pobieranie stanu aktywacji chwytaka
 +++++++++++++++++++++++++++++++++++++++++++++
@@ -348,46 +352,60 @@ Oczekiwanie na Status Ruchu Chwytaka
     :linenos:
 
     /**
-    * @brief Oczekuje na status ruchu chwytaka (zdefiniowany tylko dla otwartego protokołu końcówki; dla zaadaptowanych urządzeń pobierany status ruchu jest wartością przelotową)
-    * @param [in] status 0-ruch nie zakończony, 1-ruch zakończony bez wykrycia obiektu, 2-ruch zakończony z wykryciem obiektu
-    * @param [in] timeout Limit czasu (ms), -1 dla nieskończonego oczekiwania
-    * @param [in] strategy 0-zatrzymaj z błędem, 1-kontynuuj działanie
-    * @param [in] type 0-chwytak równoległy, 1-chwytak obrotowy
+    * @brief Oczekuj na stan ruchu chwytaka (od wersji 401 protokół efektora końcowego i definicja sprzężenia zwrotnego stanu ruchu chwytaka dostosowanych urządzeń są ujednolicone)
+    * @param [in] staus 0-Ruch nieukończony, 1-Ruch ukończony, nie wykryto obiektu; 2-Ruch ukończony, wykryto obiekt; 3-Ruch ukończony, wykryto upadek obiektu
+    * @param [in] timeout Limit czasu (ms), -1 oznacza oczekiwanie bezterminowe
+    * @param [in] strategy 0-Zatrzymaj i zgłoś błąd, 1-Kontynuuj działanie
+    * @param [in] type 0-Chwytak równoległy, 1-Chwytak obrotowy
     * @return Kod błędu
     */
-    errno_t GripperWaitMotionDone(int status, int timeout, int strategy, int type);
+    errno_t GripperWaitMotionDone(int staus, int timeout, int strategy, int type);
     
 Przykład Kodu Oczekiwania na Status Ruchu Chwytaka
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
-    int TestGripperWaitMotionDone()
+    int TestGetGripperMotionDone()
     {
-    ROBOT_STATE_PKG pkg = {};
-    FRRobot robot;
-    robot.LoggerInit();
-    robot.SetLoggerLevel(1);
-    robot.SetReConnectParam(true, 30000, 500);
-    int rtn = robot.RPC("192.168.58.2");
-    if (rtn != 0)
-    {
-        return -1;
-    }
-    for (int i = 0; i < 10; i++)
-    {
-        rtn = robot.MoveGripper(1, 0, 10, 100, 30000, 0, 0, 0, 0, 0);
-        printf("MoveGripper(Open) ret=%d\n", rtn);
-        rtn = robot.GripperWaitMotionDone(1, 10000, 0, 0);
-        printf("GripperWaitMotionDone(Wait for motion completed without object detection) ret=%d\n", rtn);
-        rtn = robot.MoveGripper(1, 90, 10, 100, 30000, 0, 0, 0, 0, 0);
-        printf("MoveGripper(Close) ret=%d\n", rtn);
-        rtn = robot.GripperWaitMotionDone(1, 10000, 0, 0);
-        printf("GripperWaitMotionDone(Wait for motion completed without object detection) ret=%d\n", rtn);
-    }
-    robot.Sleep(1000);
-    robot.CloseRPC();
-    robot.Sleep(1000);
+        ROBOT_STATE_PKG pkg = {};
+        FRRobot robot;
+        robot.LoggerInit();
+        robot.SetLoggerLevel(1);
+        robot.SetReConnectParam(true, 30000, 500);
+        int rtn = robot.RPC("192.168.58.2");
+        if (rtn != 0)
+        {
+            return -1;
+        }
+        uint8_t status = 0;
+        uint16_t fault = 0;
+        // Gripper open
+        rtn = robot.MoveGripper(2, 50, 50, 100, 30000, 0, 0, 0, 0, 0);
+        printf("MoveGripper(open) ret=%d\n", rtn);
+        std::this_thread::sleep_for(std::chrono::milliseconds(2000));
+        robot.GetRobotRealTimeState(&pkg);
+        printf(" gripper_motiondone %d)\n", pkg.gripper_motiondone);
+        // Gripper close
+        rtn = robot.MoveGripper(2, 90, 100, 100, 30000, 0, 0, 0, 0, 0);
+        printf("MoveGripper(close) ret=%d\n", rtn);
+        std::this_thread::sleep_for(std::chrono::milliseconds(2000));
+        robot.GetRobotRealTimeState(&pkg);
+        printf(" gripper_motiondone %d)\n", pkg.gripper_motiondone);
+        // Wait for motion completion without object detection, timeout 5s, stop and report error
+        rtn = robot.GripperWaitMotionDone(2, 5000, 0, 0);
+        printf("GripperWaitMotionDone(wait for completion, no object detected) ret=%d\n", rtn);
+        while (true)
+        {
+            robot.GetGripperMotionDone(&fault, &status);
+            printf("motion status:%d,%d\n", fault, status);
+            robot.GetRobotRealTimeState(&pkg);
+            printf(" error code %d,%d\n", pkg.main_code, pkg.sub_code);
+            std::this_thread::sleep_for(std::chrono::milliseconds(500));
+        }
+        robot.CloseRPC();
+        robot.Sleep(1000);
+        return 0;
     }
 
 Uruchamianie, zatrzymywanie przenośnika

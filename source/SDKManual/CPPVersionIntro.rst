@@ -13,6 +13,13 @@ Informacje o aktualizacji wersji
      - **Data**
      - **Opis aktualizacji**
 
+   * - V4.0.1
+     - 2026-10-27
+     - | 1. Zmodyfikowano opisy parametrów polecenia GetGripperMotionDone() do pobierania stanu ruchu chwytaka oraz polecenia GripperWaitMotionDone() do oczekiwania na ukończenie ruchu chwytaka; parametr stanu ruchu chwytaka dodaje stan ruch ukończony i wykryto upadek obiektu;
+       | 2. Zmodyfikowano polecenie ServoMoveStart() rozpoczęcia ruchu serwo, dodając ustawienia parametrów czasu filtrowania i wzmocnienia;
+       | 3. Dodano polecenia DataPackageUpgrade() i GetDataPackageUpgradeProgress() do aktualizacji przez przesłanie pakietu kopii zapasowej danych robota oraz do pobierania procentu postępu aktualizacji, wraz z przykładami kodu;
+       | 4. Dodano polecenie GetJointAllParamUpgradeProgress() do pobierania procentu postępu aktualizacji wszystkich parametrów przegubów robota, wraz z przykładem kodu;
+
    * - V4.0.0
      - 2026-09-23
      - | 1. Zmodyfikowano interfejs FRRobot() do tworzenia instancji robota, dodając konfigurację parametru włączenia szyfrowania TLS dla komunikacji zintegrowanego protokołu poleceń w SDK;

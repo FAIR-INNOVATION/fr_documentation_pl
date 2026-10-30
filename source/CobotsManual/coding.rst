@@ -4221,20 +4221,121 @@ Podczas korzystania z programu w tle, program jest wykonywany w pętli od począ
 
 Po odcięciu zasilania, podczas następnego włączenia zasilania, programy logiczne działające w tle zostaną automatycznie załadowane i będą działać zgodnie z ustawionym stanem.
 
+Interfejs poleceń w tle
++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Lewa strona interfejsu to głównie obszar dodawania poleceń programu. Kliknij ikonę nad każdym słowem kluczowym, aby przejść do szczegółowego interfejsu dodawania poleceń programu po prawej stronie.
+
+.. image:: coding/253.png
+   :width: 6in
+   :align: center
+
+.. centered:: Rysunek 9.19-1-1 Interfejs programu w tle
+
+Interfejs poleceń logicznych
+********************************************************************************
+
+Sposób użycia poleceń logicznych jest zgodny z programami pierwszoplanowymi, w tym warunki, zmienne i drukowanie.
+
+Interfejs poleceń sterujących
+********************************************************************************
+
+Polecenia sterowania wykonaniem
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+Służą do sterowania programami pierwszoplanowymi, w tym polecenie uruchomienia, polecenie pauzy, polecenie wznowienia i polecenie zatrzymania;
+
+.. image:: coding/626.png
+   :width: 6in
+   :align: center
+
+.. centered:: Rysunek 9.19-1-2 Polecenia sterujące programu w tle
+
+DelayMS
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+DelayMS to polecenie opóźnienia przeznaczone wyłącznie dla programów w tle, a jednostką czasu oczekiwania jest milisekunda.
+
+.. image:: coding/627.png
+   :width: 6in
+   :align: center
+
+.. centered:: Rysunek 9.19-1-3 Polecenie DelayMS
+
+DIO w tle
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+Ta część poleceń służy do sterowania IO skrzynki sterowniczej w programach w tle, w tym ustawiania DO, pobierania DI i odczytu stanu DO. Aby zapewnić cykliczne wykonywanie programów w tle, zaleca się stosowanie trybu nieblokującego w poleceniach programu w tle.
+
+.. image:: coding/628.png
+   :width: 6in
+   :align: center
+
+.. centered:: Rysunek 9.19-1-4 Interfejs poleceń DIO w tle
+
+AIO w tle
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+Ta część poleceń służy do sterowania sygnałami analogowymi AO i AI w programach w tle, w tym ustawiania AO, pobierania AI i odczytu stanu AO. Aby zapewnić cykliczne wykonywanie programów w tle, zaleca się stosowanie trybu nieblokującego w poleceniach programu w tle.
+
+.. image:: coding/629.png
+   :width: 6in
+   :align: center
+
+.. centered:: Rysunek 9.19-1-5 Interfejs poleceń AIO w tle
+
+Rozszerzone IO w tle
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+Ta część poleceń służy do sterowania sygnałami rozszerzonego IO w programach w tle, w tym ustawiania lub odczytu AuxDO, AuxAO, AuxDI i AuxAI. Aby zapewnić cykliczne wykonywanie programów w tle, zaleca się stosowanie trybu nieblokującego w poleceniach programu w tle lub zastosowanie wątków w opcjach poleceń.
+
+.. image:: coding/630.png
+   :width: 6in
+   :align: center
+
+.. centered:: Rysunek 9.19-1-6 Interfejs poleceń rozszerzonego IO w tle
+
+Interfejs poleceń komunikacyjnych
+********************************************************************************
+
+Polecenia Modbus
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+Sposób użycia tej części poleceń jest zgodny z programami pierwszoplanowymi. W oparciu o funkcję magistrali protokołu ModbusTCP/RTU użytkownicy mogą odczytywać i zapisywać cewki, wejścia dyskretne i rejestry za pomocą powiązanych poleceń.
+
+.. image:: coding/631.png
+   :width: 6in
+   :align: center
+
+.. centered:: Rysunek 9.19-1-7 Interfejs poleceń Modbus w tle
+
+Polecenia karty
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+Sposób użycia tej części poleceń jest zgodny z programami pierwszoplanowymi. Po nawiązaniu komunikacji z kartą można ustawić lub pobrać DO, AO, DI i AI slave'a za pomocą poleceń karty w tle.
+
+.. image:: coding/632.png
+   :width: 6in
+   :align: center
+
+.. centered:: Rysunek 9.19-1-8 Polecenia karty
+
+Polecenia Socket
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+Sposób użycia tej części poleceń jest zgodny z programami pierwszoplanowymi. W programach w tle można używać wyłącznie poleceń wysyłania i odbierania Socket. Podczas użytkowania należy pamiętać: polecenia wysyłania i odbierania Socket mają właściwości blokujące: jeśli zostaną wywołane w programie w tle, zablokują wykonywanie innych poleceń w tym samym programie, a także wpłyną na działanie programów pierwszoplanowych na tych samych danych Socket. Zaleca się używanie poleceń Socket osobno w tym samym programie pierwszoplanowym lub w tle, aby nie wpływać na inne polecenia.
+
+.. image:: coding/633.png
+   :width: 6in
+   :align: center
+
+.. centered:: Rysunek 9.19-1-9 Polecenia socket w tle
+
 Zapisywanie programu działającego w tle robota
 ***********************************************
 
 Programy w tle można tworzyć, edytować i zapisywać tylko w interfejsie programu w tle.
 
 **Krok 1**: Otwórz interfejs programu w tle robota. Otwórz stronę nauczania, kolejno kliknij „Program nauczania”, „Programowanie”. Wybierz instrukcję programu w tle w lewym górnym rogu, aby przejść do interfejsu programu w tle.
-
-.. note:: Program w tle zawiera tylko instrukcje logiczne, instrukcje przypisania, instrukcje sterowania na pierwszym planie, instrukcje interfejsu I/O oraz instrukcje komunikacji Modbus.
-
-.. image:: coding/253.png
-   :width: 6in
-   :align: center
-
-.. centered:: Schemat 9.19-1 Interfejs programu w tle
 
 **Krok 2**: W trybie ręcznym otwórz plik programu nauczania w tle. Kliknij „Nowy”, aby utworzyć nowy plik programu nauczania, edytuj program, a następnie kliknij „Zapisz”, aby zapisać plik.
 
@@ -9281,3 +9382,81 @@ ModbusMasterWriteDO_RTU(), ModbusMasterWriteAO_RTU(), ModbusMasterReadDO_RTU(), 
 FieldBusSlaveWaitAI(), WaitToolAI(), WaitAuxAI(), SPLCSetAO(), SPLCSetToolAO(), SetToolList(), SetWObjList(), SetExToolList(), PostureAdjustOn(), RegisterVar(), SetSysVarValue(), GetSysVarValue(), MultilayerOffsetTrsfToBase(), GetSegWeldDisDir(), DMP()
 LTSearchStart(), PointTableSwitch(), GetSegmentWeldPoint(), LaserRecordPoint(), GetIntersectionThrough3Point(), GetIntersectionThrough4Point(), GetUserVal(), SetUserVal(), MoveToIntersectLineStart(), MoveIntersectLine(), OriginPointWeaveStart()
 MatrixMoveStart(), MatrixMoveEnd(), MatrixSetCountPlus(), MatrixGetCount(), MatrixSetStartCount().   
+
+Funkcja debugowania krokowego programów Lua
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Tło
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Istniejąca platforma robotów serii FR ma już pełną zdolność wykonywania programów Lua, a cały łańcuch działa stabilnie. Jednak proces wykonywania jest dla użytkownika czarną skrzynką — program wykonuje się do końca, a ewentualne problemy pośrodku można rozwiązać tylko za pomocą logów lub metodą prób i błędów.
+
+Ta praca dodaje możliwość debugowania krokowego bez zmiany istniejącej struktury, pozwalając użytkownikom obserwować krok po kroku wykonanie programu, przeglądać stan wykonania i lokalizować problemy.
+
+Wprowadzenie do funkcji debugowania krokowego
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Wejście do funkcji debugowania krokowego jest utrzymywane na stronie web "Ustawienia początkowe" -> "Program nauczania" -> "Programowanie programu". Przycisk wejścia do funkcji debugowania znajduje się za nazwą otwartego programu. Funkcja debugowania krokowego może być wykonywana tylko w trybie ręcznym, a podczas debugowania zabronione jest przeciąganie robota.
+
+.. image:: coding/634.png
+   :width: 6in
+   :align: center
+
+.. centered:: Rysunek 9.41-1 Wejście do funkcji debugowania krokowego
+
+Po kliknięciu "Włącz debugowanie krokowe" można wejść do debugowania programu lua. Program zatrzyma się na wejściu i będzie czekał na następne polecenie. Funkcja debugowania krokowego udostępnia trzy polecenia:
+
+Debugowanie krokowe (step_over): wykonuje bieżącą linię "w całości", a następnie zatrzymuje się w następnej linii, bez wchodzenia do funkcji wywoływanej przez bieżącą linię. Jeśli wewnątrz wywoływanej funkcji ustawiono punkt przerwania lub napotkano instrukcję wyjątku/zatrzymania, program nadal zatrzyma się wewnątrz funkcji, zamiast przeskoczyć bezpośrednio do następnej linii.
+
+.. image:: coding/635.png
+   :width: 6in
+   :align: center
+
+.. centered:: Rysunek 9.41-2 Polecenie wykonania krokowego
+
+- **Kontynuuj**: wznawia wykonywanie programu od bieżącej pozycji i zatrzymuje się dopiero przy napotkaniu następnego punktu przerwania, zakończeniu programu lub wystąpieniu wyjątku.
+
+.. image:: coding/636.png
+   :width: 6in
+   :align: center
+
+.. centered:: Rysunek 9.41-3 Polecenie kontynuacji
+
+- **Wyjdź**: wychodzi z funkcji debugowania krokowego.
+
+.. image:: coding/637.png
+   :width: 6in
+   :align: center
+
+.. centered:: Rysunek 9.41-4 Polecenie wyjścia
+
+Panel informacyjny debugowania krokowego
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Panel "Debugowanie krokowe" służy do przekazywania w czasie rzeczywistym podstawowego stanu wykonania, gdy program jest wykonywany linia po linii. Operatorzy mogą za pomocą tego panelu monitorować trajektorię wykonania programu, bieżące środowisko wykonania i dane pamięci, precyzyjnie lokalizując błędy logiczne lub wyjątki.
+
+- Stan: wyświetla bieżącą sytuację wykonania programu. Obejmuje bezczynność, wykonywanie, pauzę i zakończenie.
+- Numer linii: wyświetla numer bieżącej linii kodu do wykonania.
+- Przyczyna pauzy: wyjaśnia, dlaczego program się tutaj zatrzymał. Obejmuje wejście, krok i kontynuację.
+- Informacje o stosie: wyświetla bieżący ślad stosu wywołań programu.
+- Zmienne lokalne: wyświetla w czasie rzeczywistym wszystkie zmienne w zakresie bieżącej linii kodu i ich bieżące wartości. W LUA tylko zmienne zdefiniowane jako local mogą bezpośrednio wyświetlić nazwę.
+- Informacje o błędach stosu: gdy program ulegnie awarii lub zostanie przerwany z powodu błędów czasu wykonania (takich jak dzielenie przez zero, odwołanie do wskaźnika null, indeks tablicy poza zakresem), ten obszar wyświetli konkretny kod błędu i opis błędu.
+
+.. image:: coding/638.png
+   :width: 3in
+   :align: center
+
+.. centered:: Rysunek 9.41-5 Panel informacyjny debugowania krokowego
+
+Zarządzanie punktami przerwania
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Punkty przerwania należą do samego programu, a nie do sesji debugowania. Każdy plik Lua utrzymuje własne informacje o punktach przerwania; punkty przerwania są nadal zapisywane po odświeżeniu lub ponownym uruchomieniu urządzenia.
+
+Użytkownicy mogą kliknąć numer linii kodu w interfejsie front-end, aby ustawić lub anulować punkty przerwania. Wiele punktów przerwania może istnieć jednocześnie, punkty przerwania można ustawiać przed i podczas debugowania, a punkty przerwania działają natychmiast podczas debugowania.
+
+.. image:: coding/639.png
+   :width: 6in
+   :align: center
+
+.. centered:: Rysunek 9.41-6 Zarządzanie punktami przerwania

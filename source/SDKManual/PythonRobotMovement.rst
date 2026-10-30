@@ -340,11 +340,15 @@ Rozpoczęcie ruchu serwo
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototyp", "``ServoMoveStart(cmdType=0)``"
-    "Opis", "Rozpoczęcie ruchu serwo, używane razem z instrukcjami ServoJ, ServoCart"
-    "Parametry wymagane", "- ``cmdType``: Typ transmisji poleceń, 0=XML-RPC, 1=transmisja przezroczysta UDP"
+    "Prototyp", "``ServoMoveStart(self, cmdType=0, filtertime=0, gain=[-1.0, -1.0, -1.0, -1.0, -1.0, -1.0])``"
+    "Opis", "Rozpoczęcie ruchu serwo, używane razem z poleceniami ServoJ i ServoCart"
+    "Parametry wymagane", "
+    - ``cmdType``: Typ transmisji polecenia, 0=XML-RPC, 1=UDP passthrough
+    - ``filtertime``: Czas filtrowania, jednostka ms, domyślnie 0
+    - ``gain``: Tablica wzmocnienia pętli pozycji, długość powinna wynosić 6, odpowiadająca kolejno wzmocnieniom pętli pozycji przegubów J1~J6; gdy przekazano None, używana jest wartość domyślna [-1.0, -1.0, -1.0, -1.0, -1.0, -1.0]
+    "
     "Parametry domyślne", "Brak"
-    "Wartość zwracana", "Kod błędu sukces-0 błąd- errcode"
+    "Wartość zwracana", "Kod błędu Sukces-0  Błąd- errcode"
 
 Zakończenie ruchu serwo
 +++++++++++++++++++++++
@@ -379,81 +383,152 @@ Ruch w trybie serwo w przestrzeni przegubów
     - ``cmdType``: Typ transmisji poleceń, 0=XML-RPC, 1=transmisja przezroczysta UDP;"
     "Wartość zwracana", "Kod błędu sukces-0 błąd- errcode"
 
-Przykład kodu SDK dla ServoJ, ServoMoveStart, ServoMoveEnd opartych na komunikacji UDP
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Przykład kodu rozpoczęcia ruchu serwo
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. code-block:: python
     :linenos:
 
-    from time import sleep
-    import time
     from fairino import Robot
+    import time
 
-    # Połączenie z kontrolerem robota
-    robot = Robot.RPC('192.168.58.2')
 
-    def TestServoJUDP(self):
-        # Ustawienie wywołania zwrotnego
-        def callback(src_type, count, cmd_id, data_len, content):
-            print("Funkcja zwrotna: cmd_id={} count={} data_len={} content={}".format(cmd_id, count, data_len, content))
-            return 0
+    def udp_frame_callback(src_type, count, cmd_id, data_len, content):
+        """UDP frame receive callback"""
+        print("Callback: cmd_id={} count={} data_len={} content={}".format(cmd_id, count, data_len, content))
+        return 0
 
-        robot.SetUDPCmdRpyCallback(callback)
-        # # Inicjalizacja pozycji przegubów i pozycji osi zewnętrznej
-        j= [105, -108, 74, -66, -88.893, -1.621]
-        offset_pos = [0, 0, 0, 0, 0, 0]
-        epos = [0, 0, 0, 0]
-        # # Przejście do pozycji początkowej
-        result=robot.MoveJ(joint_pos=j, tool=0, user=0, vel=100, acc=100, ovl=100,exaxis_pos=epos, blendT=-1, offset_flag=0, offset_pos=offset_pos)
-        print("Wynik MoveJ: {}".format(result))
+
+    def test_servo_j_with_filtertime(robot):
+        """ServoJ with filter time and servo gain test"""
+        print("\n========== ServoJ with Filter Time Test ==========")
+
+        j = [70.000000, -49.000000, -109.000000, -81.000000, 76.000000, 93.000000]
+        epos = [0.0, 0.0, 0.0, 0.0]
+        offset_pos = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+
+        # Przejdź do początkowej pozycji przegubów
+        robot.MoveJ(joint_pos=j, tool=1, user=0, vel=100, acc=100, ovl=100,
+                    exaxis_pos=epos, blendT=-1, offset_flag=0, offset_pos=offset_pos)
+
         vel = 0.0
         acc = 0.0
-        cmdT = 0.016
+        cmdT = 0.008
         filterT = 0.0
         gain = 0.0
-        flag = 0
-        dt = 0.1
         cmdID = 0
+        comType = 0
+        filtertime = 0
+        ServoGain = [22.0, 22.0, 22.0, 22.0, 22.0, 22.0]
 
-        # Pobranie bieżącej pozycji przegubów
-        ret, j = robot.GetActualJointPosDegree(flag)
-        if ret != 0:
-            print(f"GetActualJointPosDegree errcode:{ret}")
-        while 1:
-            count = 300
-            result = robot.ServoMoveStart(cmdType=1)
-            print("Wynik ServoMoveStart: {}".format(result))
-            while count > 0:
-                result = robot.ServoJ(joint_pos=j, axisPos=epos, acc=acc, vel=vel, cmdT=cmdT,filterT=filterT, gain=gain, id=cmdID, cmdType=1)
-                j[0] += dt
-                j[1] += dt
-                j[2] += dt
-                j[3] += dt
-                j[4] += dt
-                j[5] += dt
-                count -= 1
-                time.sleep(0.01)
-            result = robot.ServoMoveEnd(cmdType=1)
-            print("Wynik ServoMoveEnd: {}".format(result))
+        # Pobierz bieżącą pozycję przegubów
+        rtn, j = robot.GetActualJointPosDegree(0)
+        if rtn != 0:
+            print(f"GetActualJointPosDegree errcode:{rtn}")
 
-            count = 300
-            result = robot.ServoMoveStart(cmdType=1)
-            print("Wynik ServoMoveStart: {}".format(result))
-            while count > 0:
-                result = robot.ServoJ(joint_pos=j, axisPos=epos, acc=acc, vel=vel, cmdT=cmdT,filterT=filterT, gain=gain, id=cmdID, cmdType=1)
-                j[0] -= dt
-                j[1] -= dt
-                j[2] -= dt
-                j[3] -= dt
-                j[4] -= dt
-                j[5] -= dt
-                count -= 1
-                time.sleep(0.01)
-            result = robot.ServoMoveEnd(cmdType=1)
-            print("Wynik ServoMoveEnd: {}".format(result))
+        # Rozpocznij ruch serwo z czasem filtrowania i wzmocnieniem
+        rtn = robot.ServoMoveStart(comType, filtertime, ServoGain)
+        print(f"ServoMoveStart rtn is {rtn}")
+
+        # Odczytaj plik trajektorii i wyślij polecenia ServoJ
+        file_path = "D://zUP/6RPTPpath.txt"
+        try:
+            with open(file_path, 'r') as fin:
+                for line in fin:
+                    line = line.strip()
+                    if not line:
+                        continue
+                    # Format analizy wiersza: ServoJ(j1,j2,j3,j4,j5,j6,...
+                    if line.startswith("ServoJ("):
+                        values_str = line[len("ServoJ("):]
+                        parts = values_str.split(',')
+                        if len(parts) >= 6:
+                            p = [float(parts[i]) for i in range(6)]
+                            rtn = robot.ServoJ(joint_pos=p, axisPos=epos, acc=acc, vel=vel,
+                                            cmdT=cmdT, filterT=filterT, gain=gain,
+                                            id=cmdID, cmdType=comType)
+                            print(f"ServoJ rtn is {rtn}")
+        except FileNotFoundError:
+            print(f"File not found: {file_path}")
+
+        # Zakończ ruch serwo
+        rtn = robot.ServoMoveEnd(comType)
+        print(f"ServoMoveEnd rtn is {rtn}")
+
+        time.sleep(4)
+
+
+    def test_servo_cart_with_filtertime(robot):
+        """ServoCart with filter time and servo gain test"""
+        print("\n========== ServoCart with Filter Time Test ==========")
+
+        desc_pos_dt = [542.1690, 34.7990, 114.4800, 169.808000, -3.600000, -133.152000]
+        exaxis = [0.0, 0.0, 0.0, 0.0]
+        pos_gain = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+        mode = 0
+        vel = 0.0
+        acc = 0.0
+        cmdT = 0.008
+        filterT = 0.0
+        gain = 0.0
+        filtertime = 80
+        ServoGain = [20.0, 20.0, 20.0, 20.0, 20.0, 20.0]
+
+        # Ustaw prędkość i przejdź do punktu początkowego
+        robot.SetSpeed(20)
+        offset_pos = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+        robot.MoveL(desc_pos=desc_pos_dt, tool=1, user=0, vel=100, acc=100, ovl=100,
+                    blendR=-1, blendMode=0, exaxis_pos=exaxis, search=0,
+                    offset_flag=0, offset_pos=offset_pos)
+
+        # Rozpocznij ruch serwo z czasem filtrowania i wzmocnieniem
+        rtn = robot.ServoMoveStart(0, filtertime, ServoGain)
+        print(f"ServoMoveStart rtn is {rtn}")
+
+        # Odczytaj plik trajektorii i wyślij polecenia ServoCart
+        file_path = "D://zUP/6RCARpath.txt"
+        try:
+            with open(file_path, 'r') as fin:
+                for line in fin:
+                    line = line.strip()
+                    if not line:
+                        continue
+                    # Format analizy wiersza: ServoCart(0,x,y,z,rx,ry,rz,...
+                    if line.startswith("ServoCart("):
+                        values_str = line[len("ServoCart("):]
+                        parts = values_str.split(',')
+                        # Pomiń pierwszy element (mode=0), weź kolejne 6 wartości
+                        if len(parts) >= 7:
+                            desc_pos_dt = [float(parts[i]) for i in range(1, 7)]
+                            rtn = robot.ServoCart(mode=mode, desc_pos=desc_pos_dt, exaxis=exaxis,
+                                                pos_gain=pos_gain, acc=acc, vel=vel,
+                                                cmdT=cmdT, filterT=filterT, gain=gain)
+                            print(f"ServoCart rtn is {rtn}")
+        except FileNotFoundError:
+            print(f"File not found: {file_path}")
+
+        # Zakończ ruch serwo
+        robot.ServoMoveEnd()
+
+
+    def main():
+        # Nawiąż połączenie z kontrolerem robota
+        robot = Robot.RPC('192.168.58.2')
+        time.sleep(0.5)  # Poczekaj na połączenie i odbiór danych
+
+        # Ustaw callback odpowiedzi na polecenia UDP
+        robot.SetUDPCmdRpyCallback(udp_frame_callback)
+
+        # Uruchom żądany test (odkomentuj pojedynczo)
+        # test_servo_j_with_filtertime(robot)
+        test_servo_cart_with_filtertime(robot)
+
+        # Zamknij połączenie
         robot.CloseRPC()
-        return 0
-    TestServoJUDP(robot)
+
+
+    if __name__ == "__main__":
+        main()
 
 Przykładowy program ruchu w trybie serwo w przestrzeni przegubów
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

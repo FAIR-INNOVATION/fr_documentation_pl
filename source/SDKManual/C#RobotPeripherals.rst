@@ -68,78 +68,86 @@ Sterowanie chwytakiem
     */
     int MoveGripper(int index, int pos, int vel, int force, int max_time, byte block, int type, double rotNum, int rotVel, int rotTorque);
 
-Pobranie stanu ruchu chwytaka
-+++++++++++++++++++++++++++++
+Pobieranie stanu ruchu chwytaka
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief  Pobiera stan ruchu chwytaka
-    * @param  [out] fault  0-brak błędu, 1-wystąpił błąd
-    * @param  [out] staus  0-ruch nieukończony, 1-ruch ukończony
+    * @brief  Pobierz stan ruchu chwytaka (od wersji 401 protokół efektora końcowego i definicja sprzężenia zwrotnego stanu ruchu chwytaka dostosowanych urządzeń są ujednolicone)
+    * @param  [out] fault  0-Brak błędu, inny-Błąd
+    * @param  [out] staus  0-Ruch nieukończony, 1-Ruch ukończony, nie wykryto obiektu, 2-Ruch ukończony, wykryto obiekt, 3-Ruch ukończony, wykryto upadek obiektu
     * @return  Kod błędu
     */
     int GetGripperMotionDone(ref int fault, ref int status); 
 
-Pobranie stanu aktywacji chwytaka
-+++++++++++++++++++++++++++++++++
+Pobieranie stanu aktywacji chwytaka
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief  Pobiera stan aktywacji chwytaka
-    * @param  [out] fault  0-brak błędu, 1-wystąpił błąd
-    * @param  [out] status  bit0~bit15 odpowiadają numerom chwytaka 0~15, bit=0 oznacza nieaktywny, bit=1 oznacza aktywny
+    * @brief  Pobierz stan aktywacji chwytaka
+    * @param  [out] fault  0-Brak błędu, 1-Błąd
+    * @param  [out] status  bit0~bit15 odpowiadają numerom chwytaków 0~15; bit=0 nieaktywny, bit=1 aktywny
     * @return  Kod błędu
     */
     int GetGripperActivateStatus(ref int fault, ref int status);
 
-Oczekiwanie na Status Ruchu Chwytaka
+Oczekiwanie na stan ruchu chwytaka
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief  Oczekuje na status ruchu chwytaka (zdefiniowany tylko dla otwartego protokołu końcówki; dla zaadaptowanych urządzeń definicja statusu jest przekazywana do każdego producenta chwytaków)
-    * @param  [in] status  0-ruch nie zakończony, 1-ruch zakończony bez wykrycia obiektu, 2-ruch zakończony z wykryciem obiektu
-    * @param  [in] timeout Limit czasu (ms), -1 dla nieskończonego oczekiwania
-    * @param  [in] strategy  0-zatrzymaj z błędem, 1-kontynuuj działanie
-    * @param  [in] type  0-chwytak równoległy, 1-chwytak obrotowy
+    * @brief  Oczekuj na stan ruchu chwytaka (od wersji 401 protokół efektora końcowego i definicja sprzężenia zwrotnego stanu ruchu chwytaka dostosowanych urządzeń są ujednolicone)
+    * @param  [in]  staus  0-Ruch nieukończony, 1-Ruch ukończony, nie wykryto obiektu, 2-Ruch ukończony, wykryto obiekt, 3-Ruch ukończony, wykryto upadek obiektu
+    * @param  [in] timeout Limit czasu (ms), -1 oznacza oczekiwanie bezterminowe
+    * @param  [in] strategy  0-Zatrzymaj i zgłoś błąd, 1-Kontynuuj działanie
+    * @param  [in] type  0-Chwytak równoległy, 1-Chwytak obrotowy
     * @return  Kod błędu
     */
-    public int GripperWaitMotionDone(int status, int timeout, int strategy, int type) 
+    public int GripperWaitMotionDone(int staus, int timeout, int strategy, int type) 
     
-Przykład Kodu Oczekiwania na Status Ruchu Chwytaka
+Przykład kodu oczekiwania na stan ruchu chwytaka
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
-    public void TestGripperWaitMotionDone()
+    public void TestGetGripperMotionDone()
     {
         int rtn;
+        int status = 0;
+        int fault = 0;
         ROBOT_STATE_PKG pkg = new ROBOT_STATE_PKG();
 
-
-        // Chwytak otwarty
-        rtn = robot.MoveGripper(1, 50, 50, 100, 30000, 0, 0, 0, 0, 0);
-        Console.WriteLine("MoveGripper(otwórz) ret={0}", rtn);
+        // Otwórz chwytak
+        rtn = robot.MoveGripper(2, 50, 50, 100, 30000, 0, 0, 0, 0, 0);
+        Console.WriteLine("MoveGripper(Otwórz) ret={0}", rtn);
         Thread.Sleep(2000);
         robot.GetRobotRealTimeState(ref pkg);
         Console.WriteLine(" gripper_motiondone {0})", pkg.gripper_motiondone);
-        // Chwytak zamknięty
-        rtn = robot.MoveGripper(1, 90, 100, 100, 30000, 0, 0, 0, 0, 0);
-        Console.WriteLine("MoveGripper(zamknij) ret={0}", rtn);
+        // Zamknij chwytak
+        rtn = robot.MoveGripper(2, 90, 100, 100, 30000, 0, 0, 0, 0, 0);
+        Console.WriteLine("MoveGripper(Zamknij) ret={0}", rtn);
         Thread.Sleep(2000);
         robot.GetRobotRealTimeState(ref pkg);
         Console.WriteLine(" gripper_motiondone {0}", pkg.gripper_motiondone);
-        // Oczekiwanie na zakończenie ruchu bez wykrycia obiektu, timeout 30s, zatrzymaj z błędem
-        rtn = robot.GripperWaitMotionDone(2, -1, 0, 0);
-        Console.WriteLine("GripperWaitMotionDone(oczekiwanie na zakończenie bez wykrycia obiektu) ret={0}", rtn);
+        // Oczekuj na ukończenie ruchu bez wykrycia obiektu, limit czasu 5s, zatrzymaj i zgłoś błąd
+        rtn = robot.GripperWaitMotionDone(2, 5000, 0, 0);
+        Console.WriteLine("GripperWaitMotionDone(oczekiwanie na ukończenie bez wykrycia obiektu) ret={0}", rtn);
 
-        // Chwytak otwarty
-        rtn = robot.MoveGripper(1, 0, 100, 100, 30000, 0, 0, 0, 0, 0);
-        Console.WriteLine("MoveGripper(otwórz) ret={0}", rtn);
-    }    
+        while (true)
+        {
+
+            robot.GetGripperMotionDone(ref fault, ref status);
+            Console.WriteLine("motion status:{0},{1}\n", fault, status);
+            robot.GetRobotRealTimeState(ref pkg);
+            Console.WriteLine(" error code {0},{1}", pkg.main_code, pkg.sub_code);
+            Thread.Sleep(500);
+
+        }
+    }
 
 Pobranie pozycji chwytaka
 +++++++++++++++++++++++++
