@@ -124,6 +124,18 @@ Certyfikaty robotów:
      - ✅
      - :download:`Pobierz <_static/_doc/CE-MD certification.zip>`
 
+   * - **Certyfikat CE-MR**
+     - ✅
+     - ✅
+     - ✅
+     - ✅
+     - ✅
+     - ✅
+     - ✅
+     - ✅
+     - ✅
+     - :download:`Pobierz <_static/_doc/CE-MR Certificate.pdf>`
+
    * - **Certyfikat bezpieczeństwa funkcjonalnego**
      - ✅
      - ✅
